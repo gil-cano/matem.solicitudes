@@ -1,0 +1,265 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+  <head>
+    <title tal:content="template/title">Solicitudes</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  </head>
+
+  <metal:javascript_head fill-slot="javascript_head_slot">
+    <tal:block define="macro here/archetypes_custom_js/macros/javascript_head | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+    <tal:comment replace="nothing">
+      Many of the following defines duplicated from the tal:defines in the
+      main slot. With base_edit, edit_macros could be reused as it was defined
+      for the entire document. base_view uses main_template and thus must
+      create additional defines for each slot it fills.
+    </tal:comment>
+    <tal:js define="fields python:here.Schema().viewableFields(here);
+                    js python:here.getUniqueWidgetAttr(fields, 'helper_js')"
+            condition="js"
+            repeat="item js">
+      <script type="text/javascript"
+              charset="iso-8859-1"
+              tal:condition="python:exists('portal/%s' % item)"
+              tal:attributes="src string:$portal_url/$item">
+      </script>
+    </tal:js>
+    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+                       view_template python:'%s_view' % portal_type;
+                       view_macros python:path('here/%s/macros|nothing' % view_template);
+                       macro view_macros/js | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+    <script type="text/javascript"
+              charset="iso-8859-1">
+     function printTable(spanName){
+         var head = "<html><head><\/head>";
+         var body = document.getElementsByName(spanName)[0].innerHTML;
+         var foot = "<\/body><\/html>";
+
+         myWindow=window.open('','','');
+         myWindow.document.write(head + body + foot);
+         myWindow.print();
+         myWindow.close();}
+    </script>
+  </metal:javascript_head>
+
+  <metal:css fill-slot="css_slot">
+    <tal:comment replace="nothing">
+      Many of the following defines duplicated from the tal:defines in the
+      main slot. With base_edit, edit_macros could be reused as it was defined
+      for the entire document. base_view uses main_template and thus must
+      create additional defines for each slot it fills.
+    </tal:comment>
+    <tal:css define="fields python:here.Schema().viewableFields(here);
+                     css python:here.getUniqueWidgetAttr(fields, 'helper_css')"
+             condition="css"
+             repeat="item css">
+      <style type="text/css"
+             media="all"
+             tal:condition="python:exists('portal/%s' % item)"
+             tal:content="structure string:<!-- @import url($portal_url/$item); -->">
+      </style>
+    </tal:css>
+    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+                       view_template python:'%s_view' % portal_type;
+                       view_macros python:path('here/%s/macros|nothing' % view_template);
+                       macro view_macros/css | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+    <style type="text/css">
+        #contentActionMenus{
+            visibility: hidden;
+        }
+
+        #fieldsetlegend-metadata .{
+            visibility: hidden;
+        }
+    </style>
+  </metal:css>
+
+  <body>
+    <metal:fill fill-slot="main">
+      <metal:main_macro define-macro="main"
+            tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+            base_macros here/base/macros;
+            view_template python:'%s_view' % portal_type;
+            view_macros python:path('here/%s/macros|nothing' % view_template);
+            header_macro view_macros/header | header_macro | base_macros/header;
+            body_macro view_macros/body | body_macro | base_macros/body;
+            folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
+            footer_macro view_macros/footer | footer_macro | base_macros/footer;
+            errors python:request.get('errors', {})">
+
+    <metal:header_macro define-macro="header">
+        <span tal:define="usuarioActual user/getId">
+            <dl class="portalMessage warning"
+                tal:condition="python:view.hasPendingReviews(usuarioActual)">
+                <dt i18n:translate="label_atencion">
+                    Attention!
+                </dt>
+                <dd i18n:translate="label_pending_reviews">
+                     You have pending reviews! Review your pending requests using the square in the right called 'Review List'.
+                </dd>
+            </dl>
+        </span>
+        <p style="color: #FF0000;" tal:content="python:'Estado del Periodo '+str(here.Title())+': '+str(here.getWFStateName())"></p>
+        <h1 class="documentFirstHeading" i18n:translate="label_approved_app"> Mis solicitudes aprobadas </h1>
+        <table><tr>
+        <td><img src="" tal:attributes="src string:${context/absolute_url}/++resource++ma.png" width="48" height="48"></td>
+        <th><div i18n:translate="help_approved_app">Here you can see your approved applications</div> dentro del folder <span tal:replace="here/title_or_id">content title or id</span></th>
+          </tr></table>
+            <span tal:condition="template/title"
+                  tal:replace="template/title">optional template title</span>
+
+                <div class="tabularView">
+                <table class="listing" align="right" border="0">
+                <tr>
+                     <td><form method="post" name="import" action="#" method="post"
+                                   tal:attributes="action string:${context/absolute_url}/import">
+                          <a href="javascript: document.import.submit()">Importar Solicitudes</a>
+                     </form></td>
+
+                     <td><form method="post" name="export" action="#" method="post"
+                                   tal:attributes="action string:${context/absolute_url}/export">
+                          <a href="javascript: document.export.submit()">Exportar Mis Aprobadas</a>
+                          <input type="hidden" name="Opcion" value="1" />
+                     </form></td>
+
+                     <td><a href="" tal:attributes="href string:${context/absolute_url}/folder_factories">
+                                 <img src="" width="20" height="20" tal:attributes="src string:${context/absolute_url}/++resource++nueva.png"/>
+                          </a>
+                          <a href="" tal:attributes="href string:${context/absolute_url}/folder_factories">Nueva Solicitud</a>
+                     </td>
+
+                </tr>
+                </table></div>
+
+        </metal:header_macro>
+
+    <metal:body_macro define-macro="body">
+
+    <br>
+    <!--Obtiene usuario actual--->
+    <span tal:define="usuarioActual user/getId">
+
+    <span tal:define="items python:view.getSolicitudesAprobadasIndividuales(usuarioActual)">
+
+
+    <!--Cantidad--->
+    <br><br>
+    <h3 i18n:translate="label_approved_quantities_sol">Total Approved Quantities</h3>
+
+	<div class="tabularView">
+                <table class="listing" border="1" width="100%">
+                    <tbody>        
+                            <tr>
+                                <th class="column" i18n:translate="label_solicitor">
+                                   Solicitor
+                                </th>
+                                <th class="column" i18n:translate="label_total_approved_quantity">
+                                   Sum of All Approved Quantities
+                                </th>
+                                <th class="column" i18n:translate="label_total_approved_license_days">
+                                   Dias de License Aprobados
+                                </th>
+                                <th class="column" i18n:translate="label_total_approved_commission_days">
+                                   Dias de Comision Aprobados
+                                </th>
+                             </tr>
+
+                           <tr tal:repeat="investigador python:view.getPresupuestoIndividual(usuarioActual)">
+                                <td tal:content="python:investigador[0]">Solicitor</td>
+                                <span tal:condition="items">
+                                    <span tal:define="itemtotal python:view.calcularTotal(items)">
+                                        <td align="center" tal:content="itemtotal">Approved Quantity</td>
+                                        <td align="center" tal:content="python:investigador[2]">License Days</td>
+                                        <td align="center" tal:content="python:investigador[3]">Commission Days</td>
+                                        <span tal:condition="python:view.compararValores(investigador[1],itemtotal)"></span>
+                                    </span>
+                                </span>
+                                <span tal:condition="not:items">
+                                        <td align="center">0.0</td>
+                                        <td align="center">0.0</td>
+                                        <td align="center">0.0</td>
+                                        <span tal:condition="python:view.compararValores(investigador[1],0.0)"></span>
+                                </span>
+<!--                                <td align="center" tal:content="python:investigador[1]">Approved Quantity</td>-->
+                          </tr>
+
+                           <tr tal:repeat="totales python:view.getCantidadAsignadaLocal(usuarioActual)">
+                                <th align="right" tal:content="python:totales[0]">Indicator</th>
+                                <td colspan="3" tal:content="python:totales[1]">Quantity</td>
+                          </tr>
+                    </tbody>
+                 </table>
+	</div>
+
+    <h3 tal:condition="not:items" i18n:translate="label_no_approved">None of your applications has been approved yet.</h3>
+    <h4 tal:condition="not:items" i18n:translate="label_no_show">There are no applications to show.</h4>
+
+<span name="tablaSolicitudes">
+<br><br>
+
+    <h3 tal:condition="items" i18n:translate="label_approved_quantities_nosol">Approved Quantities per Request</h3>
+    <a tal:condition="items" href="javascript: printTable('tablaSolicitudes')">Imprimir</a>
+    <div class="tabularView">
+    <table class="listing" border="1" width="100%" tal:condition="items">
+        <tbody>
+ 	<tr>
+		<th i18n:translate="label_type">Type</th>
+		<th i18n:translate="label_solicitor">Solicitor</th>
+		<th i18n:translate="label_reason">Reason</th>
+		<th i18n:translate="label_place">Place</th>
+		<th i18n:translate="label_creation_date">Solicitud Creada</th>
+		<th i18n:translate="label_start_date">Fecha de Inicio</th>
+		<th i18n:translate="label_end_date">Fecha de Termino</th>
+		<th i18n:translate="label_quantity_days">Cantidad de Días</th>
+		<th i18n:translate="label_approved_quantity">Approved Quantity (pesos)</th>
+		<th i18n:translate="label_fecha_de_revision">Fecha de Revision por Consejo Interno</th>
+		<th i18n:translate="label_link">Link</th>
+	</tr>
+        <tr tal:repeat="item python:items">
+          <td tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</td>
+          <td tal:content="python:item['owner_name']">Solicitant</td>
+          <td tal:content="python:item['objective']">Reason</td>
+          <td tal:content="python:item['country']">Place</td>
+	  <td tal:content="python:item['creation_date']">Solicitud Creada</td>
+          <td tal:content="python:item['from']">Creation Date</td>
+          <td tal:content="python:item['to']">Creation Date</td>
+          <td tal:content="python:item['quantity_of_days']">Quantity of Days</td>
+          <td align="center" tal:content="python:item['total_approved_quantity']">Quantity</td>
+          <td align="center" tal:content="python:item['revision_ci_date']">Fecha de Revision</td>
+          <td><a href="#" tal:attributes="href python:item['url']" tal:content="python:string('revisar')" /></td>
+        </tr>
+
+        </tbody>
+    </table>
+    </div>
+</span>
+
+    </span>
+    </span>
+    </metal:body_macro>
+    <metal:footer_macro define-macro="footer">
+
+    </metal:footer_macro>
+    <metal:folderlisting_macro define-macro="folderlisting">
+
+    </metal:folderlisting_macro>
+
+      </metal:main_macro>
+    </metal:fill>
+  </body>
+</html>

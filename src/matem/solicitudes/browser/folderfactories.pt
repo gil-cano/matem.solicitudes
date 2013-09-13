@@ -1,0 +1,104 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+
+<head>
+<metal:block fill-slot="javascript_head_slot">
+<!-- helper script that uses the calendar -->
+<script type="text/javascript">
+// This function gets called when the end-user clicks on some radio.
+jQuery(function($) {
+    $("input[name='url']").click(function() {
+        if ($('#form-field-solicitudinstitucional').is(':checked')) {                   
+            $("select[name='event']").attr("disabled", false);
+        }
+        else {
+            $("select[name='event']").attr("disabled", true);          
+        }
+    });
+});
+</script>
+</metal:block>
+    <metal:block fill-slot="top_slot"
+                 tal:define="dummy python:request.set('disable_border',1)" />
+    <metal:block fill-slot="column_one_slot" />
+    <metal:block fill-slot="column_two_slot" />
+</head>
+
+<body>
+
+<div metal:fill-slot="main">
+
+    <h1 class="documentFirstHeading" i18n:translate="heading_add_new_item">Add new item</h1>
+
+    <p class="documentDescription"
+       i18n:translate="description_add_new_item">
+        Select the type of item you want to add to your folder.
+    </p>
+
+    <p tal:condition="view/can_constrain_types">
+        <a href="#" title="Configure which content types can be added here"
+                    i18n:attributes="title title_configure_addable_content_types;"
+                    tal:define="add_context view/add_context"
+                    tal:attributes="href string:${add_context/absolute_url}/folder_constraintypes_form;"
+                    i18n:translate="folder_add_settings_long">
+            Click to configure what type of items can be added here&hellip;
+        </a>
+    </p>
+
+    <div metal:define-macro="addlist">
+
+        <form name="quickAdd" method="post" 
+            tal:attributes="action string:${context/absolute_url}/@@folder_factories">
+            
+            <dl>
+                <tal:typelist repeat="item view/addable_types">
+                    <dt>
+                        <input type="radio" name="url"
+                               tal:attributes="value item/action;
+                                               id string:form-field-${item/extra/id}" />
+                        <label tal:attributes="class string:contenttype-${item/extra/id};
+                                               for string:form-field-${item/extra/id};">
+                            <img tal:attributes="src item/icon" alt="" />
+                            <span tal:replace="item/title">Type title</span>
+                        </label>                                 
+                    </dt>
+                    <dd>
+                      <span tal:replace="item/description">Type description</span>
+                      <select name="event"  disabled 
+                              tal:condition="python:item['extra']['id'] == 'solicitudinstitucional'">
+                        <tal:block tal:repeat="opcion view/institutional_events">
+                          <option tal:attributes="value opcion/value" tal:content="opcion/title" />
+                        </tal:block>
+<!-- 
+                        <option value='EMALCA'> Escuela de Matemáticas de América Latina y el Caribe (EMALCA 2012) </option>
+                        <option value='CLAM'> IV Congreso Latinoamericano de Matemáticos (IV CLAM 2012) </option>
+                        <option value='SMM'> XLV Congreso Nacional de la Sociedad Matemática Mexicana </option>
+                        <option value='KNOT'> School on Knot and 3-Manifolds </option>
+                        <option value='AlbertoFest'> AlbertoFest: Geometría Compleja, Sistemas Dinámicos y Teoría de Números </option>
+ -->
+                      </select>
+                    </dd>
+                    <!-- <dd tal:content="item/description">Type description</dd> -->
+                </tal:typelist>
+            </dl>
+
+            <div class="formControls">
+                <input class="standalone"
+                      type="submit"
+                      value="Add"
+                      name="form.button.Add"
+                      i18n:attributes="value label_add"
+                      />
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

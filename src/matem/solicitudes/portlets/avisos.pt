@@ -1,0 +1,240 @@
+<dl class="portlet portletAvisos"
+    i18n:domain="plone">
+
+    <dt class="portletHeader" tal:define="titulo view/getHeader">
+        <span class="portletTopLeft"></span>
+        <span tal:replace="titulo">Header</span>
+        <span class="portletTopRight"></span>
+    </dt>
+
+    <dd class="portletItem odd">
+
+        <span tal:define="usuarioActual user/getId;
+               propietario python:view.esPropietario(usuarioActual);
+               comisionado python:view.esComisionado(usuarioActual);
+               consejero python:view.esConsejero(usuarioActual);
+               investigadoracargo python:view.esInvestigadorACargo(usuarioActual);
+               folder python:view.esFolder();
+               parent python:here.getParentNode();">
+
+<!--Solicitud-Propietario-->
+
+            <span tal:condition="python:propietario and not folder">
+            <p align="center" style="color: #FF0000; font-size: 14pt" tal:condition="view/esBorrador">¡Debe enviar la solicitud para su revisi&oacute;n!</p>
+                <p align="center" i18n:translate="label_estado_borrador_propietario" tal:condition="view/esBorrador">
+                    This format has not been sent yet. Review data, if it is correct, you should send it to revision, by selecting 'State: Solicitud en borrador' then 'Enviar solicitud' inside the transitions menu in the top right corner.
+                </p>
+
+            <p align="center"><img src="++resource++transicionIN.png" tal:condition="view/esPreeliminar"></p>
+                <p align="center" i18n:translate="label_estado_preeliminar" tal:condition="view/esPreeliminar">
+                    This format is being reviewed by the advisor in charge.
+                </p>
+
+            <p align="center"><img src="++resource++transicionCE.png" tal:condition="view/esRevisionComision" /></p>
+                <p align="center" i18n:translate="label_revision_comision_especial" tal:condition="view/esRevisionComision">
+                    This application is been reviewed by the special comision.
+                </p>
+
+            <p align="center"><img src="++resource++transicionCI.png" tal:condition="view/esRevisionConsejo"/></p>
+                <p align="center" i18n:translate="label_revision_consejo_interno" tal:condition="view/esRevisionConsejo">
+                    This application is been reviewed by the internal council.
+                </p>
+
+            <p align="center"><img src="++resource++revisado.png" tal:condition="view/esAprobada"/></p>
+                <p align="center" tal:condition="view/esAprobada">
+                    <span i18n:translate="label_aprobada_propietario">Congratulations, your application was approved! The total amount approved for this application is </span><span tal:content="view/getPresupuestoAprobadoSolicitud">cantidad</span> pesos.
+                </p>
+
+            <p align="center"><img src="++resource++rechazado.png" tal:condition="view/esRechazada" /></p>
+                <p align="center" tal:condition="view/esRechazada" >
+                    <span i18n:translate="label_rechazada_propietario">Too bad, your application was rejected! You may send another application if you wish. </span>
+                </p>
+
+                      <p align="left">Acceso rapido: </p>
+                         <p><a href="#" tal:attributes="href string:${parent/absolute_url}/view">Ir al menu</a></p>
+                         <form action="" tal:attributes="action string:${parent/absolute_url}/view" method="post" name="ppl">
+                             <input type="hidden" name="vistafolder" value="folderpendientes"/>
+                             <a href="javascript: document.ppl.submit()">Ir a 'Solicitudes pendientes de revision'</a>
+                         </form>
+            </span>
+
+<!--Solicitud-NoPropietarios-->
+
+            <span tal:condition="python: not propietario and not folder">
+
+            <p align="center"><img src="++resource++info.png" tal:condition="view/esBorrador" /></p>
+                <p align="center" i18n:translate="label_estado_borrador_nopropietario" tal:condition="view/esBorrador">
+                    This format has not been sent yet and is still being modified by it's author.
+                </p>
+
+            <span tal:condition="investigadoracargo">
+            <p align="center"><img src="++resource++pendiente.png" tal:condition="view/esPreeliminar"/></p>
+            <p align="center" style="color: #FF0000; font-size: 14pt" tal:condition="view/esBorrador">¡Debe enviar ésta solicitud a revisi&oacute;n o regresarla a su becario si es incorrecta!</p>
+                <p align="center" i18n:translate="label_revision_investigadoracargo" tal:condition="view/esPreeliminar">
+                    You still haven't approved nor rejected this request! Review data and approve it or return it to the scholarship holder by selecting 'State: Solicitud en revision preeliminar' and then 'Enviar' o 'Regresar solicitud a becario', respectively, inside the transitions menu in the top right corner.
+                </p>
+            </span>
+
+            <span tal:condition="not:investigadoracargo">
+            <p align="center"><img src="++resource++transicionIN.png" tal:condition="view/esPreeliminar" /></p>
+                <p align="center" i18n:translate="label_estado_preeliminar" tal:condition="view/esPreeliminar">
+                    This format is being reviewed by the advisor in charge.
+                </p>
+            </span>
+
+            <span tal:condition="comisionado">
+            <p align="center"><img src="++resource++pendiente.png" tal:condition="view/esRevisionComision" /></p>
+                <p align="center" i18n:translate="label_revision_comisionado" tal:condition="view/esRevisionComision">
+                    You still haven't approved nor rejected this request! Review data and approve it or reject it by selecting 'State: Solicitud en revision por comision especial' then 'Aprobar y enviar a consejo interno' or 'Rechazar', respectively, inside the transitions menu in the top right corner.
+                </p>
+            </span>
+
+            <span tal:condition="not:comisionado">
+            <p align="center"><img src="++resource++transicionCE.png" tal:condition="view/esRevisionComision"/></p>
+                <p align="center" i18n:translate="label_revision_comision_especial" tal:condition="view/esRevisionComision">
+                    This application is been reviewed by the special comision.
+                </p>
+            </span>
+
+            <span tal:condition="consejero">
+            <p align="center"><img src="++resource++pendiente.png" tal:condition="view/esRevisionConsejo" /></p>
+                <p align="center" i18n:translate="label_revision_consejero" tal:condition="view/esRevisionConsejo">
+                    You still haven't approved nor rejected this request! Review data and approve it or reject it by selecting 'State: Solicitud en revision por consejo interno' then 'Aprobar' or 'Rechazar', respectively, inside the transitions menu in the top right corner.
+                </p>
+            </span>
+
+            <span tal:condition="not:consejero">
+            <p align="center"><img src="++resource++transicionCI.png" tal:condition="view/esRevisionConsejo" /></p>
+                <p align="center" i18n:translate="label_revision_consejo_interno" tal:condition="view/esRevisionConsejo">
+                    This application is been reviewed by the internal council.
+                </p>
+            </span>
+
+            <p align="center"><img src="++resource++revisado.png" tal:condition="view/esAprobada" /></p>
+                <p align="center" tal:condition="view/esAprobada">
+                    <span i18n:translate="label_aprobada_nopropietario">This application has been aproved. If you have any doubt please contact the site manager. The total amount approved for this application is </span><span tal:content="view/getPresupuestoAprobadoSolicitud">cantidad</span> pesos.
+                </p>
+
+            <p align="center"><img src="++resource++rechazado.png" tal:condition="view/esRechazada" /></p>
+                <p align="center" tal:condition="view/esRechazada">
+                    <span i18n:translate="label_rechazada_nopropietario">This application has been rejected. If you have any doubt please contact the site manager.</span>
+                </p>
+
+                      <p align="left"><img src="++resource++info.png" width="15" height="15"/> Acceso rapido: </p>
+                         <p><a href="#" tal:attributes="href string:${parent/absolute_url}/view">Regresar al menu</a></p>
+                         <form action="" tal:attributes="action string:${parent/absolute_url}/view" method="post" name="ppl">
+                             <input type="hidden" name="vistafolder" value="folderpendientes"/>
+                             <a href="javascript: document.ppl.submit()">Ir a 'Solicitudes pendientes de revision'</a>
+                         </form>
+            </span>
+
+<!--Folder-->
+
+            <span tal:define="pendientes python:view.hasPendingReviews(usuarioActual);
+                              enviadas python:view.hasSentReviews(usuarioActual)"
+                  tal:condition="folder">
+                  <p align="center"><a href="" tal:attributes="href string:${context/absolute_url}/view">
+                       Del <span tal:replace="here/getFecha_desde"> Fecha </span> hasta <span tal:replace="here/getFecha_hasta"> Fecha </span>.
+                   </a>
+                  </p>
+
+                  <span tal:condition="pendientes">
+                     <table align="center" border="0"><tr><td>
+                         <form action="" tal:attributes="action string:${context/absolute_url}/view" method="post" name="pp">
+                             <input type="hidden" name="vistafolder" value="folderpendientes"/>
+                             <a href="javascript: document.pp.submit()"><p align="center"><img align="center" src="++resource++folderpendiente.png"/></p><p align="center" style="color: #FF0000; font-size: 14pt">¡Hay solicitudes que requieren revisi&oacute;n!</p></a>
+                         </form>
+                     </td></tr></table>
+
+                      <p align="center" i18n:translate="label_pending_reviews">
+                           You have pending reviews! Review your pending requests using the square in the right called 'Review List'.
+                      </p>
+
+                      <p align="left"><img src="++resource++info.png" width="15" height="15"/> Acceso rapido: </p>
+                         <form action="" tal:attributes="action string:${context/absolute_url}/view" method="post" name="ppl">
+                             <input type="hidden" name="vistafolder" value="folderpendientes"/>
+                             <a href="javascript: document.ppl.submit()">Ir a 'Solicitudes pendientes de revision'</a>
+                         </form>
+
+                         <br>
+                         <a href="#" tal:attributes="href string:${context/absolute_url}/view">Regresar al menu</a>
+                  </span>
+
+                  <span 
+                        tal:condition="python: not pendientes and enviadas">
+                     <table align="center" border="0"><tr><td>
+                         <form action="" tal:attributes="action string:${context/absolute_url}/view" method="post" name="ps">
+                             <input type="hidden" name="vistafolder" value="misenviadas"/>
+                             <a href="javascript: document.ps.submit()"><img src="++resource++foldertransito.png"/></a>
+                         </form>
+                     </td></tr></table>
+
+                      <br>
+                      <p align="center" i18n:translate="label_sent_reviews">
+                           You have applications in process. Review your applications in process navigating to 'In process applications'.
+                      </p>
+
+                      <p align="left"><img src="++resource++info.png" width="15" height="15"/> Acceso rapido: </p>
+                         <form action="" tal:attributes="action string:${context/absolute_url}/view" method="post" name="psl">
+                             <input type="hidden" name="vistafolder" value="misenviadas"/>
+                             <a href="javascript: document.psl.submit()">Ir a 'Mis solicitudes en proceso'</a>
+                         </form>
+                         <br>
+                         <a href="#" tal:attributes="href string:${context/absolute_url}/view">Regresar al menu</a>
+                  </span>
+
+                  <span tal:condition="python:not pendientes and not enviadas">
+                     <table align="center" border="0"><tr><td>
+                         <form action="" tal:attributes="action string:${context/absolute_url}/view" method="post" name="ps">
+                             <input type="hidden" name="vistafolder" value="misaprobadas"/>
+                             <a href="javascript: document.ps.submit()"><img src="++resource++folderlibre.png"/></a>
+                         </form>
+                     </td></tr></table>
+
+                      <br>
+                      <p align="center" i18n:translate="label_no_pending">
+                           Hooray! You have no pending reviews. You can review your approved or rejected reviews by navigating to 'My approved applications' or 'My rejected applications' respectively.
+                      </p>
+
+                      <p align="left"><img src="++resource++info.png" width="15" height="15"/> Acceso rapido: </p>
+                         <form action="" tal:attributes="action string:${context/absolute_url}/view" method="post" name="pal">
+                             <input type="hidden" name="vistafolder" value="misaprobadas"/>
+                             <a href="javascript: document.pal.submit()">Ir a 'Mis solicitudes aprobadas'</a>
+                         </form>
+                         <form action="" tal:attributes="action string:${context/absolute_url}/view" method="post" name="prl">
+                             <input type="hidden" name="vistafolder" value="misrechazadas"/>
+                             <a href="javascript: document.prl.submit()">Ir a 'Mis solicitudes rechazadas'</a>
+                         </form>
+
+                         <br>
+                         <a href="#" tal:attributes="href string:${context/absolute_url}/view">Regresar al menu</a>
+                  </span>
+                 <br><br>
+            </span>
+
+            <p align="left"><img src="" tal:replace="structure here/user.gif" /> Tu tienes los roles de: </p>
+            <dl>
+                <dt tal:condition="python:view.esConsejeroG(usuarioActual)">Consejero</dt>
+                <dt tal:condition="python:view.esComisionadoG(usuarioActual)">Comisionado</dt>
+                <dt tal:condition="python:view.esConsejeroResponsableG(usuarioActual)">Responsable del Consejo</dt>
+                <dt tal:condition="python:view.esComisionadoResponsableG(usuarioActual)">Responsable de la Comision</dt>
+                <dt tal:condition="python:view.esBecarioG(usuarioActual)">Becario</dt>
+                <dt tal:condition="python:view.esInvestigadorG(usuarioActual)">Investigador</dt>
+                <dt tal:condition="python:view.esTecnicoAcademicoG(usuarioActual)">Tecnico Academico</dt>
+                <dt tal:condition="python:view.esImportadorDeSolicitudesG(usuarioActual)">Importador de Solicitudes</dt>
+                <dt tal:condition="python:view.esProgramadorDePresupuestoG(usuarioActual)">Programador de Presupuesto</dt>
+                <dt tal:condition="python:view.esSolicitanteAuxiliarG(usuarioActual)">Solicitante Auxiliar</dt>
+            </dl>
+
+            <br>
+
+        </span>
+    </dd>
+
+<!--
+    <dd class="portletFooter">
+        <span class="portletBottomLeft"></span>
+        <span class="portletBottomRight"></span>
+    </dd>
+-->
+</dl>

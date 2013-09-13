@@ -1,0 +1,307 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+  <head>
+    <title tal:content="template/title">Importar Solicitudes</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  </head>
+
+  <metal:javascript_head fill-slot="javascript_head_slot">
+    <tal:block define="macro here/archetypes_custom_js/macros/javascript_head | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+    <tal:comment replace="nothing">
+      Many of the following defines duplicated from the tal:defines in the
+      main slot. With base_edit, edit_macros could be reused as it was defined
+      for the entire document. base_view uses main_template and thus must
+      create additional defines for each slot it fills.
+    </tal:comment>
+    <tal:js define="fields python:here.Schema().viewableFields(here);
+                    js python:here.getUniqueWidgetAttr(fields, 'helper_js')"
+            condition="js"
+            repeat="item js">
+      <script type="text/javascript"
+              charset="iso-8859-1"
+              tal:condition="python:exists('portal/%s' % item)"
+              tal:attributes="src string:$portal_url/$item">
+      </script>
+    </tal:js>
+    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+                       view_template python:'%s_view' % portal_type;
+                       view_macros python:path('here/%s/macros|nothing' % view_template);
+                       macro view_macros/js | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+  </metal:javascript_head>
+
+  <metal:css fill-slot="css_slot">
+    <tal:comment replace="nothing">
+      Many of the following defines duplicated from the tal:defines in the
+      main slot. With base_edit, edit_macros could be reused as it was defined
+      for the entire document. base_view uses main_template and thus must
+      create additional defines for each slot it fills.
+    </tal:comment>
+    <tal:css define="fields python:here.Schema().viewableFields(here);
+                     css python:here.getUniqueWidgetAttr(fields, 'helper_css')"
+             condition="css"
+             repeat="item css">
+      <style type="text/css"
+             media="all"
+             tal:condition="python:exists('portal/%s' % item)"
+             tal:content="structure string:<!-- @import url($portal_url/$item); -->">
+      </style>
+    </tal:css>
+    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+                       view_template python:'%s_view' % portal_type;
+                       view_macros python:path('here/%s/macros|nothing' % view_template);
+                       macro view_macros/css | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+    <style type="text/css">
+        #contentActionMenus{
+            visibility: hidden;
+        }
+
+        #fieldsetlegend-metadata .{
+            visibility: hidden;
+        }
+    </style>
+  </metal:css>
+
+  <body>
+    <metal:fill fill-slot="main">
+      <metal:main_macro define-macro="main"
+            tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+            base_macros here/base/macros;
+            view_template python:'%s_view' % portal_type;
+            view_macros python:path('here/%s/macros|nothing' % view_template);
+            header_macro view_macros/header | header_macro | base_macros/header;
+            body_macro view_macros/body | body_macro | base_macros/body;
+            folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
+            footer_macro view_macros/footer | footer_macro | base_macros/footer;
+            errors python:request.get('errors', {})">
+
+    <metal:header_macro define-macro="header">
+        <span tal:define="usuarioActual user/getId">
+            <dl class="portalMessage warning"
+                tal:condition="python:view.hasPendingReviews(usuarioActual)">
+                <dt i18n:translate="label_atencion">
+                    Attention!
+                </dt>
+                <dd i18n:translate="label_pending_reviews">
+                     You have pending reviews! Review your pending requests using the square in the right called 'Review List'.
+                </dd>
+            </dl>
+        </span>
+        <span>
+            <dl class="portalMessage error"
+                tal:condition="view/hasError">
+                <dt i18n:translate="label_error">
+                    Error
+                </dt>
+                <dd i18n:translate="label_couldnt_import">
+                     One or more applications couldn't be imported
+                </dd>
+            </dl>
+        </span>
+        </metal:header_macro>
+
+    <metal:body_macro define-macro="body">
+
+    <h1 class="documentFirstHeading">
+        <span i18n:translate="Import">Import</span> en folder <span tal:replace="here/title_or_id">content title or id</span></h1>
+
+    <p i18n:translate="description_import">
+    You can import simple text applications into the system.
+    </p>
+
+    <form action="import"
+          class="enableAutoFocus"
+          method="post"
+          name="import_form"
+          enctype="multipart/form-data"
+          tal:condition="not:view/hasReqData">
+
+        <fieldset>
+
+            <legend i18n:translate="legend_import_terms">Import Applications</legend>
+
+            <table>
+
+            <tr><div class="field">
+                <td><label for="Tipo" i18n:translate="label_import_type">Type to import</label>
+
+            	    <div class="formHelp" i18n:translate="help_importtype_importForm">
+	              Select the type of application to import.
+	            </div>
+
+                    <span tal:condition="python: view.esInvestigador() or view.esTecnicoAcademico()">
+                    <input type="radio" name="tiposolicitud" value="licencia" checked><span i18n:translate="License Application"> License Application </span><br>
+                    <input type="radio" name="tiposolicitud" value="visitante"><span i18n:translate="Visitor Application"> Visitor Application</span><br>
+                    <input type="radio" name="tiposolicitud" value="bloque"><span i18n:translate="Several types simultaneously"> Several types simultaneously</span><br>
+                     </span>
+
+                    <span tal:condition="view/esBecario">
+                    <input type="radio" name="tiposolicitud" value="becario" checked><span i18n:translate="Student Application"> Student Application</span><br>
+                    <input type="radio" name="tiposolicitud" value="bloquebecario"><span i18n:translate="Several types simultaneously"> Several types simultaneously</span><br>
+                     </span>
+
+                </td>
+            </div></tr>
+
+            <tr><td></td></tr>
+            <tr><td >
+              <div class="field" tal:condition="view/esBecario">
+                <label for="Creator" i18n:translate="label_asesor">Advisor</label>
+
+                <div class="formHelp" i18n:translate="help_asesor">
+                Name of the advisor in charge.
+                </div>
+    
+                <tal:creators tal:define="creators view/getCreators">
+                    <select name="Creator"
+                            id="Creator">
+                        <option value="" i18n:translate="label_any_advisor">Select an advisor...</option>
+                        <metal:block tal:repeat="creator creators">
+                            <option value="" tal:attributes="value python:creator[0];" tal:content="python:creator[1]"> username </option>
+                        </metal:block>
+                    </select>
+
+                </tal:creators>
+
+             </div>
+           </td></tr>
+
+<tr><td>
+        <div class="field">
+          <label for="file" i18n:translate="label_archivoFuente_importForm">Source File</label>
+
+          <div class="formHelp" i18n:translate="help_archivoFuente_importForm">
+            Select the file to import clicking the button labeled as <span i18n:name="BrowseButton"><strong> Browse </strong></span>.
+          </div>
+
+          <input type="file" id="file" name="file" size="30" tabindex=""
+                 tal:attributes="tabindex tabindex/next"
+                 value='Buscar' i18n:attributes="value boton_buscar_importForm" />
+        </div>
+</td></tr>
+
+            </table>
+
+            <div class="visualClear" id="clear-space-before-submit"><!-- --></div>
+
+            <div class="formControls">
+                <input class="context"
+                       type="submit"
+                       name="form.button.Import"
+                       value="Import"
+                       i18n:attributes="value Import;"
+                       />
+            </div>
+
+        </fieldset>
+    
+    </form>
+
+<!--No vacio-->
+
+    <form action="import"
+          class="enableAutoFocus"
+          method="post"
+          name="import_form"
+          enctype="multipart/form-data"
+          tal:condition="view/hasReqData">
+
+        <fieldset>
+
+            <legend i18n:translate="legend_import_terms">Import Applications</legend>
+
+            <table>
+
+            <tr><div class="field">
+                <td><label for="Tipo" i18n:translate="label_import_type">Type to import</label>
+
+          <div class="formHelp" i18n:translate="help_importtype_importForm">
+            Select the type of application to import.
+          </div>
+                    <input type="radio" name="tiposolicitud" value="becario" checked><span i18n:translate="Student Application"> Student Application</span><br>
+                    <input type="radio" name="tiposolicitud" value="bloquebecario"><span i18n:translate="Several types simultaneously"> Several types simultaneously</span><br>
+                </td>
+            </div></tr>
+            
+            <tr><td></td></tr>
+
+            <tr><td>
+              <div class="field">
+                <label for="Creator" i18n:translate="label_asesor">Advisor</label>
+
+                <div class="formHelp" i18n:translate="help_asesor">
+                Name of the advisor in charge.
+                </div>
+    
+                <tal:creators tal:define="creators view/getCreators">
+                    <select name="Creator"
+                            id="Creator">
+                        <option value="" i18n:translate="label_any_advisor">Select an advisor...</option>
+                        <metal:block tal:repeat="creator creators">
+                            <option value="" tal:attributes="value python:creator[0];" tal:content="python:creator[1]"> username </option>
+                        </metal:block>
+                    </select>
+
+                </tal:creators>
+
+             </div>
+           </td></tr>
+
+<tr><td>
+        <div class="field">
+          <label for="file" i18n:translate="label_archivoFuente_importForm">Source File</label>
+
+          <div class="formHelp" i18n:translate="help_archivoFuente_importForm">
+            Select the file to import clicking the button labeled as <span i18n:name="BrowseButton"><strong> Browse </strong></span>.
+          </div>
+
+          <input type="file" id="file" name="file" size="30" tabindex=""
+                 tal:attributes="tabindex tabindex/next"
+                 value='Buscar' i18n:attributes="value boton_buscar_importForm" />
+        </div>
+</td></tr>
+
+            </table>
+
+            <div class="visualClear" id="clear-space-before-submit"><!-- --></div>
+
+            <div class="formControls">
+                <input class="context"
+                       type="submit"
+                       name="form.button.Import"
+                       value="Import"
+                       i18n:attributes="value Import;"
+                       />
+            </div>
+
+        </fieldset>
+    
+    </form>
+
+    </metal:body_macro>
+    <metal:footer_macro define-macro="footer">
+
+    </metal:footer_macro>
+    <metal:folderlisting_macro define-macro="folderlisting">
+
+    </metal:folderlisting_macro>
+
+      </metal:main_macro>
+    </metal:fill>
+  </body>
+</html>

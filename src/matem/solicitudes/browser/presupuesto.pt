@@ -1,0 +1,164 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+  <head>
+    <title tal:content="template/title">Solicitudes</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  </head>
+
+  <metal:javascript_head fill-slot="javascript_head_slot">
+    <script type="text/javascript"
+              charset="iso-8859-1">
+     function printTable(spanName){
+         var head = "<html><head><\/head>";
+         var body = document.getElementsByName(spanName)[0].innerHTML;
+         var foot = "<\/body><\/html>";
+
+         myWindow=window.open('','','');
+         myWindow.document.write(head + body + foot);
+         myWindow.print();
+         myWindow.close();}
+    </script>
+  </metal:javascript_head>
+
+  <metal:css fill-slot="css_slot">
+    <style type="text/css">
+        #contentActionMenus{
+            visibility: hidden;
+        }
+
+        #fieldsetlegend-metadata .{
+            visibility: hidden;
+        }
+
+        #navcontainer ul
+        {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            text-align: center;
+        }
+
+        #navcontainer ul li { 
+            display: inline;
+        }
+
+        #navcontainer ul li form{ 
+            display: inline;
+            margin: 0;
+            padding: 0;
+        }
+
+        #navcontainer ul li a
+        {
+            text-decoration: none;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+  </metal:css>
+
+  <body>
+    <metal:fill fill-slot="main">
+      <metal:main_macro define-macro="main"
+            tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+            base_macros here/base/macros;
+            view_template python:'%s_view' % portal_type;
+            view_macros python:path('here/%s/macros|nothing' % view_template);
+            header_macro view_macros/header | header_macro | base_macros/header;
+            body_macro view_macros/body | body_macro | base_macros/body;
+            folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
+            footer_macro view_macros/footer | footer_macro | base_macros/footer;
+            errors python:request.get('errors', {})">
+
+    <metal:header_macro define-macro="header">
+        <h2><span i18n:translate="Budget Overview">Budget overview</span>
+            <span tal:condition="template/title"
+                  tal:replace="template/title">optional template title</span></h2>
+            <div tal:condition="python: view.hasReqData('recalc')">
+                <div tal:condition="view/recalcular">Cantidades recalculadas</div>
+            </div>
+            <div tal:condition="python: view.hasReqData('refreshGlobal')">
+                <div>Cantidades actualizadas</div>
+            </div>
+            <div tal:condition="python: view.hasReqData('refresh')">
+                <div tal:condition="python: view.actualizar(view.getReqDataStr('memberID'),view.getReqDataStr('newBudget'))">Cantidades actualizadas</div>
+            </div>
+        </metal:header_macro>
+
+    <metal:body_macro define-macro="body">
+
+    <!--Obtiene usuario actual--->
+    <span tal:define="usuarioActual user/getId">
+
+    <!--Por Folders--->
+    <h3 i18n:translate="label_approved_quantities_period">Approved Quantities by Period</h3>
+
+	<div class="tabularView">
+                <table class="listing" border="1" width="100%">
+                    <tbody>        
+                            <tr>
+                                <th class="column" i18n:translate="label_folder">
+                                   Folder
+                                </th>
+                                <th class="column" i18n:translate="label_period">
+                                   Period
+                                </th>
+                                <th class="column" i18n:translate="label_bugdet_this_period">
+                                   Local Budget for this Period
+                                </th>
+                                <th class="column" i18n:translate="label_locally_assigned">
+                                   Locally Assigned Budget
+                                </th>
+                                <th class="column" i18n:translate="label_local_remaining_quantity_period">
+                                   Remaining Quantity for this Period
+                                </th>
+                             </tr>
+
+                           <tr tal:repeat="folder python:view.getFolders()">
+                                <td>
+                                    <a href="#" tal:attributes="href python:folder[5]+string('?vistafolder=presupuestolocal')"
+                                               tal:content="python:folder[0]"/></td>
+                                <td align="center" tal:content="python:str('Del ')+folder[1]+str(' al ')+folder[2]">Period</td>
+                                <td align="center" tal:content="python:folder[3]">Initial Quantity</td>
+                                <td align="center" tal:content="python:folder[4]">Assigned Quantity</td>
+                                <td align="center" tal:content="python:folder[3]-folder[4]">Remaining Quantity</td>
+
+                          </tr>
+
+                           <tr tal:repeat="totales python:view.getCantidadAsignadaTotal(usuarioActual)">
+                                <th colspan="2" align="right" tal:content="python:totales[0]" i18n:attributes="content">Indicator</th>
+                                <td colspan="3" align="center" tal:content="python:totales[1]">Quantity</td>
+                          </tr>
+                    </tbody>
+                 </table>
+	</div>
+
+        <form action="@@presupuesto" method="post">
+                <input type="hidden" value="1" name="recalc" />
+                <input class="context"
+                       type="submit"
+                       name="form.button.Recalculate"
+                       value="Recalculate"
+                       i18n:attributes="value Recalculate;"
+                       />
+        </form>
+    </span>
+    </metal:body_macro>
+    <metal:footer_macro define-macro="footer">
+
+    </metal:footer_macro>
+    <metal:folderlisting_macro define-macro="folderlisting">
+
+    </metal:folderlisting_macro>
+
+      </metal:main_macro>
+    </metal:fill>
+  </body>
+</html>

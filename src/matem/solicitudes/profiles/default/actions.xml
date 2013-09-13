@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<object name="portal_actions" meta_type="Plone Actions Tool"
+        xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+    <object name="user" meta_type="CMF Action Category">
+        <object name="accesosolicitudes" meta_type="CMF Action" i18n:domain="plone" insert-before="logout">
+            <property name="title" i18n:translate="">Ir a Solicitudes</property>
+            <property name="description" i18n:translate=""></property>
+            <property name="url_expr">string:${globals_view/navigationRootUrl}/servicios/servicios-internos/solicitudes</property>
+            <property name="icon_expr"></property>
+            <property name="available_expr">python:(member is not None) and (
+                                                ('Investigador' in list(here.portal_membership.getAuthenticatedMember().getRoles())) or
+                                                ('Tecnico Academico' in list(here.portal_membership.getAuthenticatedMember().getRoles())) or
+                                                ('PostDoc' in list(here.portal_membership.getAuthenticatedMember().getRoles())) or
+                                                ('Becario' in list(here.portal_membership.getAuthenticatedMember().getRoles())) or
+                                                ('Solicitante Auxiliar' in list(here.portal_membership.getAuthenticatedMember().getRoles())) or
+                                                ('Consejero' in list(here.portal_membership.getAuthenticatedMember().getRoles())) or
+                                                ('Responsable del Consejo' in list(here.portal_membership.getAuthenticatedMember().getRoles())) or
+                                                ('Comisionado' in list(here.portal_membership.getAuthenticatedMember().getRoles())) or
+                                                ('Responsable de la Comision' in list(here.portal_membership.getAuthenticatedMember().getRoles())) or
+                                                ('Programador de Presupuesto' in list(here.portal_membership.getAuthenticatedMember().getRoles())) or
+                                                ('Solicitante' in list(here.portal_membership.getAuthenticatedMember().getRoles())))
+                                                </property>
+            <property name="permissions">
+                 <element value="View"/>
+            </property>
+            <property name="visible">True</property>
+        </object>
+        <object name="accesopresupuesto" meta_type="CMF Action" i18n:domain="plone" insert-before="accesosolicitudes">
+            <property name="title" i18n:translate="">Ver cuentas y presupuesto</property>
+            <property name="description" i18n:translate=""></property>
+            <property name="url_expr">string:${globals_view/navigationRootUrl}/presupuesto</property>
+            <property name="icon_expr"></property>
+            <property name="available_expr">python:(member is not None) and 'Programador de Presupuesto' in list(here.portal_membership.getAuthenticatedMember().getRoles())</property>
+            <property name="permissions">
+                 <element value="View"/>
+            </property>
+            <property name="visible">True</property>
+         </object>
+    </object>
+    <object name="object" meta_type="CMF Action Category">
+        <object name="folderContents" meta_type="CMF Action" i18n:domain="plone" insert-before="accesosolicitudes">
+            <property name="available_expr">python:object.displayContentsTab() and (context.meta_type != 'SolicitudFolder' or 'Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))</property>
+        </object>
+    </object>
+</object>

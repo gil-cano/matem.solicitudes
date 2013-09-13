@@ -1,0 +1,75 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="matem.portlet.avisos">
+
+    <include package="plone.app.portlets" />
+
+    <plone:portlet
+        name="matem.solicitudes.Avisos"
+        interface=".avisos.IAvisos"
+        assignment=".avisos.Assignment"
+        view_permission="zope2.View"
+        edit_permission="cmf.ManagePortal"
+        renderer=".avisos.Renderer"
+        addview=".avisos.AddForm"
+        />
+
+    <plone:portletRenderer
+        portlet="plone.app.portlets.portlets.navigation.INavigationPortlet"
+        layer="..interfaces.ISolicitudSpecific"
+        class=".navigation.MyRenderer"
+        />
+    
+    <browser:resource
+        name="revisado.png"
+        image="revisado.png"
+        />
+    
+    <browser:resource
+        name="pendiente.png"
+        image="pendiente.png"
+        />
+
+    <browser:resource
+        name="rechazado.png"
+        image="rechazado.png"
+        />
+
+    <browser:resource
+        name="info.png"
+        image="info.png"
+        />
+
+    <browser:resource
+        name="transicionCE.png"
+        image="transicionCE.png"
+        />
+
+    <browser:resource
+        name="transicionCI.png"
+        image="transicionCI.png"
+        />
+    
+    <browser:resource
+        name="transicionIN.png"
+        image="transicionIN.png"
+        />
+
+    <browser:resource
+        name="folderlibre.png"
+        image="folderlibre.png"
+        />
+
+    <browser:resource
+        name="folderpendiente.png"
+        image="folderpendiente.png"
+        />
+
+    <browser:resource
+        name="foldertransito.png"
+        image="foldertransito.png"
+        />
+
+</configure>

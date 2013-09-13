@@ -1,0 +1,15 @@
+<configure
+    xmlns:zope="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+    <genericsetup:upgradeStep
+        source="3.1"
+        destination="308"
+        title="Upgrade matem.solicitudes"
+        description="Recalculate travel expenses"
+        profile="matem.solicitudes:default"
+        handler="matem.solicitudes.upgrades.upgrade_to_308"
+        />
+
+</configure>

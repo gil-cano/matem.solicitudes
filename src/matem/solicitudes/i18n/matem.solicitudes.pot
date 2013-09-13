@@ -1,0 +1,902 @@
+# Translation of solicitudes-plone.pot to Spanish
+# Eduardo Espinosa <>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: matem.solicitudes\n"
+"POT-Creation-Date: 2008-03-17 06:37+0000\n"
+"PO-Revision-Date: 2008-11-30:29+0200\n"
+"Last-Translator: Arturo Curiel <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+
+#### á Ã¡ é Ã© í Ã­ ó Ã³ ú Ãº ñ Ã± 
+
+#. Default: "A document which may contain directly uploaded images and attachments."
+#: ./content/solicitudes.py
+msgid "A document which may contain directly uploaded images and attachments."
+msgstr ""
+
+#. Default: "Request of license or commision."
+#: ./content/solicitudes.py
+msgid "Request of license or commision."
+msgstr ""
+
+#. Default: "Request of schoolarship holder."
+#: ./content/solicitudes.py
+msgid "Request of schoolarship holder."
+msgstr ""
+
+#. Default: "Request of invited visitor."
+#: ./content/solicitudes.py
+msgid "Request of invited visitor."
+msgstr ""
+
+#. Default: "Basic document view"
+#: ./skins/Solicitudes/solicitudes_view.pt.metadata
+msgid "Basic document view"
+msgstr ""
+
+#. Default: "Float first image"
+#: ./skins/Solicitudes/solicitudes_view_float.pt.metadata
+msgid "Float first image"
+msgstr ""
+
+#. Default: "Preview thumbnails"
+#: ./skins/Solicitudes/solicitudes_view_preview.pt.metadata
+msgid "Preview thumbnails"
+msgstr ""
+
+#. Default: "Rich document"
+#: ./content/solicitudes.py
+msgid "Rich document"
+msgstr ""
+
+#. Default: "Request"
+#: ./content/solicitudes.py
+msgid "Request"
+msgstr ""
+
+#. Default: "A document which can contain rich text, images and attachments"
+#: ./content/richdocument.py
+msgid "RichDocument_description_edit"
+msgstr ""
+
+#. Default: "Request License Commission"
+#: ./content/solicitudest.py
+msgid "Solicitud_description_edit"
+msgstr ""
+
+#. Default: "Request Scholarship Holder"
+#: ./content/solicitudes.py
+msgid "SolicitudBecario_description_edit"
+msgstr ""
+
+#. Default: "Request Visitor"
+#: ./content/solicitudes.py
+msgid "SolicitudVisitante_description_edit"
+msgstr ""
+
+#. Default: "A file attached to a document"
+#: ./skins/content/attachments.py
+msgid "A file attached to a document"
+msgstr ""
+
+#. Default: "An image attached to a document"
+#: ./skins/content/attachments.py
+msgid "An image attached to a document"
+msgstr ""
+
+#. Default: "A file attached to a document"
+#: ./skins/content/attachments.py
+msgid "FileAttachment_description_edit"
+msgstr ""
+
+#. Default: "An image attached to a document"
+#: ./skins/content/attachments.py
+msgid "ImageAttachment_description_edit"
+msgstr ""
+
+#. Default: "Attachments"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "attachmentsBox"
+msgstr ""
+
+#. Default: "Images"
+#: ./skins/attachment_widgets/solicitudes_view.pt
+msgid "imagesBox"
+msgstr ""
+
+#. Default: "File attachment"
+#: ./content/solicitudes.py
+msgid "File attachment"
+msgstr ""
+
+#. Default: "Image attachment"
+#: ./content/solicitudes.py
+msgid "Image attachment"
+msgstr ""
+
+#. Default: "Image management controls"
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+msgid "title_widgetimagesmanager"
+msgstr ""
+
+msgid "attachmentsBox"
+msgstr ""
+
+msgid "Images"
+msgstr ""
+
+msgid "Attachments"
+msgstr ""
+
+###################################### para SOLICITUD
+
+#. Default:
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "Review data, if it is correct, you should send it to revision, by clicking the 'send request' button at the end of this page or by selecting 'state: solicitud no enviada' then 'enviar solicitud' inside the transitions menu in the top right corner"
+msgstr ""
+
+#. Default: "Review data, if it is correct, you should send it to your tutor, by clicking the 'send to the tutor' button at the end of this page or by selecting 'state: solicitud no enviada al tutor' then 'enviar al tutor' inside the transitions menu in the top right corner"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_estado_becario"
+msgstr ""
+
+#. Default:
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "Review data, if it is correct, you should send it to your tutor, by clicking the 'send to the tutor' button at the end of this page or by selecting 'state: solicitud no enviada al tutor' then 'enviar al tutor' inside the transitions menu in the top right corner"
+msgstr ""
+
+#. Default: "If your request is ready, you should send it to revision, by clicking the 'send request' button at the end of this page or by selecting 'state: pendiente' then 'reenviar solicitud' inside the transitions menu in the top right corner"
+#: ./skins/Solicitudes/_view.pt
+msgid "label_estado_pendiente"
+msgstr ""
+
+#. Default:
+#: ./skins/Solicitudes/_view.pt
+msgid "If your request is ready, you should send it to revision, by clicking the 'send request' button at the end of this page or by selecting 'state: pendiente' then 'reenviar solicitud' inside the transitions menu in the top right corner"
+msgstr ""
+
+#. Default: "Your request has been received successfully, you can print this page as acknowledgement of receipt"
+#: ./skins/Solicitudes/_view.pt
+msgid "label_acuse_recibo"
+msgstr ""
+
+#. Default:
+#: ./skins/Solicitudes/_view.pt
+msgid "Your request has been received successfully, you can print this page as acknowledgement of receipt"
+msgstr ""
+
+#. Default: "Additional comments"
+#: ./content/solicitud.py
+msgid "label_comentario_owner"
+msgstr ""
+
+#. Default: "Add any comment that you consider important for your request"
+#: ./content/solicitud.py
+msgid "help_comentario_owner"
+msgstr ""
+
+#. Default: "Recommendation by special commission"
+#: ./content/solicitud.py
+msgid "label_comentario_ce"
+msgstr ""
+
+#. Default: "Add any comment related to your recommendation for this request"
+#: ./content/solicitud.py
+msgid "help_comentario_ce"
+msgstr ""
+
+#. Default: "Comments by Consejo Interno"
+#: ./content/solicitud.py
+msgid "label_comentario_ci"
+msgstr ""
+
+#. Default: "Add any comment related to the resolution taken for this request"
+#: ./content/solicitud.py
+msgid "help_comentario_ci"
+msgstr ""
+
+
+########## Botones de transiciones, con q esten aki y en el form sea i18n:domain="plone"
+
+#. Default: "Send to the tutor"
+#: ./skins/Solicitudes/_view.pt
+msgid "label_enviar_tutor"
+msgstr ""
+
+#. Default: "Send to the tutor"
+#: ./skins/Solicitudes/_view.pt
+msgid "label_enviar"
+msgstr ""
+
+#. Default: "Recommend approval"
+#: ./skins/Solicitudes/_view.pt
+msgid "label_rec_aprobar"
+msgstr ""
+
+#. Default: "Recommend review"
+#: ./skins/Solicitudes/_view.pt
+msgid "label_rec_revisar"
+msgstr ""
+
+#. Default: "Approve"
+#: ./skins/Solicitudes/_view.pt
+msgid "label_aprobar"
+msgstr ""
+
+#. Default: "Pending"
+#: ./skins/Solicitudes/_view.pt
+msgid "label_pendiente"
+msgstr ""
+
+#. Default: "Remove request"
+#: ./skins/Solicitudes/_view.pt
+msgid "label_retirar"
+msgstr ""
+
+#. Default: "Total accumulated by the solicitor in the year"
+#: ./skins/Solicitudes/_view.pt
+msgid "label_total_acumulado"
+msgstr ""
+
+########## Botones de transiciones
+
+#. Default: "City"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_ciudad_pais"
+msgstr ""
+
+#. Default: "Country"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_pais"
+msgstr ""
+
+#. Default: "Country"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "Country"
+msgstr ""
+
+#. Default: "Institution"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_institucion"
+msgstr ""
+
+#. Default: "Start date"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_fecha_desde"
+msgstr ""
+
+#. Default: "End date"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_fecha_hasta"
+msgstr ""
+
+#. Default: "Objective"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_objeto_viaje"
+msgstr ""
+
+#. Default: "Paper"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_trabajo"
+msgstr ""
+
+#. Default: "Specify if a paper will be presented"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_trabajo"
+msgstr ""
+
+#. Default: "Title of the paper to present"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_titulo_trabajo"
+msgstr ""
+
+#. Default: "Passage"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_pasaje"
+msgstr ""
+
+#. Default: "Passage type"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_tipo_pasaje"
+msgstr ""
+
+#. Default: "Passage amount"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_pasaje"
+msgstr ""
+
+#. Default: "Travel allowances"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_viaticos"
+msgstr ""
+
+#. Default: "Travel allowances amount"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_viaticos"
+msgstr ""
+
+#. Default: "Inscription"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_inscripcion"
+msgstr ""
+
+#. Default: "Inscription amount"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_inscripcion"
+msgstr ""
+
+#. Default: "Amount approved"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_autorizada"
+msgstr ""
+
+#. Default: "Amount approved for this request"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_cantidad_autorizada"
+msgstr ""
+
+#. Default: "Date of application"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_fecha_solicitud"
+msgstr ""
+
+#. Default: "Date on which the request is sent"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_fecha_solicitud"
+msgstr ""
+
+#. Default: "Attachments"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_adjuntos"
+msgstr ""
+
+#. Default: "Please attach invitation letter or any other related documents"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_adjuntos"
+msgstr ""
+
+#. Default: "Date of revision"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_fecha_sesionci"
+msgstr ""
+
+#. Default: "Date on which the request was revised"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_fecha_sesionci"
+msgstr ""
+
+#. Default: "Number of record of Consejo Interno"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_actaci"
+msgstr ""
+
+#. Default: "Number of record where the request was revised"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_actaci"
+msgstr ""
+
+#. Default: "Approved amount for transportation expenses"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_autorizada_pasaje"
+msgstr ""
+
+#. Default: "Amount approved for transportation expenses for this request"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_cantidad_autorizada_pasaje"
+msgstr ""
+
+#. Default: "Approved amount for travel allowences"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_autorizada_viaticos"
+msgstr ""
+
+#. Default: "Amount approved for travel allowences for this request"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_cantidad_autorizada_viaticos"
+msgstr ""
+
+#. Default: "Approved amount for registration"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_autorizada_inscripcion"
+msgstr ""
+
+#. Default: "Amount approved for registration for this request"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_cantidad_autorizada_inscripcion"
+msgstr ""
+
+#. Default: "Responsible researcher"
+#: ./skins/Solicitudes/solicitudvisitante_view.pt
+msgid "label_responsable"
+msgstr ""
+
+#. Default: "Name of the responsible researcher"
+#: ./skins/Solicitudes/solicitudvisitante_view.pt
+msgid "help_responsable"
+msgstr ""
+
+#. Default: "Guest"
+#: ./skins/Solicitudes/solicitudvisitante_view.pt
+msgid "label_invitado"
+msgstr ""
+
+#. Default: "Name of the guest"
+#: ./skins/Solicitudes/solicitudvisitante_view.pt
+msgid "help_invitado"
+msgstr ""
+
+#. Default: "City"
+#: ./skins/Solicitudes/solicitudvisitante_view.pt
+msgid "label_procedencia"
+msgstr ""
+
+#. Default: "City of origin"
+#: ./skins/Solicitudes/solicitudvisitante_view.pt
+msgid "help_procedencia"
+msgstr ""
+
+#. Default: "Country"
+#: ./skins/Solicitudes/solicitudvisitante_view.pt
+msgid "label_pais_procedencia"
+msgstr ""
+
+#. Default: "Country of origin"
+#: ./skins/Solicitudes/solicitudvisitante_view.pt
+msgid "help_pais_procedencia"
+msgstr ""
+
+#. Default: "Country of origin"
+#: ./skins/Solicitudes/solicitudvisitante_view.pt
+msgid "Country of origin"
+msgstr ""
+
+#. Default: "Institution"
+#: ./skins/Solicitudes/solicitudvisitante_view.pt
+msgid "label_institucion_procedencia"
+msgstr ""
+
+#. Default: "Institution of origin"
+#: ./skins/Solicitudes/solicitudvisitante_view.pt
+msgid "help_institucion_procedencia"
+msgstr ""
+
+#. Default: "Degree"
+#: ./skins/Solicitudes/solicitudbecario_view.pt
+msgid "label_grado"
+msgstr ""
+
+#. Default: "Specify the degree of the scholarship holder"
+#: ./skins/Solicitudes/solicitudbecario_view.pt
+msgid "help_grado"
+msgstr ""
+
+#. Default: "Tutor"
+#: ./skins/Solicitudes/solicitudbecario_view.pt
+msgid "label_tutor"
+msgstr ""
+
+#. Default: "Name of the tutor of the scholarship holder"
+#: ./skins/Solicitudes/solicitudbecario_view.pt
+msgid "help_tutor"
+msgstr ""
+
+#. Default: "Extra support"
+#: ./skins/Solicitudes/solicitudbecario_view.pt
+msgid "label_apoyo_extra"
+msgstr ""
+
+#. Default: "Specify if you requested support to the post-degree or another instance"
+#: ./skins/Solicitudes/solicitudbecario_view.pt
+msgid "help_apoyo_extra"
+msgstr ""
+
+#. Default: "Detail the obtained support"
+#: ./skins/Solicitudes/solicitudbecario_view.pt
+msgid "label_apoyo_texto"
+msgstr ""
+
+#. Default: "Enter the detail of the obtained support"
+#: ./skins/Solicitudes/solicitudbecario_view.pt
+msgid "help_apoyo_texto"
+msgstr ""
+
+#. Default: "Travel allowances amount"
+#: ./skins/Solicitudes/solicitudbecario_view.pt
+msgid "label_viaticos_becario"
+msgstr ""
+
+#. Default: "Specify if the travel allowances will be charged. It is necessary to deliver vouchers for the total"
+#: ./skins/Solicitudes/solicitudbecario_view.pt
+msgid "help_viaticos_becario"
+msgstr ""
+
+#. Default: "Research areas"
+#: ./skins/Solicitudes/solicitud_view.pt
+msgid "label_investigacionarea"
+msgstr ""
+
+#. Default: "Doubts about the classification and how to find an area, go to the official website of the <a href=\"http://www.ams.org/msc\">ams</a>"
+#: ./skins/Solicitudes/solicitud_view.pt
+msgid "help_investigacionarea"
+msgstr ""
+
+#. Default: "Research areas"
+#: ./skins/Solicitudes/solicitud_view.pt
+msgid "Research areas"
+msgstr ""
+
+#. Default: "Doubts about the classification and how to find an area, go to the official website of the <a href=\"http://www.ams.org/msc\">ams</a>"
+#: ./skins/Solicitudes/solicitud_view.pt
+msgid "Doubts about the classification and how to find an area, go to the official website of the <a href=\"http://www.ams.org/msc\">ams</a>"
+msgstr ""
+
+##############################
+
+#. Default: "Change titles"
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "Change titles"
+msgstr ""
+
+#. Default: "Delete selected"
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "Delete selected"
+msgstr ""
+
+#. Default: "Move first"
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "Move first"
+msgstr ""
+
+#. Default: "If selected, a list of uploaded attachments will be presented at the bottom of the document to allow them to be easily downloaded."
+#: ../content/solicitudes.py
+msgid "RichDocument_help_displayAttachments"
+msgstr ""
+
+#. Default: "If selected, a list of uploaded images will be presented at the bottom of the document to allow them to be easily downloaded."
+#: ../content/solicitudes.py
+msgid "RichDocument_help_displayImages"
+msgstr ""
+
+#. Default: "Display attachments download box"
+#: ../content/solicitudes.py
+msgid "RichDocument_label_displayAttachments"
+msgstr ""
+
+#. Default: "Display images download box"
+#: ../content/solicitudes.py
+msgid "RichDocument_label_displayImages"
+msgstr ""
+
+#. Default: "Upload"
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "Upload"
+msgstr ""
+
+#. Default: "Once an image is uploaded, you can refer to it in your body text by its filename."
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+msgid "help_widget_imagesmanager_upload"
+msgstr ""
+
+#. Default: "Select an attachment to add and click 'Upload'"
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "help_widgetattachmentsmanager_attachment"
+msgstr ""
+
+#. Default: "Enter a title for the attachment"
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "help_widgetattachmentsmanager_title"
+msgstr ""
+
+#. Default: "Once an attachment is uploaded, you can refer to it in your body text by its filename."
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "help_widgetattachmentsmanager_upload"
+msgstr ""
+
+#. Default: "Select an image to add and click 'Upload'"
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+msgid "help_widgetimagesmanager_images"
+msgstr ""
+
+#. Default: "Enter a title for the image"
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+msgid "help_widgetimagesmanager_title"
+msgstr ""
+
+#. Default: "Add attachment to document"
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "label_widgetattachmentsmanager_title"
+msgstr ""
+
+#. Default: "Add image to document"
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+msgid "label_widgetimagesmanager_title"
+msgstr ""
+
+#. Default: "Attachments"
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "legend_attachments"
+msgstr ""
+
+#. Default: "Images"
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+msgid "legend_images"
+msgstr ""
+
+#. Default: "Attachment management controls"
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "title_widgetattachmentsmanager"
+msgstr ""
+
+#. Default: "Image management controls"
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+msgid "title_widgetimagesmanager"
+msgstr ""
+
+#. Default: "Add image to document"
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+msgid "label_widgetimagesmanager_title"
+msgstr ""
+
+#. Default: "Enter a title for the image"
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+msgid "help_widgetimagesmanager_title"
+msgstr ""
+
+#. Default: "Select an image to add and click 'Upload'"
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+msgid "help_widgetimagesmanager_images"
+msgstr ""
+
+#. Default: "Once an image is uploaded, you can refer to it in your body text by its filename."
+#: ./skins/attachment_widgets/widget_imagesmanager.pt
+msgid "help_widget_imagesmanager_upload"
+msgstr ""
+
+#. Default: "Attachments"
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "legend_attachments"
+msgstr ""
+
+#. Default: "Attachment management controls"
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "title_widgetattachmentsmanager"
+msgstr ""
+
+#. Default: "Add attachment to document"
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "label_widgetattachmentsmanager_title"
+msgstr ""
+
+#. Default: "Select an attachment to add and click 'Upload'"
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "help_widgetattachmentsmanager_attachment"
+msgstr ""
+
+#. Default: "Once an attachment is uploaded, you can refer to it in your body text by its filename."
+#: ./skins/attachment_widgets/widget_attachmentsmanager.pt
+msgid "help_widgetattachmentsmanager_upload"
+msgstr ""
+
+#. Default: "City"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_ciudad_pais"
+msgstr ""
+
+#. Default: "Country"
+#: ./skins/Solicitudes/solicitudes_view.pt
+#msgid "label_pais"
+#msgstr "PaÃ­s"
+
+#. Default: "City to visit"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_ciudad_pais"
+msgstr ""
+
+#. Default: "Country to visit"
+#: ./skins/Solicitudes/solicitudes_view.pt
+#msgid "help_pais"
+#msgstr "PaÃ­s que visitarÃ¡"
+
+#. Default: "Country to visit"
+#: ./skins/Solicitudes/solicitudes_view.pt
+#msgid "Country to visit"
+#msgstr "PaÃ­s que visitarÃ¡"
+
+#. Default: "Institution"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_institucion"
+msgstr ""
+
+#. Default: "Institution to visit"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_institucion"
+msgstr ""
+
+#. Default: "Start date"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_fecha_desde"
+msgstr ""
+
+#. Default: "Date on wich the visit will start (may be approximate)"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_fecha_desde"
+msgstr ""
+
+#. Default: "End date"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_fecha_hasta"
+msgstr ""
+
+#. Default: "Date on wich the visit will end (may be approximate)"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_fecha_hasta"
+msgstr ""
+
+#. Default: "Objective"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_objeto_viaje"
+msgstr ""
+
+#. Default: "Enter the expected objective of the visit"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_objeto_viaje"
+msgstr ""
+
+#. Default: "Title of the paper to present"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_titulo_trabajo"
+msgstr ""
+
+#. Default: "Title of the paper to present"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_titulo_trabajo"
+msgstr ""
+
+#. Default: "Passage"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_pasaje"
+msgstr ""
+
+#. Default: "Specify if the passage will be charged"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_pasaje"
+msgstr ""
+
+#. Default: "Type of passage"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_tipo_pasaje"
+msgstr ""
+
+#. Default: "Define the type of passage to be used"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_tipo_pasaje"
+msgstr ""
+
+#. Default: "Passage amount"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_pasaje"
+msgstr ""
+
+#. Default: "Amount requested for passages in mexican pesos"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_cantidad_pasaje"
+msgstr ""
+
+#. Default: "Travel allowances"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_viaticos"
+msgstr ""
+
+#. Default: "Specify if the travel allowances will be charged. 900 daily pesos (national) and 1200 daily pesos (foreign), it is necessary to deliver vouchers for the total"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_viaticos"
+msgstr ""
+
+#. Default: "Travel allowances amount"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_viaticos"
+msgstr ""
+
+#. Default: "Amount requested for travel allowances, in mexican pesos"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_cantidad_viaticos"
+msgstr ""
+
+#. Default: "Inscription"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_inscripcion"
+msgstr ""
+
+#. Default: "Specify if the registration will be charged"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_inscripcion"
+msgstr ""
+
+#. Default: "Inscription amount"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_inscripcion"
+msgstr ""
+
+#. Default: "Amount requested for registration in mexican pesos"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "help_cantidad_inscripcion"
+msgstr ""
+
+#. Default: "Date of application"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_fecha_solicitud"
+msgstr ""
+
+#. Default: "Fecha de Revision por La Comision Especial"
+#: ./browser/folderpendientes.pt
+msgid "label_fecha_revision_comision"
+msgstr ""
+
+#. Default: "The maximum days of License is 45, if you exceed this number consult whit Secretaria Academica"
+#: ./content/solicitud.py
+msgid "label_mensaje_licencias"
+msgstr ""
+
+msgid "label_cantidad_recomendada_pasaje"
+msgstr "Recommended amount for transportation expenses"
+
+msgid "label_cantidad_recomendada_pasaje_institucional"
+msgstr "Recommended amount for transportation expenses (Institutional)"
+
+msgid "label_cantidad_recomendada_viaticos"
+msgstr "Recommended amount for travel allowences"
+
+msgid "label_cantidad_recomendada_viaticos_institucional"
+msgstr "Recommended amount for travel allowences (Institutional)"
+
+msgid "label_cantidad_recomendada_inscripcion"
+msgstr "Recommended amount for registration"
+
+msgid "label_cantidad_recomendada_inscripcion_institucional"
+msgstr "Recommended amount for registration (Institutional)"
+
+#. Default: "Approved amount for transportation expenses"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_consejo_pasaje"
+msgstr "Approved amount for transportation expenses"
+
+#. Default: "Approved amount for transportation expenses"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_consejo_pasaje_institucional"
+msgstr "Approved amount for transportation expenses (Institutional)"
+
+#. Default: "Approved amount for travel allowences"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_consejo_viaticos"
+msgstr "Approved amount for travel allowences"
+
+#. Default: "Approved amount for travel allowences"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_consejo_viaticos_institucional"
+msgstr "Approved amount for travel allowences (Institutional)"
+
+#. Default: "Approved amount for registration"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_consejo_inscripcion"
+msgstr "Approved amount for registration"
+
+#. Default: "Approved amount for registration"
+#: ./skins/Solicitudes/solicitudes_view.pt
+msgid "label_cantidad_consejo_inscripcion_institucional"
+msgstr "Approved amount for registration (Institutional)"
+
+msgid "Mexico"
+msgstr ""

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<object name="portal_factory" meta_type="Plone Factory Tool">
+ <factorytypes>
+  <type portal_type="Solicitud"/>
+ </factorytypes>
+ <factorytypes>
+  <type portal_type="SolicitudBecario"/>
+ </factorytypes>
+ <factorytypes>
+  <type portal_type="SolicitudVisitante"/>
+ </factorytypes>
+ <factorytypes>
+  <type portal_type="SolicitudFolder"/>
+ </factorytypes>
+ <factorytypes>
+   <type portal_type="Solicitud Institucional" />
+ </factorytypes>
+</object>

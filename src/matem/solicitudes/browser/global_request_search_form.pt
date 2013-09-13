@@ -1,0 +1,457 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+  <head>
+    <title tal:content="template/title">Busqueda Global de Solicitudes</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  </head>
+
+  <metal:javascript_head fill-slot="javascript_head_slot">
+    <script type="text/javascript"
+              charset="iso-8859-1">
+     function printTable(spanName){
+         var head = "<html><head><\/head>";
+         var body = document.getElementsByName(spanName)[0].innerHTML;
+         var foot = "<\/body><\/html>";
+
+         myWindow=window.open('','','');
+         myWindow.document.write(head + body + foot);
+         myWindow.print();
+         myWindow.close();}
+    </script>
+  </metal:javascript_head>
+
+  <metal:css fill-slot="css_slot">
+    <style type="text/css">
+        #contentActionMenus{
+            visibility: hidden;
+        }
+
+        #fieldsetlegend-metadata .{
+            visibility: hidden;
+        }
+    </style>
+  </metal:css>
+
+  <body>
+    <metal:fill fill-slot="main">
+      <metal:main_macro define-macro="main"
+            tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+            base_macros here/base/macros;
+            view_template python:'%s_view' % portal_type;
+            view_macros python:path('here/%s/macros|nothing' % view_template);
+            header_macro view_macros/header | header_macro | base_macros/header;
+            body_macro view_macros/body | body_macro | base_macros/body;
+            folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
+            footer_macro view_macros/footer | footer_macro | base_macros/footer;
+            errors python:request.get('errors', {})">
+
+    <metal:header_macro define-macro="header">
+        <h1 class="documentFirstHeading">Busqueda Global de Solicitudes</h1>
+    </metal:header_macro>
+
+    <metal:body_macro define-macro="body">
+
+    <span tal:define="items python:view.getIndexedList(view.global_search(),20);
+                      page python:view.getPage('pagina');">
+
+    <span name="tablaSolicitudes" tal:condition="items">
+    <h3 tal:condition="items" i18n:translate="label_approved_quantities_nosol">Approved Quantities per Request</h3>
+    <a tal:condition="items" href="javascript: printTable('tablaSolicitudes')">Imprimir</a>
+    <div class="tabularView">
+    <table class="listing" border="1" width="100%" tal:condition="items">
+        <tbody>
+        <tr><th i18n:translate="label_period">Period</th><th i18n:translate="label_type">Type</th><th i18n:translate="label_solicitor">Solicitor</th><th i18n:translate="label_reason">Reason</th><th i18n:translate="label_place">Place</th><th i18n:translate="label_creation_date">Fecha de Solicitud</th><th i18n:translate="label_quantity_days">Cantidad de Días</th><th i18n:translate="label_requested_quantity">Requested Quantity (pesos)</th><th i18n:translate="label_state">State</th><th i18n:translate="label_link">Link</th></tr>
+        <tr tal:repeat="item python:items[page]">
+          <td><a href="#" tal:attributes="href python:item[len(item)-1]" tal:content="python:item[len(item)-2]"/></td>
+          <td tal:content="python:item[0]">Meta-Type</td>
+          <td><a href="#" tal:attributes="href python:here.absolute_url()+str('/global_request_search_form?Creator=')+item[9]+str('&Type=all&Pais=&Ciudad=&Institucion=&Desde=&Desde_year=0000&Desde_month=00&Desde_day=00&Desde_hour=00&Desde_minute=00&Desde_ampm=&Hasta=&Hasta_year=0000&Hasta_month=00&Hasta_day=00&Hasta_hour=00&Hasta_minute=00&Hasta_ampm=&Area=&Becario=&Asesor=&Objeto=&TTrabajo=&Cantidad=0.0&CantidadLarger=0.0&CantidadLower=0.0&State=any&form.button.Submit=Buscar&pagina=')+str(page)" tal:content="python:item[1]" /></td>
+          <td tal:content="python:item[2]">Reason</td>
+          <td tal:content="python:item[3]">Place</td>
+          <td tal:content="python:item[18]">Creation Date</td>
+          <td tal:content="python:item[19]">Quantity of Days</td>
+          <td align="center" tal:content="python:item[6]">Quantity</td>
+          <td align="center" tal:content="python:item[7]">State</td>
+          <td><a href="#" tal:attributes="href python:item[8]" tal:content="python:string('ver')" /></td>
+        </tr>
+
+        <!--Paginas-->
+        <tr>
+            <td colspan=9 align="center">
+                <span tal:repeat="i python:range(0,len(items))">
+                <form action="global_request_search_form"
+                    class="enableAutoFocus"
+                    method="get"
+                    tal:attributes="name python:str('search')+str(i)">
+
+                    <input type=hidden name="Creator" value="" tal:attributes="value python:view.getRequest('Creator')"/>
+                    <input type=hidden name="Pais" value="" tal:attributes="value python:view.getRequest('Pais')"/>
+                    <input type=hidden name="Ciudad" value="" tal:attributes="value python:view.getRequest('Ciudad')"/>
+                    <input type=hidden name="Institucion" value="" tal:attributes="value python:view.getRequest('Institucion')"/>
+                    <input type=hidden name="Desde" value="" tal:attributes="value python:view.getRequest('Desde')"/>
+                    <input type=hidden name="Desde_year" value="" tal:attributes="value python:view.getRequest('Desde_year')"/>
+                    <input type=hidden name="Desde_month" value="" tal:attributes="value python:view.getRequest('Desde_month')"/>
+                    <input type=hidden name="Desde_day" value="" tal:attributes="value python:view.getRequest('Desde_day')"/>
+                    <input type=hidden name="Desde_hour" value="" tal:attributes="value python:view.getRequest('Desde_hour')"/>
+                    <input type=hidden name="Desde_minute" value="" tal:attributes="value python:view.getRequest('Desde_minute')"/>
+                    <input type=hidden name="Desde_ampm" value="" tal:attributes="value python:view.getRequest('Desde_ampm')"/>
+                    <input type=hidden name="Hasta" value="" tal:attributes="value python:view.getRequest('Hasta')"/>
+                    <input type=hidden name="Hasta_year" value="" tal:attributes="value python:view.getRequest('Hasta_year')"/>
+                    <input type=hidden name="Hasta_month" value="" tal:attributes="value python:view.getRequest('Hasta_month')"/>
+                    <input type=hidden name="Hasta_day" value="" tal:attributes="value python:view.getRequest('Hasta_day')"/>
+                    <input type=hidden name="Hasta_hour" value="" tal:attributes="value python:view.getRequest('Hasta_hour')"/>
+                    <input type=hidden name="Hasta_minute" value="" tal:attributes="value python:view.getRequest('Hasta_minute')"/>
+                    <input type=hidden name="Hasta_ampm" value="" tal:attributes="value python:view.getRequest('Hasta_ampm')"/>
+                    <input type=hidden name="Objeto" value="" tal:attributes="value python:view.getRequest('Objeto')"/>
+                    <input type=hidden name="Area" value="" tal:attributes="value python:view.getRequest('Area')"/>
+                    <input type=hidden name="TTrabajo" value="" tal:attributes="value python:view.getRequest('TTrabajo')"/>
+                    <input type=hidden name="Becario" value="" tal:attributes="value python:view.getRequest('Becario')"/>
+                    <input type=hidden name="Asesor" value="" tal:attributes="value python:view.getRequest('Asesor')"/>
+                    <input type=hidden name="Cantidad" value="" tal:attributes="value python:view.getRequest('Cantidad')"/>
+                    <input type=hidden name="CantidadLarger" value="" tal:attributes="value python:view.getRequest('CantidadLarger')"/>
+                    <input type=hidden name="CantidadLower" value="" tal:attributes="value python:view.getRequest('CantidadLower')"/>
+                    <input type=hidden name="Type" value="" tal:attributes="value python:view.getRequest('Type')"/>
+                    <input type=hidden name="State" value="" tal:attributes="value python:view.getRequest('State')"/>
+                    <input type=hidden name="pagina" value="" tal:attributes="value python:str(i)"/>
+                    <input type=hidden name="form.button.Submit" value="Search"/>
+
+                    <a href="#" tal:attributes="href python:str('javascript: document.search')+str(i)+str('.submit()')"
+                                               tal:content="python:str(i+1)"/>
+                </form>
+                </span></td>
+        </tr>
+
+<!--        <tr><td tal:content="python:items"></td></tr>-->
+        </tbody>
+    </table>
+    </div>
+    </span>
+
+    <span tal:condition="not:items">
+
+            <dl class="portalMessage error"
+                tal:condition="python:view.hasReqDataStr('State')">
+                <dt i18n:translate="label_atencion">
+                    Attention!
+                </dt>
+                <dd i18n:translate="label_no_results">
+                     This search rendered no results. Try again.
+                </dd>
+            </dl>
+
+    <p i18n:translate="description_request_search">
+    Aquí puede buscar solicitudes de viáticos en todos los periodos.
+    <br />
+    Si desea realizar una busqueda en un periodo específico, puede acceder al 
+    formato de busqueda en dicho periodo.
+    </p>
+
+    <form action="global_request_search_form"
+          class="enableAutoFocus"
+          method="get"
+          name="search"
+          tal:define="DateTime python:modules['DateTime'].DateTime">
+
+        <fieldset>
+
+            <legend i18n:translate="legend_search_terms">Search Terms</legend>
+
+
+            <div class="field">
+                <label for="Creator" i18n:translate="label_author">Author</label>
+
+                <div class="formHelp" i18n:translate="help_search_author">
+                Return items created by a particular person.
+                </div>
+    
+                <tal:creators tal:define="creators view/getCreatorsBecarioInvestigador">
+                    <select name="Creator"
+                            id="Creator">
+                        <option value="" i18n:translate="label_search_creator">Applications submitted by...</option>
+                        <metal:block tal:repeat="creator creators">
+                            <option value="" tal:attributes="value python:creator[0];" tal:content="python:creator[1]"> username </option>
+                        </metal:block>
+                        <option value="todos" i18n:translate="label_search_all">All authors</option>
+                    </select>
+
+                </tal:creators>
+            </div>
+
+            <div class="field">
+                <label for="Type" i18n:translate="label_type">Type</label>
+
+                <div class="formHelp" i18n:translate="help_search_type">
+                Return applications of the selected type.
+                </div>
+
+                <input type="radio" name="Type" value="all" checked><span i18n:translate="All"> All </span><br>    
+                <input type="radio" name="Type" value="licencia"><span i18n:translate="License Application"> License Application </span><br>
+                <input type="radio" name="Type" value="visitante"><span i18n:translate="Visitor Application"> Visitor Application</span><br>
+                <input type="radio" name="Type" value="becario"><span i18n:translate="Student Application"> Student Application</span><br>
+            </div>
+
+            <table>
+
+            <tr><div class="field">
+                <td><label for="Pais" i18n:translate="label_pais">Country</label>
+
+                <div class="formHelp" i18n:translate="help_search_pais">
+                Country specified in the application.
+                </div></td>
+
+                <td><select name="Pais" id="Pais" tal:define="countrytool here/portal_countryutils">
+                      <option value="" i18n:translate="label_choose_country">Choose country...</option>
+                      <optgroup
+                          label="North America"
+                          tal:repeat="area countrytool/listAreas"
+                          tal:attributes="label area/name">
+                        <option
+                          value="MX"
+                          tal:repeat="country area/countries"
+                          tal:content="country/name"
+                          tal:attributes="value country/isocc">Mexico
+                        </option>
+                      </optgroup>
+                    </select></td>
+
+            </div></tr>
+
+            <tr><div class="field">
+                <td><label for="Ciudad" i18n:translate="label_ciudad_pais">City</label>
+
+                <div class="formHelp" i18n:translate="help_search_ciudad_pais">
+                City specified in the application.
+                </div></td>
+
+                <td><input type="text"
+                       id="Ciudad"
+                       name="Ciudad"
+                       size="25"
+                       /></td>
+            </div></tr>
+
+            <tr><div class="field">
+                <td><label for="Institucion" i18n:translate="label_institucion">Institution</label>
+
+                <div class="formHelp" i18n:translate="help_search_institucion">
+                Institution specified in the application.
+                </div></td>
+
+                <td><input type="text"
+                       id="Institucion"
+                       name="Institucion"
+                       size="25"
+                       /></td>
+            </div></tr>
+
+            <tr><div class="field">
+               <td> <label for="Desde" i18n:translate="label_fecha_desde">From Date</label>
+
+                <div class="formHelp" i18n:translate="help_search_fecha_desde">
+                Initial date specified in the application.
+                </div></td>
+
+                <td><div tal:define="inputname  string:Desde;
+                                     formname   string:search;
+                                     inputvalue python:request.get('effective_date', '');">
+
+                              <div metal:use-macro="here/calendar_macros/macros/calendarDatePickerBox">
+                                calendar pop-up
+                              </div>
+                            </div> </td>
+            </div></tr>
+
+            <tr><div class="field">
+               <td> <label for="Hasta" i18n:translate="label_fecha_hasta">To Date</label>
+
+                <div class="formHelp" i18n:translate="help_search_fecha_hasta">
+                Final date specified in the application.
+                </div></td>
+
+                <td><div tal:define="inputname  string:Hasta;
+                                     formname   string:search;
+                                     inputvalue python:request.get('effective_date', '');">
+
+                              <div metal:use-macro="here/calendar_macros/macros/calendarDatePickerBox">
+                                calendar pop-up
+                              </div>
+                            </div> </td>
+            </div></tr>
+
+            <tr><div class="field">
+                <td><label for="Area" i18n:translate="label_investigacionarea">Area of Research</label></td>
+
+
+               <td><tal:areas tal:define="areas view/getAreasInv">
+                    <select name="Area"
+                            id="Area">
+                        <option value="" i18n:translate="label_search_area">Applications in Area...</option>
+                        <metal:block tal:repeat="area areas">
+                            <option value="" tal:attributes="value python:area[0];" tal:content="python:area[1]"> username </option>
+                        </metal:block>
+                    </select>
+
+                </tal:areas></td>
+            </div></tr>
+
+           <tr> <div class="field">
+                <td><label for="Becario" i18n:translate="label_nombre_becario">Scholarship Holder</label></td>
+
+                <td><tal:creators tal:define="creators view/getCreatorsBecario">
+                    <select name="Becario"
+                            id="Becario">
+                        <option value="" i18n:translate="label_search_becario">Select a scholarship holder (if needed)...</option>
+                        <metal:block tal:repeat="creator creators">
+                            <option value="" tal:attributes="value python:creator[0];" tal:content="python:creator[1]"> username </option>
+                        </metal:block>
+                    </select>
+
+                </tal:creators></td>
+
+            </div></tr>
+
+            <tr><div class="field">
+                <td><label for="Asesor" i18n:translate="label_asesor">Advisor</label></td>
+
+                <td><tal:creators tal:define="creators view/getCreatorsInvestigador">
+                    <select name="Asesor"
+                            id="Asesor">
+                        <option value="" i18n:translate="label_any_advisor">Select an advisor (if needed)...</option>
+                        <metal:block tal:repeat="creator creators">
+                            <option value="" tal:attributes="value python:creator[0];" tal:content="python:creator[1]"> username </option>
+                        </metal:block>
+                    </select>
+
+                </tal:creators></td>
+
+            </div></tr>
+<!--            <tr><div class="field">
+               <td> <label for="Hasta" i18n:translate="label_fecha_Hasta">To Date</label></td>
+
+                <td><input type="text"
+                       id="Hasta"
+                       name="Hasta"
+                       size="25"
+                       /></td>
+            </div></tr>-->
+
+            <tr><div class="field">
+                <td><label for="Objeto" i18n:translate="label_objeto_viaje">Objective</label></td>
+
+               <td> <input type="text"
+                       id="Objeto"
+                       name="Objeto"
+                       size="25"
+                       /></td>
+            </div></tr>
+
+           <tr> <div class="field">
+                <td><label for="TTrabajo" i18n:translate="label_titulo_trabajo">Work Title</label></td>
+
+                <td><input type="text"
+                       id="TTrabajo"
+                       name="TTrabajo"
+                       size="25"
+                       /></td>
+            </div></tr>
+
+           <tr> <div class="field">
+                <td><label for="Cantidad" i18n:translate="label_search_cantidad">Total Amount </label>
+                <div class="formHelp" i18n:translate="help_search_cantidad">
+                Total approved or, if it is the case, requested amount in pesos (MXN).
+                </div>
+                </td>
+                <td>
+                <input type="text"
+                       id="Cantidad"
+                       name="Cantidad"
+                       value="0.0"
+                       size="25"
+                       />
+                </td>
+            </div></tr>
+
+
+           <tr> <div class="field">
+                <td><label for="CantidadLarger" i18n:translate="label_search_cantidad_larger">Larger than Amount</label>
+                <div class="formHelp" i18n:translate="help_search_cantidad_larger">
+                If greater than zero, it will return every application with a larger approved, or requested if it is the case, amount than the one specified.
+                </div>
+                </td>
+                <td>
+                <input type="text"
+                       id="CantidadLarger"
+                       name="CantidadLarger"
+                       value="0.0"
+                       size="25"
+                       />
+                </td>
+            </div></tr>
+
+           <tr> <div class="field">
+                <td><label for="CantidadLower" i18n:translate="label_search_cantidad_lower">Lower than Amount</label>
+                <div class="formHelp" i18n:translate="help_search_cantidad_lower">
+                If greater than zero, it will return every application with a lower approved, or requested if it is the case, amount than the one specified.
+                </div>
+                </td>
+                <td>
+                <input type="text"
+                       id="CantidadLower"
+                       name="CantidadLower"
+                       value="0.0"
+                       size="25"
+                       />
+                </td>
+            </div></tr>
+
+           <tr> <div class="field">
+                <td><label for="State" i18n:translate="label_current_state">Current State</label>
+                <div class="formHelp" i18n:translate="help_search_current_state">
+                Returns applications in specified state.
+                </div>
+                </td>
+                <td>
+                <input type="radio" name="State" value="any" checked><span i18n:translate="Any"> Any </span><br>    
+                <input type="radio" name="State" value="aprobada"><span i18n:translate="Approved"> Approved </span><br>
+                <input type="radio" name="State" value="rechazada"><span i18n:translate="Rejected"> Rejected</span><br>
+                <input type="radio" name="State" value="revision"><span i18n:translate="Reviewing"> In review</span><br>
+                </td>
+            </div></tr>
+
+            </table>
+
+            <div class="visualClear" id="clear-space-before-submit"><!-- --></div>
+
+            <div class="formControls">
+                <input class="context"
+                       type="submit"
+                       name="form.button.Submit"
+                       value="Search"
+                       i18n:attributes="value label_search;"
+                       />
+            </div>
+
+        </fieldset>
+    
+    </form>
+    </span>
+
+    </span>
+    </metal:body_macro>
+    <metal:footer_macro define-macro="footer">
+
+    </metal:footer_macro>
+    <metal:folderlisting_macro define-macro="folderlisting">
+
+    </metal:folderlisting_macro>
+
+      </metal:main_macro>
+    </metal:fill>
+  </body>
+</html>

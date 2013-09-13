@@ -1,0 +1,428 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+  <head>
+    <title tal:content="template/title">Solicitudes</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  </head>
+
+  <metal:javascript_head fill-slot="javascript_head_slot">
+    <tal:block define="macro here/archetypes_custom_js/macros/javascript_head | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+    <tal:comment replace="nothing">
+      Many of the following defines duplicated from the tal:defines in the
+      main slot. With base_edit, edit_macros could be reused as it was defined
+      for the entire document. base_view uses main_template and thus must
+      create additional defines for each slot it fills.
+    </tal:comment>
+    <tal:js define="fields python:here.Schema().viewableFields(here);
+                    js python:here.getUniqueWidgetAttr(fields, 'helper_js')"
+            condition="js"
+            repeat="item js">
+      <script type="text/javascript"
+              charset="iso-8859-1"
+              tal:condition="python:exists('portal/%s' % item)"
+              tal:attributes="src string:$portal_url/$item">
+      </script>
+    </tal:js>
+    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+                       view_template python:'%s_view' % portal_type;
+                       view_macros python:path('here/%s/macros|nothing' % view_template);
+                       macro view_macros/js | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+    <script type="text/javascript"
+              charset="iso-8859-1">
+     function printTable(spanName){
+         var head = "<html><head><\/head>";
+         var body = document.getElementsByName(spanName)[0].innerHTML;
+         var foot = "<\/body><\/html>";
+
+         myWindow=window.open('','','');
+         myWindow.document.write(head + body + foot);
+         myWindow.print();
+         myWindow.close();}
+    </script>
+  </metal:javascript_head>
+
+  <metal:css fill-slot="css_slot">
+    <tal:comment replace="nothing">
+      Many of the following defines duplicated from the tal:defines in the
+      main slot. With base_edit, edit_macros could be reused as it was defined
+      for the entire document. base_view uses main_template and thus must
+      create additional defines for each slot it fills.
+    </tal:comment>
+    <tal:css define="fields python:here.Schema().viewableFields(here);
+                     css python:here.getUniqueWidgetAttr(fields, 'helper_css')"
+             condition="css"
+             repeat="item css">
+      <style type="text/css"
+             media="all"
+             tal:condition="python:exists('portal/%s' % item)"
+             tal:content="structure string:<!-- @import url($portal_url/$item); -->">
+      </style>
+    </tal:css>
+    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+                       view_template python:'%s_view' % portal_type;
+                       view_macros python:path('here/%s/macros|nothing' % view_template);
+                       macro view_macros/css | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+    <style type="text/css">
+        #contentActionMenus{
+            visibility: hidden;
+        }
+
+        #fieldsetlegend-metadata .{
+            visibility: hidden;
+        }
+
+        #navcontainer ul
+        {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            text-align: center;
+        }
+
+        #navcontainer ul li { 
+            display: inline; 
+        }
+
+        #navcontainer ul li form{ 
+            display: inline; 
+            margin: 0;
+            padding: 0;
+        }
+
+        #navcontainer ul li a
+        {
+            text-decoration: none;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+  </metal:css>
+
+  <body>
+    <metal:fill fill-slot="main">
+      <metal:main_macro define-macro="main"
+            tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+            base_macros here/base/macros;
+            view_template python:'%s_view' % portal_type;
+            view_macros python:path('here/%s/macros|nothing' % view_template);
+            header_macro view_macros/header | header_macro | base_macros/header;
+            body_macro view_macros/body | body_macro | base_macros/body;
+            folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
+            footer_macro view_macros/footer | footer_macro | base_macros/footer;
+            errors python:request.get('errors', {})">
+
+    <metal:header_macro define-macro="header">
+        <h1 class="documentFirstHeading" i18n:translate="label_localbudget_app"> Local Budget Overview</h1>
+        <table><tr>
+        <td><img src="" tal:attributes="src string:${context/absolute_url}/++resource++presupuestolocal.png" width="48" height="48"></td>
+        <th><div i18n:translate="help_localbudget_app">Here you can see the detail of the local budgets for the current period.</div> Folder <span tal:replace="here/title_or_id">content title or id</span></th>
+          </tr></table>
+            <span tal:content="template/title">optional template title</span>
+            <div tal:condition="python: view.hasReqData('recalc')">
+                <div tal:condition="here/actualizarPeriodo">Cantidades recalculadas</div>
+            </div>
+        </metal:header_macro>
+
+    <metal:body_macro define-macro="body">
+      <form action="presupuestofolder" method="post" tal:condition="python: not view.hasReqData('individualList')">
+        <input type="hidden" name="vistafolder" value="presupuestolocal"/>
+        <h3 i18n:translate="legend_budget">Max Budget per Researcher: </h3>
+        <div class="tabularView">
+
+          <!-- Forma para asignar presupuesto por categoria -->
+          <table class="listing" border="1">
+            <tbody>
+              <tr>
+                <th> </th>
+                <th>Asignación anual</th>
+                <th>Apoyo institucional</th>
+              </tr>
+              <tr>
+                <th i18n:translate="label_researchers">Researcher</th>
+                <td> $ <input type="text" name="budgetvalueinvestigador" value="" tal:attributes="value here/getPresupuesto_maximo_investigadores" tal:condition="not:python:view.hasReqData('budgetvalueinvestigador')"/>
+                       <input type="text" name="budgetvalueinvestigador" value="" tal:attributes="value python:view.setBudgets('budgetvalueinvestigador')" tal:condition="python:view.hasReqData('budgetvalueinvestigador')"/>
+                </td>
+                <td> $ <input type="text" name="apoyovalueinvestigador" value="" tal:attributes="value here/getApoyoinst_maximo_investigadores" tal:condition="not:python:view.hasReqData('apoyovalueinvestigador')"/>
+                       <input type="text" name="apoyovalueinvestigador" value="" tal:attributes="value python:view.setBudgets('apoyovalueinvestigador')" tal:condition="python:view.hasReqData('apoyovalueinvestigador')"/>
+                </td>
+              </tr>
+              <tr>
+                <th i18n:translate="label_scholarship_holders">Scholarship Holders</th>
+                <td> $ <input type="text" name="budgetvaluebecario" value="" tal:attributes="value here/getPresupuesto_maximo_becarios" tal:condition="not:python:view.hasReqData('budgetvaluebecario')"/>
+                       <input type="text" name="budgetvaluebecario" value="" tal:attributes="value python:view.setBudgets('budgetvaluebecario')" tal:condition="python:view.hasReqData('budgetvaluebecario')"/>
+                </td>
+                <td> $ <input type="text" name="apoyovaluebecario" value="" tal:attributes="value here/getApoyoinst_maximo_becarios" tal:condition="not:python:view.hasReqData('apoyovaluebecario')"/>
+                       <input type="text" name="apoyovaluebecario" value="" tal:attributes="value python:view.setBudgets('apoyovaluebecario')" tal:condition="python:view.hasReqData('apoyovaluebecario')"/>
+                </td>
+              </tr>
+              <tr>
+                <th>Tecnicos Academicos</th>
+                <td> $ <input type="text" name="budgetvaluetecnico" value="" tal:attributes="value here/getPresupuesto_maximo_tecnicos" tal:condition="not:python:view.hasReqData('budgetvaluetecnico')"/>
+                       <input type="text" name="budgetvaluetecnico" value="" tal:attributes="value python:view.setBudgets('budgetvaluetecnico')" tal:condition="python:view.hasReqData('budgetvaluetecnico')"/>
+                </td>
+                <td> $ <input type="text" name="apoyovaluetecnico" value="" tal:attributes="value here/getApoyoinst_maximo_tecnicos" tal:condition="not:python:view.hasReqData('apoyovaluetecnico')"/>
+                       <input type="text" name="apoyovaluetecnico" value="" tal:attributes="value python:view.setBudgets('apoyovaluetecnico')" tal:condition="python:view.hasReqData('apoyovaluetecnico')"/>
+                </td>
+              </tr>
+              <tr>
+                <th>Postdocs</th>
+                <td> $ <input type="text" name="budgetvaluepostdoc" value="" tal:attributes="value here/getPresupuesto_maximo_postdocs" tal:condition="not:python:view.hasReqData('budgetvaluepostdoc')"/>
+                       <input type="text" name="budgetvaluepostdoc" value="" tal:attributes="value python:view.setBudgets('budgetvaluepostdoc')" tal:condition="python:view.hasReqData('budgetvaluepostdoc')"/>
+                </td>
+                <td> $ <input type="text" name="apoyovaluepostdoc" value="" tal:attributes="value here/getApoyoinst_maximo_postdocs" tal:condition="not:python:view.hasReqData('apoyovaluepostdoc')"/>
+                       <input type="text" name="apoyovaluepostdoc" value="" tal:attributes="value python:view.setBudgets('apoyovaluepostdoc')" tal:condition="python:view.hasReqData('apoyovaluepostdoc')"/>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <input type="hidden" name="refreshGlobal" value="0"/>
+        <input class="context"
+               type="submit"
+               name="form.button.Set"
+               value="Set"
+               i18n:attributes="value Set;"
+               />
+      </form>
+
+      <br/><br/>
+
+      <!-- link para asignar presupuesto individual -->
+      <form action="presupuestofolder" method="post" name="individuales" tal:condition="python: not view.hasReqData('individualList')">
+        <input type="hidden" name="vistafolder" value="presupuestolocal"/>
+        <input type="hidden" name="individualList" value="0"/>
+        <a href="#" tal:attributes="href python:str('javascript: document.individuales.submit()')">
+          Ir asignacion de presupuesto individual...
+        </a>
+      </form>
+
+      <!-- Forma para asignar Presupuesto Individual -->
+      <div class="tabularView" tal:condition="python: view.hasReqData('individualList')" 
+                               tal:define="researchers python:view.getIndividualBudgets();
+                                           page python:view.getPageAlphabetic('pagina');">
+
+             <h3 i18n:translate="legend_budget">Max Budget per Researcher: </h3>
+
+                <table class="listing" border="1" tal:condition="researchers">
+                    <tbody>        
+                           <tr>
+                                <th>Persona</th>
+                                <th>Cantidad</th>
+                          </tr>
+                           <tr tal:repeat="value python:researchers[page]">
+                              <form action="presupuestofolder">
+                                <input type="hidden" name="vistafolder" value="presupuestolocal"/>
+                                <td>
+                                    <input type="hidden" value="" name="memberID" tal:attributes="value python:value[2]"/>
+                                    <label tal:content="python:value[0]"/>
+                                </td>
+                                <td> $
+                                    <input type="text" name="newBudget" value="" tal:attributes="value python:value[1]"/>
+                                    <input type="hidden" name="individualList" value="0"/>
+                                    <input type="hidden" name="pagina" value="" tal:attributes="value page"/>
+                                    <input class="context"
+                                           type="submit"
+                                           value="Cambiar"/>
+                                </td>
+                              </form>
+                          </tr>
+                          <tr>
+                               <td id="navcontainer" colspan=6 align="center">
+                               <ul>
+                                <li tal:repeat="i python:view.getAlphabetLetters()">
+                                 <form action="presupuestofolder" class="enableAutoFocus" method="post" name=""
+                                   tal:attributes="name python:'pg'+str(i)">
+                                    <input type="hidden" name="vistafolder" value="presupuestolocal"/>
+                                    <input type="hidden" name="pagina" value="" tal:attributes="value python:str(i)"/>
+                                    <input type="hidden" name="individualList" value="0"/>
+                                    <a href="#" tal:attributes="href python:'javascript: document.pg'+str(i)+'.submit()'" tal:content="python:str(i)"/>
+                                 </form>
+                                </li>
+                               </ul>
+                               </td>
+                          </tr>
+
+                    </tbody>
+                 </table>
+
+        <a href="#" tal:attributes="href string:${context/absolute_url}?vistafolder=presupuestolocal">
+        Ir asignacion de presupuesto total...
+        </a>
+      </div>
+
+      <h3> <span i18n:translate="legend_budget_local">Max Budget for this Period: </span>
+                                       <span tal:content="python:str(here.getFecha_desde())+str(' hasta ')+str(here.getFecha_hasta())"></span></h3>
+
+        <form action="presupuestofolder" method="post">
+
+                                    <input type="text" name="budgetvaluelocal" value="" tal:attributes="value python:here.getPresupuesto_inicial()" tal:condition="not:python:view.hasReqData('budgetvaluelocal')"/>
+                                    <input type="text" name="budgetvaluelocal" value="" tal:attributes="value python:view.setBudget('budgetvaluelocal')" tal:condition="python:view.hasReqData('budgetvaluelocal')"/>
+                                    <input type="hidden" name="vistafolder" value="presupuestolocal"/>
+
+                <input class="context"
+                       type="submit"
+                       name="form.button.Set"
+                       value="Set"
+                       i18n:attributes="value Set;"
+                       />
+        </form>
+
+      <!-- Muestra gastos por investigador -->
+      <span tal:define="usuarioActual user/getId">
+        <div class="tabularView">
+          <table class="listing" border="1" width="100%">
+            <tbody>
+              <tr>
+                <th class="column" i18n:translate="label_type">Type</th>
+                <th class="column" i18n:translate="label_solicitor">Solicitor</th>
+                <th class="column" i18n:translate="label_local_approved_quantity">Approved Quantity</th>
+                <th class="column" i18n:translate="label_local_remaining_quantity">Remaining Quantity</th>
+                <th class="column">Apoyo Institucional asignado</th>
+                <th class="column">Apoyo institucional restante</th>                
+                <th class="column" i18n:translate="label_local_commission_days">Días de Comisión Aprobados</th>
+                <th class="column" i18n:translate="label_local_license_days">Días de Licencia Aprobados</th>
+              </tr>
+              <div tal:define="investigadores python:view.getInvestigadoresLocalAlfabeticamente(usuarioActual);
+                                page python:view.getPageAlphabetic('pagina');">
+                <tr tal:repeat="investigador python:investigadores[page]">
+                  <td tal:content="python:investigador[2]">Type</td>
+                  <td>
+                    <form action="presupuestofolder" method="post" name="" tal:attributes="name python:investigador[3]">
+                      <input type="hidden" name="State" value="aprobada"/>
+                      <input type="hidden" name="vistafolder" value="presupuestolocal"/>
+                      <input type="hidden" name="Creator" value="" tal:attributes="value python:investigador[3]"/>
+                      <input type="hidden" name="pagina" value="" tal:attributes="value page"/>
+                      <a href="#" tal:attributes="href python:str('javascript: document.')+investigador[3]+str('.submit()')"
+                                  tal:content="python:investigador[0]"/>
+                    </form></td>
+                  <td align="center" tal:content="python:investigador[1]">Approved Quantity</td>
+                  <td align="center" tal:content="python:investigador[4]">Remaining Quantity</td>
+                  <td align="center" tal:content="python:investigador[7]">Apoyo Institucional asignado</td>
+                  <td align="center" tal:content="python:investigador[8]">Apoyo Institucional restante</td>
+                  <td align="center" tal:content="python:investigador[5]">Commission Days</td>
+                  <td align="center" tal:content="python:investigador[6]">License Days</td>
+                </tr>
+
+                <!-- Alfabeto -->
+                <tr>
+                  <td id="navcontainer" colspan=8 align="center">
+                    <ul>
+                      <li tal:repeat="i python:view.getAlphabetLetters()">
+                        <form action="#" class="enableAutoFocus" method="post" name="#"
+                              tal:attributes="action string:${context/absolute_url}/view;
+                                              name python:'pf'+str(i)">
+                          <input type="hidden" name="pagina" value="" tal:attributes="value python:str(i)"/>
+                          <input type="hidden" name="vistafolder" value="presupuestolocal"/>
+                          <a href="#" tal:attributes="href python:'javascript: document.pf'+str(i)+'.submit()'" tal:content="python:str(i)"/>
+                        </form>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+
+                <span tal:define="sumaTotal python:view.calcularTotalInvDict(investigadores)">
+                  <span tal:condition="python:here.getPresupuesto_asignado()!=sumaTotal">
+                    <div tal:define="a python:here.setPresupuesto_asignado(sumaTotal)"></div>
+                  </span>
+                </span>
+              </div>
+
+              <tr>
+                <th colspan=3 align="right" i18n:translate="label_bugdet_this_period">Budget for this period</th>
+                <td colspan=3 tal:content="python:here.getPresupuesto_inicial()">Quantity</td>
+              </tr>
+              <tr>
+                <th colspan=3 align="right" i18n:translate="label_locally_assigned">Locally assigned budget</th>
+                <td colspan=3 tal:content="python:here.getPresupuesto_asignado()">Quantity</td>
+              </tr>
+              <tr>
+                <th colspan=3 align="right" i18n:translate="label_local_remaining_quantity_period">Remaining Quantity For Period</th>
+                <td colspan=3 tal:content="python:here.getPresupuesto_inicial()-here.getPresupuesto_asignado()">Quantity</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <form action="presupuestofolder" method="post">
+                <input type="hidden" value="1" name="recalc" />
+                <input type="hidden" name="vistafolder" value="presupuestolocal"/>
+                <input class="context"
+                       type="submit"
+                       name="form.button.Recalculate"
+                       value="Recalculate"
+                       i18n:attributes="value Recalculate;"
+                       />
+        </form>
+
+    <br><br>
+    <div tal:condition="python: view.hasReqDataStr('Creator')">
+        <div class="tabularView" tal:define="items
+            python:view.getUserApplications(view.getReqDataStr('Creator'))">
+        <a tal:condition="items" href="javascript: printTable('tablaSolicitudes')">Imprimir Tabla</a>
+        <table class="listing" border="1" width="100%" tal:condition="items">
+            <tbody>
+            <tr>
+                <th i18n:translate="label_type">Type</th>
+                <th i18n:translate="label_solicitor">Solicitor</th>
+                <th i18n:translate="label_reason">Reason</th>
+                <th i18n:translate="label_place">Place</th>
+                <th i18n:translate="label_creation_date">Solicitud Creada</th>
+                <th i18n:translate="label_start_date">Fecha de Inicio</th>
+                <th i18n:translate="label_end_date">Fecha de Termino</th>
+                <th i18n:translate="label_quantity_days">Cantidad de Días</th>
+                <th i18n:translate="label_approved_quantity">Cantidad Aprobada
+                    (pesos)</th>
+                <th i18n:translate="label_fecha_de_revision">Fecha de Revision por Consejo Interno</th>
+                <th>Con cargo a:</th>
+            </tr>
+            <tr tal:repeat="item python:items">
+              <td><a href="#" tal:attributes="href python:item['url']"
+                tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</a></td> 
+              <td tal:content="python:item['owner_name']">Solicitant</td>
+              <td tal:content="python:item['objective']">Reason</td>
+              <td tal:content="python:item['country']">Place</td>
+              <td tal:content="python:item['creation_date']">Solicitud Creada</td>
+              <td tal:content="python:item['from']">Creation Date</td>
+              <td tal:content="python:item['to']">Creation Date</td>
+              <td tal:content="python:item['quantity_of_days']">Quantity of
+              Days</td>
+              <td align="center"
+              tal:content="python:item['total_approved_quantity']">Quantity</td>
+              <td align="center"
+              tal:content="python:item['revision_ci_date']">Fecha de Revision por Consejo Interno</td>
+              <td>asignacion anual/apoyo institucional</td>
+            </tr>
+            </tbody>
+         </table>
+         </div>
+    </div>
+
+    </span>
+    </metal:body_macro>
+    <metal:footer_macro define-macro="footer">
+
+    </metal:footer_macro>
+    <metal:folderlisting_macro define-macro="folderlisting">
+
+    </metal:folderlisting_macro>
+
+      </metal:main_macro>
+    </metal:fill>
+  </body>
+</html>

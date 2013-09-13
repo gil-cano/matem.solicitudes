@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<object name="portal_catalog">
+    <!-- <index name="pais" meta_type="FieldIndex">
+        <indexed_attr value="pais"/>
+    </index>
+    <column value="pais"/>
+
+    <index name="ciudad_pais" meta_type="FieldIndex">
+        <indexed_attr value="ciudad_pais"/>
+    </index>
+    <column value="ciudad_pais"/>
+
+    <index name="institucion" meta_type="FieldIndex">
+        <indexed_attr value="institucion"/>
+    </index>
+    <column value="institucion"/>
+
+    <index name="fecha_desde" meta_type="FieldIndex">
+        <indexed_attr value="fecha_desde"/>
+    </index>
+    <column value="fecha_desde"/>
+
+    <index name="fecha_hasta" meta_type="FieldIndex">
+        <indexed_attr value="fecha_desde"/>
+    </index>
+    <column value="fecha_hasta"/>
+
+    <index name="objeto_viaje" meta_type="FieldIndex">
+        <indexed_attr value="objeto_viaje"/>
+    </index>
+    <column value="objeto_viaje"/>
+
+    <index name="investigacion_area" meta_type="FieldIndex">
+        <indexed_attr value="investigacion_area"/>
+    </index>
+    <column value="investigacion_area"/>
+
+    <index name="titulo_trabajo" meta_type="FieldIndex">
+        <indexed_attr value="titulo_trabajo"/>
+    </index>
+    <column value="titulo_trabajo"/>
+
+    <index name="nombrebecario" meta_type="FieldIndex">
+        <indexed_attr value="nombrebecario"/>
+    </index>
+    <column value="nombrebecario"/>
+
+    <index name="asesor" meta_type="FieldIndex">
+        <indexed_attr value="asesor"/>
+    </index>
+    <column value="asesor"/> -->
+
+</object>

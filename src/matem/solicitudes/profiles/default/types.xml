@@ -1,0 +1,12 @@
+<object name="portal_types" meta_type="Plone Types Tool">
+ <object name="Solicitud"
+ meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="SolicitudBecario"
+ meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="SolicitudVisitante"
+ meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="SolicitudFolder"
+ meta_type="Factory-based Type Information with dynamic views"/>
+ <object name="SolicitudInstitucional"
+   meta_type="Factory-based Type Information with dynamic views" />
+</object>

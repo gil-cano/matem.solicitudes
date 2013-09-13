@@ -1,0 +1,272 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+  <head>
+    <title tal:content="template/title">Solicitudes</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  </head>
+
+  <metal:javascript_head fill-slot="javascript_head_slot">
+    <tal:block define="macro here/archetypes_custom_js/macros/javascript_head | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+    <tal:comment replace="nothing">
+      Many of the following defines duplicated from the tal:defines in the
+      main slot. With base_edit, edit_macros could be reused as it was defined
+      for the entire document. base_view uses main_template and thus must
+      create additional defines for each slot it fills.
+    </tal:comment>
+    <tal:js define="fields python:here.Schema().viewableFields(here);
+                    js python:here.getUniqueWidgetAttr(fields, 'helper_js')"
+            condition="js"
+            repeat="item js">
+      <script type="text/javascript"
+              charset="iso-8859-1"
+              tal:condition="python:exists('portal/%s' % item)"
+              tal:attributes="src string:$portal_url/$item">
+      </script>
+    </tal:js>
+    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+                       view_template python:'%s_view' % portal_type;
+                       view_macros python:path('here/%s/macros|nothing' % view_template);
+                       macro view_macros/js | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+  </metal:javascript_head>
+
+  <metal:css fill-slot="css_slot">
+    <tal:comment replace="nothing">
+      Many of the following defines duplicated from the tal:defines in the
+      main slot. With base_edit, edit_macros could be reused as it was defined
+      for the entire document. base_view uses main_template and thus must
+      create additional defines for each slot it fills.
+    </tal:comment>
+    <tal:css define="fields python:here.Schema().viewableFields(here);
+                     css python:here.getUniqueWidgetAttr(fields, 'helper_css')"
+             condition="css"
+             repeat="item css">
+      <style type="text/css"
+             media="all"
+             tal:condition="python:exists('portal/%s' % item)"
+             tal:content="structure string:<!-- @import url($portal_url/$item); -->">
+      </style>
+    </tal:css>
+    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+                       view_template python:'%s_view' % portal_type;
+                       view_macros python:path('here/%s/macros|nothing' % view_template);
+                       macro view_macros/css | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+    <style type="text/css">
+        #contentActionMenus{
+            visibility: hidden;
+        }
+
+        #fieldsetlegend-metadata .{
+            visibility: hidden;
+        }
+    </style>
+  </metal:css>
+
+  <body>
+    <metal:fill fill-slot="main">
+      <metal:main_macro define-macro="main"
+            tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+            base_macros here/base/macros;
+            view_template python:'%s_view' % portal_type;
+            view_macros python:path('here/%s/macros|nothing' % view_template);
+            body_macro view_macros/body | body_macro | base_macros/body;
+            folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
+            errors python:request.get('errors', {})">
+
+    <metal:header_macro define-macro="header">
+        <span tal:define="usuarioActual user/getId">
+            <dl class="portalMessage warning"
+                tal:condition="python:view.hasPendingReviews(usuarioActual)">
+                <dt i18n:translate="label_atencion">
+                    Attention!
+                </dt>
+                <dd i18n:translate="label_pending_reviews">
+                     You have pending reviews! Review your pending requests using the square in the right called 'Review List'.
+                </dd>
+            </dl>
+        </span>
+        <p style="color: #FF0000;" tal:content="python:'Estado del Periodo '+str(here.Title())+': '+str(here.getWFStateName())"></p>
+         <h1 class="documentFirstHeading">Menu, folder <span tal:replace="here/title_or_id">content title or id</span>
+         </h1>
+
+
+                <div class="tabularView" tal:condition="python: str(here.getWFState()) != 'historico' ">
+                <table class="listing" align="right" border="0">
+                <tr>
+                     <td><form method="post" name="import" action="#"
+                                   tal:attributes="action string:${context/absolute_url}/import">
+                          <a href="javascript: document.import.submit()">Importar Solicitudes</a>
+                     </form></td>
+
+                     <td><a href="" tal:attributes="href string:${context/absolute_url}/folder_factories">
+                                 <img src="" width="20" height="20" tal:attributes="src string:${context/absolute_url}/++resource++nueva.png"/>
+                          </a>
+                          <a href="" tal:attributes="href string:${context/absolute_url}/folder_factories">Nueva Solicitud</a>
+                     </td>
+
+                </tr>
+                </table></div>
+
+        </metal:header_macro>
+
+    <metal:body_macro define-macro="body">
+
+       <br><br><br><br>
+       <table align="center" border="0" tal:define="esNormal python:view.esSolicitanteNormal(user.getId())">
+<!--        <tr tal:condition="python:esNormal or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
+        <form action="#" class="enableAutoFocus" method="post" name="acc"
+              tal:attributes="action string:${context/absolute_url}/view">
+        <td width="48" height="48"><a href="javascript: document.gen.submit()"><img src="#" width="48" height="48" tal:attributes="src string:${context/absolute_url}/++resource++gen.png"></a></td>
+        <td>
+            <input type="hidden" name="vistafolder" value="micuenta"/><br>
+            <a href="javascript: document.acc.submit()"><label i18n:translate="">Ver mi cuenta</label></a>
+            <div class="formHelp" i18n:translate="">Aqui puede revisar la cantidad de dias y dinero que ha utilizado.</div><br>
+        </td>
+        </form>
+        </tr>
+-->
+        <tr tal:condition="python:esNormal or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
+        <form action="#" class="enableAutoFocus" method="post" name="ma"
+              tal:attributes="action string:${context/absolute_url}/view">
+        <td width="48" height="48"><a href="javascript: document.ma.submit()"><img src="#" width="48" height="48" tal:attributes="src string:${context/absolute_url}/++resource++ma.png"></a></td>
+        <td>
+            <input type="hidden" name="vistafolder" value="misaprobadas"/><br>
+            <a href="javascript: document.ma.submit()"><label i18n:translate="label_approved_app">My approved applications</label></a>
+            <div class="formHelp" i18n:translate="help_approved_app">Here you can see your approved applications</div><br>
+        </td>
+        </form>
+        </tr>
+
+        <tr tal:condition="python:esNormal or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
+        <form action="#" class="enableAutoFocus" method="post" name="mr"
+              tal:attributes="action string:${context/absolute_url}/view">
+        <td width="48" height="48"><a href="javascript: document.mr.submit()"><img src="#" width="48" height="48" tal:attributes="src string:${context/absolute_url}/++resource++mr.png"></a></td>
+        <td>
+            <input type="hidden" name="vistafolder" value="misrechazadas"/><br>
+            <a href="javascript: document.mr.submit()"><label i18n:translate="label_rejected_app">My rejected applications</label></a>
+            <div class="formHelp" i18n:translate="help_rejected_app">Here you can see your rejected applications</div><br>
+        </td>
+        </form>
+        </tr>
+
+        <tr tal:condition="python:esNormal or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
+        <form action="#" class="enableAutoFocus" method="post" name="me"
+              tal:attributes="action string:${context/absolute_url}/view">
+        <td width="48" height="48"><a href="javascript: document.me.submit()"><img src="#" width="48" height="48" tal:attributes="src string:${context/absolute_url}/++resource++me.png"></a></td>
+        <td>
+            <input type="hidden" name="vistafolder" value="misenviadas"/><br>
+            <a href="javascript: document.me.submit()"><label i18n:translate="label_sent_app">In process applications</label></a>
+            <div class="formHelp" i18n:translate="help_sent_app">Here you can see all the applications you have sent for review</div><br>
+        </td>
+        </form>
+        </tr>
+
+        <tr tal:condition="python:esNormal or view.esConsejero(user.getId()) or view.esComisionado(user.getId()) or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
+        <form action="#" class="enableAutoFocus" method="post" name="p"
+              tal:attributes="action string:${context/absolute_url}/view">
+        <td width="48" height="48"><a href="javascript: document.p.submit()"><img src="#" width="48" height="48" tal:attributes="src string:${context/absolute_url}/++resource++p.png"></a></td>
+        <td>
+            <input type="hidden" name="vistafolder" value="folderpendientes"/><br>
+            <a href="javascript: document.p.submit()"><label i18n:translate="label_pending_app">Pending for review</label></a>
+            <div class="formHelp" i18n:translate="help_pending_app">Here you can see every application that needs your review</div><br>
+        </td>
+        </form>
+        </tr>
+
+        <tr tal:condition="python:view.esConsejero(user.getId()) or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
+        <form action="#" class="enableAutoFocus" method="post" name="aa"
+              tal:attributes="action string:${context/absolute_url}/view">
+        <td width="48" height="48"><a href="javascript: document.aa.submit()"><img src="#" width="48" height="48" tal:attributes="src string:${context/absolute_url}/++resource++aa.png"></a></td>
+        <td>
+            <input type="hidden" name="vistafolder" value="folderaprobadas"/><br>
+            <a href="javascript: document.aa.submit()"><label i18n:translate="label_allapproved_app">Public approved applications</label></a>
+            <div class="formHelp" i18n:translate="help_allapproved_app">Here you can see every approved application in this period (even if it's not yours).</div><br>
+        </td>
+        </form>
+        </tr>
+
+        <tr tal:condition="python:view.esConsejero(user.getId()) or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
+        <form action="#" class="enableAutoFocus" method="post" name="ar"
+              tal:attributes="action string:${context/absolute_url}/view">
+        <td width="48" height="48"><a href="javascript: document.ar.submit()"><img src="#" width="48" height="48" tal:attributes="src string:${context/absolute_url}/++resource++ar.png"></a></td>
+        <td>
+            <input type="hidden" name="vistafolder" value="folderrechazadas"/><br>
+            <a href="javascript: document.ar.submit()"><label i18n:translate="label_allrejected_app">Public rejected applications</label></a>
+            <div class="formHelp" i18n:translate="help_allrejected_app">Here you can see every rejected application in this period (even if it's not yours).</div><br>
+        </td>
+        </form>
+        </tr>
+
+        <tr tal:condition="view/programaPresupuesto">
+        <form action="#" class="enableAutoFocus" method="post" name="pf"
+              tal:attributes="action string:${context/absolute_url}/view">
+        <td width="48" height="48"><a href="javascript: document.pf.submit()"><img src="#" width="48" height="48" tal:attributes="src string:${context/absolute_url}/++resource++presupuestolocal.png"></a></td>
+        <td>
+            <input type="hidden" name="vistafolder" value="presupuestolocal"/><br>
+            <a href="javascript: document.pf.submit()"><label i18n:translate="label_localbudget_app">Total Local Budget</label></a>
+            <div class="formHelp" i18n:translate="help_localbudget_app">Here you can see the detail of the local budgets for the current period.</div><br>
+        </td>
+        </form>
+        </tr>
+
+        <tr tal:condition="python: view.esSolicitanteAuxiliar() and str(here.getWFState()) != 'historico'">
+        <td width="48" height="48"><a href="#" tal:attributes="href string:${context/absolute_url}/folder_factories"><img src="#" width="48" height="48" tal:attributes="src string:${context/absolute_url}/++resource++presupuestolocal.png"></a></td>
+        <td>
+            <a href="#" tal:attributes="href string:${context/absolute_url}/folder_factories"><label i18n:translate="label_applications_for_others">Subir solicitud a nombre de otra persona</label></a>
+            <div class="formHelp" i18n:translate="help_applications_for_others">De click aqui si la solicitud que va a introducir al sistema no es para usted, sino para un tercero.</div><br>
+        </td>
+        </tr>
+<!--
+        <tr tal:condition="python:view.esResponsableDelConsejo(user.getId())">
+        <form action="#" class="enableAutoFocus" method="post" name="gen"
+              tal:attributes="action string:${context/absolute_url}/view">
+        <td width="48" height="48"><a href="javascript: document.gen.submit()"><img src="#" width="48" height="48" tal:attributes="src string:${context/absolute_url}/++resource++gen.png"></a></td>
+        <td>
+            <input type="hidden" name="vistafolder" value="generaractas"/><br>
+            <a href="javascript: document.gen.submit()"><label i18n:translate="">Ver actas del consejo</label></a>
+            <div class="formHelp" i18n:translate="">Aqui puede revisar las actas del Consejo Interno.</div><br>
+        </td>
+        </form>
+        </tr>
+-->
+     </table>
+
+<br><br>
+    <table border="0">
+      <tr>
+       <td tal:repeat="transicion python:here.getLegalTransitions()">
+           <a class="context" style="text-decoration:none" href="#" tal:attributes="href python:transicion['url']" tal:content="python:transicion['name']"/>
+       </td>
+       <td tal:condition="python:('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
+           <a class="context" style="text-decoration:none" href="#" tal:attributes="href python:here.absolute_url()+'/delete_confirmation'">Eliminar folder de solicitudes.</a>
+       </td>
+      </tr>
+    </table>
+
+    </metal:body_macro>
+    <metal:footer_macro define-macro="footer">
+
+    </metal:footer_macro>
+    <metal:folderlisting_macro define-macro="folderlisting">
+
+    </metal:folderlisting_macro>
+
+      </metal:main_macro>
+    </metal:fill>
+  </body>
+</html>

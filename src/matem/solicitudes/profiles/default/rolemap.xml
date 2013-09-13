@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<rolemap>
+  <roles>
+    <role name="Investigador"/>
+    <role name="Tecnico Academico"/>
+    <role name="Postdoc"/>
+    <role name="Becario"/>
+    <role name="Comisionado"/>
+    <role name="Consejero"/>
+    <role name="Responsable de la Comision"/>
+    <role name="Responsable del Consejo"/>
+    <role name="Importador de Solicitudes"/>
+    <role name="Programador de Presupuesto"/>
+    <role name="Solicitante Auxiliar"/>
+  </roles>
+  <permissions>
+    <permission name="Solicitud: Add Solicitud" acquire="False">
+        <role name="Investigador" />
+        <role name="Tecnico Academico" />
+        <role name="Postdoc"/>
+        <role name="Solicitante Auxiliar"/>
+    </permission>
+    <permission name="SolicitudBecario: Add SolicitudBecario" acquire="False">
+        <role name="Becario"/>
+        <role name="Solicitante Auxiliar"/>
+    </permission>
+    <permission name="SolicitudVisitante: Add SolicitudVisitante" acquire="False">
+        <role name="Investigador"/>
+        <role name="Tecnico Academico" />
+        <role name="Postdoc"/>
+        <role name="Solicitante Auxiliar"/>
+    </permission>
+    <permission name="SolicitudFolder: Add SolicitudFolder" acquire="False">
+        <role name="Manager" />
+    </permission>
+    <permission name="Solicitud: Cambiar Solicitante" acquire="False">
+        <role name="Solicitante Auxiliar"/>
+    </permission>
+    <permission name="Solicitud: Investigador Revisa Solicitud" acquire="False">
+        <role name="Investigador" />
+        <role name="Tecnico Academico" />
+        <role name="Postdoc"/>
+    </permission>
+    <permission name="Solicitud: Revisar Solicitud" acquire="False">
+        <role name="Manager" />
+        <role name="Comisionado" />
+        <role name="Consejero" />
+        <role name="Responsable de la Comision"/>
+        <role name="Responsable del Consejo"/>
+    </permission>
+    <permission name="Solicitud: Modificar Solicitud" acquire="False">
+        <role name="Manager" />
+        <role name="Owner" />
+    </permission>
+    <permission name="Solicitud: Comision Revisa Solicitud" acquire="False">
+        <role name="Manager" />
+        <role name="Comisionado" />
+        <role name="Responsable de la Comision"/>
+    </permission>
+    <permission name="Solicitud: Consejo Revisa Solicitud" acquire="False">
+        <role name="Manager" />
+        <role name="Consejero" />
+        <role name="Responsable del Consejo"/>
+    </permission>
+    <permission name="Programar Presupuesto" acquire="False">
+        <role name="Programador de Presupuesto" />
+    </permission>
+    <permission name="Importacion de Solicitudes" acquire="False">
+        <role name="Importador de Solicitudes" />
+        <role name="Investigador"/>
+        <role name="Tecnico Academico"/>
+        <role name="Postdoc"/>
+        <role name="Becario"/>
+    </permission>
+    <permission name="Sharing page: Delegate roles" acquire="False">
+        <role name="Manager" />
+    </permission>
+    <permission name="matem.solicitudes: Add Solicitud Institucional" acquire="False">
+      <role name="Investigador" />
+      <role name="Postdoc"/>
+      <role name="Tecnico Academico" />
+      <role name="Solicitante Auxiliar"/>
+    </permission>
+  </permissions>
+</rolemap>

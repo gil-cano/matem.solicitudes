@@ -1,0 +1,365 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+
+  <head><title></title></head>
+
+  <metal:javascript_head fill-slot="javascript_head_slot">
+    <tal:block define="macro here/archetypes_custom_js/macros/javascript_head | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+    <tal:comment replace="nothing">
+      Many of the following defines duplicated from the tal:defines in the
+      main slot. With base_edit, edit_macros could be reused as it was defined
+      for the entire document. base_view uses main_template and thus must
+      create additional defines for each slot it fills.
+    </tal:comment>
+    <tal:js define="fields python:here.Schema().viewableFields(here);
+                    js python:here.getUniqueWidgetAttr(fields, 'helper_js')"
+            condition="js"
+            repeat="item js">
+      <script type="text/javascript"
+              charset="iso-8859-1"
+              tal:condition="python:exists('portal/%s' % item)"
+              tal:attributes="src string:$portal_url/$item">
+      </script>
+    </tal:js>
+    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+                       view_template python:'%s_view' % portal_type;
+                       view_macros python:path('here/%s/macros|nothing' % view_template);
+                       macro view_macros/js | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+  </metal:javascript_head>
+
+  <metal:css fill-slot="css_slot">
+    <tal:comment replace="nothing">
+      Many of the following defines duplicated from the tal:defines in the
+      main slot. With base_edit, edit_macros could be reused as it was defined
+      for the entire document. base_view uses main_template and thus must
+      create additional defines for each slot it fills.
+    </tal:comment>
+    <tal:css define="fields python:here.Schema().viewableFields(here);
+                     css python:here.getUniqueWidgetAttr(fields, 'helper_css')"
+             condition="css"
+             repeat="item css">
+      <style type="text/css"
+             media="all"
+             tal:condition="python:exists('portal/%s' % item)"
+             tal:content="structure string:<!-- @import url($portal_url/$item); -->">
+      </style>
+    </tal:css>
+    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+                       view_template python:'%s_view' % portal_type;
+                       view_macros python:path('here/%s/macros|nothing' % view_template);
+                       macro view_macros/css | nothing"
+               condition="macro">
+      <metal:block use-macro="macro" />
+    </tal:block>
+    <style type="text/css">
+        #contentActionMenus{
+            visibility: hidden;
+        }
+
+        #fieldsetlegend-metadata .{
+            visibility: hidden;
+        }
+    </style>
+  </metal:css>
+
+  <body>
+    <metal:fill fill-slot="main">
+      <metal:main_macro define-macro="main"
+            tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+            base_macros here/base/macros;
+            view_template python:'%s_view' % portal_type;
+            view_macros python:path('here/%s/macros|nothing' % view_template);
+            body_macro view_macros/body | body_macro | base_macros/body;
+            folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
+            errors python:request.get('errors', {})">
+
+        <metal:header_macro define-macro="header">
+            <span tal:define="usuarioActual user/getId;
+                   propietario python:view.esPropietario(usuarioActual);
+                   comisionado python:view.esComisionado(usuarioActual);
+                   consejero python:view.esConsejero(usuarioActual);">
+
+            <span tal:repeat="datosAdicionales python:view.getPresupuestoOwner()">
+            <dl class="portalMessage info">
+                <dt i18n:translate="label_informacion_solicitante">
+                    Information about the solicitor
+                </dt>
+                <dd>
+                    <span tal:content="python:datosAdicionales[0]">Researcher</span> <span i18n:translate="label_presupuesto_asignado">has an total assigned budget of </span><span tal:replace="python:datosAdicionales[1]">Budget</span> pesos.
+                </dd>
+            </dl>
+            </span>
+
+            <span tal:condition="propietario">
+            <dl class="portalMessage warning"
+                tal:condition="view/esBorrador">
+                <dt i18n:translate="label_atencion">
+                    Attention!
+                </dt>
+                <dd i18n:translate="label_estado_borrador_propietario">
+                    This format has not been sent yet. Review data, if it is correct, you should send it to revision, by selecting 'State: Solicitud en borrador' then 'Enviar solicitud' inside the transitions menu in the top right corner.
+                </dd>
+            </dl>
+
+            <dl class="portalMessage info"
+                tal:condition="view/esRevisionComision">
+                <dt i18n:translate="label_informacion">
+                    Info
+                </dt>
+                <dd i18n:translate="label_revision_comision_especial">
+                    This application is been reviewed by the special comision.
+                </dd>
+            </dl>
+
+            <dl class="portalMessage info"
+                tal:condition="view/esRevisionConsejo">
+                <dt i18n:translate="label_informacion">
+                    Info
+                </dt>
+                <dd i18n:translate="label_revision_consejo_interno">
+                    This application is been reviewed by the internal council.
+                </dd>
+            </dl>
+
+            <dl class="portalMessage info"
+                tal:condition="view/esAprobada">
+                <dt i18n:translate="label_informacion">
+                    Info
+                </dt>
+                <dd>
+                    <span i18n:translate="label_aprobada_propietario">Congratulations, your application was approved! The total amount approved for this application is </span><span tal:content="view/getPresupuestoAprobadoSolicitud">cantidad</span> pesos.
+                </dd>
+            </dl>
+            </span>
+
+            <span tal:condition="not:propietario">
+            <dl class="portalMessage info"
+                tal:condition="view/esBorrador">
+                <dt i18n:translate="label_informacion">
+                    Info
+                </dt>
+                <dd i18n:translate="label_estado_borrador_nopropietario">
+                    This format has not been sent yet and is still being modified by it's author.
+                </dd>
+            </dl>
+
+            <span tal:condition="comisionado">
+            <dl class="portalMessage warning"
+                tal:condition="view/esRevisionComision">
+                <dt i18n:translate="label_atencion">
+                    Attention!
+                </dt>
+                <dd i18n:translate="label_revision_comisionado">
+                    You still haven't approved nor rejected this request! Review data and approve it or reject it by selecting 'State: Solicitud en revision por comision especial' then 'Aprobar y enviar a consejo interno' or 'Rechazar', respectively, inside the transitions menu in the top right corner.
+                </dd>
+            </dl>
+            </span>
+
+            <span tal:condition="not:comisionado">
+            <dl class="portalMessage info"
+                tal:condition="view/esRevisionComision">
+                <dt i18n:translate="label_informacion">
+                    Info
+                </dt>
+                <dd i18n:translate="label_revision_comision_especial">
+                    This application is been reviewed by the special comision.
+                </dd>
+            </dl>
+            </span>
+
+            <span tal:condition="consejero">
+            <dl class="portalMessage warning"
+                tal:condition="view/esRevisionConsejo">
+                <dt i18n:translate="label_atencion">
+                    Attention!
+                </dt>
+                <dd i18n:translate="label_revision_consejero">
+                    You still haven't approved nor rejected this request! Review data and approve it or reject it by selecting 'State: Solicitud en revision por consejo interno' then 'Aprobar' or 'Rechazar', respectively, inside the transitions menu in the top right corner.
+                </dd>
+            </dl>
+            </span>
+
+            <span tal:condition="not:consejero">
+            <dl class="portalMessage info"
+                tal:condition="view/esRevisionConsejo">
+                <dt i18n:translate="label_informacion">
+                    Info
+                </dt>
+                <dd i18n:translate="label_revision_consejo_interno">
+                    This application is been reviewed by the internal council.
+                </dd>
+            </dl>
+            </span>
+
+            <dl class="portalMessage info"
+                tal:condition="view/esAprobada">
+                <dt i18n:translate="">
+                    Info
+                </dt>
+                <dd>
+                    <span i18n:translate="label_aprobada_nopropietario">This application has been aproved. If you have any doubt please contact the site manager. The total amount approved for this application is </span><span tal:content="view/getPresupuestoAprobadoSolicitud">cantidad</span> pesos.
+                </dd>
+            </dl>
+            </span>
+
+            <h2><span tal:replace="here/pretty_title_or_id">content title or id</span></h2>
+
+                <p style="color: #FF0000;" tal:content="python:'Estado: '+str(here.getWFStateName())"></p>
+                <div class="tabularView" tal:define="parent python:here.getParentNode()">
+                <table class="listing" align="right" border="0">
+                <tr>
+                     <td><form method="post" name="import" action="#" method="post"
+                                   tal:attributes="action string:${parent/absolute_url}/import">
+                          <a href="javascript: document.import.submit()">Importar</a>
+                     </form></td>
+
+<!--                     <td><form method="post" name="import" action="#" method="post"
+                                   tal:attributes="action string:${context/absolute_url}/import">
+                          <a href="javascript: document.import.submit()">Importar</a>
+                     </form></td>-->
+
+                     <td><form method="post" name="export" action="#" method="post"
+                                   tal:attributes="action string:${context/absolute_url}/export">
+                          <a href="javascript: document.export.submit()">Exportar</a>
+                     </form></td>
+
+                     <td><form method="post" name="print" action="#" method="post"
+                                   tal:attributes="action string:${context/absolute_url}/print">
+                          <a href="javascript: this.print()">Imprimir</a>
+                     </form></td>
+
+                </tr>
+                </table></div>
+               <h3><br></h3>
+            </span>
+        </metal:header_macro>
+
+        <metal:body_macro define-macro="body">
+
+
+    <div class="tabularView" tal:define="usuarioActual user/getId;
+                                         propietario python:view.esPropietario(usuarioActual);
+                                         editor python:view.esEditor(usuarioActual);
+                                         comisionado python:view.esComisionado(usuarioActual);
+                                         responsableconsejo python:view.esResponsableConsejo(usuarioActual);
+                                         consejero python:view.esConsejero(usuarioActual);">
+
+    <table class="listing" border="1" width="100%" align="center" tal:define="datosAdicionales python:view.getPresupuestoOwner()">
+        <tbody>
+	<tr><th colspan="5"><b>Datos del Solicitante</b></th></tr>
+	<tr><th colspan="2">Nombre</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][0]">Value</td></tr>
+        <tr><th rowspan="2">Presupuesto:</th><th>Asignado</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][1]">Value</td></tr>
+        <tr>                                 <th>Disponible</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][2]">Value</td></tr>
+        <tr><th rowspan="2">Dias Aprobados:</th><th>Comision</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][3]">Value</td></tr>
+        <tr>                                 <th>Licencia</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][4]">Value</td></tr>
+	<tr><th colspan="5"><b>Información Sobre la Solicitud</b></th></tr>
+        <tr><th colspan="2">Fecha de Solicitud</th><td align="center" colspan="3"><span tal:content="here/getCreationDate">Value</span></td></tr>
+        <tr><th colspan="2" i18n:translate="label_invitado">Visitor</th><td align="center" colspan="3" tal:content="here/getInvitado">Value</td></tr>
+
+        <tr><th colspan="2" i18n:translate="label_semblanza">Semblanza</th><td align="center" colspan="3" tal:content="here/getSemblanza">Value</td></tr>
+        <tr><th colspan="2" i18n:translate="label_visitante">Foto Visitante</th><td align="center" colspan="3">  
+                <img src="" alt="" tal:replace="structure python:context.getWrappedField('image').tag(context, scale='normal',  css_class='photo')" /></td></tr>
+
+        <tr><th colspan="2" i18n:translate="label_pais_procedencia">Country</th>
+                                             <td align="center" colspan="3" tal:content="here/getPais">Value</td></tr>
+        <tr><th colspan="2" i18n:translate="label_procedencia">City</th><td align="center" colspan="3" tal:content="here/getProcedencia">Value</td></tr>
+        <tr><th colspan="2" i18n:translate="label_institucion_procedencia">Institution</th><td align="center" colspan="3" 
+                                                                                  tal:content="here/getInstitucion_procedencia">Value</td></tr>
+        <tr><th colspan="5"></th></tr>
+        <tr><th colspan="2" i18n:translate="label_fecha_desde">From date</th><td align="center" tal:content="here/getFechaDesde">Value</td>
+            <th i18n:translate="label_fecha_hasta">To date</th><td align="center" tal:content="here/getFechaHasta">Value</td></tr>
+	<tr><th colspan="5"><b>Datos Adicionales</b></th></tr>
+
+        <tr><th colspan="2" i18n:translate="label_objeto_viaje">Objective of trip</th><td align="center" colspan="3" 
+                                                                              tal:content="here/getObjetoViaje">Value</td></tr>
+        <tr><th colspan="2" i18n:translate="label_investigacionarea">Area of Research</th><td align="center" colspan="3">
+                                                                              <div tal:repeat="areaInv python:view.getArea(here.getInvestigacionArea())"> 
+                                                                              <p tal:content="python:areaInv">Value</p>
+                                                                              </div>
+                                                                              </td></tr>
+        <tr><th colspan="2" i18n:translate="label_adjuntos">Attachments</th>
+              <td align="center" colspan="3"><tal:block condition="python:here.getField('displayAttachments') is not None">
+                                                 <div metal:use-macro="python:here.widget('displayAttachments')"/>
+                                             </tal:block></td></tr>
+        <tr><th colspan="2" i18n:translate="label_comentario_owner">Additional Comments</th><td align="center" colspan="3"
+                                                                              tal:content="here/getComentario_owner">Value</td></tr>
+        <tr><th colspan="2" i18n:translate="label_viaticos">Travel Allowances</th>
+                                                                  <td colspan="3" align="center" tal:content="python:here.getViaticos().lower()">Value</td></tr>
+        <tr><th colspan="5"></th></tr>
+        <tr><th colspan="2" i18n:translate="label_pasaje">Transportation</th><td align="center" tal:content="python:here.getPasaje().lower()">Value</td>
+            <th i18n:translate="label_tipo_pasaje">Transportation means</th><td align="center" 
+                                                                         tal:content="python:view.getTipoTransporte(here.getTipo_pasaje()).rstrip(',')">Value</td></tr>
+        <tr><th colspan="5"><b>Cantidades</b></th></tr>
+        <tr><th>Concepto</th><th>Cantidad Solicitada</th><th>Cantidad Recomendada por Comision Especial</th><th>Cantidad Autorizada por el Consejo Interno</th><th>Cantidad Utilizada</th></tr>
+        <tr><th i18n:translate="label_cantidad_pasaje">Transportation cost</th>
+                      <td align="center" tal:content="here/getCantidad_pasaje">Cantidad Solicitada</td>
+                      <td align="center" tal:content="here/getCantidad_recomendada_pasaje">Cantidad Recomendada</td>
+                      <td align="center" tal:content="here/getCantidad_consejo_pasaje">Cantidad Autorizada</td>
+                      <td align="center" tal:content="here/getCantidad_autorizada_pasaje">Cantidad Utilizada</td></tr>
+        <tr><th i18n:translate="label_cantidad_viaticos">Travel allowances</th>
+                      <td align="center" tal:content="here/getCantidad_viaticos">Cantidad Solicitada</td>
+                      <td align="center" tal:content="here/getCantidad_recomendada_viaticos">Cantidad Recomendada</td>
+                      <td align="center" tal:content="here/getCantidad_consejo_viaticos">Cantidad Autorizada</td>
+                      <td align="center" tal:content="here/getCantidad_autorizada_viaticos">Cantidad Utilizada</td></tr>
+        <tr><th><b>Total</b></th>
+                      <td align="center" tal:content="here/getTotal">Cantidad Solicitada</td>
+                      <td align="center" tal:content="here/getCantidadRecomendadaTotal">Cantidad Recomendada</td>
+                      <td align="center" tal:content="here/getCantidadConsejoTotal">Cantidad Autorizada</td>
+                      <td align="center" tal:content="here/getCantidadAutorizadaTotal">Cantidad Utilizada</td></tr>
+        </tbody>
+    </table>
+
+    <table class="listing" width="100%" border="1" align="center" tal:condition="python:comisionado or consejero">
+        <tbody>
+            <tr><th colspan="2"><b>Información Interna</b></th></tr>
+            <tr><th i18n:translate="label_fecha_sesionce">Fecha de revisión por Comisión Especial</th>
+                <td align="left" tal:content="here/getFecha_sesionce">Value</td></tr>
+            <tr><th i18n:translate="label_comentario_ce">Recommendation by Special Commission</th>
+                <td align="left" tal:content="here/getComentario_ce">Value</td></tr>
+            <tr><th i18n:translate="label_recomienda_aprobar">Recomiendo Aprobar</th>
+                <td align="left" tal:content="here/getRecomienda_aprobar">Value</td></tr>
+            <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th colspan="2"><b>Consejo Interno</b></th></tr>
+            <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_fecha_sesionci">Date of revision by the CI</th>
+                <td align="left" tal:content="here/getFecha_sesionci">Value</td></tr>
+            <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_actaci">Record number</th>
+                <td align="left" tal:content="here/getActaci">Value</td></tr>
+            <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_comentario_ci">Comments by Consejo Interno</th>
+                <td align="left" tal:content="here/getComentario_ci">Value</td></tr>
+        </tbody>
+    </table>
+
+    <table border="0">
+      <tr>
+       <td tal:repeat="transicion python:here.getLegalTransitions()">
+           <a class="context" style="text-decoration:none" href="#" tal:attributes="href python:transicion['url']" tal:content="python:transicion['name']"/>
+       </td>
+       <td tal:condition="python:(responsableconsejo and (here.aprobada() or here.rechazada())) or (editor and view.esBorrador()) or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
+           <a class="context" style="text-decoration:none" href="#" tal:attributes="href python:here.absolute_url()+'/delete_confirmation'">Eliminar solicitud.</a>
+       </td>
+       <td tal:condition="python:(consejero and (here.getWFState()=='revisionconsejo')) or (comisionado and (here.getWFState()=='revisioncomision')) or (editor and view.esBorrador()) or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
+           <a class="context" style="text-decoration:none" href="#" tal:attributes="href python:here.absolute_url()+'/edit'">Hacer cambios a solicitud.</a>
+       </td>
+      </tr>
+    </table>
+
+    </div>
+
+        </metal:body_macro>
+        <metal:use_body use-macro="folderlisting_macro" />
+
+      </metal:main_macro>
+    </metal:fill>
+  </body>
+</html>

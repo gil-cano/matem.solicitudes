@@ -1,0 +1,68 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:plone="http://namespaces.zope.org/plone"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="matem.solicitudes">
+
+    <five:registerPackage package="." initialize=".initialize" />
+
+		<!-- load dependencies configuration -->
+		<!--<include package="archetypes.schemaextender" />-->
+		<include package="Products.Relations" />
+		<include package="Products.membrane" />
+		<include package="Products.FacultyStaffDirectory" />
+
+
+    <include package=".browser" />
+    <include package=".portlets" />
+
+    <genericsetup:registerProfile
+      name="default"
+      title="Solicitudes"
+      directory="profiles/default"
+      description="Solicitudes de viaticos para investigadores."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+    <subscriber for=".interfaces.ISolicitud
+                     Products.Archetypes.interfaces.IObjectInitializedEvent"
+                handler=".handlers.modificationHandler" />
+    <subscriber for=".interfaces.ISolicitudBecario
+                     Products.Archetypes.interfaces.IObjectInitializedEvent"
+                handler=".handlers.modificationHandler" />
+    <subscriber for=".interfaces.ISolicitudVisitante
+                     Products.Archetypes.interfaces.IObjectInitializedEvent"
+                handler=".handlers.modificationHandler" />
+    <subscriber for=".interfaces.ISolicitudInstitucional
+                     Products.Archetypes.interfaces.IObjectInitializedEvent"
+                handler=".handlers.modificationHandler" />
+    <subscriber for=".interfaces.ISolicitud
+                     zope.lifecycleevent.IObjectModifiedEvent"
+                handler=".handlers.modificationHandler" />
+    <subscriber for=".interfaces.ISolicitudBecario
+                     zope.lifecycleevent.IObjectModifiedEvent"
+                handler=".handlers.modificationHandler" />
+    <subscriber for=".interfaces.ISolicitudVisitante
+                     zope.lifecycleevent.IObjectModifiedEvent"
+                handler=".handlers.modificationHandler" />
+    <subscriber for=".interfaces.ISolicitudInstitucional
+                     zope.lifecycleevent.IObjectModifiedEvent"
+                handler=".handlers.modificationHandler" />
+
+    <!-- register an event handler -->
+    <!-- <subscriber for=".interfaces.ISolicitud
+                     Products.Archetypes.interfaces.IObjectInitializedEvent"
+                handler=".handlers.movetofolder" />
+    <subscriber for=".interfaces.ISolicitudBecario
+                     Products.Archetypes.interfaces.IObjectInitializedEvent"
+                handler=".handlers.movetofolder" />
+    <subscriber for=".interfaces.ISolicitudVisitante
+                     Products.Archetypes.interfaces.IObjectInitializedEvent"
+                handler=".handlers.movetofolder" /> -->
+
+
+    <include file="upgrades.zcml"/>
+
+</configure>

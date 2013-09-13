@@ -1,0 +1,2 @@
+"""Archetypes test package.
+"""

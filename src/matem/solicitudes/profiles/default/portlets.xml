@@ -1,0 +1,7 @@
+<portlets>
+    <portlet
+       addview="matem.solicitudes.Avisos"
+       title="Portlet Avisos"
+       description="A portlet which can shows if you have pending application reviews."
+       />
+</portlets>

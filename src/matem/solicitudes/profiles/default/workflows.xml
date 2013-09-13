@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<object name="portal_workflow" meta_type="Plone Workflow Tool">
+ <object name="solicitud_workflow" meta_type="Workflow"/>
+ <object name="solicitudbecario_workflow" meta_type="Workflow"/>
+ <object name="solicitudfolder_workflow" meta_type="Workflow"/>
+ <bindings>
+  <type type_id="Solicitud">
+   <bound-workflow workflow_id="solicitud_workflow"/>
+  </type>
+  <type type_id="SolicitudBecario">
+   <bound-workflow workflow_id="solicitudbecario_workflow"/>
+  </type>
+  <type type_id="SolicitudVisitante">
+   <bound-workflow workflow_id="solicitud_workflow"/>
+  </type>
+  <type type_id="SolicitudFolder">
+   <bound-workflow workflow_id="solicitudfolder_workflow"/>
+  </type>
+  <type type_id="SolicitudInstitucional">
+   <bound-workflow workflow_id="solicitud_workflow"/>
+  </type>
+ </bindings>
+</object>

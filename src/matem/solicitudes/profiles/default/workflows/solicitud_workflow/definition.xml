@@ -1,0 +1,437 @@
+<dc-workflow workflow_id="solicitud_workflow"
+             title="Solicitud Workflow" description=""
+             state_variable="review_state"
+             initial_state="borrador"> 
+ <permission>Access contents information</permission>
+ <permission>Change portal events</permission>
+ <permission>Modify portal content</permission>
+ <permission>Delete objects</permission>
+ <permission>Solicitud: Comision Revisa Solicitud</permission>
+ <permission>Solicitud: Consejo Revisa Solicitud</permission>
+ <permission>Solicitud: Consejo Cambia Solicitud</permission>
+ <permission>Solicitud: Datos Perennes Consejo</permission>
+ <permission>Solicitud: Modificar Solicitud</permission>
+ <permission>Sharing page: Delegate role</permission>
+ <permission>Solicitud: Cambiar Solicitante</permission>
+ <permission>View</permission>
+
+ <state state_id="borrador" title="Solicitud en borrador"> 
+  <exit-transition transition_id="enviar"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Solicitante Auxiliar</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Solicitante Auxiliar</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Cambiar Solicitante" acquired="False">
+   <permission-role>Solicitante Auxiliar</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Comision Revisa Solicitud" acquired="False">
+  </permission-map>
+  <permission-map name="Solicitud: Consejo Revisa Solicitud" acquired="False">
+  </permission-map>
+  <permission-map name="Solicitud: Consejo Cambia Solicitud" acquired="False">
+  </permission-map>
+  <permission-map name="Solicitud: Datos Perennes Consejo" acquired="False">
+  </permission-map>
+  <permission-map name="Solicitud: Modificar Solicitud" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="Sharing page: Delegate roles" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="revisioncomision" title="Solicitud en revision por Comision Especial"> 
+  <exit-transition transition_id="enviaraconsejo"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Comisionado</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Responsable de la Comision</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Responsable de la Comision</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Comisionado</permission-role>
+   <permission-role>Responsable de la Comision</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Comision Revisa Solicitud" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Comisionado</permission-role>
+   <permission-role>Responsable de la Comision</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Cambiar Solicitante" acquired="False">
+  </permission-map>
+  <permission-map name="Solicitud: Consejo Revisa Solicitud" acquired="False">
+  </permission-map>
+  <permission-map name="Solicitud: Consejo Cambia Solicitud" acquired="False">
+  </permission-map>
+  <permission-map name="Solicitud: Datos Perennes Consejo" acquired="False">
+  </permission-map>
+  <permission-map name="Solicitud: Modificar Solicitud" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Sharing page: Delegate roles" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Comisionado</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Responsable de la Comision</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+ </state> 
+ <state state_id="revisionconsejo" title="Solicitud en revision por Consejo Interno"> 
+  <exit-transition transition_id="aprobar"/>
+  <exit-transition transition_id="rechazar"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Comisionado</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Responsable de la Comision</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Cambiar Solicitante" acquired="False">
+  </permission-map>
+  <permission-map name="Solicitud: Comision Revisa Solicitud" acquired="False">
+  </permission-map>
+  <permission-map name="Solicitud: Consejo Revisa Solicitud" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Datos Perennes Consejo" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Consejo Cambia Solicitud" acquired="False">
+  </permission-map>
+  <permission-map name="Solicitud: Modificar Solicitud" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Sharing page: Delegate roles" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Comisionado</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Responsable de la Comision</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+ </state> 
+<state state_id="aprobada" title="Solicitud aprobada"> 
+  <exit-transition transition_id="rechazararevisor"/>
+  <exit-transition transition_id="reconsiderar"/>
+  <exit-transition transition_id="avisarinvestigador"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Comisionado</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Investigador</permission-role>
+   <permission-role>Tecnico Academico</permission-role>
+   <permission-role>Postdoc</permission-role>
+   <permission-role>Importador de Solicitudes</permission-role>
+   <permission-role>Responsable de la Comision</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Cambiar Solicitante" acquired="False">
+  </permission-map>
+  <permission-map name="Solicitud: Comision Revisa Solicitud" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Consejo Revisa Solicitud" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Datos Perennes Consejo" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Consejo Cambia Solicitud" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Modificar Solicitud" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Sharing page: Delegate roles" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Comisionado</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Investigador</permission-role>
+   <permission-role>Tecnico Academico</permission-role>
+   <permission-role>Postdoc</permission-role>
+   <permission-role>Importador de Solicitudes</permission-role>
+   <permission-role>Responsable de la Comision</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+ </state> 
+<state state_id="rechazada" title="Solicitud rechazada"> 
+  <exit-transition transition_id="reconsiderar"/>
+  <permission-map name="Access contents information" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Comisionado</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Investigador</permission-role>
+   <permission-role>Tecnico Academico</permission-role>
+   <permission-role>Postdoc</permission-role>
+   <permission-role>Importador de Solicitudes</permission-role>
+   <permission-role>Responsable de la Comision</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Change portal events" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Cambiar Solicitante" acquired="False">
+  </permission-map>
+  <permission-map name="Solicitud: Comision Revisa Solicitud" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Comisionado</permission-role>
+   <permission-role>Responsable de la Comision</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Consejo Revisa Solicitud" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Consejo Cambia Solicitud" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Datos Perennes Consejo" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+  <permission-map name="Solicitud: Modificar Solicitud" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Sharing page: Delegate roles" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Comisionado</permission-role>
+   <permission-role>Consejero</permission-role>
+   <permission-role>Investigador</permission-role>
+   <permission-role>Postdoc</permission-role>
+   <permission-role>Tecnico Academico</permission-role>
+   <permission-role>Importador de Solicitudes</permission-role>
+   <permission-role>Responsable de la Comision</permission-role>
+   <permission-role>Responsable del Consejo</permission-role>
+  </permission-map>
+ </state> 
+ <transition transition_id="avisarinvestigador"
+             title="Avisar al Investigador sobre modificaciones"
+             new_state="aprobada" trigger="USER"
+             before_script="" after_script="avisar_investigador"> 
+  <action url="%(content_url)s/content_status_modify?workflow_action=avisarinvestigador"
+          category="workflow">Avisar a Investigador sobre modificaciones</action> 
+  <guard> 
+   <guard-role>Manager</guard-role>
+   <guard-role>Responsable del Consejo</guard-role>
+  </guard> 
+ </transition> 
+ <transition transition_id="rechazararevisor"
+             title="Regresar solicitud al Consejo Interno"
+             new_state="revisionconsejo" trigger="USER"
+             before_script="" after_script="regresar_valor"> 
+  <action url="%(content_url)s/content_status_modify?workflow_action=rechazararevisor"
+          category="workflow">Regresar solicitud a revision de Consejo Interno</action> 
+  <guard> 
+   <guard-role>Manager</guard-role>
+  </guard> 
+ </transition> 
+ <transition transition_id="reconsiderar"
+             title="Reconsiderar Solicitud"
+             new_state="revisionconsejo" trigger="USER"
+             before_script="" after_script=""> 
+  <action url="%(content_url)s/content_status_modify?workflow_action=reconsiderar"
+          category="workflow">Reconsiderar Solicitud</action> 
+  <guard> 
+   <guard-role>Manager</guard-role> 
+  </guard> 
+ </transition> 
+
+ <transition transition_id="aprobar"
+             title="Solicitud Aprobada"
+             new_state="aprobada" trigger="USER"
+             before_script="" after_script="registrar_valor"> 
+  <action url="%(content_url)s/content_status_modify?workflow_action=aprobar"
+          category="workflow">Aprobar</action> 
+  <guard> 
+   <guard-role>Responsable del Consejo</guard-role>
+   <guard-role>Manager</guard-role> 
+  </guard> 
+ </transition>
+ <transition transition_id="enviaraconsejo"
+             title="Enviar a Consejo Interno"
+             new_state="revisionconsejo" trigger="USER"
+             before_script="" after_script="pasar_valor_consejero"> 
+  <action url="%(content_url)s/content_status_modify?workflow_action=enviaraconsejo"
+          category="workflow">Enviar a Consejo Interno</action> 
+  <guard> 
+   <guard-role>Responsable de la Comision</guard-role>
+   <guard-role>Manager</guard-role> 
+  </guard> 
+ </transition>  
+ <transition transition_id="rechazar"
+             title="Solicitud Rechazada"
+             new_state="rechazada" trigger="USER"
+             before_script="" after_script="registrar_valor"> 
+  <action url="%(content_url)s/content_status_modify?workflow_action=rechazar"
+          category="workflow">Rechazar</action> 
+  <guard> 
+   <guard-role>Responsable del Consejo</guard-role>
+   <guard-role>Manager</guard-role> 
+  </guard> 
+ </transition>
+ <transition transition_id="cancelar"
+             title="Solicitud Cancelada"
+             new_state="rechazada" trigger="USER"
+             before_script="" after_script="regresar_valor">
+  <action url="%(content_url)s/content_status_modify?workflow_action=cancelar"
+          category="workflow">Cancelar</action> 
+  <guard> 
+   <guard-role>Responsable del Consejo</guard-role>
+   <guard-role>Manager</guard-role> 
+  </guard> 
+ </transition>
+ <transition transition_id="enviar"
+             title="Enviar solicitud"
+             new_state="revisioncomision" trigger="USER"
+             before_script="" after_script="pasar_valor_comisionado"> 
+  <action url="%(content_url)s/content_status_modify?workflow_action=enviar"
+          category="workflow">Enviar</action> 
+  <guard> 
+   <guard-role>Owner</guard-role> 
+   <guard-role>Manager</guard-role> 
+  </guard> 
+ </transition> 
+
+ <worklist worklist_id="comision_queue" title="Solicitudes Pendientes">
+  <description>Solicitudes en revision por Comision Especial</description>
+  <action url="%(portal_url)s/search?review_state=revisioncomision"
+          category="global">Pending (%(count)d)</action>
+  <guard>
+   <guard-role>Comisionado</guard-role> 
+   <guard-role>Responsable de la Comision</guard-role>
+  </guard>
+  <match name="review_state" values="revisioncomision"/>
+ </worklist>
+
+ <worklist worklist_id="council_queue" title="Solicitudes Pendientes">
+  <description>Solicitudes en revision por Consejo Interno</description>
+  <action url="%(portal_url)s/search?review_state=revisionconsejo"
+          category="global">Pending (%(count)d)</action>
+  <guard>
+   <guard-role>Consejero</guard-role> 
+   <guard-role>Responsable del Consejo</guard-role>
+  </guard>
+  <match name="review_state" values="revisionconsejo"/>
+ </worklist>
+
+ <worklist worklist_id="solicitor_queue" title="Solicitudes Pendientes">
+  <description>Solicitudes en borrador</description>
+  <action url="%(portal_url)s/search?review_state=borrador"
+          category="global">Pending (%(count)d)</action>
+  <guard>
+   <guard-role>Owner</guard-role>
+  </guard>
+  <match name="review_state" values="borrador"/>
+ </worklist>
+
+ <script script_id="avisar_investigador"
+         type="Script (Python)"
+         filename="workflows/solicitud_workflow/scripts/avisar_investigador.py"
+         module="" function=""/>
+ <script script_id="registrar_valor"
+         type="Script (Python)"
+         filename="workflows/solicitud_workflow/scripts/registrar_valor.py"
+         module="" function=""/> 
+ <script script_id="pasar_valor_comisionado"
+         type="Script (Python)"
+         filename="workflows/solicitud_workflow/scripts/pasar_valor_comisionado.py"
+         module="" function=""/>
+ <script script_id="pasar_valor_consejero"
+         type="Script (Python)"
+         filename="workflows/solicitud_workflow/scripts/pasar_valor_consejero.py"
+         module="" function=""/>
+ <script script_id="regresar_valor"
+         type="Script (Python)"
+         filename="workflows/solicitud_workflow/scripts/regresar_valor.py"
+         module="" function=""/>  
+</dc-workflow>
