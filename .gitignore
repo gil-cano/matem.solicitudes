@@ -1,0 +1,34 @@
+# byte-compiled Python files
+*.py[co]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+develop-eggs
+.installed.cfg
+Makefile
+
+# Unit test / coverage reports
+.coverage
+coverage
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+
+# SublimeCodeIntel
+.codeintel
+
+# svn
+.svn
