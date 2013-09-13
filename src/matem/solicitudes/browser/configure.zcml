@@ -3,6 +3,7 @@
     i18n_domain="matem.solicitudes" >
 
     <!-- IDefaultPloneLayer layer-based templates -->
+    <include package="Products.CMFCore" file="permissions.zcml" />
     
     <browser:page
         for="matem.solicitudes.interfaces.ISolicitud"
