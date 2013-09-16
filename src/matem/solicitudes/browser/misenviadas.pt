@@ -91,15 +91,18 @@
 
   <body>
     <metal:fill fill-slot="main">
+      <!-- 
+        variables que hacen que truene la vista
+        footer_macro view_macros/footer | footer_macro | base_macros/footer; 
+        header_macro view_macros/header | header_macro | base_macros/header;
+      -->
       <metal:main_macro define-macro="main"
             tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
             base_macros here/base/macros;
             view_template python:'%s_view' % portal_type;
             view_macros python:path('here/%s/macros|nothing' % view_template);
-            header_macro view_macros/header | header_macro | base_macros/header;
             body_macro view_macros/body | body_macro | base_macros/body;
             folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
-            footer_macro view_macros/footer | footer_macro | base_macros/footer;
             errors python:request.get('errors', {})">
 
     <metal:header_macro define-macro="header">
@@ -120,8 +123,10 @@
         <td><img src="" tal:attributes="src string:${context/absolute_url}/++resource++me.png" width="48" height="48"></td>
         <th><div i18n:translate="help_sent_app">Here you can see all the applications you have sent for review</div> dentro del folder <span tal:replace="here/title_or_id">content title or id</span></th>
           </tr></table>
-            <span tal:condition="template/title"
-                  tal:replace="template/title">optional template title</span>
+              <!-- 
+                Con esto truena la vista
+                <span tal:condition="template/title" 
+                tal:replace="template/title">optional template title</span>  -->
 
                 <div class="tabularView" tal:condition="python: str(here.getWFState()) != 'historico'">
                 <table class="listing" align="right" border="0">
@@ -145,11 +150,13 @@
                 </tr>
                 </table></div>
         </metal:header_macro>
-
+    
     <metal:body_macro define-macro="body">
 
     <br>
+   
     <!-- Obtiene usuario actual -->
+   
     <span tal:define="usuarioActual user/getId">
 
     <span tal:define="items python:view.getSolicitudesEnviadasIndividuales(usuarioActual)">
@@ -201,13 +208,14 @@
     </span>
     </span>
     </metal:body_macro>
+  
     <metal:footer_macro define-macro="footer">
 
     </metal:footer_macro>
     <metal:folderlisting_macro define-macro="folderlisting">
 
     </metal:folderlisting_macro>
-
+ 
       </metal:main_macro>
     </metal:fill>
   </body>

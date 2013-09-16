@@ -51,7 +51,7 @@
                 </p>
 
                       <p align="left">Acceso rapido: </p>
-                         <p><a href="#" tal:attributes="href string:${parent/absolute_url}/view">Ir al menu</a></p>
+                        <!-- <p><a href="#" tal:attributes="href string:${parent/absolute_url}/view">Ir al menu</a></p>-->
                          <form action="" tal:attributes="action string:${parent/absolute_url}/view" method="post" name="ppl">
                              <input type="hidden" name="vistafolder" value="folderpendientes"/>
                              <a href="javascript: document.ppl.submit()">Ir a 'Solicitudes pendientes de revision'</a>
@@ -212,7 +212,7 @@
                  <br><br>
             </span>
 
-            <p align="left"><img src="" tal:replace="structure here/user.gif" /> Tu tienes los roles de: </p>
+            <p align="left"><img src="" tal:replace="structure here/user.png" /> Tu tienes los roles de: </p>
             <dl>
                 <dt tal:condition="python:view.esConsejeroG(usuarioActual)">Consejero</dt>
                 <dt tal:condition="python:view.esComisionadoG(usuarioActual)">Comisionado</dt>

@@ -115,15 +115,20 @@
 
   <body>
     <metal:fill fill-slot="main">
+      <!-- 
+        header_macro view_macros/header | header_macro | base_macros/header;
+        footer_macro view_macros/footer | footer_macro | base_macros/footer;
+       -->
+
+
       <metal:main_macro define-macro="main"
             tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
-            base_macros here/base/macros;
+            base_macros context/base/macros;
             view_template python:'%s_view' % portal_type;
-            view_macros python:path('here/%s/macros|nothing' % view_template);
-            header_macro view_macros/header | header_macro | base_macros/header;
+            view_macros python:path('context/%s/macros|nothing' % view_template);
             body_macro view_macros/body | body_macro | base_macros/body;
             folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
-            footer_macro view_macros/footer | footer_macro | base_macros/footer;
+            header_macro base_macros/header|nothing;
             errors python:request.get('errors', {})">
 
     <metal:header_macro define-macro="header">
@@ -144,8 +149,8 @@
         <td><img src="" tal:attributes="src string:${context/absolute_url}/++resource++p.png" width="48" height="48"></td>
         <th><div i18n:translate="help_pending_app">Here you can see every application that needs your review</div></th>
           </tr></table>
-            <span tal:condition="template/title"
-                  tal:replace="template/title">optional template title</span>
+            <!-- <span tal:condition="template/title"
+                  tal:replace="template/title">optional template title</span> -->
 
                 <div class="tabularView" tal:condition="python: str(here.getWFState()) != 'historico'">
                 <table class="listing" align="right" border="0">

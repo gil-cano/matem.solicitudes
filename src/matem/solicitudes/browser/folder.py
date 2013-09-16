@@ -255,6 +255,7 @@ class SolicitudFolderView(BrowserView):
         folder=self.context
         mt = self.context.portal_membership
         member=mt.getMemberById(usuario)
+        
         fsdperson=self.queryObj.getPersonWrapper(usuario)
         users = []
         rol = ""
