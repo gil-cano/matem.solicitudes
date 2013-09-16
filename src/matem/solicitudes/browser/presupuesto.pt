@@ -71,13 +71,15 @@
             base_macros here/base/macros;
             view_template python:'%s_view' % portal_type;
             view_macros python:path('here/%s/macros|nothing' % view_template);
-            header_macro view_macros/header | header_macro | base_macros/header;
             body_macro view_macros/body | body_macro | base_macros/body;
             folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
-            footer_macro view_macros/footer | footer_macro | base_macros/footer;
             errors python:request.get('errors', {})">
 
-    <metal:header_macro define-macro="header">
+            <!-- header_macro view_macros/header | header_macro | base_macros/header; -->
+            <!-- footer_macro view_macros/footer | footer_macro | base_macros/footer; -->
+
+
+<!--     <metal:header_macro define-macro="header">
         <h2><span i18n:translate="Budget Overview">Budget overview</span>
             <span tal:condition="template/title"
                   tal:replace="template/title">optional template title</span></h2>
@@ -90,7 +92,7 @@
             <div tal:condition="python: view.hasReqData('refresh')">
                 <div tal:condition="python: view.actualizar(view.getReqDataStr('memberID'),view.getReqDataStr('newBudget'))">Cantidades actualizadas</div>
             </div>
-        </metal:header_macro>
+        </metal:header_macro> -->
 
     <metal:body_macro define-macro="body">
 
@@ -151,9 +153,9 @@
         </form>
     </span>
     </metal:body_macro>
-    <metal:footer_macro define-macro="footer">
+<!--     <metal:footer_macro define-macro="footer">
 
-    </metal:footer_macro>
+    </metal:footer_macro> -->
     <metal:folderlisting_macro define-macro="folderlisting">
 
     </metal:folderlisting_macro>
