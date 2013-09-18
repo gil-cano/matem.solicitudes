@@ -119,8 +119,6 @@
         header_macro view_macros/header | header_macro | base_macros/header;
         footer_macro view_macros/footer | footer_macro | base_macros/footer;
        -->
-
-
       <metal:main_macro define-macro="main"
             tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
             base_macros context/base/macros;
@@ -515,7 +513,6 @@
         tal:condition="python:view.esResponsableDelConsejo(user.getId())"/>
 
    </form>
-    </div>
 
     </span>
 

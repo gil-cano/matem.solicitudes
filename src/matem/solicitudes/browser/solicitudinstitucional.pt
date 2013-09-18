@@ -287,14 +287,18 @@
 	<tr><th colspan="5"><b>Informaci&oacute;n Sobre Solicitud</b></th></tr>
         <tr><th colspan="2">Tipo</th><td align="center" colspan="3">Solicitud de <span tal:content="here/getLicenciacomision">Value</span></td></tr>
         <tr><th colspan="2">Con cargo a</th><td align="center" colspan="3" tal:content="here/getCargo_presupuesto">Value</td></tr>        
-        <tr><th colspan="2">Fecha de Solicitud</th><td align="center" colspan="3"><span tal:content="python:DateTime(here.creation_date).strftime('%d/%m/%Y')">Value</span></td></tr>
+        <tr><th colspan="2">Fecha de Solicitud</th><td align="center" colspan="3"><span tal:content="python:context.creation_date.strftime('%d/%m/%Y')">Value</span></td></tr>
         <tr><th colspan="2" i18n:translate="label_pais">Country</th><td align="center" colspan="3" tal:content="here/getPais">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_ciudad_pais">City</th><td align="center" colspan="3" tal:content="here/getCiudadPais">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_institucion">Institution</th><td align="center" colspan="3" 
                                                                                   tal:content="here/getInstitucion">Value</td></tr>
         <tr><th colspan="5"></th></tr>
+        <!--
+
+       Esta linea si estaba
         <tr><th colspan="2" i18n:translate="label_fecha_desde">From date</th><td align="center" tal:content="python:here.getFechaDesde().strftime('%d/%m/%Y')">Value</td>
-            <th i18n:translate="label_fecha_hasta">To date</th><td align="center" tal:content="python:DateTime(here.getFechaHasta()).strftime('%d/%m/%Y')">Value</td></tr>
+            <th i18n:translate="label_fecha_hasta">To date</th><td align="center" tal:content="python:here.getFechaHasta().strftime('%d/%m/%Y')">Value</td></tr>
+        -->
 	<tr><th colspan="5"><b>Datos Adicionales</b></th></tr>
 
         <tr><th colspan="2" i18n:translate="label_objeto_viaje">Objective of trip</th><td align="center" colspan="3" 
@@ -307,10 +311,11 @@
         <tr><th colspan="2" i18n:translate="label_titulo_trabajo">Title of the work to be presented</th><td align="center" colspan="3"
                                                                               tal:content="here/getTituloTrabajo">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_adjuntos">Attachments</th>
+            <!-- Este bloque si debe estar
               <td align="center" colspan="3"><tal:block condition="python:here.getField('displayAttachments') is not None">
                                                  <div metal:use-macro="python:here.widget('displayAttachments')"/>
                                              </tal:block>
-              </td>
+              </td>-->
         </tr>
         <tr><th colspan="2" i18n:translate="label_comentario_owner">Additional Comments</th><td align="center" colspan="3"
                                                                               tal:content="here/getComentario_owner">Value</td></tr>

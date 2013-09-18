@@ -119,7 +119,6 @@
             base_macros here/base/macros;
             view_template python:'%s_view' % portal_type;
             view_macros python:path('here/%s/macros|nothing' % view_template);
-            header_macro header_macro | base_macros/header;
             body_macro view_macros/body | body_macro | base_macros/body;
             folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
             errors python:request.get('errors', {})">

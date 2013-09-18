@@ -287,7 +287,7 @@
 	<tr><th colspan="5"><b>Informaci&oacute;n Sobre Solicitud</b></th></tr>
         <tr><th colspan="2">Tipo</th><td align="center" colspan="3">Solicitud de <span tal:content="here/getLicenciacomision">Value</span></td></tr>
         <tr><th colspan="2">Con cargo a</th><td align="center" colspan="3" tal:content="here/getCargo_presupuesto">Value</td></tr>        
-        <tr><th colspan="2">Fecha de Solicitud</th><td align="center" colspan="3"><span tal:content="python:here.creation_date.strftime('%d/%m/%Y')">Value</span></td></tr>
+        <tr><th colspan="2">Fecha de Solicitud</th><td align="center" colspan="3"><span tal:content="python:context.creation_date.strftime('%d/%m/%Y')">Value</span></td></tr>
         <tr><th colspan="2" i18n:translate="label_pais">Country</th><td align="center" colspan="3" tal:content="here/getPais">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_ciudad_pais">City</th><td align="center" colspan="3" tal:content="here/getCiudadPais">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_institucion">Institution</th><td align="center" colspan="3" 

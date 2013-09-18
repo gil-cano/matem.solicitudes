@@ -1140,10 +1140,12 @@ class SolicitudInstitucional(BaseContent):
         return self.getField('institucion').get(self)
 
     def getFechaDesde(self):
-        return self.getField('fecha_desde').get(self)
+        #return self.getField('fecha_desde').get(self)
+        return DateTime(self.getField('fecha_desde').get(self))
 
     def getFechaHasta(self):
-        return self.getField('fecha_hasta').get(self)
+        #return self.getField('fecha_hasta').get(self)
+        return DateTime(self.getField('fecha_hasta').get(self))
 
     def getObjetoViaje(self):
         return self.getField('objeto_viaje').get(self)
@@ -1432,11 +1434,17 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
         getToolByName(self,'MailHost').send(msg, mail_to, mail_from, subject)
         return
 
+    #Esta definida en solicitud
     def getCantidadDeDias(self):
-        t1=str(self.getFecha_desde()).split("/")
-        t2=str(self.getFecha_hasta()).split("/")
-        d1=datetime(int(t1[0]),int(t1[1]),int(t1[2]))
-        d2=datetime(int(t2[0]),int(t2[1]),int(t2[2]))
+        # t1=str(self.getFecha_desde()).split("/")
+        # t2=str(self.getFecha_hasta()).split("/")
+        # d1=datetime(int(t1[0]),int(t1[1]),int(t1[2]))
+        # d2=datetime(int(t2[0]),int(t2[1]),int(t2[2]))
+        # return int((d2-d1).days)+1
+        t1 = str(DateTime(self.getFecha_desde())).split("/")
+        t2 = str(DateTime(self.getFecha_hasta())).split("/")
+        d1=datetime(int(t1[0]),int(t1[1]),int(t1[2].split(" ")[0]))
+        d2=datetime(int(t2[0]),int(t2[1]),int(t1[2].split(" ")[0]))
         return int((d2-d1).days)+1
 
     def actualizarInvestigador(self):

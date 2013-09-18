@@ -182,7 +182,6 @@
                                    Dias de Comision Aprobados
                                 </th>
                              </tr>
-
                            <tr tal:repeat="investigador python:view.getPresupuestoIndividual(usuarioActual)">
                                 <td tal:content="python:investigador[0]">Solicitor</td>
                                 <span tal:condition="items">

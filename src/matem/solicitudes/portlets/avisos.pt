@@ -15,8 +15,10 @@
                consejero python:view.esConsejero(usuarioActual);
                investigadoracargo python:view.esInvestigadorACargo(usuarioActual);
                folder python:view.esFolder();
-               parent python:here.getParentNode();">
+               parent python:context.aq_inner.aq_parent;
+               ">
 
+<!-- parent python:here.getParentNode(); -->
 <!--Solicitud-Propietario-->
 
             <span tal:condition="python:propietario and not folder">
@@ -119,14 +121,9 @@
                 <p align="center" tal:condition="view/esRechazada">
                     <span i18n:translate="label_rechazada_nopropietario">This application has been rejected. If you have any doubt please contact the site manager.</span>
                 </p>
-
-                    <!-- tal:attributes="href string:${parent/absolute_url}/view" 
-
-                    tal:define="parent_url python:here.navigationParent(here, template_id)"
-                -->
                       <p align="left"><img src="++resource++info.png" width="15" height="15"/> Acceso rapido: </p>
-                         <p><a href="#" tal:define="parent python:context.aq_inner.aq_parent" tal:attributes="href string:${parent/absolute_url}/view">Regresar al menu</a></p>
-                         <form action="" tal:define="parent python:context.aq_inner.aq_parent" tal:attributes="action string:${parent/absolute_url}/view" method="post" name="ppl">
+                         <p><a href="#" tal:attributes="href string:${parent/absolute_url}/view">Regresar al menu</a></p>
+                         <form action="" tal:attributes="action string:${parent/absolute_url}/view" method="post" name="ppl">
                              <input type="hidden" name="vistafolder" value="folderpendientes"/>
                              <a href="javascript: document.ppl.submit()">Ir a 'Solicitudes pendientes de revision'</a>
                          </form>

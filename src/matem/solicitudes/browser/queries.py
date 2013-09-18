@@ -5,6 +5,7 @@ from matem.solicitudes.extender import PersonWrapper
 
 from plone.memoize import forever
 
+
 class Queries(BrowserView):
     """A class for querying the site for applications"""
 
@@ -529,6 +530,7 @@ class Queries(BrowserView):
         folder_path = '/'.join(self.context.getPhysicalPath())
         catalog = self.context.portal_catalog
         results = catalog(path={'query': folder_path, 'depth': 1},portal_type=('Solicitud','SolicitudVisitante','SolicitudBecario','SolicitudInstitucional'),review_state=wfstateid,Creator=userid)
+
         applications=[]
         for brain in results:
             start=brain.start
@@ -564,6 +566,7 @@ class Queries(BrowserView):
                         'work_title':obj.getTituloTrabajo(),
                     }
 
+                #Las fechas fueron modificadas DateTime(obj....)
                 applications.append({
                             'meta_type':obj.meta_type,
                             'id':obj.getId(),
@@ -602,6 +605,7 @@ class Queries(BrowserView):
             except Exception, err:
                 print obj.getId()+": "+str(err);
                 pass;
+
         return applications
 
     def searchWithCatalog(self,*args,**kwargs):

@@ -290,9 +290,10 @@
                                                                               </div>
                                                                               </td></tr>
         <tr><th colspan="2" i18n:translate="label_adjuntos">Attachments</th>
+            <!-- Este bloque si debe estar 
               <td align="center" colspan="3"><tal:block condition="python:here.getField('displayAttachments') is not None">
                                                  <div metal:use-macro="python:here.widget('displayAttachments')"/>
-                                             </tal:block></td></tr>
+                                             </tal:block></td>--></tr>
         <tr><th colspan="2" i18n:translate="label_comentario_owner">Additional Comments</th><td align="center" colspan="3"
                                                                               tal:content="here/getComentario_owner">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_viaticos">Travel Allowances</th>
