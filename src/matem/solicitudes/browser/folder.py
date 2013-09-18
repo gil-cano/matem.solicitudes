@@ -99,7 +99,7 @@ class SolicitudFolderView(BrowserView):
                 return self.folderrechazadas()
             elif tipo == "presupuestolocal":
                 if letra is not None:
-                    self.presupuestolocal.pt_getContext().get('request','').set('pagina',letra)
+                    self.request.set('pagina',letra)
                 if memberid is not None:
                     solicitantes=self.context.getSolicitantes()
                     try:
@@ -255,7 +255,7 @@ class SolicitudFolderView(BrowserView):
         folder=self.context
         mt = self.context.portal_membership
         member=mt.getMemberById(usuario)
-        
+
         fsdperson=self.queryObj.getPersonWrapper(usuario)
         users = []
         rol = ""

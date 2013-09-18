@@ -156,7 +156,7 @@ class SolicitudFolder(ATFolder):
     _at_rename_after_creation = True
 
     def canSetDefaultPage(self):
-	return False
+        return False
 
     def getWFState(self):
         workflowTool = getToolByName(self, "portal_workflow")

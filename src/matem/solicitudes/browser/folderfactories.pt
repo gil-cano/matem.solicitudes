@@ -31,46 +31,43 @@ jQuery(function($) {
 
 <body>
 
-<div metal:fill-slot="main">
+<metal:main metal:fill-slot="main">
 
     <h1 class="documentFirstHeading" i18n:translate="heading_add_new_item">Add new item</h1>
 
-    <p class="documentDescription"
+    <div class="documentDescription"
        i18n:translate="description_add_new_item">
         Select the type of item you want to add to your folder.
-    </p>
+    </div>
 
+    <div id="content-core">
+        <p tal:condition="view/can_constrain_types">
+            <a href="#" title="Configure which content types can be added here"
+                        i18n:attributes="title title_configure_addable_content_types;"
+                        tal:define="add_context view/add_context"
+                        tal:attributes="href string:${add_context/absolute_url}/folder_constraintypes_form;"
+                        i18n:translate="folder_add_settings_long">
+                Click to configure what type of items can be added here&hellip;
+            </a>
+        </p>
 
+        <metal:addlist define-macro="addlist">
 
-    <p tal:condition="view/can_constrain_types">
-        <a href="#" title="Configure which content types can be added here"
-                    i18n:attributes="title title_configure_addable_content_types;"
-                    tal:define="add_context view/add_context"
-                    tal:attributes="href string:${add_context/absolute_url}/folder_constraintypes_form;"
-                    i18n:translate="folder_add_settings_long">
-            Click to configure what type of items can be added here&hellip;
-        </a>
-    </p>
+            <form name="quickAdd" method="post" 
+                tal:attributes="action string:${context/absolute_url}/@@folder_factories">
 
-    <div metal:define-macro="addlist">
-
-        <form name="quickAdd" method="post" 
-            tal:attributes="action string:${context/absolute_url}/@@folder_factories">
-            
-             <span> vamos a corregir</span>
-             <span tal:content="view/addable_types"/>
-            <dl>
-                <tal:typelist repeat="item view/addable_types">
-                    <dt>
-                        <input type="radio" name="url"
-                               tal:attributes="value item/action;
-                                               id string:form-field-${item/extra/id}" />
-                        <label tal:attributes="class string:contenttype-${item/extra/id};
-                                               for string:form-field-${item/extra/id};">
-                            <img tal:attributes="src item/icon" alt="" />
-                            <span tal:replace="item/title">Type title</span>
-                        </label>                                 
-                    </dt>
+                <dl>
+                    <tal:typelist repeat="item view/addable_types">
+                        <dt>
+                            <input type="radio" name="url"
+                                   tal:attributes="value item/action;
+                                                   id string:form-field-${item/extra/id}" />
+                            <label tal:attributes="class string:contenttype-${item/extra/id};
+                                                   for string:form-field-${item/extra/id};">
+                                <img tal:attributes="src item/icon" alt="" />
+                                <span tal:replace="item/title">Type title</span>
+                            </label>
+                        </dt>
                     <dd>
                       <span tal:replace="item/description">Type description</span>
                       <select name="event"  disabled 
@@ -78,31 +75,26 @@ jQuery(function($) {
                         <tal:block tal:repeat="opcion view/institutional_events">
                           <option tal:attributes="value opcion/value" tal:content="opcion/title" />
                         </tal:block>
-<!-- 
-                        <option value='EMALCA'> Escuela de Matemáticas de América Latina y el Caribe (EMALCA 2012) </option>
-                        <option value='CLAM'> IV Congreso Latinoamericano de Matemáticos (IV CLAM 2012) </option>
-                        <option value='SMM'> XLV Congreso Nacional de la Sociedad Matemática Mexicana </option>
-                        <option value='KNOT'> School on Knot and 3-Manifolds </option>
-                        <option value='AlbertoFest'> AlbertoFest: Geometría Compleja, Sistemas Dinámicos y Teoría de Números </option>
- -->
                       </select>
                     </dd>
-                    <!-- <dd tal:content="item/description">Type description</dd> -->
-                </tal:typelist>
-            </dl>
+                        <!-- <dd tal:content="item/description">Type description</dd> -->
+                    </tal:typelist>
+                </dl>
+                
+                <div class="formControls">
+                    <input class="standalone"
+                          type="submit"
+                          value="Add"
+                          name="form.button.Add"
+                          i18n:attributes="value label_add"
+                          />
+                </div>
+            </form>
+        </metal:addlist>
 
-            <div class="formControls">
-                <input class="standalone"
-                      type="submit"
-                      value="Add"
-                      name="form.button.Add"
-                      i18n:attributes="value label_add"
-                      />
-            </div>
-        </form>
-    </div>
+ </div>
 
-</div>
+</metal:main>
 
 </body>
 </html>
