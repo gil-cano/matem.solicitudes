@@ -76,15 +76,18 @@
 
   <body>
     <metal:fill fill-slot="main">
+    <!-- 
+        header_macro view_macros/header | header_macro | base_macros/header;
+        footer_macro view_macros/footer | footer_macro | base_macros/footer;
+    -->
+
       <metal:main_macro define-macro="main"
             tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
             base_macros here/base/macros;
             view_template python:'%s_view' % portal_type;
             view_macros python:path('here/%s/macros|nothing' % view_template);
-            header_macro view_macros/header | header_macro | base_macros/header;
             body_macro view_macros/body | body_macro | base_macros/body;
             folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
-            footer_macro view_macros/footer | footer_macro | base_macros/footer;
             errors python:request.get('errors', {})">
 
         <metal:header_macro define-macro="header">
@@ -274,9 +277,12 @@
 
 
             <h2><span tal:replace="here/pretty_title_or_id">content title or id</span>
+               <!-- 
+                  Esta linea si estaba
                 <span tal:condition="template/title"
-                      tal:replace="template/title">optional template title</span></h2>
-
+                      tal:replace="template/title">optional template title</span>
+                -->
+                </h2>
                 <p style="color: #FF0000;" tal:content="python:'Estado: '+str(here.getWFStateName())"></p>
                 <div class="tabularView" tal:define="parent python:here.getParentNode()">
                 <table class="listing" align="right" border="0">
@@ -349,10 +355,12 @@
                                                                               </td></tr>
         <tr><th colspan="2" i18n:translate="label_titulo_trabajo">Title of the work to be presented</th><td align="center" colspan="3"
                                                                               tal:content="here/getTituloTrabajo">Value</td></tr>
-        <tr><th colspan="2" i18n:translate="label_adjuntos">Attachments</th>
+        <!--
+          Esta linea si estaba 
+            <tr><th colspan="2" i18n:translate="label_adjuntos">Attachments</th>
               <td align="center" colspan="3"><tal:block condition="python:here.getField('displayAttachments') is not None">
                                                  <div metal:use-macro="python:here.widget('displayAttachments')"/>
-                                             </tal:block></td></tr>
+                                             </tal:block></td></tr> -->
         <tr><th colspan="2" i18n:translate="label_comentario_asesor">Comments by advisor in charge</th><td align="center" colspan="3"
                                                                               tal:content="here/getComentario_asesor">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_comentario_owner">Additional Comments</th><td align="center" colspan="3"
@@ -428,7 +436,9 @@
         </metal:body_macro>
 
         <metal:use_body use-macro="folderlisting_macro" />
-        <metal:use_footer use-macro="footer_macro" />
+        <!-- 
+          Esta linea si estaba
+          <metal:use_footer use-macro="footer_macro" /> -->
 
       </metal:main_macro>
     </metal:fill>

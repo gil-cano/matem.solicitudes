@@ -40,6 +40,8 @@ jQuery(function($) {
         Select the type of item you want to add to your folder.
     </p>
 
+
+
     <p tal:condition="view/can_constrain_types">
         <a href="#" title="Configure which content types can be added here"
                     i18n:attributes="title title_configure_addable_content_types;"
@@ -55,6 +57,8 @@ jQuery(function($) {
         <form name="quickAdd" method="post" 
             tal:attributes="action string:${context/absolute_url}/@@folder_factories">
             
+             <span> vamos a corregir</span>
+             <span tal:content="view/addable_types"/>
             <dl>
                 <tal:typelist repeat="item view/addable_types">
                     <dt>
