@@ -329,8 +329,8 @@ class SolicitudFolderView(BrowserView):
             llaves=folder.getSolicitantes()[0].keys()
             for person in llaves:
                 personinfo=folder.getSolicitantes()[0][person]
-                letter=unicode(personinfo[0])[0].upper();
-                letter=letter.replace('Á','A').replace('É','E').replace('Í','I').replace('Ó','O').replace('Ú','U').replace('Ñ','N').replace('Ö','O');
+                letter = unicode(personinfo[0], "utf-8")[0].upper()
+                letter = letter.replace(u'Á','A').replace(u'É','E').replace(u'Í','I').replace(u'Ó','O').replace(u'Ú','U').replace(u'Ñ','N').replace(u'Ö','O');
                 users[letter].append([personinfo[0]+", "+personinfo[1]+" "+personinfo[2],
                           folder.getPresupuesto_asignado_solicitantes()[0].get(person,0.0),
                           personinfo[3],
@@ -354,8 +354,8 @@ class SolicitudFolderView(BrowserView):
 
         if 'Programador de Presupuesto' in list(member.getRoles()):
             for key, value in solicitantes[0].iteritems():
-                letter=unicode(value[0])[0].upper();
-                letter=letter.replace('Á','A').replace('É','E').replace('Í','I').replace('Ó','O').replace('Ú','U').replace('Ñ','N').replace('Ö','O');
+                letter = unicode(value[0], "utf-8")[0].upper()
+                letter = letter.replace(u'Á','A').replace(u'É','E').replace(u'Í','I').replace(u'Ó','O').replace(u'Ú','U').replace(u'Ñ','N').replace(u'Ö','O');
                 users[letter].append(["%s, %s %s" % (value[0], value[1], value[2]),
                                       value[4], key])
 

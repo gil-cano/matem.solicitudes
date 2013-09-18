@@ -116,15 +116,19 @@
 
   <body>
     <metal:fill fill-slot="main">
+      <!-- 
+        header_macro view_macros/header | header_macro | base_macros/header;
+        footer_macro view_macros/footer | footer_macro | base_macros/footer;
+       -->
       <metal:main_macro define-macro="main"
             tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
             base_macros here/base/macros;
             view_template python:'%s_view' % portal_type;
             view_macros python:path('here/%s/macros|nothing' % view_template);
-            header_macro view_macros/header | header_macro | base_macros/header;
+            
             body_macro view_macros/body | body_macro | base_macros/body;
             folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
-            footer_macro view_macros/footer | footer_macro | base_macros/footer;
+            
             errors python:request.get('errors', {})">
 
     <metal:header_macro define-macro="header">
@@ -133,7 +137,9 @@
         <td><img src="" tal:attributes="src string:${context/absolute_url}/++resource++presupuestolocal.png" width="48" height="48"></td>
         <th><div i18n:translate="help_localbudget_app">Here you can see the detail of the local budgets for the current period.</div> Folder <span tal:replace="here/title_or_id">content title or id</span></th>
           </tr></table>
-            <span tal:content="template/title">optional template title</span>
+            <!-- 
+              Sí estaba
+              <span tal:content="template/title">optional template title</span> -->
             <div tal:condition="python: view.hasReqData('recalc')">
                 <div tal:condition="here/actualizarPeriodo">Cantidades recalculadas</div>
             </div>
