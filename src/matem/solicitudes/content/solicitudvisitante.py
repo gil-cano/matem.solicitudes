@@ -1156,7 +1156,7 @@ La cantidad total que se le ha aprobado en lo que va del año: %s.
         t1 = str(DateTime(self.getFecha_desde())).split("/")
         t2 = str(DateTime(self.getFecha_hasta())).split("/")
         d1=datetime(int(t1[0]),int(t1[1]),int(t1[2].split(" ")[0]))
-        d2=datetime(int(t2[0]),int(t2[1]),int(t1[2].split(" ")[0]))
+        d2=datetime(int(t2[0]),int(t2[1]),int(t2[2].split(" ")[0]))
         return int((d2-d1).days)+1
 
 
