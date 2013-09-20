@@ -119,14 +119,20 @@
         header_macro view_macros/header | header_macro | base_macros/header;
         footer_macro view_macros/footer | footer_macro | base_macros/footer;
        -->
+       <!-- <span> view_template: </span>
+       <span tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
+                        view_template python:'%s_view' % portal_type;">
+        <span tal:content="view_template"/><br/>
+        <span> path:</span> 
+        <span tal:content="base_macros/header"/><br/>
+      </span> -->
       <metal:main_macro define-macro="main"
             tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
-            base_macros context/base/macros;
+            base_macros here/base/macros;
             view_template python:'%s_view' % portal_type;
-            view_macros python:path('context/%s/macros|nothing' % view_template);
+            view_macros python:path('here/%s/macros|nothing' % view_template);
             body_macro view_macros/body | body_macro | base_macros/body;
             folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
-            header_macro base_macros/header|nothing;
             errors python:request.get('errors', {})">
 
     <metal:header_macro define-macro="header">

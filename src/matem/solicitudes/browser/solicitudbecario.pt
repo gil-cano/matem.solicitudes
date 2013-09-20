@@ -277,11 +277,8 @@
 
 
             <h2><span tal:replace="here/pretty_title_or_id">content title or id</span>
-               <!-- 
-                  Esta linea si estaba
-                <span tal:condition="template/title"
-                      tal:replace="template/title">optional template title</span>
-                -->
+                <span tal:condition="here/title"
+                      tal:replace="here/title">optional template title</span>
                 </h2>
                 <p style="color: #FF0000;" tal:content="python:'Estado: '+str(here.getWFStateName())"></p>
                 <div class="tabularView" tal:define="parent python:here.getParentNode()">
@@ -291,12 +288,6 @@
                                    tal:attributes="action string:${parent/absolute_url}/import">
                           <a href="javascript: document.import.submit()">Importar</a>
                      </form></td>
-
-<!--                     <td><form method="post" name="import" action="#" method="post"
-                                   tal:attributes="action string:${context/absolute_url}/import">
-                          <a href="javascript: document.import.submit()">Importar</a>
-                     </form></td>-->
-
 
                      <td><form method="post" name="export" action="#" method="post"
                                    tal:attributes="action string:${context/absolute_url}/export">
@@ -355,12 +346,12 @@
                                                                               </td></tr>
         <tr><th colspan="2" i18n:translate="label_titulo_trabajo">Title of the work to be presented</th><td align="center" colspan="3"
                                                                               tal:content="here/getTituloTrabajo">Value</td></tr>
-        <!--
-          Esta linea si estaba 
+      
+          
             <tr><th colspan="2" i18n:translate="label_adjuntos">Attachments</th>
               <td align="center" colspan="3"><tal:block condition="python:here.getField('displayAttachments') is not None">
                                                  <div metal:use-macro="python:here.widget('displayAttachments')"/>
-                                             </tal:block></td></tr> -->
+                                             </tal:block></td></tr>
         <tr><th colspan="2" i18n:translate="label_comentario_asesor">Comments by advisor in charge</th><td align="center" colspan="3"
                                                                               tal:content="here/getComentario_asesor">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_comentario_owner">Additional Comments</th><td align="center" colspan="3"
