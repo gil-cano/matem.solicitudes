@@ -4,6 +4,31 @@
 
     <!-- IDefaultPloneLayer layer-based templates -->
     <include package="Products.CMFCore" file="permissions.zcml" />
+
+    <browser:page
+        for="matem.solicitudes.interfaces.ISolicitudFolder"
+        class=".folder.SolicitudFolderView"
+        name="solicitudfolder_view"
+        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="matem.solicitudes.interfaces.ISolicitudFolder"
+        class=".folder.SolicitudFolderView"
+        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
+        name="presupuesto_folder_view"
+        template="presupuesto_folder.pt"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="matem.solicitudes.interfaces.ISolicitudFolder"
+        name="search_form"
+        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
+        class=".search.SearchView"
+        permission="zope2.View"
+        />
     
     <browser:page
         for="matem.solicitudes.interfaces.ISolicitud"
@@ -24,6 +49,24 @@
         />
 
     <browser:page
+        for="matem.solicitudes.interfaces.ISolicitudVisitante"
+        class=".solicitudes.SolicitudView"
+        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
+        name="solicitudvisitante_view"
+        template="solicitudvisitante.pt"
+        permission="zope2.View"
+        />
+
+    <browser:page
+        for="matem.solicitudes.interfaces.ISolicitudBecario"
+        class=".solicitudes.SolicitudView"
+        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
+        name="solicitudbecario_view"
+        template="solicitudbecario.pt"
+        permission="zope2.View"
+        />
+
+    <browser:page
         for="matem.solicitudes.interfaces.ISolicitud"
         name="export"
         layer="matem.solicitudes.interfaces.ISolicitudSpecific"
@@ -32,7 +75,7 @@
         />
 
     <browser:page
-        for="matem.solicitudes.interfaces.ISolicitudBecario"
+        for="matem.solicitudes.interfaces.ISolicitudVisitante"
         name="export"
         layer="matem.solicitudes.interfaces.ISolicitudSpecific"
         class=".solicitudes.ExportView"
@@ -40,7 +83,7 @@
         />
 
     <browser:page
-        for="matem.solicitudes.interfaces.ISolicitudVisitante"
+        for="matem.solicitudes.interfaces.ISolicitudBecario"
         name="export"
         layer="matem.solicitudes.interfaces.ISolicitudSpecific"
         class=".solicitudes.ExportView"
@@ -71,54 +114,13 @@
         permission="zope2.View"
         />
 
-    <browser:page
-        for="matem.solicitudes.interfaces.ISolicitudBecario"
-        class=".solicitudes.SolicitudView"
-        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
-        name="solicitudbecario_view"
-        template="solicitudbecario.pt"
-        permission="zope2.View"
-        />
 
-    <browser:page
-        for="matem.solicitudes.interfaces.ISolicitudVisitante"
-        class=".solicitudes.SolicitudView"
-        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
-        name="solicitudvisitante_view"
-        template="solicitudvisitante.pt"
-        permission="zope2.View"
-        />
-
-    <browser:page
-        for="matem.solicitudes.interfaces.ISolicitudFolder"
-        class=".folder.SolicitudFolderView"
-        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
-        name="solicitudfolder_view"
-        permission="zope2.View"
-        />
 
     <browser:view
         name="presupuesto"
         for="*"
         class=".budget.BudgetView"
         layer="matem.solicitudes.interfaces.ISolicitudSpecific"
-        permission="zope2.View"
-        />
-
-    <browser:page
-        for="matem.solicitudes.interfaces.ISolicitudFolder"
-        class=".folder.SolicitudFolderView"
-        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
-        name="presupuesto_folder_view"
-        template="presupuesto_folder.pt"
-        permission="zope2.View"
-        />
-
-    <browser:page
-        for="matem.solicitudes.interfaces.ISolicitudFolder"
-        name="search_form"
-        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
-        class=".search.SearchView"
         permission="zope2.View"
         />
 
@@ -192,10 +194,15 @@
 
     <browser:resource
         name="dateinput.css"
-        image="css/dateinput.css"
+        file="css/dateinput.css"
         />
 
-    <!-- Folder factories -->
+    <browser:resource
+        name="solicitudes.css"
+        file="css/solicitudes.css"
+        />
+
+    <!-- Folder factories (add institutional events) -->
     <browser:page
         for="matem.solicitudes.interfaces.ISolicitudFolder"
         name="folder_factories"
@@ -204,9 +211,4 @@
         permission="cmf.AddPortalContent"
         />
 
-    <!-- resource directory for javascript 
-    <browser:resourceDirectory
-        name="azview.javascript"
-        directory="javascript"
-        />-->
 </configure>

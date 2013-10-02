@@ -38,15 +38,13 @@ class SolicitudFolderView(BrowserView):
     queryObj = None;
     reqObj = None;
 
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
-        self.queryObj=Queries(self.context,self.request)
-        self.reqObj=Requests(self.context,self.request)
-
     def __call__(self):
-        self.queryObj=Queries(self.context,self.request)
-        self.reqObj=Requests(self.context,self.request)
+        # fisrt time in folder
+        if not self.request.form:
+            return self.menu()
+
+        self.queryObj = Queries(self.context,self.request)
+        self.reqObj = Requests(self.context,self.request)
         form = self.request.form
         req = self.request
         container = self.context
@@ -560,14 +558,30 @@ class SolicitudFolderView(BrowserView):
 
         return vertodo
 
-    def hasPendingReviews(self,usuarioActual):
-        mt = self.context.portal_membership
-        member = mt.getMemberById(usuarioActual)
-
-        if self.getSolicitudesPendientes(usuarioActual) == []:
-            return False
-
-        return True
+    def hasPendingReviews(self, usuarioActual):
+        """ This fuction return True if the are drafts or
+        students pending reviews
+        """
+        folder_path = '/'.join(self.context.getPhysicalPath())
+        catalog = getToolByName(self.context, 'portal_catalog')
+        drafts = catalog(
+            path={'query': folder_path, 'depth': 1},
+            portal_type=(
+                'Solicitud',
+                'SolicitudVisitante',
+                'SolicitudBecario',
+                'SolicitudInstitucional',
+            ),
+            review_state='borrador',
+            Creator=usuarioActual,
+        )
+        students = catalog(
+            path={'query': folder_path, 'depth': 1},
+            portal_type='SolicitudBecario',
+            review_state='preeliminar',
+            asesor=usuarioActual,
+        )
+        return drafts or students
 
     def getTodasSolicitudesProcesadas(self): #Aprobadas y Rechazadas como Dictionario
         queryObj = self.queryObj
@@ -832,10 +846,22 @@ class SolicitudFolderView(BrowserView):
         return self.reqObj.hasReqDataStr(tipodato)
 
     def programaPresupuesto(self):
-        return self.reqObj.programaPresupuesto()
+        """ return true if user has 'Programador de Presupuesto' rol
+        """
+        mt = getToolByName(self.context, 'portal_membership')
+        member=mt.getAuthenticatedMember()
+        if 'Programador de Presupuesto' in list(member.getRoles()):
+            return True
+        return False
 
     def esSolicitanteAuxiliar(self):
-        return self.reqObj.esSolicitanteAuxiliar()
+        """ return true if user has 'Solicitante Auxiliar' rol
+        """
+        mt = getToolByName(self.context, 'portal_membership')
+        member=mt.getAuthenticatedMember()
+        if 'Solicitante Auxiliar' in list(member.getRoles()):
+            return True
+        return False
 
     def getUserApplications(self,user):
         return self.queryObj.getUserApplications(user)

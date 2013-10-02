@@ -96,10 +96,8 @@
             base_macros here/base/macros;
             view_template python:'%s_view' % portal_type;
             view_macros python:path('here/%s/macros|nothing' % view_template);
-            header_macro view_macros/header | header_macro | base_macros/header;
             body_macro view_macros/body | body_macro | base_macros/body;
             folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
-            footer_macro view_macros/footer | footer_macro | base_macros/footer;
             errors python:request.get('errors', {})">
 
     <metal:header_macro define-macro="header">
@@ -524,10 +522,10 @@
 
     </span>
     </metal:body_macro>
-    <metal:footer_macro define-macro="footer">
+<!--     <metal:footer_macro define-macro="footer">
 
     </metal:footer_macro>
-    <metal:folderlisting_macro define-macro="folderlisting">
+ -->    <metal:folderlisting_macro define-macro="folderlisting">
 
     </metal:folderlisting_macro>
 
