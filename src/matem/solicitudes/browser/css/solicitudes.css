@@ -1,0 +1,12 @@
+.solicitudes_workflow
+{
+    font: 11px Arial, Helvetica, sans-serif;
+    height:30px;
+    line-height:30px;
+    color:#9b9b9b;
+    border:solid 1px #cacaca;
+    width:100%;
+    overflow:hidden;
+    margin:0px;
+    padding:0px;
+}
