@@ -196,11 +196,11 @@
         </tr>
      </table>
 
-      <ul class="btn-group inline">
-        <li repeat="transicion python:here.getLegalTransitions()">
+      <ul class="btn-group">
+        <li tal:repeat="transicion python:here.getLegalTransitions()">
           <a class="context btn btn-small" style="text-decoration:none" href="#" tal:attributes="href python:transicion['url']" tal:content="python:transicion['name']"/>
         </li>
-        <li condition="python:('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
+        <li tal:condition="python:('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
           <a class="context btn btn-small" style="text-decoration:none" href="#" tal:attributes="href python:here.absolute_url()+'/delete_confirmation'">Eliminar folder de solicitudes.</a>
         </li>
       </ul>
