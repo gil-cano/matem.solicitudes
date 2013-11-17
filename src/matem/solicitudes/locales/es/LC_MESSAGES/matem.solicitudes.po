@@ -51,12 +51,12 @@ msgstr "Contiene todas las solicitudes que necesitan ser revisadas por usted"
 #. Default: "Here you can see your rejected applications"
 #: matem/solicitudes/browser/solicitudfolder.pt:125
 msgid "help_rejected_app"
-msgstr "Aqui puede ver sus solicitudes que fueron rechazadas"
+msgstr "Aquí puede ver sus solicitudes que fueron rechazadas"
 
 #. Default: "Here you can see all the applications you have sent for review"
 #: matem/solicitudes/browser/solicitudfolder.pt:137
 msgid "help_sent_app"
-msgstr "Aqui puede ver todas las solicitudes que ha enviado"
+msgstr "Aquí puede ver todas las solicitudes que ha enviado"
 
 #. Default: "Public approved applications"
 #: matem/solicitudes/browser/solicitudfolder.pt:160
