@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-11-17 20:26+0000\n"
+"POT-Creation-Date: 2013-11-17 21:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,6 +88,31 @@ msgstr ""
 msgid "label_aprobada_propietario"
 msgstr ""
 
+#. Default: "Back to menu"
+#: matem/solicitudes/portlets/avisos.pt:163
+msgid "label_back_menu"
+msgstr ""
+
+#. Default: "Becario"
+#: matem/solicitudes/portlets/avisos.pt:234
+msgid "label_becario"
+msgstr ""
+
+#. Default: "Comisionado"
+#: matem/solicitudes/portlets/avisos.pt:228
+msgid "label_comisionado"
+msgstr ""
+
+#. Default: "Consejero"
+#: matem/solicitudes/portlets/avisos.pt:226
+msgid "label_consejero"
+msgstr ""
+
+#. Default: "You have this roles:"
+#: matem/solicitudes/portlets/avisos.pt:223
+msgid "label_current_roles"
+msgstr ""
+
 #. Default: "This format has not been sent yet and is still being modified by it's author."
 #: matem/solicitudes/portlets/avisos.pt:68
 msgid "label_estado_borrador_nopropietario"
@@ -103,13 +128,28 @@ msgstr ""
 msgid "label_estado_preeliminar"
 msgstr ""
 
+#. Default: "Ir a 'Solicitudes pendientes de revision'"
+#: matem/solicitudes/portlets/avisos.pt:59
+msgid "label_go_pending"
+msgstr ""
+
+#. Default: "Importador de Solicitudes"
+#: matem/solicitudes/portlets/avisos.pt:240
+msgid "label_importador"
+msgstr ""
+
+#. Default: "Investigador"
+#: matem/solicitudes/portlets/avisos.pt:236
+msgid "label_investigador"
+msgstr ""
+
 #. Default: "Local Budget Overview"
 #: matem/solicitudes/browser/solicitudfolder.pt:184
 msgid "label_localbudget_app"
 msgstr ""
 
-#. Default: "No applications pending"
-#: matem/solicitudes/portlets/avisos.pt:196
+#. Default: "Hooray! You have no pending reviews. You can review your approved or rejected reviews by navigating to 'My approved applications' or 'My rejected applications' respectively."
+#: matem/solicitudes/portlets/avisos.pt:200
 msgid "label_no_pending"
 msgstr ""
 
@@ -123,8 +163,13 @@ msgstr ""
 msgid "label_pending_reviews"
 msgstr ""
 
-#. Default: "Quck access:"
-#: matem/solicitudes/portlets/avisos.pt:201
+#. Default: "Programador de Presupuesto"
+#: matem/solicitudes/portlets/avisos.pt:242
+msgid "label_programador_presupuesto"
+msgstr ""
+
+#. Default: "Quick access:"
+#: matem/solicitudes/portlets/avisos.pt:55
 msgid "label_quick_access"
 msgstr ""
 
@@ -141,6 +186,16 @@ msgstr ""
 #. Default: "My rejected applications"
 #: matem/solicitudes/browser/solicitudfolder.pt:124
 msgid "label_rejected_app"
+msgstr ""
+
+#. Default: "Responsable de la Comision"
+#: matem/solicitudes/portlets/avisos.pt:232
+msgid "label_responsable_comision"
+msgstr ""
+
+#. Default: "Responsable del Consejo"
+#: matem/solicitudes/portlets/avisos.pt:230
+msgid "label_responsable_consejo"
 msgstr ""
 
 #. Default: "This application is been reviewed by the special comision."
@@ -174,7 +229,17 @@ msgid "label_sent_app"
 msgstr ""
 
 #. Default: "You have applications in process. Review your applications in process navigating to 'In process applications'."
-#: matem/solicitudes/portlets/avisos.pt:174
+#: matem/solicitudes/portlets/avisos.pt:176
 msgid "label_sent_reviews"
+msgstr ""
+
+#. Default: "Solicitante Auxiliar"
+#: matem/solicitudes/portlets/avisos.pt:244
+msgid "label_solicitante_auxiliar"
+msgstr ""
+
+#. Default: "Tecnico Academico"
+#: matem/solicitudes/portlets/avisos.pt:238
+msgid "label_tecnico"
 msgstr ""
 

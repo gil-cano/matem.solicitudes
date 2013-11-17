@@ -1,5 +1,5 @@
 <dl class="portlet portletAvisos"
-    i18n:domain="plone">
+    i18n:domain="matem.solicitudes">
 
     <dt class="portletHeader" tal:define="titulo view/getHeader">
         <span class="portletTopLeft"></span>
@@ -220,7 +220,7 @@
             </span>
 
             <p align="left"><img src="" tal:replace="structure here/user.png"/>
-              <span i18n:translate="label_current_roles">You have this roles:</span>
+              <span i18n:translate="label_current_roles">You have this roles</span>:
             </p>
             <dl>
                 <dt tal:condition="python:view.esConsejeroG(usuarioActual)"
