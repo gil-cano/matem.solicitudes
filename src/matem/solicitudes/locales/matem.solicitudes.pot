@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-11-17 19:24+0000\n"
+"POT-Creation-Date: 2013-11-17 20:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,9 +78,39 @@ msgstr ""
 msgid "label_approved_app"
 msgstr ""
 
+#. Default: "This application has been aproved. If you have any doubt please contact the site manager. The total amount approved for this application is"
+#: matem/solicitudes/portlets/avisos.pt:117
+msgid "label_aprobada_nopropietario"
+msgstr ""
+
+#. Default: "Congratulations, your application was approved! The total amount approved for this application is"
+#: matem/solicitudes/portlets/avisos.pt:47
+msgid "label_aprobada_propietario"
+msgstr ""
+
+#. Default: "This format has not been sent yet and is still being modified by it's author."
+#: matem/solicitudes/portlets/avisos.pt:68
+msgid "label_estado_borrador_nopropietario"
+msgstr ""
+
+#. Default: "This format has not been sent yet. Review data, if it is correct, you should send it to revision, by selecting 'State: Solicitud en borrador' then 'Enviar solicitud' inside the transitions menu in the top right corner."
+#: matem/solicitudes/portlets/avisos.pt:26
+msgid "label_estado_borrador_propietario"
+msgstr ""
+
+#. Default: "This format is being reviewed by the advisor in charge."
+#: matem/solicitudes/portlets/avisos.pt:31
+msgid "label_estado_preeliminar"
+msgstr ""
+
 #. Default: "Local Budget Overview"
 #: matem/solicitudes/browser/solicitudfolder.pt:184
 msgid "label_localbudget_app"
+msgstr ""
+
+#. Default: "No applications pending"
+#: matem/solicitudes/portlets/avisos.pt:196
+msgid "label_no_pending"
 msgstr ""
 
 #. Default: "Pending for review"
@@ -88,13 +118,63 @@ msgstr ""
 msgid "label_pending_app"
 msgstr ""
 
+#. Default: "You have pending reviews! Review your pending requests using the square in the right called 'Review List'."
+#: matem/solicitudes/portlets/avisos.pt:150
+msgid "label_pending_reviews"
+msgstr ""
+
+#. Default: "Quck access:"
+#: matem/solicitudes/portlets/avisos.pt:201
+msgid "label_quick_access"
+msgstr ""
+
+#. Default: "This application has been rejected. If you have any doubt please contact the site manager."
+#: matem/solicitudes/portlets/avisos.pt:122
+msgid "label_rechazada_nopropietario"
+msgstr ""
+
+#. Default: "Too bad, your application was rejected! You may send another application if you wish."
+#: matem/solicitudes/portlets/avisos.pt:52
+msgid "label_rechazada_propietario"
+msgstr ""
+
 #. Default: "My rejected applications"
 #: matem/solicitudes/browser/solicitudfolder.pt:124
 msgid "label_rejected_app"
 msgstr ""
 
+#. Default: "This application is been reviewed by the special comision."
+#: matem/solicitudes/portlets/avisos.pt:36
+msgid "label_revision_comision_especial"
+msgstr ""
+
+#. Default: "You still haven't approved nor rejected this request! Review data and approve it or reject it by selecting 'State: Solicitud en revision por comision especial' then 'Aprobar y enviar a consejo interno' or 'Rechazar', respectively, inside the transitions menu in the top right corner."
+#: matem/solicitudes/portlets/avisos.pt:89
+msgid "label_revision_comisionado"
+msgstr ""
+
+#. Default: "You still haven't approved nor rejected this request! Review data and approve it or reject it by selecting 'State: Solicitud en revision por consejo interno' then 'Aprobar' or 'Rechazar', respectively, inside the transitions menu in the top right corner."
+#: matem/solicitudes/portlets/avisos.pt:103
+msgid "label_revision_consejero"
+msgstr ""
+
+#. Default: "This application is been reviewed by the internal council."
+#: matem/solicitudes/portlets/avisos.pt:41
+msgid "label_revision_consejo_interno"
+msgstr ""
+
+#. Default: "You still haven't approved nor rejected this request! Review data and approve it or return it to the scholarship holder by selecting 'State: Solicitud en revision preeliminar' and then 'Enviar' o 'Regresar solicitud a becario', respectively, inside the transitions menu in the top right corner."
+#: matem/solicitudes/portlets/avisos.pt:75
+msgid "label_revision_investigadoracargo"
+msgstr ""
+
 #. Default: "In process applications"
 #: matem/solicitudes/browser/solicitudfolder.pt:136
 msgid "label_sent_app"
+msgstr ""
+
+#. Default: "You have applications in process. Review your applications in process navigating to 'In process applications'."
+#: matem/solicitudes/portlets/avisos.pt:174
+msgid "label_sent_reviews"
 msgstr ""
 
