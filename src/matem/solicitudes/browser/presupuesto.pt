@@ -113,10 +113,10 @@
                                    Period
                                 </th>
                                 <th class="column" i18n:translate="label_bugdet_this_period">
-                                   Local Budget for this Period
+                                  Budget for this period
                                 </th>
                                 <th class="column" i18n:translate="label_locally_assigned">
-                                   Locally Assigned Budget
+                                  Locally assigned budget
                                 </th>
                                 <th class="column" i18n:translate="label_local_remaining_quantity_period">
                                    Remaining Quantity for this Period

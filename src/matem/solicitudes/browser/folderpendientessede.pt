@@ -134,7 +134,7 @@
                     Attention!
                 </dt>
                 <dd i18n:translate="label_pending_reviews">
-                     You have pending reviews! Review your pending requests using the square in the right called 'Review List' or by navigating to 'Pending for review'.
+                     You have pending reviews! Review your pending requests using the square in the right called 'Review List'.
                 </dd>
             </dl>
         </span>
@@ -194,14 +194,14 @@
 		<th/>
                 <input type="checkbox" name="allEnvio" id="allEnvio" onclick="checkAll('pendientesDeEnvio','allEnvio');" />
                 <th i18n:translate="label_type">Type</th>
-                <th i18n:translate="label_solicitor">Solicitor</th>
+                <th i18n:translate="label_solicitor">Solicitante</th>
                 <th i18n:translate="label_reason">Reason</th>
                 <th i18n:translate="label_place">Place</th>
                 <th i18n:translate="label_creation_date">Solicitud Creada</th>
                 <th i18n:translate="label_start_date">Fecha de Inicio</th>
                 <th i18n:translate="label_end_date">Fecha de Termino</th>
                 <th i18n:translate="label_quantity_days">Cantidad de Días</th>
-                <th i18n:translate="label_required_quantity"> Cantidad Requerida (pesos)</th>
+                <th i18n:translate="label_required_quantity">Cantidad requerida (pesos)</th>
                 <th i18n:translate="label_link">Link</th>
 	</tr>
 
@@ -245,15 +245,14 @@
 		<th/>
                 <input type="checkbox" name="allPreeliminar" id="allPreeliminar" onclick="checkAll('pendientesDeRevisionPreeliminar','allPreeliminar');" />
                 <th i18n:translate="label_type">Type</th>
-                <th i18n:translate="label_solicitor">Solicitor</th>
+                <th i18n:translate="label_solicitor">Solicitante</th>
                 <th i18n:translate="label_reason">Reason</th>
                 <th i18n:translate="label_place">Place</th>
                 <th i18n:translate="label_creation_date">Solicitud Creada</th>
                 <th i18n:translate="label_start_date">Fecha de Inicio</th>
                 <th i18n:translate="label_end_date">Fecha de Termino</th>
                 <th i18n:translate="label_quantity_days">Cantidad de Días</th>
-                <th i18n:translate="label_required_quantity">Cantidad Requerida
-                (pesos)</th>
+                <th i18n:translate="label_required_quantity">Cantidad requerida (pesos)</th>
                 <th i18n:translate="label_link">Link</th>
         </tr>
         <tr tal:repeat="item python:items">
@@ -300,17 +299,15 @@
 		<th/>
                 <input type="checkbox" name="allComision" id="allComision" onclick="checkAll('pendientesDeRevisionComision','allComision');" />
                 <th i18n:translate="label_type">Type</th>
-                <th i18n:translate="label_solicitor">Solicitor</th>
+                <th i18n:translate="label_solicitor">Solicitante</th>
                 <th i18n:translate="label_reason">Reason</th>
                 <th i18n:translate="label_place">Place</th>
                 <th i18n:translate="label_creation_date">Solicitud Creada</th>
                 <th i18n:translate="label_start_date">Fecha de Inicio</th>
                 <th i18n:translate="label_end_date">Fecha de Termino</th>
                 <th i18n:translate="label_quantity_days">Cantidad de Días</th>
-                <th i18n:translate="label_required_quantity">Cantidad Requerida
-                (pesos)</th>
-                <th i18n:translate="label_fecha_revision_comision">Fecha de Revision
-                Por La Comision Especial</th>
+                <th i18n:translate="label_required_quantity">Cantidad requerida (pesos)</th>
+                <th i18n:translate="label_fecha_revision_comision">Fecha de revision por la Comision Especial</th>
                 <th i18n:translate="label_link">Link</th>
         </tr>
         <tr tal:repeat="item python:items">
@@ -336,7 +333,7 @@
 
     <fieldset>
     <div class="field" tal:condition="python:view.esResponsableDeLaComision(user.getId())">
-       <label for="fechaderevisionCE" i18n:translate="label_fecha_revision_comision">Fecha de Revision Por La Comision Especial</label>
+       <label for="fechaderevisionCE" i18n:translate="label_fecha_revision_comision">Fecha de revision por la Comision Especial</label>
        <br>
         <input type="date" name="fechaderevisionCE"/>
 
@@ -374,22 +371,18 @@
 		<th/>
                 <input type="checkbox" name="allConsejo" id="allConsejo" onclick="checkAll('pendientesDeRevisionConsejo','allConsejo');" />
                 <th i18n:translate="label_type">Type</th>
-                <th i18n:translate="label_solicitor">Solicitor</th>
+                <th i18n:translate="label_solicitor">Solicitante</th>
                 <th i18n:translate="label_reason">Reason</th>
                 <th i18n:translate="label_place">Place</th>
                 <th i18n:translate="label_creation_date">Solicitud Creada</th>
                 <th i18n:translate="label_start_date">Fecha de Inicio</th>
                 <th i18n:translate="label_end_date">Fecha de Termino</th>
                 <th i18n:translate="label_quantity_days">Cantidad de Días</th>
-                <th i18n:translate="label_required_quantity">Cantidad Requerida
-                (pesos)</th>
-                <th i18n:translate="label_commision_recommended_quantity">Cantidad Recomendada
-                Por La Comision (pesos)</th>
-                <th i18n:translate="label_fecha_revision_comision">Fecha de Revision
-                Por La Comision Especial</th>
-                <th i18n:translate="label_fecha_revision_consejo">Fecha de Revision
-                Por El Consejo Interno</th>
-                <th i18n:translate="label_actaci">Numero de Acta del Consejo Interno</th>
+                <th i18n:translate="label_required_quantity">Cantidad requerida (pesos)</th>
+                <th i18n:translate="label_commision_recommended_quantity">Cantidad Recomendada Por La Comision (pesos)</th>
+                <th i18n:translate="label_fecha_revision_comision">Fecha de revision por la Comision Especial</th>
+                <th i18n:translate="label_fecha_revision_consejo">Fecha de revision por el Consejo Interno</th>
+                <th i18n:translate="label_actaci">Number of record where the request was reviewed</th>
                 <th i18n:translate="label_link">Link</th>
         </tr>
         <tr tal:repeat="item python:items">
@@ -418,7 +411,7 @@
     </table>
     <fieldset>
     <div class="field" tal:condition="python:view.esResponsableDelConsejo(user.getId())">
-       <label for="fechaderevisionCI" i18n:translate="label_fecha_revision_consejo">Fecha de Revision Por Consejo Interno</label>
+       <label for="fechaderevisionCI" i18n:translate="label_fecha_revision_consejo">Fecha de revision por el Consejo Interno</label>
        <br>
         <input type="date" name="fechaderevisionCI"/>
         <input class="context"

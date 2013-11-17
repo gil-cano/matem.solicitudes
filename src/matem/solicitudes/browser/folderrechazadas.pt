@@ -181,7 +181,7 @@
 
     <!--Cantidad--->
     <span name="tablaSolicitudes">
-    <h3 tal:condition="items" i18n:translate="label_rejected_nosol">Rejected Applications</h3>
+    <h3 tal:condition="items" i18n:translate="label_rejected_nosol">Rejected applications</h3>
     <a tal:condition="items" href="javascript: printTable('tablaSolicitudes')">Imprimir</a>
     <div class="tabularView">
     <form action="#" method="post" id="todasLasRechazadas" tal:condition="items" tal:attributes="action string:${context/absolute_url}/view">
@@ -190,7 +190,7 @@
         <tr>
                 <th tal:condition="python:view.esManager(user.getId())"><input type="checkbox" name="allRechazadas" id="allRechazadas" onclick="checkAll('todasLasRechazadas','allRechazadas');"/></th>
                 <th i18n:translate="label_type">Type</th>
-                <th i18n:translate="label_solicitor">Solicitor</th>
+                <th i18n:translate="label_solicitor">Solicitante</th>
                 <th i18n:translate="label_reason">Reason</th>
                 <th i18n:translate="label_place">Place</th>
                 <th i18n:translate="label_creation_date">Solicitud Creada</th>
@@ -200,7 +200,7 @@
                 <th i18n:translate="label_rejected_quantity">Cantidad Rechazada
                 (pesos)</th>
                 <th i18n:translate="label_fecha_revision">Fecha de Revision por Consejo Interno</th>
-                <th i18n:translate="label_actaci">No de Acta del Consejo Interno</th>
+                <th i18n:translate="label_actaci">Number of record where the request was reviewed</th>
                 <th i18n:translate="label_link">Link</th>
         </tr>
         <tr tal:repeat="item python:items">
@@ -226,7 +226,7 @@
     </table>
     <fieldset tal:condition="python:view.esManager(user.getId())">
     <div class="field">
-       <label for="fechaderevisionCI" i18n:translate="label_fecha_revision_consejo">Fecha de Revision Por Consejo Interno</label>
+       <label for="fechaderevisionCI" i18n:translate="label_fecha_revision_consejo">Fecha de revision por el Consejo Interno</label>
        <br>
        <input type="date" name="fechaderevisionCI"/>
 

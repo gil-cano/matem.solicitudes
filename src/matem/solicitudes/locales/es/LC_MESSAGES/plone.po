@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-11-17 19:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: matem/solicitudes/profiles/default/types/SolicitudFolder.xml
+msgid "Folder de Solicitudes"
+msgstr ""
+
+#: matem/solicitudes/profiles/default/types/SolicitudFolder.xml
+msgid "Folder de solicitudes."
+msgstr ""
+
+#: matem/solicitudes/profiles/default/types/SolicitudFolder.xml
+msgid "Import Applications"
+msgstr ""
+
+#: matem/solicitudes/profiles/default/actions.xml
+msgid "Ir a Solicitudes"
+msgstr ""
+
+#: matem/solicitudes/profiles/default/types/SolicitudFolder.xml
+msgid "Navigation"
+msgstr ""
+
+#: matem/solicitudes/profiles/default/types/SolicitudFolder.xml
+msgid "Search"
+msgstr ""
+
+#: matem/solicitudes/profiles/default/types/SolicitudBecario.xml
+msgid "Solicitud de Becario"
+msgstr ""
+
+#: matem/solicitudes/profiles/default/types/Solicitud.xml
+msgid "Solicitud de Licencia/Comision"
+msgstr ""
+
+#: matem/solicitudes/profiles/default/types/SolicitudVisitante.xml
+msgid "Solicitud de Visitante"
+msgstr ""
+
+#: matem/solicitudes/profiles/default/types/Solicitud.xml
+msgid "Solicitud de licencia o comision para investigadores. Importante: Consulte con la secretaria academica antes de llenar esta forma para saber si va a pedir licencia o va a pedir comision."
+msgstr ""
+
+#: matem/solicitudes/profiles/default/types/SolicitudBecario.xml
+msgid "Solicitud de viaticos para becarios."
+msgstr ""
+
+#: matem/solicitudes/profiles/default/types/SolicitudVisitante.xml
+msgid "Solicitud de viaticos para investigadores visitantes."
+msgstr ""
+
+#: matem/solicitudes/profiles/default/actions.xml
+msgid "Ver cuentas y presupuesto"
+msgstr ""
+

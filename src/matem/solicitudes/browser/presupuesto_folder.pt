@@ -132,7 +132,7 @@
             errors python:request.get('errors', {})">
 
     <metal:header_macro define-macro="header">
-        <h1 class="documentFirstHeading" i18n:translate="label_localbudget_app"> Local Budget Overview</h1>
+        <h1 class="documentFirstHeading" i18n:translate="label_localbudget_app">Local Budget Overview</h1>
         <table><tr>
         <td><img src="" tal:attributes="src string:${context/absolute_url}/++resource++presupuestolocal.png" width="48" height="48"></td>
         <th><div i18n:translate="help_localbudget_app">Here you can see the detail of the local budgets for the current period.</div> Folder <span tal:replace="here/title_or_id">content title or id</span></th>
@@ -296,7 +296,7 @@
             <tbody>
               <tr>
                 <th class="column" i18n:translate="label_type">Type</th>
-                <th class="column" i18n:translate="label_solicitor">Solicitor</th>
+                <th class="column" i18n:translate="label_solicitor">Solicitante</th>
                 <th class="column" i18n:translate="label_local_approved_quantity">Approved Quantity</th>
                 <th class="column" i18n:translate="label_local_remaining_quantity">Remaining Quantity</th>
                 <th class="column">Apoyo Institucional asignado</th>
@@ -358,7 +358,7 @@
                 <td colspan=3 tal:content="python:here.getPresupuesto_asignado()">Quantity</td>
               </tr>
               <tr>
-                <th colspan=3 align="right" i18n:translate="label_local_remaining_quantity_period">Remaining Quantity For Period</th>
+                <th colspan=3 align="right" i18n:translate="label_local_remaining_quantity_period">Remaining Quantity for this Period</th>
                 <td colspan=3 tal:content="python:here.getPresupuesto_inicial()-here.getPresupuesto_asignado()">Quantity</td>
               </tr>
             </tbody>
@@ -385,15 +385,14 @@
             <tbody>
             <tr>
                 <th i18n:translate="label_type">Type</th>
-                <th i18n:translate="label_solicitor">Solicitor</th>
+                <th i18n:translate="label_solicitor">Solicitante</th>
                 <th i18n:translate="label_reason">Reason</th>
                 <th i18n:translate="label_place">Place</th>
                 <th i18n:translate="label_creation_date">Solicitud Creada</th>
                 <th i18n:translate="label_start_date">Fecha de Inicio</th>
                 <th i18n:translate="label_end_date">Fecha de Termino</th>
                 <th i18n:translate="label_quantity_days">Cantidad de Días</th>
-                <th i18n:translate="label_approved_quantity">Cantidad Aprobada
-                    (pesos)</th>
+                <th i18n:translate="label_approved_quantity">Approved Quantity (pesos)</th>
                 <th i18n:translate="label_fecha_de_revision">Fecha de Revision por Consejo Interno</th>
                 <th>Con cargo a:</th>
             </tr>

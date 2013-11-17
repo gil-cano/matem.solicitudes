@@ -67,7 +67,7 @@
     <div class="tabularView">
     <table class="listing" border="1" width="100%" tal:condition="items">
         <tbody>
-        <tr><th i18n:translate="label_period">Period</th><th i18n:translate="label_type">Type</th><th i18n:translate="label_solicitor">Solicitor</th><th i18n:translate="label_reason">Reason</th><th i18n:translate="label_place">Place</th><th i18n:translate="label_creation_date">Fecha de Solicitud</th><th i18n:translate="label_quantity_days">Cantidad de Días</th><th i18n:translate="label_requested_quantity">Requested Quantity (pesos)</th><th i18n:translate="label_state">State</th><th i18n:translate="label_link">Link</th></tr>
+        <tr><th i18n:translate="label_period">Period</th><th i18n:translate="label_type">Type</th><th i18n:translate="label_solicitor">Solicitante</th><th i18n:translate="label_reason">Reason</th><th i18n:translate="label_place">Place</th><th i18n:translate="label_application_date">Fecha de Solicitud</th><th i18n:translate="label_quantity_days">Cantidad de Días</th><th i18n:translate="label_requested_quantity">Requested Quantity (pesos)</th><th i18n:translate="label_state">State</th><th i18n:translate="label_link">Link</th></tr>
         <tr tal:repeat="item python:items[page]">
           <td><a href="#" tal:attributes="href python:item[len(item)-1]" tal:content="python:item[len(item)-2]"/></td>
           <td tal:content="python:item[0]">Meta-Type</td>
@@ -251,7 +251,7 @@
             </div></tr>
 
             <tr><div class="field">
-               <td> <label for="Desde" i18n:translate="label_fecha_desde">From Date</label>
+               <td> <label for="Desde" i18n:translate="label_fecha_desde">From date</label>
 
                 <div class="formHelp" i18n:translate="help_search_fecha_desde">
                 Initial date specified in the application.
@@ -268,7 +268,7 @@
             </div></tr>
 
             <tr><div class="field">
-               <td> <label for="Hasta" i18n:translate="label_fecha_hasta">To Date</label>
+               <td> <label for="Hasta" i18n:translate="label_fecha_hasta">To date</label>
 
                 <div class="formHelp" i18n:translate="help_search_fecha_hasta">
                 Final date specified in the application.
@@ -322,7 +322,7 @@
                 <td><tal:creators tal:define="creators view/getCreatorsInvestigador">
                     <select name="Asesor"
                             id="Asesor">
-                        <option value="" i18n:translate="label_any_advisor">Select an advisor (if needed)...</option>
+                        <option value="" i18n:translate="label_any_advisor">Select an advisor...</option>
                         <metal:block tal:repeat="creator creators">
                             <option value="" tal:attributes="value python:creator[0];" tal:content="python:creator[1]"> username </option>
                         </metal:block>
@@ -332,7 +332,7 @@
 
             </div></tr>
 <!--            <tr><div class="field">
-               <td> <label for="Hasta" i18n:translate="label_fecha_Hasta">To Date</label></td>
+               <td> <label for="Hasta" i18n:translate="label_fecha_Hasta">To date</label></td>
 
                 <td><input type="text"
                        id="Hasta"
@@ -352,7 +352,7 @@
             </div></tr>
 
            <tr> <div class="field">
-                <td><label for="TTrabajo" i18n:translate="label_titulo_trabajo">Work Title</label></td>
+                <td><label for="TTrabajo" i18n:translate="label_titulo_trabajo">Title of the work to be presented</label></td>
 
                 <td><input type="text"
                        id="TTrabajo"

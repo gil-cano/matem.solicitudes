@@ -97,7 +97,7 @@
                     Information about the solicitor
                 </dt>
                 <dd>
-                    <span tal:content="python:datosAdicionales[0]">Researcher</span> <span i18n:translate="label_presupuesto_asignado">has an total assigned budget of </span><span tal:replace="python:datosAdicionales[1]">Budget</span> pesos.
+                    <span tal:content="python:datosAdicionales[0]">Researcher</span> <span i18n:translate="label_presupuesto_asignado">has a total assigned budget of </span><span tal:replace="python:datosAdicionales[1]">Budget</span> pesos.
                 </dd>
             </dl>
             </span>
@@ -277,7 +277,7 @@
             <th i18n:translate="label_fecha_hasta">To date</th><td align="center" tal:content="here/getFechaHasta">Value</td></tr>
 	<tr><th colspan="5"><b>Datos Adicionales</b></th></tr>
 
-        <tr><th colspan="2" i18n:translate="label_objeto_viaje">Objective of trip</th><td align="center" colspan="3" 
+        <tr><th colspan="2" i18n:translate="label_objeto_viaje">Objective</th><td align="center" colspan="3" 
                                                                               tal:content="here/getObjetoViaje">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_investigacionarea">Area of Research</th><td align="center" colspan="3">
                                                                               <div tal:repeat="areaInv python:view.getArea(here.getInvestigacionArea())"> 
@@ -328,7 +328,7 @@
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th colspan="2"><b>Consejo Interno</b></th></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_fecha_sesionci">Date of revision by the CI</th>
                 <td align="left" tal:content="here/getFecha_sesionci">Value</td></tr>
-            <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_actaci">Record number</th>
+            <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_actaci_number">Record number</th>
                 <td align="left" tal:content="here/getActaci">Value</td></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_comentario_ci">Comments by Consejo Interno</th>
                 <td align="left" tal:content="here/getComentario_ci">Value</td></tr>

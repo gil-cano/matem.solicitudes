@@ -169,7 +169,7 @@
         <tbody>
         <tr>
                 <th i18n:translate="label_type">Type</th>
-                <th i18n:translate="label_solicitor">Solicitor</th>
+                <th i18n:translate="label_solicitor">Solicitante</th>
                 <th i18n:translate="label_reason">Reason</th>
                 <th i18n:translate="label_place">Place</th>
                 <th i18n:translate="label_creation_date">Solicitud Creada</th>

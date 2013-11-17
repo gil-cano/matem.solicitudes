@@ -1,0 +1,100 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2013-11-17 19:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#: matem/solicitudes/profiles/default/types/SolicitudInstitucional.xml
+msgid "Solicitud con apoyo institucional"
+msgstr ""
+
+#. Default: "Here you can see every approved application in this period (even if it's not yours)."
+#: matem/solicitudes/browser/solicitudfolder.pt:161
+msgid "help_allapproved_app"
+msgstr ""
+
+#. Default: "Here you can see every rejected application in this period (even if it's not yours)."
+#: matem/solicitudes/browser/solicitudfolder.pt:173
+msgid "help_allrejected_app"
+msgstr ""
+
+#. Default: "De click aqui si la solicitud que va a introducir al sistema no es para usted, sino para un tercero."
+#: matem/solicitudes/browser/solicitudfolder.pt:194
+msgid "help_applications_for_others"
+msgstr ""
+
+#. Default: "Here you can see your approved applications"
+#: matem/solicitudes/browser/solicitudfolder.pt:113
+msgid "help_approved_app"
+msgstr ""
+
+#. Default: "Here you can see the detail of the local budgets for the current period."
+#: matem/solicitudes/browser/solicitudfolder.pt:185
+msgid "help_localbudget_app"
+msgstr ""
+
+#. Default: "Here you can see every application that needs your review"
+#: matem/solicitudes/browser/solicitudfolder.pt:149
+msgid "help_pending_app"
+msgstr ""
+
+#. Default: "Here you can see your rejected applications"
+#: matem/solicitudes/browser/solicitudfolder.pt:125
+msgid "help_rejected_app"
+msgstr ""
+
+#. Default: "Here you can see all the applications you have sent for review"
+#: matem/solicitudes/browser/solicitudfolder.pt:137
+msgid "help_sent_app"
+msgstr ""
+
+#. Default: "Public approved applications"
+#: matem/solicitudes/browser/solicitudfolder.pt:160
+msgid "label_allapproved_app"
+msgstr ""
+
+#. Default: "Public rejected applications"
+#: matem/solicitudes/browser/solicitudfolder.pt:172
+msgid "label_allrejected_app"
+msgstr ""
+
+#. Default: "Subir solicitud a nombre de otra persona"
+#: matem/solicitudes/browser/solicitudfolder.pt:193
+msgid "label_applications_for_others"
+msgstr ""
+
+#. Default: "My approved applications"
+#: matem/solicitudes/browser/solicitudfolder.pt:112
+msgid "label_approved_app"
+msgstr ""
+
+#. Default: "Local Budget Overview"
+#: matem/solicitudes/browser/solicitudfolder.pt:184
+msgid "label_localbudget_app"
+msgstr ""
+
+#. Default: "Pending for review"
+#: matem/solicitudes/browser/solicitudfolder.pt:148
+msgid "label_pending_app"
+msgstr ""
+
+#. Default: "My rejected applications"
+#: matem/solicitudes/browser/solicitudfolder.pt:124
+msgid "label_rejected_app"
+msgstr ""
+
+#. Default: "In process applications"
+#: matem/solicitudes/browser/solicitudfolder.pt:136
+msgid "label_sent_app"
+msgstr ""
+

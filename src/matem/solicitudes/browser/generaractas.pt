@@ -195,7 +195,7 @@
         <tr>
                 <th></th>
                 <th i18n:translate="label_type">Type</th>
-                <th i18n:translate="label_solicitor">Solicitor</th>
+                <th i18n:translate="label_solicitor">Solicitante</th>
                 <th i18n:translate="label_reason">Reason</th>
                 <th i18n:translate="label_place">Place</th>
                 <th i18n:translate="label_creation_date">Solicitud Creada</th>
@@ -205,7 +205,7 @@
                 <th i18n:translate="label_approved_quantity">Approved Quantity
                 (pesos)</th>
                 <th i18n:translate="label_fecha_revision">Fecha de Revision por Consejo Interno</th>
-                <th i18n:translate="label_actaci">No de Acta del Consejo Interno</th>
+                <th i18n:translate="label_actaci">Number of record where the request was reviewed</th>
                 <th i18n:translate="label_link">Link</th>
         </tr>
         <tr tal:repeat="item python:items[key]">

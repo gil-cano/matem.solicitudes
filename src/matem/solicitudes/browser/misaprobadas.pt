@@ -119,7 +119,7 @@
             </dl>
         </span>
         <p style="color: #FF0000;" tal:content="python:'Estado del Periodo '+str(here.Title())+': '+str(here.getWFStateName())"></p>
-        <h1 class="documentFirstHeading" i18n:translate="label_approved_app"> Mis solicitudes aprobadas </h1>
+        <h1 class="documentFirstHeading" i18n:translate="label_approved_app">My approved applications</h1>
         <table><tr>
         <td><img src="" tal:attributes="src string:${context/absolute_url}/++resource++ma.png" width="48" height="48"></td>
         <th><div i18n:translate="help_approved_app">Here you can see your approved applications</div> dentro del folder <span tal:replace="here/title_or_id">content title or id</span></th>
@@ -170,7 +170,7 @@
                     <tbody>        
                             <tr>
                                 <th class="column" i18n:translate="label_solicitor">
-                                   Solicitor
+                                   Solicitante
                                 </th>
                                 <th class="column" i18n:translate="label_total_approved_quantity">
                                    Sum of All Approved Quantities
@@ -222,7 +222,7 @@
         <tbody>
  	<tr>
 		<th i18n:translate="label_type">Type</th>
-		<th i18n:translate="label_solicitor">Solicitor</th>
+		<th i18n:translate="label_solicitor">Solicitante</th>
 		<th i18n:translate="label_reason">Reason</th>
 		<th i18n:translate="label_place">Place</th>
 		<th i18n:translate="label_creation_date">Solicitud Creada</th>

@@ -127,15 +127,14 @@
         <tbody>
         <tr>
             <th i18n:translate="label_type">Type</th>
-            <th i18n:translate="label_solicitor">Solicitor</th>
+            <th i18n:translate="label_solicitor">Solicitante</th>
             <th i18n:translate="label_reason">Reason</th>
             <th i18n:translate="label_place">Place</th>
             <th i18n:translate="label_creation_date">Solicitud Creada</th>
             <th i18n:translate="label_start_date">Fecha de Inicio</th>
             <th i18n:translate="label_end_date">Fecha de Termino</th>
             <th i18n:translate="label_quantity_days">Cantidad de Días</th>
-            <th i18n:translate="label_approved_quantity">Cantidad Aprobada
-                (pesos)</th>
+            <th i18n:translate="label_approved_quantity">Approved Quantity (pesos)</th>
             <th i18n:translate="label_fecha_de_revision">Fecha de Revision por Consejo Interno</th>
             <th>con cargo a:</th>
             <th i18n:translate="label_state">State</th>
@@ -325,7 +324,7 @@
             </div></tr>
 
             <tr><div class="field">
-               <td> <label for="Desde" i18n:translate="label_fecha_desde">From Date</label>
+               <td> <label for="Desde" i18n:translate="label_fecha_desde">From date</label>
 
                 <div class="formHelp" i18n:translate="help_search_fecha_desde">
                 Initial date specified in the application.
@@ -342,7 +341,7 @@
             </div></tr>
 
             <tr><div class="field">
-               <td> <label for="Hasta" i18n:translate="label_fecha_hasta">To Date</label>
+               <td> <label for="Hasta" i18n:translate="label_fecha_hasta">To date</label>
 
                 <div class="formHelp" i18n:translate="help_search_fecha_hasta">
                 Final date specified in the application.
@@ -398,7 +397,7 @@
                 <tal:creators tal:define="creators view/getCreatorsInvestigador">
                     <select name="Asesor"
                             id="Asesor">
-                        <option value="" i18n:translate="label_any_advisor">Select an advisor (if needed)...</option>
+                        <option value="" i18n:translate="label_any_advisor">Select an advisor...</option>
                         <metal:block tal:repeat="creator creators">
                             <option value="" tal:attributes="value python:creator[1];" tal:content="python:creator[0]"> username </option>
                         </metal:block>
@@ -408,7 +407,7 @@
 
             </div></tr>
 <!--            <tr><div class="field">
-               <td> <label for="Hasta" i18n:translate="label_fecha_Hasta">To Date</label></td>
+               <td> <label for="Hasta" i18n:translate="label_fecha_Hasta">To date</label></td>
 
                 <td><input type="text"
                        id="Hasta"
@@ -429,7 +428,7 @@
             </div></tr>
 
            <tr> <div class="field">
-                <td><label for="TTrabajo" i18n:translate="label_titulo_trabajo">Work Title</label>
+                <td><label for="TTrabajo" i18n:translate="label_titulo_trabajo">Title of the work to be presented</label>
 <br/>
 
                 <input type="text"
