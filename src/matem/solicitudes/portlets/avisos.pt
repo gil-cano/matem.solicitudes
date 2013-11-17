@@ -52,11 +52,11 @@
                     <span i18n:translate="label_rechazada_propietario">Too bad, your application was rejected! You may send another application if you wish. </span>
                 </p>
 
-                      <p align="left">Acceso rapido: </p>
+                      <p align="left" i18n:translate="label_quick_access">Quick access:</p>
                         <!-- <p><a href="#" tal:attributes="href string:${parent/absolute_url}/view">Ir al menu</a></p>-->
                          <form action="" tal:attributes="action string:${parent/absolute_url}/view" method="post" name="ppl">
                              <input type="hidden" name="vistafolder" value="folderpendientes"/>
-                             <a href="javascript: document.ppl.submit()">Ir a 'Solicitudes pendientes de revision'</a>
+                             <a href="javascript: document.ppl.submit()" i18n:translate="label_go_pending">Ir a 'Solicitudes pendientes de revision'</a>
                          </form>
             </span>
 
@@ -125,7 +125,7 @@
                          <p><a href="#" tal:attributes="href string:${parent/absolute_url}/view">Regresar al menu</a></p>
                          <form action="" tal:attributes="action string:${parent/absolute_url}/view" method="post" name="ppl">
                              <input type="hidden" name="vistafolder" value="folderpendientes"/>
-                             <a href="javascript: document.ppl.submit()">Ir a 'Solicitudes pendientes de revision'</a>
+                             <a href="javascript: document.ppl.submit()" i18n:translate="label_go_pending">Ir a 'Solicitudes pendientes de revision'</a>
                          </form>
             </span>
 
@@ -135,7 +135,7 @@
                               enviadas python:view.hasSentReviews(usuarioActual)"
                   tal:condition="folder">
                   <p align="center"><a href="" tal:attributes="href string:${context/absolute_url}/view">
-                       Del <span tal:replace="here/getFecha_desde"> Fecha </span> hasta <span tal:replace="here/getFecha_hasta"> Fecha </span>.
+                       Del <span tal:replace="python:here.getFecha_desde().strftime('%d/%m/%Y')"> Fecha </span> hasta <span tal:replace="python:here.getFecha_hasta().strftime('%d/%m/%Y')"> Fecha </span>.
                    </a>
                   </p>
 
@@ -151,14 +151,16 @@
                            You have pending reviews! Review your pending requests using the square in the right called 'Review List'.
                       </p>
 
-                      <p align="left"><img src="++resource++info.png" width="15" height="15"/> Acceso rapido: </p>
+                      <p align="left"><img src="++resource++info.png" width="15" height="15"/>
+                        <span i18n:translate="label_quick_access">Quick access:</span>
+                      </p>
                          <form action="" tal:attributes="action string:${context/absolute_url}/view" method="post" name="ppl">
                              <input type="hidden" name="vistafolder" value="folderpendientes"/>
-                             <a href="javascript: document.ppl.submit()">Ir a 'Solicitudes pendientes de revision'</a>
+                             <a href="javascript: document.ppl.submit()" i18n:translate="label_go_pending">Ir a 'Solicitudes pendientes de revision'</a>
                          </form>
 
                          <br>
-                         <a href="#" tal:attributes="href string:${context/absolute_url}/view">Regresar al menu</a>
+                         <a href="#" tal:attributes="href string:${context/absolute_url}/view" i18n:translate="label_back_menu">Back to menu</a>
                   </span>
 
                   <span 
@@ -175,13 +177,15 @@
                            You have applications in process. Review your applications in process navigating to 'In process applications'.
                       </p>
 
-                      <p align="left"><img src="++resource++info.png" width="15" height="15"/> Acceso rapido: </p>
+                      <p align="left"><img src="++resource++info.png" width="15" height="15"/>
+                        <span i18n:translate="label_quick_access">Quick access:</span>
+                      </p>
                          <form action="" tal:attributes="action string:${context/absolute_url}/view" method="post" name="psl">
                              <input type="hidden" name="vistafolder" value="misenviadas"/>
                              <a href="javascript: document.psl.submit()">Ir a 'Mis solicitudes en proceso'</a>
                          </form>
                          <br>
-                         <a href="#" tal:attributes="href string:${context/absolute_url}/view">Regresar al menu</a>
+                         <a href="#" tal:attributes="href string:${context/absolute_url}/view" i18n:translate="label_back_menu">Back to menu</a>
                   </span>
 
                   <span tal:condition="python:not pendientes and not enviadas">
@@ -197,8 +201,10 @@
                            Hooray! You have no pending reviews. You can review your approved or rejected reviews by navigating to 'My approved applications' or 'My rejected applications' respectively.
                       </p>
 
-                      <p align="left"><img src="++resource++info.png" width="15" height="15"/> Acceso rapido: </p>
-                         <form action="" tal:attributes="action string:${context/absolute_url}/view" method="post" name="pal">
+                      <p align="left"><img src="++resource++info.png" width="15" height="15"/>
+                        <span i18n:translate="label_quick_access">Quick access:</span>
+                      </p>
+                      <form action="" tal:attributes="action string:${context/absolute_url}/view" method="post" name="pal">
                              <input type="hidden" name="vistafolder" value="misaprobadas"/>
                              <a href="javascript: document.pal.submit()">Ir a 'Mis solicitudes aprobadas'</a>
                          </form>
@@ -208,23 +214,35 @@
                          </form>
 
                          <br>
-                         <a href="#" tal:attributes="href string:${context/absolute_url}/view">Regresar al menu</a>
+                         <a href="#" tal:attributes="href string:${context/absolute_url}/view" i18n:translate="label_back_menu">Back to menu</a>
                   </span>
                  <br><br>
             </span>
 
-            <p align="left"><img src="" tal:replace="structure here/user.png" /> Tu tienes los roles de: </p>
+            <p align="left"><img src="" tal:replace="structure here/user.png"/>
+              <span i18n:translate="label_current_roles">You have this roles:</span>
+            </p>
             <dl>
-                <dt tal:condition="python:view.esConsejeroG(usuarioActual)">Consejero</dt>
-                <dt tal:condition="python:view.esComisionadoG(usuarioActual)">Comisionado</dt>
-                <dt tal:condition="python:view.esConsejeroResponsableG(usuarioActual)">Responsable del Consejo</dt>
-                <dt tal:condition="python:view.esComisionadoResponsableG(usuarioActual)">Responsable de la Comision</dt>
-                <dt tal:condition="python:view.esBecarioG(usuarioActual)">Becario</dt>
-                <dt tal:condition="python:view.esInvestigadorG(usuarioActual)">Investigador</dt>
-                <dt tal:condition="python:view.esTecnicoAcademicoG(usuarioActual)">Tecnico Academico</dt>
-                <dt tal:condition="python:view.esImportadorDeSolicitudesG(usuarioActual)">Importador de Solicitudes</dt>
-                <dt tal:condition="python:view.esProgramadorDePresupuestoG(usuarioActual)">Programador de Presupuesto</dt>
-                <dt tal:condition="python:view.esSolicitanteAuxiliarG(usuarioActual)">Solicitante Auxiliar</dt>
+                <dt tal:condition="python:view.esConsejeroG(usuarioActual)"
+                    i18n:translate="label_consejero">Consejero</dt>
+                <dt tal:condition="python:view.esComisionadoG(usuarioActual)"
+                    i18n:translate="label_comisionado">Comisionado</dt>
+                <dt tal:condition="python:view.esConsejeroResponsableG(usuarioActual)"
+                    i18n:translate="label_responsable_consejo">Responsable del Consejo</dt>
+                <dt tal:condition="python:view.esComisionadoResponsableG(usuarioActual)"
+                    i18n:translate="label_responsable_comision">Responsable de la Comision</dt>
+                <dt tal:condition="python:view.esBecarioG(usuarioActual)"
+                    i18n:translate="label_becario">Becario</dt>
+                <dt tal:condition="python:view.esInvestigadorG(usuarioActual)"
+                    i18n:translate="label_investigador">Investigador</dt>
+                <dt tal:condition="python:view.esTecnicoAcademicoG(usuarioActual)"
+                    i18n:translate="label_tecnico">Tecnico Academico</dt>
+                <dt tal:condition="python:view.esImportadorDeSolicitudesG(usuarioActual)"
+                    i18n:translate="label_importador">Importador de Solicitudes</dt>
+                <dt tal:condition="python:view.esProgramadorDePresupuestoG(usuarioActual)"
+                    i18n:translate="label_programador_presupuesto">Programador de Presupuesto</dt>
+                <dt tal:condition="python:view.esSolicitanteAuxiliarG(usuarioActual)"
+                    i18n:translate="label_solicitante_auxiliar">Solicitante Auxiliar</dt>
             </dl>
 
             <br>
