@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-11-21 06:24+0000\n"
+"POT-Creation-Date: 2013-11-21 06:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,6 +51,7 @@ msgid "help_pending_app"
 msgstr ""
 
 #. Default: "Here you can see your rejected applications"
+#: matem/solicitudes/browser/misrechazadas.pt:123
 #: matem/solicitudes/browser/solicitudfolder.pt:125
 msgid "help_rejected_app"
 msgstr ""
@@ -117,6 +118,7 @@ msgstr ""
 #. Default: "Attention!"
 #: matem/solicitudes/browser/folderaprobadas.pt:130
 #: matem/solicitudes/browser/misaprobadas.pt:113
+#: matem/solicitudes/browser/misrechazadas.pt:111
 msgid "label_atencion"
 msgstr ""
 
@@ -143,6 +145,7 @@ msgstr ""
 #. Default: "Solicitud Creada"
 #: matem/solicitudes/browser/folderaprobadas.pt:198
 #: matem/solicitudes/browser/misaprobadas.pt:228
+#: matem/solicitudes/browser/misrechazadas.pt:175
 msgid "label_creation_date"
 msgstr ""
 
@@ -154,6 +157,7 @@ msgstr ""
 #. Default: "Fecha de Termino"
 #: matem/solicitudes/browser/folderaprobadas.pt:200
 #: matem/solicitudes/browser/misaprobadas.pt:230
+#: matem/solicitudes/browser/misrechazadas.pt:177
 msgid "label_end_date"
 msgstr ""
 
@@ -175,6 +179,7 @@ msgstr ""
 #. Default: "Fecha de Revision por Consejo Interno"
 #: matem/solicitudes/browser/folderaprobadas.pt:204
 #: matem/solicitudes/browser/misaprobadas.pt:233
+#: matem/solicitudes/browser/misrechazadas.pt:181
 msgid "label_fecha_revision"
 msgstr ""
 
@@ -200,6 +205,7 @@ msgstr ""
 
 #. Default: "Link"
 #: matem/solicitudes/browser/folderaprobadas.pt:206
+#: matem/solicitudes/browser/misrechazadas.pt:182
 msgid "label_link"
 msgstr ""
 
@@ -223,9 +229,15 @@ msgstr ""
 msgid "label_no_pending"
 msgstr ""
 
+#. Default: "None of your applications has been rejected yet."
+#: matem/solicitudes/browser/misrechazadas.pt:160
+msgid "label_no_rejected"
+msgstr ""
+
 #. Default: "There are no applications to show."
 #: matem/solicitudes/browser/folderaprobadas.pt:182
 #: matem/solicitudes/browser/misaprobadas.pt:213
+#: matem/solicitudes/browser/misrechazadas.pt:162
 msgid "label_no_show"
 msgstr ""
 
@@ -237,13 +249,14 @@ msgstr ""
 #. Default: "You have pending reviews! Review your pending requests using the square in the right called 'Review List'."
 #: matem/solicitudes/browser/folderaprobadas.pt:133
 #: matem/solicitudes/browser/misaprobadas.pt:116
-#: matem/solicitudes/portlets/avisos.pt:150
+#: matem/solicitudes/browser/misrechazadas.pt:114
 msgid "label_pending_reviews"
 msgstr ""
 
 #. Default: "Place"
 #: matem/solicitudes/browser/folderaprobadas.pt:197
 #: matem/solicitudes/browser/misaprobadas.pt:227
+#: matem/solicitudes/browser/misrechazadas.pt:174
 msgid "label_place"
 msgstr ""
 
@@ -255,6 +268,7 @@ msgstr ""
 #. Default: "Cantidad de Días"
 #: matem/solicitudes/browser/folderaprobadas.pt:201
 #: matem/solicitudes/browser/misaprobadas.pt:231
+#: matem/solicitudes/browser/misrechazadas.pt:178
 msgid "label_quantity_days"
 msgstr ""
 
@@ -266,6 +280,7 @@ msgstr ""
 #. Default: "Reason"
 #: matem/solicitudes/browser/folderaprobadas.pt:196
 #: matem/solicitudes/browser/misaprobadas.pt:226
+#: matem/solicitudes/browser/misrechazadas.pt:173
 msgid "label_reason"
 msgstr ""
 
@@ -280,8 +295,19 @@ msgid "label_rechazada_propietario"
 msgstr ""
 
 #. Default: "My rejected applications"
+#: matem/solicitudes/browser/misrechazadas.pt:120
 #: matem/solicitudes/browser/solicitudfolder.pt:124
 msgid "label_rejected_app"
+msgstr ""
+
+#. Default: "Rejected applications"
+#: matem/solicitudes/browser/misrechazadas.pt:165
+msgid "label_rejected_nosol"
+msgstr ""
+
+#. Default: "Cantidad Rechazada (pesos)"
+#: matem/solicitudes/browser/misrechazadas.pt:179
+msgid "label_rejected_quantity"
 msgstr ""
 
 #. Default: "Responsable de la Comision"
@@ -337,12 +363,14 @@ msgstr ""
 #. Default: "Solicitante"
 #: matem/solicitudes/browser/folderaprobadas.pt:195
 #: matem/solicitudes/browser/misaprobadas.pt:172
+#: matem/solicitudes/browser/misrechazadas.pt:172
 msgid "label_solicitor"
 msgstr ""
 
 #. Default: "Fecha de Inicio"
 #: matem/solicitudes/browser/folderaprobadas.pt:199
 #: matem/solicitudes/browser/misaprobadas.pt:229
+#: matem/solicitudes/browser/misrechazadas.pt:176
 msgid "label_start_date"
 msgstr ""
 
@@ -374,6 +402,7 @@ msgstr ""
 #. Default: "Type"
 #: matem/solicitudes/browser/folderaprobadas.pt:194
 #: matem/solicitudes/browser/misaprobadas.pt:224
+#: matem/solicitudes/browser/misrechazadas.pt:171
 msgid "label_type"
 msgstr ""
 
