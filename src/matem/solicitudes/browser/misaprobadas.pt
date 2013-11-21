@@ -5,7 +5,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="matem.solicitudes">
 
   <head>
     <title tal:content="template/title">Solicitudes</title>
@@ -202,7 +202,7 @@
                           </tr>
 
                            <tr tal:repeat="totales python:view.getCantidadAsignadaLocal(usuarioActual)">
-                                <th align="right" tal:content="python:totales[0]">Indicator</th>
+                                <th align="right" i18n:translate="" tal:content="python:totales[0]">Indicator</th>
                                 <td colspan="3" tal:content="python:totales[1]">Quantity</td>
                           </tr>
                     </tbody>
@@ -230,7 +230,7 @@
 		<th i18n:translate="label_end_date">Fecha de Termino</th>
 		<th i18n:translate="label_quantity_days">Cantidad de Días</th>
 		<th i18n:translate="label_approved_quantity">Approved Quantity (pesos)</th>
-		<th i18n:translate="label_fecha_de_revision">Fecha de Revision por Consejo Interno</th>
+		<th i18n:translate="label_fecha_revision">Fecha de Revision por Consejo Interno</th>
 		<th>con cargo a:</th>
 		<th i18n:translate="label_state">State</th>
 	</tr>

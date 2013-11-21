@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-11-17 22:17+0000\n"
+"POT-Creation-Date: 2013-11-21 06:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,6 +35,7 @@ msgid "help_applications_for_others"
 msgstr ""
 
 #. Default: "Here you can see your approved applications"
+#: matem/solicitudes/browser/misaprobadas.pt:125
 #: matem/solicitudes/browser/solicitudfolder.pt:113
 msgid "help_approved_app"
 msgstr ""
@@ -81,17 +82,25 @@ msgid "label_applications_for_others"
 msgstr ""
 
 #. Default: "My approved applications"
+#: matem/solicitudes/browser/misaprobadas.pt:122
 #: matem/solicitudes/browser/solicitudfolder.pt:112
 msgid "label_approved_app"
 msgstr ""
 
 #. Default: "Approved Quantities per Request"
 #: matem/solicitudes/browser/folderaprobadas.pt:186
+#: matem/solicitudes/browser/misaprobadas.pt:218
 msgid "label_approved_quantities_nosol"
+msgstr ""
+
+#. Default: "Total Approved Quantities"
+#: matem/solicitudes/browser/misaprobadas.pt:166
+msgid "label_approved_quantities_sol"
 msgstr ""
 
 #. Default: "Approved Quantity (pesos)"
 #: matem/solicitudes/browser/folderaprobadas.pt:202
+#: matem/solicitudes/browser/misaprobadas.pt:232
 msgid "label_approved_quantity"
 msgstr ""
 
@@ -107,6 +116,7 @@ msgstr ""
 
 #. Default: "Attention!"
 #: matem/solicitudes/browser/folderaprobadas.pt:130
+#: matem/solicitudes/browser/misaprobadas.pt:113
 msgid "label_atencion"
 msgstr ""
 
@@ -132,6 +142,7 @@ msgstr ""
 
 #. Default: "Solicitud Creada"
 #: matem/solicitudes/browser/folderaprobadas.pt:198
+#: matem/solicitudes/browser/misaprobadas.pt:228
 msgid "label_creation_date"
 msgstr ""
 
@@ -142,6 +153,7 @@ msgstr ""
 
 #. Default: "Fecha de Termino"
 #: matem/solicitudes/browser/folderaprobadas.pt:200
+#: matem/solicitudes/browser/misaprobadas.pt:230
 msgid "label_end_date"
 msgstr ""
 
@@ -162,6 +174,7 @@ msgstr ""
 
 #. Default: "Fecha de Revision por Consejo Interno"
 #: matem/solicitudes/browser/folderaprobadas.pt:204
+#: matem/solicitudes/browser/misaprobadas.pt:233
 msgid "label_fecha_revision"
 msgstr ""
 
@@ -195,6 +208,11 @@ msgstr ""
 msgid "label_localbudget_app"
 msgstr ""
 
+#. Default: "None of your applications has been approved yet."
+#: matem/solicitudes/browser/misaprobadas.pt:212
+msgid "label_no_approved"
+msgstr ""
+
 #. Default: "No applications has been approved."
 #: matem/solicitudes/browser/folderaprobadas.pt:181
 msgid "label_no_approved_general"
@@ -207,6 +225,7 @@ msgstr ""
 
 #. Default: "There are no applications to show."
 #: matem/solicitudes/browser/folderaprobadas.pt:182
+#: matem/solicitudes/browser/misaprobadas.pt:213
 msgid "label_no_show"
 msgstr ""
 
@@ -217,12 +236,14 @@ msgstr ""
 
 #. Default: "You have pending reviews! Review your pending requests using the square in the right called 'Review List'."
 #: matem/solicitudes/browser/folderaprobadas.pt:133
+#: matem/solicitudes/browser/misaprobadas.pt:116
 #: matem/solicitudes/portlets/avisos.pt:150
 msgid "label_pending_reviews"
 msgstr ""
 
 #. Default: "Place"
 #: matem/solicitudes/browser/folderaprobadas.pt:197
+#: matem/solicitudes/browser/misaprobadas.pt:227
 msgid "label_place"
 msgstr ""
 
@@ -233,6 +254,7 @@ msgstr ""
 
 #. Default: "Cantidad de Días"
 #: matem/solicitudes/browser/folderaprobadas.pt:201
+#: matem/solicitudes/browser/misaprobadas.pt:231
 msgid "label_quantity_days"
 msgstr ""
 
@@ -243,6 +265,7 @@ msgstr ""
 
 #. Default: "Reason"
 #: matem/solicitudes/browser/folderaprobadas.pt:196
+#: matem/solicitudes/browser/misaprobadas.pt:226
 msgid "label_reason"
 msgstr ""
 
@@ -313,12 +336,19 @@ msgstr ""
 
 #. Default: "Solicitante"
 #: matem/solicitudes/browser/folderaprobadas.pt:195
+#: matem/solicitudes/browser/misaprobadas.pt:172
 msgid "label_solicitor"
 msgstr ""
 
 #. Default: "Fecha de Inicio"
 #: matem/solicitudes/browser/folderaprobadas.pt:199
+#: matem/solicitudes/browser/misaprobadas.pt:229
 msgid "label_start_date"
+msgstr ""
+
+#. Default: "State"
+#: matem/solicitudes/browser/misaprobadas.pt:235
+msgid "label_state"
 msgstr ""
 
 #. Default: "Tecnico Academico"
@@ -326,8 +356,24 @@ msgstr ""
 msgid "label_tecnico"
 msgstr ""
 
+#. Default: "Dias de Comision Aprobados"
+#: matem/solicitudes/browser/misaprobadas.pt:181
+msgid "label_total_approved_commission_days"
+msgstr ""
+
+#. Default: "Dias de License Aprobados"
+#: matem/solicitudes/browser/misaprobadas.pt:178
+msgid "label_total_approved_license_days"
+msgstr ""
+
+#. Default: "Sum of All Approved Quantities"
+#: matem/solicitudes/browser/misaprobadas.pt:175
+msgid "label_total_approved_quantity"
+msgstr ""
+
 #. Default: "Type"
 #: matem/solicitudes/browser/folderaprobadas.pt:194
+#: matem/solicitudes/browser/misaprobadas.pt:224
 msgid "label_type"
 msgstr ""
 
