@@ -7,87 +7,26 @@
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="matem.solicitudes">
 
-  <head>
-    <title tal:content="template/title">Solicitudes</title>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  </head>
-
-  <metal:javascript_head fill-slot="javascript_head_slot">
-    <tal:block define="macro here/archetypes_custom_js/macros/javascript_head | nothing"
-               condition="macro">
-      <metal:block use-macro="macro" />
-    </tal:block>
-    <tal:comment replace="nothing">
-      Many of the following defines duplicated from the tal:defines in the
-      main slot. With base_edit, edit_macros could be reused as it was defined
-      for the entire document. base_view uses main_template and thus must
-      create additional defines for each slot it fills.
-    </tal:comment>
-    <tal:js define="fields python:here.Schema().viewableFields(here);
-                    js python:here.getUniqueWidgetAttr(fields, 'helper_js')"
-            condition="js"
-            repeat="item js">
-      <script type="text/javascript"
-              charset="iso-8859-1"
-              tal:condition="python:exists('portal/%s' % item)"
-              tal:attributes="src string:$portal_url/$item">
-      </script>
-    </tal:js>
-    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
-                       view_template python:'%s_view' % portal_type;
-                       view_macros python:path('here/%s/macros|nothing' % view_template);
-                       macro view_macros/js | nothing"
-               condition="macro">
-      <metal:block use-macro="macro" />
-    </tal:block>
-    <script type="text/javascript"
-              charset="iso-8859-1">
-     function printTable(spanName){
-         var head = "<html><head><\/head>";
-         var body = document.getElementsByName(spanName)[0].innerHTML;
-         var foot = "<\/body><\/html>";
-
-         myWindow=window.open('','','');
-         myWindow.document.write(head + body + foot);
-         myWindow.print();
-         myWindow.close();}
-    </script>
-  </metal:javascript_head>
-
-  <metal:css fill-slot="css_slot">
-    <tal:comment replace="nothing">
-      Many of the following defines duplicated from the tal:defines in the
-      main slot. With base_edit, edit_macros could be reused as it was defined
-      for the entire document. base_view uses main_template and thus must
-      create additional defines for each slot it fills.
-    </tal:comment>
-    <tal:css define="fields python:here.Schema().viewableFields(here);
-                     css python:here.getUniqueWidgetAttr(fields, 'helper_css')"
-             condition="css"
-             repeat="item css">
-      <style type="text/css"
-             media="all"
-             tal:condition="python:exists('portal/%s' % item)"
-             tal:content="structure string:<!-- @import url($portal_url/$item); -->">
-      </style>
-    </tal:css>
-    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
-                       view_template python:'%s_view' % portal_type;
-                       view_macros python:path('here/%s/macros|nothing' % view_template);
-                       macro view_macros/css | nothing"
-               condition="macro">
-      <metal:block use-macro="macro" />
-    </tal:block>
+<head>
+  <metal:block fill-slot="top_slot">
+    <tal:insert tal:replace="nothing" tal:define="dummy python:request.set('enable_border', 0)" />
+  </metal:block>
+  <metal:css fill-slot="style_slot"
+             tal:define="resources_url string:${context/portal_url}/++resource++wcfc">
+    <link href="++resource++wcfc/bootstrap/bootstrap-fixed.css"
+          tal:attributes="href string:${resources_url}/bootstrap/bootstrap-fixed.css"
+          rel="stylesheet" type="text/css"/>
+    <!-- Bootstrap Image Gallery styles -->
+    <link rel="stylesheet"
+          href="http://blueimp.github.com/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css"
+          tal:attributes="href string:${resources_url}/jquery-file-upload/css/bootstrap-image-gallery.min.css" />
     <style type="text/css">
-        #contentActionMenus{
-            visibility: hidden;
-        }
-
-        #fieldsetlegend-metadata .{
-            visibility: hidden;
-        }
+      #contentActionMenus{
+          visibility: hidden;
+      }
     </style>
   </metal:css>
+</head>
 
   <body>
     <metal:fill fill-slot="main">
@@ -123,32 +62,19 @@
         <table><tr>
         <td><img src="" tal:attributes="src string:${context/absolute_url}/++resource++ma.png" width="48" height="48"></td>
         <th><div i18n:translate="help_approved_app">Here you can see your approved applications</div> dentro del folder <span tal:replace="here/title_or_id">content title or id</span></th>
-          </tr></table>
-            <!-- <span tal:condition="template/title"
-                  tal:replace="template/title">optional template title</span>
- -->
-                <div class="tabularView" tal:condition="python: str(here.getWFState()) != 'historico'">
-                <table class="listing" align="right" border="0">
-                <tr>
-                     <td><form method="post" name="import" action="#" method="post"
-                                   tal:attributes="action string:${context/absolute_url}/import">
-                          <a href="javascript: document.import.submit()">Importar Solicitudes</a>
-                     </form></td>
+        </tr></table>
+        <div class="tabularView" tal:condition="python: str(here.getWFState()) != 'historico'">
+          <table class="listing" align="right" border="0">
+            <tr>
+                 <td><a href="" tal:attributes="href string:${context/absolute_url}/folder_factories">
+                             <img src="" width="20" height="20" tal:attributes="src string:${context/absolute_url}/++resource++nueva.png"/>
+                      </a>
+                      <a href="" tal:attributes="href string:${context/absolute_url}/folder_factories">Nueva Solicitud</a>
+                 </td>
 
-                     <td><form method="post" name="export" action="#" method="post"
-                                   tal:attributes="action string:${context/absolute_url}/export">
-                          <a href="javascript: document.export.submit()">Exportar Mis Aprobadas</a>
-                          <input type="hidden" name="Opcion" value="1" />
-                     </form></td>
-
-                     <td><a href="" tal:attributes="href string:${context/absolute_url}/folder_factories">
-                                 <img src="" width="20" height="20" tal:attributes="src string:${context/absolute_url}/++resource++nueva.png"/>
-                          </a>
-                          <a href="" tal:attributes="href string:${context/absolute_url}/folder_factories">Nueva Solicitud</a>
-                     </td>
-
-                </tr>
-                </table></div>
+            </tr>
+          </table>
+        </div>
 
         </metal:header_macro>
 
@@ -216,11 +142,11 @@
 <br><br>
 
     <h3 tal:condition="items" i18n:translate="label_approved_quantities_nosol">Approved Quantities per Request</h3>
-    <a tal:condition="items" href="javascript: printTable('tablaSolicitudes')">Imprimir</a>
-    <div class="tabularView">
-    <table class="listing" border="1" width="100%" tal:condition="items">
-        <tbody>
- 	<tr>
+    <!-- <a tal:condition="items" href="javascript: printTable('tablaSolicitudes')">Imprimir</a> -->
+    <div class="fc">
+    <table class="table table-bordered table-condensed table-hover" tal:condition="items">
+        
+ 	<thead>
 		<th i18n:translate="label_type">Type</th>
 		<th i18n:translate="label_solicitor">Solicitante</th>
 		<th i18n:translate="label_reason">Reason</th>
@@ -233,7 +159,8 @@
 		<th i18n:translate="label_fecha_revision">Fecha de Revision por Consejo Interno</th>
 		<th>con cargo a:</th>
 		<th i18n:translate="label_state">State</th>
-	</tr>
+	</thead>
+  <tbody>
         <tr tal:repeat="item python:items">
           <td><a href="#" tal:attributes="href python:item['url']"
           tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</a></td>
