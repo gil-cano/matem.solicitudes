@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-11-23 22:56+0000\n"
+"POT-Creation-Date: 2013-11-23 23:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,6 +47,10 @@ msgstr "Solicitudes de sus becarios esperando Vo.Bo."
 #: matem/solicitudes/browser/folderpendientessede.pt:186
 msgid "Pending for send"
 msgstr "Solicitudes propias pendientes de envío"
+
+#: matem/solicitudes/browser/presupuesto.pt:147
+msgid "Recalculate"
+msgstr "Volver a calcular cantidades"
 
 #: matem/solicitudes/profiles/default/types/SolicitudInstitucional.xml
 msgid "Solicitud con apoyo institucional"
@@ -189,6 +193,11 @@ msgstr "Mis solicitudes aprobadas"
 msgid "label_approved_quantities_nosol"
 msgstr "Cantidades Aprobadas (por Solicitud)"
 
+#. Default: "Approved Quantities by Period"
+#: matem/solicitudes/browser/presupuesto.pt:103
+msgid "label_approved_quantities_period"
+msgstr "Cantidades aprobadas por periodo"
+
 #. Default: "Total Approved Quantities"
 #: matem/solicitudes/browser/misaprobadas.pt:92
 msgid "label_approved_quantities_sol"
@@ -236,6 +245,11 @@ msgstr "Menú"
 #: matem/solicitudes/portlets/avisos.pt:234
 msgid "label_becario"
 msgstr "Becario"
+
+#. Default: "Budget for this period"
+#: matem/solicitudes/browser/presupuesto.pt:115
+msgid "label_bugdet_this_period"
+msgstr "Presupuesto para de este periodo"
 
 #. Default: "Registration cost"
 #: matem/solicitudes/browser/solicitud.pt:331
@@ -393,6 +407,11 @@ msgstr "Fecha de revisión por Comisión Especial"
 msgid "label_fecha_sesionci"
 msgstr "Fecha de revisión por el Consejo Interno"
 
+#. Default: "Folder"
+#: matem/solicitudes/browser/presupuesto.pt:109
+msgid "label_folder"
+msgstr "Título"
+
 #. Default: "Ir a 'Solicitudes pendientes de revision'"
 #: matem/solicitudes/portlets/avisos.pt:59
 msgid "label_go_pending"
@@ -465,10 +484,20 @@ msgstr "Invitado"
 msgid "label_link"
 msgstr "Enlace"
 
+#. Default: "Remaining Quantity for this Period"
+#: matem/solicitudes/browser/presupuesto.pt:121
+msgid "label_local_remaining_quantity_period"
+msgstr "Cantidad restante para este periodo"
+
 #. Default: "Local Budget Overview"
 #: matem/solicitudes/browser/solicitudfolder.pt:122
 msgid "label_localbudget_app"
 msgstr "Presupuesto Total Local"
+
+#. Default: "Locally assigned budget"
+#: matem/solicitudes/browser/presupuesto.pt:118
+msgid "label_locally_assigned"
+msgstr "Presupuesto ya ejercido en este periodo"
 
 #. Default: "None of your applications has been approved yet."
 #: matem/solicitudes/browser/misaprobadas.pt:138
@@ -545,6 +574,11 @@ msgstr "Solicitudes pendientes de revisión"
 #: matem/solicitudes/browser/folderpendientessede.pt:136
 msgid "label_pending_reviews"
 msgstr "¡Tiene solicitudes pendientes! Revíselas usando el cuadro ubicado a la derecha de su pantalla y que lleva por título 'A examinar' (dando clic sobre los recuadros) o navegando a 'Solicitudes pendientes de revisión'."
+
+#. Default: "Period"
+#: matem/solicitudes/browser/presupuesto.pt:112
+msgid "label_period"
+msgstr "Periodo"
 
 #. Default: "Place"
 #: matem/solicitudes/browser/folderaprobadas.pt:197

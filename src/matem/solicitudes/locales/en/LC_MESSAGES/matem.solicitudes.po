@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-11-23 22:56+0000\n"
+"POT-Creation-Date: 2013-11-23 23:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,6 +46,10 @@ msgstr ""
 #: matem/solicitudes/browser/folderpendientes.pt:194
 #: matem/solicitudes/browser/folderpendientessede.pt:186
 msgid "Pending for send"
+msgstr ""
+
+#: matem/solicitudes/browser/presupuesto.pt:147
+msgid "Recalculate"
 msgstr ""
 
 #: matem/solicitudes/profiles/default/types/SolicitudInstitucional.xml
@@ -189,6 +193,11 @@ msgstr ""
 msgid "label_approved_quantities_nosol"
 msgstr ""
 
+#. Default: "Approved Quantities by Period"
+#: matem/solicitudes/browser/presupuesto.pt:103
+msgid "label_approved_quantities_period"
+msgstr ""
+
 #. Default: "Total Approved Quantities"
 #: matem/solicitudes/browser/misaprobadas.pt:92
 msgid "label_approved_quantities_sol"
@@ -235,6 +244,11 @@ msgstr ""
 #. Default: "Becario"
 #: matem/solicitudes/portlets/avisos.pt:234
 msgid "label_becario"
+msgstr ""
+
+#. Default: "Budget for this period"
+#: matem/solicitudes/browser/presupuesto.pt:115
+msgid "label_bugdet_this_period"
 msgstr ""
 
 #. Default: "Registration cost"
@@ -393,6 +407,11 @@ msgstr ""
 msgid "label_fecha_sesionci"
 msgstr ""
 
+#. Default: "Folder"
+#: matem/solicitudes/browser/presupuesto.pt:109
+msgid "label_folder"
+msgstr ""
+
 #. Default: "Ir a 'Solicitudes pendientes de revision'"
 #: matem/solicitudes/portlets/avisos.pt:59
 msgid "label_go_pending"
@@ -465,9 +484,19 @@ msgstr ""
 msgid "label_link"
 msgstr ""
 
+#. Default: "Remaining Quantity for this Period"
+#: matem/solicitudes/browser/presupuesto.pt:121
+msgid "label_local_remaining_quantity_period"
+msgstr ""
+
 #. Default: "Local Budget Overview"
 #: matem/solicitudes/browser/solicitudfolder.pt:122
 msgid "label_localbudget_app"
+msgstr ""
+
+#. Default: "Locally assigned budget"
+#: matem/solicitudes/browser/presupuesto.pt:118
+msgid "label_locally_assigned"
 msgstr ""
 
 #. Default: "None of your applications has been approved yet."
@@ -544,6 +573,11 @@ msgstr ""
 #: matem/solicitudes/browser/folderpendientes.pt:145
 #: matem/solicitudes/browser/folderpendientessede.pt:136
 msgid "label_pending_reviews"
+msgstr ""
+
+#. Default: "Period"
+#: matem/solicitudes/browser/presupuesto.pt:112
+msgid "label_period"
 msgstr ""
 
 #. Default: "Place"
