@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-11-23 23:41+0000\n"
+"POT-Creation-Date: 2013-11-23 23:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,6 +122,7 @@ msgid "help_applications_for_others"
 msgstr "Dé clic aquí si la solicitud que va a introducir al sistema no es para usted, sino para un tercero."
 
 #. Default: "Here you can see your approved applications"
+#: matem/solicitudes/browser/micuenta.pt:121
 #: matem/solicitudes/browser/misaprobadas.pt:64
 #: matem/solicitudes/browser/solicitudfolder.pt:51
 msgid "help_approved_app"
@@ -277,6 +278,7 @@ msgid "label_applications_for_others"
 msgstr "Subir solicitud a nombre de otra persona"
 
 #. Default: "My approved applications"
+#: matem/solicitudes/browser/micuenta.pt:118
 #: matem/solicitudes/browser/misaprobadas.pt:61
 #: matem/solicitudes/browser/solicitudfolder.pt:50
 msgid "label_approved_app"
@@ -284,8 +286,8 @@ msgstr "Mis solicitudes aprobadas"
 
 #. Default: "Approved Quantities per Request"
 #: matem/solicitudes/browser/folderaprobadas.pt:186
+#: matem/solicitudes/browser/micuenta.pt:215
 #: matem/solicitudes/browser/misaprobadas.pt:144
-#: matem/solicitudes/browser/search_form.pt:123
 msgid "label_approved_quantities_nosol"
 msgstr "Cantidades Aprobadas (por Solicitud)"
 
@@ -295,6 +297,7 @@ msgid "label_approved_quantities_period"
 msgstr "Cantidades aprobadas por periodo"
 
 #. Default: "Total Approved Quantities"
+#: matem/solicitudes/browser/micuenta.pt:162
 #: matem/solicitudes/browser/misaprobadas.pt:92
 msgid "label_approved_quantities_sol"
 msgstr "Cantidades Aprobadas (Totales)"
@@ -302,7 +305,7 @@ msgstr "Cantidades Aprobadas (Totales)"
 #. Default: "Approved Quantity (pesos)"
 #: matem/solicitudes/browser/folderaprobadas.pt:202
 #: matem/solicitudes/browser/generaractas.pt:205
-#: matem/solicitudes/browser/misaprobadas.pt:158
+#: matem/solicitudes/browser/micuenta.pt:229
 msgid "label_approved_quantity"
 msgstr "Cantidad utilizada (pesos)"
 
@@ -473,6 +476,7 @@ msgid "label_estado_preeliminar"
 msgstr "Esta solicitud está siendo revisada por el asesor a cargo. Espere noticias pronto."
 
 #. Default: "Fecha de Revision por Consejo Interno"
+#: matem/solicitudes/browser/micuenta.pt:230
 #: matem/solicitudes/browser/presupuesto_folder.pt:396
 #: matem/solicitudes/browser/search_form.pt:138
 msgid "label_fecha_de_revision"
@@ -642,6 +646,7 @@ msgid "label_locally_assigned"
 msgstr "Presupuesto ya ejercido en este periodo"
 
 #. Default: "None of your applications has been approved yet."
+#: matem/solicitudes/browser/micuenta.pt:209
 #: matem/solicitudes/browser/misaprobadas.pt:138
 msgid "label_no_approved"
 msgstr "Ninguna de sus solicitudes ha sido aprobada aún"
@@ -1018,16 +1023,19 @@ msgid "label_titulo_trabajo"
 msgstr "Título del trabajo a presentar"
 
 #. Default: "Dias de Comision Aprobados"
+#: matem/solicitudes/browser/micuenta.pt:177
 #: matem/solicitudes/browser/misaprobadas.pt:107
 msgid "label_total_approved_commission_days"
 msgstr "Días de Comisión aprobados"
 
 #. Default: "Dias de License Aprobados"
+#: matem/solicitudes/browser/micuenta.pt:174
 #: matem/solicitudes/browser/misaprobadas.pt:104
 msgid "label_total_approved_license_days"
 msgstr "Días de Licencia aprobados"
 
 #. Default: "Sum of All Approved Quantities"
+#: matem/solicitudes/browser/micuenta.pt:171
 #: matem/solicitudes/browser/misaprobadas.pt:101
 msgid "label_total_approved_quantity"
 msgstr "Suma de cantidades aprobadas (pesos)"
