@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-11-23 23:07+0000\n"
+"POT-Creation-Date: 2013-11-23 23:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,7 +49,12 @@ msgid "Pending for send"
 msgstr ""
 
 #: matem/solicitudes/browser/presupuesto.pt:147
+#: matem/solicitudes/browser/presupuesto_folder.pt:371
 msgid "Recalculate"
+msgstr ""
+
+#: matem/solicitudes/browser/presupuesto_folder.pt:202
+msgid "Set"
 msgstr ""
 
 #: matem/solicitudes/profiles/default/types/SolicitudInstitucional.xml
@@ -104,6 +109,7 @@ msgid "help_investigador"
 msgstr ""
 
 #. Default: "Here you can see the detail of the local budgets for the current period."
+#: matem/solicitudes/browser/presupuesto_folder.pt:138
 #: matem/solicitudes/browser/solicitudfolder.pt:123
 msgid "help_localbudget_app"
 msgstr ""
@@ -248,6 +254,7 @@ msgstr ""
 
 #. Default: "Budget for this period"
 #: matem/solicitudes/browser/presupuesto.pt:115
+#: matem/solicitudes/browser/presupuesto_folder.pt:353
 msgid "label_bugdet_this_period"
 msgstr ""
 
@@ -357,6 +364,11 @@ msgstr ""
 #: matem/solicitudes/browser/solicitudbecario.pt:127
 #: matem/solicitudes/portlets/avisos.pt:31
 msgid "label_estado_preeliminar"
+msgstr ""
+
+#. Default: "Fecha de Revision por Consejo Interno"
+#: matem/solicitudes/browser/presupuesto_folder.pt:396
+msgid "label_fecha_de_revision"
 msgstr ""
 
 #. Default: "From date"
@@ -484,18 +496,41 @@ msgstr ""
 msgid "label_link"
 msgstr ""
 
+#. Default: "Approved Quantity"
+#: matem/solicitudes/browser/presupuesto_folder.pt:300
+msgid "label_local_approved_quantity"
+msgstr ""
+
+#. Default: "Días de Comisión Aprobados"
+#: matem/solicitudes/browser/presupuesto_folder.pt:304
+msgid "label_local_commission_days"
+msgstr ""
+
+#. Default: "Días de Licencia Aprobados"
+#: matem/solicitudes/browser/presupuesto_folder.pt:305
+msgid "label_local_license_days"
+msgstr ""
+
+#. Default: "Remaining Quantity"
+#: matem/solicitudes/browser/presupuesto_folder.pt:301
+msgid "label_local_remaining_quantity"
+msgstr ""
+
 #. Default: "Remaining Quantity for this Period"
 #: matem/solicitudes/browser/presupuesto.pt:121
+#: matem/solicitudes/browser/presupuesto_folder.pt:361
 msgid "label_local_remaining_quantity_period"
 msgstr ""
 
 #. Default: "Local Budget Overview"
+#: matem/solicitudes/browser/presupuesto_folder.pt:135
 #: matem/solicitudes/browser/solicitudfolder.pt:122
 msgid "label_localbudget_app"
 msgstr ""
 
 #. Default: "Locally assigned budget"
 #: matem/solicitudes/browser/presupuesto.pt:118
+#: matem/solicitudes/browser/presupuesto_folder.pt:357
 msgid "label_locally_assigned"
 msgstr ""
 
@@ -695,6 +730,11 @@ msgstr ""
 msgid "label_required_quantity_viaticos"
 msgstr ""
 
+#. Default: "Researcher"
+#: matem/solicitudes/browser/presupuesto_folder.pt:163
+msgid "label_researchers"
+msgstr ""
+
 #. Default: "Responsable de la Comision"
 #: matem/solicitudes/portlets/avisos.pt:232
 msgid "label_responsable_comision"
@@ -742,6 +782,11 @@ msgstr ""
 #: matem/solicitudes/browser/solicitudbecario.pt:190
 #: matem/solicitudes/portlets/avisos.pt:75
 msgid "label_revision_investigadoracargo"
+msgstr ""
+
+#. Default: "Scholarship Holders"
+#: matem/solicitudes/browser/presupuesto_folder.pt:172
+msgid "label_scholarship_holders"
 msgstr ""
 
 #. Default: "Semblanza"
@@ -857,6 +902,16 @@ msgstr ""
 #. Default: "Foto Visitante"
 #: matem/solicitudes/browser/solicitudvisitante.pt:267
 msgid "label_visitante"
+msgstr ""
+
+#. Default: "Max Budget per Researcher:"
+#: matem/solicitudes/browser/presupuesto_folder.pt:151
+msgid "legend_budget"
+msgstr ""
+
+#. Default: "Max Budget for this Period:"
+#: matem/solicitudes/browser/presupuesto_folder.pt:275
+msgid "legend_budget_local"
 msgstr ""
 
 #. Default: "Subir Solicitudes a Nombre de otro Usuario"
