@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-11-23 22:37+0000\n"
+"POT-Creation-Date: 2013-11-23 22:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,9 +14,17 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:110
+msgid "Import"
+msgstr ""
+
 #: matem/solicitudes/browser/solicitud.pt:218
 #: matem/solicitudes/browser/solicitudbecario.pt:258
 msgid "Info"
+msgstr ""
+
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:134
+msgid "License Application"
 msgstr ""
 
 #: matem/solicitudes/browser/folderpendientes.pt:388
@@ -43,6 +51,19 @@ msgstr ""
 msgid "Solicitud con apoyo institucional"
 msgstr ""
 
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:136
+msgid "Student Application"
+msgstr ""
+
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:135
+msgid "Visitor Application"
+msgstr ""
+
+#. Default: "You can import simple text applications into the system."
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:112
+msgid "description_import"
+msgstr ""
+
 #. Default: "Here you can see every approved application in this period (even if it's not yours)."
 #: matem/solicitudes/browser/folderaprobadas.pt:142
 #: matem/solicitudes/browser/generaractas.pt:140
@@ -65,6 +86,16 @@ msgstr ""
 #: matem/solicitudes/browser/misaprobadas.pt:64
 #: matem/solicitudes/browser/solicitudfolder.pt:51
 msgid "help_approved_app"
+msgstr ""
+
+#. Default: "Seleccione el tipo de solicitud a importar."
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:130
+msgid "help_importtype_auxiliaresForm"
+msgstr ""
+
+#. Default: "Nombre del investigador/estudiante/tecnico para el cual se va a crear la solicitud."
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:144
+msgid "help_investigador"
 msgstr ""
 
 #. Default: "Here you can see the detail of the local budgets for the current period."
@@ -126,6 +157,11 @@ msgstr ""
 #: matem/solicitudes/browser/folderrechazadas.pt:138
 #: matem/solicitudes/browser/solicitudfolder.pt:110
 msgid "label_allrejected_app"
+msgstr ""
+
+#. Default: "Seleccione a nombre de que usuario desea introducir la solicitud..."
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:151
+msgid "label_any_creator"
 msgstr ""
 
 #. Default: "Extra support"
@@ -645,6 +681,11 @@ msgstr ""
 msgid "label_sent_reviews"
 msgstr ""
 
+#. Default: "¿Para quien es la solicitud?"
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:142
+msgid "label_solicitante"
+msgstr ""
+
 #. Default: "Solicitante Auxiliar"
 #: matem/solicitudes/portlets/avisos.pt:244
 msgid "label_solicitante_auxiliar"
@@ -710,6 +751,11 @@ msgstr ""
 msgid "label_type"
 msgstr ""
 
+#. Default: "Tipo de Solicitud"
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:128
+msgid "label_type_upload"
+msgstr ""
+
 #. Default: "Travel Allowances"
 #: matem/solicitudes/browser/solicitud.pt:317
 msgid "label_viaticos"
@@ -718,6 +764,11 @@ msgstr ""
 #. Default: "Travel Allowances"
 #: matem/solicitudes/browser/solicitudbecario.pt:365
 msgid "label_viaticos_becario"
+msgstr ""
+
+#. Default: "Subir Solicitudes a Nombre de otro Usuario"
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:123
+msgid "legend_upload_auxiliar_forms"
 msgstr ""
 
 #. Default: "Numero de Acta del Consejo Interno"
