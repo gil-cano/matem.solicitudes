@@ -5,7 +5,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="matem.solicitudes">
 
   <head>
     <title tal:content="template/title">Solicitudes</title>
@@ -517,7 +517,7 @@
 
     <span name="pendientesUsuarioActual" tal:define="items python:view.getSolicitudesPendientes(usuarioActual)">
 
-    <h3 tal:condition="not:items" i18n:translate="label_no_pending">No applications pending</h3>
+    <h3 tal:condition="not:items" i18n:translate="label_no_pending">Hooray! You have no pending reviews. You can review your approved or rejected reviews by navigating to 'My approved applications' or 'My rejected applications' respectively.</h3>
     <h4 tal:condition="not:items" i18n:translate="label_no_show">There are no applications to show.</h4>
 
     </span>
