@@ -641,6 +641,10 @@ schema = BaseSchema + Schema((
     ),)
 
 
+for f in schema.filterFields(isMetadata=True):
+    f.widget.visible = { "edit" : "invisible" }
+
+
 class SolicitudVisitante(BaseContent):
     "A simple quotation content type."
 

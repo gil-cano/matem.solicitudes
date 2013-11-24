@@ -707,6 +707,9 @@ schema = BaseSchema + Schema((
         ),
 ))
 
+for f in schema.filterFields(isMetadata=True):
+    f.widget.visible = { "edit" : "invisible" }
+
 class Solicitud(BaseContent):
     """Request License Commission"""
 
@@ -717,9 +720,9 @@ class Solicitud(BaseContent):
     _at_rename_after_creation = False
 
     def canSetDefaultPage(self):
-	return False
+        return False
 
-## desde aqui peg\'o eduardo ...
+    ## desde aqui peg\'o eduardo ...
     def addTranslation(self, language, **kwargs):
         # call orginal addTranslation
         BaseContent.addTranslation(self, language, **kwargs)

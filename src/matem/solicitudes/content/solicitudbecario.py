@@ -786,6 +786,10 @@ SolicitudBecarioSchema = BaseSchema + Schema((
     ),)
 
 
+for f in SolicitudBecarioSchema.filterFields(isMetadata=True):
+    f.widget.visible = { "edit" : "invisible" }
+
+
 class SolicitudBecario(BaseContent):
     """Request Scholarship Commission"""
 

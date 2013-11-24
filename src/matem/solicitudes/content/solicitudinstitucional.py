@@ -923,6 +923,8 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
 # SolicitudInstitucionalSchema['description'].storage = atapi.AnnotationStorage()
 #
 # schemata.finalizeATCTSchema(SolicitudInstitucionalSchema, moveDiscussion=False)
+for f in SolicitudInstitucionalSchema.filterFields(isMetadata=True):
+    f.widget.visible = { "edit" : "invisible" }
 
 
 class SolicitudInstitucional(BaseContent):
