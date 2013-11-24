@@ -97,7 +97,7 @@
                condition="macro">
       <metal:block use-macro="macro" />
     </tal:block>
-    <style type="text/css">
+    <!-- <style type="text/css" media="all">
         #contentActionMenus{
             visibility: hidden;
         }
@@ -109,9 +109,26 @@
         .overflowable {
             overflow:scroll;
         }
-    </style>
+    </style> -->
     <link rel="stylesheet" type="text/css" href="http://jquerytools.org/media/css/dateinput/skin1.css"/> 
   </metal:css>
+
+  <metal:css fill-slot="style_slot">
+    <style type="text/css">
+      div.position-3\3a 4 {margin-left:26.875%;} /* .position-3:4 */
+      #contentActionMenus{
+            visibility: hidden;
+      }
+      #fieldsetlegend-metadata .{
+            visibility: hidden;
+        }
+        
+        .overflowable {
+            overflow:scroll;
+        }
+    </style>
+  </metal:css>
+
 
   <body>
     <metal:fill fill-slot="main">
@@ -126,6 +143,9 @@
         <span> path:</span> 
         <span tal:content="base_macros/header"/><br/>
       </span> -->
+
+<!--  -->
+
       <metal:main_macro define-macro="main"
             tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
             base_macros here/base/macros;

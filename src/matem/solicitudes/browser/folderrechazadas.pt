@@ -95,7 +95,7 @@
                condition="macro">
       <metal:block use-macro="macro" />
     </tal:block>
-    <style type="text/css">
+    <!-- <style type="text/css">
         #contentActionMenus{
             visibility: hidden;
         }
@@ -103,9 +103,25 @@
         #fieldsetlegend-metadata .{
             visibility: hidden;
         }
-    </style>
+    </style> -->
     <link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/demos/dateinput/css/skin1.css"/> 
   </metal:css>
+  <metal:css fill-slot="style_slot">
+    <style type="text/css">
+      div.position-3\3a 4 {margin-left:1%;} /* .position-3:4 */
+      #contentActionMenus{
+            visibility: hidden;
+      }
+      #fieldsetlegend-metadata .{
+            visibility: hidden;
+        }
+        
+        .overflowable {
+            overflow:scroll;
+        }
+    </style>
+  </metal:css>
+
 
   <body>
     <metal:fill fill-slot="main">
