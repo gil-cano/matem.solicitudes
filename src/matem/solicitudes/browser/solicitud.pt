@@ -63,7 +63,7 @@
                condition="macro">
       <metal:block use-macro="macro" />
     </tal:block>
-    <style type="text/css">
+    <!-- <style type="text/css">
         #contentActionMenus{
             visibility: hidden;
         }
@@ -71,8 +71,28 @@
         #fieldsetlegend-metadata .{
             visibility: hidden;
         }
-    </style>
+    </style> -->
   </metal:css>
+
+  <metal:css fill-slot="style_slot"
+               tal:define="resources_url string:${context/portal_url}/++resource++wcfc">
+      <link href="++resource++wcfc/bootstrap/bootstrap-fixed.css"
+            tal:attributes="href string:${resources_url}/bootstrap/bootstrap-fixed.css"
+            rel="stylesheet" type="text/css"/>
+      <!-- Bootstrap Image Gallery styles -->
+      <link rel="stylesheet"
+            href="http://blueimp.github.com/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css"
+            tal:attributes="href string:${resources_url}/jquery-file-upload/css/bootstrap-image-gallery.min.css" />
+      <style type="text/css">
+        #contentActionMenus{
+            visibility: hidden;
+        }
+        #fieldsetlegend-metadata .{
+            visibility: hidden;
+        }
+      </style>
+    </metal:css>
+
 
   <body tal:define="kss_inline_editable python:False;">
     <metal:fill fill-slot="main">
@@ -238,21 +258,21 @@
 
                 <p style="color: #FF0000;" tal:content="python:'Estado: '+str(here.getWFStateName())"></p>
                 <div class="tabularView" tal:define="parent python:here.getParentNode()">
-                <table class="listing" align="right" border="0">
-                <tr>
+                <table class="fc" align="right" border="0">
+                <tr class="btn-group">
                      <td><form method="post" name="import" action="#" method="post"
                                    tal:attributes="action string:${parent/absolute_url}/import">
-                          <a href="javascript: document.import.submit()">Importar</a>
+                          <a class="context btn btn-small" href="javascript: document.import.submit()">Importar</a>
                      </form></td>
 
                      <td><form method="post" name="export" action="#" method="post"
                                    tal:attributes="action string:${context/absolute_url}/export">
-                          <a href="javascript: document.export.submit()">Exportar</a>
+                          <a class="context btn btn-small" href="javascript: document.export.submit()">Exportar</a>
                      </form></td>
 
                      <td><form method="post" name="print" action="#" method="post"
                                    tal:attributes="action string:${context/absolute_url}/print">
-                          <a href="javascript: this.print()">Imprimir</a>
+                          <a class="context btn btn-small" href="javascript: this.print()">Imprimir</a>
                      </form></td>
                 </tr>
                 </table></div>
@@ -360,7 +380,24 @@
         </tbody>
     </table>
 
-    <table border="0">
+    <div class="fc">
+      <span class="btn-group">
+        <span tal:repeat="transicion python:here.getLegalTransitions()">
+          <a class="context btn btn-small" style="text-decoration:none" href="#" 
+              tal:attributes="href python:transicion['url']" tal:content="python:transicion['name']"/>
+        </span>
+        <span tal:condition="python:(responsableconsejo and (here.aprobada() or here.rechazada())) or (editor and view.esBorrador()) or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
+          <a class="context btn btn-small" style="text-decoration:none" href="#" 
+              tal:attributes="href python:here.absolute_url()+'/delete_confirmation'">Eliminar solicitud</a>
+        </span>
+        <span tal:condition="python:(consejero and (here.getWFState()=='revisionconsejo')) or (comisionado and (here.getWFState()=='revisioncomision')) or (editor and view.esBorrador()) or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
+          <a class="context btn btn-small" style="text-decoration:none" href="#" 
+              tal:attributes="href python:here.absolute_url()+'/edit'">Hacer cambios a solicitud</a>
+        </span>
+      </span>
+    </div>
+
+    <!-- <table border="0">
       <tr>
        <td tal:repeat="transicion python:here.getLegalTransitions()">
            <a class="context" style="text-decoration:none" href="#" tal:attributes="href python:transicion['url']" tal:content="python:transicion['name']"/>
@@ -372,7 +409,7 @@
            <a class="context" style="text-decoration:none" href="#" tal:attributes="href python:here.absolute_url()+'/edit'">Hacer cambios a solicitud.</a>
        </td>
       </tr>
-    </table>
+    </table> -->
 
     </div>
 

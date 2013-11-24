@@ -21,6 +21,7 @@
           href="http://blueimp.github.com/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css"
           tal:attributes="href string:${resources_url}/jquery-file-upload/css/bootstrap-image-gallery.min.css" />
     <style type="text/css">
+      div.position-3\3a 4 {margin-left:-16%;} /* .position-3:4 */
       #contentActionMenus{
           visibility: hidden;
       }
