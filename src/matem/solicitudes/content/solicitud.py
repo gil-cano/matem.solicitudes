@@ -66,7 +66,7 @@ schema = BaseSchema + Schema((
                            vocabulary=SEDE,
                            widget=SelectionWidget(label='Sede',
                                  label_msgid='label_sede',
-                                 i18n_domain='plone',
+                                 i18n_domain='matem.solicitudes',
                                  description='Especifica de donde es el investigador que pide la licencia',
                                  description_msgid='help_sede',
                                  visible={'view':'invisible','edit':'invisible'},
@@ -80,7 +80,7 @@ schema = BaseSchema + Schema((
             default_method='getSolicitanteDefault',
             widget=SelectionWidget(label="Solicitante",
                                    label_msgid="label_solicitante",
-                                   i18n_domain='plone',
+                                   i18n_domain='matem.solicitudes',
                                    description="Nombre del investigador a nombre del cual es esta solicitud.",
                                    description_msgid="help_solicitante"),
             write_permission="Solicitud: Cambiar Solicitante",
@@ -96,7 +96,7 @@ schema = BaseSchema + Schema((
             widget=LabelWidget(
                 label=u'Recuerde que el número máximo de días de Licencia es 45. Si los rebasa consulte con la Secretaría Académica.',
                 label_msgid='label_mensaje_licencias',
-                i18n_domain='plone',
+                i18n_domain='matem.solicitudes',
                 visible = {'view': 'invisible', 'edit': 'visible' })
         ),
 
@@ -109,7 +109,7 @@ schema = BaseSchema + Schema((
                                     )),
             widget=SelectionWidget(label='Tipo de solicitud',
                                  label_msgid='label_licenciacomision',
-                                 i18n_domain='plone',
+                                 i18n_domain='matem.solicitudes',
                                  description='Especifica si esta es una solicitud de comisión o de licencia',
                                  description_msgid='help_licenciacomision',
                                 ),
@@ -123,6 +123,7 @@ schema = BaseSchema + Schema((
             default=('MX'),
             widget=CountryWidget(label='Country',
                                 label_msgid='label_pais',
+                                i18n_domain='matem.solicitudes',
                                 provideNullValue=1,   # this is default
                                 omitCountries=None,   # this is default, can be a
                                                       # list of country codes which
