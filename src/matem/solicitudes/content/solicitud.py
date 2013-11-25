@@ -140,7 +140,7 @@ schema = BaseSchema + Schema((
             required=1,
             widget=StringWidget(label='City',
                                 label_msgid='label_ciudad_pais',
-                                i18n_domain='plone',
+                                i18n_domain='matem.solicitudes',
                                 description='City to visit',
                                 description_msgid='help_ciudad_pais'),
 #            read_permission="Solicitud: Modificar Solicitud",

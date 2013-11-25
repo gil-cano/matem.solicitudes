@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-11-23 23:44+0000\n"
+"POT-Creation-Date: 2013-11-25 09:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,9 +30,9 @@ msgstr "Aprobada"
 msgid "Import"
 msgstr "Importar"
 
-#: matem/solicitudes/browser/solicitud.pt:218
-#: matem/solicitudes/browser/solicitudbecario.pt:258
-#: matem/solicitudes/browser/solicitudinstitucional.pt:218
+#: matem/solicitudes/browser/solicitud.pt:238
+#: matem/solicitudes/browser/solicitudbecario.pt:278
+#: matem/solicitudes/browser/solicitudinstitucional.pt:201
 msgid "Info"
 msgstr ""
 
@@ -41,28 +41,28 @@ msgstr ""
 msgid "License Application"
 msgstr "Solicitud de Licencia/Comisión"
 
-#: matem/solicitudes/browser/folderpendientes.pt:388
+#: matem/solicitudes/browser/folderpendientes.pt:408
 #: matem/solicitudes/browser/folderpendientessede.pt:364
 msgid "Pending for review by Internal Council"
 msgstr "Solicitudes pendientes de revisión como miembro del Consejo Interno"
 
-#: matem/solicitudes/browser/folderpendientes.pt:300
+#: matem/solicitudes/browser/folderpendientes.pt:320
 #: matem/solicitudes/browser/folderpendientessede.pt:292
 msgid "Pending for review by Special Comission"
 msgstr "Solicitudes pendientes de revisión como miembro de la Comisión Especial"
 
-#: matem/solicitudes/browser/folderpendientes.pt:245
+#: matem/solicitudes/browser/folderpendientes.pt:265
 #: matem/solicitudes/browser/folderpendientessede.pt:238
 msgid "Pending for review by researcher"
 msgstr "Solicitudes de sus becarios esperando Vo.Bo."
 
-#: matem/solicitudes/browser/folderpendientes.pt:194
+#: matem/solicitudes/browser/folderpendientes.pt:214
 #: matem/solicitudes/browser/folderpendientessede.pt:186
 msgid "Pending for send"
 msgstr "Solicitudes propias pendientes de envío"
 
 #: matem/solicitudes/browser/presupuesto.pt:147
-#: matem/solicitudes/browser/presupuesto_folder.pt:371
+#: matem/solicitudes/browser/presupuesto_folder.pt:408
 msgid "Recalculate"
 msgstr "Volver a calcular cantidades"
 
@@ -75,7 +75,7 @@ msgstr "Rechazada"
 msgid "Reviewing"
 msgstr "En revisión"
 
-#: matem/solicitudes/browser/presupuesto_folder.pt:202
+#: matem/solicitudes/browser/presupuesto_folder.pt:239
 msgid "Set"
 msgstr "Poner nuevo presupuesto"
 
@@ -104,14 +104,14 @@ msgid "description_localrequest_search"
 msgstr "Con esta forma puede buscar solicitudes de viáticos del periodo actual"
 
 #. Default: "Here you can see every approved application in this period (even if it's not yours)."
-#: matem/solicitudes/browser/folderaprobadas.pt:142
+#: matem/solicitudes/browser/folderaprobadas.pt:153
 #: matem/solicitudes/browser/generaractas.pt:140
 #: matem/solicitudes/browser/solicitudfolder.pt:99
 msgid "help_allapproved_app"
 msgstr "Aquí puede ver todas las solicitudes públicas aprobadas en el periodo (aún si no son de usted)"
 
 #. Default: "Here you can see every rejected application in this period (even if it's not yours)."
-#: matem/solicitudes/browser/folderrechazadas.pt:141
+#: matem/solicitudes/browser/folderrechazadas.pt:157
 #: matem/solicitudes/browser/solicitudfolder.pt:111
 msgid "help_allrejected_app"
 msgstr "Aquí puede ver todas las solicitudes públicas rechazadas en el periodo (aún si no son de usted)"
@@ -123,10 +123,13 @@ msgstr "Dé clic aquí si la solicitud que va a introducir al sistema no es para
 
 #. Default: "Here you can see your approved applications"
 #: matem/solicitudes/browser/micuenta.pt:121
-#: matem/solicitudes/browser/misaprobadas.pt:64
+#: matem/solicitudes/browser/misaprobadas.pt:65
 #: matem/solicitudes/browser/solicitudfolder.pt:51
 msgid "help_approved_app"
 msgstr "Aquí puede ver sus solicitudes que ya han sido aprobadas"
+
+msgid "help_ciudad_pais"
+msgstr "Ciudad que visitará"
 
 #. Default: "Seleccione el tipo de solicitud a importar."
 #: matem/solicitudes/browser/solicitudes_auxiliares.pt:130
@@ -139,20 +142,23 @@ msgid "help_investigador"
 msgstr "Nombre del investigador/estudiante/técnico para el cual se va a crear la solicitud"
 
 #. Default: "Here you can see the detail of the local budgets for the current period."
-#: matem/solicitudes/browser/presupuesto_folder.pt:138
+#: matem/solicitudes/browser/presupuesto_folder.pt:175
 #: matem/solicitudes/browser/solicitudfolder.pt:123
 msgid "help_localbudget_app"
 msgstr "Desglose del presupuesto dentro del folder actual"
 
+msgid "help_pais"
+msgstr "País destino"
+
 #. Default: "Here you can see every application that needs your review"
-#: matem/solicitudes/browser/folderpendientes.pt:154
+#: matem/solicitudes/browser/folderpendientes.pt:174
 #: matem/solicitudes/browser/folderpendientessede.pt:145
 #: matem/solicitudes/browser/solicitudfolder.pt:87
 msgid "help_pending_app"
 msgstr "Contiene todas las solicitudes que necesitan ser revisadas por usted"
 
 #. Default: "Here you can see your rejected applications"
-#: matem/solicitudes/browser/misrechazadas.pt:123
+#: matem/solicitudes/browser/misrechazadas.pt:135
 #: matem/solicitudes/browser/solicitudfolder.pt:63
 msgid "help_rejected_app"
 msgstr "Aquí puede ver sus solicitudes que fueron rechazadas"
@@ -213,46 +219,46 @@ msgid "help_search_type"
 msgstr "Buscar solicitudes del tipo especificado"
 
 #. Default: "Here you can see all the applications you have sent for review"
-#: matem/solicitudes/browser/misenviadas.pt:124
+#: matem/solicitudes/browser/misenviadas.pt:136
 #: matem/solicitudes/browser/solicitudfolder.pt:75
 msgid "help_sent_app"
 msgstr "Aquí puede ver todas las solicitudes que ha enviado"
 
 #. Default: "No. de Cuenta"
-#: matem/solicitudes/browser/solicitudbecario.pt:325
+#: matem/solicitudes/browser/solicitudbecario.pt:345
 msgid "label_account"
 msgstr "No. de Cuenta"
 
 #. Default: "Number of record where the request was reviewed"
-#: matem/solicitudes/browser/folderaprobadas.pt:205
-#: matem/solicitudes/browser/folderpendientes.pt:415
+#: matem/solicitudes/browser/folderaprobadas.pt:217
+#: matem/solicitudes/browser/folderpendientes.pt:435
 #: matem/solicitudes/browser/folderpendientessede.pt:385
 msgid "label_actaci"
 msgstr "Número de acta del Consejo Interno"
 
 #. Default: "Record number"
-#: matem/solicitudes/browser/solicitud.pt:356
-#: matem/solicitudes/browser/solicitudbecario.pt:404
-#: matem/solicitudes/browser/solicitudinstitucional.pt:374
+#: matem/solicitudes/browser/solicitud.pt:376
+#: matem/solicitudes/browser/solicitudbecario.pt:424
+#: matem/solicitudes/browser/solicitudinstitucional.pt:360
 msgid "label_actaci_number"
 msgstr "Número de registro"
 
 #. Default: "Attachments"
-#: matem/solicitudes/browser/solicitud.pt:305
-#: matem/solicitudes/browser/solicitudbecario.pt:351
-#: matem/solicitudes/browser/solicitudinstitucional.pt:306
+#: matem/solicitudes/browser/solicitud.pt:325
+#: matem/solicitudes/browser/solicitudbecario.pt:371
+#: matem/solicitudes/browser/solicitudinstitucional.pt:292
 msgid "label_adjuntos"
 msgstr "Archivos adjuntos"
 
 #. Default: "Public approved applications"
-#: matem/solicitudes/browser/folderaprobadas.pt:139
+#: matem/solicitudes/browser/folderaprobadas.pt:150
 #: matem/solicitudes/browser/generaractas.pt:137
 #: matem/solicitudes/browser/solicitudfolder.pt:98
 msgid "label_allapproved_app"
 msgstr "Solicitudes públicas aprobadas"
 
 #. Default: "Public rejected applications"
-#: matem/solicitudes/browser/folderrechazadas.pt:138
+#: matem/solicitudes/browser/folderrechazadas.pt:154
 #: matem/solicitudes/browser/solicitudfolder.pt:110
 msgid "label_allrejected_app"
 msgstr "Solicitudes públicas rechazadas"
@@ -268,7 +274,7 @@ msgid "label_any_creator"
 msgstr "Seleccione a nombre de que usuario desea introducir la solicitud"
 
 #. Default: "Extra support"
-#: matem/solicitudes/browser/solicitudbecario.pt:359
+#: matem/solicitudes/browser/solicitudbecario.pt:379
 msgid "label_apoyo_extra"
 msgstr "Apoyo extra"
 
@@ -279,15 +285,15 @@ msgstr "Subir solicitud a nombre de otra persona"
 
 #. Default: "My approved applications"
 #: matem/solicitudes/browser/micuenta.pt:118
-#: matem/solicitudes/browser/misaprobadas.pt:61
+#: matem/solicitudes/browser/misaprobadas.pt:62
 #: matem/solicitudes/browser/solicitudfolder.pt:50
 msgid "label_approved_app"
 msgstr "Mis solicitudes aprobadas"
 
 #. Default: "Approved Quantities per Request"
-#: matem/solicitudes/browser/folderaprobadas.pt:186
+#: matem/solicitudes/browser/folderaprobadas.pt:197
 #: matem/solicitudes/browser/micuenta.pt:215
-#: matem/solicitudes/browser/misaprobadas.pt:144
+#: matem/solicitudes/browser/misaprobadas.pt:145
 msgid "label_approved_quantities_nosol"
 msgstr "Cantidades Aprobadas (por Solicitud)"
 
@@ -298,40 +304,40 @@ msgstr "Cantidades aprobadas por periodo"
 
 #. Default: "Total Approved Quantities"
 #: matem/solicitudes/browser/micuenta.pt:162
-#: matem/solicitudes/browser/misaprobadas.pt:92
+#: matem/solicitudes/browser/misaprobadas.pt:93
 msgid "label_approved_quantities_sol"
 msgstr "Cantidades Aprobadas (Totales)"
 
 #. Default: "Approved Quantity (pesos)"
-#: matem/solicitudes/browser/folderaprobadas.pt:202
+#: matem/solicitudes/browser/folderaprobadas.pt:214
 #: matem/solicitudes/browser/generaractas.pt:205
 #: matem/solicitudes/browser/micuenta.pt:229
 msgid "label_approved_quantity"
 msgstr "Cantidad utilizada (pesos)"
 
 #. Default: "This application has been aproved. If you have any doubt please contact the site manager. The total amount approved for this application is"
-#: matem/solicitudes/browser/solicitud.pt:222
-#: matem/solicitudes/browser/solicitudbecario.pt:262
-#: matem/solicitudes/browser/solicitudinstitucional.pt:222
+#: matem/solicitudes/browser/solicitud.pt:242
+#: matem/solicitudes/browser/solicitudbecario.pt:282
+#: matem/solicitudes/browser/solicitudinstitucional.pt:203
 msgid "label_aprobada_nopropietario"
 msgstr "Esta solicitud ya ha sido aprobada. La cantidad total aprobada para esta solicitud es de "
 
 #. Default: "Congratulations, your application was approved! The total amount approved for this application is"
-#: matem/solicitudes/browser/solicitud.pt:142
-#: matem/solicitudes/browser/solicitudbecario.pt:158
-#: matem/solicitudes/browser/solicitudinstitucional.pt:142
+#: matem/solicitudes/browser/solicitud.pt:162
+#: matem/solicitudes/browser/solicitudbecario.pt:178
+#: matem/solicitudes/browser/solicitudinstitucional.pt:146
 msgid "label_aprobada_propietario"
 msgstr "Su solicitud ha sido aprobada. La cantidad total aprobada para esta solicitud es de "
 
 #. Default: "Advisor"
 #: matem/solicitudes/browser/search_form.pt:394
-#: matem/solicitudes/browser/solicitudbecario.pt:327
+#: matem/solicitudes/browser/solicitudbecario.pt:347
 msgid "label_asesor"
 msgstr "Asesor"
 
 #. Default: "Attention!"
-#: matem/solicitudes/browser/folderaprobadas.pt:130
-#: matem/solicitudes/browser/folderpendientes.pt:142
+#: matem/solicitudes/browser/folderaprobadas.pt:141
+#: matem/solicitudes/browser/folderpendientes.pt:162
 #: matem/solicitudes/browser/folderpendientessede.pt:133
 msgid "label_atencion"
 msgstr "¡Atención!"
@@ -353,27 +359,27 @@ msgstr "Becario"
 
 #. Default: "Budget for this period"
 #: matem/solicitudes/browser/presupuesto.pt:115
-#: matem/solicitudes/browser/presupuesto_folder.pt:353
+#: matem/solicitudes/browser/presupuesto_folder.pt:390
 msgid "label_bugdet_this_period"
 msgstr "Presupuesto para de este periodo"
 
 #. Default: "Registration cost"
-#: matem/solicitudes/browser/solicitud.pt:331
-#: matem/solicitudes/browser/solicitudbecario.pt:379
+#: matem/solicitudes/browser/solicitud.pt:351
+#: matem/solicitudes/browser/solicitudbecario.pt:399
 msgid "label_cantidad_inscripcion"
 msgstr "Cantidad para inscripción"
 
 #. Default: "Transportation cost"
-#: matem/solicitudes/browser/solicitud.pt:321
-#: matem/solicitudes/browser/solicitudbecario.pt:369
-#: matem/solicitudes/browser/solicitudvisitante.pt:301
+#: matem/solicitudes/browser/solicitud.pt:341
+#: matem/solicitudes/browser/solicitudbecario.pt:389
+#: matem/solicitudes/browser/solicitudvisitante.pt:321
 msgid "label_cantidad_pasaje"
 msgstr "Cantidad para pasajes"
 
 #. Default: "Travel allowances"
-#: matem/solicitudes/browser/solicitud.pt:326
-#: matem/solicitudes/browser/solicitudbecario.pt:374
-#: matem/solicitudes/browser/solicitudvisitante.pt:306
+#: matem/solicitudes/browser/solicitud.pt:346
+#: matem/solicitudes/browser/solicitudbecario.pt:394
+#: matem/solicitudes/browser/solicitudvisitante.pt:326
 msgid "label_cantidad_viaticos"
 msgstr "Cantidad para viáticos"
 
@@ -384,34 +390,34 @@ msgstr "Elija un país"
 
 #. Default: "City"
 #: matem/solicitudes/browser/search_form.pt:299
-#: matem/solicitudes/browser/solicitud.pt:288
-#: matem/solicitudes/browser/solicitudbecario.pt:332
+#: matem/solicitudes/browser/solicitud.pt:308
+#: matem/solicitudes/browser/solicitudbecario.pt:352
 msgid "label_ciudad_pais"
 msgstr "Ciudad"
 
 #. Default: "Comments by advisor in charge"
-#: matem/solicitudes/browser/solicitudbecario.pt:355
+#: matem/solicitudes/browser/solicitudbecario.pt:375
 msgid "label_comentario_asesor"
 msgstr "Comentarios por el asesor a cargo"
 
 #. Default: "Recommendation by Special Commission"
-#: matem/solicitudes/browser/solicitud.pt:349
-#: matem/solicitudes/browser/solicitudbecario.pt:397
-#: matem/solicitudes/browser/solicitudinstitucional.pt:367
+#: matem/solicitudes/browser/solicitud.pt:369
+#: matem/solicitudes/browser/solicitudbecario.pt:417
+#: matem/solicitudes/browser/solicitudinstitucional.pt:353
 msgid "label_comentario_ce"
 msgstr "Recomendación de la Comisión Especial"
 
 #. Default: "Comments by Consejo Interno"
-#: matem/solicitudes/browser/solicitud.pt:358
-#: matem/solicitudes/browser/solicitudbecario.pt:406
-#: matem/solicitudes/browser/solicitudinstitucional.pt:376
+#: matem/solicitudes/browser/solicitud.pt:378
+#: matem/solicitudes/browser/solicitudbecario.pt:426
+#: matem/solicitudes/browser/solicitudinstitucional.pt:362
 msgid "label_comentario_ci"
 msgstr "Comentarios del Consejo Interno"
 
 #. Default: "Additional Comments"
-#: matem/solicitudes/browser/solicitud.pt:311
-#: matem/solicitudes/browser/solicitudbecario.pt:357
-#: matem/solicitudes/browser/solicitudinstitucional.pt:312
+#: matem/solicitudes/browser/solicitud.pt:331
+#: matem/solicitudes/browser/solicitudbecario.pt:377
+#: matem/solicitudes/browser/solicitudinstitucional.pt:298
 msgid "label_comentario_owner"
 msgstr "Comentarios adicionales"
 
@@ -421,7 +427,7 @@ msgid "label_comisionado"
 msgstr "Comisionado"
 
 #. Default: "Cantidad Recomendada Por La Comision (pesos)"
-#: matem/solicitudes/browser/folderpendientes.pt:410
+#: matem/solicitudes/browser/folderpendientes.pt:430
 #: matem/solicitudes/browser/folderpendientessede.pt:382
 msgid "label_commision_recommended_quantity"
 msgstr "Cantidad Recomendada por la Comisión (pesos)"
@@ -432,8 +438,8 @@ msgid "label_consejero"
 msgstr "Consejero"
 
 #. Default: "Solicitud Creada"
-#: matem/solicitudes/browser/folderaprobadas.pt:198
-#: matem/solicitudes/browser/folderpendientes.pt:208
+#: matem/solicitudes/browser/folderaprobadas.pt:210
+#: matem/solicitudes/browser/folderpendientes.pt:228
 #: matem/solicitudes/browser/folderpendientessede.pt:200
 msgid "label_creation_date"
 msgstr "Fecha de creación"
@@ -449,84 +455,84 @@ msgid "label_current_state"
 msgstr "Estado actual"
 
 #. Default: "Fecha de Termino"
-#: matem/solicitudes/browser/folderaprobadas.pt:200
-#: matem/solicitudes/browser/folderpendientes.pt:210
+#: matem/solicitudes/browser/folderaprobadas.pt:212
+#: matem/solicitudes/browser/folderpendientes.pt:230
 #: matem/solicitudes/browser/folderpendientessede.pt:202
 msgid "label_end_date"
 msgstr "Fecha de término"
 
 #. Default: "This format has not been sent yet and is still being modified by it's author."
-#: matem/solicitudes/browser/solicitud.pt:163
-#: matem/solicitudes/browser/solicitudbecario.pt:179
-#: matem/solicitudes/browser/solicitudinstitucional.pt:163
+#: matem/solicitudes/browser/solicitud.pt:183
+#: matem/solicitudes/browser/solicitudbecario.pt:199
+#: matem/solicitudes/browser/solicitudinstitucional.pt:161
 msgid "label_estado_borrador_nopropietario"
 msgstr "Esta solicitud aún no ha sido enviada y sigue siendo modificada por su autor."
 
 #. Default: "This format has not been sent yet. Review data, if it is correct, you should send it to revision, by selecting 'State: Solicitud en borrador' then 'Enviar solicitud' inside the transitions menu in the top right corner."
-#: matem/solicitudes/browser/solicitud.pt:111
-#: matem/solicitudes/browser/solicitudbecario.pt:117
-#: matem/solicitudes/browser/solicitudinstitucional.pt:111
+#: matem/solicitudes/browser/solicitud.pt:131
+#: matem/solicitudes/browser/solicitudbecario.pt:137
+#: matem/solicitudes/browser/solicitudinstitucional.pt:128
 msgid "label_estado_borrador_propietario"
 msgstr "Esta solicitud aún no ha sido enviada. Puede cambiar su informacion haciendo clic en la pestaña 'Hacer cambios' en la parte superior. Revise los datos y, si son correctos, envíela a revisión haciendo clic en el botón 'Enviar', ubicado en la parte inferior de la solicitud."
 
 #. Default: "This format is being reviewed by the advisor in charge."
-#: matem/solicitudes/browser/solicitudbecario.pt:127
+#: matem/solicitudes/browser/solicitudbecario.pt:147
 #: matem/solicitudes/portlets/avisos.pt:31
 msgid "label_estado_preeliminar"
 msgstr "Esta solicitud está siendo revisada por el asesor a cargo. Espere noticias pronto."
 
 #. Default: "Fecha de Revision por Consejo Interno"
 #: matem/solicitudes/browser/micuenta.pt:230
-#: matem/solicitudes/browser/presupuesto_folder.pt:396
+#: matem/solicitudes/browser/presupuesto_folder.pt:433
 #: matem/solicitudes/browser/search_form.pt:138
 msgid "label_fecha_de_revision"
 msgstr "Fecha de Revisión por Consejo Interno"
 
 #. Default: "From date"
 #: matem/solicitudes/browser/search_form.pt:327
-#: matem/solicitudes/browser/solicitud.pt:292
-#: matem/solicitudes/browser/solicitudbecario.pt:336
+#: matem/solicitudes/browser/solicitud.pt:312
+#: matem/solicitudes/browser/solicitudbecario.pt:356
 msgid "label_fecha_desde"
 msgstr "Fecha de inicio"
 
 #. Default: "To date"
 #: matem/solicitudes/browser/search_form.pt:344
-#: matem/solicitudes/browser/solicitud.pt:293
-#: matem/solicitudes/browser/solicitudbecario.pt:337
+#: matem/solicitudes/browser/solicitud.pt:313
+#: matem/solicitudes/browser/solicitudbecario.pt:357
 msgid "label_fecha_hasta"
 msgstr "Fecha de término"
 
 #. Default: "Fecha de Revision por Consejo Interno"
-#: matem/solicitudes/browser/folderaprobadas.pt:204
-#: matem/solicitudes/browser/folderrechazadas.pt:202
+#: matem/solicitudes/browser/folderaprobadas.pt:216
+#: matem/solicitudes/browser/folderrechazadas.pt:218
 #: matem/solicitudes/browser/generaractas.pt:207
 msgid "label_fecha_revision"
 msgstr "Fecha de revisión por Consejo Interno"
 
 #. Default: "Fecha de revision por la Comision Especial"
-#: matem/solicitudes/browser/folderpendientes.pt:327
+#: matem/solicitudes/browser/folderpendientes.pt:347
 #: matem/solicitudes/browser/folderpendientessede.pt:310
 msgid "label_fecha_revision_comision"
 msgstr "Fecha de Revisión por la Comisión Especial"
 
 #. Default: "Fecha de revision por el Consejo Interno"
-#: matem/solicitudes/browser/folderaprobadas.pt:231
-#: matem/solicitudes/browser/folderpendientes.pt:414
+#: matem/solicitudes/browser/folderaprobadas.pt:243
+#: matem/solicitudes/browser/folderpendientes.pt:434
 #: matem/solicitudes/browser/folderpendientessede.pt:384
 msgid "label_fecha_revision_consejo"
 msgstr "Fecha de revisión por el Consejo Interno"
 
 #. Default: "Fecha de revisión por Comisión Especial"
-#: matem/solicitudes/browser/solicitud.pt:347
-#: matem/solicitudes/browser/solicitudbecario.pt:395
-#: matem/solicitudes/browser/solicitudinstitucional.pt:365
+#: matem/solicitudes/browser/solicitud.pt:367
+#: matem/solicitudes/browser/solicitudbecario.pt:415
+#: matem/solicitudes/browser/solicitudinstitucional.pt:351
 msgid "label_fecha_sesionce"
 msgstr "Fecha de revisión por Comisión Especial"
 
 #. Default: "Date of revision by the CI"
-#: matem/solicitudes/browser/solicitud.pt:354
-#: matem/solicitudes/browser/solicitudbecario.pt:402
-#: matem/solicitudes/browser/solicitudinstitucional.pt:372
+#: matem/solicitudes/browser/solicitud.pt:374
+#: matem/solicitudes/browser/solicitudbecario.pt:422
+#: matem/solicitudes/browser/solicitudinstitucional.pt:358
 msgid "label_fecha_sesionci"
 msgstr "Fecha de revisión por el Consejo Interno"
 
@@ -541,7 +547,7 @@ msgid "label_go_pending"
 msgstr "Ir a solicitudes pendientes de revisión"
 
 #. Default: "Degree"
-#: matem/solicitudes/browser/solicitudbecario.pt:326
+#: matem/solicitudes/browser/solicitudbecario.pt:346
 msgid "label_grado"
 msgstr "Grado de estudios"
 
@@ -551,42 +557,42 @@ msgid "label_importador"
 msgstr "Importador de Solicitudes"
 
 #. Default: "Info"
-#: matem/solicitudes/browser/solicitud.pt:118
-#: matem/solicitudes/browser/solicitudbecario.pt:124
-#: matem/solicitudes/browser/solicitudinstitucional.pt:118
+#: matem/solicitudes/browser/solicitud.pt:138
+#: matem/solicitudes/browser/solicitudbecario.pt:144
+#: matem/solicitudes/browser/solicitudinstitucional.pt:134
 msgid "label_informacion"
 msgstr "Información"
 
 #. Default: "Information about the solicitor"
-#: matem/solicitudes/browser/solicitud.pt:96
-#: matem/solicitudes/browser/solicitudbecario.pt:102
-#: matem/solicitudes/browser/solicitudinstitucional.pt:96
+#: matem/solicitudes/browser/solicitud.pt:116
+#: matem/solicitudes/browser/solicitudbecario.pt:122
+#: matem/solicitudes/browser/solicitudinstitucional.pt:118
 msgid "label_informacion_solicitante"
 msgstr "Información sobre el solicitante"
 
 #. Default: "Registration"
-#: matem/solicitudes/browser/solicitud.pt:318
-#: matem/solicitudes/browser/solicitudbecario.pt:366
-#: matem/solicitudes/browser/solicitudinstitucional.pt:319
+#: matem/solicitudes/browser/solicitud.pt:338
+#: matem/solicitudes/browser/solicitudbecario.pt:386
+#: matem/solicitudes/browser/solicitudinstitucional.pt:305
 msgid "label_inscripcion"
 msgstr "Inscripción"
 
 #. Default: "Institution"
 #: matem/solicitudes/browser/search_form.pt:313
-#: matem/solicitudes/browser/solicitud.pt:289
-#: matem/solicitudes/browser/solicitudbecario.pt:333
+#: matem/solicitudes/browser/solicitud.pt:309
+#: matem/solicitudes/browser/solicitudbecario.pt:353
 msgid "label_institucion"
 msgstr "Institución"
 
 #. Default: "Institution"
-#: matem/solicitudes/browser/solicitudvisitante.pt:273
+#: matem/solicitudes/browser/solicitudvisitante.pt:293
 msgid "label_institucion_procedencia"
 msgstr "Institución"
 
 #. Default: "Area of Research"
 #: matem/solicitudes/browser/search_form.pt:361
-#: matem/solicitudes/browser/solicitud.pt:298
-#: matem/solicitudes/browser/solicitudbecario.pt:342
+#: matem/solicitudes/browser/solicitud.pt:318
+#: matem/solicitudes/browser/solicitudbecario.pt:362
 msgid "label_investigacionarea"
 msgstr "Áreas de investigación"
 
@@ -596,77 +602,77 @@ msgid "label_investigador"
 msgstr "Investigador"
 
 #. Default: "Visitor"
-#: matem/solicitudes/browser/solicitudvisitante.pt:264
+#: matem/solicitudes/browser/solicitudvisitante.pt:284
 msgid "label_invitado"
 msgstr "Invitado"
 
 #. Default: "Link"
-#: matem/solicitudes/browser/folderaprobadas.pt:206
-#: matem/solicitudes/browser/folderpendientes.pt:263
+#: matem/solicitudes/browser/folderaprobadas.pt:218
+#: matem/solicitudes/browser/folderpendientes.pt:283
 #: matem/solicitudes/browser/folderpendientessede.pt:205
 msgid "label_link"
 msgstr "Enlace"
 
 #. Default: "Approved Quantity"
-#: matem/solicitudes/browser/presupuesto_folder.pt:300
+#: matem/solicitudes/browser/presupuesto_folder.pt:337
 msgid "label_local_approved_quantity"
 msgstr "Cantidad aprobada para este periodo"
 
 #. Default: "Días de Comisión Aprobados"
-#: matem/solicitudes/browser/presupuesto_folder.pt:304
+#: matem/solicitudes/browser/presupuesto_folder.pt:341
 msgid "label_local_commission_days"
 msgstr "Días de Comisión Aprobados"
 
 #. Default: "Días de Licencia Aprobados"
-#: matem/solicitudes/browser/presupuesto_folder.pt:305
+#: matem/solicitudes/browser/presupuesto_folder.pt:342
 msgid "label_local_license_days"
 msgstr "Días de Licencia Aprobados"
 
 #. Default: "Remaining Quantity"
-#: matem/solicitudes/browser/presupuesto_folder.pt:301
+#: matem/solicitudes/browser/presupuesto_folder.pt:338
 msgid "label_local_remaining_quantity"
 msgstr "Cantidad restante para este investigador"
 
 #. Default: "Remaining Quantity for this Period"
 #: matem/solicitudes/browser/presupuesto.pt:121
-#: matem/solicitudes/browser/presupuesto_folder.pt:361
+#: matem/solicitudes/browser/presupuesto_folder.pt:398
 msgid "label_local_remaining_quantity_period"
 msgstr "Cantidad restante para este periodo"
 
 #. Default: "Local Budget Overview"
-#: matem/solicitudes/browser/presupuesto_folder.pt:135
+#: matem/solicitudes/browser/presupuesto_folder.pt:172
 #: matem/solicitudes/browser/solicitudfolder.pt:122
 msgid "label_localbudget_app"
 msgstr "Presupuesto Total Local"
 
 #. Default: "Locally assigned budget"
 #: matem/solicitudes/browser/presupuesto.pt:118
-#: matem/solicitudes/browser/presupuesto_folder.pt:357
+#: matem/solicitudes/browser/presupuesto_folder.pt:394
 msgid "label_locally_assigned"
 msgstr "Presupuesto ya ejercido en este periodo"
 
 #. Default: "None of your applications has been approved yet."
 #: matem/solicitudes/browser/micuenta.pt:209
-#: matem/solicitudes/browser/misaprobadas.pt:138
+#: matem/solicitudes/browser/misaprobadas.pt:139
 msgid "label_no_approved"
 msgstr "Ninguna de sus solicitudes ha sido aprobada aún"
 
 #. Default: "No applications has been approved."
-#: matem/solicitudes/browser/folderaprobadas.pt:181
-#: matem/solicitudes/browser/folderrechazadas.pt:179
+#: matem/solicitudes/browser/folderaprobadas.pt:192
+#: matem/solicitudes/browser/folderrechazadas.pt:195
 #: matem/solicitudes/browser/generaractas.pt:179
 msgid "label_no_approved_general"
 msgstr "Ninguna solicitud se ha aprobado aún"
 
 #. Default: "Hooray! You have no pending reviews. You can review your approved or rejected reviews by navigating to 'My approved applications' or 'My rejected applications' respectively."
-#: matem/solicitudes/browser/folderpendientes.pt:520
+#: matem/solicitudes/browser/folderpendientes.pt:540
 #: matem/solicitudes/browser/folderpendientessede.pt:478
 #: matem/solicitudes/portlets/avisos.pt:200
 msgid "label_no_pending"
 msgstr "No hay solicitudes pendientes. Puede revisar sus solicitudes aprobadas y rechazadas navegando a 'Mis solicitudes aprobadas' y 'Mis solicitudes rechazadas', respectivamente."
 
 #. Default: "None of your applications has been rejected yet."
-#: matem/solicitudes/browser/misrechazadas.pt:160
+#: matem/solicitudes/browser/misrechazadas.pt:172
 msgid "label_no_rejected"
 msgstr "Ninguna de tus solicitudes ha sido rechazada aún"
 
@@ -676,13 +682,13 @@ msgid "label_no_results"
 msgstr "La busqueda no generó resultados. Intente de nuevo"
 
 #. Default: "No has enviado ninguna solicitud nueva aún"
-#: matem/solicitudes/browser/misenviadas.pt:165
+#: matem/solicitudes/browser/misenviadas.pt:177
 msgid "label_no_sent"
 msgstr "No has enviado ninguna solicitud nueva aún"
 
 #. Default: "There are no applications to show."
-#: matem/solicitudes/browser/folderaprobadas.pt:182
-#: matem/solicitudes/browser/folderpendientes.pt:521
+#: matem/solicitudes/browser/folderaprobadas.pt:193
+#: matem/solicitudes/browser/folderpendientes.pt:541
 #: matem/solicitudes/browser/folderpendientessede.pt:479
 msgid "label_no_show"
 msgstr "No hay ninguna solicitud para mostrar"
@@ -694,40 +700,40 @@ msgstr "Nombre del becario"
 
 #. Default: "Objective"
 #: matem/solicitudes/browser/search_form.pt:420
-#: matem/solicitudes/browser/solicitud.pt:296
-#: matem/solicitudes/browser/solicitudbecario.pt:340
+#: matem/solicitudes/browser/solicitud.pt:316
+#: matem/solicitudes/browser/solicitudbecario.pt:360
 msgid "label_objeto_viaje"
 msgstr "Objetivo de la visita"
 
 #. Default: "Country"
 #: matem/solicitudes/browser/search_form.pt:275
-#: matem/solicitudes/browser/solicitud.pt:287
-#: matem/solicitudes/browser/solicitudbecario.pt:331
+#: matem/solicitudes/browser/solicitud.pt:307
+#: matem/solicitudes/browser/solicitudbecario.pt:351
 msgid "label_pais"
 msgstr "País"
 
 #. Default: "Country"
-#: matem/solicitudes/browser/solicitudvisitante.pt:270
+#: matem/solicitudes/browser/solicitudvisitante.pt:290
 msgid "label_pais_procedencia"
 msgstr "País"
 
 #. Default: "Transportation"
-#: matem/solicitudes/browser/solicitud.pt:314
-#: matem/solicitudes/browser/solicitudbecario.pt:362
-#: matem/solicitudes/browser/solicitudinstitucional.pt:315
+#: matem/solicitudes/browser/solicitud.pt:334
+#: matem/solicitudes/browser/solicitudbecario.pt:382
+#: matem/solicitudes/browser/solicitudinstitucional.pt:301
 msgid "label_pasaje"
 msgstr "Pasaje"
 
 #. Default: "Pending for review"
-#: matem/solicitudes/browser/folderpendientes.pt:151
+#: matem/solicitudes/browser/folderpendientes.pt:171
 #: matem/solicitudes/browser/folderpendientessede.pt:142
 #: matem/solicitudes/browser/solicitudfolder.pt:86
 msgid "label_pending_app"
 msgstr "Solicitudes pendientes de revisión"
 
 #. Default: "You have pending reviews! Review your pending requests using the square in the right called 'Review List'."
-#: matem/solicitudes/browser/folderaprobadas.pt:133
-#: matem/solicitudes/browser/folderpendientes.pt:145
+#: matem/solicitudes/browser/folderaprobadas.pt:144
+#: matem/solicitudes/browser/folderpendientes.pt:165
 #: matem/solicitudes/browser/folderpendientessede.pt:136
 msgid "label_pending_reviews"
 msgstr "¡Tiene solicitudes pendientes! Revíselas usando el cuadro ubicado a la derecha de su pantalla y que lleva por título 'A examinar' (dando clic sobre los recuadros) o navegando a 'Solicitudes pendientes de revisión'."
@@ -738,28 +744,28 @@ msgid "label_period"
 msgstr "Periodo"
 
 #. Default: "Place"
-#: matem/solicitudes/browser/folderaprobadas.pt:197
-#: matem/solicitudes/browser/folderpendientes.pt:207
+#: matem/solicitudes/browser/folderaprobadas.pt:209
+#: matem/solicitudes/browser/folderpendientes.pt:227
 #: matem/solicitudes/browser/folderpendientessede.pt:199
 msgid "label_place"
 msgstr "Lugar"
 
 #. Default: "has a total assigned budget of"
-#: matem/solicitudes/browser/solicitud.pt:100
-#: matem/solicitudes/browser/solicitudbecario.pt:106
-#: matem/solicitudes/browser/solicitudinstitucional.pt:100
+#: matem/solicitudes/browser/solicitud.pt:120
+#: matem/solicitudes/browser/solicitudbecario.pt:126
+#: matem/solicitudes/browser/solicitudinstitucional.pt:120
 msgid "label_presupuesto_asignado"
 msgstr "tiene un presupuesto total ejercido de "
 
 #. Default: "and can have, at most, another"
-#: matem/solicitudes/browser/solicitud.pt:100
-#: matem/solicitudes/browser/solicitudbecario.pt:106
-#: matem/solicitudes/browser/solicitudinstitucional.pt:100
+#: matem/solicitudes/browser/solicitud.pt:120
+#: matem/solicitudes/browser/solicitudbecario.pt:126
+#: matem/solicitudes/browser/solicitudinstitucional.pt:120
 msgid "label_presupuesto_asignado2"
 msgstr "y puede tener máximo otros "
 
 #. Default: "City"
-#: matem/solicitudes/browser/solicitudvisitante.pt:272
+#: matem/solicitudes/browser/solicitudvisitante.pt:292
 msgid "label_procedencia"
 msgstr "Ciudad"
 
@@ -769,8 +775,8 @@ msgid "label_programador_presupuesto"
 msgstr "Programador de Presupuesto"
 
 #. Default: "Cantidad de Días"
-#: matem/solicitudes/browser/folderaprobadas.pt:201
-#: matem/solicitudes/browser/folderpendientes.pt:211
+#: matem/solicitudes/browser/folderaprobadas.pt:213
+#: matem/solicitudes/browser/folderpendientes.pt:231
 #: matem/solicitudes/browser/folderpendientessede.pt:203
 msgid "label_quantity_days"
 msgstr "Cantidad de días"
@@ -781,79 +787,79 @@ msgid "label_quick_access"
 msgstr "Acceso rápido"
 
 #. Default: "Reason"
-#: matem/solicitudes/browser/folderaprobadas.pt:196
-#: matem/solicitudes/browser/folderpendientes.pt:206
+#: matem/solicitudes/browser/folderaprobadas.pt:208
+#: matem/solicitudes/browser/folderpendientes.pt:226
 #: matem/solicitudes/browser/folderpendientessede.pt:198
 msgid "label_reason"
 msgstr "Motivo"
 
 #. Default: "This application has been rejected. If you have any doubt please contact the site manager."
-#: matem/solicitudes/browser/solicitud.pt:232
-#: matem/solicitudes/browser/solicitudbecario.pt:272
-#: matem/solicitudes/browser/solicitudinstitucional.pt:232
+#: matem/solicitudes/browser/solicitud.pt:252
+#: matem/solicitudes/browser/solicitudbecario.pt:292
+#: matem/solicitudes/browser/solicitudinstitucional.pt:210
 msgid "label_rechazada_nopropietario"
 msgstr "Esta solicitud ha sido rechazada. Si tiene alguna duda, contacte al administrador."
 
 #. Default: "Too bad, your application was rejected! You may send another application if you wish."
-#: matem/solicitudes/browser/solicitud.pt:152
-#: matem/solicitudes/browser/solicitudbecario.pt:168
-#: matem/solicitudes/browser/solicitudinstitucional.pt:152
+#: matem/solicitudes/browser/solicitud.pt:172
+#: matem/solicitudes/browser/solicitudbecario.pt:188
+#: matem/solicitudes/browser/solicitudinstitucional.pt:153
 msgid "label_rechazada_propietario"
 msgstr "Por desgracia esta solicitud ha sido rechazada. Puede mandar otra solicitud si lo desea."
 
 #. Default: "Recomiendo Aprobar"
-#: matem/solicitudes/browser/solicitud.pt:351
-#: matem/solicitudes/browser/solicitudbecario.pt:399
-#: matem/solicitudes/browser/solicitudinstitucional.pt:369
+#: matem/solicitudes/browser/solicitud.pt:371
+#: matem/solicitudes/browser/solicitudbecario.pt:419
+#: matem/solicitudes/browser/solicitudinstitucional.pt:355
 msgid "label_recomienda_aprobar"
 msgstr "Recomiendo Aprobar"
 
 #. Default: "My rejected applications"
-#: matem/solicitudes/browser/misrechazadas.pt:120
+#: matem/solicitudes/browser/misrechazadas.pt:132
 #: matem/solicitudes/browser/solicitudfolder.pt:62
 msgid "label_rejected_app"
 msgstr "Mis solicitudes rechazadas"
 
 #. Default: "Rejected applications"
-#: matem/solicitudes/browser/folderrechazadas.pt:184
-#: matem/solicitudes/browser/misrechazadas.pt:165
+#: matem/solicitudes/browser/folderrechazadas.pt:200
+#: matem/solicitudes/browser/misrechazadas.pt:177
 msgid "label_rejected_nosol"
 msgstr "Solicitudes Rechazadas"
 
 #. Default: "Cantidad Rechazada (pesos)"
-#: matem/solicitudes/browser/folderrechazadas.pt:200
-#: matem/solicitudes/browser/misrechazadas.pt:179
+#: matem/solicitudes/browser/folderrechazadas.pt:216
+#: matem/solicitudes/browser/misrechazadas.pt:191
 msgid "label_rejected_quantity"
 msgstr "Cantidad Rechazada (pesos)"
 
 #. Default: "Cantidad requerida (pesos)"
-#: matem/solicitudes/browser/misenviadas.pt:184
+#: matem/solicitudes/browser/misenviadas.pt:196
 msgid "label_requested_quantity"
 msgstr "Cantidad requerida (pesos)"
 
 #. Default: "Cantidad requerida (pesos)"
-#: matem/solicitudes/browser/folderpendientes.pt:212
+#: matem/solicitudes/browser/folderpendientes.pt:232
 #: matem/solicitudes/browser/folderpendientessede.pt:204
 msgid "label_required_quantity"
 msgstr "Cantidad requerida (pesos)"
 
 #. Default: "Cantidad requerida para Inscripcion (pesos)"
-#: matem/solicitudes/browser/folderpendientes.pt:324
+#: matem/solicitudes/browser/folderpendientes.pt:344
 msgid "label_required_quantity_register"
 msgstr "Cantidad requerida para Inscripción (pesos)"
 
 #. Default: "Cantidad requerida para Pasaje (pesos)"
-#: matem/solicitudes/browser/folderpendientes.pt:322
+#: matem/solicitudes/browser/folderpendientes.pt:342
 msgid "label_required_quantity_transport"
 msgstr "Cantidad requerida para Pasaje (pesos)"
 
 #. Default: "Cantidad requerida para Viaticos (pesos)"
-#: matem/solicitudes/browser/folderpendientes.pt:323
+#: matem/solicitudes/browser/folderpendientes.pt:343
 msgid "label_required_quantity_viaticos"
 msgstr "Cantidad requerida para Viáticos (pesos)"
 
 #. Default: "Researcher"
-#: matem/solicitudes/browser/presupuesto_folder.pt:163
+#: matem/solicitudes/browser/presupuesto_folder.pt:200
 msgid "label_researchers"
 msgstr "Investigadores"
 
@@ -868,46 +874,46 @@ msgid "label_responsable_consejo"
 msgstr "Responsable del Consejo"
 
 #. Default: "This application is been reviewed by the special comision."
-#: matem/solicitudes/browser/solicitud.pt:121
-#: matem/solicitudes/browser/solicitudbecario.pt:137
-#: matem/solicitudes/browser/solicitudinstitucional.pt:121
+#: matem/solicitudes/browser/solicitud.pt:141
+#: matem/solicitudes/browser/solicitudbecario.pt:157
+#: matem/solicitudes/browser/solicitudinstitucional.pt:135
 msgid "label_revision_comision_especial"
 msgstr "Esta solicitud está siendo revisada por la comisión especial. Espere noticias pronto."
 
 #. Default: "You still haven't approved nor rejected this request! Review data and approve it or reject it by selecting 'State: Solicitud en revision por comision especial' then 'Aprobar y enviar a consejo interno' or 'Rechazar', respectively, inside the transitions menu in the top right corner."
-#: matem/solicitudes/browser/solicitud.pt:174
-#: matem/solicitudes/browser/solicitudbecario.pt:214
-#: matem/solicitudes/browser/solicitudinstitucional.pt:174
+#: matem/solicitudes/browser/solicitud.pt:194
+#: matem/solicitudes/browser/solicitudbecario.pt:234
+#: matem/solicitudes/browser/solicitudinstitucional.pt:169
 msgid "label_revision_comisionado"
 msgstr "¡Usted aún no ha aprobado ni rechazado esta solicitud! Puede cambiar su informacion dando clic en la pestaña 'Hacer cambios' en la parte superior. Revise los datos mandela oprimiendo el boton 'Enviar a consejo Interno' o 'Rechazar', ubicados en la parte inferior de la solicitud."
 
 #. Default: "You still haven't approved nor rejected this request! Review data and approve it or reject it by selecting 'State: Solicitud en revision por consejo interno' then 'Aprobar' or 'Rechazar', respectively, inside the transitions menu in the top right corner."
-#: matem/solicitudes/browser/solicitud.pt:198
-#: matem/solicitudes/browser/solicitudinstitucional.pt:198
-#: matem/solicitudes/browser/solicitudvisitante.pt:188
+#: matem/solicitudes/browser/solicitud.pt:218
+#: matem/solicitudes/browser/solicitudinstitucional.pt:185
+#: matem/solicitudes/browser/solicitudvisitante.pt:208
 msgid "label_revision_consejero"
 msgstr "¡Usted aún no ha aprobado ni rechazado esta solicitud! Puede cambiar su informacion dando clic en la pestaña 'Hacer cambios' en la parte superior. Revise los datos y apruebela o rechacela haciendo clic en los botones 'Aprobar' o 'Rechazar', respectivamente, ubicados en la parte inferior de la solicitud."
 
 #. Default: "You still haven't approved nor rejected this request! Review data and approve it or reject it by selecting 'State: Solicitud en revision por consejo interno' then 'Aprobar' or 'Rechazar', respectively, inside the transitions menu in the top right corner."
-#: matem/solicitudes/browser/solicitudbecario.pt:238
+#: matem/solicitudes/browser/solicitudbecario.pt:258
 msgid "label_revision_consejero_interno"
 msgstr "¡Usted aún no ha aprobado ni rechazado esta solicitud! Puede cambiar su informacion dando clic en la pestaña 'Hacer cambios' en la parte superior. Revise los datos y apruebela o rechacela haciendo clic en los botones 'Aprobar' o 'Rechazar', respectivamente, ubicados en la parte inferior de la solicitud."
 
 #. Default: "This application is been reviewed by the internal council."
-#: matem/solicitudes/browser/solicitud.pt:131
-#: matem/solicitudes/browser/solicitudbecario.pt:147
-#: matem/solicitudes/browser/solicitudinstitucional.pt:131
+#: matem/solicitudes/browser/solicitud.pt:151
+#: matem/solicitudes/browser/solicitudbecario.pt:167
+#: matem/solicitudes/browser/solicitudinstitucional.pt:140
 msgid "label_revision_consejo_interno"
 msgstr "Esta solicitud está siendo revisada por el Consejo Interno. Espere noticias pronto."
 
 #. Default: "You still haven't approved nor rejected this request! Review data and approve it or return it to the scholarship holder by selecting 'State: Solicitud en revision preeliminar' and then 'Enviar' o 'Regresar solicitud a becario', respectively, inside the transitions menu in the top right corner."
-#: matem/solicitudes/browser/solicitudbecario.pt:190
+#: matem/solicitudes/browser/solicitudbecario.pt:210
 #: matem/solicitudes/portlets/avisos.pt:75
 msgid "label_revision_investigadoracargo"
 msgstr "¡Usted aún no ha aprobado ni rechazado esta solicitud! Puede cambiar su informacion dando clic en la pestaña 'Hacer cambios' en la parte superior. Revise los datos y apruebela o regresela al becario haciendo clic en los botones 'Enviar' o 'Regresar solicitud a becario', respectivamente, ubicados en la parte inferior de la solicitud."
 
 #. Default: "Scholarship Holders"
-#: matem/solicitudes/browser/presupuesto_folder.pt:172
+#: matem/solicitudes/browser/presupuesto_folder.pt:209
 msgid "label_scholarship_holders"
 msgstr "Becarios"
 
@@ -952,18 +958,18 @@ msgid "label_search_creator"
 msgstr "Solicitudes enviadas por"
 
 #. Default: "Semblanza"
-#: matem/solicitudes/browser/solicitudvisitante.pt:266
+#: matem/solicitudes/browser/solicitudvisitante.pt:286
 msgid "label_semblanza"
 msgstr "Semblanza"
 
 #. Default: "In process applications"
-#: matem/solicitudes/browser/misenviadas.pt:121
+#: matem/solicitudes/browser/misenviadas.pt:133
 #: matem/solicitudes/browser/solicitudfolder.pt:74
 msgid "label_sent_app"
 msgstr "Mis solicitudes en proceso"
 
 #. Default: "Solicitudes en proceso de revisión"
-#: matem/solicitudes/browser/misenviadas.pt:170
+#: matem/solicitudes/browser/misenviadas.pt:182
 msgid "label_sent_nosol"
 msgstr "Solicitudes en proceso de revisión"
 
@@ -983,23 +989,23 @@ msgid "label_solicitante_auxiliar"
 msgstr "Solicitante Auxiliar"
 
 #. Default: "Solicitante"
-#: matem/solicitudes/browser/folderaprobadas.pt:195
-#: matem/solicitudes/browser/folderpendientes.pt:205
+#: matem/solicitudes/browser/folderaprobadas.pt:207
+#: matem/solicitudes/browser/folderpendientes.pt:225
 #: matem/solicitudes/browser/folderpendientessede.pt:197
 msgid "label_solicitor"
 msgstr "Solicitante"
 
 #. Default: "Fecha de Inicio"
-#: matem/solicitudes/browser/folderaprobadas.pt:199
-#: matem/solicitudes/browser/folderpendientes.pt:209
+#: matem/solicitudes/browser/folderaprobadas.pt:211
+#: matem/solicitudes/browser/folderpendientes.pt:229
 #: matem/solicitudes/browser/folderpendientessede.pt:201
 msgid "label_start_date"
 msgstr "Fecha de inicio"
 
 #. Default: "State"
-#: matem/solicitudes/browser/folderpendientes.pt:213
-#: matem/solicitudes/browser/misaprobadas.pt:161
-#: matem/solicitudes/browser/misenviadas.pt:186
+#: matem/solicitudes/browser/folderpendientes.pt:233
+#: matem/solicitudes/browser/misaprobadas.pt:162
+#: matem/solicitudes/browser/misenviadas.pt:198
 msgid "label_state"
 msgstr "Estado"
 
@@ -1009,40 +1015,40 @@ msgid "label_tecnico"
 msgstr "Técnico Académico"
 
 #. Default: "Transportation means"
-#: matem/solicitudes/browser/solicitud.pt:315
-#: matem/solicitudes/browser/solicitudbecario.pt:363
-#: matem/solicitudes/browser/solicitudinstitucional.pt:316
+#: matem/solicitudes/browser/solicitud.pt:335
+#: matem/solicitudes/browser/solicitudbecario.pt:383
+#: matem/solicitudes/browser/solicitudinstitucional.pt:302
 msgid "label_tipo_pasaje"
 msgstr "Tipo de pasaje"
 
 #. Default: "Title of the work to be presented"
 #: matem/solicitudes/browser/search_form.pt:431
-#: matem/solicitudes/browser/solicitud.pt:303
-#: matem/solicitudes/browser/solicitudbecario.pt:347
+#: matem/solicitudes/browser/solicitud.pt:323
+#: matem/solicitudes/browser/solicitudbecario.pt:367
 msgid "label_titulo_trabajo"
 msgstr "Título del trabajo a presentar"
 
 #. Default: "Dias de Comision Aprobados"
 #: matem/solicitudes/browser/micuenta.pt:177
-#: matem/solicitudes/browser/misaprobadas.pt:107
+#: matem/solicitudes/browser/misaprobadas.pt:108
 msgid "label_total_approved_commission_days"
 msgstr "Días de Comisión aprobados"
 
 #. Default: "Dias de License Aprobados"
 #: matem/solicitudes/browser/micuenta.pt:174
-#: matem/solicitudes/browser/misaprobadas.pt:104
+#: matem/solicitudes/browser/misaprobadas.pt:105
 msgid "label_total_approved_license_days"
 msgstr "Días de Licencia aprobados"
 
 #. Default: "Sum of All Approved Quantities"
 #: matem/solicitudes/browser/micuenta.pt:171
-#: matem/solicitudes/browser/misaprobadas.pt:101
+#: matem/solicitudes/browser/misaprobadas.pt:102
 msgid "label_total_approved_quantity"
 msgstr "Suma de cantidades aprobadas (pesos)"
 
 #. Default: "Type"
-#: matem/solicitudes/browser/folderaprobadas.pt:194
-#: matem/solicitudes/browser/folderpendientes.pt:204
+#: matem/solicitudes/browser/folderaprobadas.pt:206
+#: matem/solicitudes/browser/folderpendientes.pt:224
 #: matem/solicitudes/browser/folderpendientessede.pt:196
 msgid "label_type"
 msgstr "Tipo"
@@ -1053,29 +1059,29 @@ msgid "label_type_upload"
 msgstr "Tipo de Solicitud"
 
 #. Default: "Travel Allowances"
-#: matem/solicitudes/browser/solicitud.pt:317
-#: matem/solicitudes/browser/solicitudinstitucional.pt:318
-#: matem/solicitudes/browser/solicitudvisitante.pt:293
+#: matem/solicitudes/browser/solicitud.pt:337
+#: matem/solicitudes/browser/solicitudinstitucional.pt:304
+#: matem/solicitudes/browser/solicitudvisitante.pt:313
 msgid "label_viaticos"
 msgstr "Viáticos"
 
 #. Default: "Travel Allowances"
-#: matem/solicitudes/browser/solicitudbecario.pt:365
+#: matem/solicitudes/browser/solicitudbecario.pt:385
 msgid "label_viaticos_becario"
 msgstr "Cantidad para viáticos"
 
 #. Default: "Foto Visitante"
-#: matem/solicitudes/browser/solicitudvisitante.pt:267
+#: matem/solicitudes/browser/solicitudvisitante.pt:287
 msgid "label_visitante"
 msgstr "Foto Visitante"
 
 #. Default: "Max Budget per Researcher:"
-#: matem/solicitudes/browser/presupuesto_folder.pt:151
+#: matem/solicitudes/browser/presupuesto_folder.pt:188
 msgid "legend_budget"
 msgstr "Presupuesto máximo por investigador: "
 
 #. Default: "Max Budget for this Period:"
-#: matem/solicitudes/browser/presupuesto_folder.pt:275
+#: matem/solicitudes/browser/presupuesto_folder.pt:312
 msgid "legend_budget_local"
 msgstr "Máximo Presupuesto para este Periodo: "
 
@@ -1090,8 +1096,8 @@ msgid "legend_upload_auxiliar_forms"
 msgstr "Subir Solicitudes a Nombre de otro Usuario"
 
 #. Default: "Numero de Acta del Consejo Interno"
-#: matem/solicitudes/browser/folderaprobadas.pt:241
-#: matem/solicitudes/browser/folderpendientes.pt:466
+#: matem/solicitudes/browser/folderaprobadas.pt:253
+#: matem/solicitudes/browser/folderpendientes.pt:486
 #: matem/solicitudes/browser/folderpendientessede.pt:423
 msgid "numeroDeActa"
 msgstr "Número de Acta del Consejo Interno"
