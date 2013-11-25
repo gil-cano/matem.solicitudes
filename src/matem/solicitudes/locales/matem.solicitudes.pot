@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-11-25 09:40+0000\n"
+"POT-Creation-Date: 2013-11-25 10:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,6 +103,9 @@ msgstr ""
 msgid "description_localrequest_search"
 msgstr ""
 
+msgid "help_adjuntos"
+msgstr ""
+
 #. Default: "Here you can see every approved application in this period (even if it's not yours)."
 #: matem/solicitudes/browser/folderaprobadas.pt:153
 #: matem/solicitudes/browser/generaractas.pt:140
@@ -128,12 +131,48 @@ msgstr ""
 msgid "help_approved_app"
 msgstr ""
 
+msgid "help_cantidad_inscripcion"
+msgstr ""
+
+msgid "help_cantidad_pasaje"
+msgstr ""
+
+msgid "help_cantidad_viaticos"
+msgstr ""
+
 msgid "help_ciudad_pais"
+msgstr ""
+
+msgid "help_comentario_ce"
+msgstr ""
+
+msgid "help_comentario_ci"
+msgstr ""
+
+msgid "help_comentario_owner"
+msgstr ""
+
+msgid "help_fecha_desde"
+msgstr ""
+
+msgid "help_fecha_hasta"
+msgstr ""
+
+msgid "help_fecha_sesionci"
 msgstr ""
 
 #. Default: "Seleccione el tipo de solicitud a importar."
 #: matem/solicitudes/browser/solicitudes_auxiliares.pt:130
 msgid "help_importtype_auxiliaresForm"
+msgstr ""
+
+msgid "help_inscripcion"
+msgstr ""
+
+msgid "help_institucion"
+msgstr ""
+
+msgid "help_investigacionarea"
 msgstr ""
 
 #. Default: "Nombre del investigador/estudiante/tecnico para el cual se va a crear la solicitud."
@@ -147,7 +186,13 @@ msgstr ""
 msgid "help_localbudget_app"
 msgstr ""
 
+msgid "help_objeto_viaje"
+msgstr ""
+
 msgid "help_pais"
+msgstr ""
+
+msgid "help_pasaje"
 msgstr ""
 
 #. Default: "Here you can see every application that needs your review"
@@ -222,6 +267,18 @@ msgstr ""
 #: matem/solicitudes/browser/misenviadas.pt:136
 #: matem/solicitudes/browser/solicitudfolder.pt:75
 msgid "help_sent_app"
+msgstr ""
+
+msgid "help_tipo_pasaje"
+msgstr ""
+
+msgid "help_titulo_trabajo"
+msgstr ""
+
+msgid "help_trabajo"
+msgstr ""
+
+msgid "help_viaticos"
 msgstr ""
 
 #. Default: "No. de Cuenta"
@@ -1044,6 +1101,9 @@ msgstr ""
 #: matem/solicitudes/browser/micuenta.pt:171
 #: matem/solicitudes/browser/misaprobadas.pt:102
 msgid "label_total_approved_quantity"
+msgstr ""
+
+msgid "label_trabajo"
 msgstr ""
 
 #. Default: "Type"

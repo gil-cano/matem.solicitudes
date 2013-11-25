@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-11-25 09:40+0000\n"
+"POT-Creation-Date: 2013-11-25 10:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -103,6 +103,9 @@ msgstr "Puede importar solicitudes en texto simple al sistema"
 msgid "description_localrequest_search"
 msgstr "Con esta forma puede buscar solicitudes de viáticos del periodo actual"
 
+msgid "help_adjuntos"
+msgstr "Por favor adjunte la carta de invitación o cualquier otro documento relacionado"
+
 #. Default: "Here you can see every approved application in this period (even if it's not yours)."
 #: matem/solicitudes/browser/folderaprobadas.pt:153
 #: matem/solicitudes/browser/generaractas.pt:140
@@ -128,13 +131,49 @@ msgstr "Dé clic aquí si la solicitud que va a introducir al sistema no es para
 msgid "help_approved_app"
 msgstr "Aquí puede ver sus solicitudes que ya han sido aprobadas"
 
+msgid "help_cantidad_inscripcion"
+msgstr "Cantidad solicitada para inscripción, en pesos mexicanos"
+
+msgid "help_cantidad_pasaje"
+msgstr "Cantidad solicitada para pasajes, en pesos mexicanos"
+
+msgid "help_cantidad_viaticos"
+msgstr "Cantidad solicitada para viáticos, en pesos mexicanos"
+
 msgid "help_ciudad_pais"
 msgstr "Ciudad que visitará"
+
+msgid "help_comentario_ce"
+msgstr "Agregue cualquier comentario referente a su recomendación para esta solicitud"
+
+msgid "help_comentario_ci"
+msgstr "Agregue cualquier comentario referente a la resolución tomada para esta solicitud"
+
+msgid "help_comentario_owner"
+msgstr "Agregue cualquier comentario que considere importante para su solicitud"
+
+msgid "help_fecha_desde"
+msgstr "Fecha en que iniciará la visita (puede ser aproximada)"
+
+msgid "help_fecha_hasta"
+msgstr "Fecha en que terminará la visita (puede ser aproximada)"
+
+msgid "help_fecha_sesionci"
+msgstr "Fecha en la que la solicitud fue revisada"
 
 #. Default: "Seleccione el tipo de solicitud a importar."
 #: matem/solicitudes/browser/solicitudes_auxiliares.pt:130
 msgid "help_importtype_auxiliaresForm"
 msgstr "Seleccione el tipo de solicitud a importar"
+
+msgid "help_inscripcion"
+msgstr "Especifique si solicita el pago de inscripción"
+
+msgid "help_institucion"
+msgstr "Institucion que visitará"
+
+msgid "help_investigacionarea"
+msgstr ""Dudas acerca de la clasificación y como encontrar un área, acceda a la página oficial del <a href=\"http://www.ams.org/msc\">ams</a>"
 
 #. Default: "Nombre del investigador/estudiante/tecnico para el cual se va a crear la solicitud."
 #: matem/solicitudes/browser/solicitudes_auxiliares.pt:144
@@ -147,8 +186,14 @@ msgstr "Nombre del investigador/estudiante/técnico para el cual se va a crear l
 msgid "help_localbudget_app"
 msgstr "Desglose del presupuesto dentro del folder actual"
 
+msgid "help_objeto_viaje"
+msgstr "Escriba el objetivo esperado de la visita"
+
 msgid "help_pais"
 msgstr "País destino"
+
+msgid "help_pasaje"
+msgstr "Especifique si solicita el pago de pasaje"
 
 #. Default: "Here you can see every application that needs your review"
 #: matem/solicitudes/browser/folderpendientes.pt:174
@@ -223,6 +268,18 @@ msgstr "Buscar solicitudes del tipo especificado"
 #: matem/solicitudes/browser/solicitudfolder.pt:75
 msgid "help_sent_app"
 msgstr "Aquí puede ver todas las solicitudes que ha enviado"
+
+msgid "help_tipo_pasaje"
+msgstr "Especifique el tipo de pasaje que utilizará"
+
+msgid "help_titulo_trabajo"
+msgstr "Escriba el título del trabajo a presentar"
+
+msgid "help_trabajo"
+msgstr "Especifique si presentará un trabajo"
+
+msgid "help_viaticos"
+msgstr "Especifique si solicita viáticos. Los máximos son: $900 diarios (México) y $1,200 diarios (Otros países)"
 
 #. Default: "No. de Cuenta"
 #: matem/solicitudes/browser/solicitudbecario.pt:345
@@ -1045,6 +1102,9 @@ msgstr "Días de Licencia aprobados"
 #: matem/solicitudes/browser/misaprobadas.pt:102
 msgid "label_total_approved_quantity"
 msgstr "Suma de cantidades aprobadas (pesos)"
+
+msgid "label_trabajo"
+msgstr "Trabajo"
 
 #. Default: "Type"
 #: matem/solicitudes/browser/folderaprobadas.pt:206

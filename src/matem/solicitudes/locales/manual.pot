@@ -19,3 +19,63 @@ msgstr ""
 
 msgid "help_ciudad_pais"
 msgstr ""
+
+msgid "help_institucion"
+msgstr ""
+
+msgid "help_fecha_desde"
+msgstr ""
+
+msgid "help_fecha_hasta"
+msgstr ""
+
+msgid "help_objeto_viaje"
+msgstr ""
+
+msgid "help_investigacionarea"
+msgstr ""
+
+msgid "label_trabajo"
+msgstr ""
+
+msgid "help_trabajo"
+msgstr ""
+
+msgid "help_titulo_trabajo"
+msgstr ""
+
+msgid "help_pasaje"
+msgstr ""
+
+msgid "help_tipo_pasaje"
+msgstr ""
+
+msgid "help_cantidad_pasaje"
+msgstr ""
+
+msgid "help_viaticos"
+msgstr ""
+
+msgid "help_cantidad_viaticos"
+msgstr ""
+
+msgid "help_inscripcion"
+msgstr ""
+
+msgid "help_cantidad_inscripcion"
+msgstr ""
+
+msgid "help_adjuntos"
+msgstr ""
+
+msgid "help_comentario_owner"
+msgstr ""
+
+msgid "help_comentario_ce"
+msgstr ""
+
+msgid "help_comentario_ci"
+msgstr ""
+
+msgid "help_fecha_sesionci"
+msgstr ""
