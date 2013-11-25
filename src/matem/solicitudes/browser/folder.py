@@ -1011,16 +1011,30 @@ class SolicitudFolderView(BrowserView):
                     text_dates = unicode('Duración %s días, del %s al %s.' % (solicitud.getCantidadDeDias(), solicitud.getFechaDesde().strftime('%d/%m/%Y'), solicitud.getFechaHasta().strftime('%d/%m/%Y')), 'utf-8')
 
                     if solicitud.getTotal() > 0:
-                        exp_viaticos = u'%s para viáticos' % solicitud.getCantidad_viaticos()
-                        exp_pasaje = u'%s para pasaje' % solicitud.getCantidad_pasaje()
-                        exp_inscripcion = u'%s para inscripción' % solicitud.getCantidad_inscripcion()
-                        exp_total = u'Total: %s' % solicitud.getTotal()
-                        expenses = u'Solicita %s, %s y %s. %s.' % (exp_viaticos, exp_pasaje, exp_inscripcion, exp_total)
+                        exp_viaticos = unicode('%s para viáticos' % solicitud.getCantidad_viaticos(), 'utf-8')
+                        exp_pasaje = unicode('%s para pasaje' % solicitud.getCantidad_pasaje(), 'utf-8')
+                        exp_inscripcion = unicode('%s para inscripción' % solicitud.getCantidad_inscripcion(), 'utf-8')
+                        exp_total = unicode('Total: %s' % solicitud.getTotal(), 'utf-8')
+                        expenses = unicode('Solicita %s, %s y %s. %s.' % (exp_viaticos, exp_pasaje, exp_inscripcion, exp_total), 'utf-8')
                         if solicitud.getPasaje() == 'si':
                             tipopasaje = ' '.join(solicitud.getTipo_pasaje())
-                            expenses = u'Solicita %s, %s. Tipo de pasaje %s y %s. %s.' % (exp_viaticos, exp_pasaje, tipopasaje, exp_inscripcion, exp_total)
-                        rec_expenses = u'Cantidad recomendada: %s.' % solicitud.getCantidadRecomendadaTotal()
+                            expenses = unicode('Solicita %s, %s. Tipo de pasaje %s y %s. %s.' % (exp_viaticos, exp_pasaje, tipopasaje, exp_inscripcion, exp_total), 'utf-8')
+                        rec_expenses = unicode('Cantidad recomendada: %s.' % solicitud.getCantidadRecomendadaTotal(), 'utf-8')
                         text_expenses = ' '.join((expenses, rec_expenses))
+
+                        ##########################################################################################
+                        ##VERSION ORIGINAL
+                        # exp_viaticos = u'%s para viáticos' % solicitud.getCantidad_viaticos()
+                        # exp_pasaje = u'%s para pasaje' % solicitud.getCantidad_pasaje()
+                        # exp_inscripcion = u'%s para inscripción' % solicitud.getCantidad_inscripcion()
+                        # exp_total = u'Total: %s' % solicitud.getTotal()
+                        # expenses = u'Solicita %s, %s y %s. %s.' % (exp_viaticos, exp_pasaje, exp_inscripcion, exp_total)
+                        # if solicitud.getPasaje() == 'si':
+                        #     tipopasaje = ' '.join(solicitud.getTipo_pasaje())
+                        #     expenses = u'Solicita %s, %s. Tipo de pasaje %s y %s. %s.' % (exp_viaticos, exp_pasaje, tipopasaje, exp_inscripcion, exp_total)
+                        # rec_expenses = u'Cantidad recomendada: %s.' % solicitud.getCantidadRecomendadaTotal()
+                        # text_expenses = ' '.join((expenses, rec_expenses))
+                        ##########################################################################################
                     else:
                         text_expenses = unicode('Erogación: Ninguna.', 'utf-8')
 
@@ -1035,7 +1049,8 @@ class SolicitudFolderView(BrowserView):
                     if solicitud.meta_type == "Solicitud":
                         if solicitud.getTrabajo() == 'Si':
                             t_titulo = ' '.join(solicitud.getTituloTrabajo().splitlines())
-                            text_talk = 'El trabajo que presentara se titula "%s".' % t_titulo
+                            #text_talk = 'El trabajo que presentará se titula "%s".' % t_titulo
+                            text_talk = unicode('El trabajo que presentará se titula "%s".' % t_titulo, 'utf-8')
                         else:
                             text_talk = unicode('', 'utf-8')
                         tempText = ' '.join([text_objective, text_talk, text_dates, text_expenses])
@@ -1078,39 +1093,75 @@ class SolicitudFolderView(BrowserView):
                     elif solicitud.meta_type == "SolicitudInstitucional":
                         if solicitud.getTrabajo() == 'Si':
                             t_titulo = ' '.join(solicitud.getTituloTrabajo().splitlines())
-                            text_talk = 'El trabajo que presentara se titula "%s".' % t_titulo
+                            #text_talk = 'El trabajo que presentara se titula "%s".' % t_titulo
+                            text_talk = unicode('El trabajo que presentará se titula "%s".' % t_titulo, 'utf-8')
                         else:
-                            text_talk = ''
+                            text_talk = unicode('', 'utf-8')
+
                         # Solicitudes institucionales deben desplegar los dos presupuestos.
                         if solicitud.getTotal() > 0:
-                            exp_viaticos = u'%s para viáticos' % solicitud.getCantidad_viaticos()
-                            exp_pasaje = u'%s para pasaje' % solicitud.getCantidad_pasaje()
-                            exp_inscripcion = u'%s para inscripción' % solicitud.getCantidad_inscripcion()
-                            expenses = u'Solicita %s, %s y %s.' % (exp_viaticos, exp_pasaje, exp_inscripcion)
+                            exp_viaticos = unicode('%s para viáticos' % solicitud.getCantidad_viaticos(), 'utf-8')
+                            exp_pasaje = unicode('%s para pasaje' % solicitud.getCantidad_pasaje(), 'utf-8')
+                            exp_inscripcion = unicode('%s para inscripción' % solicitud.getCantidad_inscripcion(), 'utf-8')
+                            expenses = unicode('Solicita %s, %s y %s.' % (exp_viaticos, exp_pasaje, exp_inscripcion), 'utf-8')
                             if solicitud.getPasaje() == 'si':
                                 tipopasaje = ' '.join(solicitud.getTipo_pasaje())
-                                expenses = u'Solicita %s, %s. Tipo de pasaje %s y %s.' % (exp_viaticos, exp_pasaje, tipopasaje, exp_inscripcion)
+                                expenses = unicode('Solicita %s, %s. Tipo de pasaje %s y %s.' % (exp_viaticos, exp_pasaje, tipopasaje, exp_inscripcion), 'utf-8')
 
-                            apoyo_viaticos = u'%s para viáticos' % solicitud.getCantidad_viaticos_apoyo()
-                            apoyo_pasaje = u'%s para pasaje' % solicitud.getCantidad_pasaje_apoyo()
-                            apoyo_inscripcion = u'%s para inscripción' % solicitud.getCantidad_inscripcion_apoyo()
-                            exp_total = u'Total: %s' % solicitud.getTotal()
-                            apoyo_expenses = u'Solicita de apoyo institucional %s, %s y %s. %s.' % (apoyo_viaticos, apoyo_pasaje, apoyo_inscripcion, exp_total)
+                            apoyo_viaticos = unicode('%s para viáticos' % solicitud.getCantidad_viaticos_apoyo(), 'utf-8')
+                            apoyo_pasaje = unicode('%s para pasaje' % solicitud.getCantidad_pasaje_apoyo(), 'utf-8')
+                            apoyo_inscripcion = unicode('%s para inscripción' % solicitud.getCantidad_inscripcion_apoyo(), 'utf-8')
+                            exp_total = unicode('Total: %s' % solicitud.getTotal(), 'utf-8')
+                            apoyo_expenses = unicode('Solicita de apoyo institucional %s, %s y %s. %s.' % (apoyo_viaticos, apoyo_pasaje, apoyo_inscripcion, exp_total), 'utf-8')
                             if solicitud.getPasaje() == 'si':
                                 tipopasaje = ' '.join(solicitud.getTipo_pasaje())
-                                apoyo_expenses = u'Solicita de apoyo institucional %s, %s. Tipo de pasaje %s y %s. %s.' % (apoyo_viaticos, apoyo_pasaje, tipopasaje, apoyo_inscripcion, exp_total)
-                            rec_expenses = u'Cantidad recomendada: %s.' % solicitud.getCantidadRecomendadaTotal()
+                                apoyo_expenses = unicode('Solicita de apoyo institucional %s, %s. Tipo de pasaje %s y %s. %s.' % (apoyo_viaticos, apoyo_pasaje, tipopasaje, apoyo_inscripcion, exp_total), 'utf-8')
+                            rec_expenses = unicode('Cantidad recomendada: %s.' % solicitud.getCantidadRecomendadaTotal(), 'utf-8')
                             text_expenses = ' '.join((expenses, apoyo_expenses, rec_expenses))
 
                         tempText = ' '.join([text_objective, text_talk, text_dates, text_expenses])
                         p = Paragraph( ss.ParagraphStyles.Normal)
-                        p.append(Text(self.rtf_repr(author.decode('utf-8')),boldText), ' ',
-                                 self.rtf_repr(tempText.decode('utf-8')))
+                        p.append(Text(self.rtf_repr(author),boldText), ' ', self.rtf_repr(tempText))
                         if solicitud.getComentario_owner():
-                            p.append(LINE, self.rtf_repr(text_comments.decode('utf-8')))
+                            p.append(LINE, self.rtf_repr(text_comments))
                         if solicitud.getComentario_ce():
-                            p.append(LINE, self.rtf_repr(text_ccomments.decode('utf-8')))
-                        p.append(LINE, Text(self.rtf_repr(recomendacion.decode('utf-8')),boldText))
+                            p.append(LINE, self.rtf_repr(text_ccomments))
+                        p.append(LINE, Text(self.rtf_repr(recomendacion),boldText))
+
+                        ##########################################################################################
+                        ##VERSION ORIGINAL
+                        # # Solicitudes institucionales deben desplegar los dos presupuestos.
+                        # if solicitud.getTotal() > 0:
+                        #     exp_viaticos = u'%s para viáticos' % solicitud.getCantidad_viaticos()
+                        #     exp_pasaje = u'%s para pasaje' % solicitud.getCantidad_pasaje()
+                        #     exp_inscripcion = u'%s para inscripción' % solicitud.getCantidad_inscripcion()
+                        #     expenses = u'Solicita %s, %s y %s.' % (exp_viaticos, exp_pasaje, exp_inscripcion)
+                        #     if solicitud.getPasaje() == 'si':
+                        #         tipopasaje = ' '.join(solicitud.getTipo_pasaje())
+                        #         expenses = u'Solicita %s, %s. Tipo de pasaje %s y %s.' % (exp_viaticos, exp_pasaje, tipopasaje, exp_inscripcion)
+
+                        #     apoyo_viaticos = u'%s para viáticos' % solicitud.getCantidad_viaticos_apoyo()
+                        #     apoyo_pasaje = u'%s para pasaje' % solicitud.getCantidad_pasaje_apoyo()
+                        #     apoyo_inscripcion = u'%s para inscripción' % solicitud.getCantidad_inscripcion_apoyo()
+                        #     exp_total = u'Total: %s' % solicitud.getTotal()
+                        #     apoyo_expenses = u'Solicita de apoyo institucional %s, %s y %s. %s.' % (apoyo_viaticos, apoyo_pasaje, apoyo_inscripcion, exp_total)
+                        #     if solicitud.getPasaje() == 'si':
+                        #         tipopasaje = ' '.join(solicitud.getTipo_pasaje())
+                        #         apoyo_expenses = u'Solicita de apoyo institucional %s, %s. Tipo de pasaje %s y %s. %s.' % (apoyo_viaticos, apoyo_pasaje, tipopasaje, apoyo_inscripcion, exp_total)
+                        #     rec_expenses = u'Cantidad recomendada: %s.' % solicitud.getCantidadRecomendadaTotal()
+                        #     text_expenses = ' '.join((expenses, apoyo_expenses, rec_expenses))
+
+                        # tempText = ' '.join([text_objective, text_talk, text_dates, text_expenses])
+                        # p = Paragraph( ss.ParagraphStyles.Normal)
+                        # p.append(Text(self.rtf_repr(author.decode('utf-8')),boldText), ' ',
+                        #          self.rtf_repr(tempText.decode('utf-8')))
+                        # if solicitud.getComentario_owner():
+                        #     p.append(LINE, self.rtf_repr(text_comments.decode('utf-8')))
+                        # if solicitud.getComentario_ce():
+                        #     p.append(LINE, self.rtf_repr(text_ccomments.decode('utf-8')))
+                        # p.append(LINE, Text(self.rtf_repr(recomendacion.decode('utf-8')),boldText))
+                        ##########################################################################################
+
                         if solicitud.getLicenciacomision()=="Licencia":
                             l+=1
                             numeracion = "L%d." % l
@@ -1123,45 +1174,94 @@ class SolicitudFolderView(BrowserView):
                             comision.append(p)
                     elif solicitud.meta_type == "SolicitudVisitante":
                         v+=1
-                        numeracion = "V%d. " % v
-                        guest = solicitud.getNombreInvitado()
-                        semblanza = solicitud.getSemblanza()
-                        text_place = 'de la %s, %s.' % (solicitud.getInstitucion(), solicitud.getPais())
-                        tempText = ' '.join([' para', solicitud.getObjetoViaje(), text_dates, text_expenses])
+                        numeracion = unicode("V%d. " % v, 'utf-8')
+                        guest = unicode(solicitud.getNombreInvitado(), 'utf-8')
+                        semblanza = unicode(solicitud.getSemblanza(), 'utf-8')
+                        text_place = unicode('de la %s, %s.' % (solicitud.getInstitucion(), solicitud.getPais()), 'utf-8')
+                        tempText = unicode(' '.join([' para', solicitud.getObjetoViaje(), text_dates, text_expenses]), 'utf-8')
                         p = Paragraph( ss.ParagraphStyles.Normal)
-                        p.append(self.rtf_repr(numeracion.decode('utf-8')),
-                                 Text(self.rtf_repr(guest.decode('utf-8')), boldText), ' ',
-                                 self.rtf_repr(text_place.decode('utf-8')), ' Invitado de: ',
-                                 Text(self.rtf_repr(author.decode('utf-8')), boldText),
-                                 self.rtf_repr(tempText.decode('utf-8')))
-                        p.append(LINE, self.rtf_repr(semblanza.decode('utf-8')))
+
+                        p.append(self.rtf_repr(numeracion),
+                                 Text(self.rtf_repr(guest), boldText), ' ',
+                                 self.rtf_repr(text_place), ' Invitado de: ',
+                                 Text(self.rtf_repr(author), boldText),
+                                 self.rtf_repr(tempText))
+                        p.append(LINE, self.rtf_repr(semblanza))
                         if solicitud.getComentario_owner():
-                            p.append(LINE, self.rtf_repr(text_comments.decode('utf-8')))
+                            p.append(LINE, self.rtf_repr(text_comments))
                         if solicitud.getComentario_ce():
-                            p.append(LINE, self.rtf_repr(text_ccomments.decode('utf-8')))
-                        p.append(LINE, Text(self.rtf_repr(recomendacion.decode('utf-8')),boldText))
+                            p.append(LINE, self.rtf_repr(text_ccomments))
+                        p.append(LINE, Text(self.rtf_repr(recomendacion),boldText))
                         visitante.append(p)
+
+                        ##########################################################################################
+                        ##VERSION ORIGINAL
+                        # v+=1
+                        # numeracion = "V%d. " % v
+                        # guest = solicitud.getNombreInvitado()
+                        # semblanza = solicitud.getSemblanza()
+                        # text_place = 'de la %s, %s.' % (solicitud.getInstitucion(), solicitud.getPais())
+                        # tempText = ' '.join([' para', solicitud.getObjetoViaje(), text_dates, text_expenses])
+                        # p = Paragraph( ss.ParagraphStyles.Normal)
+                        # p.append(self.rtf_repr(numeracion.decode('utf-8')),
+                        #          Text(self.rtf_repr(guest.decode('utf-8')), boldText), ' ',
+                        #          self.rtf_repr(text_place.decode('utf-8')), ' Invitado de: ',
+                        #          Text(self.rtf_repr(author.decode('utf-8')), boldText),
+                        #          self.rtf_repr(tempText.decode('utf-8')))
+                        # p.append(LINE, self.rtf_repr(semblanza.decode('utf-8')))
+                        # if solicitud.getComentario_owner():
+                        #     p.append(LINE, self.rtf_repr(text_comments.decode('utf-8')))
+                        # if solicitud.getComentario_ce():
+                        #     p.append(LINE, self.rtf_repr(text_ccomments.decode('utf-8')))
+                        # p.append(LINE, Text(self.rtf_repr(recomendacion.decode('utf-8')),boldText))
+                        # visitante.append(p)
+                        ##########################################################################################
                     else:
                         e+=1
                         if solicitud.getTrabajo() == 'Si':
-                            text_talk = 'El trabajo que presentara se titula "%s".' % solicitud.getTituloTrabajo()
+                            text_talk = unicode('El trabajo que presentará se titula "%s".' % solicitud.getTituloTrabajo(), 'utf-8')
                         else:
-                            text_talk = ''
-                        numeracion = 'E%d. ' % e
-                        tempText = ' '.join([text_objective, text_talk, text_dates, text_expenses])
+                            text_talk = unicode('', 'utf-8')
+                        numeracion = unicode('E%d. ' % e, 'utf-8')
+                        tempText = unicode(' '.join([text_objective, text_talk, text_dates, text_expenses]), 'utf-8')
                         p = Paragraph( ss.ParagraphStyles.Normal)
-                        p.append(self.rtf_repr(numeracion.decode('utf-8')),
-                                 Text(self.rtf_repr(author.decode('utf-8')),boldText), ' Asesor: ',
-                                 Text(self.rtf_repr(solicitud.getNombreAsesor().decode('utf-8')),boldText),
-                                 self.rtf_repr(tempText.decode('utf-8')))
-                        apoyo_comments = u'Comentario de apoyo extra: %s' % solicitud.getApoyo_texto()
-                        p.append(LINE, self.rtf_repr(apoyo_comments.decode('utf-8')))
+                        p.append(self.rtf_repr(numeracion),
+                                 Text(self.rtf_repr(author),boldText), ' Asesor: ',
+                                 Text(self.rtf_repr(solicitud.getNombreAsesor()),boldText),
+                                 self.rtf_repr(tempText))
+                        apoyo_comments = unicode('Comentario de apoyo extra: %s' % solicitud.getApoyo_texto(), 'utf-8')
+                        p.append(LINE, self.rtf_repr(apoyo_comments))
                         if solicitud.getComentario_owner():
-                            p.append(LINE, self.rtf_repr(text_comments.decode('utf-8')))
+                            p.append(LINE, self.rtf_repr(text_comments))
                         if solicitud.getComentario_ce():
-                            p.append(LINE, self.rtf_repr(text_ccomments.decode('utf-8')))
-                        p.append(LINE, Text(self.rtf_repr(recomendacion.decode('utf-8')),boldText))
+                            p.append(LINE, self.rtf_repr(text_ccomments))
+                        p.append(LINE, Text(self.rtf_repr(recomendacion),boldText))
                         estudiante.append(p)
+
+                        ##########################################################################################
+                        ##VERSION ORIGINAL
+                        # e+=1
+                        # if solicitud.getTrabajo() == 'Si':
+                        #     text_talk = 'El trabajo que presentara se titula "%s".' % solicitud.getTituloTrabajo()
+                        # else:
+                        #     text_talk = ''
+                        # numeracion = 'E%d. ' % e
+                        # tempText = ' '.join([text_objective, text_talk, text_dates, text_expenses])
+                        # p = Paragraph( ss.ParagraphStyles.Normal)
+                        # p.append(self.rtf_repr(numeracion.decode('utf-8')),
+                        #          Text(self.rtf_repr(author.decode('utf-8')),boldText), ' Asesor: ',
+                        #          Text(self.rtf_repr(solicitud.getNombreAsesor().decode('utf-8')),boldText),
+                        #          self.rtf_repr(tempText.decode('utf-8')))
+                        # apoyo_comments = u'Comentario de apoyo extra: %s' % solicitud.getApoyo_texto()
+                        # p.append(LINE, self.rtf_repr(apoyo_comments.decode('utf-8')))
+                        # if solicitud.getComentario_owner():
+                        #     p.append(LINE, self.rtf_repr(text_comments.decode('utf-8')))
+                        # if solicitud.getComentario_ce():
+                        #     p.append(LINE, self.rtf_repr(text_ccomments.decode('utf-8')))
+                        # p.append(LINE, Text(self.rtf_repr(recomendacion.decode('utf-8')),boldText))
+                        # estudiante.append(p)
+                        ##########################################################################################
+
                     if fecha is None:
                         fecha=solicitud.getFecha_sesionce().strftime('%d/%m/%Y')
                         #fecha='25/11/2013'
