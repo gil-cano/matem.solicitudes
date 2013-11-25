@@ -173,7 +173,7 @@ msgid "help_institucion"
 msgstr "Institucion que visitará"
 
 msgid "help_investigacionarea"
-msgstr ""Dudas acerca de la clasificación y como encontrar un área, acceda a la página oficial del <a href=\"http://www.ams.org/msc\">ams</a>"
+msgstr "Dudas acerca de la clasificación y como encontrar un área, acceda a la página oficial del <a href=\"http://www.ams.org/msc\">ams</a>"
 
 #. Default: "Nombre del investigador/estudiante/tecnico para el cual se va a crear la solicitud."
 #: matem/solicitudes/browser/solicitudes_auxiliares.pt:144
