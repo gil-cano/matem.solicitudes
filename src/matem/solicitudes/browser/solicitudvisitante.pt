@@ -280,7 +280,7 @@
         <tr><th rowspan="2">Dias Aprobados:</th><th>Comision</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][3]">Value</td></tr>
         <tr>                                 <th>Licencia</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][4]">Value</td></tr>
 	<tr><th colspan="5"><b>Información Sobre la Solicitud</b></th></tr>
-        <tr><th colspan="2">Fecha de Solicitud</th><td align="center" colspan="3"><span tal:content="here/getCreationDate">Value</span></td></tr>
+        <tr><th colspan="2">Fecha de Solicitud</th><td align="center" colspan="3"><span tal:content="python:context.creation_date.strftime('%d/%m/%Y')">Value</span></td></tr>
         <tr><th colspan="2" i18n:translate="label_invitado">Visitor</th><td align="center" colspan="3" tal:content="here/getInvitado">Value</td></tr>
 
         <tr><th colspan="2" i18n:translate="label_semblanza">Semblanza</th><td align="center" colspan="3" tal:content="here/getSemblanza">Value</td></tr>
@@ -293,8 +293,8 @@
         <tr><th colspan="2" i18n:translate="label_institucion_procedencia">Institution</th><td align="center" colspan="3" 
                                                                                   tal:content="here/getInstitucion_procedencia">Value</td></tr>
         <tr><th colspan="5"></th></tr>
-        <tr><th colspan="2" i18n:translate="label_fecha_desde">From date</th><td align="center" tal:content="here/getFechaDesde">Value</td>
-            <th i18n:translate="label_fecha_hasta">To date</th><td align="center" tal:content="here/getFechaHasta">Value</td></tr>
+        <tr><th colspan="2" i18n:translate="label_fecha_desde">From date</th><td align="center" tal:content="python:here.getFechaDesde().strftime('%d/%m/%Y')">Value</td>
+            <th i18n:translate="label_fecha_hasta">To date</th><td align="center" tal:content="python:here.getFechaHasta().strftime('%d/%m/%Y')">Value</td></tr>
 	<tr><th colspan="5"><b>Datos Adicionales</b></th></tr>
 
         <tr><th colspan="2" i18n:translate="label_objeto_viaje">Objective</th><td align="center" colspan="3" 
@@ -340,14 +340,14 @@
         <tbody>
             <tr><th colspan="2"><b>Información Interna</b></th></tr>
             <tr><th i18n:translate="label_fecha_sesionce">Fecha de revisión por Comisión Especial</th>
-                <td align="left" tal:content="here/getFecha_sesionce">Value</td></tr>
+                <td align="left" tal:content="python:here.getFecha_sesionce() and here.getFecha_sesionce().strftime('%d/%m/%Y')">Value</td></tr>
             <tr><th i18n:translate="label_comentario_ce">Recommendation by Special Commission</th>
                 <td align="left" tal:content="here/getComentario_ce">Value</td></tr>
             <tr><th i18n:translate="label_recomienda_aprobar">Recomiendo Aprobar</th>
                 <td align="left" tal:content="here/getRecomienda_aprobar">Value</td></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th colspan="2"><b>Consejo Interno</b></th></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_fecha_sesionci">Date of revision by the CI</th>
-                <td align="left" tal:content="here/getFecha_sesionci">Value</td></tr>
+                <td align="left" tal:content="python:here.getFecha_sesionci() and here.getFecha_sesionci().strftime('%d/%m/%Y')">Value</td></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_actaci_number">Record number</th>
                 <td align="left" tal:content="here/getActaci">Value</td></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_comentario_ci">Comments by Consejo Interno</th>

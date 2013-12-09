@@ -349,14 +349,14 @@
         <tbody>
             <tr><th colspan="2"><b>Información Interna</b></th></tr>
             <tr><th i18n:translate="label_fecha_sesionce">Fecha de revisión por Comisión Especial</th>
-                <td align="left" tal:content="here/getFecha_sesionce">Value</td></tr>
+                <td align="left" tal:content="python:here.getFecha_sesionce() and here.getFecha_sesionce().strftime('%d/%m/%Y')">Value</td></tr>
             <tr><th i18n:translate="label_comentario_ce">Recommendation by Special Commission</th>
                 <td align="left" tal:content="here/getComentario_ce">Value</td></tr>
             <tr><th i18n:translate="label_recomienda_aprobar">Recomiendo Aprobar</th>
                 <td align="left" tal:content="here/getRecomienda_aprobar">Value</td></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th colspan="2"><b>Consejo Interno</b></th></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_fecha_sesionci">Date of revision by the CI</th>
-                <td align="left" tal:content="here/getFecha_sesionci">Value</td></tr>
+                <td align="left" tal:content="python:here.getFecha_sesionci() and here.getFecha_sesionci().strftime('%d/%m/%Y')">Value</td></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_actaci_number">Record number</th>
                 <td align="left" tal:content="here/getActaci">Value</td></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_comentario_ci">Comments by Consejo Interno</th>

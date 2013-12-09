@@ -484,6 +484,13 @@ class Queries(BrowserView):
                         'inscription_quantity':obj.getCantidadInscripcion(),
                         'work_title':obj.getTituloTrabajo(),
                     }
+                # standar date format for no required fields
+                date_sesionci = ''
+                if obj.getFecha_sesionci():
+                	date_sesionci = obj.getFecha_sesionci().strftime('%d/%m/%Y')
+                date_sesionce = ''
+                if obj.getFecha_sesionce():
+                	date_sesionce = obj.getFecha_sesionce().strftime('%d/%m/%Y')
 
                 applications.append({
                             'meta_type':obj.meta_type,
@@ -510,8 +517,8 @@ class Queries(BrowserView):
                             'total_consejo_quantity':obj.getCantidadConsejoTotal(),
                             'total_approved_quantity':obj.getCantidadAutorizadaTotal(),
                             'creation_date':obj.creation_date.strftime('%d/%m/%Y'),
-                            'revision_ci_date':obj.getFecha_sesionci(),
-                            'revision_ce_date':obj.getFecha_sesionce(),
+                            'revision_ci_date':date_sesionci,
+                            'revision_ce_date':date_sesionce,
                             'acta_ci':obj.getActaci(),
                             'workflow_state':obj.getWFState(),
                             'workflow_state_name':obj.getWFStateName(),
