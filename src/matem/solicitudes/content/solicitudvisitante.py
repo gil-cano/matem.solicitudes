@@ -1212,7 +1212,7 @@ La cantidad total que se le ha aprobado en lo que va del año: %s.
             return "Revision por Consejo Interno"
 
     def getDefaultDate(self):
-        return DateTime('2013/1/1')
+        return DateTime('2014/1/1')
 
     def getPersonWrapper(self,userid):
         fsdtool = getToolByName(self,'facultystaffdirectory_tool')

@@ -1289,7 +1289,7 @@ class SolicitudFolderView(BrowserView):
             p.append(self.rtf_repr(subHeader))
             header.append(p)
 
-            generationDate="Cd. Universitaria, a _ de _ de 2013"
+            generationDate="Cd. Universitaria, a _ de _ de 2014"
             signersTitle="LA COMISION ESPECIAL"
             signersNames=""
 
