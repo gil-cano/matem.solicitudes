@@ -65,7 +65,13 @@ events = {
 },
 
 2014: {
-
+'SMESMM': {'event_title': 'III Reunión Conjunta de la Real Sociedad Matemática Española-Sociedad Matemática Mexicana',
+         'pais': 'MX',
+         'ciudad_pais': 'Zacatecas',
+         'institucion': '',
+         'fecha_desde': '2014-09-01 00:00 ',
+         'fecha_hasta': '2014-09-05 00:00 ',
+         'objeto_viaje': 'Asistir ala III Reunión Conjunta de la Real Sociedad Matemática Española-Sociedad Matemática Mexicana'},
 },
 
 }
