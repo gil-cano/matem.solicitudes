@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 from Products.Archetypes.atapi import DisplayList
 
+#from Products.Archetypes.public import DisplayList
+from zope.component.hooks import getSite
+from plone.i18n.normalizer import idnormalizer as idn
+from Products.ATCountryWidget.config import COUNTRIES
+
+
 ADD_CONTENT_PERMISSION = {
     "Solicitud": "Solicitud: Add Solicitud",
     "SolicitudBecario": "SolicitudBecario: Add SolicitudBecario",
@@ -237,3 +243,13 @@ SEDE = DisplayList((
 EVENTOS_INSTITUCIONALES = ((
     ('malaga', 'Malaga'),
     ))
+
+#TODO change location of this vocabulary
+def getCountriesVocabulary(self):
+    translation_service = getSite().translation_service
+    sorted_list = [x for x in COUNTRIES.iteritems()]
+    sorted_list.append(('', ''))
+    spanish_list =[(x[0],translation_service.translate(x[1], domain="plone", target_language="es"))  for x in sorted_list]
+    spanish_list.sort(key=lambda x: idn.normalize(x[1]))
+    import pdb; pdb.set_trace( )
+    return DisplayList(spanish_list)
