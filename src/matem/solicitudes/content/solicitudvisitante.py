@@ -157,7 +157,7 @@ schema = BaseSchema + Schema((
         ),
 
 
-        StringField(
+        LinesField(
           name='pais_procedencia',
           required=True,
           default='MX',
@@ -911,8 +911,7 @@ class SolicitudVisitante(BaseContent):
     def getPais(self):
         pais=self.getField('pais_procedencia').get(self)
         try:
-            #pais=COUNTRIES[pais[0]]
-            pais=COUNTRIES[pais]
+            pais=COUNTRIES[pais[0]]
             return pais
         except Exception, e:
             pais=""
@@ -1251,14 +1250,7 @@ La cantidad total que se le ha aprobado en lo que va del año: %s.
     #PUT = ATDocument.PUT
 
     def getCountriesVocabulary(self):
-      #This function is defined in config.py
-      return getCountriesVocabulary(self)
-
-        # translation_service = getSite().translation_service
-        # sorted_list = [x for x in COUNTRIES.iteritems()]
-        # sorted_list.append(('', ''))
-        # spanish_list =[(x[0],translation_service.translate(x[1], domain="plone", target_language="es"))  for x in sorted_list]
-        # spanish_list.sort(key=lambda x: idn.normalize(x[1]))
-        # return DisplayList(spanish_list)
+        #This function is defined in config.py
+        return getCountriesVocabulary(self)
 
 registerType(SolicitudVisitante, PROJECTNAME)

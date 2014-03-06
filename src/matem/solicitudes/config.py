@@ -251,5 +251,4 @@ def getCountriesVocabulary(self):
     sorted_list.append(('', ''))
     spanish_list =[(x[0],translation_service.translate(x[1], domain="plone", target_language="es"))  for x in sorted_list]
     spanish_list.sort(key=lambda x: idn.normalize(x[1]))
-    import pdb; pdb.set_trace( )
     return DisplayList(spanish_list)
