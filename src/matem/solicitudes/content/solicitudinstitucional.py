@@ -38,6 +38,7 @@ from matem.solicitudes.interfaces import ISolicitudInstitucional
 from matem.solicitudes.config import AREAS_INVESTIGACION
 from matem.solicitudes.config import PROJECTNAME
 from matem.solicitudes.config import SEDE
+from matem.solicitudes.config import getCountriesVocabulary
 from matem.solicitudes.extender import PersonWrapper
 
 SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
@@ -138,21 +139,35 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
             write_permission="Solicitud: Modificar Solicitud",
         ),
 
-        LinesField('pais',
-            searchable=1,
-            required=1,
-            default=('MX'),
-            widget=CountryWidget(label='Country',
-                                label_msgid='label_pais',
-                                provideNullValue=1,   # this is default
-                                omitCountries=None,   # this is default, can be a
-                                                      # list of country codes which
-                                                      # are not displayed
-                                description='Country to visit',
-                                description_msgid='help_pais'),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+#         LinesField('pais',
+#             searchable=1,
+#             required=1,
+#             default=('MX'),
+#             widget=CountryWidget(label='Country',
+#                                 label_msgid='label_pais',
+#                                 provideNullValue=1,   # this is default
+#                                 omitCountries=None,   # this is default, can be a
+#                                                       # list of country codes which
+#                                                       # are not displayed
+#                                 description='Country to visit',
+#                                 description_msgid='help_pais'),
+# #            read_permission="Solicitud: Modificar Solicitud",
+#             write_permission="Solicitud: Modificar Solicitud",
+#         ),
 
+        LinesField(
+            name='pais',
+            required=True,
+            default='MX',
+            widget=SelectionWidget(
+                label='Country',
+                label_msgid='label_pais',
+                description='Country to visit',
+                description_msgid='help_pais',
+                i18n_domain='matem.solicitudes',
+            ),
+            vocabulary="getCountriesVocabulary",
+            write_permission="Solicitud: Modificar Solicitud",
         ),
 
         StringField('ciudad_pais',
@@ -1540,5 +1555,8 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
 
         return fsdperson
 
+    def getCountriesVocabulary(self):
+        #This function is defined in config.py
+        return getCountriesVocabulary(self)
 
 atapi.registerType(SolicitudInstitucional, PROJECTNAME)
