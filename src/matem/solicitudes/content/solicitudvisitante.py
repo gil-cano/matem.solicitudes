@@ -244,6 +244,7 @@ schema = BaseSchema + Schema((
                                   show_hm=False),
 #            read_permission="Solicitud: Modificar Solicitud",
             write_permission="Solicitud: Modificar Solicitud",
+            validators='isGreaterthanStart',
         ),
         StringField('objeto_viaje',
             searchable=1,

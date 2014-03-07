@@ -1,16 +1,27 @@
+from zope.i18nmessageid import MessageFactory
+
+solicitudesMessageFactory = MessageFactory('matem.solicitudes')
+
+
+from Products.validation import validation
+from matem.solicitudes.content.validators import StartBeforeEnd
+validation.register(StartBeforeEnd('isGreaterthanStart'))
+
+
 from Products.Archetypes.atapi import process_types
 from Products.Archetypes.atapi import listTypes
 
 from Products.CMFCore import utils
-from zope.i18nmessageid import MessageFactory
-
-solicitudesMessageFactory = MessageFactory('matem.solicitudes')
 
 from content.solicitud import Solicitud
 from content.solicitudbecario import SolicitudBecario
 from content.solicitudvisitante import SolicitudVisitante
 from content.solicitudfolder import SolicitudFolder
 from content.solicitudinstitucional import SolicitudInstitucional
+
+
+
+
 
 import config
 
