@@ -27,6 +27,7 @@ from archetypes.multifile.MultiFileWidget import MultiFileWidget
 
 from Products.ATContentTypes.content.document import ATDocument
 from DateTime.DateTime import DateTime
+from matem.solicitudes.config import getCountriesVocabulary
 
 schema = BaseSchema + Schema((
         ComputedField(name='title',
@@ -117,23 +118,41 @@ schema = BaseSchema + Schema((
             write_permission="Solicitud: Modificar Solicitud",
         ),
 
-        LinesField('pais',
-            searchable=1,
-            required=1,
-            default=('MX'),
-            widget=CountryWidget(label='Country',
-                                label_msgid='label_pais',
-                                i18n_domain='matem.solicitudes',
-                                provideNullValue=1,   # this is default
-                                omitCountries=None,   # this is default, can be a
-                                                      # list of country codes which
-                                                      # are not displayed
-                                description='Country to visit',
-                                description_msgid='help_pais'),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
 
-        ),
+        LinesField(
+          name='pais',
+          required=True,
+          default=('MX'),
+          #storage=atapi.AnnotationStorage(),
+          widget=SelectionWidget(
+            label='Country',
+            label_msgid='label_pais',
+            description='Country to visit',
+            description_msgid='help_pais',
+            i18n_domain='matem.solicitudes',
+          ),
+          vocabulary="getCountriesVocabulary",
+          write_permission="Solicitud: Modificar Solicitud",
+        ),    
+
+
+#         LinesField('pais',
+#             searchable=1,
+#             required=1,
+#             default=('MX'),
+#             widget=CountryWidget(label='Country',
+#                                 label_msgid='label_pais',
+#                                 i18n_domain='matem.solicitudes',
+#                                 provideNullValue=1,   # this is default
+#                                 omitCountries=None,   # this is default, can be a
+#                                                       # list of country codes which
+#                                                       # are not displayed
+#                                 description='Country to visit',
+#                                 description_msgid='help_pais'),
+# #            read_permission="Solicitud: Modificar Solicitud",
+#             write_permission="Solicitud: Modificar Solicitud",
+
+#         ),
 
         StringField('ciudad_pais',
             searchable=1,
@@ -1289,5 +1308,9 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
         fsdperson = PersonWrapper(encontrados[0])
 
         return fsdperson
+
+    def getCountriesVocabulary(self):
+        #This function is defined in config.py
+        return getCountriesVocabulary(self)
 
 registerType(Solicitud, PROJECTNAME)

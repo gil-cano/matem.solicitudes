@@ -225,7 +225,7 @@
           tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</td>
           <td tal:content="python:item['owner_name']">Solicitant</td>
           <td tal:content="python:item['objective']">Reason</td>
-          <td tal:content="python:item['country']">Place</td>
+          <td i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</td>
           <td tal:content="python:item['creation_date']">Solicitud Creada</td>
           <td tal:content="python:item['from']">Creation Date</td>
           <td tal:content="python:item['to']">Creation Date</td>

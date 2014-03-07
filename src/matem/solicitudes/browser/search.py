@@ -16,6 +16,8 @@ from operator import itemgetter
 import datetime
 import sys
 
+from matem.solicitudes.config import getCountriesVocabulary
+
 class SearchView(BrowserView):
 
     globaltemplate = ViewPageTemplateFile('global_request_search_form.pt')
@@ -91,6 +93,7 @@ class SearchView(BrowserView):
                 encontradas = queryObj.getFolderApplicationsByState(unEstado)
             else:
                 encontradas = queryObj.getFolderApplicationsByStateAndUser(unEstado,Creator)
+
 
         for obj in encontradas:
             append=False
@@ -460,3 +463,10 @@ class SearchView(BrowserView):
                     return True
         except:
             return False
+
+
+    def getCountriesVocabulary(self):
+        #This function is defined in config.py
+        return getCountriesVocabulary(self).items()[1:]
+
+

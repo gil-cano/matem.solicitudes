@@ -23,6 +23,7 @@ from archetypes.multifile.MultiFileField import MultiFileField
 from archetypes.multifile.MultiFileWidget import MultiFileWidget
 
 from DateTime.DateTime import *
+from matem.solicitudes.config import getCountriesVocabulary
 
 SolicitudBecarioSchema = BaseSchema + Schema((
     ComputedField(name='title',
@@ -167,21 +168,39 @@ SolicitudBecarioSchema = BaseSchema + Schema((
         ),
     ),
 
-    LinesField('pais',
-        searchable=1,
-        required=1,
-        default=('MX'),
-        widget=CountryWidget(
+
+    LinesField(
+          name='pais',
+          required=True,
+          default=('MX'),
+          #storage=atapi.AnnotationStorage(),
+          widget=SelectionWidget(
             label='Country',
             label_msgid='label_pais',
-            provideNullValue=1,
-            omitCountries=None,
             description='Country to visit',
             description_msgid='help_pais',
             i18n_domain='matem.solicitudes',
-        ),
-        write_permission="Solicitud: Modificar Solicitud",
-    ),
+          ),
+          vocabulary="getCountriesVocabulary",
+          write_permission="Solicitud: Modificar Solicitud",
+    ),    
+
+
+    # LinesField('pais',
+    #     searchable=1,
+    #     required=1,
+    #     default=('MX'),
+    #     widget=CountryWidget(
+    #         label='Country',
+    #         label_msgid='label_pais',
+    #         provideNullValue=1,
+    #         omitCountries=None,
+    #         description='Country to visit',
+    #         description_msgid='help_pais',
+    #         i18n_domain='matem.solicitudes',
+    #     ),
+    #     write_permission="Solicitud: Modificar Solicitud",
+    # ),
 
     StringField('ciudad_pais',
         searchable=1,
@@ -1411,5 +1430,9 @@ Para más detalles vaya a %s.
         fsdperson = PersonWrapper(encontrados[0])
 
         return fsdperson
+
+    def getCountriesVocabulary(self):
+        #This function is defined in config.py
+        return getCountriesVocabulary(self)
 
 registerType(SolicitudBecario, PROJECTNAME)

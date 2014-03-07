@@ -288,7 +288,7 @@
                 <img src="" alt="" tal:replace="structure python:context.getWrappedField('image').tag(context, scale='normal',  css_class='photo')" /></td></tr>
 
         <tr><th colspan="2" i18n:translate="label_pais_procedencia">Country</th>
-                                             <td align="center" colspan="3" tal:content="here/getPais">Value</td></tr>
+                                             <td align="center" colspan="3" i18n:translate="" i18n:domain="plone" tal:content="here/getPais">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_procedencia">City</th><td align="center" colspan="3" tal:content="here/getProcedencia">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_institucion_procedencia">Institution</th><td align="center" colspan="3" 
                                                                                   tal:content="here/getInstitucion_procedencia">Value</td></tr>

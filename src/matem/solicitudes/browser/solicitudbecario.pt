@@ -348,7 +348,7 @@
                                              <td align="center" colspan="3" tal:content="python:view.getNombreAsesor(here.getAsesor())">Value</td></tr>
 	<tr><th colspan="5"><b>Información Sobre la Solicitud</b></th></tr>
         <tr><th colspan="2">Fecha de Solicitud</th><td align="center" colspan="3"><span tal:content="python:context.creation_date.strftime('%d/%m/%Y')">Value</span></td></tr>
-        <tr><th colspan="2" i18n:translate="label_pais">Country</th><td align="center" colspan="3" tal:content="here/getPais">Value</td></tr>
+        <tr><th colspan="2" i18n:translate="label_pais">Country</th><td align="center" colspan="3" i18n:translate="" i18n:domain="plone" tal:content="here/getPais">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_ciudad_pais">City</th><td align="center" colspan="3" tal:content="here/getCiudadPais">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_institucion">Institution</th><td align="center" colspan="3" 
                                                                                   tal:content="here/getInstitucion">Value</td></tr>
