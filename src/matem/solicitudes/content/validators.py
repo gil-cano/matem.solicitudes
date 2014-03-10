@@ -36,9 +36,15 @@ class StartBeforeEnd:
 
     def __call__(self, value, *args, **kwargs):
 
-        #import pdb; pdb.set_trace( )
-        pass
+        start_date  = kwargs['REQUEST'].get('fecha_desde', 'None')
 
+        try:
+            if start_date > value:
+                return _("The end date must be greater than start date.")
+        except:
+            return _("Indicate the start date.")
+
+        return True
 
 
 # def validateStartEnd(data):
