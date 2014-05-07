@@ -1105,7 +1105,7 @@ class SolicitudFolderView(BrowserView):
                             exp_viaticos = unicode('%s para viáticos' % solicitud.getCantidad_viaticos(), 'utf-8')
                             exp_pasaje = unicode('%s para pasaje' % solicitud.getCantidad_pasaje(), 'utf-8')
                             exp_inscripcion = unicode('%s para inscripción' % solicitud.getCantidad_inscripcion(), 'utf-8')
-                            expenses = unicode('Solicita %s, %s y %s.' % (exp_viaticos, exp_pasaje, exp_inscripcion), 'utf-8')
+                            expenses = 'Solicita %s, %s y %s.' % (exp_viaticos, exp_pasaje, exp_inscripcion)
                             if solicitud.getPasaje() == 'si':
                                 tipopasaje = unicode(' '.join(solicitud.getTipo_pasaje()), 'utf-8')
                                 expenses = 'Solicita %s, %s. Tipo de pasaje %s y %s.' % (exp_viaticos, exp_pasaje, tipopasaje, exp_inscripcion)
