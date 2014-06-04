@@ -743,6 +743,36 @@ class Solicitud(BaseContent):
     def canSetDefaultPage(self):
         return False
 
+    def post_validate(self, REQUEST=None, errors=None):
+        """Validates start and end date
+        End date must be after start date.
+        If There is more than 15 days image is required.
+        """
+        if 'fecha_desde' in errors or 'fecha_hasta' in errors:
+            # No point in validating bad input
+            return
+
+        rstartDate = REQUEST.get('fecha_desde', None)
+        rendDate = REQUEST.get('fecha_hasta', None)
+
+        try:
+            end = DateTime(rendDate)
+        except:
+            errors['fecha_hasta'] = u'La fecha de término no es valida'
+
+        try:
+            start = DateTime(rstartDate)
+        except:
+            errors['fecha_desde'] = u'La fecha de inicio no es valida'
+
+        if 'fecha_desde' in errors or 'fecha_hasta' in errors:
+            # No point in validating bad input
+            return
+
+        if start > end:
+            errors['fecha_hasta'] = u'La fecha de término debe ser posterior a la de inicio'
+
+
     ## desde aqui peg\'o eduardo ...
     def addTranslation(self, language, **kwargs):
         # call orginal addTranslation
