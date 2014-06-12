@@ -236,8 +236,10 @@ NIVEL = DisplayList((
 
 SEDE = DisplayList((
     ('cu', 'C.U.'),
-    ('matmor', 'Morelia'),
     ('matcuer', 'Cuernavaca'),
+    ('juriquilla', 'Juriquilla'),
+    ('matmor', 'Morelia'),
+    ('oaxaca', 'Oaxaca'),
     ))
 
 EVENTOS_INSTITUCIONALES = ((

@@ -175,8 +175,7 @@
 
     <br>
     <!--Obtiene usuario actual--->
-    <span tal:define="usuarioActual user/getId;
-                      sedes python:['cu','matmor','matcuer'];">
+    <span tal:define="usuarioActual user/getId;">
 
     <span name="pendientesEnvio" class="overflowable" tal:define="items python:view.getSolicitudesPendientesEnvio(usuarioActual)">
 
