@@ -829,7 +829,7 @@ class SolicitudBecario(BaseContent):
         End date must be after start date.
         If There is more than 15 days image is required.
         """
-        if 'fecha_desde' in errors or 'fecha_hasta' in errors:
+        if not 'fecha_desde' in REQUEST or not 'fecha_hasta' in REQUEST:
             # No point in validating bad input
             return
 
