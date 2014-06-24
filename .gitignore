@@ -1,34 +1,19 @@
-# byte-compiled Python files
-*.py[co]
-
-# C extensions
-*.so
-
-# Packages
-*.egg
-*.egg-info
-dist
-build
-eggs
-parts
-bin
-var
-develop-eggs
-.installed.cfg
-Makefile
-
-# Unit test / coverage reports
-.coverage
-coverage
-
-# Translations
+*.pyc
+*.pyo
+*.tmp*
 *.mo
-
-# Mr Developer
-.mr.developer.cfg
-
-# SublimeCodeIntel
-.codeintel
-
-# svn
-.svn
+*.egg
+*.EGG
+*.egg-info
+*.EGG-INFO
+.*.cfg
+.DS_Store
+bin/
+build/
+develop-eggs/
+downloads/
+eggs/
+fake-eggs/
+parts/
+dist/
+var/
