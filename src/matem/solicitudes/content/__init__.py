@@ -1,13 +1,6 @@
 # -*- coding: utf-8 -*-
+
 from Products.CMFCore.permissions import setDefaultRoles
-from Products.validation import validation
-from validators import isFloat
-
-# try:
-#     validation.register(isFloat('isFloat'))
-# except:
-#     print "error validator isfloat"
-
 
 setDefaultRoles('Solicitud: Revisar Solicitud', ())
 setDefaultRoles('SolicitudBecario: Add SolicitudBecario', ())
