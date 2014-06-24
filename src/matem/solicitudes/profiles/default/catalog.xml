@@ -21,7 +21,7 @@
     <column value="fecha_desde"/>
 
     <index name="fecha_hasta" meta_type="FieldIndex">
-        <indexed_attr value="fecha_desde"/>
+        <indexed_attr value="fecha_hasta"/>
     </index>
     <column value="fecha_hasta"/>
 
