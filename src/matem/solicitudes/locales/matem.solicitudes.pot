@@ -1162,3 +1162,54 @@ msgstr ""
 msgid "numeroDeActa"
 msgstr ""
 
+#: matem/solicitudes/browser/folderaprobadas.pt:253
+#: matem/solicitudes/browser/folderpendientes.pt:486
+#: matem/solicitudes/browser/folderpendientessede.pt:423
+msgid "numeroDeActa"
+msgstr ""
+
+#. Default: "School practices"
+#: matem/solicitudes/content/solicitud.py:
+msgid "label_school_practices"
+msgstr ""
+
+#. Default: "Only Students and Posdoc from Cuernavaca"
+#: matem/solicitudes/content/solicitud.py:
+msgid "help_school_practices"
+msgstr ""
+
+msgid "Car"
+msgstr ""
+
+msgid "Bus"
+msgstr ""
+
+msgid "Airplane"
+msgstr ""
+
+msgid "label_cantidad_recomendada_pasaje"
+msgstr ""
+
+msgid "label_cantidad_recomendada_viaticos"
+msgstr ""
+
+msgid "label_cantidad_recomendada_inscripcion"
+msgstr ""
+
+msgid "label_cantidad_consejo_pasaje"
+msgstr ""
+
+msgid "label_cantidad_consejo_viaticos"
+msgstr ""
+
+msgid "label_cantidad_consejo_inscripcion"
+msgstr ""
+
+msgid "label_cantidad_autorizada_pasaje"
+msgstr ""
+
+msgid "label_cantidad_autorizada_viaticos"
+msgstr ""
+
+msgid "label_cantidad_autorizada_inscripcion"
+msgstr ""

@@ -1162,3 +1162,48 @@ msgstr "Subir Solicitudes a Nombre de otro Usuario"
 msgid "numeroDeActa"
 msgstr "Número de Acta del Consejo Interno"
 
+#. Default: "School Practices"
+#: matem/solicitudes/content/solicitud.py:
+msgid "label_school_practices"
+msgstr "Practicas escolares"
+
+#. Default: "Only Students and Posdoc from Cuernavaca"
+#: matem/solicitudes/content/solicitud.py:
+msgid "help_school_practices"
+msgstr "Solo para estudiantes y Posdoc de Cuernavaca"
+
+msgid "Car"
+msgstr "Carro"
+
+msgid "Bus"
+msgstr "Autobús"
+
+msgid "Airplane"
+msgstr "Avión"
+
+msgid "label_cantidad_recomendada_pasaje"
+msgstr "Cantidad recomendada para pasaje"
+
+msgid "label_cantidad_recomendada_viaticos"
+msgstr "Cantidad recomendada para viaticos o practicas escolares"
+
+msgid "label_cantidad_recomendada_inscripcion"
+msgstr "Cantidad recomendada para inscripción"
+
+msgid "label_cantidad_consejo_pasaje"
+msgstr "Cantidad autorizada para pasaje"
+
+msgid "label_cantidad_consejo_viaticos"
+msgstr "Cantidad autorizada para viaticos o practicas escolares"
+
+msgid "label_cantidad_consejo_inscripcion"
+msgstr "Cantidad autorizada para inscripción"
+
+msgid "label_cantidad_autorizada_pasaje"
+msgstr "Cantidad utilizada para pasaje"
+
+msgid "label_cantidad_autorizada_viaticos"
+msgstr "Cantidad utilizada para viaticos o practicas escolares"
+
+msgid "label_cantidad_autorizada_inscripcion"
+msgstr "Cantidad utilizada para inscripción"
