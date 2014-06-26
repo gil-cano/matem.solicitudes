@@ -1213,3 +1213,21 @@ msgstr ""
 
 msgid "label_cantidad_autorizada_inscripcion"
 msgstr ""
+
+msgid "label_cantidad_recomendada_pasaje_institucional"
+msgstr ""
+
+msgid "label_cantidad_recomendada_viaticos_institucional"
+msgstr ""
+
+msgid "label_cantidad_recomendada_inscripcion_institucional"
+msgstr ""
+
+msgid "label_cantidad_consejo_pasaje_institucional"
+msgstr ""
+
+msgid "label_cantidad_consejo_viaticos_institucional"
+msgstr ""
+
+msgid "label_cantidad_consejo_inscripcion_institucional"
+msgstr ""

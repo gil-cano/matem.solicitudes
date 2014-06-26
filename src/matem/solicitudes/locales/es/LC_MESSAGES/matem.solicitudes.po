@@ -1173,7 +1173,7 @@ msgid "help_school_practices"
 msgstr "Solo para estudiantes y Posdoc de Cuernavaca"
 
 msgid "Car"
-msgstr "Carro"
+msgstr "Auto"
 
 msgid "Bus"
 msgstr "Autobús"
@@ -1207,3 +1207,21 @@ msgstr "Cantidad utilizada para viaticos o practicas escolares"
 
 msgid "label_cantidad_autorizada_inscripcion"
 msgstr "Cantidad utilizada para inscripción"
+
+msgid "label_cantidad_recomendada_pasaje_institucional"
+msgstr "Cantidad recomendada para pasaje (Institucional)"
+
+msgid "label_cantidad_recomendada_viaticos_institucional"
+msgstr "Cantidad recomendada para viaticos o practicas escolares (Institucional)"
+
+msgid "label_cantidad_recomendada_inscripcion_institucional"
+msgstr "Cantidad recomendada para inscripción (Institucional)"
+
+msgid "label_cantidad_consejo_pasaje_institucional"
+msgstr "Cantidad autorizada para pasaje (Institucional)"
+
+msgid "label_cantidad_consejo_viaticos_institucional"
+msgstr "Cantidad autorizada para viaticos o practicas escolares (Institucional)"
+
+msgid "label_cantidad_consejo_inscripcion_institucional"
+msgstr "Cantidad autorizada para inscripción (Institucional)"
