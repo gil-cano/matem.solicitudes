@@ -1165,7 +1165,7 @@ msgstr "Número de Acta del Consejo Interno"
 #. Default: "School Practices"
 #: matem/solicitudes/content/solicitud.py:
 msgid "label_school_practices"
-msgstr "Practicas escolares"
+msgstr "Prácticas escolares"
 
 #. Default: "Only Students and Posdoc from Cuernavaca"
 #: matem/solicitudes/content/solicitud.py:
@@ -1237,3 +1237,18 @@ msgstr "Cantidad utilizada para inscripción (Institucional)"
 
 msgid "help_institucion_procedencia"
 msgstr "Institución del invitado"
+
+msgid "PHD"
+msgstr "Doctorado"
+
+msgid "Mastery"
+msgstr "Maestría"
+
+msgid "Undergraduate"
+msgstr "Licenciatura"
+
+msgid "help_apoyo_extra"
+msgstr "Indique si solicito apoyo extra al posgrado u otra dependecia"
+
+msgid "label_apoyo_texto"
+msgstr "Detalles del apoyo obtenido o negado"

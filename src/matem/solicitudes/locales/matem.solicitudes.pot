@@ -1243,3 +1243,18 @@ msgstr ""
 
 msgid "help_institucion_procedencia"
 msgstr ""
+
+msgid "PHD"
+msgstr ""
+
+msgid "Mastery"
+msgstr ""
+
+msgid "Undergraduate"
+msgstr ""
+
+msgid "help_apoyo_extra"
+msgstr ""
+
+msgid "label_apoyo_texto"
+msgstr ""
