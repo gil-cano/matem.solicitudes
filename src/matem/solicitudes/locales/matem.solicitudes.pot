@@ -1240,3 +1240,6 @@ msgstr ""
 
 msgid "label_cantidad_autorizada_inscripcion_institucional"
 msgstr ""
+
+msgid "help_institucion_procedencia"
+msgstr ""

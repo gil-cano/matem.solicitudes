@@ -153,10 +153,10 @@ msgid "help_comentario_owner"
 msgstr "Agregue cualquier comentario que considere importante para su solicitud"
 
 msgid "help_fecha_desde"
-msgstr "Fecha en que iniciará la visita (puede ser aproximada)"
+msgstr "Fecha en que iniciará la visita"
 
 msgid "help_fecha_hasta"
-msgstr "Fecha en que terminará la visita (puede ser aproximada)"
+msgstr "Fecha en que terminará la visita"
 
 msgid "help_fecha_sesionci"
 msgstr "Fecha en la que la solicitud fue revisada"
@@ -661,7 +661,7 @@ msgstr "Investigador"
 #. Default: "Visitor"
 #: matem/solicitudes/browser/solicitudvisitante.pt:284
 msgid "label_invitado"
-msgstr "Invitado"
+msgstr "Nombre del Invitado"
 
 #. Default: "Link"
 #: matem/solicitudes/browser/folderaprobadas.pt:218
@@ -1234,3 +1234,6 @@ msgstr "Cantidad utilizada para viaticos (Institucional)"
 
 msgid "label_cantidad_autorizada_inscripcion_institucional"
 msgstr "Cantidad utilizada para inscripción (Institucional)"
+
+msgid "help_institucion_procedencia"
+msgstr "Institución del invitado"
