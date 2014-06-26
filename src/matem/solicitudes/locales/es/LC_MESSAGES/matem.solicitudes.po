@@ -1185,7 +1185,7 @@ msgid "label_cantidad_recomendada_pasaje"
 msgstr "Cantidad recomendada para pasaje"
 
 msgid "label_cantidad_recomendada_viaticos"
-msgstr "Cantidad recomendada para viaticos o practicas escolares"
+msgstr "Cantidad recomendada para viaticos"
 
 msgid "label_cantidad_recomendada_inscripcion"
 msgstr "Cantidad recomendada para inscripción"
@@ -1194,7 +1194,7 @@ msgid "label_cantidad_consejo_pasaje"
 msgstr "Cantidad autorizada para pasaje"
 
 msgid "label_cantidad_consejo_viaticos"
-msgstr "Cantidad autorizada para viaticos o practicas escolares"
+msgstr "Cantidad autorizada para viaticos"
 
 msgid "label_cantidad_consejo_inscripcion"
 msgstr "Cantidad autorizada para inscripción"
@@ -1203,7 +1203,7 @@ msgid "label_cantidad_autorizada_pasaje"
 msgstr "Cantidad utilizada para pasaje"
 
 msgid "label_cantidad_autorizada_viaticos"
-msgstr "Cantidad utilizada para viaticos o practicas escolares"
+msgstr "Cantidad utilizada para viaticos"
 
 msgid "label_cantidad_autorizada_inscripcion"
 msgstr "Cantidad utilizada para inscripción"
@@ -1212,7 +1212,7 @@ msgid "label_cantidad_recomendada_pasaje_institucional"
 msgstr "Cantidad recomendada para pasaje (Institucional)"
 
 msgid "label_cantidad_recomendada_viaticos_institucional"
-msgstr "Cantidad recomendada para viaticos o practicas escolares (Institucional)"
+msgstr "Cantidad recomendada para viaticos (Institucional)"
 
 msgid "label_cantidad_recomendada_inscripcion_institucional"
 msgstr "Cantidad recomendada para inscripción (Institucional)"
@@ -1221,7 +1221,16 @@ msgid "label_cantidad_consejo_pasaje_institucional"
 msgstr "Cantidad autorizada para pasaje (Institucional)"
 
 msgid "label_cantidad_consejo_viaticos_institucional"
-msgstr "Cantidad autorizada para viaticos o practicas escolares (Institucional)"
+msgstr "Cantidad autorizada para viaticos (Institucional)"
 
 msgid "label_cantidad_consejo_inscripcion_institucional"
 msgstr "Cantidad autorizada para inscripción (Institucional)"
+
+msgid "label_cantidad_autorizada_pasaje_institucional"
+msgstr "Cantidad utilizada para pasaje (Institucional)"
+
+msgid "label_cantidad_autorizada_viaticos_institucional"
+msgstr "Cantidad utilizada para viaticos (Institucional)"
+
+msgid "label_cantidad_autorizada_inscripcion_institucional"
+msgstr "Cantidad utilizada para inscripción (Institucional)"

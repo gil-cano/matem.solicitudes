@@ -1231,3 +1231,12 @@ msgstr ""
 
 msgid "label_cantidad_consejo_inscripcion_institucional"
 msgstr ""
+
+msgid "label_cantidad_autorizada_pasaje_institucional"
+msgstr ""
+
+msgid "label_cantidad_autorizada_viaticos_institucional"
+msgstr ""
+
+msgid "label_cantidad_autorizada_inscripcion_institucional"
+msgstr ""
