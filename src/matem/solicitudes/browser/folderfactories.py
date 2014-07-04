@@ -72,6 +72,13 @@ events = {
          'fecha_desde': '2014-09-01 00:00 ',
          'fecha_hasta': '2014-09-05 00:00 ',
          'objeto_viaje': 'Asistir ala III Reunión Conjunta de la Real Sociedad Matemática Española-Sociedad Matemática Mexicana'},
+'SMM': {'event_title': 'XLVII Congreso Nacional de la Sociedad Matemática Mexicana (XLVII SMM 2014)',
+        'pais': 'MX',
+        'ciudad_pais': 'Durango',
+        'institucion': 'Universidad Juárez del Estado de Durango',
+        'fecha_desde': '2014-10-26 00:00 ',
+        'fecha_hasta': '2014-10-31 00:00 ',
+        'objeto_viaje': 'Asistir al XLVII Congreso Nacional de la Sociedad Matemática Mexicana (XLVII SMM 2014)'},
 },
 
 }
