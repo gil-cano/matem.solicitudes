@@ -309,7 +309,7 @@ SolicitudBecarioSchema = BaseSchema + Schema((
 
     StringField(
         name='apoyo_texto',
-        required=0,
+        required=1,
         default='',
         widget=TextAreaWidget(
             label='Detail the obtained support',
