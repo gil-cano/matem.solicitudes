@@ -239,7 +239,7 @@ class SolicitudFolderView(BrowserView):
             append=True
 
         if append:
-#            users.append([fsdperson.getLastName()+', '+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),fsdperson.getPresupuesto_asignado(),rol,str(fsdperson.getId())])
+           # users.append([fsdperson.getLastName()+', '+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),fsdperson.getPresupuesto_asignado(),rol,str(fsdperson.getId())])
              users[letter].append([fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),
                        folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(),0.0),
                        rol,
@@ -1038,7 +1038,8 @@ class SolicitudFolderView(BrowserView):
                         # text_expenses = ' '.join((expenses, rec_expenses))
                         ##########################################################################################
                     else:
-                        text_expenses = unicode('Erogación: Ninguna.', 'utf-8')
+                        text_expenses = ''
+                        # text_expenses = unicode('Erogación: Ninguna.', 'utf-8')
 
                     text_comments = unicode('Comentario del solicitante: %s.' % solicitud.getComentario_owner(), 'utf-8')
                     text_ccomments = unicode('Comentario de la comisión: %s' % solicitud.getComentario_ce(), 'utf-8')
@@ -1063,6 +1064,8 @@ class SolicitudFolderView(BrowserView):
                             p.append(LINE, self.rtf_repr(text_comments))
                         if solicitud.getComentario_ce():
                             p.append(LINE, self.rtf_repr(text_ccomments))
+                        if not text_expenses:
+                            p.append(LINE, self.rtf_repr(unicode('Erogación: Ninguna.', 'utf-8')))
                         p.append(LINE, Text(self.rtf_repr(recomendacion),boldText))
 
 
@@ -1128,6 +1131,8 @@ class SolicitudFolderView(BrowserView):
                             p.append(LINE, self.rtf_repr(text_comments))
                         if solicitud.getComentario_ce():
                             p.append(LINE, self.rtf_repr(text_ccomments))
+                        if not text_expenses:
+                            p.append(LINE, self.rtf_repr(unicode('Erogación: Ninguna.', 'utf-8')))
                         p.append(LINE, Text(self.rtf_repr(recomendacion),boldText))
 
                         ##########################################################################################
@@ -1179,7 +1184,12 @@ class SolicitudFolderView(BrowserView):
                         numeracion = unicode("V%d. " % v, 'utf-8')
                         guest = unicode(solicitud.getNombreInvitado(), 'utf-8')
                         semblanza = unicode(solicitud.getSemblanza(), 'utf-8')
-                        text_place = unicode('de la %s, %s.' % (solicitud.getInstitucion(), solicitud.getPais()), 'utf-8')
+                        #text_place = unicode('de la %s, %s.' % (solicitud.getInstitucion(), solicitud.getPais()), 'utf-8')
+                        text_place = 'de la %s, %s.' % (
+                            unicode(solicitud.getInstitucion(), 'utf-8'),
+                            solicitud.translate(solicitud.getPais())
+                        )
+
                         travel_obj_u = unicode(solicitud.getObjetoViaje(), 'utf-8')
                         tempText = ' '.join([' para', travel_obj_u, text_dates, text_expenses])
                         p = Paragraph( ss.ParagraphStyles.Normal)
@@ -1194,6 +1204,8 @@ class SolicitudFolderView(BrowserView):
                             p.append(LINE, self.rtf_repr(text_comments))
                         if solicitud.getComentario_ce():
                             p.append(LINE, self.rtf_repr(text_ccomments))
+                        if not text_expenses:
+                            p.append(LINE, self.rtf_repr(unicode('Erogación: Ninguna.', 'utf-8')))
                         p.append(LINE, Text(self.rtf_repr(recomendacion),boldText))
                         visitante.append(p)
 
@@ -1232,12 +1244,14 @@ class SolicitudFolderView(BrowserView):
                                  Text(self.rtf_repr(author),boldText), ' Asesor: ',
                                  Text(self.rtf_repr(solicitud.getNombreAsesor()),boldText),
                                  self.rtf_repr(tempText))
-                        apoyo_comments = unicode('Comentario de apoyo extra: %s' % solicitud.getApoyo_texto(), 'utf-8')
-                        p.append(LINE, self.rtf_repr(apoyo_comments))
                         if solicitud.getComentario_owner():
                             p.append(LINE, self.rtf_repr(text_comments))
                         if solicitud.getComentario_ce():
                             p.append(LINE, self.rtf_repr(text_ccomments))
+                        apoyo_comments = unicode('Comentario de apoyo extra: %s' % solicitud.getApoyo_texto(), 'utf-8')
+                        p.append(LINE, self.rtf_repr(apoyo_comments))
+                        if not text_expenses:
+                            p.append(LINE, self.rtf_repr(unicode('Erogación: Ninguna.', 'utf-8')))
                         p.append(LINE, Text(self.rtf_repr(recomendacion),boldText))
                         estudiante.append(p)
 
@@ -1290,23 +1304,24 @@ class SolicitudFolderView(BrowserView):
             header.append(p)
 
             generationDate="Cd. Universitaria, a _ de _ de 2014"
-            signersTitle="LA COMISION ESPECIAL"
-            signersNames=""
+            #This source insert/delete the comisations
+            # signersTitle="LA COMISION ESPECIAL"
+            # signersNames=""
 
-            p = Paragraph( ss.ParagraphStyles.Heading2,alignCenter)
-            p.append(self.rtf_repr(generationDate))
-            signers.append(p)
+            # p = Paragraph( ss.ParagraphStyles.Heading2,alignCenter)
+            # p.append(self.rtf_repr(generationDate))
+            # signers.append(p)
 
-            p = Paragraph( ss.ParagraphStyles.Heading2,alignCenter)
-            p.append(self.rtf_repr(signersNames))
-            signers.append(p)
+            # p = Paragraph( ss.ParagraphStyles.Heading2,alignCenter)
+            # p.append(self.rtf_repr(signersNames))
+            # signers.append(p)
 
-            comisionados=self.queryObj.getMiembrosComision()
+            # comisionados=self.queryObj.getMiembrosComision()
 
-            for comisionado in comisionados.keys():
-                p = Paragraph( ss.ParagraphStyles.Normal)
-                p.append(Text(self.rtf_repr(unicode(comisionados[comisionado][0], 'utf-8')),boldText))
-                signers.append(p)
+            # for comisionado in comisionados.keys():
+            #     p = Paragraph( ss.ParagraphStyles.Normal)
+            #     p.append(Text(self.rtf_repr(unicode(comisionados[comisionado][0], 'utf-8')),boldText))
+            #     signers.append(p)
 
             p = Paragraph( ss.ParagraphStyles.Normal)
             p.append(Text(self.rtf_repr("SRG/gcv*"),smallText))
