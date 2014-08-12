@@ -1252,3 +1252,9 @@ msgstr "Especifique si solicitó apoyo a otras instancias. Usted cuenta con mayo
 
 msgid "label_apoyo_texto"
 msgstr "Detalles del apoyo obtenido o negado"
+
+msgid "help_pais_procedencia"
+msgstr "País de procedencia"
+
+msgid "help_ciudad_procedencia"
+msgstr "Ciudad de procedencia"
