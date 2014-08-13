@@ -1,40 +1,32 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
-
-from Products.Five.browser import BrowserView
-from matem.solicitudes.interfaces import ISolicitudFolder
-from matem.solicitudes.config import DICCIONARIO_AREAS
-from matem.solicitudes.browser.queries import Queries
-from matem.solicitudes.browser.requests import Requests
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from DateTime.DateTime import DateTime
-
-from operator import itemgetter
-
-import datetime
-import sys
-
+from matem.solicitudes.browser.queries import Queries
+from matem.solicitudes.browser.requests import Requests
+from matem.solicitudes.config import DICCIONARIO_AREAS
 from matem.solicitudes.config import getCountriesVocabulary
+from matem.solicitudes.interfaces import ISolicitudFolder
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
 
 class SearchView(BrowserView):
 
     globaltemplate = ViewPageTemplateFile('global_request_search_form.pt')
     localtemplate = ViewPageTemplateFile('search_form.pt')
 
-    queryObj = None;
-    reqObj = None;
+    queryObj = None
+    reqObj = None
 
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        self.queryObj=Queries(self.context,self.request)
-        self.reqObj=Requests(self.context,self.request)
+        self.queryObj = Queries(self.context, self.request)
+        self.reqObj = Requests(self.context, self.request)
 
     def __call__(self):
-        self.queryObj=Queries(self.context,self.request)
-        self.reqObj=Requests(self.context,self.request)
+        self.queryObj = Queries(self.context, self.request)
+        self.reqObj = Requests(self.context, self.request)
         if ISolicitudFolder.providedBy(self.context):
             return self.localtemplate()
         return self.globaltemplate()
