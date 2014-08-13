@@ -1248,7 +1248,13 @@ msgid "Undergraduate"
 msgstr "Licenciatura"
 
 msgid "help_apoyo_extra"
-msgstr "Indique si solicito apoyo extra al posgrado u otra dependecia"
+msgstr "Especifique si solicitó apoyo a otras instancias. Usted cuenta con mayores posibilidades de obtener apoyo, siempre que agote las instancias de financiamiento externas al Instituto (organizadores y/o posgrado, así como otros órganos). Cada caso se analizará en lo particular."
 
 msgid "label_apoyo_texto"
 msgstr "Detalles del apoyo obtenido o negado"
+
+msgid "help_pais_procedencia"
+msgstr "País de procedencia"
+
+msgid "help_ciudad_procedencia"
+msgstr "Ciudad de procedencia"

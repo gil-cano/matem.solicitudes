@@ -369,7 +369,7 @@
                             </div> </td>
             </div></tr>
 
-            <tr><div class="field">
+<!--             <tr><div class="field">
                 <td><label for="Area" i18n:translate="label_investigacionarea">Area of Research</label>
 
 <br/>
@@ -384,8 +384,8 @@
 
                 </tal:areas></td>
             </div></tr>
-
-           <tr> <div class="field">
+ -->
+ <!--           <tr> <div class="field">
                 <td><label for="Becario" i18n:translate="label_nombre_becario">Scholarship Holder</label>
 
 <br/>
@@ -400,9 +400,9 @@
 
                 </tal:creators></td>
 
-            </div></tr>
+            </div></tr> -->
 
-            <tr><div class="field">
+ <!--            <tr><div class="field">
                 <td><label for="Asesor" i18n:translate="label_asesor">Advisor</label>
 
 <br/>
@@ -417,7 +417,7 @@
 
                 </tal:creators></td>
 
-            </div></tr>
+            </div></tr> -->
 <!--            <tr><div class="field">
                <td> <label for="Hasta" i18n:translate="label_fecha_Hasta">To date</label></td>
 
@@ -428,7 +428,7 @@
                        /></td>
             </div></tr>-->
 
-            <tr><div class="field">
+ <!--            <tr><div class="field">
                 <td><label for="Objeto" i18n:translate="label_objeto_viaje">Objective</label>
 
 <br/>
@@ -437,9 +437,9 @@
                        name="Objeto"
                        size="25"
                        /></td>
-            </div></tr>
+            </div></tr> -->
 
-           <tr> <div class="field">
+ <!--           <tr> <div class="field">
                 <td><label for="TTrabajo" i18n:translate="label_titulo_trabajo">Title of the work to be presented</label>
 <br/>
 
@@ -448,9 +448,9 @@
                        name="TTrabajo"
                        size="25"
                        /></td>
-            </div></tr>
+            </div></tr> -->
 
-           <tr> <div class="field">
+<!--            <tr> <div class="field">
                 <td><label for="Cantidad" i18n:translate="label_search_cantidad">Total Amount </label>
                 <div class="formHelp" i18n:translate="help_search_cantidad">
                 Total approved or, if it is the case, requested amount in pesos (MXN).
@@ -465,9 +465,9 @@
                        />
                 </td>
             </div></tr>
+ -->
 
-
-           <tr> <div class="field">
+<!--            <tr> <div class="field">
                 <td><label for="CantidadLarger" i18n:translate="label_search_cantidad_larger">Larger than Amount</label>
                 <div class="formHelp" i18n:translate="help_search_cantidad_larger">
                 If greater than zero, it will return every application with a larger approved, or requested if it is the case, amount than the one specified.
@@ -482,8 +482,8 @@
                        />
                 </td>
             </div></tr>
-
-           <tr> <div class="field">
+ -->
+ <!--           <tr> <div class="field">
                 <td><label for="CantidadLower" i18n:translate="label_search_cantidad_lower">Lower than Amount</label>
                 <div class="formHelp" i18n:translate="help_search_cantidad_lower">
                 If greater than zero, it will return every application with a lower approved, or requested if it is the case, amount than the one specified.
@@ -498,7 +498,7 @@
                        />
                 </td>
             </div></tr>
-
+ -->
            <tr> <div class="field">
                 <td><label for="State" i18n:translate="label_current_state">Current State</label>
                 <div class="formHelp" i18n:translate="help_search_current_state">
