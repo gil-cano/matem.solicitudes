@@ -263,7 +263,7 @@
         <tr>                                 <th>Disponible</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][2]">Value</td></tr>
         <tr><th rowspan="2">Apoyo institucional:</th><th>Asignado</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][5]">Value</td></tr>
         <tr>                                 <th>Disponible</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][6]">Value</td></tr>
-        <tr><th rowspan="2">Dias Aprobados:</th><th>Comision</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][3]">Value</td></tr>
+        <tr><th rowspan="2">D&iacute;as Aprobados:</th><th>Comisi&oacute;n</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][3]">Value</td></tr>
         <tr>                                 <th>Licencia</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][4]">Value</td></tr>
 	<tr><th colspan="5"><b>Informaci&oacute;n Sobre Solicitud</b></th></tr>
         <tr><th colspan="2">Tipo</th><td align="center" colspan="3">Solicitud de <span tal:content="here/getLicenciacomision">Value</span></td></tr>
@@ -304,13 +304,13 @@
         <tr><th colspan="2" i18n:translate="label_viaticos">Travel Allowances</th><td align="center" tal:content="python:here.getViaticos().lower()">Value</td>
             <th i18n:translate="label_inscripcion">Registration</th><td align="center" tal:content="python:here.getInscripcion().lower()">Value</td></tr>
         <tr><th colspan="5"><b>Cantidades</b></th></tr>
-        <tr><th>Concepto</th><th>Cantidad Solicitada</th><th>Cantidad Recomendada por Comision Especial</th><th>Cantidad Autorizada por el Consejo Interno</th><th>Cantidad Utilizada</th></tr>
+        <tr><th>Concepto</th><th>Cantidad Solicitada</th><th>Cantidad Recomendada por Comisi&oacute;n Especial</th><th>Cantidad Autorizada por el Consejo Interno</th><th>Cantidad Utilizada</th></tr>
         <tr><th>Cantidad para pasajes (Apoyo institucional)</th>
                       <td align="center" tal:content="here/getCantidad_pasaje_apoyo">Cantidad Solicitada</td>
                       <td align="center" tal:content="here/getCantidad_recomendada_pasaje_apoyo">Cantidad Recomendada</td>
                       <td align="center" tal:content="here/getCantidad_consejo_pasaje_apoyo">Cantidad Autorizada</td>
                       <td align="center" tal:content="here/getCantidad_autorizada_pasaje_apoyo">Cantidad Utilizada</td></tr>
-        <tr><th>Cantidad para viaticos (Apoyo institucional)</th>
+        <tr><th>Cantidad para vi&aacute;ticos (Apoyo institucional)</th>
                       <td align="center" tal:content="here/getCantidad_viaticos_apoyo">Cantidad Solicitada</td>
                       <td align="center" tal:content="here/getCantidad_recomendada_viaticos_apoyo">Cantidad Recomendada</td>
                       <td align="center" tal:content="here/getCantidad_consejo_viaticos_apoyo">Cantidad Autorizada</td>
@@ -326,7 +326,7 @@
                       <td align="center" tal:content="here/getCantidad_recomendada_pasaje">Cantidad Recomendada</td>
                       <td align="center" tal:content="here/getCantidad_consejo_pasaje">Cantidad Autorizada</td>
                       <td align="center" tal:content="here/getCantidad_autorizada_pasaje">Cantidad Utilizada</td></tr>
-        <tr><th>Cantidad para viaticos (Asignación anual/)</th>
+        <tr><th>Cantidad para vi&aacute;ticos (Asignación anual/)</th>
                       <td align="center" tal:content="here/getCantidad_viaticos">Cantidad Solicitada</td>
                       <td align="center" tal:content="here/getCantidad_recomendada_viaticos">Cantidad Recomendada</td>
                       <td align="center" tal:content="here/getCantidad_consejo_viaticos">Cantidad Autorizada</td>
