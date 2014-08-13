@@ -117,7 +117,7 @@
                     Information about the solicitor
                 </dt>
                 <dd>
-                    <span tal:content="python:datosAdicionales[0]">Researcher</span> <span i18n:translate="label_presupuesto_asignado">has a total assigned budget of </span><span tal:replace="python:datosAdicionales[1]">Budget</span> pesos, <span i18n:translate="label_presupuesto_asignado2">and can have, at most, another </span><span tal:replace="python:datosAdicionales[2]">Budget</span> pesos.
+                    <span tal:content="python:datosAdicionales[0]">Researcher</span> <span i18n:translate="label_presupuesto_asignado">has a total assigned budget of </span><font color="#0000FF"><span tal:replace="python:datosAdicionales[1]">Budget</span></font> pesos, <span i18n:translate="label_presupuesto_asignado2">and can have, at most, another </span><font color="#FFFFFF" style="background-color:#FF6600;"><span background="#FF0000" tal:replace="python:datosAdicionales[2]">Budget</span></font> pesos.
                 </dd>
             </dl>
             </span>
@@ -295,9 +295,9 @@
 	<tr><th colspan="5"><b>Datos del Solicitante</b></th></tr>
 	<tr><th colspan="2">Nombre</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][0]">Value</td></tr>
         <tr><th rowspan="2">Asignación anual:</th><th>Asignado</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][1]">Value</td></tr>
-        <tr>                                 <th>Disponible</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][2]">Value</td></tr>
+        <tr>                                 <th>Disponible</th><td  style="color: #FFFFFF; background:#FF6600;" align="center" colspan="3" tal:content="python:datosAdicionales[0][2]">Value</td></tr>
         <tr><th rowspan="2">Apoyo institucional:</th><th>Asignado</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][5]">Value</td></tr>
-        <tr>                                 <th>Disponible</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][6]">Value</td></tr>
+        <tr>                                 <th>Disponible</th><td style="color: #FFFFFF; background:#FF6600;" align="center" colspan="3" tal:content="python:datosAdicionales[0][6]">Value</td></tr>
         <tr><th rowspan="2">Dias Aprobados:</th><th>Comision</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][3]">Value</td></tr>
         <tr>                                 <th>Licencia</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][4]">Value</td></tr>
 	<tr><th colspan="5"><b>Informaci&oacute;n Sobre Solicitud</b></th></tr>
