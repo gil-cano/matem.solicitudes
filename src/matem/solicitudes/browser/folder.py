@@ -1465,3 +1465,22 @@ class SolicitudFolderView(BrowserView):
     def _encode_unicode(self, match):
         codepoint = ord(match.group(1))
         return '\\u%s?' % (codepoint < 32768 and codepoint or codepoint - 65536)
+
+    def getPresupuestoOwner(self, items):
+
+        extra_data = {}
+        folder = self.context
+        for item in items:
+            solicitud = {}
+            usuarioActual = item['owner_id']
+            cantidadAsignada = folder.getPresupuesto_asignado_solicitantes()[0].get(usuarioActual, 0.0)
+            cantidadInicial = folder.getSolicitantes()[0].get(usuarioActual, [0, 0, 0, 0, 0.0])[4]
+            cantidadInicialApoyos = folder.getSolicitantes()[0].get(usuarioActual, [0, 0, 0, 0, 0.0])[5]
+            resto = cantidadInicial - cantidadAsignada
+            solicitud['resto'] = resto
+            solicitud['dcomision'] = folder.getDias_comision_utilizados_solicitantes()[0].get(usuarioActual, 0.0)
+            solicitud['dlicencia'] = folder.getDias_licencia_utilizados_solicitantes()[0].get(usuarioActual, 0.0)
+            solicitud['apoyo'] = cantidadInicialApoyos-folder.getApoyoinst_asignado_solicitantes()[0].get(usuarioActual, 0.0)
+            extra_data[item['id']] = solicitud
+
+        return extra_data
