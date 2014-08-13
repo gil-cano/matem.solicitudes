@@ -233,7 +233,6 @@
                 <th i18n:translate="label_required_quantity">Cantidad requerida (pesos)</th>
                 <th i18n:translate="label_state">State</th>
   </tr>
-
         <tr tal:repeat="item python:items">
           <!-- <td><input type="checkbox" name="" tal:attributes="name python:str(item['id'])"></td> -->
           <td><input type="checkbox" name="" tal:attributes="name python: '/'.join([item['parentid'], item['id']])"></td>
@@ -316,7 +315,7 @@
     </span>
 
     <span name="pendientesRevisionComision" class="overflowable"
-          tal:define="items python:view.getSolicitudesPendientesRevisionComision()">
+          tal:define="items python:view.getSolicitudesPendientesRevisionComision(); extra_data python:view.getPresupuestoOwner(items)">
 
       <h3 tal:condition="items" i18n:translate="Pending for review by Special Comission">
         Pending for review by Special Comission
@@ -326,7 +325,7 @@
         <form action="#" method="post" id="pendientesDeRevisionComision" 
               tal:condition="items" tal:attributes="action string:${context/absolute_url}/view">
           <table class="listing" border="1" width="100%" tal:condition="items">
-            <tbody>      
+            <tbody>
               <tr>
                 <th>
                   <input type="checkbox" name="allComision" id="allComision" 
@@ -360,7 +359,11 @@
                 <td tal:content="python:item['creation_date']">Creation Date</td>
                 <td tal:content="python:item['from']">Creation Date</td>
                 <td tal:content="python:item['to']">Creation Date</td>
-                <td tal:content="python:item['quantity_of_days']">Quantity of Days</td>
+                <td>
+                  <span tal:content="python:item['quantity_of_days']">Quantity of Days</span><br/>
+                  licencia utilizados <span tal:content="python:extra_data[item['id']]['dcomision']"/><br/>
+                  comisión utilizados <span tal:content="python:extra_data[item['id']]['dlicencia']"/>
+                </td>
                 <td align="right" tal:content="python:item['transportation_quantity']">Cantidad para Pasaje</td>
                 <td align="center" tal:content="python:item['travel_expense_quantity']">Cantidad para Viaticos</td>
                 <td align="right">
@@ -369,7 +372,12 @@
                     <tal:block tal:content="python:item['special_fields']['inscription_quantity']"> 10.0 </tal:block>
                   </tal:block>
                 </td>
-                <td align="center" tal:content="python:item['total_quantity']">Quantity</td>
+                <td align="center">
+                  <span tal:content="python:item['total_quantity']">Quantity</span>
+                  anual <span tal:content="python:extra_data[item['id']]['resto']"/>
+                  institucional <span tal:content="python:extra_data[item['id']]['apoyo']"/>
+                </td>
+                <!-- <td align="center" tal:content="python:item['total_quantity']">Quantity</td> -->
                 <td tal:content="python:item['cargo_presupuesto']">Con cargo</td>
                 <td align="center" tal:content="python:item['revision_ce_date']">Commision Date</td>
               </tr>
