@@ -322,13 +322,13 @@
       </h3>
       <a tal:condition="items" href="javascript: printTable('pendientesRevisionComision')">Imprimir</a>
       <div class="tabularView">
-        <form action="#" method="post" id="pendientesDeRevisionComision" 
+        <form action="#" method="post" id="pendientesDeRevisionComision"
               tal:condition="items" tal:attributes="action string:${context/absolute_url}/view">
           <table class="listing" border="1" width="100%" tal:condition="items">
             <tbody>
               <tr>
                 <th>
-                  <input type="checkbox" name="allComision" id="allComision" 
+                  <input type="checkbox" name="allComision" id="allComision"
                       onclick="checkAll('pendientesDeRevisionComision','allComision');" /> </th>
                 <th>Sede</th>
                 <th i18n:translate="label_type">Type</th>
@@ -359,7 +359,7 @@
                 <td tal:content="python:item['creation_date']">Creation Date</td>
                 <td tal:content="python:item['from']">Creation Date</td>
                 <td tal:content="python:item['to']">Creation Date</td>
-                <td>
+                <td tal:attributes="style python:extra_data[item['id']]['style-days']">
                   <span tal:content="python:item['quantity_of_days']">Quantity of Days</span><br/>
                   licencia utilizados <span tal:content="python:extra_data[item['id']]['dcomision']"/><br/>
                   comisión utilizados <span tal:content="python:extra_data[item['id']]['dlicencia']"/>
@@ -372,10 +372,9 @@
                     <tal:block tal:content="python:item['special_fields']['inscription_quantity']"> 10.0 </tal:block>
                   </tal:block>
                 </td>
-                <td align="center">
+                <td tal:attributes="style python:extra_data[item['id']]['style-quantity']" align="center">
                   <span tal:content="python:item['total_quantity']">Quantity</span>
-                  anual <span tal:content="python:extra_data[item['id']]['resto']"/>
-                  institucional <span tal:content="python:extra_data[item['id']]['apoyo']"/>
+                  <span tal:content="python:', '.join(extra_data[item['id']]['style-quantity-text'])"/>
                 </td>
                 <!-- <td align="center" tal:content="python:item['total_quantity']">Quantity</td> -->
                 <td tal:content="python:item['cargo_presupuesto']">Con cargo</td>

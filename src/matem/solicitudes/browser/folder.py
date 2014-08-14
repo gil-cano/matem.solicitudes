@@ -1481,6 +1481,32 @@ class SolicitudFolderView(BrowserView):
             solicitud['dcomision'] = folder.getDias_comision_utilizados_solicitantes()[0].get(usuarioActual, 0.0)
             solicitud['dlicencia'] = folder.getDias_licencia_utilizados_solicitantes()[0].get(usuarioActual, 0.0)
             solicitud['apoyo'] = cantidadInicialApoyos-folder.getApoyoinst_asignado_solicitantes()[0].get(usuarioActual, 0.0)
+            solicitud['style-days'] = ""
+            solicitud['style-quantity'] = ""
+            solicitud['style-quantity-text'] = []
+
+            if item['meta_type'] in ['Solicitud', 'SolicitudInstitucional']:
+                if item['special_fields']['type'] == 'Licencia':
+                    if item['quantity_of_days'] > 45 - solicitud['dlicencia']:
+                        solicitud['style-days'] = "color: #FFFFFF; background:#FF0000;"
+
+                # comission type
+                else:
+                    if item['quantity_of_days'] > 45 - solicitud['dcomision']:
+                        solicitud['style-days'] = "color: #FFFFFF; background:#FF0000;"
+
+            institutional_budget = item['institutional_budget']['transport_expenses'] + item['institutional_budget']['registration_expenses'] + item['institutional_budget']['food_expenses']
+            if institutional_budget > solicitud['apoyo']:
+                solicitud['style-quantity'] = "color: #FFFFFF; background:#FF0000;"
+                text = 'Solicita institucional %s y tiene %s \n'%(institutional_budget, solicitud['apoyo'])
+                solicitud['style-quantity-text'].append(text)
+
+            annual_budget = item['annual_budget']['transport_expenses'] + item['annual_budget']['registration_expenses'] + item['annual_budget']['food_expenses']
+            if annual_budget > solicitud['resto']:
+                solicitud['style-quantity'] = "color: #FFFFFF; background:#FF0000;"
+                text = 'Solicita anual %s y tiene %s \n'%(annual_budget, solicitud['resto'])
+                solicitud['style-quantity-text'].append(text)
+
             extra_data[item['id']] = solicitud
 
         return extra_data

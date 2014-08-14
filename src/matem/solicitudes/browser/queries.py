@@ -487,10 +487,30 @@ class Queries(BrowserView):
                 # standar date format for no required fields
                 date_sesionci = ''
                 if obj.getFecha_sesionci():
-                	date_sesionci = obj.getFecha_sesionci().strftime('%d/%m/%Y')
+                  date_sesionci = obj.getFecha_sesionci().strftime('%d/%m/%Y')
                 date_sesionce = ''
                 if obj.getFecha_sesionce():
-                	date_sesionce = obj.getFecha_sesionce().strftime('%d/%m/%Y')
+                  date_sesionce = obj.getFecha_sesionce().strftime('%d/%m/%Y')
+
+                try:
+                  iregistration = obj.getCantidad_inscripcion_apoyo()
+                except Exception:
+                  iregistration = 0.0
+
+                try:
+                  aregistration = obj.getCantidad_inscripcion()
+                except Exception:
+                  aregistration = 0.0
+
+                try:
+                  itransport = obj.getCantidad_pasaje_apoyo()
+                except Exception:
+                  itransport = 0.0
+
+                try:
+                  ifood = obj.getCantidad_viaticos_apoyo()
+                except Exception:
+                  ifood = 0.0
 
                 applications.append({
                             'meta_type':obj.meta_type,
@@ -525,6 +545,16 @@ class Queries(BrowserView):
                             'url':obj.absolute_url(),
                             'special_fields':special_dictionary,
                             'cargo_presupuesto':obj.getCargo_presupuesto(),
+                            'institutional_budget': {
+                                'transport_expenses': itransport,
+                                'registration_expenses': iregistration,
+                                'food_expenses': ifood
+                            },
+                            'annual_budget': {
+                                'transport_expenses': obj.getCantidad_pasaje(),
+                                'registration_expenses': aregistration,
+                                'food_expenses': obj.getCantidad_viaticos()
+                            }
                 })
 
             except Exception, err:
