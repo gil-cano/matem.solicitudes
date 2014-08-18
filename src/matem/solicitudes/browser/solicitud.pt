@@ -117,7 +117,7 @@
                     Information about the solicitor
                 </dt>
                 <dd>
-                    <span tal:content="python:datosAdicionales[0]">Researcher</span> <span i18n:translate="label_presupuesto_asignado">has a total assigned budget of </span><font color="#0000FF"><span tal:replace="python:datosAdicionales[1]">Budget</span></font> pesos, <span i18n:translate="label_presupuesto_asignado2">and can have, at most, another </span><font color="#FFFFFF" style="background-color:#FF6600;"><span background="#FF0000" tal:replace="python:datosAdicionales[2]">Budget</span></font> pesos.
+                    <span tal:content="python:datosAdicionales[0]">Researcher</span> <span i18n:translate="label_presupuesto_asignado">has a total assigned budget of </span><font color="#0000FF"><span tal:replace="python:datosAdicionales[1]">Budget</span></font> pesos, <span i18n:translate="label_presupuesto_asignado2">and can have, at most, another </span><font color="#FFFFFF" style="background-color:#FF6600;"><span tal:replace="python:datosAdicionales[2]">Budget</span></font> pesos.
                 </dd>
             </dl>
             </span>
