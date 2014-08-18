@@ -1482,6 +1482,7 @@ class SolicitudFolderView(BrowserView):
             solicitud['dlicencia'] = folder.getDias_licencia_utilizados_solicitantes()[0].get(usuarioActual, 0.0)
             solicitud['apoyo'] = cantidadInicialApoyos-folder.getApoyoinst_asignado_solicitantes()[0].get(usuarioActual, 0.0)
             solicitud['style-days'] = ""
+            solicitud['style-days-text'] = ""
             solicitud['style-quantity'] = ""
             solicitud['style-quantity-text'] = []
 
@@ -1489,11 +1490,15 @@ class SolicitudFolderView(BrowserView):
                 if item['special_fields']['type'] == 'Licencia':
                     if item['quantity_of_days'] > 45 - solicitud['dlicencia']:
                         solicitud['style-days'] = "color: #FFFFFF; background:#FF0000;"
+                        text = 'Solicita Licencia %s y tiene %s \n'%(item['quantity_of_days'], 45 - solicitud['dlicencia'])
+                        solicitud['style-days-text'] = text
 
                 # comission type
                 else:
                     if item['quantity_of_days'] > 45 - solicitud['dcomision']:
                         solicitud['style-days'] = "color: #FFFFFF; background:#FF0000;"
+                        text = 'Solicita Comisión %s y tiene %s \n'%(item['quantity_of_days'], 45 - solicitud['dcomision'])
+                        solicitud['style-days-text'] = text
 
             institutional_budget = item['institutional_budget']['transport_expenses'] + item['institutional_budget']['registration_expenses'] + item['institutional_budget']['food_expenses']
             if institutional_budget > solicitud['apoyo']:

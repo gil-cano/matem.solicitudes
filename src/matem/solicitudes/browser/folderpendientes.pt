@@ -360,9 +360,8 @@
                 <td tal:content="python:item['from']">Creation Date</td>
                 <td tal:content="python:item['to']">Creation Date</td>
                 <td tal:attributes="style python:extra_data[item['id']]['style-days']">
-                  <span tal:content="python:item['quantity_of_days']">Quantity of Days</span><br/>
-                  licencia utilizados <span tal:content="python:extra_data[item['id']]['dcomision']"/><br/>
-                  comisión utilizados <span tal:content="python:extra_data[item['id']]['dlicencia']"/>
+                  <span tal:content="python:item['quantity_of_days']">Quantity of Days</span>
+                  <span tal:content="python:extra_data[item['id']]['style-days-text']"/>
                 </td>
                 <td align="right" tal:content="python:item['transportation_quantity']">Cantidad para Pasaje</td>
                 <td align="center" tal:content="python:item['travel_expense_quantity']">Cantidad para Viaticos</td>
@@ -376,7 +375,6 @@
                   <span tal:content="python:item['total_quantity']">Quantity</span>
                   <span tal:content="python:', '.join(extra_data[item['id']]['style-quantity-text'])"/>
                 </td>
-                <!-- <td align="center" tal:content="python:item['total_quantity']">Quantity</td> -->
                 <td tal:content="python:item['cargo_presupuesto']">Con cargo</td>
                 <td align="center" tal:content="python:item['revision_ce_date']">Commision Date</td>
               </tr>
