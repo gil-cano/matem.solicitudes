@@ -355,12 +355,19 @@
                       tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</a></td>
                 <td tal:content="python:item['owner_name']">Solicitante</td>
                 <td tal:content="python:item['objective']">Reason</td>
-                <td i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</td>
+                <td tal:attributes="style python:extra_data[item['id']]['style-country']">
+                  <span i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</span>
+                  <span tal:replace="structure python:extra_data[item['id']]['style-country-text']"/>
+                </td>
                 <td tal:content="python:item['creation_date']">Creation Date</td>
-                <td tal:content="python:item['from']">Creation Date</td>
-                <td tal:content="python:item['to']">Creation Date</td>
+                <td tal:attributes="style python:extra_data[item['id']]['style-overlap']">
+                  <span tal:content="python:item['from']">Creation Date</span>
+                  <span tal:replace="structure python:extra_data[item['id']]['style-overlap-text']"/>
+                </td>
+                <td tal:attributes="style python:extra_data[item['id']]['style-overlap']">
+                  <span tal:content="python:item['to']">Creation Date</span>
+                </td>
                 <td tal:attributes="style python:extra_data[item['id']]['style-days']">
-                  <span tal:content="python:item['quantity_of_days']">Quantity of Days</span>
                   <span tal:content="python:extra_data[item['id']]['style-days-text']"/>
                 </td>
                 <td align="right" tal:content="python:item['transportation_quantity']">Cantidad para Pasaje</td>

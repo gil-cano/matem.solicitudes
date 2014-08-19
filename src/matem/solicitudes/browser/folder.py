@@ -1470,6 +1470,7 @@ class SolicitudFolderView(BrowserView):
 
         extra_data = {}
         folder = self.context
+        catalog = folder.portal_catalog
         for item in items:
             solicitud = {}
             usuarioActual = item['owner_id']
@@ -1482,35 +1483,80 @@ class SolicitudFolderView(BrowserView):
             solicitud['dlicencia'] = folder.getDias_licencia_utilizados_solicitantes()[0].get(usuarioActual, 0.0)
             solicitud['apoyo'] = cantidadInicialApoyos-folder.getApoyoinst_asignado_solicitantes()[0].get(usuarioActual, 0.0)
             solicitud['style-days'] = ""
-            solicitud['style-days-text'] = ""
+            solicitud['style-days-text'] = item['quantity_of_days']
             solicitud['style-quantity'] = ""
             solicitud['style-quantity-text'] = []
+            solicitud['style-country'] = ""
+            solicitud['style-country-text'] = ""
+            solicitud['style-overlap'] = ""
+            solicitud['style-overlap-text'] = ""
 
             if item['meta_type'] in ['Solicitud', 'SolicitudInstitucional']:
                 if item['special_fields']['type'] == 'Licencia':
                     if item['quantity_of_days'] > 45 - solicitud['dlicencia']:
-                        solicitud['style-days'] = "color: #FFFFFF; background:#FF0000;"
-                        text = 'Solicita Licencia %s y tiene %s \n'%(item['quantity_of_days'], 45 - solicitud['dlicencia'])
+                        solicitud['style-days'] = "background:#FFCC00;"
+                        text = 'Solicita %s  días de Licencia y dispone de %s \n'%(item['quantity_of_days'], 45 - solicitud['dlicencia'])
                         solicitud['style-days-text'] = text
 
                 # comission type
                 else:
                     if item['quantity_of_days'] > 45 - solicitud['dcomision']:
-                        solicitud['style-days'] = "color: #FFFFFF; background:#FF0000;"
-                        text = 'Solicita Comisión %s y tiene %s \n'%(item['quantity_of_days'], 45 - solicitud['dcomision'])
+                        solicitud['style-days'] = "background:#FFCC00;"
+                        text = 'Solicita %s días de Comisión y dispone de %s \n'%(item['quantity_of_days'], 45 - solicitud['dcomision'])
                         solicitud['style-days-text'] = text
 
             institutional_budget = item['institutional_budget']['transport_expenses'] + item['institutional_budget']['registration_expenses'] + item['institutional_budget']['food_expenses']
             if institutional_budget > solicitud['apoyo']:
                 solicitud['style-quantity'] = "color: #FFFFFF; background:#FF0000;"
-                text = 'Solicita institucional %s y tiene %s \n'%(institutional_budget, solicitud['apoyo'])
+                text = 'Solicita de apoyo institucional %s y dispone de %s \n'%(institutional_budget, solicitud['apoyo'])
                 solicitud['style-quantity-text'].append(text)
 
             annual_budget = item['annual_budget']['transport_expenses'] + item['annual_budget']['registration_expenses'] + item['annual_budget']['food_expenses']
             if annual_budget > solicitud['resto']:
                 solicitud['style-quantity'] = "color: #FFFFFF; background:#FF0000;"
-                text = 'Solicita anual %s y tiene %s \n'%(annual_budget, solicitud['resto'])
+                text = 'Solicita de asignación anual %s y dispone de %s \n'%(annual_budget, solicitud['resto'])
                 solicitud['style-quantity-text'].append(text)
+
+            if item['meta_type'] == 'SolicitudBecario':
+                user_level = catalog(id=usuarioActual)[0].getObject().student_education_level
+                if user_level == 'bachelor':
+                    if item['country_code'][0] != 'MX':
+                        text = "No puede solicitar salida al extranjero"
+                        solicitud['style-country'] = "color: #FFFFFF; background:#006600;"
+                        solicitud['style-country-text'] = text
+
+                else:
+                    user_aprobadas = catalog(portal_type="SolicitudBecario", Creator=usuarioActual, review_state='aprobada')
+                    country_bylevel = {'Doctorado': [], 'Maestria': []}
+                    solicitudesbylevel = {'Doctorado': [], 'Maestria': []}
+                    for sol in user_aprobadas:
+                        obj = sol.getObject()
+                        if obj.getPais() != 'Mexico':
+                            country_bylevel[obj.getGrado()].append(obj.getPais())
+                            solicitudesbylevel[obj.getGrado()].append(sol)
+
+                    unique_countries = {}
+                    for k, v in country_bylevel.iteritems():
+                        unique_countries[k] = list(set(v))
+
+                    if user_level == 'phd' and len(unique_countries['Doctorado']) > 0:
+                        text = "Ya solicitó salida al extranjero"
+                        solicitud['style-country'] = "color: #FFFFFF; background:#006600;"
+                        solicitud['style-country-text'] = "%s <a href=%s> ver solicitud </a>"%(text,solicitudesbylevel['Doctorado'][0].getURL())
+                    if user_level == 'master' and len(unique_countries['Maestria']) > 0:
+                        text = "Ya solicitó salida al extranjero"
+                        solicitud['style-country'] = "color: #FFFFFF; background:#006600;"
+                        solicitud['style-country-text'] = "%s <a href=%s> ver solicitud </a>"%(text,solicitudesbylevel['Maestria'][0].getURL())
+
+            if item['meta_type'] != 'SolicitudVisitante':
+                sol = catalog(id=item['id'])
+                date1 = sol[0].fecha_desde
+                date2 = sol[0].fecha_hasta
+                overlap_sol = catalog(portal_type=('Solicitud','SolicitudBecario', 'SolicitudInstitucional'), Creator=usuarioActual, review_state='aprobada', fecha_desde={'query': date2, 'range': 'max'}, fecha_hasta={'query': date1, 'range': 'min'})
+                if len(overlap_sol) > 0:
+                    text = 'Tiene otra salida para esas fechas'
+                    solicitud['style-overlap'] = "color: #FFFFFF; background:#0066FF;"
+                    solicitud['style-overlap-text'] = "%s <a href=%s> ver solicitud </a>"%(text,overlap_sol[0].getURL())
 
             extra_data[item['id']] = solicitud
 
