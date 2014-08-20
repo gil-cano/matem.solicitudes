@@ -1518,35 +1518,36 @@ class SolicitudFolderView(BrowserView):
                 solicitud['style-quantity-text'].append(text)
 
             if item['meta_type'] == 'SolicitudBecario':
-                user_level = catalog(id=usuarioActual)[0].getObject().student_education_level
-                if user_level == 'bachelor':
-                    if item['country_code'][0] != 'MX':
+                if item['country_code'][0] != 'MX':
+                    user_level = catalog(id=usuarioActual)[0].getObject().student_education_level
+                    if user_level == 'bachelor':
+                        # if item['country_code'][0] != 'MX':
                         text = "No puede solicitar salida al extranjero"
                         solicitud['style-country'] = "color: #FFFFFF; background:#006600;"
                         solicitud['style-country-text'] = text
 
-                else:
-                    user_aprobadas = catalog(portal_type="SolicitudBecario", Creator=usuarioActual, review_state='aprobada')
-                    country_bylevel = {'Doctorado': [], 'Maestria': []}
-                    solicitudesbylevel = {'Doctorado': [], 'Maestria': []}
-                    for sol in user_aprobadas:
-                        obj = sol.getObject()
-                        if obj.getPais() != 'Mexico':
-                            country_bylevel[obj.getGrado()].append(obj.getPais())
-                            solicitudesbylevel[obj.getGrado()].append(sol)
+                    else:
+                        user_aprobadas = catalog(portal_type="SolicitudBecario", Creator=usuarioActual, review_state='aprobada')
+                        country_bylevel = {'Doctorado': [], 'Maestria': []}
+                        solicitudesbylevel = {'Doctorado': [], 'Maestria': []}
+                        for sol in user_aprobadas:
+                            obj = sol.getObject()
+                            if obj.getPais() != 'Mexico':
+                                country_bylevel[obj.getGrado()].append(obj.getPais())
+                                solicitudesbylevel[obj.getGrado()].append(sol)
 
-                    unique_countries = {}
-                    for k, v in country_bylevel.iteritems():
-                        unique_countries[k] = list(set(v))
+                        unique_countries = {}
+                        for k, v in country_bylevel.iteritems():
+                            unique_countries[k] = list(set(v))
 
-                    if user_level == 'phd' and len(unique_countries['Doctorado']) > 0:
-                        text = "Ya solicitó salida al extranjero"
-                        solicitud['style-country'] = "color: #FFFFFF; background:#006600;"
-                        solicitud['style-country-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>"%(text,solicitudesbylevel['Doctorado'][0].getURL())
-                    if user_level == 'master' and len(unique_countries['Maestria']) > 0:
-                        text = "Ya solicitó salida al extranjero"
-                        solicitud['style-country'] = "color: #FFFFFF; background:#006600;"
-                        solicitud['style-country-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>"%(text,solicitudesbylevel['Maestria'][0].getURL())
+                        if user_level == 'phd' and len(unique_countries['Doctorado']) > 0:
+                            text = "Ya solicitó salida al extranjero"
+                            solicitud['style-country'] = "color: #FFFFFF; background:#006600;"
+                            solicitud['style-country-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>"%(text,solicitudesbylevel['Doctorado'][0].getURL())
+                        if user_level == 'master' and len(unique_countries['Maestria']) > 0:
+                            text = "Ya solicitó salida al extranjero"
+                            solicitud['style-country'] = "color: #FFFFFF; background:#006600;"
+                            solicitud['style-country-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>"%(text,solicitudesbylevel['Maestria'][0].getURL())
 
             if item['meta_type'] != 'SolicitudVisitante':
                 sol = catalog(id=item['id'])
