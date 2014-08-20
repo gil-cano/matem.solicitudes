@@ -1542,11 +1542,11 @@ class SolicitudFolderView(BrowserView):
                     if user_level == 'phd' and len(unique_countries['Doctorado']) > 0:
                         text = "Ya solicitó salida al extranjero"
                         solicitud['style-country'] = "color: #FFFFFF; background:#006600;"
-                        solicitud['style-country-text'] = "%s <a href=%s> ver solicitud </a>"%(text,solicitudesbylevel['Doctorado'][0].getURL())
+                        solicitud['style-country-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>"%(text,solicitudesbylevel['Doctorado'][0].getURL())
                     if user_level == 'master' and len(unique_countries['Maestria']) > 0:
                         text = "Ya solicitó salida al extranjero"
                         solicitud['style-country'] = "color: #FFFFFF; background:#006600;"
-                        solicitud['style-country-text'] = "%s <a href=%s> ver solicitud </a>"%(text,solicitudesbylevel['Maestria'][0].getURL())
+                        solicitud['style-country-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>"%(text,solicitudesbylevel['Maestria'][0].getURL())
 
             if item['meta_type'] != 'SolicitudVisitante':
                 sol = catalog(id=item['id'])
@@ -1556,7 +1556,7 @@ class SolicitudFolderView(BrowserView):
                 if len(overlap_sol) > 0:
                     text = 'Tiene otra salida para esas fechas'
                     solicitud['style-overlap'] = "color: #FFFFFF; background:#0066FF;"
-                    solicitud['style-overlap-text'] = "%s <a href=%s> ver solicitud </a>"%(text,overlap_sol[0].getURL())
+                    solicitud['style-overlap-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>"%(text,overlap_sol[0].getURL())
 
             extra_data[item['id']] = solicitud
 
