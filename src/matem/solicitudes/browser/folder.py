@@ -1498,12 +1498,12 @@ class SolicitudFolderView(BrowserView):
                         text = 'Solicita %s  días de Licencia y dispone de %s \n'%(item['quantity_of_days'], 45 - solicitud['dlicencia'])
                         solicitud['style-days-text'] = text
 
-                # comission type
-                else:
-                    if item['quantity_of_days'] > 45 - solicitud['dcomision']:
-                        solicitud['style-days'] = "background:#FFCC00;"
-                        text = 'Solicita %s días de Comisión y dispone de %s \n'%(item['quantity_of_days'], 45 - solicitud['dcomision'])
-                        solicitud['style-days-text'] = text
+                # # comission type
+                # else:
+                #     if item['quantity_of_days'] > 45 - solicitud['dcomision']:
+                #         solicitud['style-days'] = "background:#FFCC00;"
+                #         text = 'Solicita %s días de Comisión y dispone de %s \n'%(item['quantity_of_days'], 45 - solicitud['dcomision'])
+                #         solicitud['style-days-text'] = text
 
             institutional_budget = item['institutional_budget']['transport_expenses'] + item['institutional_budget']['registration_expenses'] + item['institutional_budget']['food_expenses']
             if institutional_budget > solicitud['apoyo']:
