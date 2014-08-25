@@ -1466,7 +1466,7 @@ class SolicitudFolderView(BrowserView):
         codepoint = ord(match.group(1))
         return '\\u%s?' % (codepoint < 32768 and codepoint or codepoint - 65536)
 
-    def getPresupuestoOwner(self, items):
+    def getStyles(self, items):
 
         extra_data = {}
         folder = self.context
@@ -1506,18 +1506,20 @@ class SolicitudFolderView(BrowserView):
                 #         solicitud['style-days-text'] = text
 
             institutional_budget = item['institutional_budget']['transport_expenses'] + item['institutional_budget']['registration_expenses'] + item['institutional_budget']['food_expenses']
-            if institutional_budget > solicitud['apoyo']:
-                solicitud['style-quantity'] = "color: #FFFFFF; background:#FF0000;"
-                text = 'Solicita de apoyo institucional %s y dispone de %s \n'%(institutional_budget, solicitud['apoyo'])
-                solicitud['style-quantity-text'].append(text)
+            if item['meta_type'] != 'SolicitudBecario':
+                if institutional_budget > solicitud['apoyo']:
+                    solicitud['style-quantity'] = "color: #FFFFFF; background:#FF0000;"
+                    text = 'Solicita de apoyo institucional %s y dispone de %s \n'%(institutional_budget, solicitud['apoyo'])
+                    solicitud['style-quantity-text'].append(text)
 
-            annual_budget = item['annual_budget']['transport_expenses'] + item['annual_budget']['registration_expenses'] + item['annual_budget']['food_expenses']
-            if annual_budget > solicitud['resto']:
-                solicitud['style-quantity'] = "color: #FFFFFF; background:#FF0000;"
-                text = 'Solicita de asignación anual %s y dispone de %s \n'%(annual_budget, solicitud['resto'])
-                solicitud['style-quantity-text'].append(text)
+                annual_budget = item['annual_budget']['transport_expenses'] + item['annual_budget']['registration_expenses'] + item['annual_budget']['food_expenses']
+                if annual_budget > solicitud['resto']:
+                    solicitud['style-quantity'] = "color: #FFFFFF; background:#FF0000;"
+                    text = 'Solicita de asignación anual %s y dispone de %s \n'%(annual_budget, solicitud['resto'])
+                    solicitud['style-quantity-text'].append(text)
 
-            if item['meta_type'] == 'SolicitudBecario':
+            # if item['meta_type'] == 'SolicitudBecario':
+            else:
                 if item['country_code'][0] != 'MX':
                     user_level = catalog(id=usuarioActual)[0].getObject().student_education_level
                     if user_level == 'bachelor':
@@ -1553,11 +1555,22 @@ class SolicitudFolderView(BrowserView):
                 sol = catalog(id=item['id'])
                 date1 = sol[0].fecha_desde
                 date2 = sol[0].fecha_hasta
-                overlap_sol = catalog(portal_type=('Solicitud','SolicitudBecario', 'SolicitudInstitucional'), Creator=usuarioActual, review_state='aprobada', fecha_desde={'query': date2, 'range': 'max'}, fecha_hasta={'query': date1, 'range': 'min'})
-                if len(overlap_sol) > 0:
+                overlap_sol = catalog(
+                    portal_type=('Solicitud','SolicitudBecario', 'SolicitudInstitucional'),
+                    Creator=usuarioActual,
+                    review_state=['aprobada', 'revisioncomision', 'revisionconsejo'],
+                    fecha_desde={'query': date2, 'range': 'max'},
+                    fecha_hasta={'query': date1, 'range': 'min'}
+                )
+                effective_sol = []
+                for sol in overlap_sol:
+                    if sol.id != item['id']:
+                        effective_sol.append(sol)
+                # if len(overlap_sol) > 0:
+                if len(effective_sol) > 0:
                     text = 'Tiene otra salida para esas fechas'
                     solicitud['style-overlap'] = "color: #FFFFFF; background:#0066FF;"
-                    solicitud['style-overlap-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>"%(text,overlap_sol[0].getURL())
+                    solicitud['style-overlap-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>"%(text,effective_sol[0].getURL())
 
             extra_data[item['id']] = solicitud
 

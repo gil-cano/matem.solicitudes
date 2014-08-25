@@ -315,7 +315,7 @@
     </span>
 
     <span name="pendientesRevisionComision" class="overflowable"
-          tal:define="items python:view.getSolicitudesPendientesRevisionComision(); extra_data python:view.getPresupuestoOwner(items)">
+          tal:define="items python:view.getSolicitudesPendientesRevisionComision(); extra_data python:view.getStyles(items)">
 
       <h3 tal:condition="items" i18n:translate="Pending for review by Special Comission">
         Pending for review by Special Comission
@@ -416,7 +416,8 @@
 
     </span>
 
-    <span name="pendientesRevisionConsejo" class="overflowable" tal:define="items python:view.getSolicitudesPendientesRevisionConsejo()">
+    <span name="pendientesRevisionConsejo" class="overflowable"
+      tal:define="items python:view.getSolicitudesPendientesRevisionConsejo(); extra_data python:view.getStyles(items)">
 
     <h3 tal:condition="items" i18n:translate="Pending for review by Internal Council">Pending for review by Internal Council</h3>
     <a tal:condition="items" href="javascript: printTable('pendientesRevisionConsejo')">Imprimir</a>
@@ -454,30 +455,37 @@
           tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</a></td>
           <td tal:content="python:item['owner_name']">Solicitant</td>
           <td tal:content="python:item['objective']">Reason</td>
-          <td i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</td>
+          <td tal:attributes="style python:extra_data[item['id']]['style-country']">
+            <span i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</span>
+            <span tal:replace="structure python:extra_data[item['id']]['style-country-text']"/>
+          </td>
           <td tal:content="python:item['creation_date']">Creation Date</td>
-          <td tal:content="python:item['from']">Creation Date</td>
-          <td tal:content="python:item['to']">Creation Date</td>
-          <td tal:content="python:item['quantity_of_days']">Quantity of
-          Days</td>
+
+          <td tal:attributes="style python:extra_data[item['id']]['style-overlap']">
+            <span tal:content="python:item['from']">Creation Date</span>
+            <span tal:replace="structure python:extra_data[item['id']]['style-overlap-text']"/>
+          </td>
+          <td tal:attributes="style python:extra_data[item['id']]['style-overlap']">
+            <span tal:content="python:item['to']">Creation Date</span>
+          </td>
+          <td tal:attributes="style python:extra_data[item['id']]['style-days']">
+            <span tal:content="python:extra_data[item['id']]['style-days-text']"/>
+          </td>
           <td align="right"
             tal:content="python:item['transportation_quantity']">Cantidad para Pasaje</td>
           <td align="right"
             tal:content="python:item['travel_expense_quantity']">Cantidad para Viaticos</td>
           <td align="right">
             <tal:block tal:condition="python: not 'inscription_quantity' in item['special_fields'].keys()"> 0.0 </tal:block>
-            <tal:block
-            tal:condition="python: 'inscription_quantity' in item['special_fields'].keys()">
-            <tal:block tal:content="python:item['special_fields']['inscription_quantity']">
-            10.0 
-            </tal:block>
+            <tal:block tal:condition="python: 'inscription_quantity' in item['special_fields'].keys()">
+              <tal:block tal:content="python:item['special_fields']['inscription_quantity']">10.0</tal:block>
             </tal:block>
           </td>
-          <td align="right"
-          tal:content="python:item['total_quantity']">Quantity</td>
-
-          <td align="center"
-          tal:content="python:item['total_recommended_quantity']">Quantity (Commision)</td>
+          <td tal:attributes="style python:extra_data[item['id']]['style-quantity']" align="center">
+            <span tal:content="python:item['total_quantity']">Quantity</span>
+            <span tal:content="python:', '.join(extra_data[item['id']]['style-quantity-text'])"/>
+          </td>
+          <td align="center" tal:content="python:item['total_recommended_quantity']">Quantity (Commision)</td>
           <td tal:content="python:item['cargo_presupuesto']">Con cargo</td>
           <td align="center" tal:content="python:item['revision_ce_date']">Commission Date</td>
           <td align="center" tal:content="python:item['revision_ci_date']">Council Date</td>
