@@ -1170,7 +1170,7 @@ msgstr "Prácticas escolares"
 #. Default: "Only Students and Posdoc from Cuernavaca"
 #: matem/solicitudes/content/solicitud.py:
 msgid "help_school_practices"
-msgstr "Solo para estudiantes y Posdoc de Cuernavaca"
+msgstr "Sólo para estudiantes y Posdoc de Cuernavaca"
 
 msgid "Car"
 msgstr "Auto"
