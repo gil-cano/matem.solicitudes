@@ -1508,15 +1508,15 @@ class SolicitudFolderView(BrowserView):
 
             institutional_budget = item['institutional_budget']['transport_expenses'] + item['institutional_budget']['registration_expenses'] + item['institutional_budget']['food_expenses']
             if item['meta_type'] != 'SolicitudBecario':
-                if institutional_budget > solicitud['apoyo']:
+                if institutional_budget > solicitud['apoyo'] and institutional_budget > 0.0:
                     solicitud['style-quantity'] = "color: #FFFFFF; background:#FF0000;"
-                    text = 'Solicita de apoyo institucional %s y dispone de %s \n'%(institutional_budget, solicitud['apoyo'])
+                    text = 'Solicita de apoyo institucional %.2f y dispone de %.2f \n'%(institutional_budget, solicitud['apoyo'])
                     solicitud['style-quantity-text'].append(text)
 
                 annual_budget = item['annual_budget']['transport_expenses'] + item['annual_budget']['registration_expenses'] + item['annual_budget']['food_expenses']
-                if annual_budget > solicitud['resto']:
+                if annual_budget > solicitud['resto'] and annual_budget > 0.0:
                     solicitud['style-quantity'] = "color: #FFFFFF; background:#FF0000;"
-                    text = 'Solicita de asignación anual %s y dispone de %s \n'%(annual_budget, solicitud['resto'])
+                    text = 'Solicita de asignación anual %.2f y dispone de %.2f \n'%(annual_budget, solicitud['resto'])
                     solicitud['style-quantity-text'].append(text)
 
             # if item['meta_type'] == 'SolicitudBecario':
