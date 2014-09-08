@@ -81,6 +81,9 @@ events = {
         'objeto_viaje': 'Asistir al XLVII Congreso Nacional de la Sociedad Matemática Mexicana (XLVII SMM 2014)'},
 },
 
+2015: {
+
+},
 }
 
 
