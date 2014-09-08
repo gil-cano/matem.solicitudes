@@ -554,7 +554,8 @@ class Queries(BrowserView):
                                 'transport_expenses': obj.getCantidad_pasaje(),
                                 'registration_expenses': aregistration,
                                 'food_expenses': obj.getCantidad_viaticos()
-                            }
+                            },
+                            'parent_folder': obj.aq_parent,
                 })
 
             except Exception, err:

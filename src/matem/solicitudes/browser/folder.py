@@ -1473,6 +1473,7 @@ class SolicitudFolderView(BrowserView):
         catalog = folder.portal_catalog
         for item in items:
             solicitud = {}
+            folder = item['parent_folder']
             usuarioActual = item['owner_id']
             cantidadAsignada = folder.getPresupuesto_asignado_solicitantes()[0].get(usuarioActual, 0.0)
             cantidadInicial = folder.getSolicitantes()[0].get(usuarioActual, [0, 0, 0, 0, 0.0])[4]
