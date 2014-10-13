@@ -1094,11 +1094,10 @@ class SolicitudVisitante(BaseContent):
         return
 
     def pasarValorConsejero(self):
-        pasaje=self.getCantidad_recomendada_pasaje()
-        viaticos=self.getCantidad_recomendada_viaticos()
-
-        self.setCantidad_consejo_pasaje(pasaje)
-        self.setCantidad_consejo_viaticos(viaticos)
+        self.setComentario_ci(self.getComentario_ce())
+        self.setCantidad_consejo_pasaje(self.getCantidad_recomendada_pasaje())
+        self.setCantidad_consejo_viaticos(
+            self.getCantidad_recomendada_viaticos())
         return
 
     def pasarValorAutorizado(self):
