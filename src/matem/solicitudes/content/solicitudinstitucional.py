@@ -1383,19 +1383,18 @@ class SolicitudInstitucional(BaseContent):
         return
 
     def pasarValorConsejero(self):
-        pasaje=self.getCantidad_recomendada_pasaje()
-        viaticos=self.getCantidad_recomendada_viaticos()
-        inscripcion=self.getCantidad_recomendada_inscripcion()
-        pasaje_a=self.getCantidad_recomendada_pasaje_apoyo()
-        viaticos_a=self.getCantidad_recomendada_viaticos_apoyo()
-        inscripcion_a=self.getCantidad_recomendada_inscripcion_apoyo()
-
-        self.setCantidad_consejo_pasaje(pasaje)
-        self.setCantidad_consejo_viaticos(viaticos)
-        self.setCantidad_consejo_inscripcion(inscripcion)
-        self.setCantidad_consejo_pasaje_apoyo(pasaje_a)
-        self.setCantidad_consejo_viaticos_apoyo(viaticos_a)
-        self.setCantidad_consejo_inscripcion_apoyo(inscripcion_a)
+        self.setComentario_ci(self.getComentario_ce())
+        self.setCantidad_consejo_pasaje(self.getCantidad_recomendada_pasaje())
+        self.setCantidad_consejo_viaticos(
+            self.getCantidad_recomendada_viaticos())
+        self.setCantidad_consejo_inscripcion(
+            self.getCantidad_recomendada_inscripcion())
+        self.setCantidad_consejo_pasaje_apoyo(
+            self.getCantidad_recomendada_pasaje_apoyo())
+        self.setCantidad_consejo_viaticos_apoyo(
+            self.getCantidad_recomendada_viaticos_apoyo())
+        self.setCantidad_consejo_inscripcion_apoyo(
+            self.getCantidad_recomendada_inscripcion_apoyo())
         return
 
     def pasarValorAutorizado(self):
