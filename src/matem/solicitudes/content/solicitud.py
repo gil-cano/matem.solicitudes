@@ -1320,7 +1320,7 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
             return "Revision por Consejo Interno"
 
     def getDefaultDate(self):
-        return DateTime('2014/1/1')
+        return DateTime('2015/1/1')
 
     def getPersonWrapper(self,userid):
         fsdtool = getToolByName(self,'facultystaffdirectory_tool')
