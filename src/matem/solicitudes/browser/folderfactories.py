@@ -82,7 +82,20 @@ events = {
 },
 
 2015: {
-
+'UMISMM': {'event_title': 'Primera Reunión Conjunta de la Unión Matemática de Israel y la Sociedad Matemática Mexicana',
+         'pais': 'MX',
+         'ciudad_pais': 'Oaxaca',
+         'institucion': 'Instituto Tecnológico de Oaxaca',
+         'fecha_desde': '2015-09-07 00:00 ',
+         'fecha_hasta': '2015-09-11 00:00 ',
+         'objeto_viaje': 'Asistir ala Primera Reunión Conjunta de la Unión Matemática de Israel y la Sociedad Matemática Mexicana'},
+'SMM': {'event_title': 'XLVIII Congreso Nacional de la Sociedad Matemática Mexicana (XLVIII SMM 2015)',
+        'pais': 'MX',
+        'ciudad_pais': 'Sonora',
+        'institucion': 'Universidad de Sonora',
+        'fecha_desde': '2014-10-18 00:00 ',
+        'fecha_hasta': '2014-10-23 00:00 ',
+        'objeto_viaje': 'Asistir al XLVIII Congreso Nacional de la Sociedad Matemática Mexicana (XLVIII SMM 2015)'},
 },
 }
 
