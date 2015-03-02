@@ -83,62 +83,6 @@ class SearchView(BrowserView):
 
         for obj in encontradas:
             append = True
-            # try:
-            #     if obj['owner_id'].find(searchStr[0]) != -1 and searchStr[0] is not "":
-            #         append = True
-            #     elif searchStr[0]=='todos':
-            #         append=True
-            #     elif obj['country_code'][0].find(searchStr[1])!=-1 and searchStr[1] is not "":
-            #         append=True
-            #     elif obj['country'].lower().find(searchStr[2])!=-1 and searchStr[2] is not "":
-            #         append=True
-            #     elif obj['institution'].lower().find(searchStr[3])!=-1 and searchStr[3] is not "":
-            #         append=True
-            #     elif obj['from'] >= fechaDesde and fechaDesde != zeroDate:
-            #         if fechaHasta == zeroDate :
-            #             append=True
-            #         else:
-            #             if obj['to'] <= fechaHasta:
-            #                 append=True
-            #     elif obj['to'] <= fechaHasta and fechaHasta != zeroDate:
-            #         if fechaDesde == zeroDate :
-            #             append=True
-            #         else:
-            #             if obj['from'] >= fechaDesde:
-            #                 append=True
-            #     elif obj['objective'].lower().find(searchStr[6])!=-1 and searchStr[6] is not "":
-            #         append=True
-            #     elif obj['special_fields']['work_title'].lower().find(searchStr[8])!=-1 and searchStr[8] is not "":
-            #         append=True
-            # except:
-            #     append=False
-
-
-            # if obj['meta_type'] == 'SolicitudBecario':
-
-            #     if obj['owner_id'].find(searchStr[9])!=-1 and searchStr[9] is not "":
-            #         append=True
-            #     if obj['special_fields']['researcher_id'].find(searchStr[10])!=-1 and searchStr[10] is not "":
-            #         append=True
-
-            # try:
-            #     equal=float(searchStr[11])
-            #     larger=float(searchStr[12])
-            #     lower=float(searchStr[13])
-            # except:
-            #     equal=larger=lower=0.0
-
-            # if obj['workflow_state']=="aprobada":
-            #     referencia=obj['total_approved_quantity']
-            # else:
-            #     referencia=obj['total_quantity']
-
-            # if equal == referencia and equal > 0:
-            #     append=True
-            # elif referencia > larger and larger > 0:
-            #     append=True
-            # elif referencia < lower and lower > 0:
-            #     append=True
 
             if append and unTipo != "all":
                 if unTipo == "becario":
@@ -150,16 +94,6 @@ class SearchView(BrowserView):
                 elif unTipo == "licencia":
                     if not obj['meta_type'] == "Solicitud":
                         append = False
-
-            # if append and unEstado is not None:
-            #     if unEstado == "aprobada" and not obj['workflow_state']=="aprobada":
-            #             append=False
-            #     elif unEstado == "rechazada" and not obj['workflow_state']=="rechazada":
-            #             append=False
-            #     elif unEstado == "revision" and obj['workflow_state']=="aprobada":
-            #             append=False
-            #     elif unEstado == "revision" and obj['workflow_state']=="rechazada":
-            #             append=False
 
             if append:
                 applications.append(obj)
