@@ -6,8 +6,10 @@ from matem.solicitudes.browser.requests import Requests
 from matem.solicitudes.config import DICCIONARIO_AREAS
 from matem.solicitudes.config import getCountriesVocabulary
 from matem.solicitudes.interfaces import ISolicitudFolder
+from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from zope.component.hooks import getSite
 
 
 class SearchView(BrowserView):
@@ -32,75 +34,65 @@ class SearchView(BrowserView):
         return self.globaltemplate()
 
     def search(self):
-        queryObj = self.queryObj
-        applications = []
-        try:
-            searchStr = [
-                self.request.form['Creator'],
-                self.request.form['Pais'],
-                self.request.form['Ciudad'].lower(),
-                self.request.form['Institucion'].lower(),
-                self.request.form['Desde'],
-                self.request.form['Hasta']
+        if 'form.button.Submit' not in self.request.form:
+            return []
+
+        catalog = getToolByName(getSite(), 'portal_catalog')
+        ptype = self.request.form['Type']
+        if ptype == 'all':
+            ptype = (
+                'Solicitud',
+                'SolicitudVisitante',
+                'SolicitudBecario',
+                'SolicitudInstitucional'
+            )
+        path = '/'.join(self.context.getPhysicalPath())
+        query = {'path': {'query': path, 'depth': 1}, 'portal_type': ptype}
+
+        if self.request.form['Creator']:
+            query['Creator'] = self.request.form['Creator']
+
+        state = self.request.form['State']
+        if state == 'revision':
+            state = ('preeliminar', 'revisioncomision', 'revisionconsejo')
+        if 'any' not in state:
+            query['review_state'] = state
+
+        brains = catalog(query)
+
+        # sorted_list = [(a['revision_ci_date'], a) for a in applications]
+        # sorted_list.sort(key=lambda  x: x[0])
+        # return [dic for name, dic in sorted_list]
+        attlist = [
+            'absolute_url',
+            'Type',
+            'getNombreOwner',
+            'getPais',
+            'getFechaDesde',
+            'getFechaHasta',
+            'getObjetoViaje',
+            'getCantidadDeDias',
+            'getCantidadAutorizadaTotal',
+            'getFecha_sesionci',
+            'getActaci',
+            'getCargo_presupuesto',
+            'getWFStateName',
             ]
-
-            Creator = self.request.form['Creator']
-            unTipo = self.request.form['Type']
-            unEstado = self.request.form['State']
-
-            if 'revision' in unEstado:
-                unEstado = (
-                    'preeliminar',
-                    'revisioncomision',
-                    'revisionconsejo'
-                )
-
-        except:
-            return applications
-
-        zeroDate = DateTime(1920, 1, 1)
-
-        try:
-            fechaDesde = DateTime(
-                int(self.request.form['Desde_year']),
-                int(self.request.form['Desde_month']),
-                int(self.request.form['Desde_day']))
-        except:
-            fechaDesde = zeroDate
-
-        encontradas = []
-
-        if 'any' in unEstado:
-            if Creator:
-                encontradas = queryObj.getUserApplications(Creator)
-            else:
-                encontradas = queryObj.getCurrentFolderApplications()
-        else:
-            if Creator:
-                encontradas = queryObj.getFolderApplicationsByStateAndUser(unEstado, Creator)
-            else:
-                encontradas = queryObj.getFolderApplicationsByState(unEstado)
-
-        for obj in encontradas:
-            append = True
-
-            if append and unTipo != "all":
-                if unTipo == "becario":
-                    if not obj['meta_type'] == "SolicitudBecario":
-                        append = False
-                elif unTipo == "visitante":
-                    if not obj['meta_type'] == "SolicitudVisitante":
-                        append = False
-                elif unTipo == "licencia":
-                    if not obj['meta_type'] == "Solicitud":
-                        append = False
-
-            if append:
-                applications.append(obj)
-
-        sorted_list = [(a['revision_ci_date'], a) for a in applications]
-        sorted_list.sort(key=lambda  x: x[0])
-        return [dic for name, dic in sorted_list]
+        items = []
+        for b in brains:
+            o = b.getObject()
+            adic = {a: getattr(o, a)() for a in attlist}
+            ffrom = adic['getFechaDesde']
+            if ffrom is not None:
+                adic['getFechaDesde'] = ffrom.strftime('%d/%m/%Y')
+            tto = adic['getFechaHasta']
+            if tto is not None:
+                adic['getFechaHasta'] = tto.strftime('%d/%m/%Y')
+            cidate = adic['getFecha_sesionci']
+            if cidate is not None:
+                adic['getFecha_sesionci'] = cidate.strftime('%d/%m/%Y')
+            items.append(adic)
+        return items
 
     def searchSlow(self):
         form = self.request.form
@@ -343,18 +335,18 @@ class SearchView(BrowserView):
         return users
 
     def getAreasInv(self):
-        options=[]
-        llaves= DICCIONARIO_AREAS.keys()
+        options = []
+        llaves = DICCIONARIO_AREAS.keys()
         llaves.sort()
 
         for llave in llaves:
-            options.append([llave,DICCIONARIO_AREAS[llave]])
+            options.append([llave, DICCIONARIO_AREAS[llave]])
         return options
 
-    def getRequest(self,tipodato):
+    def getRequest(self, tipodato):
         try:
             req = self.request
-            tipo=req.get(tipodato, '')
+            tipo = req.get(tipodato, '')
             f = tipo
             if tipo is None:
                 return ""
@@ -363,10 +355,10 @@ class SearchView(BrowserView):
         except:
             return ""
 
-    def hasReqDataStr(self,tipodato):
+    def hasReqDataStr(self, tipodato):
         try:
             req = self.request
-            tipo=req.get(tipodato, '')
+            tipo = req.get(tipodato, '')
             f = tipo
             if tipo is None:
                 return False
@@ -378,9 +370,6 @@ class SearchView(BrowserView):
         except:
             return False
 
-
     def getCountriesVocabulary(self):
-        #This function is defined in config.py
+        # This function is defined in config.py
         return getCountriesVocabulary(self).items()[1:]
-
-

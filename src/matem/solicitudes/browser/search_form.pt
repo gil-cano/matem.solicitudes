@@ -121,11 +121,13 @@
 
     <metal:body_macro define-macro="body">
 
-    <span tal:define="items python:view.search()">
+    <span tal:define="items view/search">
 
     <span name="tablaSolicitudes" tal:condition="items">
     <h3 tal:condition="items" i18n:translate="label_approved_quantities_nosol">Approved Quantities per Request</h3>
     <a tal:condition="items" href="javascript: printTable('tablaSolicitudes')">Imprimir</a>
+    <div tal:content="python:len(items)">  </div>
+
     <div class="tabularView">
     <table class="listing" border="1" width="100%" tal:condition="items">
         <tbody>
@@ -144,21 +146,19 @@
             <th i18n:translate="label_state">State</th>
         </tr>
         <tr tal:repeat="item python:items">
-          <td><a href="#" tal:attributes="href python:item['url']"
-          tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</a></td>
-          <td tal:content="python:item['owner_name']">Solicitant</td>
-          <td tal:content="python:item['objective']">Reason</td>
-          <td i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</td>
-          <td tal:content="python:item['from']">Creation Date</td>
-          <td tal:content="python:item['to']">Creation Date</td>
-          <td tal:content="python:item['quantity_of_days']">Quantity of
-          Days</td>
-          <td align="center"
-          tal:content="python:item['total_approved_quantity']">Quantity</td>
-          <td align="center" tal:content="python:item['revision_ci_date']">Fecha de Revision</td>
-          <td tal:content="python:item['acta_ci']">Solicitud Creada</td>
-          <td tal:content="python:item['cargo_presupuesto']">Con cargo</td>
-          <td tal:content="python:item['workflow_state_name']">workflow state</td>
+          <td><a href="#" tal:attributes="href item/absolute_url"
+          tal:content="item/Type">Meta-Type</a></td>
+          <td tal:content="item/getNombreOwner">Solicitant</td>
+          <td tal:content="item/getObjetoViaje">Reason</td>
+          <td i18n:translate="" i18n:domain="plone" tal:content="item/getPais">Place</td>
+          <td tal:content="item/getFechaDesde">Creation Date</td>
+          <td tal:content="item/getFechaHasta">Creation Date</td>
+          <td tal:content="item/getCantidadDeDias">Quantity of Days</td>
+          <td align="center" tal:content="item/getCantidadAutorizadaTotal">Quantity</td>
+          <td align="center" tal:content="item/getFecha_sesionci">Fecha de Revision</td>
+          <td tal:content="item/getActaci">Solicitud Creada</td>
+          <td tal:content="item/getCargo_presupuesto">Con cargo</td>
+          <td tal:content="item/getWFStateName">workflow state</td>
         </tr>
 
         <!--Paginas-->
@@ -169,33 +169,7 @@
                     class="enableAutoFocus"
                     method="get"
                     tal:attributes="name python:str('search')+str(i)">
-
                     <input type=hidden name="Creator" value="" tal:attributes="value python:view.getRequest('Creator')"/>
-                    <input type=hidden name="Pais" value="" tal:attributes="value python:view.getRequest('Pais')"/>
-                    <input type=hidden name="Ciudad" value="" tal:attributes="value python:view.getRequest('Ciudad')"/>
-                    <input type=hidden name="Institucion" value="" tal:attributes="value python:view.getRequest('Institucion')"/>
-                    <input type=hidden name="Desde" value="" tal:attributes="value python:view.getRequest('Desde')"/>
-                    <input type=hidden name="Desde_year" value="" tal:attributes="value python:view.getRequest('Desde_year')"/>
-                    <input type=hidden name="Desde_month" value="" tal:attributes="value python:view.getRequest('Desde_month')"/>
-                    <input type=hidden name="Desde_day" value="" tal:attributes="value python:view.getRequest('Desde_day')"/>
-                    <input type=hidden name="Desde_hour" value="" tal:attributes="value python:view.getRequest('Desde_hour')"/>
-                    <input type=hidden name="Desde_minute" value="" tal:attributes="value python:view.getRequest('Desde_minute')"/>
-                    <input type=hidden name="Desde_ampm" value="" tal:attributes="value python:view.getRequest('Desde_ampm')"/>
-                    <input type=hidden name="Hasta" value="" tal:attributes="value python:view.getRequest('Hasta')"/>
-                    <input type=hidden name="Hasta_year" value="" tal:attributes="value python:view.getRequest('Hasta_year')"/>
-                    <input type=hidden name="Hasta_month" value="" tal:attributes="value python:view.getRequest('Hasta_month')"/>
-                    <input type=hidden name="Hasta_day" value="" tal:attributes="value python:view.getRequest('Hasta_day')"/>
-                    <input type=hidden name="Hasta_hour" value="" tal:attributes="value python:view.getRequest('Hasta_hour')"/>
-                    <input type=hidden name="Hasta_minute" value="" tal:attributes="value python:view.getRequest('Hasta_minute')"/>
-                    <input type=hidden name="Hasta_ampm" value="" tal:attributes="value python:view.getRequest('Hasta_ampm')"/>
-                    <input type=hidden name="Objeto" value="" tal:attributes="value python:view.getRequest('Objeto')"/>
-                    <input type=hidden name="Area" value="" tal:attributes="value python:view.getRequest('Area')"/>
-                    <input type=hidden name="TTrabajo" value="" tal:attributes="value python:view.getRequest('TTrabajo')"/>
-                    <input type=hidden name="Becario" value="" tal:attributes="value python:view.getRequest('Becario')"/>
-                    <input type=hidden name="Asesor" value="" tal:attributes="value python:view.getRequest('Asesor')"/>
-                    <input type=hidden name="Cantidad" value="" tal:attributes="value python:view.getRequest('Cantidad')"/>
-                    <input type=hidden name="CantidadLarger" value="" tal:attributes="value python:view.getRequest('CantidadLarger')"/>
-                    <input type=hidden name="CantidadLower" value="" tal:attributes="value python:view.getRequest('CantidadLower')"/>
                     <input type=hidden name="Type" value="" tal:attributes="value python:view.getRequest('Type')"/>
                     <input type=hidden name="State" value="" tal:attributes="value python:view.getRequest('State')"/>
                     <input type=hidden name="pagina" value="" tal:attributes="value python:str(i)"/>
@@ -210,16 +184,15 @@
     </span>
 
     <span tal:condition="not:items">
-
-            <dl class="portalMessage error"
-                tal:condition="python:view.hasReqDataStr('State')">
-                <dt i18n:translate="label_atencion">
-                    Attention!
-                </dt>
-                <dd i18n:translate="label_no_results">
-                     This search rendered no results. Try again.
-                </dd>
-            </dl>
+        <dl class="portalMessage error"
+            tal:condition="python:view.hasReqDataStr('State')">
+            <dt i18n:translate="label_atencion">
+                Attention!
+            </dt>
+            <dd i18n:translate="label_no_results">
+                 This search rendered no results. Try again.
+            </dd>
+        </dl>
 
     <p i18n:translate="description_localrequest_search">
     Con esta forma puede buscar solicitudes de viáticos del periodo actual.
@@ -230,19 +203,13 @@
           method="get"
           name="search"
           tal:define="DateTime python:modules['DateTime'].DateTime">
-
         <fieldset>
-
             <legend i18n:translate="legend_search_terms">Search Terms</legend>
-
-
             <div class="field">
                 <label for="Creator" i18n:translate="label_author">Author</label>
-
                 <div class="formHelp" i18n:translate="help_search_author">
                 Return items created by a particular person.
                 </div>
-
                 <tal:creators tal:define="creators view/getCreatorsAll">
                     <select name="Creator"
                             id="Creator">
@@ -252,124 +219,33 @@
                         </metal:block>
                         <option value="todos" i18n:translate="label_search_all">All authors</option>
                     </select>
-
                 </tal:creators>
             </div>
 
             <div class="field">
                 <label for="Type" i18n:translate="label_type">Type</label>
-
                 <div class="formHelp" i18n:translate="help_search_type">
                 Return applications of the selected type.
                 </div>
-
-                <input type="radio" name="Type" value="all" checked><span i18n:translate="All"> All </span><br>    
-                <input type="radio" name="Type" value="licencia"><span i18n:translate="License Application"> License Application </span><br>
-                <input type="radio" name="Type" value="visitante"><span i18n:translate="Visitor Application"> Visitor Application</span><br>
-                <input type="radio" name="Type" value="becario"><span i18n:translate="Student Application"> Student Application</span><br>
+                <input type="radio" name="Type" value="all" checked><span i18n:translate="All"> All </span><br>
+                <input type="radio" name="Type" value="Solicitud"><span i18n:translate="License Application"> License Application </span><br>
+                <input type="radio" name="Type" value="SolicitudInstitucional"><span i18n:translate="Institutional License Application"> Intitutional License Application </span><br>
+                <input type="radio" name="Type" value="SolicitudVisitante"><span i18n:translate="Visitor Application"> Visitor Application</span><br>
+                <input type="radio" name="Type" value="SolicitudBecario"><span i18n:translate="Student Application"> Student Application</span><br>
             </div>
 
-            <table>
-
-            <tr><div class="field">
-                <td><label for="Pais" i18n:translate="label_pais">Country</label>
-
-                <div class="formHelp" i18n:translate="help_search_pais">
-                Country specified in the application.
-                </div>
-
-                <!-- <select name="Pais" id="Pais" tal:define="countrytool here/portal_countryutils"> -->
-                <select name="Pais" id="Pais" tal:define="country_vocabulary view/getCountriesVocabulary">
-                      <option value="" i18n:translate="label_choose_country">Choose country...</option>
-                      <option
-                          value=""
-                          tal:repeat="country country_vocabulary"
-                          tal:content="python:country[1]"
-                          tal:attributes="value python:country[0]">Country title
-                      </option>
-
-                    </select></td>
-
-            </div></tr>
-
-            <tr><div class="field">
-                <td><label for="Ciudad" i18n:translate="label_ciudad_pais">City</label>
-
-                <div class="formHelp" i18n:translate="help_search_ciudad_pais">
-                City specified in the application.
-                </div>
-
-                <input type="text"
-                       id="Ciudad"
-                       name="Ciudad"
-                       size="25"
-                       /></td>
-            </div></tr>
-
-            <tr><div class="field">
-                <td><label for="Institucion" i18n:translate="label_institucion">Institution</label>
-
-                <div class="formHelp" i18n:translate="help_search_institucion">
-                Institution specified in the application.
-                </div>
-
-                <input type="text"
-                       id="Institucion"
-                       name="Institucion"
-                       size="25"
-                       /></td>
-            </div></tr>
-
-            <tr><div class="field">
-               <td> <label for="Desde" i18n:translate="label_fecha_desde">From date</label>
-
-                <div class="formHelp" i18n:translate="help_search_fecha_desde">
-                Initial date specified in the application.
-                </div>
-
-                <div tal:define="inputname  string:Desde;
-                                     formname   string:search;
-                                     inputvalue python:request.get('effective_date', '');">
-
-                              <div metal:use-macro="here/calendar_macros/macros/calendarDatePickerBox">
-                                calendar pop-up
-                              </div>
-                            </div> </td>
-            </div></tr>
-
-            <tr><div class="field">
-               <td> <label for="Hasta" i18n:translate="label_fecha_hasta">To date</label>
-
-                <div class="formHelp" i18n:translate="help_search_fecha_hasta">
-                Final date specified in the application.
-                </div>
-
-                <div tal:define="inputname  string:Hasta;
-                                     formname   string:search;
-                                     inputvalue python:request.get('effective_date', '');">
-
-                              <div metal:use-macro="here/calendar_macros/macros/calendarDatePickerBox">
-                                calendar pop-up
-                              </div>
-                            </div> </td>
-            </div></tr>
-
-           <tr> <div class="field">
-                <td><label for="State" i18n:translate="label_current_state">Current State</label>
+            <div class="field">
+                <label for="State" i18n:translate="label_current_state">Current State</label>
                 <div class="formHelp" i18n:translate="help_search_current_state">
                 Returns applications in specified state.
                 </div>
-
-                <input type="radio" name="State" value="any" checked><span i18n:translate="Any"> Any </span><br>    
+                <input type="radio" name="State" value="any" checked><span i18n:translate="Any"> Any </span><br>
                 <input type="radio" name="State" value="aprobada"><span i18n:translate="Approved"> Approved </span><br>
                 <input type="radio" name="State" value="rechazada"><span i18n:translate="Rejected"> Rejected</span><br>
                 <input type="radio" name="State" value="revision"><span i18n:translate="Reviewing"> In review</span><br>
-                </td>
-            </div></tr>
+            </div>
 
-            </table>
-
-            <div class="visualClear" id="clear-space-before-submit"><!-- --></div>
+            <div class="visualClear" id="clear-space-before-submit"></div>
 
             <div class="formControls">
                 <input class="context"
@@ -379,9 +255,7 @@
                        i18n:attributes="value label_search;"
                        />
             </div>
-
         </fieldset>
-    
     </form>
     </span>
 
@@ -390,8 +264,8 @@
 <!--     <metal:footer_macro define-macro="footer">
 
     </metal:footer_macro>
- -->    <metal:folderlisting_macro define-macro="folderlisting">
-
+ -->
+    <metal:folderlisting_macro define-macro="folderlisting">
     </metal:folderlisting_macro>
 
       </metal:main_macro>
