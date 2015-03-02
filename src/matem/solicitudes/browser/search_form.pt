@@ -89,7 +89,7 @@
       #fieldsetlegend-metadata .{
             visibility: hidden;
         }
-      
+
     </style>
   </metal:css>
 
@@ -200,14 +200,10 @@
                     <input type=hidden name="State" value="" tal:attributes="value python:view.getRequest('State')"/>
                     <input type=hidden name="pagina" value="" tal:attributes="value python:str(i)"/>
                     <input type=hidden name="form.button.Submit" value="Search"/>
-
-<!--                    <a href="#" tal:attributes="href python:str('javascript: document.search')+str(i)+str('.submit()')"
-                                               tal:content="python:str(i+1)"/>-->
                 </form>
                 </span></td>
         </tr>
 
-<!--        <tr><td tal:content="python:items"></td></tr>-->
         </tbody>
     </table>
     </div>
@@ -246,7 +242,7 @@
                 <div class="formHelp" i18n:translate="help_search_author">
                 Return items created by a particular person.
                 </div>
-    
+
                 <tal:creators tal:define="creators view/getCreatorsAll">
                     <select name="Creator"
                             id="Creator">
@@ -292,17 +288,6 @@
                           tal:attributes="value python:country[0]">Country title
                       </option>
 
-                      <!-- <optgroup
-                          label="North America"
-                          tal:repeat="area countrytool/listAreas"
-                          tal:attributes="label area/name">
-                        <option
-                          value="MX"
-                          tal:repeat="country area/countries"
-                          tal:content="country/name"
-                          tal:attributes="value country/isocc">Mexico
-                        </option>
-                      </optgroup> -->
                     </select></td>
 
             </div></tr>
@@ -369,143 +354,12 @@
                             </div> </td>
             </div></tr>
 
-<!--             <tr><div class="field">
-                <td><label for="Area" i18n:translate="label_investigacionarea">Area of Research</label>
-
-<br/>
-               <tal:areas tal:define="areas view/getAreasInv">
-                    <select name="Area"
-                            id="Area">
-                        <option value="" i18n:translate="label_search_area">Applications in Area...</option>
-                        <metal:block tal:repeat="area areas">
-                            <option value="" tal:attributes="value python:area[0];" tal:content="python:area[1]"> username </option>
-                        </metal:block>
-                    </select>
-
-                </tal:areas></td>
-            </div></tr>
- -->
- <!--           <tr> <div class="field">
-                <td><label for="Becario" i18n:translate="label_nombre_becario">Scholarship Holder</label>
-
-<br/>
-                <tal:creators tal:define="creators view/getCreatorsBecario">
-                    <select name="Becario"
-                            id="Becario">
-                        <option value="" i18n:translate="label_search_becario">Select a scholarship holder (if needed)...</option>
-                        <metal:block tal:repeat="creator creators">
-                            <option value="" tal:attributes="value python:creator[1];" tal:content="python:creator[0]"> username </option>
-                        </metal:block>
-                    </select>
-
-                </tal:creators></td>
-
-            </div></tr> -->
-
- <!--            <tr><div class="field">
-                <td><label for="Asesor" i18n:translate="label_asesor">Advisor</label>
-
-<br/>
-                <tal:creators tal:define="creators view/getCreatorsInvestigador">
-                    <select name="Asesor"
-                            id="Asesor">
-                        <option value="" i18n:translate="label_any_advisor">Select an advisor...</option>
-                        <metal:block tal:repeat="creator creators">
-                            <option value="" tal:attributes="value python:creator[1];" tal:content="python:creator[0]"> username </option>
-                        </metal:block>
-                    </select>
-
-                </tal:creators></td>
-
-            </div></tr> -->
-<!--            <tr><div class="field">
-               <td> <label for="Hasta" i18n:translate="label_fecha_Hasta">To date</label></td>
-
-                <td><input type="text"
-                       id="Hasta"
-                       name="Hasta"
-                       size="25"
-                       /></td>
-            </div></tr>-->
-
- <!--            <tr><div class="field">
-                <td><label for="Objeto" i18n:translate="label_objeto_viaje">Objective</label>
-
-<br/>
-               <input type="text"
-                       id="Objeto"
-                       name="Objeto"
-                       size="25"
-                       /></td>
-            </div></tr> -->
-
- <!--           <tr> <div class="field">
-                <td><label for="TTrabajo" i18n:translate="label_titulo_trabajo">Title of the work to be presented</label>
-<br/>
-
-                <input type="text"
-                       id="TTrabajo"
-                       name="TTrabajo"
-                       size="25"
-                       /></td>
-            </div></tr> -->
-
-<!--            <tr> <div class="field">
-                <td><label for="Cantidad" i18n:translate="label_search_cantidad">Total Amount </label>
-                <div class="formHelp" i18n:translate="help_search_cantidad">
-                Total approved or, if it is the case, requested amount in pesos (MXN).
-                </div>
-                
-                
-                <input type="text"
-                       id="Cantidad"
-                       name="Cantidad"
-                       value="0.0"
-                       size="25"
-                       />
-                </td>
-            </div></tr>
- -->
-
-<!--            <tr> <div class="field">
-                <td><label for="CantidadLarger" i18n:translate="label_search_cantidad_larger">Larger than Amount</label>
-                <div class="formHelp" i18n:translate="help_search_cantidad_larger">
-                If greater than zero, it will return every application with a larger approved, or requested if it is the case, amount than the one specified.
-                </div>
-                
-                
-                <input type="text"
-                       id="CantidadLarger"
-                       name="CantidadLarger"
-                       value="0.0"
-                       size="25"
-                       />
-                </td>
-            </div></tr>
- -->
- <!--           <tr> <div class="field">
-                <td><label for="CantidadLower" i18n:translate="label_search_cantidad_lower">Lower than Amount</label>
-                <div class="formHelp" i18n:translate="help_search_cantidad_lower">
-                If greater than zero, it will return every application with a lower approved, or requested if it is the case, amount than the one specified.
-                </div>
-                
-                
-                <input type="text"
-                       id="CantidadLower"
-                       name="CantidadLower"
-                       value="0.0"
-                       size="25"
-                       />
-                </td>
-            </div></tr>
- -->
            <tr> <div class="field">
                 <td><label for="State" i18n:translate="label_current_state">Current State</label>
                 <div class="formHelp" i18n:translate="help_search_current_state">
                 Returns applications in specified state.
                 </div>
-                
-                
+
                 <input type="radio" name="State" value="any" checked><span i18n:translate="Any"> Any </span><br>    
                 <input type="radio" name="State" value="aprobada"><span i18n:translate="Approved"> Approved </span><br>
                 <input type="radio" name="State" value="rechazada"><span i18n:translate="Rejected"> Rejected</span><br>
