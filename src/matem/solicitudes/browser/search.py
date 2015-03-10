@@ -92,6 +92,10 @@ class SearchView(BrowserView):
             if cidate is not None:
                 adic['getFecha_sesionci'] = cidate.strftime('%d/%m/%Y')
             items.append(adic)
+            # improve type
+            if '/' in adic['Type']:
+                adic['Type'] = 'Solicitud de {type}'.format(
+                    type=o.getLicenciacomision())
         return items
 
     def searchSlow(self):
