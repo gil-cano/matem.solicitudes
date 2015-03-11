@@ -1522,7 +1522,7 @@ class SolicitudFolderView(BrowserView):
             # if item['meta_type'] == 'SolicitudBecario':
             else:
                 if item['country_code'][0] != 'MX':
-                    user_level = catalog(id=usuarioActual)[0].getObject().student_education_level
+                    user_level = catalog(portal_type='FSDPerson', id=usuarioActual)[0].getObject().student_education_level
                     if user_level == 'bachelor':
                         # if item['country_code'][0] != 'MX':
                         text = "No puede solicitar salida al extranjero"
