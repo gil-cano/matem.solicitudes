@@ -298,7 +298,7 @@ msgstr "Número de acta del Consejo Interno"
 #: matem/solicitudes/browser/solicitudbecario.pt:424
 #: matem/solicitudes/browser/solicitudinstitucional.pt:360
 msgid "label_actaci_number"
-msgstr "Número de registro"
+msgstr "Número de acta"
 
 #. Default: "Attachments"
 #: matem/solicitudes/browser/solicitud.pt:325
