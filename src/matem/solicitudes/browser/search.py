@@ -306,15 +306,13 @@ class SearchView(BrowserView):
         return users
 
     def getCreatorsAll(self):
-        folder=self.context
-        solicitantes=folder.getSolicitantes()[0]
+        folder = self.context
+        solicitantes = folder.getSolicitantes()[0]
         users = []
-
         for solicitante in solicitantes.keys():
-            users.append([solicitantes[solicitante][0]+", "+solicitantes[solicitante][1]+" "+solicitantes[solicitante][2],
-                          solicitante])
+            fullname = ' '.join(solicitantes[solicitante][0:2])
+            users.append([' '.join(fullname.split()), solicitante])
         users.sort()
-
         return users
 
     def getCreatorsBecarioInvestigador(self):
