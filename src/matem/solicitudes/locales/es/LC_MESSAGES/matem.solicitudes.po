@@ -41,6 +41,10 @@ msgstr ""
 msgid "License Application"
 msgstr "Solicitud de Licencia/Comisión"
 
+#: matem/solicitudes/browser/search_form.pt:267
+msgid "Institutional License Application"
+msgstr "Solicitud con apoyo Institucional"
+
 #: matem/solicitudes/browser/folderpendientes.pt:408
 #: matem/solicitudes/browser/folderpendientessede.pt:364
 msgid "Pending for review by Internal Council"
