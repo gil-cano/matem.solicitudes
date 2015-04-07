@@ -1,0 +1,28 @@
+@media print {
+
+    @page {
+      margin: .5cm 1.5cm;
+    }
+
+    #portal-header, #portal-footer-wrapper, #header-info{
+        display: none;
+    }
+
+    .fc .btn-group, .fc .btn{
+        display: none;
+    }
+
+    .tabularView {
+        font: 7pt Georgia, "Times New Roman", Times, serif;
+        line-height: 1;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    .objective{
+        text-align: justify;
+    }
+
+}

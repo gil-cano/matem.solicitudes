@@ -29,7 +29,7 @@
         class=".search.SearchView"
         permission="zope2.View"
         />
-    
+
     <browser:page
         for="matem.solicitudes.interfaces.ISolicitud"
         class=".solicitudes.SolicitudView"
@@ -105,7 +105,7 @@
         class=".import.ImportView"
         permission="zope2.View"
         />
-    
+
     <browser:page
         for="matem.solicitudes.interfaces.ISolicitudFolder"
         name="auxiliares"
@@ -161,7 +161,7 @@
         name="ar.png"
         image="iconos/folderrechazadas.png"
         />
- 
+
     <browser:resource
         name="gen.png"
         image="iconos/actas.png"
@@ -181,7 +181,7 @@
         name="presupuestolocal.png"
         image="iconos/presupuestolocal.png"
         />
-        
+
     <browser:resource
         name="aprobada.png"
         image="iconos/aprobada.png"
@@ -192,15 +192,10 @@
         image="iconos/rechazada.png"
         />
 
-    <browser:resource
-        name="dateinput.css"
-        file="css/dateinput.css"
-        />
+    <browser:resourceDirectory
+        name="matem.solicitudes"
+        directory="resources" />
 
-    <browser:resource
-        name="solicitudes.css"
-        file="css/solicitudes.css"
-        />
 
     <!-- Folder factories (add institutional events) -->
     <browser:page
