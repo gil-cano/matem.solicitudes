@@ -75,7 +75,7 @@
             errors python:request.get('errors', {})">
 
         <metal:header_macro define-macro="header">
-            <span id="header-info"tal:define="usuarioActual user/getId;
+            <span id="header-info" tal:define="usuarioActual user/getId;
                    propietario python:view.esPropietario(usuarioActual);
                    comisionado python:view.esComisionado(usuarioActual);
                    consejero python:view.esConsejero(usuarioActual);">

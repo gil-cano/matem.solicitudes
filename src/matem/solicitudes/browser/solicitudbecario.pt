@@ -39,41 +39,6 @@
     </tal:block>
   </metal:javascript_head>
 
-  <metal:css fill-slot="css_slot">
-    <tal:comment replace="nothing">
-      Many of the following defines duplicated from the tal:defines in the
-      main slot. With base_edit, edit_macros could be reused as it was defined
-      for the entire document. base_view uses main_template and thus must
-      create additional defines for each slot it fills.
-    </tal:comment>
-    <tal:css define="fields python:here.Schema().viewableFields(here);
-                     css python:here.getUniqueWidgetAttr(fields, 'helper_css')"
-             condition="css"
-             repeat="item css">
-      <style type="text/css"
-             media="all"
-             tal:condition="python:exists('portal/%s' % item)"
-             tal:content="structure string:<!-- @import url($portal_url/$item); -->">
-      </style>
-    </tal:css>
-    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
-                       view_template python:'%s_view' % portal_type;
-                       view_macros python:path('here/%s/macros|nothing' % view_template);
-                       macro view_macros/css | nothing"
-               condition="macro">
-      <metal:block use-macro="macro" />
-    </tal:block>
-    <!-- <style type="text/css">
-        #contentActionMenus{
-            visibility: hidden;
-        }
-
-        #fieldsetlegend-metadata .{
-            visibility: hidden;
-        }
-    </style> -->
-  </metal:css>
-
   <metal:css fill-slot="style_slot"
                tal:define="resources_url string:${context/portal_url}/++resource++wcfc">
       <link href="++resource++wcfc/bootstrap/bootstrap-fixed.css"
@@ -87,20 +52,19 @@
         #contentActionMenus{
             visibility: hidden;
         }
-
         #fieldsetlegend-metadata .{
             visibility: hidden;
         }
       </style>
+      <link rel="stylesheet" type="text/css" media="print"
+          tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+          tal:attributes="href string:${navroot}/++resource++matem.solicitudes/print.css"
+      />
   </metal:css>
+
 
   <body>
     <metal:fill fill-slot="main">
-    <!-- 
-        header_macro view_macros/header | header_macro | base_macros/header;
-        footer_macro view_macros/footer | footer_macro | base_macros/footer;
-    -->
-
       <metal:main_macro define-macro="main"
             tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
             base_macros here/base/macros;
@@ -111,7 +75,7 @@
             errors python:request.get('errors', {})">
 
         <metal:header_macro define-macro="header">
-            <span tal:define="usuarioActual user/getId;
+            <span  id="header-info" tal:define="usuarioActual user/getId;
                    propietario python:view.esPropietario(usuarioActual);
                    comisionado python:view.esComisionado(usuarioActual);
                    consejero python:view.esConsejero(usuarioActual);
@@ -359,7 +323,7 @@
         <tr><th colspan="2" i18n:translate="label_quantity_days">days</th><td align="center" colspan="3" tal:content="python:here.getCantidadDeDias()">Value</td></tr>
 	<tr><th colspan="5"><b>Datos Adicionales</b></th></tr>
 
-        <tr><th colspan="2" i18n:translate="label_objeto_viaje">Objective</th><td align="center" colspan="3" 
+        <tr><th colspan="2" i18n:translate="label_objeto_viaje">Objective</th><td class="objective" align="center" colspan="3"
                                                                               tal:content="here/getObjetoViaje">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_investigacionarea">Area of Research</th><td align="center" colspan="3">
                                                                               <div tal:repeat="areaInv python:view.getArea(here.getInvestigacionArea())"> 
@@ -448,30 +412,11 @@
       </span>
     </div>
 
-
-
-    <!-- <table border="0">
-      <tr>
-       <td tal:repeat="transicion python:here.getLegalTransitions()">
-           <a class="context" style="text-decoration:none" href="#" tal:attributes="href python:transicion['url']" tal:content="python:transicion['name']"/>
-       </td>
-       <td tal:condition="python:(responsableconsejo and (here.aprobada() or here.rechazada())) or (editor and view.esBorrador()) or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
-           <a class="context" style="text-decoration:none" href="#" tal:attributes="href python:here.absolute_url()+'/delete_confirmation'">Eliminar solicitud.</a>
-       </td>
-       <td tal:condition="python:(consejero and (here.getWFState()=='revisionconsejo')) or (comisionado and (here.getWFState()=='revisioncomision')) or (editor and view.esBorrador()) or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
-           <a class="context" style="text-decoration:none" href="#" tal:attributes="href python:here.absolute_url()+'/edit'">Hacer cambios a solicitud.</a>
-       </td>
-      </tr>
-    </table> -->
-
     </div>
 
         </metal:body_macro>
 
         <metal:use_body use-macro="folderlisting_macro" />
-        <!-- 
-          Esta linea si estaba
-          <metal:use_footer use-macro="footer_macro" /> -->
 
       </metal:main_macro>
     </metal:fill>
