@@ -538,7 +538,7 @@
               type="submit"
               name="revision.consejo.GenerarActa"
               value="Generar Acta de la Comisión"
-              tal:condition="python:view.esResponsableDelConsejo(user.getId())"/>
+              tal:condition="python:view.esResponsableDeLaComision(user.getId())"/>
         <br>
         <br>
   <input class="context"
