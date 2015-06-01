@@ -51,13 +51,9 @@ setup(
     ],
     extras_require={
         'develop': [
-            'flake8',
-            'plone.app.debugtoolbar',
             'plone.reload',
             'Products.PDBDebugMode',
             'Products.PrintingMailHost',
-            'Sphinx',
-            'zptlint',
         ],
         'test': [
             'mock',
