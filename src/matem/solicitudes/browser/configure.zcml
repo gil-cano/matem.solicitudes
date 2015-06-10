@@ -32,6 +32,38 @@
 
     <browser:page
         for="matem.solicitudes.interfaces.ISolicitud"
+        name="solicitud_edit"
+        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
+        template="solicitud_edit.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+
+    <browser:page
+        for="matem.solicitudes.interfaces.ISolicitudInstitucional"
+        name="solicitudinstitucional_edit"
+        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
+        template="solicitud_edit.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+
+    <browser:page
+        for="matem.solicitudes.interfaces.ISolicitudVisitante"
+        name="solicitudvisitante_edit"
+        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
+        template="solicitud_edit.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+
+    <browser:page
+        for="matem.solicitudes.interfaces.ISolicitudBecario"
+        name="solicitudbecario_edit"
+        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
+        template="solicitud_edit.pt"
+        permission="cmf.ModifyPortalContent"
+        />
+
+    <browser:page
+        for="matem.solicitudes.interfaces.ISolicitud"
         class=".solicitudes.SolicitudView"
         layer="matem.solicitudes.interfaces.ISolicitudSpecific"
         name="solicitud_view"

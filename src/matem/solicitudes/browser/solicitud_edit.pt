@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="plone">
+
+  <metal:head define-macro="topslot">
+  </metal:head>
+
+  <metal:head define-macro="javascript_head">
+  </metal:head>
+
+  <body>
+    <!-- <metal:header define-macro="header">
+    </metal:header> -->
+
+    <!-- <metal:typedescription define-macro="typedescription">
+    </metal:typedescription> -->
+
+    <metal:body define-macro="body">
+
+        <metal:default_body use-macro="here/edit_macros/macros/body">
+
+          <metal:block fill-slot="extra_top">
+          </metal:block>
+
+          <!-- <metal:block fill-slot="widgets">
+          </metal:block> -->
+
+          <!-- <metal:block fill-slot="extra_bottom">
+          </metal:block> -->
+
+          <metal:block fill-slot="buttons">
+              <input class="context"
+                     type="submit"
+                     name="form.button.save"
+                     value="Save"
+                     i18n:attributes="value label_save_preview;"
+                     tal:attributes="disabled python: isLocked and  'disabled' or None;"
+                     tal:condition="python:context.checkCreationFlag()"
+                     />
+              <input class="context"
+                     type="submit"
+                     name="form.button.save"
+                     value="Save Draft"
+                     i18n:attributes="value label_save_draft;"
+                     tal:attributes="disabled python: isLocked and  'disabled' or None;"
+                     tal:condition="python: not context.checkCreationFlag()"
+                     />
+              <input class="standalone"
+                     type="submit"
+                     name="form.button.cancel"
+                     value="Cancel"
+                     i18n:attributes="value label_cancel;"
+                     />
+          </metal:block>
+
+          <!-- within the formControls a slot for extra buttons -->
+          <!-- <metal:block fill-slot="extra_buttons">
+          </metal:block> -->
+
+        </metal:default_body>
+
+    </metal:body>
+
+    <!-- footer, by line created date etc. -->
+    <!-- <metal:footer define-macro="footer">
+    </metal:footer> -->
+
+  </body>
+</html>
