@@ -69,3 +69,8 @@ msgstr ""
 msgid "Ver cuentas y presupuesto"
 msgstr ""
 
+msgid "label_save_preview"
+msgstr ""
+
+msgid "label_save_draft"
+msgstr ""
