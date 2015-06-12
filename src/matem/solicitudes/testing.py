@@ -17,9 +17,18 @@ class ApplicationLayer(PloneSandboxLayer):
 
     def setUpZope(self, app, configurationContext):
         """Set up Zope."""
+        # Load missing dependencies for Products.FacultyStaffDirectory
+        import Products.membrane
+        self.loadZCML(package=Products.membrane)
+        import Products.Relations
+        self.loadZCML(package=Products.Relations)
         # Load ZCML
         import matem.solicitudes
         self.loadZCML(package=matem.solicitudes)
+        # Install products that use an old-style initialize() function
+        z2.installProduct(app, 'Products.membrane')
+        z2.installProduct(app, 'Products.Relations')
+        z2.installProduct(app, 'Products.ATCountryWidget')
 
     def setUpPloneSite(self, portal):
         """Set up Plone."""

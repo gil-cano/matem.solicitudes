@@ -46,8 +46,8 @@ setup(
         'Products.MasterSelectWidget',
         'Products.ATExtensions',
         'archetypes.multifile',
-        'matem.fsdextender',
-        'plone.app.jquerytools',
+        # 'matem.fsdextender',
+        # 'plone.app.jquerytools',
     ],
     extras_require={
         'develop': [

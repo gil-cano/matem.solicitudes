@@ -1,4 +1,10 @@
 <?xml version="1.0"?>
 <metadata>
+  <description>matem solicitudes</description>
   <version>308</version>
+  <dependencies>
+    <dependency>profile-Products.ATExtensions:default</dependency>
+    <dependency>profile-Products.MasterSelectWidget:default</dependency>
+    <dependency>profile-archetypes.multifile:default</dependency>
+  </dependencies>
 </metadata>

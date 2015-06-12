@@ -8,15 +8,13 @@
 
     <five:registerPackage package="." initialize=".initialize" />
 
-		<!-- load dependencies configuration -->
-		<!--<include package="archetypes.schemaextender" />-->
-		<include package="Products.Relations" />
-		<include package="Products.membrane" />
-		<include package="Products.FacultyStaffDirectory" />
+    <!-- Include configuration for dependencies listed in setup.py -->
+    <includeDependencies package="." />
 
-
+    <!-- Include the sub-packages that use their own configure.zcml files. -->
     <include package=".browser" />
     <include package=".portlets" />
+    <include file="upgrades.zcml"/>
 
     <i18n:registerTranslations directory="locales" />
 
@@ -63,8 +61,5 @@
     <subscriber for=".interfaces.ISolicitudVisitante
                      Products.Archetypes.interfaces.IObjectInitializedEvent"
                 handler=".handlers.movetofolder" /> -->
-
-
-    <include file="upgrades.zcml"/>
 
 </configure>
