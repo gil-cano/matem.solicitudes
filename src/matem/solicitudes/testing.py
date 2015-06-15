@@ -29,6 +29,8 @@ class ApplicationLayer(PloneSandboxLayer):
         z2.installProduct(app, 'Products.membrane')
         z2.installProduct(app, 'Products.Relations')
         z2.installProduct(app, 'Products.ATCountryWidget')
+        # this line should be ommited as in UNAM.imateCV
+        z2.installProduct(app, 'matem.solicitudes')
 
     def setUpPloneSite(self, portal):
         """Set up Plone."""
