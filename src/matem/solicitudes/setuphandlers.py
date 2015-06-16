@@ -29,4 +29,4 @@ def setupVarious(context):
     # Only run step if a flag file is present (e.g. not an extension profile)
     if context.readDataFile('importsteps-unam-solicitudes.txt') is None:
         return
-    install_dependencies(portal)
+    # install_dependencies(portal)
