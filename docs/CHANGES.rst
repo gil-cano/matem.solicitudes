@@ -1,7 +1,13 @@
 Changelog
 =========
 
-3.0.9 (unreleased)
+3.1 (unreleased)
+------------------
+
+- Update testing to use plone.app.testing
+  [gil-cano]
+
+3.0.9 (2013-11-25)
 ------------------
 
 - Agregamos nuevo contenido SolicitudInstitucional
