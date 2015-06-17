@@ -1,0 +1,5 @@
+global-exclude *.pyc
+global-exclude **/.DS_Store
+graft docs
+graft unweb
+include *.rst
