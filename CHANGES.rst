@@ -2,7 +2,10 @@ Changelog
 =========
 
 3.1 (unreleased)
-------------------
+----------------
+
+- Modernize buildout configuration
+  [gil-cano]
 
 - Update testing to use plone.app.testing
   [gil-cano]
