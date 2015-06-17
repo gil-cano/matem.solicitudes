@@ -1,10 +1,9 @@
 [report]
+include =
+    src/matem/*
 omit =
-    /home/*/.buildout/eggs/*
-    /Users/*/.buildout/eggs/*
-    /usr/*
-    bin/test
-    buildout-cache/eggs/*
+    */test*
+    */upgrades/*
     eggs/*
     parts/*
     src-git/*
