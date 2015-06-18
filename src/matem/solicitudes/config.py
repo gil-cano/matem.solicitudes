@@ -81,7 +81,7 @@ AREAS_INVESTIGACION = DisplayList((
     ('93-xx', '93-xx Systems theory; control'),
     ('94-xx', '94-xx Information and communication, circuits'),
     ('97-xx', '97-xx Mathematics education'),
-    ))
+))
 
 DICCIONARIO_AREAS_EN = {
     "00-xx": "00-xx General",
@@ -147,7 +147,7 @@ DICCIONARIO_AREAS_EN = {
     "93-xx": "93-xx Systems theory; control",
     "94-xx": "94-xx Information and communication, circuits",
     "97-xx": "97-xx Mathematics education",
-    }
+}
 
 DICCIONARIO_AREAS = {
     "00-xx": "00-xx General",
@@ -213,25 +213,25 @@ DICCIONARIO_AREAS = {
     "93-xx": "93-xx Teoría de sistemas; control",
     "94-xx": "94-xx Información y comunicación, circuitos",
     "97-xx": "97-xx Educación matemática",
-    }
+}
 
 DICCIONARIO_TIPO_TRANSPORTE_EN = {
     "auto": "Car",
     "autobus": "Bus",
     "avion": "Airplane",
-    }
+}
 
 DICCIONARIO_TIPO_TRANSPORTE = {
     "auto": "Auto",
     "autobus": "Autobus",
     "avion": "Avion",
-    }
+}
 
 NIVEL = DisplayList((
     ('Doctorado', 'PHD'),
     ('Maestria', 'Masters'),
     ('Licenciatura', 'Undergraduate'),
-    ))
+))
 
 SEDE = DisplayList((
     ('cu', 'C.U.'),
@@ -239,17 +239,18 @@ SEDE = DisplayList((
     ('juriquilla', 'Juriquilla'),
     ('matmor', 'Morelia'),
     ('oaxaca', 'Oaxaca'),
-    ))
+))
 
 EVENTOS_INSTITUCIONALES = ((
     ('malaga', 'Malaga'),
-    ))
+))
 
-#TODO change location of this vocabulary
+
+# TODO change location of this vocabulary
 def getCountriesVocabulary(self):
     translation_service = getSite().translation_service
     sorted_list = [x for x in COUNTRIES.iteritems()]
     sorted_list.append(('', ''))
-    spanish_list =[(x[0],translation_service.translate(x[1], domain="plone", target_language="es"))  for x in sorted_list]
+    spanish_list = [(x[0], translation_service.translate(x[1], domain="plone", target_language="es")) for x in sorted_list]
     spanish_list.sort(key=lambda x: idn.normalize(x[1]))
     return DisplayList(spanish_list)
