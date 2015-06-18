@@ -1,19 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from Products.Archetypes.public import FloatField
-from Products.Archetypes.public import IntegerField
-from Products.Archetypes.public import LinesField
-from Products.Archetypes.public import LinesWidget
-from Products.Archetypes.public import StringWidget
-from Products.FacultyStaffDirectory.interfaces.person import IPerson
-
-from archetypes.schemaextender.field import ExtensionField
-from archetypes.schemaextender.interfaces import IBrowserLayerAwareExtender
-from archetypes.schemaextender.interfaces import ISchemaExtender
-from matem.solicitudes.interfaces import ISolicitudSpecific
-from zope.component import adapts
-from zope.interface import implements
-
 
 class PersonWrapper:
 
