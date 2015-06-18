@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-from Products.Archetypes.atapi import DisplayList
 
-#from Products.Archetypes.public import DisplayList
-from zope.component.hooks import getSite
-from plone.i18n.normalizer import idnormalizer as idn
 from Products.ATCountryWidget.config import COUNTRIES
+from Products.Archetypes.atapi import DisplayList
+from plone.i18n.normalizer import idnormalizer as idn
+from zope.component.hooks import getSite
 
 
 ADD_CONTENT_PERMISSION = {

@@ -1,6 +1,7 @@
-from zope.interface import Interface
+# -*- coding: utf-8 -*-
 
 from plone.theme.interfaces import IDefaultPloneLayer
+from zope.interface import Interface
 
 
 class ISolicitud(Interface):
@@ -32,6 +33,7 @@ class ISolicitudSpecific(IDefaultPloneLayer):
     """Marker interface that defines a Zope 3 skin layer
        for this product.
     """
+
 
 class ISolicitudInstitucional(Interface):
     """Description of the Example Type"""
