@@ -32,7 +32,7 @@ Full documentation for end users can be found in the "docs" folder, and is also 
 Installation
 ------------
 
-Install matem.annualreport by adding it to your buildout::
+Install matem.solicitudes by adding it to your buildout::
 
    [buildout]
 
