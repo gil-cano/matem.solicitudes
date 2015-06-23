@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Installer for this package."""
+"""Installer for the matem.solicitudes package."""
 
 from setuptools import find_packages
 from setuptools import setup
