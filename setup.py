@@ -4,28 +4,30 @@
 from setuptools import find_packages
 from setuptools import setup
 
-import os
+long_description = (
+    open('README.rst').read()
+    + '\n' +
+    'Contributors\n'
+    '============\n'
+    + '\n' +
+    open('CONTRIBUTORS.rst').read()
+    + '\n' +
+    open('CHANGES.rst').read()
+    + '\n')
 
-
-def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
-
-version = '3.0.9'
-
-long_description = \
-    read('README.rst') + \
-    read('CHANGES.rst') + \
-    read('docs', 'LICENSE.rst')
 
 setup(
     name='matem.solicitudes',
-    version=version,
+    version='3.0.9',
     description="Applications for institutional resources.",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
+        "Environment :: Web Environment",
         "Framework :: Plone",
+        "Framework :: Plone :: 4.3.6",
         "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
     ],
     keywords='Plone Python',
     author='Informática Académica',
