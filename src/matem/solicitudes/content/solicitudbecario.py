@@ -15,6 +15,8 @@ except ImportError:
   from Products.Archetypes.public import *
 
 from Products.CMFCore.utils import getToolByName
+from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
+
 from Acquisition import aq_parent
 from Products.ATCountryWidget.Widget import CountryWidget
 from Products.ATCountryWidget.config import COUNTRIES
@@ -1437,14 +1439,9 @@ Para más detalles vaya a %s.
         return person.getNumeroDeCuenta()
 
     def getPersonWrapper(self, userid):
-        fsdtool = getToolByName(self, 'facultystaffdirectory_tool')
-        portal_catalog = getToolByName(self, 'portal_catalog')
-
-        results = portal_catalog(path='/'.join(fsdtool.getDirectoryRoot().getPhysicalPath()), portal_type='FSDPerson', id=userid, depth=1)
-        encontrados = [brain.getObject() for brain in results]
-
-        fsdperson = PersonWrapper(encontrados[0])
-
+        mb = getToolByName(self, MEMBRANE_TOOL)
+        person = mb.getUserObject(user_id=userid)
+        fsdperson = PersonWrapper(person)
         return fsdperson
 
     def getCountriesVocabulary(self):

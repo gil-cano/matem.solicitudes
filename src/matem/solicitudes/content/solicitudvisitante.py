@@ -18,6 +18,8 @@ except ImportError:
   from Products.Archetypes.public import *
 
 from Products.CMFCore.utils import getToolByName
+from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
+
 from Acquisition import aq_parent, aq_base, ImplicitAcquisitionWrapper
 from Products.ATCountryWidget.Widget import CountryWidget, AreaWidget
 from Products.ATCountryWidget.config import COUNTRIES
@@ -1211,19 +1213,11 @@ La cantidad total que se le ha aprobado en lo que va del año: %s.
     def getDefaultDate(self):
         return DateTime('2015/1/1')
 
-    def getPersonWrapper(self,userid):
-        fsdtool = getToolByName(self,'facultystaffdirectory_tool')
-        portal_catalog = getToolByName(self, 'portal_catalog')
-
-        results = portal_catalog(path='/'.join(fsdtool.getDirectoryRoot().getPhysicalPath()), portal_type='FSDPerson', id=userid,depth=1)
-        encontrados=[brain.getObject() for brain in results]
-
-        fsdperson = PersonWrapper(encontrados[0])
-
+    def getPersonWrapper(self, userid):
+        mb = getToolByName(self, MEMBRANE_TOOL)
+        person = mb.getUserObject(user_id=userid)
+        fsdperson = PersonWrapper(person)
         return fsdperson
-
-    # enable FTP/WebDAV and friends
-    #PUT = ATDocument.PUT
 
     def getCountriesVocabulary(self):
         #This function is defined in config.py
