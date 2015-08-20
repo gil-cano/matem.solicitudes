@@ -93,8 +93,8 @@ events = {
         'pais': 'MX',
         'ciudad_pais': 'Sonora',
         'institucion': 'Universidad de Sonora',
-        'fecha_desde': '2014-10-18 00:00 ',
-        'fecha_hasta': '2014-10-23 00:00 ',
+        'fecha_desde': '2015-10-18 00:00 ',
+        'fecha_hasta': '2015-10-23 00:00 ',
         'objeto_viaje': 'Asistir al XLVIII Congreso Nacional de la Sociedad Matemática Mexicana (XLVIII SMM 2015)'},
 },
 }
