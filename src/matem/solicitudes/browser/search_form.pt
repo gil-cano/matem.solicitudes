@@ -243,6 +243,7 @@
                 <input type="radio" name="State" value="aprobada"><span i18n:translate="Approved"> Approved </span><br>
                 <input type="radio" name="State" value="rechazada"><span i18n:translate="Rejected"> Rejected</span><br>
                 <input type="radio" name="State" value="revision"><span i18n:translate="Reviewing"> In review</span><br>
+                <input type="radio" name="State" value="borrador"><span i18n:translate="Draft"> Draft </span><br>
             </div>
 
             <div class="visualClear" id="clear-space-before-submit"></div>
