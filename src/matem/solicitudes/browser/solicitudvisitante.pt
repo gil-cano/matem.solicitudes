@@ -196,7 +196,7 @@
 
             <dl class="portalMessage info"
                 tal:condition="view/esAprobada">
-                <dt i18n:translate="">
+                <dt i18n:translate="label_informacion">
                     Info
                 </dt>
                 <dd>

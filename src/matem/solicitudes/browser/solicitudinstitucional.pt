@@ -166,14 +166,14 @@
             </span>
 
             <dl class="portalMessage info" tal:condition="view/esAprobada">
-              <dt i18n:translate="">Info</dt>
+              <dt i18n:translate="label_informacion">Info</dt>
               <dd>
                 <span i18n:translate="label_aprobada_nopropietario">This application has been aproved. If you have any doubt please contact the site manager. The total amount approved for this application is </span><span tal:content="view/getPresupuestoAprobadoSolicitud">cantidad</span> pesos.
               </dd>
             </dl>
 
             <dl class="portalMessage error" tal:condition="view/esRechazada">
-              <dt i18n:translate="">Info</dt>
+              <dt i18n:translate="label_informacion">Info</dt>
               <dd>
                 <span i18n:translate="label_rechazada_nopropietario">This application has been rejected. If you have any doubt please contact the site manager.</span>
               </dd>
