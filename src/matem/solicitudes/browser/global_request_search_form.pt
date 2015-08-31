@@ -67,7 +67,7 @@
     <div class="tabularView">
     <table class="listing" border="1" width="100%" tal:condition="items">
         <tbody>
-        <tr><th i18n:translate="label_period">Period</th><th i18n:translate="label_type">Type</th><th i18n:translate="label_solicitor">Solicitante</th><th i18n:translate="label_reason">Reason</th><th i18n:translate="label_place">Place</th><th i18n:translate="label_application_date">Fecha de Solicitud</th><th i18n:translate="label_quantity_days">Cantidad de Días</th><th i18n:translate="label_requested_quantity">Requested Quantity (pesos)</th><th i18n:translate="label_state">State</th><th i18n:translate="label_link">Link</th></tr>
+        <tr><th i18n:translate="label_period">Period</th><th i18n:translate="label_type">Type</th><th i18n:translate="label_solicitor">Solicitante</th><th i18n:translate="label_reason">Reason</th><th i18n:translate="label_place">Place</th><th i18n:translate="label_application_date">Fecha de Solicitud</th><th i18n:translate="label_quantity_days">days</th><th i18n:translate="label_requested_quantity">Requested Quantity (pesos)</th><th i18n:translate="label_state">State</th><th i18n:translate="label_link">Link</th></tr>
         <tr tal:repeat="item python:items[page]">
           <td><a href="#" tal:attributes="href python:item[len(item)-1]" tal:content="python:item[len(item)-2]"/></td>
           <td tal:content="python:item[0]">Meta-Type</td>

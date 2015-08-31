@@ -210,7 +210,7 @@
                 <th i18n:translate="label_creation_date">Solicitud Creada</th>
                 <th i18n:translate="label_start_date">Fecha de Inicio</th>
                 <th i18n:translate="label_end_date">Fecha de Termino</th>
-                <th i18n:translate="label_quantity_days">Cantidad de Días</th>
+                <th i18n:translate="label_quantity_days">days</th>
                 <th i18n:translate="label_approved_quantity">Approved Quantity
                 (pesos)</th>
                 <th i18n:translate="label_fecha_revision">Fecha de Revision por Consejo Interno</th>
