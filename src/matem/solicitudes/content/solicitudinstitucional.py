@@ -35,6 +35,7 @@ from archetypes.multifile.MultiFileWidget import MultiFileWidget
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 
+from matem.solicitudes import solicitudesMessageFactory as _
 from matem.solicitudes.interfaces import ISolicitudInstitucional
 from matem.solicitudes.config import AREAS_INVESTIGACION
 from matem.solicitudes.config import PROJECTNAME
@@ -42,7 +43,7 @@ from matem.solicitudes.config import SEDE
 from matem.solicitudes.config import getCountriesVocabulary
 from matem.solicitudes.extender import PersonWrapper
 
-SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
+SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
 
     ComputedField(name='title',
         required=1,
@@ -584,10 +585,9 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Recommended amount for transportation (Institutional)',
-            label_msgid='label_cantidad_recomendada_pasaje_institucional',
+            label=_(u'label_cantidad_recomendada_pasaje_institucional',
+                default=u'Recommended amount for transportation (Institutional)'),
             i18n_domain='matem.solicitudes',
-            tarifas=False,
             size=12),
         read_permission="Solicitud: Comision Revisa Solicitud",
         write_permission="Solicitud: Comision Revisa Solicitud",
