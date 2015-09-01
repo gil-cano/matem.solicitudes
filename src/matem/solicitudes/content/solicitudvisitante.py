@@ -177,11 +177,9 @@ schema = BaseSchema + Schema((
         name='institucion_procedencia',
         required=1,
         widget=StringWidget(
-            label='Institution',
-            label_msgid='label_institucion',
-            i18n_domain='matem.solicitudes',
-            description='Institution of origin',
-            description_msgid='help_institucion_procedencia'),
+            label=_(u'label_institucion', default='Institution'),
+            description=_(u'help_institucion_procedencia', default='Institution of origin'),
+            i18n_domain='matem.solicitudes'),
         write_permission="Solicitud: Modificar Solicitud",
     ),
 
@@ -438,8 +436,7 @@ schema = BaseSchema + Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Recommended amount for transportation expenses',
-            label_msgid='label_cantidad_recomendada_pasaje',
+            label=_(u'label_cantidad_recomendada_pasaje', default=u'Recommended amount for transportation expenses'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -452,8 +449,7 @@ schema = BaseSchema + Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Recommended amount for travel allowences',
-            label_msgid='label_cantidad_recomendada_viaticos',
+            label=_(u'label_cantidad_recomendada_viaticos', default=u'Recommended amount for travel allowences'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -527,8 +523,7 @@ schema = BaseSchema + Schema((
         name='cantidad_consejo_pasaje',
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for transportation expenses',
-            label_msgid='label_cantidad_consejo_pasaje',
+            label=_(u'label_cantidad_consejo_pasaje', default=u'Approved amount for transportation expenses'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -541,8 +536,7 @@ schema = BaseSchema + Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for travel allowences',
-            label_msgid='label_cantidad_consejo_viaticos',
+            label=_(u'label_cantidad_consejo_viaticos', default=u'Approved amount for travel allowences'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -555,8 +549,7 @@ schema = BaseSchema + Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for transportation expenses',
-            label_msgid='label_cantidad_autorizada_pasaje',
+            label=_(u'label_cantidad_autorizada_pasaje', default=u'Approved amount for transportation expenses'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -569,8 +562,7 @@ schema = BaseSchema + Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for travel allowences',
-            label_msgid='label_cantidad_autorizada_viaticos',
+            label=_(u'label_cantidad_autorizada_viaticos', default=u'Approved amount for travel allowences'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),

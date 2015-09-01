@@ -4,6 +4,7 @@ from Products.ATCountryWidget.config import COUNTRIES
 from Products.Archetypes.atapi import DisplayList
 from plone.i18n.normalizer import idnormalizer as idn
 from zope.component.hooks import getSite
+from matem.solicitudes import solicitudesMessageFactory as _
 
 
 ADD_CONTENT_PERMISSION = {
@@ -216,9 +217,9 @@ DICCIONARIO_AREAS = {
 }
 
 DICCIONARIO_TIPO_TRANSPORTE_EN = {
-    "auto": "Car",
-    "autobus": "Bus",
-    "avion": "Airplane",
+    "auto": _(u'Car'),
+    "autobus": _(u'Bus'),
+    "avion": _(u'Airplane'),
 }
 
 DICCIONARIO_TIPO_TRANSPORTE = {
