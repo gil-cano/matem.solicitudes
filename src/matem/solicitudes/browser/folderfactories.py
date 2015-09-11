@@ -97,6 +97,10 @@ events = {
         'fecha_hasta': '2015-10-23 00:00 ',
         'objeto_viaje': 'Asistir al XLVIII Congreso Nacional de la Sociedad Matemática Mexicana (XLVIII SMM 2015)'},
 },
+
+2016: {
+
+},
 }
 
 
