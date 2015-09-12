@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-12 05:09+0000\n"
+"POT-Creation-Date: 2015-09-12 15:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -482,12 +482,12 @@ msgid "label_author"
 msgstr "Autor"
 
 #. Default: "Back to menu"
-#: matem/solicitudes/portlets/avisos.pt:163
+#: matem/solicitudes/portlets/avisos.pt:162
 msgid "label_back_menu"
 msgstr "Menú"
 
 #. Default: "Becario"
-#: matem/solicitudes/portlets/avisos.pt:234
+#: matem/solicitudes/portlets/avisos.pt:233
 msgid "label_becario"
 msgstr "Becario"
 
@@ -664,7 +664,7 @@ msgid "label_comentario_owner"
 msgstr "Comentarios adicionales"
 
 #. Default: "Comisionado"
-#: matem/solicitudes/portlets/avisos.pt:228
+#: matem/solicitudes/portlets/avisos.pt:227
 msgid "label_comisionado"
 msgstr "Comisionado"
 
@@ -675,7 +675,7 @@ msgid "label_commision_recommended_quantity"
 msgstr "Cantidad Recomendada por la Comisión (pesos)"
 
 #. Default: "Consejero"
-#: matem/solicitudes/portlets/avisos.pt:226
+#: matem/solicitudes/portlets/avisos.pt:225
 msgid "label_consejero"
 msgstr "Consejero"
 
@@ -687,7 +687,7 @@ msgid "label_creation_date"
 msgstr "Fecha de creación"
 
 #. Default: "You have this roles"
-#: matem/solicitudes/portlets/avisos.pt:223
+#: matem/solicitudes/portlets/avisos.pt:222
 msgid "label_current_roles"
 msgstr "Tú tienes los roles de"
 
@@ -697,7 +697,7 @@ msgstr "Tú tienes los roles de"
 msgid "label_current_state"
 msgstr "Estado actual"
 
-#. Default: "Fecha de Termino"
+#. Default: "End date"
 #: matem/solicitudes/browser/folderaprobadas.pt:212
 #: matem/solicitudes/browser/folderpendientes.pt:231
 #: matem/solicitudes/browser/folderpendientessede.pt:201
@@ -720,7 +720,7 @@ msgstr "Esta solicitud aún no ha sido enviada. Puede cambiar su informacion hac
 
 #. Default: "This format is being reviewed by the advisor in charge."
 #: matem/solicitudes/browser/solicitudbecario.pt:112
-#: matem/solicitudes/portlets/avisos.pt:31
+#: matem/solicitudes/portlets/avisos.pt:30
 msgid "label_estado_preeliminar"
 msgstr "Esta solicitud está siendo revisada por el asesor a cargo. Espere noticias pronto."
 
@@ -785,7 +785,7 @@ msgid "label_folder"
 msgstr "Título"
 
 #. Default: "Go to 'Applications pending for review'"
-#: matem/solicitudes/portlets/avisos.pt:59
+#: matem/solicitudes/portlets/avisos.pt:58
 msgid "label_go_pending"
 msgstr "Ir a solicitudes pendientes de revisión"
 
@@ -795,7 +795,7 @@ msgid "label_grado"
 msgstr "Grado de estudios"
 
 #. Default: "Importador de Solicitudes"
-#: matem/solicitudes/portlets/avisos.pt:240
+#: matem/solicitudes/portlets/avisos.pt:239
 msgid "label_importador"
 msgstr "Importador de Solicitudes"
 
@@ -840,7 +840,7 @@ msgid "label_investigacionarea"
 msgstr "Áreas de investigación"
 
 #. Default: "Investigador"
-#: matem/solicitudes/portlets/avisos.pt:236
+#: matem/solicitudes/portlets/avisos.pt:235
 msgid "label_investigador"
 msgstr "Investigador"
 
@@ -910,7 +910,7 @@ msgstr "Ninguna solicitud se ha aprobado aún"
 #. Default: "Hooray! You have no pending reviews. You can review your approved or rejected reviews by navigating to 'My approved applications' or 'My rejected applications' respectively."
 #: matem/solicitudes/browser/folderpendientes.pt:561
 #: matem/solicitudes/browser/folderpendientessede.pt:477
-#: matem/solicitudes/portlets/avisos.pt:200
+#: matem/solicitudes/portlets/avisos.pt:199
 msgid "label_no_pending"
 msgstr "No hay solicitudes pendientes. Puede revisar sus solicitudes aprobadas y rechazadas navegando a 'Mis solicitudes aprobadas' y 'Mis solicitudes rechazadas', respectivamente."
 
@@ -1015,7 +1015,7 @@ msgid "label_procedencia"
 msgstr "Ciudad"
 
 #. Default: "Programador de Presupuesto"
-#: matem/solicitudes/portlets/avisos.pt:242
+#: matem/solicitudes/portlets/avisos.pt:241
 msgid "label_programador_presupuesto"
 msgstr "Programador de Presupuesto"
 
@@ -1027,7 +1027,7 @@ msgid "label_quantity_days"
 msgstr "Cantidad de días"
 
 #. Default: "Quick access:"
-#: matem/solicitudes/portlets/avisos.pt:55
+#: matem/solicitudes/portlets/avisos.pt:54
 msgid "label_quick_access"
 msgstr "Acceso rápido"
 
@@ -1110,12 +1110,12 @@ msgid "label_researchers"
 msgstr "Investigadores"
 
 #. Default: "Responsable de la Comision"
-#: matem/solicitudes/portlets/avisos.pt:232
+#: matem/solicitudes/portlets/avisos.pt:231
 msgid "label_responsable_comision"
 msgstr "Responsable de la Comisión"
 
 #. Default: "Responsable del Consejo"
-#: matem/solicitudes/portlets/avisos.pt:230
+#: matem/solicitudes/portlets/avisos.pt:229
 msgid "label_responsable_consejo"
 msgstr "Responsable del Consejo"
 
@@ -1154,7 +1154,7 @@ msgstr "Esta solicitud está siendo revisada por el Consejo Interno. Espere noti
 
 #. Default: "You still haven't approved nor rejected this request! Review data and approve it or return it to the scholarship holder by selecting 'State: Solicitud en revision preeliminar' and then 'Enviar' o 'Regresar solicitud a becario', respectively, inside the transitions menu in the top right corner."
 #: matem/solicitudes/browser/solicitudbecario.pt:175
-#: matem/solicitudes/portlets/avisos.pt:75
+#: matem/solicitudes/portlets/avisos.pt:74
 msgid "label_revision_investigadoracargo"
 msgstr "¡Usted aún no ha aprobado ni rechazado esta solicitud! Puede cambiar su informacion dando clic en la pestaña 'Hacer cambios' en la parte superior. Revise los datos y apruebela o regresela al becario haciendo clic en los botones 'Enviar' o 'Regresar solicitud a becario', respectivamente, ubicados en la parte inferior de la solicitud."
 
@@ -1229,7 +1229,7 @@ msgid "label_sent_nosol"
 msgstr "Solicitudes en proceso de revisión"
 
 #. Default: "You have applications in process. Review your applications in process navigating to 'In process applications'."
-#: matem/solicitudes/portlets/avisos.pt:176
+#: matem/solicitudes/portlets/avisos.pt:175
 msgid "label_sent_reviews"
 msgstr "Tiene solicitudes enviadas. Puede revisarlas navegando a 'Mis solicitudes en proceso'."
 
@@ -1239,7 +1239,7 @@ msgid "label_solicitante"
 msgstr "¿Para quién es la solicitud?"
 
 #. Default: "Solicitante Auxiliar"
-#: matem/solicitudes/portlets/avisos.pt:244
+#: matem/solicitudes/portlets/avisos.pt:243
 msgid "label_solicitante_auxiliar"
 msgstr "Solicitante Auxiliar"
 
@@ -1265,7 +1265,7 @@ msgid "label_state"
 msgstr "Estado"
 
 #. Default: "Tecnico Academico"
-#: matem/solicitudes/portlets/avisos.pt:238
+#: matem/solicitudes/portlets/avisos.pt:237
 msgid "label_tecnico"
 msgstr "Técnico Académico"
 
