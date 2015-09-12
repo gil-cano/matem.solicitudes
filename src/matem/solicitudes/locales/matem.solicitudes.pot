@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-11 18:55+0000\n"
+"POT-Creation-Date: 2015-09-12 05:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -784,7 +784,7 @@ msgstr ""
 msgid "label_folder"
 msgstr ""
 
-#. Default: "Ir a 'Solicitudes pendientes de revision'"
+#. Default: "Go to 'Applications pending for review'"
 #: matem/solicitudes/portlets/avisos.pt:59
 msgid "label_go_pending"
 msgstr ""
