@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-12 15:30+0000\n"
+"POT-Creation-Date: 2015-09-12 16:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1099,7 +1099,7 @@ msgstr ""
 msgid "label_required_quantity_transport"
 msgstr ""
 
-#. Default: "Cantidad requerida para Viaticos (pesos)"
+#. Default: "Travel Allowances (pesos)"
 #: matem/solicitudes/browser/folderpendientes.pt:343
 msgid "label_required_quantity_viaticos"
 msgstr ""

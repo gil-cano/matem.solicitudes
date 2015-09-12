@@ -340,7 +340,7 @@
                 <th i18n:translate="label_end_date">End date</th>
                 <th i18n:translate="label_quantity_days">days</th>
                 <th i18n:translate="label_required_quantity_transport">Cantidad requerida para Pasaje (pesos)</th>
-                <th i18n:translate="label_required_quantity_viaticos">Cantidad requerida para Viaticos (pesos)</th>
+                <th i18n:translate="label_required_quantity_viaticos">Travel Allowances (pesos)</th>
                 <th i18n:translate="label_required_quantity_register">Cantidad requerida para Inscripcion (pesos)</th>
                 <th i18n:translate="label_required_quantity">Cantidad requerida (pesos)</th>
                 <th>Con cargo a:</th>
@@ -438,7 +438,7 @@
                 <th i18n:translate="label_end_date">End date</th>
                 <th i18n:translate="label_quantity_days">days</th>
                 <th i18n:translate="label_required_quantity_transport">Cantidad requerida para Pasaje (pesos)</th>
-                <th i18n:translate="label_required_quantity_viaticos">Cantidad requerida para Viaticos (pesos)</th>
+                <th i18n:translate="label_required_quantity_viaticos">Travel Allowances (pesos)</th>
                 <th i18n:translate="label_required_quantity_register">Cantidad requerida para Inscripcion (pesos)</th>
                 <th i18n:translate="label_required_quantity">Cantidad requerida (pesos)</th>
                 <th i18n:translate="label_commision_recommended_quantity">Cantidad Recomendada
