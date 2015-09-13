@@ -190,7 +190,7 @@
                 <th i18n:translate="label_quantity_days">days</th>
                 <th i18n:translate="label_rejected_quantity">Cantidad Rechazada
                 (pesos)</th>
-                <th i18n:translate="label_fecha_revision">Fecha de Revision por Consejo Interno</th>
+                <th i18n:translate="consejo_review_date">Consejo Interno review date</th>
                 <th i18n:translate="label_link">Link</th>
         </tr>
         <tr tal:repeat="item python:items">

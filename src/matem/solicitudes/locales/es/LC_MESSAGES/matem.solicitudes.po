@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-12 16:43+0000\n"
+"POT-Creation-Date: 2015-09-13 00:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,6 +123,13 @@ msgstr "La fecha de termino debe ser mayor a la de inicio"
 #: matem/solicitudes/browser/solicitudes_auxiliares.pt:135
 msgid "Visitor Application"
 msgstr "Solicitud de Visitante"
+
+#. Default: "Consejo Interno review date"
+#: matem/solicitudes/browser/folderaprobadas.pt:216
+#: matem/solicitudes/browser/folderpendientes.pt:448
+#: matem/solicitudes/browser/folderpendientessede.pt:383
+msgid "consejo_review_date"
+msgstr "Fecha de revisión por el Consejo Interno"
 
 #. Default: "You can import simple text applications into the system."
 #: matem/solicitudes/browser/solicitudes_auxiliares.pt:112
@@ -724,13 +731,6 @@ msgstr "Esta solicitud aún no ha sido enviada. Puede cambiar su informacion hac
 msgid "label_estado_preeliminar"
 msgstr "Esta solicitud está siendo revisada por el asesor a cargo. Espere noticias pronto."
 
-#. Default: "Fecha de Revision por Consejo Interno"
-#: matem/solicitudes/browser/micuenta.pt:230
-#: matem/solicitudes/browser/presupuesto_folder.pt:433
-#: matem/solicitudes/browser/search_form.pt:143
-msgid "label_fecha_de_revision"
-msgstr "Fecha de Revisión por Consejo Interno"
-
 #. Default: "From date"
 #: matem/solicitudes/browser/global_request_search_form.pt:254
 #: matem/solicitudes/browser/solicitud.pt:281
@@ -745,25 +745,11 @@ msgstr "Fecha de inicio"
 msgid "label_fecha_hasta"
 msgstr "Fecha de término"
 
-#. Default: "Fecha de Revision por Consejo Interno"
-#: matem/solicitudes/browser/folderaprobadas.pt:216
-#: matem/solicitudes/browser/folderrechazadas.pt:218
-#: matem/solicitudes/browser/generaractas.pt:207
-msgid "label_fecha_revision"
-msgstr "Fecha de revisión por Consejo Interno"
-
 #. Default: "Fecha de revision por la Comision Especial"
 #: matem/solicitudes/browser/folderpendientes.pt:347
 #: matem/solicitudes/browser/folderpendientessede.pt:309
 msgid "label_fecha_revision_comision"
 msgstr "Fecha de Revisión por la Comisión Especial"
-
-#. Default: "Fecha de revision por el Consejo Interno"
-#: matem/solicitudes/browser/folderaprobadas.pt:243
-#: matem/solicitudes/browser/folderpendientes.pt:448
-#: matem/solicitudes/browser/folderpendientessede.pt:383
-msgid "label_fecha_revision_consejo"
-msgstr "Fecha de revisión por el Consejo Interno"
 
 #. Default: "Fecha de revisión por Comisión Especial"
 #: matem/solicitudes/browser/solicitud.pt:337
@@ -1091,7 +1077,6 @@ msgstr "Cantidad requerida (pesos)"
 
 #. Default: "Registration fee (pesos)"
 #: matem/solicitudes/browser/folderpendientes.pt:344
-#, fuzzy
 msgid "label_required_quantity_register"
 msgstr "Cantidad requerida para Inscripción (pesos)"
 
@@ -1102,7 +1087,6 @@ msgstr "Cantidad requerida para Pasaje (pesos)"
 
 #. Default: "Travel Allowances (pesos)"
 #: matem/solicitudes/browser/folderpendientes.pt:343
-#, fuzzy
 msgid "label_required_quantity_viaticos"
 msgstr "Cantidad requerida para Viáticos (pesos)"
 

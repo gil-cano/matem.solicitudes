@@ -215,7 +215,7 @@
                 <th i18n:translate="label_quantity_days">days</th>
                 <th i18n:translate="label_rejected_quantity">Cantidad Rechazada
                 (pesos)</th>
-                <th i18n:translate="label_fecha_revision">Fecha de Revision por Consejo Interno</th>
+                <th i18n:translate="consejo_review_date">Consejo Interno review date</th>
                 <th i18n:translate="label_actaci">Number of record where the request was reviewed</th>
                 <th i18n:translate="label_link">Link</th>
         </tr>
@@ -242,7 +242,7 @@
     </table>
     <fieldset tal:condition="python:view.esManager(user.getId())">
     <div class="field">
-       <label for="fechaderevisionCI" i18n:translate="label_fecha_revision_consejo">Fecha de revision por el Consejo Interno</label>
+       <label for="fechaderevisionCI" i18n:translate="consejo_review_date">Consejo Interno review date</label>
        <br>
        <input type="date" name="fechaderevisionCI"/>
 

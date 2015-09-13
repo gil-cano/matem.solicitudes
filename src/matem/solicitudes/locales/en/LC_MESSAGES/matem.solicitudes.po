@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-12 16:43+0000\n"
+"POT-Creation-Date: 2015-09-13 00:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,6 +122,13 @@ msgstr ""
 #: matem/solicitudes/browser/search_form.pt:233
 #: matem/solicitudes/browser/solicitudes_auxiliares.pt:135
 msgid "Visitor Application"
+msgstr ""
+
+#. Default: "Consejo Interno review date"
+#: matem/solicitudes/browser/folderaprobadas.pt:216
+#: matem/solicitudes/browser/folderpendientes.pt:448
+#: matem/solicitudes/browser/folderpendientessede.pt:383
+msgid "consejo_review_date"
 msgstr ""
 
 #. Default: "You can import simple text applications into the system."
@@ -724,13 +731,6 @@ msgstr ""
 msgid "label_estado_preeliminar"
 msgstr ""
 
-#. Default: "Fecha de Revision por Consejo Interno"
-#: matem/solicitudes/browser/micuenta.pt:230
-#: matem/solicitudes/browser/presupuesto_folder.pt:433
-#: matem/solicitudes/browser/search_form.pt:143
-msgid "label_fecha_de_revision"
-msgstr ""
-
 #. Default: "From date"
 #: matem/solicitudes/browser/global_request_search_form.pt:254
 #: matem/solicitudes/browser/solicitud.pt:281
@@ -745,24 +745,10 @@ msgstr ""
 msgid "label_fecha_hasta"
 msgstr ""
 
-#. Default: "Fecha de Revision por Consejo Interno"
-#: matem/solicitudes/browser/folderaprobadas.pt:216
-#: matem/solicitudes/browser/folderrechazadas.pt:218
-#: matem/solicitudes/browser/generaractas.pt:207
-msgid "label_fecha_revision"
-msgstr ""
-
 #. Default: "Fecha de revision por la Comision Especial"
 #: matem/solicitudes/browser/folderpendientes.pt:347
 #: matem/solicitudes/browser/folderpendientessede.pt:309
 msgid "label_fecha_revision_comision"
-msgstr ""
-
-#. Default: "Fecha de revision por el Consejo Interno"
-#: matem/solicitudes/browser/folderaprobadas.pt:243
-#: matem/solicitudes/browser/folderpendientes.pt:448
-#: matem/solicitudes/browser/folderpendientessede.pt:383
-msgid "label_fecha_revision_consejo"
 msgstr ""
 
 #. Default: "Fecha de revisión por Comisión Especial"

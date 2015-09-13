@@ -445,7 +445,7 @@
                 Por La Comision (pesos)</th>
                 <th>Con cargo a:</th>
                 <th i18n:translate="label_fecha_revision_comision">Fecha de revision por la Comision Especial</th>
-                <th i18n:translate="label_fecha_revision_consejo">Fecha de revision por el Consejo Interno</th>
+                <th i18n:translate="consejo_review_date">Consejo Interno review date</th>
                 <th i18n:translate="label_actaci">Number of record where the request was reviewed</th>
         </tr>
         <tr tal:repeat="item python:items">
@@ -495,7 +495,7 @@
     </table>
     <fieldset>
     <div class="field" tal:condition="python:view.esResponsableDelConsejo(user.getId())">
-       <label for="fechaderevisionCI" i18n:translate="label_fecha_revision_consejo">Fecha de revision por el Consejo Interno</label>
+       <label for="fechaderevisionCI" i18n:translate="consejo_review_date">Consejo Interno review date</label>
        <br>
         <input type="date" name="fechaderevisionCI"/>
         <input class="context"

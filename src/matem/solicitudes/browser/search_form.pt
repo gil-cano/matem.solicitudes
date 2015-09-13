@@ -140,7 +140,7 @@
             <th i18n:translate="label_end_date">End date</th>
             <th i18n:translate="label_quantity_days">days</th>
             <th i18n:translate="label_approved_quantity">Approved Quantity (pesos)</th>
-            <th i18n:translate="label_fecha_de_revision">Fecha de Revision por Consejo Interno</th>
+            <th i18n:translate="consejo_review_date">Consejo Interno review date</th>
             <th i18n:translate="label_actaci">Number of record where the request was reviewed</th>
             <th>con cargo a:</th>
             <th i18n:translate="label_state">State</th>
