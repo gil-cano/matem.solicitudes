@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from Products.Five.browser import BrowserView
 from matem.solicitudes.browser.queries import Queries
-from matem.solicitudes.interfaces import ISolicitud
+from matem.solicitudes.config import DICCIONARIO_AREAS
+from matem.solicitudes.config import DICCIONARIO_TIPO_TRANSPORTE
+from matem.solicitudes.config import DICCIONARIO_TIPO_TRANSPORTE_EN
 from matem.solicitudes.extender import PersonWrapper
-from matem.solicitudes.config import DICCIONARIO_AREAS,DICCIONARIO_TIPO_TRANSPORTE_EN,DICCIONARIO_TIPO_TRANSPORTE
+from matem.solicitudes.interfaces import ISolicitud
+
 
 class SolicitudView(BrowserView):
     """A view of an application"""

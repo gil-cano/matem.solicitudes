@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# copy this file in matem.solicitudes.browser/export.py
 
 from Products.Five.browser import BrowserView
 from matem.solicitudes.browser.queries import Queries
-import os
+
 import csv
+import os
+
 
 INSTANCEHOME = '/Users/gil/projects/plone/infomatem-p3/parts/instance'
 SOLFILE = os.path.join(INSTANCEHOME, 'Extensions/solicitudes.csv')

@@ -1,15 +1,14 @@
-from zope.interface import implements
 
-from plone.portlets.interfaces import IPortletDataProvider
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from matem.solicitudes.browser.folder import SolicitudFolderView
+from matem.solicitudes.browser.queries import Queries
 from plone.app.portlets.portlets import base
-
+from plone.memoize import forever
+from plone.portlets.interfaces import IPortletDataProvider
 from zope import schema
 from zope.formlib import form
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from matem.solicitudes.browser.queries import Queries
-from matem.solicitudes.browser.folder import SolicitudFolderView
+from zope.interface import implements
 
-from plone.memoize import forever
 
 class IAvisos(IPortletDataProvider):
     """A portlet

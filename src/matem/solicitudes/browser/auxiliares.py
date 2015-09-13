@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
-
-from Products.Five.browser import BrowserView
-from matem.solicitudes.interfaces import ISolicitudFolder
-from matem.solicitudes.config import DICCIONARIO_AREAS
-from matem.solicitudes.browser.queries import Queries
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from DateTime.DateTime import DateTime
-
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from matem.solicitudes.browser.queries import Queries
+from matem.solicitudes.config import DICCIONARIO_AREAS
+from matem.solicitudes.interfaces import ISolicitudFolder
 from operator import itemgetter
 
 import datetime
 import sys
+
 
 class AuxiliaresView(BrowserView):
     """Clase para importar solicitudes auxiliares"""

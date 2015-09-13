@@ -2,9 +2,9 @@
 
 from Products.ATCountryWidget.config import COUNTRIES
 from Products.Archetypes.atapi import DisplayList
+from matem.solicitudes import solicitudesMessageFactory as _
 from plone.i18n.normalizer import idnormalizer as idn
 from zope.component.hooks import getSite
-from matem.solicitudes import solicitudesMessageFactory as _
 
 
 ADD_CONTENT_PERMISSION = {

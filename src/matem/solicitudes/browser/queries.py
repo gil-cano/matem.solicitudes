@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-import sys
 from Products.Five.browser import BrowserView
 from matem.solicitudes.extender import PersonWrapper
-
 from plone.memoize import forever
 
 

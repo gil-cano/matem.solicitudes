@@ -1,6 +1,7 @@
-from plone.app.portlets.portlets.navigation import Renderer
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone.app.portlets.portlets.navigation import Renderer
+
 
 class MyRenderer(Renderer):
     _template = ViewPageTemplateFile('navigation.pt')

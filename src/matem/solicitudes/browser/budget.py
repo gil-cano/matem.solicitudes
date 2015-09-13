@@ -1,21 +1,19 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
-
-from Products.Five.browser import BrowserView
-from matem.solicitudes.interfaces import ISolicitudFolder
-from matem.solicitudes.config import DICCIONARIO_AREAS
-from matem.solicitudes.browser.queries import Queries
-from matem.solicitudes.browser.folder import SolicitudFolderView
-from matem.solicitudes.extender import PersonWrapper
-
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 from DateTime.DateTime import DateTime
-
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from matem.solicitudes.browser.folder import SolicitudFolderView
+from matem.solicitudes.browser.queries import Queries
+from matem.solicitudes.config import DICCIONARIO_AREAS
+from matem.solicitudes.extender import PersonWrapper
+from matem.solicitudes.interfaces import ISolicitudFolder
 from operator import itemgetter
 
 import datetime
 import sys
+
 
 class BudgetView(BrowserView):
     """The budget view"""
