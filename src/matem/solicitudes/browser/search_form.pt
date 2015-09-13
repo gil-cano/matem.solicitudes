@@ -141,7 +141,7 @@
             <th i18n:translate="label_quantity_days">days</th>
             <th i18n:translate="label_approved_quantity">Approved Quantity (pesos)</th>
             <th i18n:translate="consejo_review_date">Consejo Interno review date</th>
-            <th i18n:translate="label_actaci">Number of record where the request was reviewed</th>
+            <th i18n:translate="acta_number">Acta number</th>
             <th>con cargo a:</th>
             <th i18n:translate="label_state">State</th>
         </tr>

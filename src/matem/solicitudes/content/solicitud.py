@@ -612,7 +612,7 @@ schema = BaseSchema + Schema((
             default='',
             widget=StringWidget(#label='Number of record',
                                 label='Numero de acta de CI',
-                                label_msgid='label_actaci',
+                                label_msgid='acta_number',
                                 i18n_domain='matem.solicitudes',
                                 tarifas=False,
                                 size=12),

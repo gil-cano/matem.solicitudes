@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-13 00:43+0000\n"
+"POT-Creation-Date: 2015-09-13 02:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,6 +123,13 @@ msgstr "La fecha de termino debe ser mayor a la de inicio"
 #: matem/solicitudes/browser/solicitudes_auxiliares.pt:135
 msgid "Visitor Application"
 msgstr "Solicitud de Visitante"
+
+#. Default: "Acta number"
+#: matem/solicitudes/browser/folderaprobadas.pt:217
+#: matem/solicitudes/browser/folderpendientes.pt:449
+#: matem/solicitudes/browser/folderpendientessede.pt:384
+msgid "acta_number"
+msgstr "Número de acta"
 
 #. Default: "Consejo Interno review date"
 #: matem/solicitudes/browser/folderaprobadas.pt:216
@@ -357,20 +364,6 @@ msgstr "Especifique si solicita viáticos. Los máximos son: $900 diarios (Méxi
 #: matem/solicitudes/browser/solicitudbecario.pt:310
 msgid "label_account"
 msgstr "No. de Cuenta"
-
-#. Default: "Number of record where the request was reviewed"
-#: matem/solicitudes/browser/folderaprobadas.pt:217
-#: matem/solicitudes/browser/folderpendientes.pt:449
-#: matem/solicitudes/browser/folderpendientessede.pt:384
-msgid "label_actaci"
-msgstr "Número de acta del Consejo Interno"
-
-#. Default: "Record number"
-#: matem/solicitudes/browser/solicitud.pt:346
-#: matem/solicitudes/browser/solicitudbecario.pt:390
-#: matem/solicitudes/browser/solicitudinstitucional.pt:329
-msgid "label_actaci_number"
-msgstr "Número de acta"
 
 #. Default: "Attachments"
 #: matem/solicitudes/browser/solicitud.pt:295
@@ -1339,11 +1332,4 @@ msgstr "Términos de búsqueda"
 #: matem/solicitudes/browser/solicitudes_auxiliares.pt:123
 msgid "legend_upload_auxiliar_forms"
 msgstr "Subir Solicitudes a Nombre de otro Usuario"
-
-#. Default: "Numero de Acta del Consejo Interno"
-#: matem/solicitudes/browser/folderaprobadas.pt:253
-#: matem/solicitudes/browser/folderpendientes.pt:507
-#: matem/solicitudes/browser/folderpendientessede.pt:422
-msgid "numeroDeActa"
-msgstr "Número de Acta del Consejo Interno"
 

@@ -326,7 +326,7 @@
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th colspan="2"><b>Consejo Interno</b></th></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_fecha_sesionci">Date of revision by the CI</th>
                 <td align="left" tal:content="python:here.getFecha_sesionci() and here.getFecha_sesionci().strftime('%d/%m/%Y')">Value</td></tr>
-            <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_actaci_number">Record number</th>
+            <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="acta_number">Acta number</th>
                 <td align="left" tal:content="here/getActaci">Value</td></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_comentario_ci">Comments by Consejo Interno</th>
                 <td align="left" tal:content="here/getComentario_ci">Value</td></tr>

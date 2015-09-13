@@ -381,7 +381,7 @@
                 <th i18n:translate="label_commision_recommended_quantity">Cantidad Recomendada Por La Comision (pesos)</th>
                 <th i18n:translate="label_fecha_revision_comision">Fecha de revision por la Comision Especial</th>
                 <th i18n:translate="consejo_review_date">Consejo Interno review date</th>
-                <th i18n:translate="label_actaci">Number of record where the request was reviewed</th>
+                <th i18n:translate="acta_number">Acta number</th>
                 <th i18n:translate="label_link">Link</th>
         </tr>
         <tr tal:repeat="item python:items">
@@ -419,7 +419,7 @@
                value="Poner fecha a seleccionadas"/>
     </div>
     <div class="field" tal:condition="python:view.esResponsableDelConsejo(user.getId())">
-       <label for="numeroDeActa" i18n:translate="numeroDeActa">Numero de Acta del Consejo Interno</label>
+       <label for="numeroDeActa" i18n:translate="acta_number">Acta number</label>
        <br>
                 <input type="text"
                        id="numeroDeActaCI"

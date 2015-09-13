@@ -216,7 +216,7 @@
                 <th i18n:translate="label_rejected_quantity">Cantidad Rechazada
                 (pesos)</th>
                 <th i18n:translate="consejo_review_date">Consejo Interno review date</th>
-                <th i18n:translate="label_actaci">Number of record where the request was reviewed</th>
+                <th i18n:translate="acta_number">Acta number</th>
                 <th i18n:translate="label_link">Link</th>
         </tr>
         <tr tal:repeat="item python:items">
@@ -252,7 +252,7 @@
                value="Poner fecha a seleccionadas"/>
     </div>
     <div class="field">
-       <label for="numeroDeActa" i18n:translate="numeroDeActa">Numero de Acta del Consejo Interno</label>
+       <label for="numeroDeActa" i18n:translate="acta_number">Acta number</label>
        <br>
                 <input type="text"
                        id="numeroDeActaCI"

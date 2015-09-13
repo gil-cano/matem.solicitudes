@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-13 00:43+0000\n"
+"POT-Creation-Date: 2015-09-13 02:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,6 +122,13 @@ msgstr ""
 #: matem/solicitudes/browser/search_form.pt:233
 #: matem/solicitudes/browser/solicitudes_auxiliares.pt:135
 msgid "Visitor Application"
+msgstr ""
+
+#. Default: "Acta number"
+#: matem/solicitudes/browser/folderaprobadas.pt:217
+#: matem/solicitudes/browser/folderpendientes.pt:449
+#: matem/solicitudes/browser/folderpendientessede.pt:384
+msgid "acta_number"
 msgstr ""
 
 #. Default: "Consejo Interno review date"
@@ -356,20 +363,6 @@ msgstr ""
 #. Default: "No. de Cuenta"
 #: matem/solicitudes/browser/solicitudbecario.pt:310
 msgid "label_account"
-msgstr ""
-
-#. Default: "Number of record where the request was reviewed"
-#: matem/solicitudes/browser/folderaprobadas.pt:217
-#: matem/solicitudes/browser/folderpendientes.pt:449
-#: matem/solicitudes/browser/folderpendientessede.pt:384
-msgid "label_actaci"
-msgstr ""
-
-#. Default: "Record number"
-#: matem/solicitudes/browser/solicitud.pt:346
-#: matem/solicitudes/browser/solicitudbecario.pt:390
-#: matem/solicitudes/browser/solicitudinstitucional.pt:329
-msgid "label_actaci_number"
 msgstr ""
 
 #. Default: "Attachments"
@@ -1338,12 +1331,5 @@ msgstr ""
 #. Default: "Subir Solicitudes a Nombre de otro Usuario"
 #: matem/solicitudes/browser/solicitudes_auxiliares.pt:123
 msgid "legend_upload_auxiliar_forms"
-msgstr ""
-
-#. Default: "Numero de Acta del Consejo Interno"
-#: matem/solicitudes/browser/folderaprobadas.pt:253
-#: matem/solicitudes/browser/folderpendientes.pt:507
-#: matem/solicitudes/browser/folderpendientessede.pt:422
-msgid "numeroDeActa"
 msgstr ""
 
