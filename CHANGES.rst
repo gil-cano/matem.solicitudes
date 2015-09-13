@@ -3,6 +3,8 @@ Changelog
 
 3.1 (unreleased)
 ----------------
+- pass rebuild_i18n
+  [gil-cano]
 
 - Modernize buildout configuration
   [gil-cano]
