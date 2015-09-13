@@ -36,7 +36,7 @@ class TestsDeCreacion(TestCase):
         FSDFolder.invokeFactory(type_name=self.portal_type,id='consejero')
         FSDFolder.invokeFactory(type_name=self.portal_type,id='responsablecomision')
         FSDFolder.invokeFactory(type_name=self.portal_type,id='responsableconsejo')
-        
+
         self.portal.manage_setLocalRoles('manager', ['Manager','Member'])
         folderSolicitudes.manage_setLocalRoles('manager', ['Manager','Member'])
         folderSolicitudes.manage_setLocalRoles('solicitante', ['Solicitante Auxiliar','Member'])
@@ -53,85 +53,85 @@ class TestsDeCreacion(TestCase):
         self.changeUser('solicitante')
         self.failUnlessRaises(Unauthorized,
             self.portal.invokeFactory,
-            type_name='SolicitudFolder', 
-            id='TestSolicitudFolder', 
-            fecha_desde='', 
+            type_name='SolicitudFolder',
+            id='TestSolicitudFolder',
+            fecha_desde='',
             fecha_hasta='',
         )
 
         self.changeUser('investigador')
         self.failUnlessRaises(Unauthorized,
             self.portal.invokeFactory,
-            type_name='SolicitudFolder', 
-            id='TestSolicitudFolder', 
-            fecha_desde='', 
+            type_name='SolicitudFolder',
+            id='TestSolicitudFolder',
+            fecha_desde='',
             fecha_hasta='',
         )
 
         self.changeUser('tecnico')
         self.failUnlessRaises(Unauthorized,
             self.portal.invokeFactory,
-            type_name='SolicitudFolder', 
-            id='TestSolicitudFolder', 
-            fecha_desde='', 
+            type_name='SolicitudFolder',
+            id='TestSolicitudFolder',
+            fecha_desde='',
             fecha_hasta='',
         )
 
         self.changeUser('becario')
         self.failUnlessRaises(Unauthorized,
             self.portal.invokeFactory,
-            type_name='SolicitudFolder', 
-            id='TestSolicitudFolder', 
-            fecha_desde='', 
+            type_name='SolicitudFolder',
+            id='TestSolicitudFolder',
+            fecha_desde='',
             fecha_hasta='',
         )
 
         self.changeUser('comisionado')
         self.failUnlessRaises(Unauthorized,
             self.portal.invokeFactory,
-            type_name='SolicitudFolder', 
-            id='TestSolicitudFolder', 
-            fecha_desde='', 
+            type_name='SolicitudFolder',
+            id='TestSolicitudFolder',
+            fecha_desde='',
             fecha_hasta='',
         )
 
         self.changeUser('consejero')
         self.failUnlessRaises(Unauthorized,
             self.portal.invokeFactory,
-            type_name='SolicitudFolder', 
-            id='TestSolicitudFolder', 
-            fecha_desde='', 
+            type_name='SolicitudFolder',
+            id='TestSolicitudFolder',
+            fecha_desde='',
             fecha_hasta='',
         )
 
         self.changeUser('responsablecomision')
         self.failUnlessRaises(Unauthorized,
             self.portal.invokeFactory,
-            type_name='SolicitudFolder', 
-            id='TestSolicitudFolder', 
-            fecha_desde='', 
+            type_name='SolicitudFolder',
+            id='TestSolicitudFolder',
+            fecha_desde='',
             fecha_hasta='',
         )
 
         self.changeUser('responsableconsejo')
         self.failUnlessRaises(Unauthorized,
             self.portal.invokeFactory,
-            type_name='SolicitudFolder', 
-            id='TestSolicitudFolder', 
-            fecha_desde='', 
+            type_name='SolicitudFolder',
+            id='TestSolicitudFolder',
+            fecha_desde='',
             fecha_hasta='',
         )
 
         self.changeUser('manager')
-        folderAdded=self.portal.invokeFactory(type_name='SolicitudFolder', 
-                id='TestSolicitudFolder', 
-                fecha_desde='', 
+        folderAdded=self.portal.invokeFactory(type_name='SolicitudFolder',
+                id='TestSolicitudFolder',
+                fecha_desde='',
                 fecha_hasta='')
 
         folderSolicitudes = self.portal.TestSolicitudFolder
 
         self.assertEquals('TestSolicitudFolder',folderAdded)
-        
+
         self.assertEquals('noaceptando',folderSolicitudes.getWFState())
 
         self.portal.portal_workflow.doActionFor(folderSolicitudes,'archivar')
@@ -140,11 +140,11 @@ class TestsDeCreacion(TestCase):
         self.portal.portal_workflow.doActionFor(folderSolicitudes,'aceptar')
         self.assertEquals('aceptando',folderSolicitudes.getWFState())
 
-        total = folderSolicitudes.getPresupuesto_inicial() 
-        total += folderSolicitudes.getPresupuesto_asignado() 
-        total += folderSolicitudes.getPresupuesto_maximo_investigadores() 
-        total += folderSolicitudes.getPresupuesto_maximo_becarios() 
-        total += folderSolicitudes.getPresupuesto_maximo_tecnicos() 
+        total = folderSolicitudes.getPresupuesto_inicial()
+        total += folderSolicitudes.getPresupuesto_asignado()
+        total += folderSolicitudes.getPresupuesto_maximo_investigadores()
+        total += folderSolicitudes.getPresupuesto_maximo_becarios()
+        total += folderSolicitudes.getPresupuesto_maximo_tecnicos()
         total += folderSolicitudes.getPresupuesto_maximo_postdocs()
 
         self.assertEquals(0.0,total)
@@ -522,7 +522,7 @@ class TestsDeCreacion(TestCase):
             type_name='SolicitudBecario',
             id='TestSolicitudLicencia',
         )
-       
+
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(TestsDeCreacion))

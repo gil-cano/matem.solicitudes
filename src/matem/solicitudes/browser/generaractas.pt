@@ -105,7 +105,7 @@
             visibility: hidden;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/demos/dateinput/css/skin1.css"/> 
+    <link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/demos/dateinput/css/skin1.css"/>
   </metal:css>
 
   <body>
@@ -181,13 +181,13 @@
 
     <!--Cantidad--->
     <span tal:repeat="key python:view.getSortedKeys(items.keys())">
-    
+
     <span name="" tal:attributes="name python:str('todas')+key">
     <h3 tal:condition="key" i18n:translate=""><span tal:replace="python:str('Acta ')+key">Acta</span></h3>
-    <a tal:condition="key" href="" 
+    <a tal:condition="key" href=""
        tal:attributes="href python:str('javascript: printTable(\'todas')+key+str('\')')">Imprimir</a>
     <div class="tabularView">
-    <form action="#" method="post" id="" tal:condition="key" 
+    <form action="#" method="post" id="" tal:condition="key"
        tal:attributes="action string:${context/absolute_url}/view;
                        id python:str('todas')+key;">
     <table class="listing" border="1" width="100%" tal:condition="key">

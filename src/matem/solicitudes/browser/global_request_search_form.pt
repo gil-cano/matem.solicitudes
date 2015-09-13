@@ -148,7 +148,7 @@
     <p i18n:translate="description_request_search">
     Aquí puede buscar solicitudes de viáticos en todos los periodos.
     <br />
-    Si desea realizar una busqueda en un periodo específico, puede acceder al 
+    Si desea realizar una busqueda en un periodo específico, puede acceder al
     formato de busqueda en dicho periodo.
     </p>
 
@@ -169,7 +169,7 @@
                 <div class="formHelp" i18n:translate="help_search_author">
                 Return items created by a particular person.
                 </div>
-    
+
                 <tal:creators tal:define="creators view/getCreatorsBecarioInvestigador">
                     <select name="Creator"
                             id="Creator">
@@ -190,7 +190,7 @@
                 Return applications of the selected type.
                 </div>
 
-                <input type="radio" name="Type" value="all" checked><span i18n:translate="All"> All </span><br>    
+                <input type="radio" name="Type" value="all" checked><span i18n:translate="All"> All </span><br>
                 <input type="radio" name="Type" value="licencia"><span i18n:translate="License Application"> License Application </span><br>
                 <input type="radio" name="Type" value="visitante"><span i18n:translate="Visitor Application"> Visitor Application</span><br>
                 <input type="radio" name="Type" value="becario"><span i18n:translate="Student Application"> Student Application</span><br>
@@ -417,7 +417,7 @@
                 </div>
                 </td>
                 <td>
-                <input type="radio" name="State" value="any" checked><span i18n:translate="Any"> Any </span><br>    
+                <input type="radio" name="State" value="any" checked><span i18n:translate="Any"> Any </span><br>
                 <input type="radio" name="State" value="aprobada"><span i18n:translate="Approved"> Approved </span><br>
                 <input type="radio" name="State" value="rechazada"><span i18n:translate="Rejected"> Rejected</span><br>
                 <input type="radio" name="State" value="revision"><span i18n:translate="Reviewing"> In review</span><br>
@@ -438,7 +438,7 @@
             </div>
 
         </fieldset>
-    
+
     </form>
     </span>
 

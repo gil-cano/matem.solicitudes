@@ -139,10 +139,9 @@
 
             <tr><div class="field">
                 <td><label for="Tipo" i18n:translate="label_import_type">Type to import</label>
-
-            	    <div class="formHelp" i18n:translate="help_importtype_importForm">
-	              Select the type of application to import.
-	            </div>
+                  <div class="formHelp" i18n:translate="help_importtype_importForm">
+                    Select the type of application to import.
+                  </div>
 
                     <span tal:condition="python: view.esInvestigador() or view.esTecnicoAcademico()">
                     <input type="radio" name="tiposolicitud" value="licencia" checked><span i18n:translate="License Application"> License Application </span><br>
@@ -166,7 +165,7 @@
                 <div class="formHelp" i18n:translate="help_asesor">
                 Name of the advisor in charge.
                 </div>
-    
+
                 <tal:creators tal:define="creators view/getCreators">
                     <select name="Creator"
                             id="Creator">
@@ -209,7 +208,7 @@
             </div>
 
         </fieldset>
-    
+
     </form>
 
 <!--No vacio-->
@@ -237,7 +236,7 @@
                     <input type="radio" name="tiposolicitud" value="bloquebecario"><span i18n:translate="Several types simultaneously"> Several types simultaneously</span><br>
                 </td>
             </div></tr>
-            
+
             <tr><td></td></tr>
 
             <tr><td>
@@ -247,7 +246,7 @@
                 <div class="formHelp" i18n:translate="help_asesor">
                 Name of the advisor in charge.
                 </div>
-    
+
                 <tal:creators tal:define="creators view/getCreators">
                     <select name="Creator"
                             id="Creator">
@@ -290,7 +289,7 @@
             </div>
 
         </fieldset>
-    
+
     </form>
 
     </metal:body_macro>

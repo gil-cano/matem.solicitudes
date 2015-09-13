@@ -1,15 +1,15 @@
 <tal:block i18n:domain="plone">
-<dl class="portlet portletNavigationTree"  
+<dl class="portlet portletNavigationTree"
     tal:define="root view/navigation_root">
 
     <dt class="portletHeader">
         <span class="portletTopLeft"></span>
-        <a href="#" 
+        <a href="#"
            class="tile"
            tal:condition="not:view/title"
-           tal:attributes="href string:${root/absolute_url}/sitemap" 
+           tal:attributes="href string:${root/absolute_url}/sitemap"
            i18n:translate="box_navigation">Navigation</a>
-       <a href="#" 
+       <a href="#"
            class="tile"
            tal:condition="view/title"
            tal:attributes="href string:${root/absolute_url}/sitemap"
@@ -27,7 +27,7 @@
                    <a tal:attributes="href root/absolute_url;
                                       title root/Description;
                                       class selectedClass">
-                        <!-- 
+                        <!--
                           En plone 4
                          <img src="" height="16" width="16" alt=""
                         tal:condition="view/root_icon"

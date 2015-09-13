@@ -103,7 +103,7 @@
 
   <body>
     <metal:fill fill-slot="main">
-      <!-- 
+      <!--
         header_macro view_macros/header | header_macro | base_macros/header;
         footer_macro view_macros/footer | footer_macro | base_macros/footer;
        -->

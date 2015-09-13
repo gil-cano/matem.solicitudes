@@ -45,11 +45,11 @@
             text-align: center;
         }
 
-        #navcontainer ul li { 
+        #navcontainer ul li {
             display: inline;
         }
 
-        #navcontainer ul li form{ 
+        #navcontainer ul li form{
             display: inline;
             margin: 0;
             padding: 0;
@@ -102,9 +102,9 @@
     <!--Por Folders--->
     <h3 i18n:translate="label_approved_quantities_period">Approved Quantities by Period</h3>
 
-	<div class="tabularView">
+  <div class="tabularView">
                 <table class="listing" border="1" width="100%">
-                    <tbody>        
+                    <tbody>
                             <tr>
                                 <th class="column" i18n:translate="label_folder">
                                    Folder
@@ -140,7 +140,7 @@
                           </tr>
                     </tbody>
                  </table>
-	</div>
+  </div>
 
         <form action="@@presupuesto" method="post">
                 <input type="hidden" value="1" name="recalc" />

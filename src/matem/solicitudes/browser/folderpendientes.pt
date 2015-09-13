@@ -105,7 +105,7 @@
         #fieldsetlegend-metadata .{
             visibility: hidden;
         }
-        
+
         .overflowable {
             overflow:scroll;
         }
@@ -122,7 +122,7 @@
       #fieldsetlegend-metadata .{
             visibility: hidden;
         }
-        
+
         .overflowable {
             overflow:scroll;
         }
@@ -133,7 +133,7 @@
 
   <body>
     <metal:fill fill-slot="main">
-      <!-- 
+      <!--
         header_macro view_macros/header | header_macro | base_macros/header;
         footer_macro view_macros/footer | footer_macro | base_macros/footer;
        -->
@@ -141,7 +141,7 @@
        <span tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
                         view_template python:'%s_view' % portal_type;">
         <span tal:content="view_template"/><br/>
-        <span> path:</span> 
+        <span> path:</span>
         <span tal:content="base_macros/header"/><br/>
       </span> -->
 

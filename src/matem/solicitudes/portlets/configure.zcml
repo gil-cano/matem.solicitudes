@@ -21,12 +21,12 @@
         layer="..interfaces.ISolicitudSpecific"
         class=".navigation.MyRenderer"
         />
-    
+
     <browser:resource
         name="revisado.png"
         image="revisado.png"
         />
-    
+
     <browser:resource
         name="pendiente.png"
         image="pendiente.png"
@@ -51,7 +51,7 @@
         name="transicionCI.png"
         image="transicionCI.png"
         />
-    
+
     <browser:resource
         name="transicionIN.png"
         image="transicionIN.png"

@@ -244,35 +244,35 @@
 
     <table class="listing" border="1" width="100%" align="center" tal:define="datosAdicionales python:view.getPresupuestoOwner()">
         <tbody>
-	<tr><th colspan="5"><b>Datos del Solicitante</b></th></tr>
-	<tr><th colspan="2">Nombre</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][0]">Value</td></tr>
+  <tr><th colspan="5"><b>Datos del Solicitante</b></th></tr>
+  <tr><th colspan="2">Nombre</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][0]">Value</td></tr>
         <tr><th rowspan="2">Presupuesto:</th><th>Asignado</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][1]">Value</td></tr>
         <tr>                                 <th>Disponible</th><td style="color: #FFFFFF; background:#FF6600;" align="center" colspan="3" tal:content="python:datosAdicionales[0][2]">Value</td></tr>
         <tr><th rowspan="2">Dias Aprobados:</th><th>Comision</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][3]">Value</td></tr>
         <tr>                                 <th>Licencia</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][4]">Value</td></tr>
-	<tr><th colspan="5"><b>Información Sobre la Solicitud</b></th></tr>
+  <tr><th colspan="5"><b>Información Sobre la Solicitud</b></th></tr>
         <tr><th colspan="2">Fecha de Solicitud</th><td align="center" colspan="3"><span tal:content="python:context.creation_date.strftime('%d/%m/%Y')">Value</span></td></tr>
         <tr><th colspan="2" i18n:translate="label_invitado">Visitor</th><td align="center" colspan="3" tal:content="here/getInvitado">Value</td></tr>
 
         <tr><th colspan="2" i18n:translate="label_semblanza">Semblanza</th><td align="center" colspan="3" tal:content="here/getSemblanza">Value</td></tr>
-        <tr><th colspan="2" i18n:translate="label_visitante">Foto Visitante</th><td align="center" colspan="3">  
+        <tr><th colspan="2" i18n:translate="label_visitante">Foto Visitante</th><td align="center" colspan="3">
                 <img src="" alt="" tal:replace="structure python:context.getWrappedField('image').tag(context, scale='normal',  css_class='photo')" /></td></tr>
 
         <tr><th colspan="2" i18n:translate="label_pais_procedencia">Country</th>
                                              <td align="center" colspan="3" i18n:translate="" i18n:domain="plone" tal:content="here/getPais">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_procedencia">City</th><td align="center" colspan="3" tal:content="here/getProcedencia">Value</td></tr>
-        <tr><th colspan="2" i18n:translate="label_institucion_procedencia">Institution</th><td align="center" colspan="3" 
+        <tr><th colspan="2" i18n:translate="label_institucion_procedencia">Institution</th><td align="center" colspan="3"
                                                                                   tal:content="here/getInstitucion_procedencia">Value</td></tr>
         <tr><th colspan="5"></th></tr>
         <tr><th colspan="2" i18n:translate="label_fecha_desde">From date</th><td align="center" tal:content="python:here.getFechaDesde().strftime('%d/%m/%Y')">Value</td>
             <th i18n:translate="label_fecha_hasta">To date</th><td align="center" tal:content="python:here.getFechaHasta().strftime('%d/%m/%Y')">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_quantity_days">days</th><td align="center" colspan="3" tal:content="python:here.getCantidadDeDias()">Value</td></tr>
-	<tr><th colspan="5"><b>Datos Adicionales</b></th></tr>
+  <tr><th colspan="5"><b>Datos Adicionales</b></th></tr>
 
         <tr><th colspan="2" i18n:translate="label_objeto_viaje">Objective</th><td class="objective" align="center" colspan="3"
                                                                               tal:content="here/getObjetoViaje">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_investigacionarea">Area of Research</th><td align="center" colspan="3">
-                                                                              <div tal:repeat="areaInv python:view.getArea(here.getInvestigacionArea())"> 
+                                                                              <div tal:repeat="areaInv python:view.getArea(here.getInvestigacionArea())">
                                                                               <p tal:content="python:areaInv">Value</p>
                                                                               </div>
                                                                               </td></tr>
@@ -286,7 +286,7 @@
                                                                   <td colspan="3" align="center" tal:content="python:here.getViaticos().lower()">Value</td></tr>
         <tr><th colspan="5"></th></tr>
         <tr><th colspan="2" i18n:translate="label_pasaje">Transportation</th><td align="center" tal:content="python:here.getPasaje().lower()">Value</td>
-            <th i18n:translate="label_tipo_pasaje">Transportation means</th><td align="center" 
+            <th i18n:translate="label_tipo_pasaje">Transportation means</th><td align="center"
                                                                          tal:content="python:view.getTipoTransporte(here.getTipo_pasaje()).rstrip(',')">Value</td></tr>
         <tr><th colspan="5"><b>Cantidades</b></th></tr>
         <tr><th>Concepto</th><th>Cantidad Solicitada</th><th>Cantidad Recomendada por Comision Especial</th><th>Cantidad Autorizada por el Consejo Interno</th><th>Cantidad Utilizada</th></tr>
@@ -331,15 +331,15 @@
     <div class="fc">
       <span class="btn-group">
         <span tal:repeat="transicion python:here.getLegalTransitions()">
-          <a class="context btn btn-small" style="text-decoration:none" href="#" 
+          <a class="context btn btn-small" style="text-decoration:none" href="#"
               tal:attributes="href python:transicion['url']" tal:content="python:transicion['name']"/>
         </span>
         <span tal:condition="python:(responsableconsejo and (here.aprobada() or here.rechazada())) or (editor and view.esBorrador()) or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
-          <a class="context btn btn-small" style="text-decoration:none" href="#" 
+          <a class="context btn btn-small" style="text-decoration:none" href="#"
               tal:attributes="href python:here.absolute_url()+'/delete_confirmation'">Eliminar solicitud</a>
         </span>
         <span tal:condition="python:(consejero and (here.getWFState()=='revisionconsejo')) or (comisionado and (here.getWFState()=='revisioncomision')) or (editor and view.esBorrador()) or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
-          <a class="context btn btn-small" style="text-decoration:none" href="#" 
+          <a class="context btn btn-small" style="text-decoration:none" href="#"
               tal:attributes="href python:here.absolute_url()+'/edit'">Hacer cambios a solicitud</a>
         </span>
       </span>

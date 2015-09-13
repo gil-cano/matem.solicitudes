@@ -105,12 +105,12 @@
         #fieldsetlegend-metadata .{
             visibility: hidden;
         }
-        
+
         .overflowable {
             overflow:scroll;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/demos/dateinput/css/skin1.css"/> 
+    <link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/demos/dateinput/css/skin1.css"/>
   </metal:css>
 
   <body>
@@ -127,7 +127,7 @@
             errors python:request.get('errors', {})">
 
     <metal:header_macro define-macro="header">
-        <span tal:define="usuarioActual user/getId">
+      <span tal:define="usuarioActual user/getId">
             <dl class="portalMessage warning"
                 tal:condition="python:view.hasPendingReviews(usuarioActual)">
                 <dt i18n:translate="label_atencion">
@@ -188,25 +188,25 @@
 
    <form action="#" method="post" id="pendientesDeEnvio" tal:condition="items" tal:attributes="action string:${context/absolute_url}/view">
     <table class="listing" border="1" width="100%" tal:condition="items">
-	    <tbody>
+      <tbody>
         <tr>
-		<th/>
-                <input type="checkbox" name="allEnvio" id="allEnvio" onclick="checkAll('pendientesDeEnvio','allEnvio');" />
-                <th i18n:translate="label_type">Type</th>
-                <th i18n:translate="label_solicitor">Solicitante</th>
-                <th i18n:translate="label_reason">Reason</th>
-                <th i18n:translate="label_place">Place</th>
-                <th i18n:translate="label_creation_date">Solicitud Creada</th>
-                <th i18n:translate="label_start_date">Fecha de Inicio</th>
-                <th i18n:translate="label_end_date">End date</th>
-                <th i18n:translate="label_quantity_days">days</th>
-                <th i18n:translate="label_required_quantity">Cantidad requerida (pesos)</th>
-                <th i18n:translate="label_link">Link</th>
-	</tr>
+          <th/>
+            <input type="checkbox" name="allEnvio" id="allEnvio" onclick="checkAll('pendientesDeEnvio','allEnvio');" />
+            <th i18n:translate="label_type">Type</th>
+            <th i18n:translate="label_solicitor">Solicitante</th>
+            <th i18n:translate="label_reason">Reason</th>
+            <th i18n:translate="label_place">Place</th>
+            <th i18n:translate="label_creation_date">Solicitud Creada</th>
+            <th i18n:translate="label_start_date">Fecha de Inicio</th>
+            <th i18n:translate="label_end_date">End date</th>
+            <th i18n:translate="label_quantity_days">days</th>
+            <th i18n:translate="label_required_quantity">Cantidad requerida (pesos)</th>
+            <th i18n:translate="label_link">Link</th>
+          </tr>
 
         <tr tal:repeat="item python:items">
           <td><input type="checkbox" name="" tal:attributes="name python:str(item['id'])"></td>
-	  <td tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</td>
+          <td tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</td>
           <td tal:content="python:item['owner_name']">Solicitant</td>
           <td tal:content="python:item['objective']">Reason</td>
           <td i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</td>
@@ -219,16 +219,16 @@
           tal:content="python:item['total_quantity']">Quantity</td>
           <td><a href="#" tal:attributes="href python:item['url']"
           tal:content="python:string('revisar')" /></td>
-	</tr>
+        </tr>
 
-        </tbody>
+      </tbody>
     </table>
 
-	<input class="context"
-	      type="submit"
-	      name="borrador.Enviar"
-	      value="Enviar seleccionadas"/>
-	 </form>
+    <input class="context"
+      type="submit"
+      name="borrador.Enviar"
+      value="Enviar seleccionadas"/>
+    </form>
     </div>
     </span>
 
@@ -241,7 +241,7 @@
     <table class="listing" border="1" width="100%" tal:condition="items">
         <tbody>
         <tr>
-		<th/>
+          <th/>
                 <input type="checkbox" name="allPreeliminar" id="allPreeliminar" onclick="checkAll('pendientesDeRevisionPreeliminar','allPreeliminar');" />
                 <th i18n:translate="label_type">Type</th>
                 <th i18n:translate="label_solicitor">Solicitante</th>
@@ -273,15 +273,15 @@
         </tr>
         </tbody>
     </table>
-	<input class="context"
-	      type="submit"
-	      name="revision.preeliminar.Enviar"
-	      value="Enviar a revision por Comision Especial"/>
-	<input class="context"
-	      type="submit"
-	      name="revision.preeliminar.Regresar"
-	      value="Regresar a los becarios"/>
-	 </form>
+    <input class="context"
+      type="submit"
+      name="revision.preeliminar.Enviar"
+      value="Enviar a revision por Comision Especial"/>
+    <input class="context"
+      type="submit"
+      name="revision.preeliminar.Regresar"
+      value="Regresar a los becarios"/>
+    </form>
     </div>
 
     </span>
@@ -295,19 +295,18 @@
     <table class="listing" border="1" width="100%" tal:condition="items">
         <tbody>
         <tr>
-		<th/>
-                <input type="checkbox" name="allComision" id="allComision" onclick="checkAll('pendientesDeRevisionComision','allComision');" />
-                <th i18n:translate="label_type">Type</th>
-                <th i18n:translate="label_solicitor">Solicitante</th>
-                <th i18n:translate="label_reason">Reason</th>
-                <th i18n:translate="label_place">Place</th>
-                <th i18n:translate="label_creation_date">Solicitud Creada</th>
-                <th i18n:translate="label_start_date">Fecha de Inicio</th>
-                <th i18n:translate="label_end_date">End date</th>
-                <th i18n:translate="label_quantity_days">days</th>
-                <th i18n:translate="label_required_quantity">Cantidad requerida (pesos)</th>
-                <th i18n:translate="label_fecha_revision_comision">Fecha de revision por la Comision Especial</th>
-                <th i18n:translate="label_link">Link</th>
+          <th/><input type="checkbox" name="allComision" id="allComision" onclick="checkAll('pendientesDeRevisionComision','allComision');" />
+          <th i18n:translate="label_type">Type</th>
+          <th i18n:translate="label_solicitor">Solicitante</th>
+          <th i18n:translate="label_reason">Reason</th>
+          <th i18n:translate="label_place">Place</th>
+          <th i18n:translate="label_creation_date">Solicitud Creada</th>
+          <th i18n:translate="label_start_date">Fecha de Inicio</th>
+          <th i18n:translate="label_end_date">End date</th>
+          <th i18n:translate="label_quantity_days">days</th>
+          <th i18n:translate="label_required_quantity">Cantidad requerida (pesos)</th>
+          <th i18n:translate="label_fecha_revision_comision">Fecha de revision por la Comision Especial</th>
+          <th i18n:translate="label_link">Link</th>
         </tr>
         <tr tal:repeat="item python:items">
           <td><input type="checkbox" name="" tal:attributes="name python:str(item['id'])"></td>
@@ -348,12 +347,12 @@
     </div>
     </fieldset>
 
-	<input class="context"
-	      type="submit"
-	      name="revision.comision.Enviar"
-	      value="Enviar a revision por Consejo Interno"
-	      tal:condition="python:view.esResponsableDeLaComision(user.getId())"/>
-	 </form>
+    <input class="context"
+      type="submit"
+      name="revision.comision.Enviar"
+      value="Enviar a revision por Consejo Interno"
+      tal:condition="python:view.esResponsableDeLaComision(user.getId())"/>
+    </form>
     </div>
 
     </span>
@@ -367,7 +366,7 @@
     <table class="listing" border="1" width="100%" tal:condition="items">
         <tbody>
         <tr>
-		<th/>
+          <th/>
                 <input type="checkbox" name="allConsejo" id="allConsejo" onclick="checkAll('pendientesDeRevisionConsejo','allConsejo');" />
                 <th i18n:translate="label_type">Type</th>
                 <th i18n:translate="label_solicitor">Solicitante</th>
@@ -438,17 +437,17 @@
               type="submit"
               name="revision.consejo.PonerActaYFecha"
               value="Poner no. de acta y fecha a seleccionadas"
-	      tal:condition="python:view.esResponsableDelConsejo(user.getId())"/>
+              tal:condition="python:view.esResponsableDelConsejo(user.getId())"/>
        <input class="context"
               type="submit"
               name="revision.consejo.PonerActaYFechaYAprobar"
               value="Aprobar, poner no. de Acta y fecha"
-	      tal:condition="python:view.esResponsableDelConsejo(user.getId())"/>
+              tal:condition="python:view.esResponsableDelConsejo(user.getId())"/>
        <input class="context"
               type="submit"
               name="revision.consejo.PonerActaYFechaYRechazar"
               value="Rechazar, poner no. de Acta y fecha"
-	      tal:condition="python:view.esResponsableDelConsejo(user.getId())"/>
+              tal:condition="python:view.esResponsableDelConsejo(user.getId())"/>
        <input class="context"
               type="submit"
               name="revision.consejo.GenerarActa"
@@ -456,18 +455,18 @@
               tal:condition="python:view.esResponsableDelConsejo(user.getId())"/>
         <br>
         <br>
-	<input class="context"
-	      type="submit"
-	      name="revision.consejo.Aprobar"
-	      value="Aprobar"
-	      tal:condition="python:view.esResponsableDelConsejo(user.getId())"/>
-	<input class="context"
-	      type="submit"
-	      name="revision.consejo.Rechazar"
-	      value="Rechazar"
-	      tal:condition="python:view.esResponsableDelConsejo(user.getId())"/>
+        <input class="context"
+          type="submit"
+          name="revision.consejo.Aprobar"
+          value="Aprobar"
+          tal:condition="python:view.esResponsableDelConsejo(user.getId())"/>
+        <input class="context"
+              type="submit"
+              name="revision.consejo.Rechazar"
+              value="Rechazar"
+              tal:condition="python:view.esResponsableDelConsejo(user.getId())"/>
 
-	 </form>
+    </form>
     </div>
 
     </span>

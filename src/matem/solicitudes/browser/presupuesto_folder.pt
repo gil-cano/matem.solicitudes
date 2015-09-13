@@ -95,12 +95,12 @@
             text-align: center;
         }
 
-        #navcontainer ul li { 
-            display: inline; 
+        #navcontainer ul li {
+            display: inline;
         }
 
-        #navcontainer ul li form{ 
-            display: inline; 
+        #navcontainer ul li form{
+            display: inline;
             margin: 0;
             padding: 0;
         }
@@ -132,12 +132,12 @@
             text-align: center;
         }
 
-        #navcontainer ul li { 
-            display: inline; 
+        #navcontainer ul li {
+            display: inline;
         }
 
-        #navcontainer ul li form{ 
-            display: inline; 
+        #navcontainer ul li form{
+            display: inline;
             margin: 0;
             padding: 0;
         }
@@ -153,7 +153,7 @@
 
   <body>
     <metal:fill fill-slot="main">
-      <!-- 
+      <!--
         header_macro view_macros/header | header_macro | base_macros/header;
         footer_macro view_macros/footer | footer_macro | base_macros/footer;
        -->
@@ -162,10 +162,10 @@
             base_macros here/base/macros;
             view_template python:'%s_view' % portal_type;
             view_macros python:path('here/%s/macros|nothing' % view_template);
-            
+
             body_macro view_macros/body | body_macro | base_macros/body;
             folderlisting_macro view_macros/folderlisting | folderlisting | base_macros/folderlisting;
-            
+
             errors python:request.get('errors', {})">
 
     <metal:header_macro define-macro="header">
@@ -174,7 +174,7 @@
         <td><img src="" tal:attributes="src string:${context/absolute_url}/++resource++presupuestolocal.png" width="48" height="48"></td>
         <th><div i18n:translate="help_localbudget_app">Here you can see the detail of the local budgets for the current period.</div> Folder <span tal:replace="here/title_or_id">content title or id</span></th>
           </tr></table>
-            <!-- 
+            <!--
               Sí estaba
               <span tal:content="template/title">optional template title</span> -->
             <div tal:condition="python: view.hasReqData('recalc')">
@@ -256,14 +256,14 @@
       </form>
 
       <!-- Forma para asignar Presupuesto Individual -->
-      <div class="tabularView" tal:condition="python: view.hasReqData('individualList')" 
+      <div class="tabularView" tal:condition="python: view.hasReqData('individualList')"
                                tal:define="researchers python:view.getIndividualBudgets();
                                            page python:view.getPageAlphabetic('pagina');">
 
              <h3 i18n:translate="legend_budget">Max Budget per Researcher: </h3>
 
                 <table class="listing" border="1" tal:condition="researchers">
-                    <tbody>        
+                    <tbody>
                            <tr>
                                 <th>Persona</th>
                                 <th>Cantidad</th>
@@ -337,7 +337,7 @@
                 <th class="column" i18n:translate="label_local_approved_quantity">Approved Quantity</th>
                 <th class="column" i18n:translate="label_local_remaining_quantity">Remaining Quantity</th>
                 <th class="column">Apoyo Institucional asignado</th>
-                <th class="column">Apoyo institucional restante</th>                
+                <th class="column">Apoyo institucional restante</th>
                 <th class="column" i18n:translate="label_local_commission_days">Días de Comisión Aprobados</th>
                 <th class="column" i18n:translate="label_local_license_days">Días de Licencia Aprobados</th>
               </tr>
@@ -435,7 +435,7 @@
             </tr>
             <tr tal:repeat="item python:items">
               <td><a href="#" tal:attributes="href python:item['url']"
-                tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</a></td> 
+                tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</a></td>
               <td tal:content="python:item['owner_name']">Solicitant</td>
               <td tal:content="python:item['objective']">Reason</td>
               <td i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</td>

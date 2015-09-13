@@ -105,7 +105,7 @@
             visibility: hidden;
         }
     </style> -->
-    <link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/demos/dateinput/css/skin1.css"/> 
+    <link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/demos/dateinput/css/skin1.css"/>
   </metal:css>
   <metal:css fill-slot="style_slot">
     <style type="text/css">
@@ -121,7 +121,7 @@
 
   <body>
     <metal:fill fill-slot="main">
-      <!-- 
+      <!--
         header_macro view_macros/header | header_macro | base_macros/header;
         footer_macro view_macros/footer | footer_macro | base_macros/footer;
        -->

@@ -39,7 +39,7 @@ class AuxiliaresView(BrowserView):
             usuarioDestino=self.context.portal_membership.getMemberById(realowner)
         else:
             usuarioDestino=usuarioAutenticado
-    
+
         if "Solicitante Auxiliar" in list(usuarioAutenticado.getRoles()):
             if tipo=="becario":
                 if "Becario" in list(usuarioDestino.getRoles()):

@@ -32,10 +32,10 @@ class ImportView(BrowserView):
             import_but = form.get('form.button.Import', None) is not None
             importador=False
             usuarioAutenticado=self.context.portal_membership.getAuthenticatedMember()
-    
+
             if "Importador de Solicitudes" in list(usuarioAutenticado.getRoles()):
                 importador=True
-    
+
             if not import_but or not container.aceptando():
                    if importador:
                        return self.template_global()
@@ -91,9 +91,9 @@ class ImportView(BrowserView):
                         rolesInicial.append('Programador de Presupuestp')
                     if 'Manager' in list(usuarioAutenticado.getRoles()):
                         rolesInicial.append('Manager')
-    
+
                     container.manage_delLocalRoles(username)
-                    container.manage_setLocalRoles(username, ['Importador de Solicitudes','Authenticated user','Investigador','Postdoc','Tecnico Academico','Becario','Comisionado','Consejero','Responsable del Consejo','Responsable de la Comision']) 
+                    container.manage_setLocalRoles(username, ['Importador de Solicitudes','Authenticated user','Investigador','Postdoc','Tecnico Academico','Becario','Comisionado','Consejero','Responsable del Consejo','Responsable de la Comision'])
 
                 noInsertadas=""
                 errorInsercion=""
@@ -169,7 +169,7 @@ class ImportView(BrowserView):
 
                         if not line.find(";")==-1:
                             tempList=line.split(";")
-                             
+
                             if tempList[0].find("Visitante")!= -1:
                                 if len(tempList)==15:
                                     if importador:
@@ -230,10 +230,10 @@ class ImportView(BrowserView):
                                             actaci=temporal[1]
                                             comentariosConsejo=temporal[2]
                                             Estado=temporal[len(temporal)-1]
-                                        else: 
+                                        else:
                                             Estado="aprobada"
 
-                                try: 
+                                try:
                                     total=float(CantidadTransporte)+float(CantidadViaticos)
                                     id="solicitud-visitante-de-"+fullname.replace(" ","-")+"-para-"+str(Visitante)+"-por-"+str(total)+"-con-origen-"+Ciudad+"-"+Institucion+"-el-"+str(now.year)+"-"+str(now.month)+"-"+str(now.day)+"-desde-"+str(listaDesde[0])+"-"+str(listaDesde[1])+"-"+str(listaDesde[2])+"-hasta-"+str(listaHasta[0])+"-"+str(listaHasta[1])+"-"+str(listaHasta[2])
                                     id=id.replace(" ","").replace("á","a").replace("é","e").replace("í","i").replace("ó","o").replace("ú","u").replace("ñ","n").lower()
@@ -246,14 +246,14 @@ class ImportView(BrowserView):
                                     continue
 
                                 if id not in container.objectIds() and addable:
-                                  try: 
+                                  try:
                                     container.invokeFactory(type_name="SolicitudVisitante", id=id, invitado=Visitante, pais_procedencia=Pais, procedencia=Ciudad, institucion_procedencia=Institucion, objeto_viaje=Objetivo, investigacionarea=Area, trabajo=Trabajo, titulo_trabajo=Titulo, pasaje=Transporte, tipo_pasaje=Medio, cantidad_pasaje=float(CantidadTransporte), viaticos=Viaticos, cantidad_viaticos=float(CantidadViaticos), fecha_solicitud=now,comentario_owner=Comentarios)
                                   except:
                                       numeracionError+=1
                                       noInsertadas+=str(numeracionError)+".  "+line
                                       errorInsercion+=str(numeracionError)+".  "+str(sys.exc_info()[0])+"\n\n"
                                       continue
-                                      
+
 
                                 if addable:
                                   try:
@@ -283,7 +283,7 @@ class ImportView(BrowserView):
                                         if not tempList[1].find(",") == -1:
                                             Duenio=self.context.portal_membership.getMemberById(tempList[1].split(",")[0].replace(" ",""))
                                             Asesor=self.context.portal_membership.getMemberById(tempList[1].split(",")[1].replace(" ",""))
-                                        else: 
+                                        else:
                                             addable=False
                                         if Duenio is None:
                                             Duenio=self.findDuenio(tempList[1].split(",")[0])
@@ -360,7 +360,7 @@ class ImportView(BrowserView):
                                             actaci=temporal[1]
                                             comentariosConsejo=temporal[2]
                                             Estado=temporal[len(temporal)-1]
-                                        else: 
+                                        else:
                                             Estado="aprobada"
 
                                 if not importador:
@@ -387,10 +387,10 @@ class ImportView(BrowserView):
                                             noInsertadas+=str(numeracionError)+".  "+line
                                             errorInsercion+=str(numeracionError)+".  "+str(sys.exc_info()[0])+"\n\n"
                                             continue
-                                        
+
                                         if id not in container.objectIds() and addable:
                                           print "3"
-                                          try: 
+                                          try:
                                             container.invokeFactory(type_name="SolicitudBecario", id=id, grado=Grado, asesor=Asesor, pais=Pais, ciudad_pais=Ciudad, institucion=Institucion, objeto_viaje=Objetivo, investigacionarea=Area, trabajo=Trabajo, titulo_trabajo=Titulo, pasaje=Transporte, tipo_pasaje=Medio, cantidad_pasaje=float(CantidadTransporte), viaticos=Viaticos, cantidad_viaticos=float(CantidadViaticos), inscripcion=Inscripcion, cantidad_inscripcion=float(CantidadInscripcion),fecha_solicitud=now,comentario_owner=Comentarios)
                                           except:
                                               numeracionError+=1
@@ -474,7 +474,7 @@ class ImportView(BrowserView):
                                         Inscripcion="Si"
                                     CantidadViaticos=tempList[12]
                                     if int(CantidadViaticos)>0:
-                                        Viaticos="Si"                                    
+                                        Viaticos="Si"
                                     CantidadTransporte=tempList[13]
                                     Comentarios=tempList[14]
                                     if tempList[15].find("&") == -1:
@@ -487,7 +487,7 @@ class ImportView(BrowserView):
                                             actaci=temporal[1]
                                             comentariosConsejo=temporal[2]
                                             Estado=temporal[len(temporal)-1]
-                                        else: 
+                                        else:
                                             Estado="aprobada"
 
                                 try:
@@ -503,7 +503,7 @@ class ImportView(BrowserView):
                                     continue
 
                                 if id not in container.objectIds() and addable:
-                                  try: 
+                                  try:
                                     container.invokeFactory(type_name="Solicitud", id=id, pais=Pais, ciudad_pais=Ciudad, institucion=Institucion, objeto_viaje=Objetivo, investigacionarea=Area, trabajo=Trabajo, titulo_trabajo=Titulo, pasaje=Transporte, tipo_pasaje=Medio, cantidad_pasaje=float(CantidadTransporte), viaticos=Viaticos, cantidad_viaticos=float(CantidadViaticos), inscripcion=Inscripcion, cantidad_inscripcion=float(CantidadInscripcion),fecha_solicitud=now,comentario_owner=Comentarios)
                                   except:
                                       numeracionError+=1
@@ -536,7 +536,7 @@ class ImportView(BrowserView):
                     if importador:
                         username=str(self.context.portal_membership.getAuthenticatedMember().getId())
                         container.manage_delLocalRoles(username)
-#                        container.manage_setLocalRoles(username, ['Importador de Solicitudes']) 
+#                        container.manage_setLocalRoles(username, ['Importador de Solicitudes'])
                         container.manage_setLocalRoles(username, rolesInicial)
 
                         if numeracionError>0:
@@ -579,7 +579,7 @@ class ImportView(BrowserView):
                                  if not tempList[1].find(",") == -1:
                                      Duenio=self.context.portal_membership.getMemberById(tempList[1].split(",")[0].replace(" ","").replace("\n",""))
                                      Asesor=self.context.portal_membership.getMemberById(tempList[1].split(",")[1].replace(" ","").replace("\n",""))
-                                 else: 
+                                 else:
                                      Duenio=self.context.portal_membership.getMemberById(tempList[1].replace(" ","").replace("\n",""))
                                  if Duenio is None:
                                      addable=False
@@ -662,7 +662,7 @@ class ImportView(BrowserView):
                         fechadesde=DateTime(int(listaDesde[0]), int(listaDesde[1]), int(listaDesde[2]))
                         fechahasta=DateTime(int(listaHasta[0]), int(listaHasta[1]), int(listaHasta[2]))
 
-                        if id not in container.objectIds() and addable: 
+                        if id not in container.objectIds() and addable:
                             container.invokeFactory(type_name="Solicitud", id=id, pais=Pais, ciudad_pais=Ciudad, institucion=Institucion, objeto_viaje=Objetivo, investigacionarea=Area, trabajo=Trabajo, titulo_trabajo=Titulo, pasaje=Transporte, tipo_pasaje=Medio, cantidad_pasaje=float(CantidadTransporte), viaticos=Viaticos, cantidad_viaticos=float(CantidadViaticos), inscripcion=Inscripcion, cantidad_inscripcion=float(CantidadInscripcion),fecha_solicitud=now,comentario_owner=Comentarios)
                         obj=container[id]
                         obj.setFecha_desde(fechadesde)
@@ -688,7 +688,7 @@ class ImportView(BrowserView):
                         fechadesde=DateTime(int(listaDesde[0]), int(listaDesde[1]), int(listaDesde[2]))
                         fechahasta=DateTime(int(listaHasta[0]), int(listaHasta[1]), int(listaHasta[2]))
 
-                        if id not in container.objectIds() and addable: 
+                        if id not in container.objectIds() and addable:
                             container.invokeFactory(type_name="SolicitudBecario", id=id, grado=Grado, asesor=Asesor, pais=Pais, ciudad_pais=Ciudad, institucion=Institucion, objeto_viaje=Objetivo, investigacionarea=Area, trabajo=Trabajo, titulo_trabajo=Titulo, pasaje=Transporte, tipo_pasaje=Medio, cantidad_pasaje=float(CantidadTransporte), viaticos=Viaticos, cantidad_viaticos=float(CantidadViaticos), inscripcion=Inscripcion, cantidad_inscripcion=float(CantidadInscripcion),fecha_solicitud=now,comentario_owner=Comentarios)
                         obj=container[id]
                         obj.setFecha_desde(fechadesde)
@@ -705,7 +705,7 @@ class ImportView(BrowserView):
                         fechadesde=DateTime(int(listaDesde[0]), int(listaDesde[1]), int(listaDesde[2]))
                         fechahasta=DateTime(int(listaHasta[0]), int(listaHasta[1]), int(listaHasta[2]))
 
-                        if id not in container.objectIds() and addable: 
+                        if id not in container.objectIds() and addable:
                             container.invokeFactory(type_name="SolicitudVisitante", id=id, invitado=Visitante, pais_procedencia=Pais, procedencia=Ciudad, institucion_procedencia=Institucion, objeto_viaje=Objetivo, investigacionarea=Area, trabajo=Trabajo, titulo_trabajo=Titulo, pasaje=Transporte, tipo_pasaje=Medio, cantidad_pasaje=float(CantidadTransporte), viaticos=Viaticos, cantidad_viaticos=float(CantidadViaticos), fecha_solicitud=now,comentario_owner=Comentarios)
                         obj=container[id]
                         obj.setFecha_desde(fechadesde)
@@ -717,7 +717,7 @@ class ImportView(BrowserView):
                     if importador:
                         username=str(self.context.portal_membership.getAuthenticatedMember().getId())
                         container.manage_delLocalRoles(username)
-#                        container.manage_setLocalRoles(username, ['Importador de Solicitudes']) 
+#                        container.manage_setLocalRoles(username, ['Importador de Solicitudes'])
                         container.manage_setLocalRoles(username, rolesInicial)
                         return self.template_global()
 
@@ -726,7 +726,7 @@ class ImportView(BrowserView):
                     if importador:
                         username=str(self.context.portal_membership.getAuthenticatedMember().getId())
                         container.manage_delLocalRoles(username)
-#                        container.manage_setLocalRoles(username, ['Importador de Solicitudes']) 
+#                        container.manage_setLocalRoles(username, ['Importador de Solicitudes'])
                         container.manage_setLocalRoles(username, rolesInicial)
                         return self.template_global()
 
@@ -735,7 +735,7 @@ class ImportView(BrowserView):
 #                if importador:
 #                    username=str(self.context.portal_membership.getAuthenticatedMember().getId())
 #                    container.manage_delLocalRoles(username)
-#                    container.manage_setLocalRoles(username, ['Importador de Solicitudes']) 
+#                    container.manage_setLocalRoles(username, ['Importador de Solicitudes'])
 #                    container.manage_setLocalRoles(username, rolesInicial)
 
 #                print debugline+"\n"
@@ -823,7 +823,7 @@ class ImportView(BrowserView):
             return False
 
     def hasReqData(self):
-    
+
         try:
             req = self.request
             tipo=req.get('tiposolicitud', '')

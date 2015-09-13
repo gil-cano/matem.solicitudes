@@ -289,7 +289,6 @@ class SearchView(BrowserView):
                 users.append([solicitantes[solicitante][0]+", "+solicitantes[solicitante][1]+" "+solicitantes[solicitante][2],
                           solicitante])
         users.sort()
-        
         return users
 
     def getCreatorsTecnicoAcademico(self):
@@ -302,7 +301,6 @@ class SearchView(BrowserView):
                 users.append([solicitantes[solicitante][0]+", "+solicitantes[solicitante][1]+" "+solicitantes[solicitante][2],
                           solicitante])
         users.sort()
-        
         return users
 
     def getCreatorsAll(self):

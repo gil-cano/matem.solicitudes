@@ -133,7 +133,7 @@ schema = BaseSchema + Schema((
           ),
           vocabulary="getCountriesVocabulary",
           write_permission="Solicitud: Modificar Solicitud",
-        ),    
+        ),
 
 
 #         LinesField('pais',
