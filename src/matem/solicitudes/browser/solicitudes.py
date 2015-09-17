@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 from Products.Five.browser import BrowserView
 from matem.solicitudes.browser.queries import Queries
-from matem.solicitudes.interfaces import ISolicitud
+from matem.solicitudes.config import DICCIONARIO_AREAS
+from matem.solicitudes.config import DICCIONARIO_TIPO_TRANSPORTE
+from matem.solicitudes.config import DICCIONARIO_TIPO_TRANSPORTE_EN
 from matem.solicitudes.extender import PersonWrapper
-from matem.solicitudes.config import DICCIONARIO_AREAS,DICCIONARIO_TIPO_TRANSPORTE_EN,DICCIONARIO_TIPO_TRANSPORTE
+from matem.solicitudes.interfaces import ISolicitud
+
 
 class SolicitudView(BrowserView):
     """A view of an application"""
@@ -86,10 +89,10 @@ class SolicitudView(BrowserView):
         queryObj = Queries(self.context,self.request)
         member=queryObj.getPersonWrapper(usuarioActual)
         user=[]
- 
+
         cantidadAsignada=folder.getPresupuesto_asignado_solicitantes()[0].get(usuarioActual,0.0)
         cantidadInicial=folder.getSolicitantes()[0].get(usuarioActual,[0,0,0,0,0.0])[4]
-        cantidadInicialApoyos=folder.getSolicitantes()[0].get(usuarioActual,[0,0,0,0,0.0])[5]        
+        cantidadInicialApoyos=folder.getSolicitantes()[0].get(usuarioActual,[0,0,0,0,0.0])[5]
         user.append([member.getLastName()+', '+member.getFirstName() + " " + member.getMiddleName(),
                      cantidadAsignada,
                      cantidadInicial-cantidadAsignada,
@@ -156,10 +159,10 @@ class ExportView(BrowserView):
         lline1="                         \n\n"
         seccion1=uline1+":: Datos del Solicitante ::\n"+lline1
 
-	nombre="      Id de Solicitante: "
+        nombre="      Id de Solicitante: "
         nombreValor=obj.getIdOwner()+"\n"
 
-	estado="    Estado de Solicitud: "
+        estado="    Estado de Solicitud: "
         estadoValor=obj.getWFState()+"\n"
 
         presupuestoA="   Presupuesto Asignado: "
@@ -194,7 +197,7 @@ class ExportView(BrowserView):
 
             uline2="\n                       \n"
             lline2="                       \n\n"
-    	    seccion2=uline2+":: Datos del Visitante ::\n"+lline2
+            seccion2=uline2+":: Datos del Visitante ::\n"+lline2
 
             invitado="      Nombre: "
             invitadoValor= obj.getInvitado()+"\n"
@@ -204,7 +207,7 @@ class ExportView(BrowserView):
         pais="        Pais: "
         paisValor= obj.getPaisCodigo()[0]+"\n"
 
-        ciudad="      Ciudad: " 
+        ciudad="      Ciudad: "
         ciudadValor=obj.getCiudadPais()+"\n"
 
         institucion=" Institucion: "
@@ -415,7 +418,7 @@ class ExportView(BrowserView):
 
     def esConsejero(self):
         try:
-            member=self.context.portal_membership.getAuthenticatedMember() 
+            member=self.context.portal_membership.getAuthenticatedMember()
             if 'Consejero' in list(member.getRoles()):
                 return True
             elif 'Responsable del Consejo' in list(member.getRoles()):

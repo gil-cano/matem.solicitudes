@@ -35,6 +35,7 @@ from archetypes.multifile.MultiFileWidget import MultiFileWidget
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 
+from matem.solicitudes import solicitudesMessageFactory as _
 from matem.solicitudes.interfaces import ISolicitudInstitucional
 from matem.solicitudes.config import AREAS_INVESTIGACION
 from matem.solicitudes.config import PROJECTNAME
@@ -42,7 +43,7 @@ from matem.solicitudes.config import SEDE
 from matem.solicitudes.config import getCountriesVocabulary
 from matem.solicitudes.extender import PersonWrapper
 
-SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
+SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
 
     ComputedField(name='title',
         required=1,
@@ -584,10 +585,9 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Recommended amount for transportation (Institutional)',
-            label_msgid='label_cantidad_recomendada_pasaje_institucional',
+            label=_(u'label_cantidad_recomendada_pasaje_institucional',
+                default=u'Recommended amount for transportation (Institutional)'),
             i18n_domain='matem.solicitudes',
-            tarifas=False,
             size=12),
         read_permission="Solicitud: Comision Revisa Solicitud",
         write_permission="Solicitud: Comision Revisa Solicitud",
@@ -598,8 +598,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Recommended amount for transportation expenses',
-            label_msgid='label_cantidad_recomendada_pasaje',
+            label=_(u'label_cantidad_recomendada_pasaje', default=u'Recommended amount for transportation expenses'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -612,8 +611,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Recommended amount for travel allowences (Institutional)',
-            label_msgid='label_cantidad_recomendada_viaticos_institucional',
+            label=_(u'label_cantidad_recomendada_viaticos_institucional', default=u'Recommended amount for travel allowences (Institutional)'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -626,8 +624,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Recommended amount for travel allowences',
-            label_msgid='label_cantidad_recomendada_viaticos',
+            label=_(u'label_cantidad_recomendada_viaticos', default=u'Recommended amount for travel allowences'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -640,8 +637,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Recommended amount for registration (Institutional)',
-            label_msgid='label_cantidad_recomendada_inscripcion_institucional',
+            label=_(u'label_cantidad_recomendada_inscripcion_institucional', default=u'Recommended amount for registration (Institutional)'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -654,8 +650,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Recommended amount for registration',
-            label_msgid='label_cantidad_recomendada_inscripcion',
+            label=_(u'label_cantidad_recomendada_inscripcion', default=u'Recommended amount for registration'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -716,7 +711,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         default='',
         widget=StringWidget(
             label='Numero de acta de CI',
-            label_msgid='label_actaci',
+            label_msgid='acta_number',
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -729,8 +724,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for transportation expenses (Institutional)',
-            label_msgid='label_cantidad_consejo_pasaje_institucional',
+            label=_(u'label_cantidad_consejo_pasaje_institucional', default='Approved amount for transportation expenses (Institutional)'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -743,8 +737,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for transportation expenses',
-            label_msgid='label_cantidad_consejo_pasaje',
+            label=_(u'label_cantidad_consejo_pasaje', default=u'Approved amount for transportation expenses'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -757,8 +750,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for travel allowences (Institutional)',
-            label_msgid='label_cantidad_consejo_viaticos_institucional',
+            label=_(u'label_cantidad_consejo_viaticos_institucional', default=u'Approved amount for travel allowences (Institutional)'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -771,8 +763,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for travel allowences',
-            label_msgid='label_cantidad_consejo_viaticos',
+            label=_(u'label_cantidad_consejo_viaticos', default=u'Approved amount for travel allowences'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -785,8 +776,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for registration (Institutional)',
-            label_msgid='label_cantidad_consejo_inscripcion_institucional',
+            label=_(u'label_cantidad_consejo_inscripcion_institucional', default=u'Approved amount for registration (Institutional)'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -799,8 +789,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for registration',
-            label_msgid='label_cantidad_consejo_inscripcion',
+            label=_(u'label_cantidad_consejo_inscripcion', default=u'Approved amount for registration'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -813,8 +802,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for transportation expenses',
-            label_msgid='label_cantidad_autorizada_pasaje_institucional',
+            label=_(u'label_cantidad_autorizada_pasaje_institucional', default=u'Approved amount for transportation expenses'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -827,8 +815,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for transportation expenses',
-            label_msgid='label_cantidad_autorizada_pasaje',
+            label=_(u'label_cantidad_autorizada_pasaje', default=u'Approved amount for transportation expenses'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -841,8 +828,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for travel allowences',
-            label_msgid='label_cantidad_autorizada_viaticos_institucional',
+            label=_(u'label_cantidad_autorizada_viaticos_institucional', default=u'Approved amount for travel allowences'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -855,8 +841,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for travel allowences',
-            label_msgid='label_cantidad_autorizada_viaticos',
+            label=_(u'label_cantidad_autorizada_viaticos', default=u'Approved amount for travel allowences'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -869,8 +854,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for registration',
-            label_msgid='label_cantidad_autorizada_inscripcion_institucional',
+            label=_(u'label_cantidad_autorizada_inscripcion_institucional', default='Approved amount for registration'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -884,8 +868,7 @@ SolicitudInstitucionalSchema  = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for registration',
-            label_msgid='label_cantidad_autorizada_inscripcion',
+            label=_(u'label_cantidad_autorizada_inscripcion', default='Approved amount for registration'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),

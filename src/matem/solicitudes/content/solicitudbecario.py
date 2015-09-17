@@ -8,11 +8,7 @@ from matem.solicitudes.interfaces import ISolicitudBecario
 from matem.solicitudes.extender import PersonWrapper
 from Products.Archetypes.atapi import *
 
-try:
-  from Products.LinguaPlone.public import *
-except ImportError:
-  # No multilingual support
-  from Products.Archetypes.public import *
+from Products.Archetypes.public import *
 
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
@@ -26,6 +22,8 @@ from archetypes.multifile.MultiFileWidget import MultiFileWidget
 
 from DateTime.DateTime import *
 from matem.solicitudes.config import getCountriesVocabulary
+from matem.solicitudes import solicitudesMessageFactory as _
+
 
 SolicitudBecarioSchema = BaseSchema + Schema((
     ComputedField(name='title',
@@ -295,11 +293,9 @@ SolicitudBecarioSchema = BaseSchema + Schema((
         vocabulary=DisplayList(
             (('No', 'No'), ('Si', 'Si'))),
         widget=MasterSelectWidget(
-            label='Extra support',
-            label_msgid='label_apoyo_extra',
+            label=_(u'label_apoyo_extra', default='Extra support'),
+            description=_(u'help_apoyo_extra', default='Specify if you requested support to the post-degree or another instance'),
             i18n_domain='matem.solicitudes',
-            description='Specify if you requested support to the post-degree or another instance',
-            description_msgid='help_apoyo_extra',
             slave_fields=({
                 'name': 'apoyo_texto',
                 'action': 'hide',
@@ -314,9 +310,8 @@ SolicitudBecarioSchema = BaseSchema + Schema((
         required=1,
         default='',
         widget=TextAreaWidget(
-            label='Detail the obtained support',
-            label_msgid='label_apoyo_texto',
-            i18n_domain='matem.solicitudes',),
+            label=_(u'label_apoyo_texto', default=u'Detail the obtained support'),
+            i18n_domain='matem.solicitudes'),
         write_permission="Solicitud: Modificar Solicitud",
     ),
 
@@ -453,10 +448,8 @@ SolicitudBecarioSchema = BaseSchema + Schema((
         name='schoolPractices',
         default=False,
         widget=BooleanWidget(
-            label="School practices",
-            label_msgid='label_school_practices',
-            description="Only Students and Posdoc from Cuernavaca",
-            description_msgid='help_school_practices',
+            label=_(u'label_school_practices', default=u"School practices"),
+            description=_(u'help_school_practices', default=u"Only Students and Posdoc from Cuernavaca"),
             i18n_domain='matem.solicitudes',),
         write_permission="Solicitud: Modificar Solicitud",
     ),
@@ -608,11 +601,11 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             searchable=1,
             required=1,
             default='0.0',
-            widget=StringWidget(label='Recommended amount for transportation expenses',
-                                label_msgid='label_cantidad_recomendada_pasaje',
-                                i18n_domain='matem.solicitudes',
-                                tarifas=False,
-                                size=12),
+            widget=StringWidget(
+                label=_(u'label_cantidad_recomendada_pasaje', default=u'Recommended amount for transportation expenses'),
+                i18n_domain='matem.solicitudes',
+                tarifas=False,
+                size=12),
             read_permission="Solicitud: Comision Revisa Solicitud",
             write_permission="Solicitud: Comision Revisa Solicitud",
         ),
@@ -621,11 +614,11 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             searchable=1,
             required=1,
             default='0.0',
-            widget=StringWidget(label='Recommended amount for travel allowences',
-                                label_msgid='label_cantidad_recomendada_viaticos',
-                                i18n_domain='matem.solicitudes',
-                                tarifas=False,
-                                size=12),
+            widget=StringWidget(
+                label=_(u'label_cantidad_recomendada_viaticos', default=u'Recommended amount for travel allowences'),
+                i18n_domain='matem.solicitudes',
+                tarifas=False,
+                size=12),
             read_permission="Solicitud: Comision Revisa Solicitud",
             write_permission="Solicitud: Comision Revisa Solicitud",
         ),
@@ -634,11 +627,11 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             searchable=1,
             required=1,
             default='0.0',
-            widget=StringWidget(label='Recommended amount for registration',
-                                label_msgid='label_cantidad_recomendada_inscripcion',
-                                i18n_domain='matem.solicitudes',
-                                tarifas=False,
-                                size=12),
+            widget=StringWidget(
+                label=_(u'label_cantidad_recomendada_inscripcion', default=u'Recommended amount for registration'),
+                i18n_domain='matem.solicitudes',
+                tarifas=False,
+                size=12),
             read_permission="Solicitud: Comision Revisa Solicitud",
             write_permission="Solicitud: Comision Revisa Solicitud",
         ),
@@ -692,7 +685,7 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             default='',
             widget=StringWidget(
                                 label='Número de acta de CI',
-                                label_msgid='label_actaci',
+                                label_msgid='acta_number',
                                 i18n_domain='matem.solicitudes',
                                 tarifas=False,
                                 size=12),
@@ -703,11 +696,11 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             searchable=1,
             required=1,
             default='0.0',
-            widget=StringWidget(label='Approved amount for transportation expenses',
-                                label_msgid='label_cantidad_consejo_pasaje',
-                                i18n_domain='matem.solicitudes',
-                                tarifas=False,
-                                size=12),
+            widget=StringWidget(
+                label=_(u'label_cantidad_consejo_pasaje', default=u'Approved amount for transportation expenses'),
+                i18n_domain='matem.solicitudes',
+                tarifas=False,
+                size=12),
             read_permission="Solicitud: Consejo Revisa Solicitud",
             write_permission="Solicitud: Consejo Revisa Solicitud",
         ),
@@ -715,11 +708,11 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             searchable=1,
             required=1,
             default='0.0',
-            widget=StringWidget(label='Approved amount for travel allowences',
-                                label_msgid='label_cantidad_consejo_viaticos',
-                                i18n_domain='matem.solicitudes',
-                                tarifas=False,
-                                size=12),
+            widget=StringWidget(
+                label=_(u'label_cantidad_consejo_viaticos', default=u'Approved amount for travel allowences'),
+                i18n_domain='matem.solicitudes',
+                tarifas=False,
+                size=12),
             read_permission="Solicitud: Consejo Revisa Solicitud",
             write_permission="Solicitud: Consejo Revisa Solicitud",
         ),
@@ -727,11 +720,11 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             searchable=1,
             required=1,
             default='0.0',
-            widget=StringWidget(label='Approved amount for registration',
-                                label_msgid='label_cantidad_consejo_inscripcion',
-                                i18n_domain='matem.solicitudes',
-                                tarifas=False,
-                                size=12),
+            widget=StringWidget(
+                label=_(u'label_cantidad_consejo_inscripcion', default=u'Approved amount for registration'),
+                i18n_domain='matem.solicitudes',
+                tarifas=False,
+                size=12),
             read_permission="Solicitud: Consejo Revisa Solicitud",
             write_permission="Solicitud: Consejo Revisa Solicitud",
         ),
@@ -739,11 +732,11 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             searchable=1,
             required=1,
             default='0.0',
-            widget=StringWidget(label='Approved amount for transportation expenses',
-                                label_msgid='label_cantidad_autorizada_pasaje',
-                                i18n_domain='matem.solicitudes',
-                                tarifas=False,
-                                size=12),
+            widget=StringWidget(
+                label=_(u'label_cantidad_autorizada_pasaje', default=u'Approved amount for transportation expenses'),
+                i18n_domain='matem.solicitudes',
+                tarifas=False,
+                size=12),
             read_permission="Solicitud: Consejo Cambia Solicitud",
             write_permission="Solicitud: Consejo Cambia Solicitud",
         ),
@@ -751,11 +744,11 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             searchable=1,
             required=1,
             default='0.0',
-            widget=StringWidget(label='Approved amount for travel allowences',
-                                label_msgid='label_cantidad_autorizada_viaticos',
-                                i18n_domain='matem.solicitudes',
-                                tarifas=False,
-                                size=12),
+            widget=StringWidget(
+                label=_(u'label_cantidad_autorizada_viaticos', default='Approved amount for travel allowences'),
+                i18n_domain='matem.solicitudes',
+                tarifas=False,
+                size=12),
             read_permission="Solicitud: Consejo Cambia Solicitud",
             write_permission="Solicitud: Consejo Cambia Solicitud",
         ),
@@ -763,11 +756,11 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             searchable=1,
             required=1,
             default='0.0',
-            widget=StringWidget(label='Approved amount for registration',
-                                label_msgid='label_cantidad_autorizada_inscripcion',
-                                i18n_domain='matem.solicitudes',
-                                tarifas=False,
-                                size=12),
+            widget=StringWidget(
+                label=_(u'label_cantidad_autorizada_inscripcion', default=u'Approved amount for registration'),
+                i18n_domain='matem.solicitudes',
+                tarifas=False,
+                size=12),
             read_permission="Solicitud: Consejo Cambia Solicitud",
             write_permission="Solicitud: Consejo Cambia Solicitud",
         ),

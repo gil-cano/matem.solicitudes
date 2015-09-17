@@ -2,6 +2,7 @@
 
 from Products.ATCountryWidget.config import COUNTRIES
 from Products.Archetypes.atapi import DisplayList
+from matem.solicitudes import solicitudesMessageFactory as _
 from plone.i18n.normalizer import idnormalizer as idn
 from zope.component.hooks import getSite
 
@@ -216,9 +217,9 @@ DICCIONARIO_AREAS = {
 }
 
 DICCIONARIO_TIPO_TRANSPORTE_EN = {
-    "auto": "Car",
-    "autobus": "Bus",
-    "avion": "Airplane",
+    "auto": _(u'Car'),
+    "autobus": _(u'Bus'),
+    "avion": _(u'Airplane'),
 }
 
 DICCIONARIO_TIPO_TRANSPORTE = {
@@ -228,9 +229,9 @@ DICCIONARIO_TIPO_TRANSPORTE = {
 }
 
 NIVEL = DisplayList((
-    ('Doctorado', 'PHD'),
-    ('Maestria', 'Masters'),
-    ('Licenciatura', 'Undergraduate'),
+    ('Doctorado', _(u'PHD')),
+    ('Maestria', _(u'Mastery')),
+    ('Licenciatura', _(u'Undergraduate')),
 ))
 
 SEDE = DisplayList((

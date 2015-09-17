@@ -161,9 +161,9 @@
     <br><br>
     <h3 i18n:translate="label_approved_quantities_sol">Total Approved Quantities</h3>
 
-	<div class="tabularView">
+  <div class="tabularView">
                 <table class="listing" border="1" width="100%">
-                    <tbody>        
+                    <tbody>
                             <tr>
                                 <th class="column" i18n:translate="label_solicitor">
                                    Solicitante
@@ -204,7 +204,7 @@
                           </tr>
                     </tbody>
                  </table>
-	</div>
+  </div>
 
     <h3 tal:condition="not:items" i18n:translate="label_no_approved">None of your applications has been approved yet.</h3>
     <h4 tal:condition="not:items" i18n:translate="label_no_show">There are no applications to show.</h4>
@@ -217,25 +217,25 @@
     <div class="tabularView">
     <table class="listing" border="1" width="100%" tal:condition="items">
         <tbody>
- 	<tr>
-		<th i18n:translate="label_type">Type</th>
-		<th i18n:translate="label_solicitor">Solicitante</th>
-		<th i18n:translate="label_reason">Reason</th>
-		<th i18n:translate="label_place">Place</th>
-		<th i18n:translate="label_creation_date">Solicitud Creada</th>
-		<th i18n:translate="label_start_date">Fecha de Inicio</th>
-		<th i18n:translate="label_end_date">Fecha de Termino</th>
-		<th i18n:translate="label_quantity_days">Cantidad de Días</th>
-		<th i18n:translate="label_approved_quantity">Approved Quantity (pesos)</th>
-		<th i18n:translate="label_fecha_de_revision">Fecha de Revision por Consejo Interno</th>
-		<th i18n:translate="label_link">Link</th>
-	</tr>
+  <tr>
+    <th i18n:translate="label_type">Type</th>
+    <th i18n:translate="label_solicitor">Solicitante</th>
+    <th i18n:translate="label_reason">Reason</th>
+    <th i18n:translate="label_place">Place</th>
+    <th i18n:translate="label_creation_date">Solicitud Creada</th>
+    <th i18n:translate="label_start_date">Fecha de Inicio</th>
+    <th i18n:translate="label_end_date">End date</th>
+    <th i18n:translate="label_quantity_days">days</th>
+    <th i18n:translate="label_approved_quantity">Approved Quantity (pesos)</th>
+    <th i18n:translate="consejo_review_date">Consejo Interno review date</th>
+    <th i18n:translate="label_link">Link</th>
+  </tr>
         <tr tal:repeat="item python:items">
           <td tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</td>
           <td tal:content="python:item['owner_name']">Solicitant</td>
           <td tal:content="python:item['objective']">Reason</td>
           <td i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</td>
-	  <td tal:content="python:item['creation_date']">Solicitud Creada</td>
+          <td tal:content="python:item['creation_date']">Solicitud Creada</td>
           <td tal:content="python:item['from']">Creation Date</td>
           <td tal:content="python:item['to']">Creation Date</td>
           <td tal:content="python:item['quantity_of_days']">Quantity of Days</td>

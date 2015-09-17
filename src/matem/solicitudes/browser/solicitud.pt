@@ -204,7 +204,7 @@
 
             <dl class="portalMessage info"
                 tal:condition="view/esAprobada">
-                <dt i18n:translate="">
+                <dt i18n:translate="label_informacion">
                     Info
                 </dt>
                 <dd>
@@ -214,7 +214,7 @@
 
             <dl class="portalMessage error"
                 tal:condition="view/esRechazada">
-                <dt i18n:translate="">
+                <dt i18n:translate="label_informacion">
                     Info
                 </dt>
                 <dd>
@@ -261,17 +261,17 @@
 
     <table class="listing" border="1" width="100%" align="center" tal:define="datosAdicionales python:view.getPresupuestoOwner()">
         <tbody>
-	<tr><th colspan="5"><b>Datos del Solicitante</b></th></tr>
-	<tr><th colspan="2">Nombre</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][0]">Value</td></tr>
+  <tr><th colspan="5"><b>Datos del Solicitante</b></th></tr>
+  <tr><th colspan="2">Nombre</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][0]">Value</td></tr>
         <tr><th rowspan="2">Asignación anual:</th><th>Asignado</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][1]">Value</td></tr>
         <tr>                                 <th>Disponible</th><td  style="color: #FFFFFF; background:#FF6600;" align="center" colspan="3" tal:content="python:datosAdicionales[0][2]">Value</td></tr>
         <tr><th rowspan="2">Apoyo institucional:</th><th>Asignado</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][5]">Value</td></tr>
         <tr>                                 <th>Disponible</th><td style="color: #FFFFFF; background:#FF6600;" align="center" colspan="3" tal:content="python:datosAdicionales[0][6]">Value</td></tr>
         <tr><th rowspan="2">Dias Aprobados:</th><th>Comision</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][3]">Value</td></tr>
         <tr>                                 <th>Licencia</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][4]">Value</td></tr>
-	<tr><th colspan="5"><b>Informaci&oacute;n Sobre Solicitud</b></th></tr>
+  <tr><th colspan="5"><b>Informaci&oacute;n Sobre Solicitud</b></th></tr>
         <tr><th colspan="2">Tipo</th><td align="center" colspan="3">Solicitud de <span tal:content="here/getLicenciacomision">Value</span></td></tr>
-        <tr><th colspan="2">Con cargo a</th><td align="center" colspan="3" tal:content="here/getCargo_presupuesto">Value</td></tr>        
+        <tr><th colspan="2">Con cargo a</th><td align="center" colspan="3" tal:content="here/getCargo_presupuesto">Value</td></tr>
         <tr><th colspan="2">Fecha de Solicitud</th><td align="center" colspan="3"><span tal:content="python:context.creation_date.strftime('%d/%m/%Y')">Value</span></td></tr>
         <tr><th colspan="2" i18n:translate="label_pais">Country</th><td align="center" colspan="3" i18n:translate="" i18n:domain="plone" tal:content="here/getPais">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_ciudad_pais">City</th><td align="center" colspan="3" tal:content="here/getCiudadPais">Value</td></tr>
@@ -281,12 +281,12 @@
         <tr><th colspan="2" i18n:translate="label_fecha_desde">From date</th><td align="center" tal:content="python:here.getFechaDesde().strftime('%d/%m/%Y')">Value</td>
             <th i18n:translate="label_fecha_hasta">To date</th><td align="center" tal:content="python:here.getFechaHasta().strftime('%d/%m/%Y')">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_quantity_days">days</th><td align="center" colspan="3" tal:content="python:here.getCantidadDeDias()">Value</td></tr>
-	<tr><th colspan="5"><b>Datos Adicionales</b></th></tr>
+  <tr><th colspan="5"><b>Datos Adicionales</b></th></tr>
 
         <tr><th colspan="2" i18n:translate="label_objeto_viaje">Objective</th><td class="objective" align="center" colspan="3"
                                                                               tal:content="here/getObjetoViaje">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_investigacionarea">Area of Research</th><td align="center" colspan="3">
-                                                                              <div tal:repeat="areaInv python:view.getArea(here.getInvestigacionArea())"> 
+                                                                              <div tal:repeat="areaInv python:view.getArea(here.getInvestigacionArea())">
                                                                               <p tal:content="python:areaInv">Value</p>
                                                                               </div>
                                                                               </td></tr>
@@ -302,7 +302,7 @@
                                                                               tal:content="here/getComentario_owner">Value</td></tr>
         <tr><th colspan="5"></th></tr>
         <tr><th colspan="2" i18n:translate="label_pasaje">Transportation</th><td align="center" tal:content="python:here.getPasaje().lower()">Value</td>
-            <th i18n:translate="label_tipo_pasaje">Transportation means</th><td align="center" 
+            <th i18n:translate="label_tipo_pasaje">Transportation means</th><td align="center"
                                                                          tal:content="python:view.getTipoTransporte(here.getTipo_pasaje()).rstrip(',')">Value</td></tr>
         <tr><th colspan="2" i18n:translate="label_viaticos">Travel Allowances</th><td align="center" tal:content="python:here.getViaticos().lower()">Value</td>
             <th i18n:translate="label_inscripcion">Registration</th><td align="center" tal:content="python:here.getInscripcion().lower()">Value</td></tr>
@@ -343,7 +343,7 @@
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th colspan="2"><b>Consejo Interno</b></th></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_fecha_sesionci">Date of revision by the CI</th>
                 <td align="left" tal:content="python:here.getFecha_sesionci() and here.getFecha_sesionci().strftime('%d/%m/%Y')">Value</td></tr>
-            <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_actaci_number">Record number</th>
+            <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="acta_number">Acta number</th>
                 <td align="left" tal:content="here/getActaci">Value</td></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_comentario_ci">Comments by Consejo Interno</th>
                 <td align="left" tal:content="here/getComentario_ci">Value</td></tr>
@@ -353,15 +353,15 @@
     <div class="fc">
       <span class="btn-group">
         <span tal:repeat="transicion python:here.getLegalTransitions()">
-          <a class="context btn btn-small" style="text-decoration:none" href="#" 
+          <a class="context btn btn-small" style="text-decoration:none" href="#"
               tal:attributes="href python:transicion['url']" tal:content="python:transicion['name']"/>
         </span>
         <span tal:condition="python:(responsableconsejo and (here.aprobada() or here.rechazada())) or (editor and view.esBorrador()) or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
-          <a class="context btn btn-small" style="text-decoration:none" href="#" 
+          <a class="context btn btn-small" style="text-decoration:none" href="#"
               tal:attributes="href python:here.absolute_url()+'/delete_confirmation'">Eliminar solicitud</a>
         </span>
         <span tal:condition="python:(consejero and (here.getWFState()=='revisionconsejo')) or (comisionado and (here.getWFState()=='revisioncomision')) or (editor and view.esBorrador()) or ('Manager' in list(here.portal_membership.getAuthenticatedMember().getRoles()))">
-          <a class="context btn btn-small" style="text-decoration:none" href="#" 
+          <a class="context btn btn-small" style="text-decoration:none" href="#"
               tal:attributes="href python:here.absolute_url()+'/edit'">Hacer cambios a solicitud</a>
         </span>
       </span>

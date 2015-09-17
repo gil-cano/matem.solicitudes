@@ -104,7 +104,7 @@
             visibility: hidden;
         }
     </style> -->
-    <link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/demos/dateinput/css/skin1.css"/> 
+    <link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/demos/dateinput/css/skin1.css"/>
   </metal:css>
   <metal:css fill-slot="style_slot">
     <style type="text/css">
@@ -115,7 +115,7 @@
       #fieldsetlegend-metadata .{
             visibility: hidden;
         }
-        
+
         .overflowable {
             overflow:scroll;
         }
@@ -125,7 +125,7 @@
 
   <body>
     <metal:fill fill-slot="main">
-      <!-- 
+      <!--
         header_macro view_macros/header | header_macro | base_macros/header;
         footer_macro view_macros/footer | footer_macro | base_macros/footer;
        -->
@@ -211,12 +211,12 @@
                 <th i18n:translate="label_place">Place</th>
                 <th i18n:translate="label_creation_date">Solicitud Creada</th>
                 <th i18n:translate="label_start_date">Fecha de Inicio</th>
-                <th i18n:translate="label_end_date">Fecha de Termino</th>
-                <th i18n:translate="label_quantity_days">Cantidad de Días</th>
+                <th i18n:translate="label_end_date">End date</th>
+                <th i18n:translate="label_quantity_days">days</th>
                 <th i18n:translate="label_rejected_quantity">Cantidad Rechazada
                 (pesos)</th>
-                <th i18n:translate="label_fecha_revision">Fecha de Revision por Consejo Interno</th>
-                <th i18n:translate="label_actaci">Number of record where the request was reviewed</th>
+                <th i18n:translate="consejo_review_date">Consejo Interno review date</th>
+                <th i18n:translate="acta_number">Acta number</th>
                 <th i18n:translate="label_link">Link</th>
         </tr>
         <tr tal:repeat="item python:items">
@@ -242,7 +242,7 @@
     </table>
     <fieldset tal:condition="python:view.esManager(user.getId())">
     <div class="field">
-       <label for="fechaderevisionCI" i18n:translate="label_fecha_revision_consejo">Fecha de revision por el Consejo Interno</label>
+       <label for="fechaderevisionCI" i18n:translate="consejo_review_date">Consejo Interno review date</label>
        <br>
        <input type="date" name="fechaderevisionCI"/>
 
@@ -252,7 +252,7 @@
                value="Poner fecha a seleccionadas"/>
     </div>
     <div class="field">
-       <label for="numeroDeActa" i18n:translate="numeroDeActa">Numero de Acta del Consejo Interno</label>
+       <label for="numeroDeActa" i18n:translate="acta_number">Acta number</label>
        <br>
                 <input type="text"
                        id="numeroDeActaCI"

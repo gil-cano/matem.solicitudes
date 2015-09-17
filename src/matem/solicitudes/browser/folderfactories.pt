@@ -13,11 +13,11 @@
 // This function gets called when the end-user clicks on some radio.
 jQuery(function($) {
     $("input[name='url']").click(function() {
-        if ($('#form-field-solicitudinstitucional').is(':checked')) {                   
+        if ($('#form-field-solicitudinstitucional').is(':checked')) {
             $("select[name='event']").attr("disabled", false);
         }
         else {
-            $("select[name='event']").attr("disabled", true);          
+            $("select[name='event']").attr("disabled", true);
         }
     });
 });
@@ -53,7 +53,7 @@ jQuery(function($) {
 
         <metal:addlist define-macro="addlist">
 
-            <form name="quickAdd" method="post" 
+            <form name="quickAdd" method="post"
                 tal:attributes="action string:${context/absolute_url}/@@folder_factories">
 
                 <dl>
@@ -70,7 +70,7 @@ jQuery(function($) {
                         </dt>
                     <dd>
                       <span tal:replace="item/description">Type description</span>
-                      <select name="event"  disabled 
+                      <select name="event"  disabled
                               tal:condition="python:item['extra']['id'] == 'solicitudinstitucional'">
                         <tal:block tal:repeat="opcion view/institutional_events">
                           <option tal:attributes="value opcion/value" tal:content="opcion/title" />
@@ -80,7 +80,7 @@ jQuery(function($) {
                         <!-- <dd tal:content="item/description">Type description</dd> -->
                     </tal:typelist>
                 </dl>
-                
+
                 <div class="formControls">
                     <input class="standalone"
                           type="submit"

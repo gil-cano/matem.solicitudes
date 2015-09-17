@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """Test Solicitud content type."""
 
-from plone.app.testing import TEST_USER_ID
-from plone.app.testing import setRoles
 from matem.solicitudes.content.solicitud import Solicitud
 from matem.solicitudes.testing import IntegrationTestCase
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import setRoles
 
 import unittest2 as unittest
 

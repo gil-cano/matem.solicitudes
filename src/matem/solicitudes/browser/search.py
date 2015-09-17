@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from DateTime.DateTime import DateTime
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from matem.solicitudes.browser.queries import Queries
 from matem.solicitudes.browser.requests import Requests
 from matem.solicitudes.config import DICCIONARIO_AREAS
 from matem.solicitudes.config import getCountriesVocabulary
 from matem.solicitudes.interfaces import ISolicitudFolder
-from Products.CMFCore.utils import getToolByName
-from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component.hooks import getSite
 
 
@@ -289,7 +289,6 @@ class SearchView(BrowserView):
                 users.append([solicitantes[solicitante][0]+", "+solicitantes[solicitante][1]+" "+solicitantes[solicitante][2],
                           solicitante])
         users.sort()
-        
         return users
 
     def getCreatorsTecnicoAcademico(self):
@@ -302,7 +301,6 @@ class SearchView(BrowserView):
                 users.append([solicitantes[solicitante][0]+", "+solicitantes[solicitante][1]+" "+solicitantes[solicitante][2],
                           solicitante])
         users.sort()
-        
         return users
 
     def getCreatorsAll(self):

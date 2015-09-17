@@ -5,7 +5,7 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="plone">
+      i18n:domain="matem.solicitudes">
 
   <head>
     <title tal:content="template/title">Busqueda Global de Solicitudes</title>
@@ -67,7 +67,7 @@
     <div class="tabularView">
     <table class="listing" border="1" width="100%" tal:condition="items">
         <tbody>
-        <tr><th i18n:translate="label_period">Period</th><th i18n:translate="label_type">Type</th><th i18n:translate="label_solicitor">Solicitante</th><th i18n:translate="label_reason">Reason</th><th i18n:translate="label_place">Place</th><th i18n:translate="label_application_date">Fecha de Solicitud</th><th i18n:translate="label_quantity_days">Cantidad de Días</th><th i18n:translate="label_requested_quantity">Requested Quantity (pesos)</th><th i18n:translate="label_state">State</th><th i18n:translate="label_link">Link</th></tr>
+        <tr><th i18n:translate="label_period">Period</th><th i18n:translate="label_type">Type</th><th i18n:translate="label_solicitor">Solicitante</th><th i18n:translate="label_reason">Reason</th><th i18n:translate="label_place">Place</th><th i18n:translate="label_application_date">Fecha de Solicitud</th><th i18n:translate="label_quantity_days">days</th><th i18n:translate="label_requested_quantity">Requested Quantity (pesos)</th><th i18n:translate="label_state">State</th><th i18n:translate="label_link">Link</th></tr>
         <tr tal:repeat="item python:items[page]">
           <td><a href="#" tal:attributes="href python:item[len(item)-1]" tal:content="python:item[len(item)-2]"/></td>
           <td tal:content="python:item[0]">Meta-Type</td>
@@ -148,7 +148,7 @@
     <p i18n:translate="description_request_search">
     Aquí puede buscar solicitudes de viáticos en todos los periodos.
     <br />
-    Si desea realizar una busqueda en un periodo específico, puede acceder al 
+    Si desea realizar una busqueda en un periodo específico, puede acceder al
     formato de busqueda en dicho periodo.
     </p>
 
@@ -169,7 +169,7 @@
                 <div class="formHelp" i18n:translate="help_search_author">
                 Return items created by a particular person.
                 </div>
-    
+
                 <tal:creators tal:define="creators view/getCreatorsBecarioInvestigador">
                     <select name="Creator"
                             id="Creator">
@@ -190,7 +190,7 @@
                 Return applications of the selected type.
                 </div>
 
-                <input type="radio" name="Type" value="all" checked><span i18n:translate="All"> All </span><br>    
+                <input type="radio" name="Type" value="all" checked><span i18n:translate="All"> All </span><br>
                 <input type="radio" name="Type" value="licencia"><span i18n:translate="License Application"> License Application </span><br>
                 <input type="radio" name="Type" value="visitante"><span i18n:translate="Visitor Application"> Visitor Application</span><br>
                 <input type="radio" name="Type" value="becario"><span i18n:translate="Student Application"> Student Application</span><br>
@@ -417,7 +417,7 @@
                 </div>
                 </td>
                 <td>
-                <input type="radio" name="State" value="any" checked><span i18n:translate="Any"> Any </span><br>    
+                <input type="radio" name="State" value="any" checked><span i18n:translate="Any"> Any </span><br>
                 <input type="radio" name="State" value="aprobada"><span i18n:translate="Approved"> Approved </span><br>
                 <input type="radio" name="State" value="rechazada"><span i18n:translate="Rejected"> Rejected</span><br>
                 <input type="radio" name="State" value="revision"><span i18n:translate="Reviewing"> In review</span><br>
@@ -438,7 +438,7 @@
             </div>
 
         </fieldset>
-    
+
     </form>
     </span>
 

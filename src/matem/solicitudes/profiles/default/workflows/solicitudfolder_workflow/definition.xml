@@ -1,7 +1,7 @@
 <dc-workflow workflow_id="solicitudfolder_workflow"
              title="Solicitud Folder Workflow" description=""
              state_variable="review_state"
-             initial_state="noaceptando"> 
+             initial_state="noaceptando">
  <permission>Access contents information</permission>
  <permission>Change portal events</permission>
  <permission>Modify portal content</permission>
@@ -10,7 +10,7 @@
  <permission>SolicitudBecario: Add SolicitudBecario</permission>
  <permission>SolicitudVisitante: Add SolicitudVisitante</permission>
  <permission>View</permission>
- <state state_id="noaceptando" title="No se reciben solicitudes"> 
+ <state state_id="noaceptando" title="No se reciben solicitudes">
   <exit-transition transition_id="aceptar"/>
   <exit-transition transition_id="archivar"/>
   <permission-map name="Access contents information" acquired="False">
@@ -40,7 +40,7 @@
    <permission-role>Owner</permission-role>
   </permission-map>
  </state>
- <state state_id="aceptando" title="Aceptando Solicitudes"> 
+ <state state_id="aceptando" title="Aceptando Solicitudes">
   <exit-transition transition_id="noaceptar"/>
   <exit-transition transition_id="archivar"/>
   <permission-map name="Access contents information" acquired="False">
@@ -105,7 +105,7 @@
    <permission-role>Responsable del Consejo</permission-role>
   </permission-map>
  </state>
- <state state_id="historico" title="Archivado (no se reciben solicitudes)"> 
+ <state state_id="historico" title="Archivado (no se reciben solicitudes)">
   <exit-transition transition_id="aceptar"/>
   <permission-map name="Access contents information" acquired="False">
    <permission-role>Manager</permission-role>
@@ -152,39 +152,39 @@
    <permission-role>Responsable de la Comision</permission-role>
    <permission-role>Responsable del Consejo</permission-role>
   </permission-map>
- </state> 
+ </state>
  <transition transition_id="aceptar"
              title="Comenzar a aceptar solicitudes"
              new_state="aceptando" trigger="USER"
-             before_script="" after_script=""> 
+             before_script="" after_script="">
   <action url="%(content_url)s/content_status_modify?workflow_action=aceptar"
-          category="workflow">Comenzar a aceptar solicitudes</action> 
-  <guard> 
-   <guard-role>Manager</guard-role> 
-  </guard> 
+          category="workflow">Comenzar a aceptar solicitudes</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+  </guard>
  </transition>
  <transition transition_id="noaceptar"
              title="Dejar de aceptar solicitudes"
              new_state="noaceptando" trigger="USER"
-             before_script="" after_script=""> 
+             before_script="" after_script="">
   <action url="%(content_url)s/content_status_modify?workflow_action=noaceptar"
-          category="workflow">Dejar de aceptar solicitudes</action> 
-  <guard> 
-   <guard-role>Manager</guard-role> 
+          category="workflow">Dejar de aceptar solicitudes</action>
+  <guard>
+   <guard-role>Manager</guard-role>
   </guard>
- </transition> 
+ </transition>
  <transition transition_id="archivar"
              title="Archivar"
              new_state="historico" trigger="USER"
-             before_script="" after_script="registrar_valor"> 
+             before_script="" after_script="registrar_valor">
   <action url="%(content_url)s/content_status_modify?workflow_action=archivar"
-          category="workflow">Archivar</action> 
-  <guard> 
-   <guard-role>Manager</guard-role> 
-  </guard> 
+          category="workflow">Archivar</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+  </guard>
  </transition>
  <script script_id="registrar_valor"
          type="Script (Python)"
          filename="workflows/solicitudfolder_workflow/scripts/registrar_valor.py"
-         module="" function=""/> 
+         module="" function=""/>
 </dc-workflow>

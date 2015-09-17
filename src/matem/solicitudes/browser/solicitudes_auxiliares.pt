@@ -126,10 +126,9 @@
 
             <tr><div class="field">
                 <td><label for="Tipo" i18n:translate="label_type_upload">Tipo de Solicitud</label>
-
-            	    <div class="formHelp" i18n:translate="help_importtype_auxiliaresForm">
-	              Seleccione el tipo de solicitud a importar.
-	            </div>
+                  <div class="formHelp" i18n:translate="help_importtype_auxiliaresForm">
+                    Seleccione el tipo de solicitud a importar.
+                  </div>
 
                     <input type="radio" name="tiposolicitud" value="licencia" checked><span i18n:translate="License Application"> License Application </span><br>
                     <input type="radio" name="tiposolicitud" value="visitante"><span i18n:translate="Visitor Application"> Visitor Application</span><br>
@@ -144,8 +143,8 @@
                 <div class="formHelp" i18n:translate="help_investigador">
                 Nombre del investigador/estudiante/tecnico para el cual se va a crear la solicitud.
                 </div>
-    
-		<tal:creators tal:define="creators view/getProductCreatorsList">
+
+                <tal:creators tal:define="creators view/getProductCreatorsList">
                     <select name="Creator"
                             id="Creator">
                         <option value="" i18n:translate="label_any_creator">Seleccione a nombre de que usuario desea introducir la solicitud...</option>
@@ -171,7 +170,7 @@
             </div>
 
         </fieldset>
-    
+
     </form>
 
     </metal:body_macro>

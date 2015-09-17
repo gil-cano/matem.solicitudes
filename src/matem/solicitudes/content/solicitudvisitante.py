@@ -10,13 +10,7 @@ from matem.solicitudes.interfaces import ISolicitudVisitante
 from Products.Archetypes import atapi
 from Products.Archetypes.atapi import *
 from Products.ATContentTypes.utils import DT2dt
-
-try:
-  from Products.LinguaPlone.public import *
-except ImportError:
-  # No multilingual support
-  from Products.Archetypes.public import *
-
+from Products.Archetypes.public import *
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 
@@ -31,7 +25,7 @@ from archetypes.multifile.MultiFileField import MultiFileField
 from archetypes.multifile.MultiFileWidget import MultiFileWidget
 
 from matem.solicitudes.config import getCountriesVocabulary
-
+from matem.solicitudes import solicitudesMessageFactory as _
 
 
 
@@ -160,10 +154,8 @@ schema = BaseSchema + Schema((
         required=True,
         default='MX',
         widget=SelectionWidget(
-            label='Country',
-            label_msgid='label_pais',
-            description='Country of origin',
-            description_msgid='help_pais_procedencia',
+            label=_(u'label_pais', default=u'Country'),
+            description=_(u'help_pais_procedencia', default=u'Country of origin'),
             i18n_domain='matem.solicitudes',
         ),
         vocabulary="getCountriesVocabulary",
@@ -174,10 +166,8 @@ schema = BaseSchema + Schema((
         name='procedencia',
         required=1,
         widget=StringWidget(
-            label='City',
-            label_msgid='label_ciudad_pais',
-            description='City of origin',
-            description_msgid='help_ciudad_procedencia',
+            label=_(u'label_ciudad_pais', default=u'City'),
+            description=_(u'help_ciudad_procedencia', default=u'City of origin'),
             i18n_domain='matem.solicitudes',
         ),
         write_permission="Solicitud: Modificar Solicitud",
@@ -187,11 +177,9 @@ schema = BaseSchema + Schema((
         name='institucion_procedencia',
         required=1,
         widget=StringWidget(
-            label='Institution',
-            label_msgid='label_institucion',
-            i18n_domain='matem.solicitudes',
-            description='Institution of origin',
-            description_msgid='help_institucion_procedencia'),
+            label=_(u'label_institucion', default='Institution'),
+            description=_(u'help_institucion_procedencia', default='Institution of origin'),
+            i18n_domain='matem.solicitudes'),
         write_permission="Solicitud: Modificar Solicitud",
     ),
 
@@ -448,8 +436,7 @@ schema = BaseSchema + Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Recommended amount for transportation expenses',
-            label_msgid='label_cantidad_recomendada_pasaje',
+            label=_(u'label_cantidad_recomendada_pasaje', default=u'Recommended amount for transportation expenses'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -462,8 +449,7 @@ schema = BaseSchema + Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Recommended amount for travel allowences',
-            label_msgid='label_cantidad_recomendada_viaticos',
+            label=_(u'label_cantidad_recomendada_viaticos', default=u'Recommended amount for travel allowences'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -525,7 +511,7 @@ schema = BaseSchema + Schema((
         default='',
         widget=StringWidget(
             label='Número de acta de CI',
-            label_msgid='label_actaci',
+            label_msgid='acta_number',
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -537,8 +523,7 @@ schema = BaseSchema + Schema((
         name='cantidad_consejo_pasaje',
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for transportation expenses',
-            label_msgid='label_cantidad_consejo_pasaje',
+            label=_(u'label_cantidad_consejo_pasaje', default=u'Approved amount for transportation expenses'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -551,8 +536,7 @@ schema = BaseSchema + Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for travel allowences',
-            label_msgid='label_cantidad_consejo_viaticos',
+            label=_(u'label_cantidad_consejo_viaticos', default=u'Approved amount for travel allowences'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -565,8 +549,7 @@ schema = BaseSchema + Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for transportation expenses',
-            label_msgid='label_cantidad_autorizada_pasaje',
+            label=_(u'label_cantidad_autorizada_pasaje', default=u'Approved amount for transportation expenses'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),
@@ -579,8 +562,7 @@ schema = BaseSchema + Schema((
         required=1,
         default='0.0',
         widget=StringWidget(
-            label='Approved amount for travel allowences',
-            label_msgid='label_cantidad_autorizada_viaticos',
+            label=_(u'label_cantidad_autorizada_viaticos', default=u'Approved amount for travel allowences'),
             i18n_domain='matem.solicitudes',
             tarifas=False,
             size=12),

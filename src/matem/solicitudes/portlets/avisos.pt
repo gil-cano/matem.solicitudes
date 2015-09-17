@@ -18,7 +18,6 @@
                parent python:context.aq_inner.aq_parent;
                ">
 
-<!-- parent python:here.getParentNode(); -->
 <!--Solicitud-Propietario-->
 
             <span tal:condition="python:propietario and not folder">
@@ -56,7 +55,7 @@
                         <!-- <p><a href="#" tal:attributes="href string:${parent/absolute_url}/view">Ir al menu</a></p>-->
                          <form action="" tal:attributes="action string:${parent/absolute_url}/view" method="post" name="ppl">
                              <input type="hidden" name="vistafolder" value="folderpendientes"/>
-                             <a href="javascript: document.ppl.submit()" i18n:translate="label_go_pending">Ir a 'Solicitudes pendientes de revision'</a>
+                             <a href="javascript: document.ppl.submit()" i18n:translate="label_go_pending">Go to 'Applications pending for review'</a>
                          </form>
             </span>
 
@@ -125,7 +124,7 @@
                          <p><a href="#" tal:attributes="href string:${parent/absolute_url}/view">Regresar al menu</a></p>
                          <form action="" tal:attributes="action string:${parent/absolute_url}/view" method="post" name="ppl">
                              <input type="hidden" name="vistafolder" value="folderpendientes"/>
-                             <a href="javascript: document.ppl.submit()" i18n:translate="label_go_pending">Ir a 'Solicitudes pendientes de revision'</a>
+                             <a href="javascript: document.ppl.submit()" i18n:translate="label_go_pending">Go to 'Applications pending for review'</a>
                          </form>
             </span>
 
@@ -156,14 +155,14 @@
                       </p>
                          <form action="" tal:attributes="action string:${context/absolute_url}/view" method="post" name="ppl">
                              <input type="hidden" name="vistafolder" value="folderpendientes"/>
-                             <a href="javascript: document.ppl.submit()" i18n:translate="label_go_pending">Ir a 'Solicitudes pendientes de revision'</a>
+                             <a href="javascript: document.ppl.submit()" i18n:translate="label_go_pending">Go to 'Applications pending for review'</a>
                          </form>
 
                          <br>
                          <a href="#" tal:attributes="href string:${context/absolute_url}/view" i18n:translate="label_back_menu">Back to menu</a>
                   </span>
 
-                  <span 
+                  <span
                         tal:condition="python: not pendientes and enviadas">
                      <table align="center" border="0"><tr><td>
                          <form action="" tal:attributes="action string:${context/absolute_url}/view" method="post" name="ps">
@@ -250,10 +249,4 @@
         </span>
     </dd>
 
-<!--
-    <dd class="portletFooter">
-        <span class="portletBottomLeft"></span>
-        <span class="portletBottomRight"></span>
-    </dd>
--->
 </dl>
