@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-13 02:06+0000\n"
+"POT-Creation-Date: 2015-09-17 20:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,12 +60,20 @@ msgstr ""
 
 #: matem/solicitudes/browser/global_request_search_form.pt:194
 #: matem/solicitudes/browser/search_form.pt:231
-#: matem/solicitudes/browser/solicitudes_auxiliares.pt:134
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:133
 msgid "License Application"
 msgstr ""
 
+#: matem/solicitudes/config.py:233
+msgid "Mastery"
+msgstr ""
+
+#: matem/solicitudes/config.py:232
+msgid "PHD"
+msgstr ""
+
 #: matem/solicitudes/browser/folderpendientes.pt:422
-#: matem/solicitudes/browser/folderpendientessede.pt:363
+#: matem/solicitudes/browser/folderpendientessede.pt:362
 msgid "Pending for review by Internal Council"
 msgstr ""
 
@@ -110,7 +118,7 @@ msgstr ""
 
 #: matem/solicitudes/browser/global_request_search_form.pt:196
 #: matem/solicitudes/browser/search_form.pt:234
-#: matem/solicitudes/browser/solicitudes_auxiliares.pt:136
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:135
 msgid "Student Application"
 msgstr ""
 
@@ -118,23 +126,27 @@ msgstr ""
 msgid "The end date must be greater than start date."
 msgstr ""
 
+#: matem/solicitudes/config.py:234
+msgid "Undergraduate"
+msgstr ""
+
 #: matem/solicitudes/browser/global_request_search_form.pt:195
 #: matem/solicitudes/browser/search_form.pt:233
-#: matem/solicitudes/browser/solicitudes_auxiliares.pt:135
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:134
 msgid "Visitor Application"
 msgstr ""
 
 #. Default: "Acta number"
 #: matem/solicitudes/browser/folderaprobadas.pt:217
 #: matem/solicitudes/browser/folderpendientes.pt:449
-#: matem/solicitudes/browser/folderpendientessede.pt:384
+#: matem/solicitudes/browser/folderpendientessede.pt:383
 msgid "acta_number"
 msgstr ""
 
 #. Default: "Consejo Interno review date"
 #: matem/solicitudes/browser/folderaprobadas.pt:216
 #: matem/solicitudes/browser/folderpendientes.pt:448
-#: matem/solicitudes/browser/folderpendientessede.pt:383
+#: matem/solicitudes/browser/folderpendientessede.pt:382
 msgid "consejo_review_date"
 msgstr ""
 
@@ -222,7 +234,7 @@ msgid "help_fecha_sesionci"
 msgstr ""
 
 #. Default: "Seleccione el tipo de solicitud a importar."
-#: matem/solicitudes/browser/solicitudes_auxiliares.pt:130
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:129
 msgid "help_importtype_auxiliaresForm"
 msgstr ""
 
@@ -241,7 +253,7 @@ msgid "help_investigacionarea"
 msgstr ""
 
 #. Default: "Nombre del investigador/estudiante/tecnico para el cual se va a crear la solicitud."
-#: matem/solicitudes/browser/solicitudes_auxiliares.pt:144
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:143
 msgid "help_investigador"
 msgstr ""
 
@@ -391,7 +403,7 @@ msgid "label_any_advisor"
 msgstr ""
 
 #. Default: "Seleccione a nombre de que usuario desea introducir la solicitud..."
-#: matem/solicitudes/browser/solicitudes_auxiliares.pt:151
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:150
 msgid "label_any_creator"
 msgstr ""
 
@@ -670,7 +682,7 @@ msgstr ""
 
 #. Default: "Cantidad Recomendada Por La Comision (pesos)"
 #: matem/solicitudes/browser/folderpendientes.pt:444
-#: matem/solicitudes/browser/folderpendientessede.pt:381
+#: matem/solicitudes/browser/folderpendientessede.pt:380
 msgid "label_commision_recommended_quantity"
 msgstr ""
 
@@ -740,7 +752,7 @@ msgstr ""
 
 #. Default: "Fecha de revision por la Comision Especial"
 #: matem/solicitudes/browser/folderpendientes.pt:347
-#: matem/solicitudes/browser/folderpendientessede.pt:309
+#: matem/solicitudes/browser/folderpendientessede.pt:308
 msgid "label_fecha_revision_comision"
 msgstr ""
 
@@ -888,7 +900,7 @@ msgstr ""
 
 #. Default: "Hooray! You have no pending reviews. You can review your approved or rejected reviews by navigating to 'My approved applications' or 'My rejected applications' respectively."
 #: matem/solicitudes/browser/folderpendientes.pt:561
-#: matem/solicitudes/browser/folderpendientessede.pt:477
+#: matem/solicitudes/browser/folderpendientessede.pt:476
 #: matem/solicitudes/portlets/avisos.pt:199
 msgid "label_no_pending"
 msgstr ""
@@ -912,7 +924,7 @@ msgstr ""
 #. Default: "There are no applications to show."
 #: matem/solicitudes/browser/folderaprobadas.pt:193
 #: matem/solicitudes/browser/folderpendientes.pt:562
-#: matem/solicitudes/browser/folderpendientessede.pt:478
+#: matem/solicitudes/browser/folderpendientessede.pt:477
 msgid "label_no_show"
 msgstr ""
 
@@ -1213,7 +1225,7 @@ msgid "label_sent_reviews"
 msgstr ""
 
 #. Default: "¿Para quien es la solicitud?"
-#: matem/solicitudes/browser/solicitudes_auxiliares.pt:142
+#: matem/solicitudes/browser/solicitudes_auxiliares.pt:141
 msgid "label_solicitante"
 msgstr ""
 

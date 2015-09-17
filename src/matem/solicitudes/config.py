@@ -229,9 +229,9 @@ DICCIONARIO_TIPO_TRANSPORTE = {
 }
 
 NIVEL = DisplayList((
-    ('Doctorado', 'PHD'),
-    ('Maestria', 'Masters'),
-    ('Licenciatura', 'Undergraduate'),
+    ('Doctorado', _(u'PHD')),
+    ('Maestria', _(u'Mastery')),
+    ('Licenciatura', _(u'Undergraduate')),
 ))
 
 SEDE = DisplayList((
