@@ -1,17 +1,17 @@
 IM Applications package
 ==============================================================================
 
-.. image:: https://travis-ci.org/imatem/matem.solicitudes.svg?branch=master
+.. image:: https://travis-ci.org/gil-cano/matem.solicitudes.svg?branch=master
     :alt: Travis CI badge
-    :target: https://travis-ci.org/imatem/matem.solicitudes
+    :target: https://travis-ci.org/gil-cano/matem.solicitudes
 
-.. image:: https://coveralls.io/repos/imatem/matem.solicitudes/badge.png?branch=master
+.. image:: https://coveralls.io/repos/gil-cano/matem.solicitudes/badge.png?branch=master
     :alt: Coveralls badge
-    :target: https://coveralls.io/r/imatem/matem.solicitudes
+    :target: https://coveralls.io/r/gil-cano/matem.solicitudes
 
-.. image:: https://badge.waffle.io/imatem/matem.solicitudes.png?label=Ready
+.. image:: https://badge.waffle.io/gil-cano/matem.solicitudes.png?label=Ready
     :alt: Stories in Ready
-    :target: https://waffle.io/imatem/matem.solicitudes
+    :target: https://waffle.io/gil-cano/matem.solicitudes
 
 An Application package for the IM
 
@@ -26,7 +26,7 @@ Features
 Documentation
 -------------
 
-Full documentation for end users can be found in the "docs" folder, and is also available online at https://github.com/imatem/matem.solicitudes/docs
+Full documentation for end users can be found in the "docs" folder, and is also available online at https://github.com/gil-cano/matem.solicitudes/docs
 
 
 Installation
@@ -48,9 +48,9 @@ and then running "bin/buildout"
 Contribute
 ----------
 
-- Issue Tracker: `@ GitHub <http://github.com/imatem/matem.solicitudes/issues>`_
-- Source Code: `@ GitHub <https://github.com/imatem/matem.solicitudes.git>`_
-- Documentation: `@ readthedocs.org <http://github.com/imatem/matem.solicitudes>`_
+- Issue Tracker: `@ GitHub <http://github.com/gil-cano/matem.solicitudes/issues>`_
+- Source Code: `@ GitHub <https://github.com/gil-cano/matem.solicitudes.git>`_
+- Documentation: `@ readthedocs.org <http://github.com/gil-cano/matem.solicitudes>`_
 
 
 Support
