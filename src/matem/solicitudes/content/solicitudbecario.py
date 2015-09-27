@@ -1444,9 +1444,16 @@ Para más detalles vaya a %s.
     def getAddExtraTopInformation(self):
         """ Return information dependent of application type and user
         """
+        if self.getWFState() != 'borrador':
+            return None
+
         folder = self.aq_parent
-        userid = self.getSolicitanteDefault()[0]
-        balance = folder.getBalance(userid)
+        mt = getToolByName(self, 'portal_membership')
+        member = mt.getAuthenticatedMember()
+        roles = member.getRoles()
+        if 'Solicitante Auxiliar' in roles and 'Manager' not in roles:
+            return None
+        balance = folder.getBalance(member.getId())
         if not balance:
             return None
 
