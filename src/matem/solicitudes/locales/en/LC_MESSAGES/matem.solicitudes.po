@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-17 20:18+0000\n"
+"POT-Creation-Date: 2015-09-27 18:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: matem/solicitudes/config.py:222
+#: matem/solicitudes/config.py:223
 msgid "Airplane"
 msgstr ""
 
@@ -33,11 +33,26 @@ msgstr ""
 msgid "Approved"
 msgstr ""
 
-#: matem/solicitudes/config.py:221
+#: matem/solicitudes/content/solicitud.py:1345
+#: matem/solicitudes/content/solicitudbecario.py:1455
+#: matem/solicitudes/content/solicitudinstitucional.py:1562
+msgid "Available Annual Allocation"
+msgstr ""
+
+#: matem/solicitudes/content/solicitudinstitucional.py:1566
+msgid "Available Institucional Allocation"
+msgstr ""
+
+#: matem/solicitudes/content/solicitud.py:1349
+#: matem/solicitudes/content/solicitudinstitucional.py:1570
+msgid "Available licence days"
+msgstr ""
+
+#: matem/solicitudes/config.py:222
 msgid "Bus"
 msgstr ""
 
-#: matem/solicitudes/config.py:220
+#: matem/solicitudes/config.py:221
 msgid "Car"
 msgstr ""
 
@@ -64,11 +79,11 @@ msgstr ""
 msgid "License Application"
 msgstr ""
 
-#: matem/solicitudes/config.py:233
+#: matem/solicitudes/config.py:234
 msgid "Mastery"
 msgstr ""
 
-#: matem/solicitudes/config.py:232
+#: matem/solicitudes/config.py:233
 msgid "PHD"
 msgstr ""
 
@@ -126,7 +141,7 @@ msgstr ""
 msgid "The end date must be greater than start date."
 msgstr ""
 
-#: matem/solicitudes/config.py:234
+#: matem/solicitudes/config.py:235
 msgid "Undergraduate"
 msgstr ""
 
@@ -291,7 +306,7 @@ msgid "help_rejected_app"
 msgstr ""
 
 #. Default: "Only Students and Posdoc from Cuernavaca"
-#: matem/solicitudes/content/solicitud.py:393
+#: matem/solicitudes/content/solicitud.py:394
 #: matem/solicitudes/content/solicitudbecario.py:452
 msgid "help_school_practices"
 msgstr ""
@@ -510,74 +525,74 @@ msgid "label_bugdet_this_period"
 msgstr ""
 
 #. Default: "Approved amount for registration"
-#: matem/solicitudes/content/solicitud.py:693
+#: matem/solicitudes/content/solicitud.py:694
 #: matem/solicitudes/content/solicitudbecario.py:760
-#: matem/solicitudes/content/solicitudinstitucional.py:871
+#: matem/solicitudes/content/solicitudinstitucional.py:872
 msgid "label_cantidad_autorizada_inscripcion"
 msgstr ""
 
 #. Default: "Approved amount for registration"
-#: matem/solicitudes/content/solicitudinstitucional.py:857
+#: matem/solicitudes/content/solicitudinstitucional.py:858
 msgid "label_cantidad_autorizada_inscripcion_institucional"
 msgstr ""
 
 #. Default: "Approved amount for transportation expenses"
-#: matem/solicitudes/content/solicitud.py:667
+#: matem/solicitudes/content/solicitud.py:668
 #: matem/solicitudes/content/solicitudbecario.py:736
-#: matem/solicitudes/content/solicitudinstitucional.py:818
+#: matem/solicitudes/content/solicitudinstitucional.py:819
 msgid "label_cantidad_autorizada_pasaje"
 msgstr ""
 
 #. Default: "Approved amount for transportation expenses"
-#: matem/solicitudes/content/solicitudinstitucional.py:805
+#: matem/solicitudes/content/solicitudinstitucional.py:806
 msgid "label_cantidad_autorizada_pasaje_institucional"
 msgstr ""
 
 #. Default: "Approved amount for travel allowences"
-#: matem/solicitudes/content/solicitud.py:680
+#: matem/solicitudes/content/solicitud.py:681
 #: matem/solicitudes/content/solicitudbecario.py:748
-#: matem/solicitudes/content/solicitudinstitucional.py:844
+#: matem/solicitudes/content/solicitudinstitucional.py:845
 msgid "label_cantidad_autorizada_viaticos"
 msgstr ""
 
 #. Default: "Approved amount for travel allowences"
-#: matem/solicitudes/content/solicitudinstitucional.py:831
+#: matem/solicitudes/content/solicitudinstitucional.py:832
 msgid "label_cantidad_autorizada_viaticos_institucional"
 msgstr ""
 
 #. Default: "Approved amount for registration"
-#: matem/solicitudes/content/solicitud.py:654
+#: matem/solicitudes/content/solicitud.py:655
 #: matem/solicitudes/content/solicitudbecario.py:724
-#: matem/solicitudes/content/solicitudinstitucional.py:792
+#: matem/solicitudes/content/solicitudinstitucional.py:793
 msgid "label_cantidad_consejo_inscripcion"
 msgstr ""
 
 #. Default: "Approved amount for registration (Institutional)"
-#: matem/solicitudes/content/solicitudinstitucional.py:779
+#: matem/solicitudes/content/solicitudinstitucional.py:780
 msgid "label_cantidad_consejo_inscripcion_institucional"
 msgstr ""
 
 #. Default: "Approved amount for transportation expenses"
-#: matem/solicitudes/content/solicitud.py:628
+#: matem/solicitudes/content/solicitud.py:629
 #: matem/solicitudes/content/solicitudbecario.py:700
-#: matem/solicitudes/content/solicitudinstitucional.py:740
+#: matem/solicitudes/content/solicitudinstitucional.py:741
 msgid "label_cantidad_consejo_pasaje"
 msgstr ""
 
 #. Default: "Approved amount for transportation expenses (Institutional)"
-#: matem/solicitudes/content/solicitudinstitucional.py:727
+#: matem/solicitudes/content/solicitudinstitucional.py:728
 msgid "label_cantidad_consejo_pasaje_institucional"
 msgstr ""
 
 #. Default: "Approved amount for travel allowences"
-#: matem/solicitudes/content/solicitud.py:641
+#: matem/solicitudes/content/solicitud.py:642
 #: matem/solicitudes/content/solicitudbecario.py:712
-#: matem/solicitudes/content/solicitudinstitucional.py:766
+#: matem/solicitudes/content/solicitudinstitucional.py:767
 msgid "label_cantidad_consejo_viaticos"
 msgstr ""
 
 #. Default: "Approved amount for travel allowences (Institutional)"
-#: matem/solicitudes/content/solicitudinstitucional.py:753
+#: matem/solicitudes/content/solicitudinstitucional.py:754
 msgid "label_cantidad_consejo_viaticos_institucional"
 msgstr ""
 
@@ -595,38 +610,38 @@ msgid "label_cantidad_pasaje"
 msgstr ""
 
 #. Default: "Recommended amount for registration"
-#: matem/solicitudes/content/solicitud.py:556
+#: matem/solicitudes/content/solicitud.py:557
 #: matem/solicitudes/content/solicitudbecario.py:631
-#: matem/solicitudes/content/solicitudinstitucional.py:653
+#: matem/solicitudes/content/solicitudinstitucional.py:654
 msgid "label_cantidad_recomendada_inscripcion"
 msgstr ""
 
 #. Default: "Recommended amount for registration (Institutional)"
-#: matem/solicitudes/content/solicitudinstitucional.py:640
+#: matem/solicitudes/content/solicitudinstitucional.py:641
 msgid "label_cantidad_recomendada_inscripcion_institucional"
 msgstr ""
 
 #. Default: "Recommended amount for transportation expenses"
-#: matem/solicitudes/content/solicitud.py:530
+#: matem/solicitudes/content/solicitud.py:531
 #: matem/solicitudes/content/solicitudbecario.py:605
-#: matem/solicitudes/content/solicitudinstitucional.py:601
+#: matem/solicitudes/content/solicitudinstitucional.py:602
 msgid "label_cantidad_recomendada_pasaje"
 msgstr ""
 
 #. Default: "Recommended amount for transportation (Institutional)"
-#: matem/solicitudes/content/solicitudinstitucional.py:588
+#: matem/solicitudes/content/solicitudinstitucional.py:589
 msgid "label_cantidad_recomendada_pasaje_institucional"
 msgstr ""
 
 #. Default: "Recommended amount for travel allowences"
-#: matem/solicitudes/content/solicitud.py:543
+#: matem/solicitudes/content/solicitud.py:544
 #: matem/solicitudes/content/solicitudbecario.py:618
-#: matem/solicitudes/content/solicitudinstitucional.py:627
+#: matem/solicitudes/content/solicitudinstitucional.py:628
 msgid "label_cantidad_recomendada_viaticos"
 msgstr ""
 
 #. Default: "Recommended amount for travel allowences (Institutional)"
-#: matem/solicitudes/content/solicitudinstitucional.py:614
+#: matem/solicitudes/content/solicitudinstitucional.py:615
 msgid "label_cantidad_recomendada_viaticos_institucional"
 msgstr ""
 
@@ -1155,7 +1170,7 @@ msgid "label_scholarship_holders"
 msgstr ""
 
 #. Default: "School practices"
-#: matem/solicitudes/content/solicitud.py:392
+#: matem/solicitudes/content/solicitud.py:393
 #: matem/solicitudes/content/solicitudbecario.py:451
 msgid "label_school_practices"
 msgstr ""
