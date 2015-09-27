@@ -1216,7 +1216,7 @@ La cantidad total que se le ha aprobado en lo que va del año: %s.
 
         return [
             {
-                'label': 'Available Annual Allocation',
+                'label': _(u'Available Annual Allocation'),
                 'quantity': balance['yearly'] - balance['yearly_spent']
             },
         ]

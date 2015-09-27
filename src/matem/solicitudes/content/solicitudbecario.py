@@ -1452,7 +1452,7 @@ Para más detalles vaya a %s.
 
         return [
             {
-                'label': 'Available Annual Allocation',
+                'label': _(u'Available Annual Allocation'),
                 'quantity': balance['yearly'] - balance['yearly_spent']
             },
         ]

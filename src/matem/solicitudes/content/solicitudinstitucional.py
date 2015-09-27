@@ -1559,15 +1559,15 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
 
         return [
             {
-                'label': 'Available Annual Allocation',
+                'label': _(u'Available Annual Allocation'),
                 'quantity': balance['yearly'] - balance['yearly_spent']
             },
             {
-                'label': 'Available Institucional Allocation',
+                'label': _(u'Available Institucional Allocation'),
                 'quantity': balance['institutional'] - balance['institutional_spent']
             },
             {
-                'label': 'Available licence days',
+                'label': _(u'Available licence days'),
                 'quantity': LICENCEDAYS - balance['licence_days']
             },
         ]
