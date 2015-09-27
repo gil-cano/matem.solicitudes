@@ -12,6 +12,14 @@
   <metal:head define-macro="javascript_head">
   </metal:head>
 
+  <metal:head define-macro="css">
+    <link rel="stylesheet" type="text/css"
+        tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+        tal:attributes="href string:${navroot}/++resource++matem.solicitudes/print.css"
+    />
+  </metal:head>
+
+
   <body>
     <!-- <metal:header define-macro="header">
     </metal:header> -->
@@ -20,10 +28,26 @@
     </metal:typedescription> -->
 
     <metal:body define-macro="body">
-
         <metal:default_body use-macro="here/edit_macros/macros/body">
 
           <metal:block fill-slot="extra_top">
+            <div tal:define="info context/getAddExtraTopInformation"
+              tal:condition="info" class="warning-spent">
+              <div>
+                <ul>
+                  <li tal:repeat="item info">
+                    <span class="label"tal:content="item/label" i18n:translate="">Spent</span>:
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <ul>
+                  <li tal:repeat="item info">
+                    <span tal:content="item/quantity">$20,000.00</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </metal:block>
 
           <!-- <metal:block fill-slot="widgets">
