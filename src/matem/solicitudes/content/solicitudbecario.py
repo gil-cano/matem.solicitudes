@@ -1441,4 +1441,20 @@ Para más detalles vaya a %s.
         #This function is defined in config.py
         return getCountriesVocabulary(self)
 
+    def getAddExtraTopInformation(self):
+        """ Return information dependent of application type and user
+        """
+        folder = self.aq_parent
+        userid = self.getSolicitanteDefault()[0]
+        balance = folder.getBalance(userid)
+        if not balance:
+            return None
+
+        return [
+            {
+                'label': 'Available Annual Allocation',
+                'quantity': balance['yearly'] - balance['yearly_spent']
+            },
+        ]
+
 registerType(SolicitudBecario, PROJECTNAME)

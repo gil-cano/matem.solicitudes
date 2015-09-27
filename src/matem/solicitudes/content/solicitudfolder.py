@@ -374,4 +374,24 @@ class SolicitudFolder(ATFolder):
 
         return dictVacio
 
+    def getBalance(self, userid):
+        """ Return details of userid
+        """
+        # solicitantes is a list of one dict!!!
+        # every value in the dict is of the form
+        # ['app', 'name', '', 'classification', 20000.0, 10000.0]
+        userdata = self.getSolicitantes()[0].get(userid, None)
+        if not userdata:
+            return {}
+
+        balance = {}
+        balance['yearly'] = userdata[4]
+        balance['yearly_spent'] = self.getPresupuesto_asignado_solicitantes()[0][userid]
+        balance['institutional'] = userdata[5]
+        balance['institutional_spent'] = self.getApoyoinst_asignado_solicitantes()[0][userid]
+        balance['licence_days'] = self.getDias_licencia_utilizados_solicitantes()[0][userid]
+        balance['comission_days'] = self.getDias_comision_utilizados_solicitantes()[0][userid]
+        return balance
+
+
 registerType(SolicitudFolder, PROJECTNAME)

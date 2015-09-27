@@ -17,6 +17,7 @@ ADD_CONTENT_PERMISSION = {
 
 GLOBALS = globals()
 PROJECTNAME = "matem.solicitudes"
+LICENCEDAYS = 45
 
 AREAS_INVESTIGACION = DisplayList((
     ('00-xx', '00-xx General'),

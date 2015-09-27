@@ -38,6 +38,7 @@ from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 from matem.solicitudes import solicitudesMessageFactory as _
 from matem.solicitudes.interfaces import ISolicitudInstitucional
 from matem.solicitudes.config import AREAS_INVESTIGACION
+from matem.solicitudes.config import LICENCEDAYS
 from matem.solicitudes.config import PROJECTNAME
 from matem.solicitudes.config import SEDE
 from matem.solicitudes.config import getCountriesVocabulary
@@ -1546,5 +1547,29 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
     def getCountriesVocabulary(self):
         #This function is defined in config.py
         return getCountriesVocabulary(self)
+
+    def getAddExtraTopInformation(self):
+        """ Return information dependent of application type and user
+        """
+        folder = self.aq_parent
+        userid = self.getSolicitanteDefault()[0]
+        balance = folder.getBalance(userid)
+        if not balance:
+            return None
+
+        return [
+            {
+                'label': 'Available Annual Allocation',
+                'quantity': balance['yearly'] - balance['yearly_spent']
+            },
+            {
+                'label': 'Available Institucional Allocation',
+                'quantity': balance['institutional'] - balance['institutional_spent']
+            },
+            {
+                'label': 'Available licence days',
+                'quantity': LICENCEDAYS - balance['licence_days']
+            },
+        ]
 
 atapi.registerType(SolicitudInstitucional, PROJECTNAME)
