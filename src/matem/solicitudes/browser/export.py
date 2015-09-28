@@ -7,7 +7,7 @@ import csv
 import os
 
 
-INSTANCEHOME = '/Users/gil/projects/plone/infomatem-p3/parts/instance'
+INSTANCEHOME = '/Users/gil/projects/plone/matem-buildout'
 SOLFILE = os.path.join(INSTANCEHOME, 'Extensions/solicitudes.csv')
 
 
