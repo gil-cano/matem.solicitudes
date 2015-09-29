@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-27 18:13+0000\n"
+"POT-Creation-Date: 2015-09-29 17:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,18 +33,18 @@ msgstr "Cualquiera"
 msgid "Approved"
 msgstr "Aprobada"
 
-#: matem/solicitudes/content/solicitud.py:1345
-#: matem/solicitudes/content/solicitudbecario.py:1455
-#: matem/solicitudes/content/solicitudinstitucional.py:1562
+#: matem/solicitudes/content/solicitud.py:1352
+#: matem/solicitudes/content/solicitudbecario.py:1462
+#: matem/solicitudes/content/solicitudinstitucional.py:1569
 msgid "Available Annual Allocation"
 msgstr "Displonible Asignación Anual"
 
-#: matem/solicitudes/content/solicitudinstitucional.py:1566
+#: matem/solicitudes/content/solicitudinstitucional.py:1573
 msgid "Available Institucional Allocation"
 msgstr "Disponible Apoyo Institucional"
 
-#: matem/solicitudes/content/solicitud.py:1349
-#: matem/solicitudes/content/solicitudinstitucional.py:1570
+#: matem/solicitudes/content/solicitud.py:1356
+#: matem/solicitudes/content/solicitudinstitucional.py:1577
 msgid "Available licence days"
 msgstr "Días de licencia disponibles"
 
@@ -1163,6 +1163,16 @@ msgstr "Esta solicitud está siendo revisada por el Consejo Interno. Espere noti
 #: matem/solicitudes/portlets/avisos.pt:74
 msgid "label_revision_investigadoracargo"
 msgstr "¡Usted aún no ha aprobado ni rechazado esta solicitud! Puede cambiar su informacion dando clic en la pestaña 'Hacer cambios' en la parte superior. Revise los datos y apruebela o regresela al becario haciendo clic en los botones 'Enviar' o 'Regresar solicitud a becario', respectivamente, ubicados en la parte inferior de la solicitud."
+
+#. Default: "Save Draft"
+#: matem/solicitudes/browser/solicitud_edit.pt:69
+msgid "label_save_draft"
+msgstr "Guardar borrador"
+
+#. Default: "Save"
+#: matem/solicitudes/browser/solicitud_edit.pt:60
+msgid "label_save_preview"
+msgstr "Vista previa"
 
 #. Default: "Scholarship Holders"
 #: matem/solicitudes/browser/presupuesto_folder.pt:209

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-27 18:13+0000\n"
+"POT-Creation-Date: 2015-09-29 17:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,18 +33,18 @@ msgstr ""
 msgid "Approved"
 msgstr ""
 
-#: matem/solicitudes/content/solicitud.py:1345
-#: matem/solicitudes/content/solicitudbecario.py:1455
-#: matem/solicitudes/content/solicitudinstitucional.py:1562
+#: matem/solicitudes/content/solicitud.py:1352
+#: matem/solicitudes/content/solicitudbecario.py:1462
+#: matem/solicitudes/content/solicitudinstitucional.py:1569
 msgid "Available Annual Allocation"
 msgstr ""
 
-#: matem/solicitudes/content/solicitudinstitucional.py:1566
+#: matem/solicitudes/content/solicitudinstitucional.py:1573
 msgid "Available Institucional Allocation"
 msgstr ""
 
-#: matem/solicitudes/content/solicitud.py:1349
-#: matem/solicitudes/content/solicitudinstitucional.py:1570
+#: matem/solicitudes/content/solicitud.py:1356
+#: matem/solicitudes/content/solicitudinstitucional.py:1577
 msgid "Available licence days"
 msgstr ""
 
@@ -1162,6 +1162,16 @@ msgstr ""
 #: matem/solicitudes/browser/solicitudbecario.pt:175
 #: matem/solicitudes/portlets/avisos.pt:74
 msgid "label_revision_investigadoracargo"
+msgstr ""
+
+#. Default: "Save Draft"
+#: matem/solicitudes/browser/solicitud_edit.pt:69
+msgid "label_save_draft"
+msgstr ""
+
+#. Default: "Save"
+#: matem/solicitudes/browser/solicitud_edit.pt:60
+msgid "label_save_preview"
 msgstr ""
 
 #. Default: "Scholarship Holders"

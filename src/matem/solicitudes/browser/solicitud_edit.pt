@@ -36,7 +36,7 @@
               <div>
                 <ul>
                   <li tal:repeat="item info">
-                    <span class="label"tal:content="item/label" i18n:translate="">Spent</span>:
+                    <span class="label" tal:content="item/label" i18n:translate="">Spent</span>:
                   </li>
                 </ul>
               </div>
@@ -61,6 +61,7 @@
                      type="submit"
                      name="form.button.save"
                      value="Save"
+                     i18n:domain="matem.solicitudes"
                      i18n:attributes="value label_save_preview;"
                      tal:attributes="disabled python: isLocked and  'disabled' or None;"
                      tal:condition="python:context.checkCreationFlag()"
@@ -69,6 +70,7 @@
                      type="submit"
                      name="form.button.save"
                      value="Save Draft"
+                     i18n:domain="matem.solicitudes"
                      i18n:attributes="value label_save_draft;"
                      tal:attributes="disabled python: isLocked and  'disabled' or None;"
                      tal:condition="python: not context.checkCreationFlag()"
