@@ -33,20 +33,13 @@
           <metal:block fill-slot="extra_top">
             <div tal:define="info context/getAddExtraTopInformation"
               tal:condition="info" class="warning-spent">
-              <div>
-                <ul>
-                  <li tal:repeat="item info">
-                    <span class="label" tal:content="item/label" i18n:translate="">Spent</span>:
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <ul>
-                  <li tal:repeat="item info">
-                    <span tal:content="item/quantity">$20,000.00</span>
-                  </li>
-                </ul>
-              </div>
+              <table>
+                <tbody>
+                  <tr tal:repeat="item info">
+                    <th tal:content="item/label" i18n:translate="">message</th>
+                    <td tal:content="item/quantity">$45</td>
+                  </tr>
+              </table>
             </div>
           </metal:block>
 

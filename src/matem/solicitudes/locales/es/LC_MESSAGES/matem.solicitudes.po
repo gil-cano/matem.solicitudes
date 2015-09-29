@@ -37,16 +37,16 @@ msgstr "Aprobada"
 #: matem/solicitudes/content/solicitudbecario.py:1462
 #: matem/solicitudes/content/solicitudinstitucional.py:1569
 msgid "Available Annual Allocation"
-msgstr "Displonible Asignación Anual"
+msgstr "Displonible Asignación Anual (no incluye solicitudes en proceso)"
 
 #: matem/solicitudes/content/solicitudinstitucional.py:1573
 msgid "Available Institucional Allocation"
-msgstr "Disponible Apoyo Institucional"
+msgstr "Disponible Apoyo Institucional (no incluye solicitudes en proceso)"
 
 #: matem/solicitudes/content/solicitud.py:1356
 #: matem/solicitudes/content/solicitudinstitucional.py:1577
 msgid "Available licence days"
-msgstr "Días de licencia disponibles"
+msgstr "Días de licencia disponibles (no incluye solicitudes en proceso)"
 
 #: matem/solicitudes/config.py:222
 msgid "Bus"
