@@ -28,8 +28,6 @@
 }
 
 .warning-spent {
-    display: inline-flex;
-    width: 100%;
     margin-bottom: 1em;
     background-color: #e6f1f6;
     border: 1px solid #b7c7cf;
@@ -37,13 +35,12 @@
     border-top-right-radius: 3px;
 }
 
-.warning-spent>div{
-    float: left;
-    width: 29%;
-    padding-top: 3px;
-    padding-bottom: 3px;
+#content .warning-spent table {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-#content .warning-spent ul{
-    list-style-type: none;
+#content .warning-spent table td,
+#content .warning-spent table th {
+    padding-left: 2em;
 }
