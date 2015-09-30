@@ -1347,10 +1347,11 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
         if not balance:
             return None
 
+        money = balance['yearly'] - balance['yearly_spent']
         return [
             {
                 'label': _(u'Available Annual Allocation'),
-                'quantity': balance['yearly'] - balance['yearly_spent']
+                'quantity': '${:,.2f}'.format(money)
             },
             {
                 'label': _(u'Available licence days'),
