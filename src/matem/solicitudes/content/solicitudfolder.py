@@ -16,6 +16,11 @@ from Products.ATExtensions.widget.records import RecordsWidget
 from Products.CMFCore.utils import getToolByName
 from Acquisition import aq_parent, aq_base, ImplicitAcquisitionWrapper
 
+import logging
+
+logger = logging.getLogger("Plone")
+
+
 schema = ATFolder.schema.copy() + Schema((
         DateTimeField('fecha_desde',
             searchable=1,
@@ -262,7 +267,8 @@ class SolicitudFolder(ATFolder):
             return False
 
     def actualizarPeriodo(self):
-        print 'actualiza'
+        """ Recalculate users and expenses
+        """
         cantidadAutorizada = 0.0
         # dictionaries of current expenses
         dictPresupuesto = self.encontrarSolicitantes()
@@ -328,49 +334,52 @@ class SolicitudFolder(ATFolder):
         presupuestoMaximo = 0
         apoyoinstMaximo = 0
 
-        if 'Programador de Presupuesto' in list(member.getRoles()):
+        if 'Programador de Presupuesto' not in list(member.getRoles()):
+            return {}
+
+        solicitantes = list(fsd_tool.getDirectoryRoot().getSortedPeople())
+
+        for person in solicitantes:
             try:
-                solicitantes = list(fsd_tool.getDirectoryRoot().getSortedPeople())
-
-                for person in solicitantes:
-                    fsdperson = PersonWrapper(person)
-                    user = mt.getMemberById(person.getId())
-
-                    if 'Investigador' in list(user.getRoles()):
-                        rol = "Investigador"
-                        presupuestoMaximo = self.getPresupuesto_maximo_investigadores()
-                        apoyoinstMaximo = self.getApoyoinst_maximo_investigadores()
-                        append = True
-                    elif 'Postdoc' in list(user.getRoles()):
-                        rol = "Postdoc"
-                        presupuestoMaximo = self.getPresupuesto_maximo_postdocs()
-                        apoyoinstMaximo = self.getApoyoinst_maximo_postdocs()
-                        append = True
-                    elif 'Tecnico Academico' in list(user.getRoles()):
-                        rol = "Tecnico Academico"
-                        presupuestoMaximo = self.getPresupuesto_maximo_tecnicos()
-                        apoyoinstMaximo = self.getApoyoinst_maximo_tecnicos()
-                        append = True
-                    elif 'Becario' in list(user.getRoles()):
-                        rol = "Becario"
-                        presupuestoMaximo = self.getPresupuesto_maximo_becarios()
-                        apoyoinstMaximo = self.getApoyoinst_maximo_becarios()
-                        append = True
-
-                    if append:
-                        dictVacio[person.getId()] = 0
-                        dictSolicitantes[person.getId()] = [
-                                fsdperson.getLastName(),
-                                fsdperson.getFirstName(),
-                                fsdperson.getMiddleName(),
-                                rol,
-                                presupuestoMaximo,
-                                apoyoinstMaximo]
-                    append = False
-                self.setSolicitantes(dictSolicitantes)
+                fsdperson = PersonWrapper(person)
+                user = mt.getMemberById(person.getId())
             except:
-                print "Error encontrando solicitantes"
-                return {}
+                logger.info("Error encontrando solicitantes")
+                continue
+
+            if 'Investigador' in list(user.getRoles()):
+                rol = "Investigador"
+                presupuestoMaximo = self.getPresupuesto_maximo_investigadores()
+                apoyoinstMaximo = self.getApoyoinst_maximo_investigadores()
+                append = True
+            elif 'Postdoc' in list(user.getRoles()):
+                rol = "Postdoc"
+                presupuestoMaximo = self.getPresupuesto_maximo_postdocs()
+                apoyoinstMaximo = self.getApoyoinst_maximo_postdocs()
+                append = True
+            elif 'Tecnico Academico' in list(user.getRoles()):
+                rol = "Tecnico Academico"
+                presupuestoMaximo = self.getPresupuesto_maximo_tecnicos()
+                apoyoinstMaximo = self.getApoyoinst_maximo_tecnicos()
+                append = True
+            elif 'Becario' in list(user.getRoles()):
+                rol = "Becario"
+                presupuestoMaximo = self.getPresupuesto_maximo_becarios()
+                apoyoinstMaximo = self.getApoyoinst_maximo_becarios()
+                append = True
+
+            if append:
+                dictVacio[person.getId()] = 0
+                dictSolicitantes[person.getId()] = [
+                    fsdperson.getLastName(),
+                    fsdperson.getFirstName(),
+                    fsdperson.getMiddleName(),
+                    rol,
+                    presupuestoMaximo,
+                    apoyoinstMaximo
+                ]
+            append = False
+        self.setSolicitantes(dictSolicitantes)
 
         return dictVacio
 
