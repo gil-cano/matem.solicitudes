@@ -347,15 +347,15 @@ class SolicitudFolder(ATFolder):
                 logger.info("Error encontrando solicitantes")
                 continue
 
-            if 'Investigador' in list(user.getRoles()):
-                rol = "Investigador"
-                presupuestoMaximo = self.getPresupuesto_maximo_investigadores()
-                apoyoinstMaximo = self.getApoyoinst_maximo_investigadores()
-                append = True
-            elif 'Postdoc' in list(user.getRoles()):
+            if 'Postdoc' in list(user.getRoles()):
                 rol = "Postdoc"
                 presupuestoMaximo = self.getPresupuesto_maximo_postdocs()
                 apoyoinstMaximo = self.getApoyoinst_maximo_postdocs()
+                append = True
+            elif 'Investigador' in list(user.getRoles()):
+                rol = "Investigador"
+                presupuestoMaximo = self.getPresupuesto_maximo_investigadores()
+                apoyoinstMaximo = self.getApoyoinst_maximo_investigadores()
                 append = True
             elif 'Tecnico Academico' in list(user.getRoles()):
                 rol = "Tecnico Academico"
