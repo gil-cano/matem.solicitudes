@@ -4,7 +4,7 @@ from datetime import datetime
 from zope.interface import implements
 from matem.solicitudes.interfaces import ISolicitud
 from matem.solicitudes.extender import PersonWrapper
-
+from AccessControl import ClassSecurityInfo
 from Products.Archetypes.atapi import AnnotationStorage
 from Products.Archetypes.atapi import BaseContent
 from Products.Archetypes.atapi import BaseSchema
@@ -819,9 +819,21 @@ class Solicitud(BaseContent):
 
     implements(ISolicitud)
 
+    security = ClassSecurityInfo()
     schema = schema
 
     _at_rename_after_creation = False
+
+    # This method is only called once after object creation.
+    security.declarePrivate('at_post_create_script')
+    def at_post_create_script(self):
+        if self.getLicenciacomision() == 'Licencia':
+            folder = self.aq_parent
+            balance = folder.getBalance(self.getIdOwner())
+            remainig_days = LICENCEDAYS - balance['licence_days']
+            if self.getCantidadDeDias() > remainig_days:
+                self.setLicenciacomision('Comision')
+
 
     def canSetDefaultPage(self):
         return False

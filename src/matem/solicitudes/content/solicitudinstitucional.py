@@ -4,6 +4,7 @@ from datetime import datetime
 
 from zope.interface import implements
 
+from AccessControl import ClassSecurityInfo
 from Acquisition import aq_parent
 from DateTime import DateTime
 from Products.Archetypes import atapi
@@ -913,7 +914,18 @@ class SolicitudInstitucional(BaseContent):
     implements(ISolicitudInstitucional)
 
     meta_type = "SolicitudInstitucional"
+    security = ClassSecurityInfo()
     schema = SolicitudInstitucionalSchema
+
+    # This method is only called once after object creation.
+    security.declarePrivate('at_post_create_script')
+    def at_post_create_script(self):
+        if self.getLicenciacomision() == 'Licencia':
+            folder = self.aq_parent
+            balance = folder.getBalance(self.getIdOwner())
+            remainig_days = LICENCEDAYS - balance['licence_days']
+            if self.getCantidadDeDias() > remainig_days:
+                self.setLicenciacomision('Comision')
 
     def canSetDefaultPage(self):
         return False
