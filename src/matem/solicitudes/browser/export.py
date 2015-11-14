@@ -6,8 +6,8 @@ from matem.solicitudes.browser.queries import Queries
 import csv
 import os
 
-
-INSTANCEHOME = '/Users/gil/projects/plone/matem-buildout'
+# INSTANCEHOME = '/Users/gil/projects/plone/matem-buildout'
+INSTANCEHOME = '/opt/infomatemPlone4/zeocluster'
 SOLFILE = os.path.join(INSTANCEHOME, 'Extensions/solicitudes.csv')
 
 
