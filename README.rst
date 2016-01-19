@@ -5,7 +5,7 @@ IM Applications package
     :alt: Travis CI badge
     :target: https://travis-ci.org/gil-cano/matem.solicitudes
 
-.. image:: https://coveralls.io/repos/gil-cano/matem.solicitudes/badge.svg?branch=master&service=github
+.. image:: https://coveralls.io/repos/github/gil-cano/matem.solicitudes/badge.svg?branch=master
     :alt: Coveralls badge
     :target: https://coveralls.io/github/gil-cano/matem.solicitudes?branch=master
 

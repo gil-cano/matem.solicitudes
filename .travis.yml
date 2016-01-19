@@ -1,18 +1,29 @@
+sudo: false
 language: python
 python:
   - 2.7
+cache:
+  directories:
+    - $HOME/buildout-cache
+    - $HOME/parts/node
+env:
+  matrix:
+    - CONF=travis.cfg
 install:
-  - mkdir -p buildout-cache/{eggs,downloads}
   - python bootstrap.py --setuptools-version=8.3 -c travis.cfg
-  - bin/buildout -Nq -t 3 -c travis.cfg
+  - bin/buildout -Nq -t 3 -c $CONF
 script:
   - bin/code-analysis
   - bin/test
 after_success:
-  - bin/createcoverage
-  - pip install -q coveralls
+  - bin/createcoverage run bin/test
+  - pip install coverage==3.7 coveralls
   - coveralls
-
+after_failure:
+  - bin/flake8 --version
+  - bin/csslint --version
+  - bin/jshint --version
+  - bin/jscs --version
 notifications:
   email:
     - gil.cano@gmail.com
