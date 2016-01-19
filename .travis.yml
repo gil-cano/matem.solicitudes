@@ -6,14 +6,18 @@ cache:
   directories:
     - $HOME/buildout-cache
     - $HOME/parts/node
-install:
+before_cache:
   - mkdir -p buildout-cache/{eggs,downloads}
+install:
   - python bootstrap.py --setuptools-version=8.3 -c travis.cfg
   - bin/buildout -Nq -t 3 -c travis.cfg
 script:
   - bin/code-analysis
   - bin/test
-
+after_success:
+  - bin/createcoverage run bin/test
+  - pip install coverage==3.7 coveralls
+  - coveralls
 notifications:
   email:
     - gil.cano@gmail.com
