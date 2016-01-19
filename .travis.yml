@@ -6,9 +6,12 @@ cache:
   directories:
     - $HOME/buildout-cache
     - $HOME/parts/node
+env:
+  matrix:
+    - CONF=travis.cfg
 install:
   - python bootstrap.py --setuptools-version=8.3 -c travis.cfg
-  - bin/buildout -Nq -t 3 -c travis.cfg
+  - bin/buildout -Nq -t 3 -c $CONF
 script:
   - bin/code-analysis
   - bin/test
@@ -24,16 +27,3 @@ after_failure:
 notifications:
   email:
     - gil.cano@gmail.com
-
-env:
-  matrix:
-    - CONF=travis.cfg
-    - CONF=extras.cfg EXTRAS_INSTALLED=true
-matrix:
-  allow_failures:
-    - python: 3.4
-      env: CONF=extras.cfg EXTRAS_INSTALLED=true
-install:
-  - python bootstrap-buildout.py --setuptools-version=18.5
-  - bin/buildout -c $CONF annotate
-  - bin/buildout -N -t 3 -c $CONF
