@@ -385,7 +385,7 @@ msgid "help_trabajo"
 msgstr "Especifique si presentará un trabajo"
 
 msgid "help_viaticos"
-msgstr "Especifique si solicita viáticos. Los máximos son: $900 diarios (México) y $1,200 diarios (Otros países)"
+msgstr "Especifique si solicita viáticos. Los máximos son: $900 diarios (México) y $2000 diarios (Otros países)"
 
 #. Default: "No. de Cuenta"
 #: matem/solicitudes/browser/solicitudbecario.pt:310
