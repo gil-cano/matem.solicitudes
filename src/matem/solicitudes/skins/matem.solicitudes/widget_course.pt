@@ -44,9 +44,8 @@
     </div>
 
     <metal:define define-macro="course_edit">
-      Edita del curso
-      <!-- <metal:label define-slot="widget_label" />
-      <tal:define define="units accessor">
+      <metal:label define-slot="widget_label" />
+      <!-- <tal:define define="units accessor">
         <tal:rep repeat="unit units">
         <tal:block define="size unit/get_size;
                            icon unit/icon | nothing;
@@ -77,9 +76,9 @@
           </tal:link>
         </tal:block>
         </tal:rep>
-      </tal:define>
+      </tal:define> -->
 
-      <metal metal:use-macro="here/widget_multifile/macros/file_upload"/> -->
+      <!-- <metal metal:use-macro="here/widget_multifile/macros/file_upload"/> -->
     </metal:define>
 
 

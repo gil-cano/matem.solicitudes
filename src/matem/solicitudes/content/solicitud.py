@@ -43,6 +43,8 @@ from matem.solicitudes.config import PROJECTNAME
 from matem.solicitudes.config import SEDE
 from matem.solicitudes.config import getCountriesVocabulary
 from matem.solicitudes import solicitudesMessageFactory as _
+from matem.solicitudes.widgets.course.course import CourseField
+from matem.solicitudes.widgets.course.course import CourseWidget
 
 
 schema = BaseSchema + Schema((
@@ -807,6 +809,16 @@ schema = BaseSchema + Schema((
         label_msgid='label_acuse_recibo',
         default=False,
         widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
+    ),
+
+    CourseField(
+        name='wcourses',
+        # storage=atapi.AnnotationStorage(),
+        widget=CourseWidget(
+            label=_(u'label_wcourse', default=u'Courses'),
+            # description=_(u"help_date", default=u"Year / month / day. At least the year is required"),
+        ),
+        # validators='isValidDate',
     ),
 ))
 

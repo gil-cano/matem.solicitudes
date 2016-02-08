@@ -1,6 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:cmf="http://namespaces.zope.org/cmf"
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:plone="http://namespaces.zope.org/plone"
     xmlns:i18n="http://namespaces.zope.org/i18n"
@@ -15,6 +16,8 @@
     <include package=".browser" />
     <include package=".portlets" />
     <include file="upgrades.zcml"/>
+
+    <cmf:registerDirectory name="matem.solicitudes"/>
 
     <i18n:registerTranslations directory="locales" />
 

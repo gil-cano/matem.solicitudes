@@ -8,6 +8,8 @@ from Products.CompoundField.CompoundWidget import CompoundWidget
 from Products.CompoundField.CompoundField import CompoundField
 from matem.solicitudes import solicitudesMessageFactory as _
 
+from AccessControl import ClassSecurityInfo
+
 
 schema = atapi.Schema((
     atapi.StringField(
@@ -55,13 +57,14 @@ registerField(
 class CourseWidget(CompoundWidget):
     _properties = TypesWidget._properties.copy()
     _properties.update({
-        'macro': 'course_template',
+        'macro': 'widget_course',
     })
+
+    security = ClassSecurityInfo()
 
 registerWidget(
     CourseWidget,
     title='CourseWidget',
     description=('Widget for display course on CourseField type format'),
-    userd_for=('matem.solicitudes.widgets.course.CourseField',),
-    # used_for=('Products.Archetypes.Field.StringField', ),
+    used_for=('matem.solicitudes.widgets.course.course.CourseField',)
 )
