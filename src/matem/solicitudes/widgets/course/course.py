@@ -32,6 +32,14 @@ schema = atapi.Schema((
         )
     ),
 
+    atapi.StringField(
+        'title2',
+        required=True,
+        widget=atapi.StringWidget(
+            label=_(u"Este es otro campo"),
+        ),
+    ),
+
 ))
 
 
@@ -55,9 +63,10 @@ registerField(
 
 
 class CourseWidget(CompoundWidget):
-    _properties = TypesWidget._properties.copy()
+    _properties = CompoundWidget._properties.copy()
     _properties.update({
         'macro': 'widget_course',
+        'helper_js': ('course.js',),
     })
 
     security = ClassSecurityInfo()
