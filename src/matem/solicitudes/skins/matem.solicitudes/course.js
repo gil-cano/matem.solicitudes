@@ -23,7 +23,6 @@ CourseFieldFunctions.addRow = function(id) {
 
     @param id Archetypes field id for the widget
   */
-
   // fetch required data structure
     var tbody = document.getElementById("coursewidget-tbody-" + id);
     var rows = this.getRows(tbody);

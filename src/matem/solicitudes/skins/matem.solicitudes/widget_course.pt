@@ -43,39 +43,25 @@
 
     </div>
 
+    <!-- <metal:label define-slot="widget_label" /> -->
+    <!-- <metal metal:use-macro="here/widget_course/macros/course_upload"/> -->
     <metal:define define-macro="course_edit">
-      <!-- <metal:label define-slot="widget_label" /> -->
-      <!-- <metal metal:use-macro="here/widget_course/macros/course_upload"/> -->
-      <metal:use use-macro="field_macro | here/widgets/field/macros/edit">
-        <metal:body metal:fill-slot="widget_body">
-          <table class="coursewidget-table-edit"
-            tal:attributes="id python: 'coursewidget-table-' + field.getName()"
-            tal:define="fielddata python: value or field.getEditAccessor(context)();">
-            <tbody tal:attributes="id python: 'coursewidget-tbody-' + field.getName()">
-              <tal:row-loop tal:repeat="rows fielddata" tal:define="newRow python: False">
-                <tal:row metal:use-macro="here/edit_row/macros/edit_row"/>
-              </tal:row-loop>
-            </tbody>
-
-
-
-
-          </table>
-          <a class="coursewidget-add-button" id="coursewidget-add-button"
-                   i18n:translate="label_coursewidget_add_new_row"
-               tal:attributes='onclick python: "CourseFieldFunctions.addRow(\"" + field.getName() + "\")"'>Add new row</a>
-
-
-
-          <!-- <tal:block tal:repeat="f python:field.getFields()">
-            <input metal:use-macro="python:here.widget(f.getName(),field=f,mode='edit')"  />
-          </tal:block>
-          <hr/> -->
-        </metal:body>
-      </metal:use>
-
-
-
+      <table class="coursewidget-table-edit"
+        tal:attributes="id python: 'coursewidget-table-' + field.getName()"
+        style="width: 100%"
+        tal:define="fielddata python: value or field.getEditAccessor(context)();">
+        <tbody tal:attributes="id python: 'coursewidget-tbody-' + field.getName()">
+          <tal:row-loop tal:repeat="rows fielddata" tal:define="newRow python: False">
+            <tal:row metal:use-macro="here/edit_row/macros/edit_row"/>
+          </tal:row-loop>
+        </tbody>
+      </table>
+      <a class="coursewidget-add-button"
+        id="coursewidget-add-button"
+        i18n:translate="label_coursewidget_add_new_row"
+        tal:attributes='onclick python: "CourseFieldFunctions.addRow(\"" + field.getName() + "\")"'>
+        Add new row
+      </a>
       <!-- <metal:use use-macro="field_macro | here/widgets/field/macros/edit">
         <metal:body metal:fill-slot="widget_body">
           <tal:block tal:repeat="f python:field.getFields()">
@@ -87,31 +73,11 @@
     </metal:define>
 
 
-    <metal:define define-macro="course_upload">
+    <!-- <metal:define define-macro="course_upload">
       <a class="coursewidget-add-button" id="coursewidget-add-button"
                    i18n:translate="label_coursewidget_add_new_row"
                tal:attributes='onclick python: "CourseFieldFunctions.addRow(\"" + field.getName() + "\")"'>Add new row</a>
-        <!-- <button class="add_field_button"
-          tal:attributes='onclick python: "CourseFieldFunctions.addRow(\"" + field.getName() + "\")"'>Add Activity
-        </button> -->
-        <!-- <input type="file"
-               size="30"
-               tabindex=""
-               tal:attributes="name string:${fieldName}_f:list;
-                               id string:${fieldName}_f:list;
-                               tabindex tabindex/next|nothing;
-                               onchange string:return addEvent('${fieldName}_f');
-                              " />
-              <br />
-        <input type="hidden" value="0" id="theValue" />
-        <input type="hidden"
-                id="multifile-remove-label"
-                value="Remove"
-                i18n:attributes="value" />
-
-        <div class="email-link" id="myDiv"> </div>
-        <input type="hidden" value="" id="theFile" name="theFile"/> -->
-    </metal:define>
+    </metal:define> -->
 
     <metal:define define-macro="view">
       <metal:use use-macro="here/widget_course/macros/course_view" />
@@ -119,9 +85,9 @@
 
     <metal:define define-macro="edit">
       <metal:use use-macro="field_macro | here/widgets/field/macros/edit">
-        <metal:fill fill-slot="widget_body">
+        <metal:body metal:fill-slot="widget_body">
           <metal:use use-macro="here/widget_course/macros/course_edit" />
-        </metal:fill>
+        </metal:body>
       </metal:use>
     </metal:define>
 
