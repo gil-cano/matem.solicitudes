@@ -9,6 +9,11 @@ from Products.CompoundField.CompoundField import CompoundField
 from matem.solicitudes import solicitudesMessageFactory as _
 
 from AccessControl import ClassSecurityInfo
+import types
+ListTypes = (types.TupleType, types.ListType)
+from Products.Archetypes.Field import ObjectField
+from Products.Archetypes.Field import encode
+
 
 
 schema = atapi.Schema((
@@ -43,37 +48,106 @@ schema = atapi.Schema((
 ))
 
 
-class CourseField(CompoundField):
-    """
-    """
-    _properties = CompoundField._properties.copy()
-    _properties.update({
-        'type': 'coursefield',
-        # 'validators': DateFreeValidator(),
-    })
-
-    schema = schema
-
-
-registerField(
-    CourseField,
-    title='CourseField',
-    description=('Fields required for solicitud corses.'),
-)
-
-
 class CourseWidget(CompoundWidget):
     _properties = CompoundWidget._properties.copy()
     _properties.update({
         'macro': 'widget_course',
+        'helper_css': ('course.css',),
         'helper_js': ('course.js',),
     })
 
     security = ClassSecurityInfo()
+
+    # def process_form(self, instance, field, form, empty_marker=None,
+    #                  emptyReturnsMarker=False):
+    #     #print 'processss_form:',form
+    #     import pdb; pdb.set_trace()
+    #     value = dict()
+    #     for f in field.Schema().fields():
+    #         fname = getattr(f, 'old_name', field.getName())
+    #         value[fname] = f.widget.process_form(instance, f, form,empty_marker)
+
+    #     return value, {}
 
 registerWidget(
     CourseWidget,
     title='CourseWidget',
     description=('Widget for display course on CourseField type format'),
     used_for=('matem.solicitudes.widgets.course.course.CourseField',)
+)
+
+
+class CourseField(ObjectField):
+    """
+    """
+    _properties = ObjectField._properties.copy()
+    _properties.update({
+        'type': 'coursefield',
+        # 'validators': DateFreeValidator(),
+        'widget': CourseWidget,
+        'rows': [],
+    })
+
+    schema = schema
+
+    security = ClassSecurityInfo()
+    security.declarePrivate('set')
+    security.declarePrivate('get')
+    security.declarePrivate('getRaw')
+
+    def set(self, instance, value, **kwargs):
+        """
+        The passed in object should be a records object, or a sequence of dictionaries
+        """
+        # import pdb; pdb.set_trace()
+
+        if not value:
+            return
+
+        for f in self.Schema().fields():
+            if value.has_key(f.old_name):
+                v = value[f.old_name]
+                isarray = type(v) in ListTypes and len(v)==2 and type(v[1]) == types.DictType
+                if v and isarray:
+                    kw=v[1]
+                else:
+                    kw={}
+
+                request = instance.REQUEST
+                if (v or \
+                    f.type == 'lines' and \
+                    not ('controller_state' in request and \
+                         request['controller_state'].getErrors())):
+                    if isarray or (type(v) in ListTypes and len(v) ==1) and f.type != 'datagrid':
+                        f.set(instance, v[0], **kw)
+                    else:
+                        f.set(instance, v, **kw)
+
+    def getRaw(self, instance, **kwargs):
+        return self.get(instance, **kwargs)
+
+        # ObjectField.set(self, instance, value, **kwargs)
+
+    def get(self, instance, **kwargs):
+        """ Return CourseField value
+        """
+        value = ObjectField.get(self, instance, **kwargs) or ()
+        data = [encode(v, instance, **kwargs) for v in value]
+        return data
+
+
+
+        # import pdb; pdb.set_trace()
+        # res = dict()
+        # for field in self.Schema().fields():
+        #     res[field.old_name] = field.get(instance,**kwargs)
+        # # if getattr(self, 'value_class', None):
+        # #     res = self.raw2ValueClass(res)
+        # return res
+
+
+registerField(
+    CourseField,
+    title='CourseField',
+    description=('Fields required for solicitud corses.'),
 )

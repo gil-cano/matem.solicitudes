@@ -22,7 +22,9 @@
       <tr id="coursewidget-empty-row"
         class="coursewidget-empty-row"
         tal:define="fieldId string:${fieldName}_new;">
+        <td>
         Preparar el renglon nuevo
+      </td>
       </tr>
     </metal:define>
 </body>

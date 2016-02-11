@@ -28,13 +28,15 @@ CourseFieldFunctions.addRow = function(id) {
     var rows = this.getRows(tbody);
     var lastRow = rows[rows.length-1];
 
+    console.log(lastRow)
+
     var oldRows = rows.length;
 
     // Create a new row
     var newtr = this.createNewRow(lastRow);
     
     // Put new row to DOM tree before template row
-  newNode = lastRow.parentNode.insertBefore(newtr, lastRow);
+    newNode = lastRow.parentNode.insertBefore(newtr, lastRow);
 
   // update orderindex hidden fields
   //this.updateOrderIndex(tbody);
@@ -53,7 +55,7 @@ CourseFieldFunctions.createNewRow = function(tr) {
     // hidden template row
     var lastRow = rows[rows.length-1];
 
-  var newtr = document.createElement("tr");
+    var newtr = document.createElement("tr");
     newtr.setAttribute("id", "coursewidget-row");
     newtr.setAttribute("class", "coursewidget-row");
 
@@ -65,12 +67,12 @@ CourseFieldFunctions.createNewRow = function(tr) {
   // In Firefox everything worked like a charm.
   // So the code below is really a hack to satisfy Microsoft codeborgs.
   // keywords: IE javascript clone clonenode hidden element render visibility visual
-  child = lastRow.firstChild;
-  while(child != null) {
-    newchild = child.cloneNode(true);
-    newtr.appendChild(newchild);
-    child = child.nextSibling;
-  }
+    child = lastRow.firstChild;
+    while(child != null) {
+      newchild = child.cloneNode(true);
+      newtr.appendChild(newchild);
+      child = child.nextSibling;
+    }
 
     return newtr;
 }

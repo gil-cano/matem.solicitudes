@@ -1,0 +1,55 @@
+/*
+  DataGridWidget CSS definitions
+  ------------------------------------------
+  Copyright 2006 Red Innovation <http://www.redinnovation.com>
+  <dtml-with base_properties> (Loads base_properties variables)
+
+  <dtml-call "REQUEST.set('portal_url', portal_url())"> (Do not change this)
+*/
+
+table.coursewidget-table-view {
+    width: 100%;
+}
+
+
+tr.coursewidget-row {
+    vertical-align: top;
+}
+
+/*
+    Workaround for IE which cannot propeply handle
+    background images in cloned TR input fields.
+    Plone is shipped with default input background gradient image
+ */
+
+tr.coursewidget-empty-row {
+    /* Hidden row with default selection widget values */
+    display: none;
+}
+
+
+a.coursewidget-add-button, a.coursewidget-add-button:hover {
+    text-decoration: none;
+    background: &dtml-globalBackgroundColor; url(&dtml-portal_url;/linkOpaque.gif) 9px 1px no-repeat;
+    cursor: pointer;
+    font-size: &dtml-fontSmallSize;;
+    padding: 1px 1px 1px 15px;
+    text-transform: &dtml-textTransform;;
+    float: right;
+}
+
+
+div.ArchetypesCourseWidget table td img {
+    display: block;
+    cursor: pointer;
+}
+
+div.ArchetypesCourseWidget table td input,
+div.ArchetypesCourseWidget table td select {
+    width:100%;
+}
+
+
+/* 
+  </dtml-with>  (end of loaded base_properties variables)
+*/

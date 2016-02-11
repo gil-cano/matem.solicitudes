@@ -46,14 +46,20 @@
     <!-- <metal:label define-slot="widget_label" /> -->
     <!-- <metal metal:use-macro="here/widget_course/macros/course_upload"/> -->
     <metal:define define-macro="course_edit">
+      <span tal:content="value"/>
       <table class="coursewidget-table-edit"
         tal:attributes="id python: 'coursewidget-table-' + field.getName()"
         style="width: 100%"
         tal:define="fielddata python: value or field.getEditAccessor(context)();">
+
         <tbody tal:attributes="id python: 'coursewidget-tbody-' + field.getName()">
           <tal:row-loop tal:repeat="rows fielddata" tal:define="newRow python: False">
             <tal:row metal:use-macro="here/edit_row/macros/edit_row"/>
           </tal:row-loop>
+
+          <tal:empty-row tal:define="newRow python: True">
+            <tal:template metal:use-macro="here/edit_row/macros/edit_empty_row"/>
+          </tal:empty-row>
         </tbody>
       </table>
       <a class="coursewidget-add-button"
