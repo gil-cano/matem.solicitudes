@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="archetypes.multifile">
+
+  <head><title></title></head>
+
+  <body>
+
+    <!-- File Widgets -->
+
+    <div metal:define-macro="conference_view">
+      Aqui debe ir la vista del curso
+    </div>
+
+    <metal:define define-macro="conference_edit">
+      El edita de conferencia
+      <table class="datagridwidget-table-edit"
+            tal:attributes="id python: 'datagridwidget-table-' + field.getName()"
+              style="width: 100%"
+                tal:define="columns python:widget.getColumnDefs(field, context);
+                            fielddata python: value or field.getEditAccessor(context)();
+                            eventHandler python: test(widget.isAutoInsertEnabled(), 'dataGridFieldFunctions.autoInsertRow(event)', '')
+                           ">
+                <thead tal:condition="python: widget.hasHeader(context, field)">
+                    <tr>
+            <tal:block tal:repeat="c columns"
+                         ><th style="text-align: left"
+                              tal:attributes="class python:'%s datagridwidget-column-%s discreet' % (
+                                                           not c['visible'] and 'dgw-hidden-column' or '',
+                                                           repeat['c'].number());"
+                            tal:content="c/label"
+                            i18n:translate="">Column name</th
+             ></tal:block>
+      <th tal:condition="python: widget.isInsertEnabled(context, field)" />
+                        <th tal:condition="python: widget.isDeleteEnabled(context, field)" />
+                        <tal:reorder condition="python: widget.isReorderEnabled(context, field)">
+        <th />
+        <th />
+      </tal:reorder>
+                    </tr>
+                </thead>
+
+                <tbody tal:attributes="id python: 'datagridwidget-tbody-' + field.getName()">
+
+                  <tal:comment replace="nothing">
+                    <!-- Existing data rows -->
+                  </tal:comment>
+
+                    <tal:row-loop tal:repeat="rows fielddata" tal:define="newRow python: False">
+                      <tal:row metal:use-macro="here/datagridwidget_edit_row/macros/edit_row"/>
+                    </tal:row-loop>
+
+                  <tal:comment replace="nothing">
+                    <!-- A template row for adding new rows dynamically -->
+                  </tal:comment>
+
+                  <tal:empty-row tal:define="newRow python: True">
+                    <tal:template metal:use-macro="here/datagridwidget_edit_row/macros/edit_empty_row"/>
+                  </tal:empty-row>
+                 </tbody>
+            </table>
+
+            <a class="datagridwidget-add-button" id="datagridwidget-add-button"
+                   i18n:translate="label_datagridwidget_add_new_row"
+                   tal:condition="field/allow_insert"
+               tal:attributes='onclick python: "dataGridFieldFunctions.addRow(\"" + field.getName() + "\")"'>Add new row</a>
+
+
+
+
+
+      <!-- <table class="coursewidget-table-edit"
+        tal:attributes="id python: 'coursewidget-table-' + field.getName()"
+        style="width: 100%"
+        tal:define="fielddata python: value or field.getEditAccessor(context)();">
+
+        <tbody tal:attributes="id python: 'coursewidget-tbody-' + field.getName()">
+          <tal:row-loop tal:repeat="rows fielddata" tal:define="newRow python: False">
+            <tal:row metal:use-macro="here/edit_row/macros/edit_row"/>
+          </tal:row-loop>
+
+          <tal:empty-row tal:define="newRow python: True">
+            <tal:template metal:use-macro="here/edit_row/macros/edit_empty_row"/>
+          </tal:empty-row>
+        </tbody>
+      </table>
+      <a class="coursewidget-add-button"
+        id="coursewidget-add-button"
+        i18n:translate="label_coursewidget_add_new_row"
+        tal:attributes='onclick python: "CourseFieldFunctions.addRow(\"" + field.getName() + "\")"'>
+        Add new row
+      </a> -->
+    </metal:define>
+
+
+    <metal:define define-macro="view">
+      <metal:use use-macro="here/widget_conference/macros/conference_view" />
+    </metal:define>
+
+    <metal:define define-macro="edit">
+      <metal:use use-macro="field_macro | here/widgets/field/macros/edit">
+        <metal:body metal:fill-slot="widget_body">
+          <metal:use use-macro="here/widget_conference/macros/conference_edit" />
+        </metal:body>
+      </metal:use>
+    </metal:define>
+
+    <!-- <metal:define define-macro="search">
+      <metal:use use-macro="here/widget_multifile/macros/edit" />
+    </metal:define> -->
+
+  </body>
+
+</html>

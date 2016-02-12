@@ -46,6 +46,10 @@ from matem.solicitudes import solicitudesMessageFactory as _
 from matem.solicitudes.widgets.course.course import CourseField
 from matem.solicitudes.widgets.course.course import CourseWidget
 
+from Products.DataGridField.Column import Column
+from matem.solicitudes.widgets.conference.conference import DataGridConferenceField
+from matem.solicitudes.widgets.conference.conference import ConferenceWidget
+
 
 schema = BaseSchema + Schema((
     ComputedField(
@@ -820,6 +824,25 @@ schema = BaseSchema + Schema((
         ),
         # validators='isValidDate',
     ),
+
+    DataGridConferenceField(
+        name='conferences',
+        columns=('title', 'place', 'fechai', 'fechaf'),
+        widget=ConferenceWidget(
+            label=_(u"label_widgetconferences", default=u"Conferences"),
+            columns={
+                'title': Column(
+                    _(u"wtitle_label", default=u"Title"),
+                ),
+                'place': Column(
+                    _(u"wplace_label", default=u"Place"),
+                ),
+                'fechai': Column(_(u"initial_date_label", default=u"Initial Date <dd/mm/yyyy>")),
+                'fechaf': Column(_(u"end_date_label", default=u"End Date <dd/mm/yyyy>"))},
+        ),
+    ),
+
+
 ))
 
 for f in schema.filterFields(isMetadata=True):

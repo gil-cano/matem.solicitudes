@@ -46,7 +46,6 @@
     <!-- <metal:label define-slot="widget_label" /> -->
     <!-- <metal metal:use-macro="here/widget_course/macros/course_upload"/> -->
     <metal:define define-macro="course_edit">
-      <span tal:content="value"/>
       <table class="coursewidget-table-edit"
         tal:attributes="id python: 'coursewidget-table-' + field.getName()"
         style="width: 100%"

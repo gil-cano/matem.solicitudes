@@ -23,7 +23,9 @@
         class="coursewidget-empty-row"
         tal:define="fieldId string:${fieldName}_new;">
         <td>
-        Preparar el renglon nuevo
+          <tal:block tal:repeat="f python:field.getFields()">
+            <input metal:use-macro="python:here.widget(f.getName(),field=f,mode='edit')"  />
+          </tal:block>
       </td>
       </tr>
     </metal:define>

@@ -58,16 +58,6 @@ class CourseWidget(CompoundWidget):
 
     security = ClassSecurityInfo()
 
-    # def process_form(self, instance, field, form, empty_marker=None,
-    #                  emptyReturnsMarker=False):
-    #     #print 'processss_form:',form
-    #     import pdb; pdb.set_trace()
-    #     value = dict()
-    #     for f in field.Schema().fields():
-    #         fname = getattr(f, 'old_name', field.getName())
-    #         value[fname] = f.widget.process_form(instance, f, form,empty_marker)
-
-    #     return value, {}
 
 registerWidget(
     CourseWidget,
@@ -77,10 +67,10 @@ registerWidget(
 )
 
 
-class CourseField(ObjectField):
+class CourseField(CompoundField):
     """
     """
-    _properties = ObjectField._properties.copy()
+    _properties = CompoundField._properties.copy()
     _properties.update({
         'type': 'coursefield',
         # 'validators': DateFreeValidator(),
