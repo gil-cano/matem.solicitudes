@@ -11,7 +11,7 @@ class ConferenceWidget(DataGridWidget):
     _properties = DataGridWidget._properties.copy()
     _properties.update({
         'macro': 'widget_conference',
-        # 'helper_css': ('course.css',),
+        'helper_css': ('solwidgets.css',),
         # 'helper_js': ('course.js',),
     })
 

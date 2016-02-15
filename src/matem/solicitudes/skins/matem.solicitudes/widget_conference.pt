@@ -17,55 +17,90 @@
     <metal:define define-macro="conference_edit">
       El edita de conferencia
       <table class="datagridwidget-table-edit"
-            tal:attributes="id python: 'datagridwidget-table-' + field.getName()"
-              style="width: 100%"
-                tal:define="columns python:widget.getColumnDefs(field, context);
-                            fielddata python: value or field.getEditAccessor(context)();
-                            eventHandler python: test(widget.isAutoInsertEnabled(), 'dataGridFieldFunctions.autoInsertRow(event)', '')
-                           ">
-                <thead tal:condition="python: widget.hasHeader(context, field)">
-                    <tr>
-            <tal:block tal:repeat="c columns"
-                         ><th style="text-align: left"
-                              tal:attributes="class python:'%s datagridwidget-column-%s discreet' % (
-                                                           not c['visible'] and 'dgw-hidden-column' or '',
-                                                           repeat['c'].number());"
-                            tal:content="c/label"
-                            i18n:translate="">Column name</th
-             ></tal:block>
-      <th tal:condition="python: widget.isInsertEnabled(context, field)" />
-                        <th tal:condition="python: widget.isDeleteEnabled(context, field)" />
-                        <tal:reorder condition="python: widget.isReorderEnabled(context, field)">
-        <th />
-        <th />
-      </tal:reorder>
-                    </tr>
-                </thead>
+          tal:attributes="id python: 'datagridwidget-table-' + field.getName()"
+          style="width: 100%"
+          tal:define="columns python:widget.getColumnDefs(field, context);
+                    fielddata python: value or field.getEditAccessor(context)();
+                    eventHandler python: test(widget.isAutoInsertEnabled(), 'dataGridFieldFunctions.autoInsertRow(event)', '')">
+        <!-- <thead tal:condition="python: widget.hasHeader(context, field)">
+          <tr>
+            <tal:block tal:repeat="c columns">
+              <th style="text-align: left"
+                  tal:attributes="class python:'%s datagridwidget-column-%s discreet' % (
+                                    not c['visible'] and 'dgw-hidden-column' or '', repeat['c'].number());"
+                  tal:content="c/label"
+                  i18n:translate="">
+                Column name
+              </th>
+            </tal:block>
+            <th tal:condition="python: widget.isInsertEnabled(context, field)" />
+            <th tal:condition="python: widget.isDeleteEnabled(context, field)" />
+            <tal:reorder condition="python: widget.isReorderEnabled(context, field)">
+              <th />
+              <th />
+            </tal:reorder>
+          </tr>
+        </thead> -->
 
-                <tbody tal:attributes="id python: 'datagridwidget-tbody-' + field.getName()">
+        <tbody tal:attributes="id python: 'datagridwidget-tbody-' + field.getName()">
 
-                  <tal:comment replace="nothing">
-                    <!-- Existing data rows -->
-                  </tal:comment>
+          <tal:comment replace="nothing">
+            <!-- Existing data rows -->
+          </tal:comment>
 
-                    <tal:row-loop tal:repeat="rows fielddata" tal:define="newRow python: False">
-                      <tal:row metal:use-macro="here/datagridwidget_edit_row/macros/edit_row"/>
-                    </tal:row-loop>
+          <tal:row-loop tal:repeat="rows fielddata" tal:define="newRow python: False">
+            <tal:row metal:use-macro="here/datagridwidget_edit_row/macros/edit_row"/>
+          </tal:row-loop>
 
-                  <tal:comment replace="nothing">
-                    <!-- A template row for adding new rows dynamically -->
-                  </tal:comment>
+          <tal:comment replace="nothing">
+            <!-- A template row for adding new rows dynamically -->
+          </tal:comment>
 
-                  <tal:empty-row tal:define="newRow python: True">
-                    <tal:template metal:use-macro="here/datagridwidget_edit_row/macros/edit_empty_row"/>
-                  </tal:empty-row>
-                 </tbody>
-            </table>
+          <tal:empty-row tal:define="newRow python: True">
+            <!-- <span tal:content="columns"/> -->
+            <tr id="coursewidget-empty-row"
+                class="coursewidget-empty-row"
+                tal:define="fieldId string:${fieldName}_new;">
+              <td class="foo">
 
-            <a class="datagridwidget-add-button" id="datagridwidget-add-button"
-                   i18n:translate="label_datagridwidget_add_new_row"
-                   tal:condition="field/allow_insert"
-               tal:attributes='onclick python: "dataGridFieldFunctions.addRow(\"" + field.getName() + "\")"'>Add new row</a>
+              <tal:block tal:repeat="columnd columns">
+           <tal:block tal:attributes="class python:not columnd['visible'] and 'dgw-hidden-column datagridwidget-cell' or 'datagridwidget-cell';">
+              <span tal:content="columnd/label"/>
+              <span tal:define="
+                column columnd/id;
+                 column_definition python: widget.getColumnDefinition(field, column);
+                 cell_macro python: path('here/%s/macros' % column_definition.getMacro());
+                 edit_empty_macro cell_macro/edit_empty_cell;">
+
+                   <span metal:use-macro="edit_empty_macro"/>
+               </span>
+           </tal:block>
+           </tal:block>
+
+
+
+
+                <!-- <span tal:content="columns"/> -->
+                <!-- <tal:block tal:repeat="f python:field.getFields()">
+                <input metal:use-macro="python:here.widget(f.getName(),field=f,mode='edit')"  />
+                </tal:block> -->
+              </td>
+            </tr>
+
+
+
+
+
+            <!-- <tal:template metal:use-macro="here/edit_row/macros/edit_empty_row"/> -->
+            <!-- <tal:template metal:use-macro="here/datagridwidget_edit_row/macros/edit_empty_row"/> -->
+          </tal:empty-row>
+        </tbody>
+      </table>
+
+      <a class="datagridwidget-add-button" id="datagridwidget-add-button"
+        i18n:translate="label_datagridwidget_add_new_row"
+        tal:condition="field/allow_insert"
+        tal:attributes='onclick python: "dataGridFieldFunctions.addRow(\"" + field.getName() + "\")"'>Add new row</a>
 
 
 

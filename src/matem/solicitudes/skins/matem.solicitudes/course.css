@@ -14,6 +14,8 @@ table.coursewidget-table-view {
 
 tr.coursewidget-row {
     vertical-align: top;
+    box-shadow: inset 1px 1px 5px #888;
+    display: block;
 }
 
 /*
@@ -47,6 +49,7 @@ div.ArchetypesCourseWidget table td img {
 div.ArchetypesCourseWidget table td input,
 div.ArchetypesCourseWidget table td select {
     width:100%;
+    padding: 1em;
 }
 
 
