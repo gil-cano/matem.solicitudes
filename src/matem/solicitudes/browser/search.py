@@ -94,8 +94,9 @@ class SearchView(BrowserView):
             items.append(adic)
             # improve type
             if '/' in adic['Type']:
-                adic['Type'] = 'Solicitud de {type}'.format(
-                    type=o.getLicenciacomision())
+                adic['Type'] = 'Solicitud de {0}'.format(o.getLicenciacomision())
+            if 'Visitante' in adic['Type']:
+                adic['Type'] = '{0} ({1})'.format(adic['Type'], o.getNombreInvitado())
         return items
 
     def searchSlow(self):

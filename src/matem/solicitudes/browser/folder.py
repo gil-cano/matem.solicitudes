@@ -20,6 +20,7 @@ import re
 import datetime
 import sys
 
+
 class SolicitudFolderView(BrowserView):
     """A view of a folder"""
 
@@ -199,9 +200,9 @@ class SolicitudFolderView(BrowserView):
         else:
             return queryObj.getMyApplications()
 
-    def getSolicitudesAprobadasIndividuales(self,usuario):
-        queryObj=self.queryObj
-        applications=queryObj.getFolderApplicationsByStateAndUser('aprobada',usuario)
+    def getSolicitudesAprobadasIndividuales(self, usuario):
+        queryObj = self.queryObj
+        applications = queryObj.getFolderApplicationsByStateAndUser('aprobada', usuario)
         return applications
 
     def getSolicitudesRechazadasIndividuales(self,usuario):
