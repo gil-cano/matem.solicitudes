@@ -1,5 +1,12 @@
-[*.js]
+[*]
+indent_style = space
+charset = utf-8
+
+[{*.py,*.cfg}]
+indent_size = 4
+
+[{*.html,*.dtml,*.pt,*.zpt,*.xml,*.zcml,*.js}]
 indent_size = 2
 
-[{*.html,*.dtml,*.pt,*.zcml}]
-indent_size = 2
+[Makefile]
+indent_style = tab
