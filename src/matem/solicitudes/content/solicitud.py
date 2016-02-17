@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
-import sys
-from datetime import datetime
-from zope.interface import implements
-from matem.solicitudes.interfaces import ISolicitud
-from matem.solicitudes.extender import PersonWrapper
 from AccessControl import ClassSecurityInfo
+from Acquisition import aq_parent
+from archetypes.multifile.MultiFileField import MultiFileField
+from archetypes.multifile.MultiFileWidget import MultiFileWidget
+from datetime import datetime
+from DateTime.DateTime import DateTime
+from matem.solicitudes import solicitudesMessageFactory as _
+from matem.solicitudes.config import AREAS_INVESTIGACION
+from matem.solicitudes.config import getCountriesVocabulary
+from matem.solicitudes.config import LICENCEDAYS
+from matem.solicitudes.config import PROJECTNAME
+from matem.solicitudes.config import SEDE
+from matem.solicitudes.extender import PersonWrapper
+from matem.solicitudes.interfaces import ISolicitud
 from Products.Archetypes.atapi import AnnotationStorage
 from Products.Archetypes.atapi import BaseContent
 from Products.Archetypes.atapi import BaseSchema
@@ -20,29 +28,19 @@ from Products.Archetypes.atapi import LabelWidget
 from Products.Archetypes.atapi import LinesField
 from Products.Archetypes.atapi import MultiSelectionWidget
 from Products.Archetypes.atapi import PicklistWidget
+from Products.Archetypes.atapi import registerType
 from Products.Archetypes.atapi import Schema
 from Products.Archetypes.atapi import SelectionWidget
 from Products.Archetypes.atapi import StringField
 from Products.Archetypes.atapi import StringWidget
 from Products.Archetypes.atapi import TextAreaWidget
-from Products.Archetypes.atapi import registerType
-
-from Products.CMFCore.utils import getToolByName
-from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
-
-from Acquisition import aq_parent
 from Products.ATCountryWidget.config import COUNTRIES
+from Products.CMFCore.utils import getToolByName
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-from archetypes.multifile.MultiFileField import MultiFileField
-from archetypes.multifile.MultiFileWidget import MultiFileWidget
+from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
+from zope.interface import implements
 
-from DateTime.DateTime import DateTime
-from matem.solicitudes.config import AREAS_INVESTIGACION
-from matem.solicitudes.config import LICENCEDAYS
-from matem.solicitudes.config import PROJECTNAME
-from matem.solicitudes.config import SEDE
-from matem.solicitudes.config import getCountriesVocabulary
-from matem.solicitudes import solicitudesMessageFactory as _
+import sys
 
 
 schema = BaseSchema + Schema((
@@ -826,6 +824,7 @@ class Solicitud(BaseContent):
 
     # This method is only called once after object creation.
     security.declarePrivate('at_post_create_script')
+
     def at_post_create_script(self):
         if self.getLicenciacomision() == 'Licencia':
             folder = self.aq_parent
@@ -833,7 +832,6 @@ class Solicitud(BaseContent):
             remainig_days = LICENCEDAYS - balance['licence_days']
             if self.getCantidadDeDias() > remainig_days:
                 self.setLicenciacomision('Comision')
-
 
     def canSetDefaultPage(self):
         return False
@@ -1034,7 +1032,7 @@ class Solicitud(BaseContent):
             fsdperson = self.getPersonWrapper(creator)
             return fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName()
         except Exception:
-            print "Error Solicitud no encontrada persona " + creator + ", " + self.getId()
+            # print "Error Solicitud no encontrada persona " + creator + ", " + self.getId()
             return creator
 
     def getFechaSolicitud(self):
@@ -1443,7 +1441,7 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
         return [
             {
                 'label': _(u'Available Annual Allocation'),
-                'quantity': '${:,.2f}'.format(money)
+                'quantity': '${0:,.2f}'.format(money)
             },
             {
                 'label': _(u'Available licence days'),
