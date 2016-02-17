@@ -33,5 +33,5 @@ class DataGridConferenceField(ExtensionField, DataGridField):
         # 'validators': DateFreeValidator(),
         'widget': ConferenceWidget,
         # 'rows': [],
-        'label_item': 'Conference',
+        'label_item': '+ Conference',
     })

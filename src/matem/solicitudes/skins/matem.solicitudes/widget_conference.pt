@@ -28,7 +28,43 @@
           </tal:comment>
 
           <tal:row-loop tal:repeat="rows fielddata" tal:define="newRow python: False">
-            <tal:row metal:use-macro="here/datagridwidget_edit_row/macros/edit_row"/>
+            <!-- <tal:row metal:use-macro="here/datagridwidget_edit_row/macros/edit_row"/> -->
+            <tr id="datagridwidget-row" class="datagridwidget-row"
+              tal:define="oddrow repeat/rows/odd"
+              tal:condition="python: rows.get('orderindex_') != 'template_row_marker'"
+              >
+              <tal:vars define="fieldId string:${fieldName}_${repeat/rows/number};">
+                <td class="foo">
+                  <h3 i18n:translate="wlabel_conference">Conference</h3>
+                  <tal:block tal:repeat="columnd columns">
+
+                    <tal:block tal:attributes="
+                      class python:'%s datagridwidget-column-%s datagridwidget-cell' % (
+                                                 not columnd['visible'] and 'dgw-hidden-column' or '',
+                                                 repeat['columnd'].number());">
+                      <span tal:content="columnd/label"/>
+
+                      <span tal:define="
+                          column columnd/id;
+                          column_definition python: widget.getColumnDefinition(field, column);
+                          cell_macro python: path('here/%s/macros' % column_definition.getMacro());
+                          edit_macro cell_macro/edit_cell;
+                          cell_value python:rows.get(column);">
+                        <span metal:use-macro="edit_macro"/>
+                      </span>
+                    </tal:block>
+                  </tal:block>
+                </td>
+
+                <tal:comment replace="nothing">
+                  Following code renders DataGridWidget manipulation buttons
+                </tal:comment>
+
+                <!-- <tal:call metal:use-macro="here/datagridwidget_manipulators/macros/edit_manipulators"/> -->
+                <tal:call metal:use-macro="here/widget_manipulators/macros/edit_manipulators"/>
+
+              </tal:vars>
+            </tr>
           </tal:row-loop>
 
           <tal:comment replace="nothing">
@@ -68,6 +104,7 @@
         tal:condition="field/allow_insert"
         tal:attributes='onclick python: "dataGridFieldFunctions.addRow(\"" + field.getName() + "\")"'
         ><span i18n:translate="" tal:content="field/label_item">Add new row</span></a>
+      <br/><br/>
     </metal:define>
 
 
