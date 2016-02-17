@@ -1,155 +1,179 @@
-from zope.interface import implements
-from Products.Archetypes.public import *
-from matem.solicitudes.config import *
-from matem.solicitudes.interfaces import ISolicitudFolder
-from matem.solicitudes.extender import PersonWrapper
+# -*- coding: utf-8 -*-
 
-from Products.Archetypes import atapi
-from Products.Archetypes.atapi import *
-from Products.ATContentTypes.content.folder import ATFolderSchema, ATFolder
-from Products.ATContentTypes.content.topic import ATTopic
-#from Products.ATExtensions.ateapi import *
-#from Products.ATExtensions.config import PROJECTNAME
+from matem.solicitudes.config import PROJECTNAME
+from matem.solicitudes.extender import PersonWrapper
+from matem.solicitudes.interfaces import ISolicitudFolder
+from Products.ATContentTypes.content.folder import ATFolder
+from Products.Archetypes.atapi import CalendarWidget
+from Products.Archetypes.atapi import DateTimeField
+from Products.Archetypes.atapi import FloatField
+from Products.Archetypes.atapi import Schema
+from Products.Archetypes.atapi import StringWidget
+from Products.Archetypes.atapi import registerType
 from Products.ATExtensions.field.records import RecordsField
 from Products.ATExtensions.widget.records import RecordsWidget
-
 from Products.CMFCore.utils import getToolByName
-from Acquisition import aq_parent, aq_base, ImplicitAcquisitionWrapper
+from zope.interface import implements
 
 import logging
 
 logger = logging.getLogger("Plone")
 
-
 schema = ATFolder.schema.copy() + Schema((
-        DateTimeField('fecha_desde',
-            searchable=1,
-            required=1,
-            widget=CalendarWidget(label='Start date',
-                                  label_msgid='label_fecha_desde_folder',
-                                  i18n_domain='plone',
-                                  description='Date on which this period starts',
-                                  description_msgid='help_fecha_desde_folder',
-                                  show_hm=False),
-        ),
 
-        DateTimeField('fecha_hasta',
-            searchable=1,
-            required=1,
-            widget=CalendarWidget(label='End date',
-                                  label_msgid='label_fecha_hasta_folder',
-                                  i18n_domain='plone',
-                                  description='Date on which this period ends',
-                                  description_msgid='help_fecha_hasta_folder',
-                                  show_hm=False),
+    DateTimeField(
+        'fecha_desde',
+        searchable=1,
+        required=1,
+        widget=CalendarWidget(
+            label='Start date',
+            label_msgid='label_fecha_desde_folder',
+            i18n_domain='plone',
+            description='Date on which this period starts',
+            description_msgid='help_fecha_desde_folder',
+            show_hm=False
         ),
+    ),
 
-        FloatField('presupuesto_inicial',
-            searchable=1,
-            required=0,
-            default=0.0,
-            widget=StringWidget(label='Total Budget',
-                                  label_msgid='label_presupuesto_total',
-                                  i18n_domain='plone',
-                                  description='Total amount of assignable budget',
-                                  description_msgid='help_presupuesto_total',
-                                  visible=False),
+    DateTimeField(
+        'fecha_hasta',
+        searchable=1,
+        required=1,
+        widget=CalendarWidget(
+            label='End date',
+            label_msgid='label_fecha_hasta_folder',
+            i18n_domain='plone',
+            description='Date on which this period ends',
+            description_msgid='help_fecha_hasta_folder',
+            show_hm=False
         ),
+    ),
 
-        FloatField('presupuesto_asignado',
-            searchable=1,
-            required=0,
-            default=0.0,
-            widget=StringWidget(label='Assigned Budget',
-                                  label_msgid='label_presupuesto_asignado',
-                                  i18n_domain='plone',
-                                  description='Total amount of already assigned budget',
-                                  description_msgid='help_presupuesto_asignado',
-                                  visible=False),
+    FloatField(
+        'presupuesto_inicial',
+        searchable=1,
+        required=0,
+        default=0.0,
+        widget=StringWidget(
+            label='Total Budget',
+            label_msgid='label_presupuesto_total',
+            i18n_domain='plone',
+            description='Total amount of assignable budget',
+            description_msgid='help_presupuesto_total',
+            visible=False
         ),
+    ),
 
-        FloatField('presupuesto_maximo_investigadores',
-            searchable=0,
-            required=0,
-            default=0.0,
-            widget=StringWidget(visible=False),
+    FloatField(
+        'presupuesto_asignado',
+        searchable=1,
+        required=0,
+        default=0.0,
+        widget=StringWidget(
+            label='Assigned Budget',
+            label_msgid='label_presupuesto_asignado',
+            i18n_domain='plone',
+            description='Total amount of already assigned budget',
+            description_msgid='help_presupuesto_asignado',
+            visible=False
         ),
+    ),
 
-        FloatField('presupuesto_maximo_becarios',
-            searchable=0,
-            required=0,
-            default=0.0,
-            widget=StringWidget(visible=False),
-        ),
+    FloatField(
+        'presupuesto_maximo_investigadores',
+        searchable=0,
+        required=0,
+        default=0.0,
+        widget=StringWidget(visible=False),
+    ),
 
-        FloatField('presupuesto_maximo_tecnicos',
-            searchable=0,
-            required=0,
-            default=0.0,
-            widget=StringWidget(visible=False),
-        ),
+    FloatField(
+        'presupuesto_maximo_becarios',
+        searchable=0,
+        required=0,
+        default=0.0,
+        widget=StringWidget(visible=False),
+    ),
 
-        FloatField('presupuesto_maximo_postdocs',
-            searchable=0,
-            required=0,
-            default=0.0,
-            widget=StringWidget(visible=False),
-        ),
+    FloatField(
+        'presupuesto_maximo_tecnicos',
+        searchable=0,
+        required=0,
+        default=0.0,
+        widget=StringWidget(visible=False),
+    ),
 
-        RecordsField('solicitantes',
-            default=[{}],
-            widget=RecordsWidget(visible=False),
-        ),
+    FloatField(
+        'presupuesto_maximo_postdocs',
+        searchable=0,
+        required=0,
+        default=0.0,
+        widget=StringWidget(visible=False),
+    ),
 
-        RecordsField('presupuesto_asignado_solicitantes',
-            default=[{}],
-            widget=RecordsWidget(visible=False),
-        ),
+    RecordsField(
+        'solicitantes',
+        default=[{}],
+        widget=RecordsWidget(visible=False),
+    ),
 
-        RecordsField('dias_licencia_utilizados_solicitantes',
-            default=[{}],
-            widget=RecordsWidget(visible=False),
-        ),
+    RecordsField(
+        'presupuesto_asignado_solicitantes',
+        default=[{}],
+        widget=RecordsWidget(visible=False),
+    ),
 
-        RecordsField('dias_comision_utilizados_solicitantes',
-            default=[{}],
-            widget=RecordsWidget(visible=False),
-        ),
+    RecordsField(
+        'dias_licencia_utilizados_solicitantes',
+        default=[{}],
+        widget=RecordsWidget(visible=False),
+    ),
 
-        FloatField('apoyoinst_maximo_investigadores',
-            searchable=0,
-            required=0,
-            default=0.0,
-            widget=StringWidget(visible=False),
-        ),
+    RecordsField(
+        'dias_comision_utilizados_solicitantes',
+        default=[{}],
+        widget=RecordsWidget(visible=False),
+    ),
 
-        FloatField('apoyoinst_maximo_becarios',
-            searchable=0,
-            required=0,
-            default=0.0,
-            widget=StringWidget(visible=False),
-        ),
+    FloatField(
+        'apoyoinst_maximo_investigadores',
+        searchable=0,
+        required=0,
+        default=0.0,
+        widget=StringWidget(visible=False),
+    ),
 
-        FloatField('apoyoinst_maximo_tecnicos',
-            searchable=0,
-            required=0,
-            default=0.0,
-            widget=StringWidget(visible=False),
-        ),
+    FloatField(
+        'apoyoinst_maximo_becarios',
+        searchable=0,
+        required=0,
+        default=0.0,
+        widget=StringWidget(visible=False),
+    ),
 
-        FloatField('apoyoinst_maximo_postdocs',
-            searchable=0,
-            required=0,
-            default=0.0,
-            widget=StringWidget(visible=False),
-        ),
+    FloatField(
+        'apoyoinst_maximo_tecnicos',
+        searchable=0,
+        required=0,
+        default=0.0,
+        widget=StringWidget(visible=False),
+    ),
 
-        RecordsField('apoyoinst_asignado_solicitantes',
-            default=[{}],
-            widget=RecordsWidget(visible=False),
-        ),
+    FloatField(
+        'apoyoinst_maximo_postdocs',
+        searchable=0,
+        required=0,
+        default=0.0,
+        widget=StringWidget(visible=False),
+    ),
 
+    RecordsField(
+        'apoyoinst_asignado_solicitantes',
+        default=[{}],
+        widget=RecordsWidget(visible=False),
+    ),
 ))
+
 
 class SolicitudFolder(ATFolder):
     "A simple folder content type."
@@ -196,36 +220,36 @@ class SolicitudFolder(ATFolder):
     def restante(self):
         return (self.getPresupuesto_inicial()-self.getPresupuesto_asignado())
 
-    def sumarACantidadAutorizada(self,esComision,cantidad,dias,idCreador,cargo):
+    def sumarACantidadAutorizada(self, esComision, cantidad, dias, idCreador, cargo):
         try:
-            cantidad=float(cantidad)
-            dias=int(dias)
+            cantidad = float(cantidad)
+            dias = int(dias)
             if cargo.find('institucional') != -1:
-                dictcargo=self.getApoyoinst_asignado_solicitantes()[0]
+                dictcargo = self.getApoyoinst_asignado_solicitantes()[0]
             else:
-                dictcargo=self.getPresupuesto_asignado_solicitantes()[0]
+                dictcargo = self.getPresupuesto_asignado_solicitantes()[0]
                 self.setPresupuesto_asignado(cantidad + self.getPresupuesto_asignado())
             try:
-                dictcargo[idCreador]+=cantidad
+                dictcargo[idCreador] += cantidad
             except:
-                dictcargo[idCreador]=cantidad
+                dictcargo[idCreador] = cantidad
 
             if esComision is not None:
 
                 if not esComision:
                     try:
-                        dictDiasLicencia=self.getDias_licencia_utilizados_solicitantes()[0]
-                        dictDiasLicencia[idCreador]+=dias
+                        dictDiasLicencia = self.getDias_licencia_utilizados_solicitantes()[0]
+                        dictDiasLicencia[idCreador] += dias
                     except:
-                        dictDiasLicencia[idCreador]=dias
+                        dictDiasLicencia[idCreador] = dias
                     self.setDias_licencia_utilizados_solicitantes(dictDiasLicencia)
                 else:
                     try:
-                        dictDiasComision=self.getDias_comision_utilizados_solicitantes()[0]
-                        dictDiasComision[idCreador]+=dias
+                        dictDiasComision = self.getDias_comision_utilizados_solicitantes()[0]
+                        dictDiasComision[idCreador] += dias
                     except:
-                        dictDiasComision[idCreador]=dias
-                    self.setDias_comision_utilizados_solicitantes(dictDiasComision);
+                        dictDiasComision[idCreador] = dias
+                    self.setDias_comision_utilizados_solicitantes(dictDiasComision)
 
             return True
         except:
@@ -233,33 +257,33 @@ class SolicitudFolder(ATFolder):
 
     def restarACantidadAutorizada(self,esComision,cantidad,dias,idCreador):
         try:
-            cantidad=float(cantidad)
-            dias=int(dias)
+            cantidad = float(cantidad)
+            dias = int(dias)
 
             try:
-                dictPresupuesto=self.getPresupuesto_asignado_solicitantes()[0]
-                dictPresupuesto[idCreador]-=cantidad
+                dictPresupuesto = self.getPresupuesto_asignado_solicitantes()[0]
+                dictPresupuesto[idCreador] -= cantidad
             except:
-                dictPresupuesto[idCreador]=0.0
+                dictPresupuesto[idCreador] = 0.0
 
             if esComision is not None:
 
                 if not esComision:
                     try:
-                        dictDiasLicencia=self.getDias_licencia_utilizados_solicitantes()[0]
-                        dictDiasLicencia[idCreador]-=dias
+                        dictDiasLicencia = self.getDias_licencia_utilizados_solicitantes()[0]
+                        dictDiasLicencia[idCreador] -= dias
                     except:
-                        dictDiasLicencia[idCreador]=0
+                        dictDiasLicencia[idCreador] = 0
                     self.setDias_licencia_utilizados_solicitantes(dictDiasLicencia)
                 else:
                     try:
-                        dictDiasComision=self.getDias_comision_utilizados_solicitantes()[0]
-                        dictDiasComision[idCreador]-=dias
+                        dictDiasComision = self.getDias_comision_utilizados_solicitantes()[0]
+                        dictDiasComision[idCreador] -= dias
                     except:
-                        dictDiasComision[idCreador]=0.0
-                    self.setDias_comision_utilizados_solicitantes(dictDiasComision);
+                        dictDiasComision[idCreador] = 0.0
+                    self.setDias_comision_utilizados_solicitantes(dictDiasComision)
 
-            cantidad=self.getPresupuesto_asignado()-cantidad
+            cantidad = self.getPresupuesto_asignado() - cantidad
             self.setPresupuesto_asignado(cantidad)
             self.setPresupuesto_asignado_solicitantes(dictPresupuesto)
             return True
