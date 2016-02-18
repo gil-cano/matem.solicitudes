@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from Products.DataGridField import DataGridField
-from archetypes.schemaextender.field import ExtensionField
-from Products.DataGridField import DataGridWidget
 from AccessControl import ClassSecurityInfo
-from Products.Archetypes.Registry import registerWidget
+from archetypes.schemaextender.field import ExtensionField
 from matem.solicitudes import solicitudesMessageFactory as _
+from Products.Archetypes.Registry import registerWidget
+from Products.DataGridField import DataGridField
+from Products.DataGridField import DataGridWidget
 
 
 class ConferenceWidget(DataGridWidget):

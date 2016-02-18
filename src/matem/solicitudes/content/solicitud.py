@@ -42,8 +42,8 @@ from zope.interface import implements
 
 
 from Products.DataGridField.Column import Column
-from matem.solicitudes.widgets.conference.conference import DataGridConferenceField
-from matem.solicitudes.widgets.conference.conference import ConferenceWidget
+from matem.solicitudes.widgets.conference import DataGridConferenceField
+from matem.solicitudes.widgets.conference import ConferenceWidget
 from Products.DataGridField.SelectColumn import SelectColumn
 from matem.solicitudes.widgets.vocabularies import ConferenceTypeVocabulary
 from matem.solicitudes.widgets.vocabularies import ConferenceAssistantVocabulary
