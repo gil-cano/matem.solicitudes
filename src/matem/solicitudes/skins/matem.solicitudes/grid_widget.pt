@@ -11,7 +11,22 @@
     <!-- File Widgets -->
 
     <div metal:define-macro="grid_widget_view">
-      Aqui debe ir la vista del widget
+      <table class="datagridwidget-table-view listing"
+               tal:define="columns python:widget.getColumnDefs(field, context)">
+            <thead tal:condition="python: widget.hasHeader(context, field)">
+                <tr>
+            <tal:block tal:repeat="c columns"
+            ><th tal:attributes="class python:not c['visible'] and 'dgw-hidden-column' or '';"
+                        tal:content="c/label" i18n:translate="">NAME</th
+          ></tal:block>
+                </tr>
+            </thead>
+            <tbody>
+                <tal:row-loop tal:repeat="rows accessor">
+                    <tal:view_row metal:use-macro="here/datagridwidget_view_row/macros/view_row"/>
+                </tal:row-loop>
+            </tbody>
+        </table>
     </div>
 
     <metal:define define-macro="grid_widget_edit">
@@ -41,16 +56,18 @@
                       class python:'%s datagridwidget-column-%s datagridwidget-cell' % (
                                                  not columnd['visible'] and 'dgw-hidden-column' or '',
                                                  repeat['columnd'].number());">
-                      <span tal:content="columnd/label"/>
+                      <p>
+                        <span tal:content="columnd/label"/>
 
-                      <span tal:define="
-                          column columnd/id;
-                          column_definition python: widget.getColumnDefinition(field, column);
-                          cell_macro python: path('here/%s/macros' % column_definition.getMacro());
-                          edit_macro cell_macro/edit_cell;
-                          cell_value python:rows.get(column);">
-                        <span metal:use-macro="edit_macro"/>
-                      </span>
+                        <span tal:define="
+                            column columnd/id;
+                            column_definition python: widget.getColumnDefinition(field, column);
+                            cell_macro python: path('here/%s/macros' % column_definition.getMacro());
+                            edit_macro cell_macro/edit_cell;
+                            cell_value python:rows.get(column);">
+                          <span metal:use-macro="edit_macro"/>
+                        </span>
+                      </p>
                     </tal:block>
                   </tal:block>
                 </td>
@@ -77,6 +94,7 @@
                 <h3 i18n:translate="" tal:content="field/label_item"/>
                 <tal:block tal:repeat="columnd columns">
                   <tal:block tal:attributes="class python:not columnd['visible'] and 'dgw-hidden-column datagridwidget-cell' or 'datagridwidget-cell';">
+                    <p>
                     <span tal:content="columnd/label"/>
                     <span tal:define="
                       column columnd/id;
@@ -85,6 +103,7 @@
                       edit_empty_macro cell_macro/edit_empty_cell;">
                       <span metal:use-macro="edit_empty_macro"/>
                     </span>
+                    </p>
                   </tal:block>
                 </tal:block>
               </td>
