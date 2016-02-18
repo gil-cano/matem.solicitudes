@@ -40,6 +40,16 @@ from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 from zope.interface import implements
 
+
+from Products.DataGridField.Column import Column
+from matem.solicitudes.widgets.conference.conference import DataGridConferenceField
+from matem.solicitudes.widgets.conference.conference import ConferenceWidget
+from Products.DataGridField.SelectColumn import SelectColumn
+from matem.solicitudes.widgets.vocabularies import ConferenceTypeVocabulary
+from matem.solicitudes.widgets.vocabularies import ConferenceAssistantVocabulary
+
+
+
 import sys
 
 
@@ -806,6 +816,34 @@ schema = BaseSchema + Schema((
         default=False,
         widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
     ),
+
+    DataGridConferenceField(
+        name='conferences',
+        columns=('conferencetype', 'title', 'eventName', 'participationtype', 'place',),
+        widget=ConferenceWidget(
+            label=_(u"label_widgetconferences", default=u"Conferences"),
+            columns={
+                'conferencetype': SelectColumn(
+                    _(u"wconferncetype_label", default="Type"),
+                    vocabulary=ConferenceTypeVocabulary(),
+                ),
+                'title': Column(
+                    _(u"wtitle_label", default=u"Title"),
+                ),
+                'eventName': Column(
+                    _(u"weventname_label", default=u"Event Name"),
+                ),
+                'participationtype': SelectColumn(
+                    _(u"wcparticipationtype_label", default="Participation type"),
+                    vocabulary=ConferenceAssistantVocabulary(),
+                ),
+                'place': Column(
+                    _(u"wplace_label", default=u"Place"),
+                ),
+            },
+        ),
+    ),
+
 ))
 
 for f in schema.filterFields(isMetadata=True):
