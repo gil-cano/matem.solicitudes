@@ -27,3 +27,27 @@ class ConferenceAssistantVocabulary:
             ('invitation', _(u'By Invitation')),
             ('application', _(u'By Application')),
         ])
+
+
+class CourselevelVocabulary:
+    implements(IVocabulary)
+
+    def getDisplayList(self, instance):
+        return DisplayList([
+            ('highschool', _(u'High School')),
+            ('bachelor', _(u'Bachelor')),
+            ('master', _(u'Master')),
+            ('phd', _(u'PhD')),
+            ('other', _(u'Other')),
+        ])
+
+
+class CoursetypeVocabulary:
+    implements(IVocabulary)
+
+    def getDisplayList(self, instance):
+        return DisplayList([
+            ('research', _(u'Research')),
+            ('teaching', _(u'Teaching')),
+            ('divulgation', _(u'Divulgation')),
+        ])

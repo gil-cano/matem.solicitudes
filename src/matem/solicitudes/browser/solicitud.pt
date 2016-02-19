@@ -300,6 +300,13 @@
           </td>
         </tr>
 
+        <tr tal:condition="here/getCourses">
+          <th colspan="2" i18n:translate="label_widgetcourses">Courses</th>
+          <td align="center" colspan="3">
+            <metal:use use-macro="python:here.widget('courses')"/>
+          </td>
+        </tr>
+
 
         <tr><th colspan="2" i18n:translate="label_adjuntos">Attachments</th>
               <td align="center" colspan="3"><tal:block condition="python:here.getField('displayAttachments') is not None">

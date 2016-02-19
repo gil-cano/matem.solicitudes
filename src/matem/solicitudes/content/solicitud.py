@@ -44,11 +44,15 @@ from zope.interface import implements
 from Products.DataGridField.Column import Column
 from matem.solicitudes.widgets.conference import DataGridConferenceField
 from matem.solicitudes.widgets.conference import ConferenceWidget
+from matem.solicitudes.widgets.course import DataGridCourseField
+from matem.solicitudes.widgets.course import CourseWidget
+
 from Products.DataGridField.SelectColumn import SelectColumn
 from matem.solicitudes.widgets.vocabularies import ConferenceTypeVocabulary
 from matem.solicitudes.widgets.vocabularies import ConferenceAssistantVocabulary
 
-
+from matem.solicitudes.widgets.vocabularies import CourselevelVocabulary
+from matem.solicitudes.widgets.vocabularies import CoursetypeVocabulary
 
 import sys
 
@@ -839,6 +843,33 @@ schema = BaseSchema + Schema((
                 ),
                 'place': Column(
                     _(u"wplace_label", default=u"Place"),
+                ),
+            },
+        ),
+    ),
+
+    DataGridCourseField(
+        name='courses',
+        columns=('title', 'eventName', 'level', 'place', 'coursetype'),
+        widget=CourseWidget(
+            label=_(u"label_widgetcourses", default=u"Courses"),
+            columns={
+                'title': Column(
+                    _(u"wtitle_label", default=u"Title"),
+                ),
+                'eventName': Column(
+                    _(u"weventname_label", default=u"Event Name"),
+                ),
+                'level': SelectColumn(
+                    _(u"wlevel_label", default="Level"),
+                    vocabulary=CourselevelVocabulary(),
+                ),
+                'place': Column(
+                    _(u"wplace_label", default=u"Place"),
+                ),
+                'coursetype': SelectColumn(
+                    _(u"wcoursetype_label", default="Coursetype"),
+                    vocabulary=CoursetypeVocabulary(),
                 ),
             },
         ),
