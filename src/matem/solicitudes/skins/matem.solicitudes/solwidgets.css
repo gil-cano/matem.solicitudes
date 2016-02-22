@@ -50,6 +50,10 @@ td.foo input{
 
 }
 
+td.foo textarea{
+    width: 80% !important;
+
+}
 /*
     Workaround for IE which cannot propeply handle
     background images in cloned TR input fields.

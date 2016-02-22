@@ -30,6 +30,7 @@
     </div>
 
     <metal:define define-macro="grid_widget_edit">
+      <hr/>
       <table class="datagridwidget-table-edit"
           tal:attributes="id python: 'datagridwidget-table-' + field.getName()"
           style="width: 100%"
