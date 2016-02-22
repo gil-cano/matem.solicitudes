@@ -21,7 +21,7 @@ registerWidget(
     ConferenceWidget,
     title='ConferenceWidget',
     description=('Widget for display course on DataGridConferenceField type format'),
-    used_for=('matem.solicitudes.widgets.conference.conference.DataGridConferenceField',)
+    used_for=('matem.solicitudes.widgets.conference.DataGridConferenceField',)
 )
 
 
