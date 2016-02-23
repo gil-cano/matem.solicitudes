@@ -46,14 +46,31 @@ from matem.solicitudes.widgets.conference import DataGridConferenceField
 from matem.solicitudes.widgets.conference import ConferenceWidget
 from matem.solicitudes.widgets.course import DataGridCourseField
 from matem.solicitudes.widgets.course import CourseWidget
+from matem.solicitudes.widgets.researchs import DataGridResearchsField
+from matem.solicitudes.widgets.researchs import ResearchsWidget
+from matem.solicitudes.widgets.assistance import DataGridAssistanceField
+from matem.solicitudes.widgets.assistance import AssistanceWidget
+from matem.solicitudes.widgets.organization import DataGridOrganizationField
+from matem.solicitudes.widgets.organization import OrganizationWidget
+
+from matem.solicitudes.widgets.other import DataGridOtherField
+from matem.solicitudes.widgets.other import OtherWidget
 
 from Products.DataGridField.SelectColumn import SelectColumn
+from Products.DataGridField.LinesColumn import LinesColumn
+from Products.DataGridField.DateColumn import DateColumn
+from Products.DataGridField.DatetimeLocalColumn import DatetimeLocalColumn
+
+
+# from Products.DataGridField.CheckboxColumn import CheckboxColumn
+
 from matem.solicitudes.widgets.vocabularies import ConferenceTypeVocabulary
 from matem.solicitudes.widgets.vocabularies import ConferenceAssistantVocabulary
 
 from matem.solicitudes.widgets.vocabularies import CourselevelVocabulary
 from matem.solicitudes.widgets.vocabularies import CoursetypeVocabulary
 
+from matem.solicitudes.widgets.vocabularies import ResearchPositionVocabulary
 import sys
 
 
@@ -821,6 +838,29 @@ schema = BaseSchema + Schema((
         widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
     ),
 
+    DataGridAssistanceField(
+        name='assistance',
+        columns=('conferencetype', 'eventName', 'place', 'assistancedate'),
+        widget=AssistanceWidget(
+            label=_(u"label_widgetassistance", default=u"Only Assists"),
+            columns={
+                'conferencetype': SelectColumn(
+                    _(u"wconferncetype_label", default="Type"),
+                    vocabulary=ConferenceTypeVocabulary(),
+                ),
+                'eventName': Column(
+                    _(u"weventname_label", default=u"Event Name"),
+                ),
+                'place': Column(
+                    _(u"wplace_label", default=u"Place"),
+                ),
+                'assistancedate': DateColumn(
+                    _(u"wassistancedate_label", default=u"Date"),
+                ),
+            },
+        ),
+    ),
+
     DataGridConferenceField(
         name='conferences',
         columns=('conferencetype', 'title', 'eventName', 'participationtype', 'place',),
@@ -870,6 +910,76 @@ schema = BaseSchema + Schema((
                 'coursetype': SelectColumn(
                     _(u"wcoursetype_label", default="Coursetype"),
                     vocabulary=CoursetypeVocabulary(),
+                ),
+            },
+        ),
+    ),
+
+    DataGridResearchsField(
+        name='researchs',
+        columns=('hostresearcher', 'objective', 'institution'),
+        widget=ResearchsWidget(
+            label=_(u"label_widgetresearchs", default=u"Research Stay"),
+            columns={
+                'hostresearcher': Column(
+                    _(u"whostresearcher_label", default=u"Host"),
+                ),
+                'objective': LinesColumn(
+                    _(u"wobjective_label", default=u"Objective"),
+                ),
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
+                ),
+            },
+        ),
+    ),
+
+    DataGridOrganizationField(
+        name='organization',
+        columns=('eventName', 'imposition', 'researcherposition', 'activitytype', 'level', 'speakersint', 'speakersnac', 'assistants'),
+        widget=OrganizationWidget(
+            label=_(u"label_widgetorganization", default=u"Organized Activities"),
+            columns={
+                'eventName': Column(
+                    _(u"weventName_label", default=u"Event Name"),
+                ),
+                'imposition': Column(
+                    _(u"wimposition_label", default=u"IM Position"),
+                ),
+                'researcherposition': SelectColumn(
+                    _(u"wresearchposition_label", default="Research Position"),
+                    vocabulary=ResearchPositionVocabulary(),
+                ),
+                'activitytype': SelectColumn(
+                    _(u"wactivitytype_label", default="Activity Type"),
+                    vocabulary=CoursetypeVocabulary(),
+                ),
+                'level': SelectColumn(
+                    _(u"wlevel_label", default="Level"),
+                    vocabulary=CourselevelVocabulary(),
+                ),
+                'speakersint': Column(
+                    _(u"wspeakersint_label", default=u"Expected number of International Speakers"),
+                ),
+                'speakersnac': Column(
+                    _(u"wspeakersnac_label", default=u"Expected number of National Speakers"),
+                ),
+                'assistants': Column(
+                    _(u"wassistants_label", default=u"Expected number of Assistants"),
+                ),
+
+            },
+        ),
+    ),
+
+    DataGridOtherField(
+        name='otheractivity',
+        columns=('otheract',),
+        widget=OtherWidget(
+            label=_(u"label_widgetotheractivity", default=u"Other Activities"),
+            columns={
+                'otheract': Column(
+                    _(u"wotheract_label", default=u"Activity"),
                 ),
             },
         ),
