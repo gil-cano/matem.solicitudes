@@ -16,6 +16,7 @@ class ConferenceTypeVocabulary:
             ('seminary', _(u'Seminary')),
             ('coloquio', _(u'Coloquio')),
             ('school', _(u'School')),
+            ('other', _(u'Other')),
         ])
 
 
@@ -50,4 +51,19 @@ class CoursetypeVocabulary:
             ('research', _(u'Research')),
             ('teaching', _(u'Teaching')),
             ('divulgation', _(u'Divulgation')),
+        ])
+
+
+class ResearchPositionVocabulary:
+    implements(IVocabulary)
+
+    def getDisplayList(self, instance):
+        return DisplayList([
+            ('organizer', _(u'Organizer')),
+            ('co-organizer', _(u'Co-Organizer')),
+            ('responsible', _(u'Responsible of session')),
+            ('scientificc', _(u'Scientific Comittee')),
+            ('localc', _(u'Local Comitte')),
+            ('directivec', _(u'Directive Comitte')),
+            ('other', _(u'Other')),
         ])
