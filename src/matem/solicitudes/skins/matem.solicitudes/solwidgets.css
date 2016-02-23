@@ -54,6 +54,7 @@ td.foo textarea{
     width: 80% !important;
 
 }
+
 /*
     Workaround for IE which cannot propeply handle
     background images in cloned TR input fields.
@@ -94,16 +95,16 @@ td.datagridwidget-manipulator img {
 }
 
 td.tdbutton{
-  /*text-align: right;
-  margin-right: 1em;
-  display: block;
-  margin-top: auto;
-  margin-bottom: auto;*/
-  /*display: block;*/
+    /*text-align: right;
+    margin-right: 1em;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;*/
+    /*display: block;*/
   margin:auto;
 }
 
-.button {
+.widgetbutton {
     background-color: #f44336;
     border: none;
     color: white;

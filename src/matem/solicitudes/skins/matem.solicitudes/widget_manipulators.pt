@@ -37,7 +37,7 @@
                 tal:condition="python: widget.isDeleteEnabled(context, field)">
                 <!-- <button type="button">Click Me!</button> -->
                 <button
-                class="button"
+                class="widgetbutton"
                       alt="Delete row"
                       title="Delete row"
                       i18n:attributes="alt label_datagridwidget_manipulators_deleterow;
