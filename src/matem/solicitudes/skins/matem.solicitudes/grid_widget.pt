@@ -62,6 +62,7 @@
 
                         <span tal:define="
                             column columnd/id;
+                            column_label columnd/label;
                             column_definition python: widget.getColumnDefinition(field, column);
                             cell_macro python: path('here/%s/macros' % column_definition.getMacro());
                             edit_macro cell_macro/edit_cell;
@@ -99,6 +100,7 @@
                     <span tal:content="columnd/label"/>
                     <span tal:define="
                       column columnd/id;
+                      column_label columnd/label;
                       column_definition python: widget.getColumnDefinition(field, column);
                       cell_macro python: path('here/%s/macros' % column_definition.getMacro());
                       edit_empty_macro cell_macro/edit_empty_cell;">
