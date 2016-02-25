@@ -65,5 +65,9 @@
     <subscriber for=".interfaces.ISolicitudVisitante
                      Products.Archetypes.interfaces.IObjectInitializedEvent"
                 handler=".handlers.movetofolder" /> -->
+    <utility
+      component=".widgets.vocabularies.ConferenceTypeVocabulary"
+      name="matem.solicitudes.vocabularies.ConferenceType"
+      />
 
 </configure>
