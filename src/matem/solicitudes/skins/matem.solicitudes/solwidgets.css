@@ -1,10 +1,13 @@
 /*
   DataGridWidget CSS definitions
   ------------------------------------------
+
   Copyright 2006 Red Innovation <http://www.redinnovation.com>
+
   <dtml-with base_properties> (Loads base_properties variables)
 
   <dtml-call "REQUEST.set('portal_url', portal_url())"> (Do not change this)
+
 */
 
 table.datagridwidget-table-view {
@@ -34,26 +37,13 @@ td.datagridwidget-select {
     width: 5em;
 }
 
+/*
+Extend this style see below
 tr.datagridwidget-row {
     vertical-align: top;
-    box-shadow: inset 1px 1px 5px #888;
-    display: block;
-    padding-bottom: 3em;
 }
+*/
 
-td.foo{
-  padding: 0.5em;
-  width: 100%;
-}
-td.foo input{
-    width: 80% !important;
-
-}
-
-td.foo textarea{
-    width: 80% !important;
-
-}
 
 /*
     Workaround for IE which cannot propeply handle
@@ -82,103 +72,24 @@ td.datagridwidget-manipulator {
     margin: 0;  
 }
 
-span.datagridwidget-manipulator {
-    width: 16px;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-}
-
-
 td.datagridwidget-manipulator img {
     cursor: pointer;    
 }
 
-td.tdbutton{
-    /*text-align: right;
-    margin-right: 1em;
-    display: block;
-    margin-top: auto;
-    margin-bottom: auto;*/
-    /*display: block;*/
-  margin:auto;
-}
-
-.widgetbutton {
-    background-color: #f44336;
-    border: none;
-    color: white;
-    padding: 8px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-
-
 td.datagridwidget-hidden-data {
     display: none;
-    cursor: pointer;
 }
 
 
-/*a.datagridwidget-add-button, a.datagridwidget-add-button:hover {
+a.datagridwidget-add-button, a.datagridwidget-add-button:hover {
     text-decoration: none;
-    background: &dtml-globalBackgroundColor; url(&dtml-portal_url;/linkOpaque.gif) 9px 1px no-repeat;
+    background: &dtml-globalBackgroundColor; url(&dtml-portal_url;/linkOpaque.png) 9px 1px no-repeat;
     cursor: pointer;
     font-size: &dtml-fontSmallSize;;
     padding: 1px 1px 1px 15px;
     text-transform: &dtml-textTransform;;
     float: right;   
-}*/
-
-a.datagridwidget-add-button{
-    /*text-decoration: none;
-    background: &dtml-globalBackgroundColor; url(&dtml-portal_url;/linkOpaque.gif) 9px 1px no-repeat;
-    cursor: pointer;
-    font-size: &dtml-fontSmallSize;;
-    padding: 1px 1px 1px 15px;
-    text-transform: &dtml-textTransform;;
-    float: right;*/
-  background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 8px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    float: right;
 }
-
-
-#content a.datagridwidget-add-button:hover{
-    /*text-decoration: none;
-    background: &dtml-globalBackgroundColor; url(&dtml-portal_url;/linkOpaque.gif) 9px 1px no-repeat;
-    cursor: pointer;
-    font-size: &dtml-fontSmallSize;;
-    padding: 1px 1px 1px 15px;
-    text-transform: &dtml-textTransform;;
-    float: right;*/
-  background-color: #4CAF50;
-    border: none;
-    color: white !important;
-    padding: 8px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    float: right;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
-
 
 .dgw-hidden-column {
     display: none;
@@ -199,6 +110,50 @@ div.ArchetypesDataGridWidget table td img {
 div.ArchetypesDataGridWidget table td input, 
 div.ArchetypesDataGridWidget table td select {
     width:100%;
+}
+
+/*Modificatios for the widgets */
+
+span.datagridwidget-cell {
+    vertical-align: top;
+    padding: 2px;
+}
+
+td.gridwidget{
+  padding: 0.5em;
+  width: 100%;
+}
+
+/*td.gridwidget input{
+    width: 80% !important;
+
+}*/
+
+.widgetbutton {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+tr.datagridwidget-row {
+    vertical-align: top;
+    box-shadow: inset 1px 1px 5px #888;
+    display: block;
+    padding-bottom: 3em;
+}
+
+
+td.tdbutton{
+  margin:auto;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 
