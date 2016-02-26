@@ -15,7 +15,7 @@ table.datagridwidget-table-view {
 }
 
 input.datagrid-radio-button {
-    /* Radio buttons try to use Plone's default text input 
+    /* Radio buttons try to use Plone's default text input
        field CSS properties, like borders and background shade image */
     border: 0;
     background: transparent;
@@ -29,9 +29,9 @@ td.datagridwidget-radio {
 }
 
 td.datagridwidget-select {
-    /* Looks like browser want to shrink drop down menu boxes 
+    /* Looks like browser want to shrink drop down menu boxes
        to zero width if there is any fight from the space.
-       
+
        Workaround is to force select width. Override this value
        according to your needs */
     width: 5em;
@@ -69,17 +69,19 @@ td.datagridwidget-manipulator {
     width: 16px;
     text-align: center;
     padding: 0;
-    margin: 0;  
+    margin: 0;
 }
 
 td.datagridwidget-manipulator img {
-    cursor: pointer;    
+    cursor: pointer;
 }
 
 td.datagridwidget-hidden-data {
     display: none;
 }
 
+/*
+Extend this style see below
 
 a.datagridwidget-add-button, a.datagridwidget-add-button:hover {
     text-decoration: none;
@@ -88,15 +90,15 @@ a.datagridwidget-add-button, a.datagridwidget-add-button:hover {
     font-size: &dtml-fontSmallSize;;
     padding: 1px 1px 1px 15px;
     text-transform: &dtml-textTransform;;
-    float: right;   
-}
+    float: right;
+}*/
 
 .dgw-hidden-column {
     display: none;
 }
 
-/* 
-    Merged from historical datagridwidget.css file 
+/*
+    Merged from historical datagridwidget.css file
     as fix for: http://plone.org/products/datagridfield/issues/30
 */
 
@@ -107,7 +109,7 @@ div.ArchetypesDataGridWidget table td img {
     cursor: pointer;
 }
 
-div.ArchetypesDataGridWidget table td input, 
+div.ArchetypesDataGridWidget table td input,
 div.ArchetypesDataGridWidget table td select {
     width:100%;
 }
@@ -154,6 +156,35 @@ td.tdbutton{
   margin:auto;
   padding-left: 1em;
   padding-right: 1em;
+}
+
+a.datagridwidget-add-button{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    float: right;
+}
+
+#content a.datagridwidget-add-button:hover{
+    background-color: #4CAF50;
+    border: none;
+    color: white !important;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    float: right;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 
