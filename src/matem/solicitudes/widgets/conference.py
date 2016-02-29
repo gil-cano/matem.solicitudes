@@ -20,7 +20,7 @@ class ConferenceWidget(DataGridWidget):
 registerWidget(
     ConferenceWidget,
     title='ConferenceWidget',
-    description=('Widget for display course on DataGridConferenceField type format'),
+    description=('Widget for display conferences on DataGridConferenceField type format'),
     used_for=('matem.solicitudes.widgets.conference.DataGridConferenceField',)
 )
 
@@ -32,7 +32,6 @@ class DataGridConferenceField(ExtensionField, DataGridField):
         'type': 'datagridconferencefield',
         # 'validators': DateFreeValidator(),
         'widget': ConferenceWidget,
-        # 'rows': [],
         'label_item': _(u'Conference'),
         'label_button': _(u'+ Conference'),
     })
