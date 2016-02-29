@@ -57,11 +57,12 @@ from matem.solicitudes.widgets.other import DataGridOtherField
 from matem.solicitudes.widgets.other import OtherWidget
 
 from Products.DataGridField.SelectColumn import SelectColumn
-from Products.DataGridField.LinesColumn import LinesColumn
+# from Products.DataGridField.LinesColumn import LinesColumn
 # from Products.DataGridField.DateColumn import DateColumn
 # from Products.DataGridField.DatetimeLocalColumn import DatetimeLocalColumn
 from collective.datagridcolumns.DateColumn import DateColumn
 from collective.datagridcolumns.MultiSelectColumn import MultiSelectColumn
+from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 
 
 # from Products.DataGridField.CheckboxColumn import CheckboxColumn
@@ -870,50 +871,63 @@ schema = BaseSchema + Schema((
         ),
     ),
 
-    # DataGridConferenceField(
-    #     name='conferences',
-    #     columns=('eventtype', 'title', 'eventName', 'isplenary', 'participationtype', 'conferencetype', 'place', 'conferencedate'),
-    #     widget=ConferenceWidget(
-    #         label=_(u"label_widgetconferences", default=u"Conferences"),
-    #         helper_js= ('datagridwidget.js', 'datagridwidget_patches.js', 'datagridmultiselect.js'),
-    #         columns={
-    #             'eventtype': SelectColumn(
-    #                 _(u"weventtype_label", default="Event Type"),
-    #                 vocabulary=EventTypeVocabulary(),
-    #             ),
-    #             'title': Column(
-    #                 _(u"wtitle_label", default=u"Title"),
-    #             ),
-    #             'eventName': Column(
-    #                 _(u"weventname_label", default=u"Event Name"),
-    #             ),
-    #             'isplenary': SelectColumn(
-    #                 _(u"wisplenary_label", default="Is your conference plenary or masterly?"),
-    #                 vocabulary=BooleanTypeVocabulary(),
-    #             ),
-    #             'participationtype': SelectColumn(
-    #                 _(u"wcparticipationtype_label", default="Participation type"),
-    #                 vocabulary=ConferenceAssistantVocabulary(),
-    #             ),
-    #             # 'conferencetype': SelectColumn(
-    #             #     _(u"wconferencetype_label", default="Conference type"),
-    #             #     vocabulary=ConferenceTypeVocabulary(),
-    #             # ),
-    #             'conferencetype': MultiSelectColumn(
-    #                 _(u"wconferencetype_label", default="Conference type"),
-    #                 # vocabulary=ConferenceTypeVocabulary(),
-    #                 vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
-    #             ),
-    #             'place': Column(
-    #                 _(u"wplace_label", default=u"Place"),
-    #             ),
-    #             'conferencedate': DateColumn(
-    #                 _(u"wconferencedate_label", default=u"Date"),
-    #                 date_format="dd/mm/yy",
-    #             ),
-    #         },
-    #     ),
-    # ),
+    DataGridConferenceField(
+        name='conferences',
+        columns=(
+            'eventtype',
+            'title',
+            'eventName',
+            'isplenary',
+            'participationtype',
+            'conferencetype',
+            'place',
+            'conferencedate'
+        ),
+        widget=ConferenceWidget(
+            label=_(u"label_widgetconferences", default=u"Conferences"),
+            helper_js=(
+                'datagridwidget.js',
+                'datagridwidget_patches.js',
+                'datagridmultiselect.js'
+            ),
+            columns={
+                'eventtype': SelectColumn(
+                    _(u"weventtype_label", default="Event Type"),
+                    vocabulary=EventTypeVocabulary(),
+                ),
+                'title': Column(
+                    _(u"wtitle_label", default=u"Title"),
+                ),
+                'eventName': Column(
+                    _(u"weventname_label", default=u"Event Name"),
+                ),
+                'isplenary': SelectColumn(
+                    _(u"wisplenary_label", default="Is your conference plenary or masterly?"),
+                    vocabulary=BooleanTypeVocabulary(),
+                ),
+                'participationtype': SelectColumn(
+                    _(u"wcparticipationtype_label", default="Participation type"),
+                    vocabulary=ConferenceAssistantVocabulary(),
+                ),
+                # 'conferencetype': SelectColumn(
+                #     _(u"wconferencetype_label", default="Conference type"),
+                #     vocabulary=ConferenceTypeVocabulary(),
+                # ),
+                'conferencetype': MultiSelectColumn(
+                    _(u"wconferencetype_label", default="Conference type"),
+                    # vocabulary=ConferenceTypeVocabulary(),
+                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                ),
+                'place': Column(
+                    _(u"wplace_label", default=u"Place"),
+                ),
+                'conferencedate': DateColumn(
+                    _(u"wconferencedate_label", default=u"Date"),
+                    date_format="dd/mm/yy",
+                ),
+            },
+        ),
+    ),
 
     # DataGridCourseField(
     #     name='courses',
@@ -1005,7 +1019,7 @@ schema = BaseSchema + Schema((
         widget=OtherWidget(
             label=_(u"label_widgetotheractivity", default=u"Other Activities"),
             columns={
-                'otheract': Column(
+                'otheract': TextAreaColumn(
                     _(u"wotheract_label", default=u"Activity"),
                 ),
             },
