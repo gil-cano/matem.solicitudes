@@ -28,12 +28,12 @@
                             column columnd/id;
                             column_label columnd/label;
                             column_definition python: widget.getColumnDefinition(field, column);
-                            valuesfoo python:column_definition.processCellData(context.REQUEST.form, value, context, field, column)[0].get(column, []);
+                            valuesrequest python:column_definition.processCellData(context.REQUEST.form, value, context, field, column);
+                            effectivevalues python:[v[column]  for v in valuesrequest if v['orderindex_'] == str(rows.get('orderindex_'))][0];
                             cell_macro python: path('here/%s/macros' % column_definition.getMacro());
                             edit_macro cell_macro/edit_cell;
                             cell_value python:rows.get(column);">
                   <label tal:attributes="for column">
-                  <!-- LOS VALORES:<span tal:content="valuesfoo"/> -->
                     <br/><span i18n:translate="" tal:content="column_label">label</span><br/>
                   </label>
                   <span metal:use-macro="edit_macro"/>
