@@ -79,15 +79,15 @@ class CourselevelVocabulary:
         ])
 
 
-class CoursetypeVocabulary:
-    implements(IVocabulary)
+# class CoursetypeVocabulary:
+#     implements(IVocabulary)
 
-    def getDisplayList(self, instance):
-        return DisplayList([
-            ('research', _(u'Research')),
-            ('teaching', _(u'Teaching')),
-            ('divulgation', _(u'Divulgation')),
-        ])
+#     def getDisplayList(self, instance):
+#         return DisplayList([
+#             ('research', _(u'Research')),
+#             ('teaching', _(u'Teaching')),
+#             ('divulgation', _(u'Divulgation')),
+#         ])
 
 
 class ResearchPositionVocabulary:
