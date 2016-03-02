@@ -15,7 +15,6 @@
     </metal:view_cell_macro>
 
     <!-- EDIT -->
-    <!-- effectivevalues python:[v[column]  for v in valuesrequest if v['orderindex_'] == opt_index]; -->
     <metal:edit_cell_macro define-macro="edit_cell">
         <tal:values repeat="opt python:column_definition.getVocabulary(context).items()">
            <span class="dataGridMultiSelectCell"
