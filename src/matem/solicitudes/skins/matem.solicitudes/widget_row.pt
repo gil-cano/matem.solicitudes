@@ -28,8 +28,8 @@
                             column columnd/id;
                             column_label columnd/label;
                             column_definition python: widget.getColumnDefinition(field, column);
-                            valuesrequest python:column_definition.processCellData(context.REQUEST.form, value, context, field, column);
-                            effectivevalues python:[v[column]  for v in valuesrequest if v['orderindex_'] == str(rows.get('orderindex_'))][0];
+                            valuesrequest python: field.widget.getType() in widgetsmultiselect and widget.getResquestValues(context.REQUEST.form, value, context, field, column) or [];
+                            effectivevalues python:valuesrequest and [v[column]  for v in valuesrequest if v['orderindex_'] == str(rows.get('orderindex_'))][0] or [];
                             cell_macro python: path('here/%s/macros' % column_definition.getMacro());
                             edit_macro cell_macro/edit_cell;
                             cell_value python:rows.get(column);">

@@ -37,7 +37,8 @@
                 style="width: 100%"
                 tal:define="columns python:widget.getColumnDefs(field, context);
                             fielddata python: value or field.getEditAccessor(context)();
-                            eventHandler python: test(widget.isAutoInsertEnabled(), 'dataGridFieldFunctions.autoInsertRow(event)', '')
+                            eventHandler python: test(widget.isAutoInsertEnabled(), 'dataGridFieldFunctions.autoInsertRow(event)', '');
+                            widgetsmultiselect python:['matem.solicitudes.widgets.conference.ConferenceWidget'];
                            ">
 
                 <tbody tal:attributes="id python: 'datagridwidget-tbody-' + field.getName()">

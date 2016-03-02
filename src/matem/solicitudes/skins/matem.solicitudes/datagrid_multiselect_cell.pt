@@ -45,7 +45,7 @@
                             opt_val python:opt[0];
                             opt_label python:opt[1];
                             ">
-               <input class="noborder" type="checkbox" onclick="checkAddress(this)" value="1" id="" style="width: auto;"
+               <input class="noborder" type="checkbox" value="1" id="" style="width: auto;"
                       tal:attributes="name string:${fieldName}.${column}.${opt_val}.999999;
                                       id string:${fieldName}_${column}_${opt_val}_999999_${opt_index};
                                       title column_label|nothing;
