@@ -79,6 +79,18 @@ class CourselevelVocabulary:
         ])
 
 
+# TOD0 Unify the course level vocabularies
+def CourselevelVocabularyFactory(context):
+    """Vocabulary factory for conference type"""
+    return SimpleVocabulary([
+        SimpleTerm(value='highschool', title=_(u'High School')),
+        SimpleTerm(value='bachelor', title=_(u'Bachelor')),
+        SimpleTerm(value='master', title=_(u'Master')),
+        SimpleTerm(value='phd', title=_(u'PhD')),
+        SimpleTerm(value='other', title=_(u'Other')),
+    ])
+directlyProvides(CourselevelVocabularyFactory, IVocabularyFactory)
+
 # class CoursetypeVocabulary:
 #     implements(IVocabulary)
 
@@ -89,17 +101,29 @@ class CourselevelVocabulary:
 #             ('divulgation', _(u'Divulgation')),
 #         ])
 
+def ResearcherPositionVocabulary(context):
+    """Vocabulary factory for conference type"""
+    return SimpleVocabulary([
+        SimpleTerm(value='organizer', title=_(u'Organizer')),
+        SimpleTerm(value='co-organizer', title=_(u'Co-Organizer')),
+        SimpleTerm(value='responsible', title=_(u'Responsible of session')),
+        SimpleTerm(value='scientific', title=_(u'Scientific Comittee')),
+        SimpleTerm(value='localc', title=_(u'Local Comitte')),
+        SimpleTerm(value='directivec', title=_(u'Directive Comitte')),
+        SimpleTerm(value='other', title=_(u'Other')),
+    ])
+directlyProvides(ResearcherPositionVocabulary, IVocabularyFactory)
 
-class ResearchPositionVocabulary:
-    implements(IVocabulary)
+# class ResearcherPositionVocabulary:
+#     implements(IVocabulary)
 
-    def getDisplayList(self, instance):
-        return DisplayList([
-            ('organizer', _(u'Organizer')),
-            ('co-organizer', _(u'Co-Organizer')),
-            ('responsible', _(u'Responsible of session')),
-            ('scientificc', _(u'Scientific Comittee')),
-            ('localc', _(u'Local Comitte')),
-            ('directivec', _(u'Directive Comitte')),
-            ('other', _(u'Other')),
-        ])
+#     def getDisplayList(self, instance):
+#         return DisplayList([
+#             ('organizer', _(u'Organizer')),
+#             ('co-organizer', _(u'Co-Organizer')),
+#             ('responsible', _(u'Responsible of session')),
+#             ('scientificc', _(u'Scientific Comittee')),
+#             ('localc', _(u'Local Comitte')),
+#             ('directivec', _(u'Directive Comitte')),
+#             ('other', _(u'Other')),
+#         ])

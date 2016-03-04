@@ -12,7 +12,12 @@
 
 table.datagridwidget-table-view {
     width: 100%;
+    /*table-layout: fixed;
+    word-wrap: break-word;*/
+
+
 }
+
 
 input.datagrid-radio-button {
     /* Radio buttons try to use Plone's default text input

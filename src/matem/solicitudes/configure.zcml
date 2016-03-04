@@ -70,4 +70,16 @@
       name="matem.solicitudes.vocabularies.ConferenceType"
       />
 
+    <utility
+      component=".widgets.vocabularies.ResearcherPositionVocabulary"
+      name="matem.solicitudes.vocabularies.ResearcherPosition"
+      />
+
+    <utility
+      component=".widgets.vocabularies.CourselevelVocabularyFactory"
+      name="matem.solicitudes.vocabularies.Courselevel"
+      />
+
+
+
 </configure>

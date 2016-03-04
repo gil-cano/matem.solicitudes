@@ -60,6 +60,10 @@
           tal:define="navroot context/@@plone_portal_state/navigation_root_url"
           tal:attributes="href string:${navroot}/++resource++matem.solicitudes/print.css"
       />
+      <link rel="stylesheet" type="text/css"
+            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+            tal:attributes="href string:${navroot}/solwidgets.css"
+            />
   </metal:css>
 
 
@@ -293,6 +297,13 @@
         <tr><th colspan="2" i18n:translate="label_titulo_trabajo">Title of the work to be presented</th><td align="center" colspan="3"
                                                                               tal:content="here/getTituloTrabajo">Value</td></tr>
 
+        <tr tal:condition="here/getAssistance">
+          <th colspan="2" i18n:translate="label_widgetassistance">Only Assists</th>
+          <td align="center" colspan="3">
+            <metal:use use-macro="python:here.widget('assistance')"/>
+          </td>
+        </tr>
+
         <tr tal:condition="here/getConferences">
           <th colspan="2" i18n:translate="label_widgetconferences">Conferences</th>
           <td align="center" colspan="3">
@@ -307,6 +318,26 @@
           </td>
         </tr>
 
+        <tr tal:condition="here/getSresearch">
+          <th colspan="2" i18n:translate="label_widgetsresearch">Research Stay</th>
+          <td align="center" colspan="3">
+            <metal:use use-macro="python:here.widget('sresearch')"/>
+          </td>
+        </tr>
+
+        <tr tal:condition="here/getOrganization">
+          <th colspan="2" i18n:translate="label_widgetorganization">Organized Activities</th>
+          <td align="center" colspan="3">
+            <metal:use use-macro="python:here.widget('organization')"/>
+          </td>
+        </tr>
+
+        <tr tal:condition="here/getOtheractivity">
+          <th colspan="2" i18n:translate="label_widgetotheractivity">Other Activities</th>
+          <td align="center" colspan="3">
+            <metal:use use-macro="python:here.widget('otheractivity')"/>
+          </td>
+        </tr>
 
         <tr><th colspan="2" i18n:translate="label_adjuntos">Attachments</th>
               <td align="center" colspan="3"><tal:block condition="python:here.getField('displayAttachments') is not None">

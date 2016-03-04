@@ -7,7 +7,7 @@ from Products.DataGridField import DataGridField
 from Products.DataGridField import DataGridWidget
 
 
-class ResearchsWidget(DataGridWidget):
+class SResearchWidget(DataGridWidget):
     _properties = DataGridWidget._properties.copy()
     _properties.update({
         'macro': 'grid_widget',
@@ -18,20 +18,20 @@ class ResearchsWidget(DataGridWidget):
     security = ClassSecurityInfo()
 
 registerWidget(
-    ResearchsWidget,
-    title='ResearchsWidget',
-    description=('Widget for display research stays on DataGridResearchsField type format'),
-    used_for=('matem.solicitudes.widgets.researchs.DataGridResearchsField',)
+    SResearchWidget,
+    title='SResearchWidget',
+    description=('Widget for display research stays on DataGridSResearchField type format'),
+    used_for=('matem.solicitudes.widgets.sresearch.DataGridSResearchField',)
 )
 
 
-class DataGridResearchsField(ExtensionField, DataGridField):
+class DataGridSResearchField(ExtensionField, DataGridField):
 
     _properties = DataGridField._properties.copy()
     _properties.update({
-        'type': 'datagridresearchsfield',
+        'type': 'datagridsresearchfield',
         # 'validators': DateFreeValidator(),
-        'widget': ResearchsWidget,
+        'widget': SResearchWidget,
         # 'rows': [],
         'label_item': _(u'Research Stay'),
         'label_button': _(u'+ Research Stay'),
