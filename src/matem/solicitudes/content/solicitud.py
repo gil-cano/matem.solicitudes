@@ -1119,6 +1119,48 @@ class Solicitud(BaseContent):
         if start > end:
             errors['fecha_hasta'] = u'La fecha de término debe ser posterior a la de inicio'
 
+        # Add validators for widgtes date in range
+        # assistanceerrors = self.valiate('assistance', REQUEST.get('assistance', []), start, end)
+
+        # assistancerows = REQUEST.get('assistance', [])
+        for row in REQUEST.get('assistance', []):
+            if row['orderindex_'] != 'template_row_marker':
+                try:
+                    # is necesarily change the order for the widget format
+                    rowitem = row['assistancedate'].split('/')
+                    rowdate = DateTime(rowitem[2] + rowitem[1] + rowitem[0])
+                    # rowdate = DateTime(row['assistancedate'])
+                except Exception:
+                    errors['assistance'] = u'La fecha de asistencia no es válida'
+                if (rowdate < start) or (rowdate > end):
+                    errors['assistance'] = u'La fecha de asistencia no está en el rango de fechas de la solicitud'
+                #     return translate(
+                #         "Validation failed: The year, sponsor and amount are required, please correct.",
+                #         domain='UNAM.imateCVct',
+                #         context=kwargs['REQUEST'],
+                #         default=_("Validation failed: The year, sponsor and amount are required, please correct.")
+                #     )
+
+    def validateDateInRange(self, fieldName, rows, dstart, dend):
+        errors = {}
+        for row in rows:
+            if row['orderindex_'] != 'template_row_marker':
+                try:
+                    # is necesarily change the order for the widget format
+                    rowitem = row['assistancedate'].split('/')
+                    rowdate = DateTime(rowitem[2] + rowitem[1] + rowitem[0])
+                    # rowdate = DateTime(row['assistancedate'])
+                except Exception:
+                    errors['assistance'] = u'La fecha de asistencia no es válida'
+                if (rowdate < dstart) or (rowdate > dend):
+                    errors['assistance'] = u'La fecha de asistencia no está en el rango de fechas de la solicitud'
+                #     return translate(
+                #         "Validation failed: The year, sponsor and amount are required, please correct.",
+                #         domain='UNAM.imateCVct',
+                #         context=kwargs['REQUEST'],
+                #         default=_("Validation failed: The year, sponsor and amount are required, please correct.")
+        return errors
+
     def addTranslation(self, language, **kwargs):
         # call orginal addTranslation
         BaseContent.addTranslation(self, language, **kwargs)
