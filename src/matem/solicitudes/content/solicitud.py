@@ -897,7 +897,7 @@ schema = BaseSchema + Schema((
                     vocabulary=EventTypeVocabulary(),
                 ),
                 'title': Column(
-                    _(u"wtitle_label", default=u"Title"),
+                    _(u"wtitle_conference_label", default=u"Title"),
                 ),
                 'eventName': Column(
                     _(u"weventname_label", default=u"Event Name"),
@@ -940,7 +940,7 @@ schema = BaseSchema + Schema((
             helper_js=('datagridwidget.js', 'datagriddatepicker.js'),
             columns={
                 'title': Column(
-                    _(u"wtitle_label", default=u"Title"),
+                    _(u"wtitle_course_label", default=u"Title"),
                 ),
                 'eventName': Column(
                     _(u"weventname_label", default=u"Event Name"),
@@ -1011,7 +1011,7 @@ schema = BaseSchema + Schema((
             helper_js=('datagridwidget.js', 'datagriddatepicker.js'),
             columns={
                 'eventName': Column(
-                    _(u"weventName_label", default=u"Event Name"),
+                    _(u"weventname_label", default=u"Event Name"),
                 ),
                 'imposition': Column(
                     _(u"wimposition_label", default=u"IM Position"),
