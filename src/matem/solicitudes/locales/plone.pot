@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-09-29 17:58+0000\n"
+"POT-Creation-Date: 2016-03-08 17:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,4 +68,3 @@ msgstr ""
 #: matem/solicitudes/profiles/default/actions.xml
 msgid "Ver cuentas y presupuesto"
 msgstr ""
-
