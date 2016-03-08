@@ -1193,7 +1193,6 @@ class Solicitud(BaseContent):
                         columnerrors[fieldName] = u'El valor del número esperado debe ser un número entero positivo'
         return columnerrors
 
-
     def validateDateInRange(self, fieldName, columndate, rows, dstart, dend):
         fielderrors = {}
         for row in rows:
