@@ -99,7 +99,20 @@ events = {
 },
 
 2016: {
-
+'CLAM': {'event_title': 'V Congreso Latinoamericano de Matemáticos (V CLAM 2016)',
+         'pais': 'CO',
+         'ciudad_pais': 'Barranquilla',
+         'institucion': 'Universidad del Norte',
+         'fecha_desde': '2012-07-11 00:00 ',
+         'fecha_hasta': '2012-07-15 00:00 ',
+         'objeto_viaje': 'Asistir al V Congreso Latinoamericano de Matemáticos (V CLAM 2016)'},
+'SMM': {'event_title': 'XLIX Congreso Nacional de la Sociedad Matemática Mexicana (XLIX SMM 2016)',
+        'pais': 'MX',
+        'ciudad_pais': 'Aguascalientes',
+        'institucion': 'Universidad de Aguascalientes',
+        'fecha_desde': '2016-10-23 00:00 ',
+        'fecha_hasta': '2016-10-28 00:00 ',
+        'objeto_viaje': 'Asistir al XLIX Congreso Nacional de la Sociedad Matemática Mexicana (XLIX SMM 2016)'},
 },
 }
 
