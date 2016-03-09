@@ -109,7 +109,7 @@ events = {
 'SMM': {'event_title': 'XLIX Congreso Nacional de la Sociedad Matemática Mexicana (XLIX SMM 2016)',
         'pais': 'MX',
         'ciudad_pais': 'Aguascalientes',
-        'institucion': 'Universidad de Aguascalientes',
+        'institucion': 'Universidad Autónoma de Aguascalientes',
         'fecha_desde': '2016-10-23 00:00 ',
         'fecha_hasta': '2016-10-28 00:00 ',
         'objeto_viaje': 'Asistir al XLIX Congreso Nacional de la Sociedad Matemática Mexicana (XLIX SMM 2016)'},
