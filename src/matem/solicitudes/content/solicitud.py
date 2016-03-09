@@ -1418,7 +1418,27 @@ class Solicitud(BaseContent):
         return DateTime(self.getField('fecha_hasta').get(self))
 
     def getObjetoViaje(self):
-        return self.getField('objeto_viaje').get(self)
+        act1 = self.getField('assistance').getAccessor(self)()
+        act2 = self.getField('conferences').getAccessor(self)()
+        act3 = self.getField('courses').getAccessor(self)()
+        act4 = self.getField('sresearch').getAccessor(self)()
+        act5 = self.getField('organization').getAccessor(self)()
+        act6 = self.getField('otheractivity').getAccessor(self)()
+        resumen = []
+        if len(act1) > 0:
+            resumen.append('Sólo asistencias ' + str(len(act1)))
+        if len(act2) > 0:
+            resumen.append('Conferencias a impartir' + str(len(act2)))
+        if len(act3) > 0:
+            resumen.append('Cursos a impartir' + str(len(act3)))
+        if len(act4) > 0:
+            resumen.append('Estancias de Investigación ' + str(len(act4)))
+        if len(act5) > 0:
+            resumen.append('Organización de Actividades ' + str(len(act5)))
+        if len(act6) > 0:
+            resumen.append('Otra Actividad ' + str(len(act6)))
+
+        return self.getField('objeto_viaje').get(self) + '. ' + ', '.join(resumen)
 
     def getComentarioCI(self):
         return self.getField('comentario_ci').get(self)
