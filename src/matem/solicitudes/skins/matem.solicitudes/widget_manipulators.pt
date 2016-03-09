@@ -43,7 +43,7 @@
                       i18n:attributes="alt label_datagridwidget_manipulators_deleterow;
                                        title label_datagridwidget_manipulators_deleterow;"
                       onclick="dataGridFieldFunctions.removeFieldRow(this);return false">
-                Delete Activity
+                Borrar elemento
                 </button>
              </td>
 
