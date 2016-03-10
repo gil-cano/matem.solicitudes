@@ -273,21 +273,6 @@ schema = BaseSchema + Schema((
         write_permission="Solicitud: Modificar Solicitud",
     ),
 
-    StringField(
-        name='objeto_viaje',
-        searchable=1,
-        required=1,
-        accessor='ObjetoViaje',
-        widget=TextAreaWidget(
-            label='Objective',
-            label_msgid='label_objeto_viaje',
-            i18n_domain='matem.solicitudes',
-            description='Enter the expected objective of the visit',
-            description_msgid='help_objeto_viaje',
-        ),
-        write_permission="Solicitud: Modificar Solicitud",
-    ),
-
     LinesField(
         name='investigacionarea',
         required=1,
@@ -323,7 +308,7 @@ schema = BaseSchema + Schema((
                 'action': 'hide',
                 'hide_values': ('No',),
             },),
-            visible={'edit': 'visible', 'view': 'invisible'},
+            visible={'edit': 'invisible', 'view': 'invisible'},
         ),
         write_permission="Solicitud: Modificar Solicitud",
     ),
@@ -339,6 +324,7 @@ schema = BaseSchema + Schema((
             i18n_domain='matem.solicitudes',
             description='Enter the title of the paper to present',
             description_msgid='help_titulo_trabajo',
+            visible={'edit': 'invisible', 'view': 'invisible'},
         ),
         write_permission="Solicitud: Modificar Solicitud",
     ),
@@ -1047,17 +1033,21 @@ schema = BaseSchema + Schema((
         ),
     ),
 
-    DataGridOtherField(
-        name='otheractivity',
-        columns=('otheract',),
-        widget=OtherWidget(
-            label=_(u"label_widgetotheractivity", default=u"Other Activities"),
-            columns={
-                'otheract': TextAreaColumn(
-                    _(u"wotheract_label", default=u"Activity"),
-                ),
-            },
+    # For the new version this field is for other activity
+    StringField(
+        name='objeto_viaje',
+        searchable=1,
+        # required=1,
+        accessor='ObjetoViaje',
+        widget=TextAreaWidget(
+            label=_(u"label_sol_otheractivity", default=u"Other Activities"),
+            # label='Objective',
+            # label_msgid='label_objeto_viaje',
+            i18n_domain='matem.solicitudes',
+            description='Enter the other activities',
+            description_msgid='help_sol_otheractivity',
         ),
+        write_permission="Solicitud: Modificar Solicitud",
     ),
 
 ))
