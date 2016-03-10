@@ -174,7 +174,7 @@ a.datagridwidget-add-button{
     font-size: 12px;
     border-radius: 8px;
     cursor: pointer;
-    float: right;
+    float: left;
 }
 
 #content a.datagridwidget-add-button:hover{
@@ -188,9 +188,35 @@ a.datagridwidget-add-button{
     font-size: 12px;
     border-radius: 8px;
     cursor: pointer;
-    float: right;
+    float: left;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
+
+div.ArchetypesAssistanceWidget label.formQuestion{
+    display: none;
+
+}
+
+div.ArchetypesConferenceWidget label.formQuestion{
+    display: none;
+
+}
+
+div.ArchetypesCourseWidget label.formQuestion{
+    display: none;
+
+}
+
+div.ArchetypesSResearchWidget label.formQuestion{
+    display: none;
+
+}
+
+div.ArchetypesOrganizationWidget label.formQuestion{
+    display: none;
+
+}
+
 
 /*
 td.foo input.DataGridDatepicker{
