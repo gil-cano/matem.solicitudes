@@ -181,8 +181,11 @@ schema = BaseSchema + Schema((
         searchable=1,
         required=1,
         default='Licencia',
+        # vocabulary=DisplayList((
+        #     ('Licencia', 'Licencia'), ('Comision', 'Comision')
+        # )),
         vocabulary=DisplayList((
-            ('Licencia', 'Licencia'), ('Comision', 'Comision')
+            ('Licencia', _(u'Licencia')), ('Comision', _(u'Comision'))
         )),
         widget=SelectionWidget(
             label='Tipo de solicitud',
@@ -294,8 +297,11 @@ schema = BaseSchema + Schema((
         searchable=1,
         required=0,
         default='No',
+        # vocabulary=DisplayList((
+        #     ('No', 'No'), ('Si', 'Si')
+        # )),
         vocabulary=DisplayList((
-            ('No', 'No'), ('Si', 'Si')
+            ('No', _(u'No')), ('Si', _(u'Si'))
         )),
         widget=MasterSelectWidget(
             label='Paper',
@@ -340,9 +346,13 @@ schema = BaseSchema + Schema((
     StringField(
         name='cargo_presupuesto',
         required=1,
+        # vocabulary=DisplayList((
+        #     ('Asignación anual', 'Asignación anual'),
+        #     ('Apoyo institucional', 'Apoyo institucional')
+        # )),
         vocabulary=DisplayList((
-            ('Asignación anual', 'Asignación anual'),
-            ('Apoyo institucional', 'Apoyo institucional')
+            ('Asignación anual', _(u'Asignación anual')),
+            ('Apoyo institucional', _(u'Apoyo institucional'))
         )),
         default='Asignación anual',
         widget=SelectionWidget(
@@ -361,8 +371,11 @@ schema = BaseSchema + Schema((
         searchable=1,
         required=0,
         default='',
+        # vocabulary=DisplayList((
+        #     ('No', _(u'No')), ('si', _(u'Si'))
+        # )),
         vocabulary=DisplayList((
-            ('No', 'No'), ('si', 'Si')
+            ('No', _(u'No')), ('si', _(u'Si'))
         )),
         widget=MasterSelectWidget(
             label='Transportation expenses',
@@ -397,7 +410,9 @@ schema = BaseSchema + Schema((
         ),
         multiValued=1,
         vocabulary=DisplayList((
-            ('auto', 'Car'), ('autobus', 'Bus'), ('avion', 'Airplane')
+            ('auto', _(u'Car')),
+            ('autobus', _(u'Bus')),
+            ('avion', _(u'Airplane'))
         )),
         write_permission="Solicitud: Modificar Solicitud",
     ),
@@ -426,7 +441,7 @@ schema = BaseSchema + Schema((
         required=0,
         default='No',
         vocabulary=DisplayList((
-            ('No', 'No'), ('Si', 'Si')
+            ('No', _(u'No')), ('Si', _(u'Si'))
         )),
         widget=MasterSelectWidget(
             label='Travel allowances',
@@ -481,7 +496,7 @@ schema = BaseSchema + Schema((
         required=0,
         default='No',
         vocabulary=DisplayList((
-            ('No', 'No'), ('Si', 'Si')
+            ('No', _(u'No')), ('Si', _(u'Si'))
         )),
         widget=MasterSelectWidget(
             label='Registration',
@@ -653,7 +668,7 @@ schema = BaseSchema + Schema((
         searchable=0,
         required=1,
         vocabulary=DisplayList((
-            ('No', 'No'), ('Si', 'Si')
+            ('No', _(u'No')), ('Si', _(u'Si'))
         )),
         default='Si',
         widget=SelectionWidget(
@@ -1426,6 +1441,7 @@ class Solicitud(BaseContent):
             resumen.append('Organización de Actividades ' + str(len(act5)))
 
         return self.getField('objeto_viaje').get(self) + '. ' + ', '.join(resumen)
+
 
     def getComentarioCI(self):
         return self.getField('comentario_ci').get(self)

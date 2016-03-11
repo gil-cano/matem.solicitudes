@@ -6,6 +6,8 @@ from matem.solicitudes.config import DICCIONARIO_TIPO_TRANSPORTE
 from matem.solicitudes.config import DICCIONARIO_TIPO_TRANSPORTE_EN
 from matem.solicitudes.extender import PersonWrapper
 from matem.solicitudes.interfaces import ISolicitud
+from zope.i18n import translate
+from matem.solicitudes import solicitudesMessageFactory as _
 
 
 class SolicitudView(BrowserView):
@@ -104,6 +106,17 @@ class SolicitudView(BrowserView):
 
         return user
 
+    def getDisplayListTitle(self, fieldName):
+        soli = self.context
+        title = ''
+        try:
+            value = soli.getField(fieldName).get(self.context)
+            vocabulary = soli.getField(fieldName).vocabulary()
+            title = vocabulary.getValue(value)
+        except Exception:
+            return title
+        return title
+
     def getArea(self,codigoArea):
         areas=[]
         for area in codigoArea:
@@ -113,17 +126,36 @@ class SolicitudView(BrowserView):
                 areas.append("")
         return areas
 
-    def getTipoTransporte(self,codigoTrans):
-        temp="";
+    # def getTipoTransporte(self, codigoTrans):
 
-        for codigo in codigoTrans:
-            try:
-                temp+=DICCIONARIO_TIPO_TRANSPORTE[codigo]
-                temp+=","
-            except:
-                temp=temp
+    #     temp="";
 
-        return temp
+    #     for codigo in codigoTrans:
+    #         try:
+    #             temp+=DICCIONARIO_TIPO_TRANSPORTE[codigo]
+    #             temp+=","
+    #         except:
+    #             temp=temp
+
+    #     return temp
+    def getTipoTransporte(self, codigoTrans):
+
+        temp = ', '.join(codigoTrans)
+
+        soli = self.context
+        titles = []
+        try:
+            vocabulary = soli.getField('tipo_pasaje').vocabulary()
+            for codigo in codigoTrans:
+                titles.append(translate(_(
+                    vocabulary.getValue(codigo)),
+                    domain='matem.solicitudes',
+                    target_language=soli.REQUEST.LANGUAGE)
+                )
+        except Exception:
+            return temp
+
+        return ', '.join(titles)
 
     def getPresupuestoAprobadoSolicitud(self):
         return self.context.getCantidadAutorizadaTotal()
