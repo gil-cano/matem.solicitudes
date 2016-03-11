@@ -332,13 +332,6 @@
           </td>
         </tr>
 
-        <tr tal:condition="here/getOtheractivity">
-          <th colspan="2" i18n:translate="label_widgetotheractivity">Other Activities</th>
-          <td align="center" colspan="3">
-            <metal:use use-macro="python:here.widget('otheractivity')"/>
-          </td>
-        </tr>
-
         <tr><th colspan="2" i18n:translate="label_adjuntos">Attachments</th>
               <td align="center" colspan="3"><tal:block condition="python:here.getField('displayAttachments') is not None">
                                                  <div metal:use-macro="python:here.widget('displayAttachments')"/>
