@@ -225,8 +225,29 @@ span.dataGridMultiSelectCell label{
 
 td.gridwidget input.DataGridDatepicker{
     width: 20% !important;
-
 }
+
+input[name="courses.duration:records"]{
+    width: 10% !important;
+}
+
+input[name="organization.speakersint:records"]{
+    width: 10% !important;
+}
+input[name="organization.speakersnac:records"]{
+    width: 10% !important;
+}
+input[name="organization.assistants:records"]{
+    width: 10% !important;
+}
+
+
+
+/*td.gridwidget input.DataGridDatepicker{
+    width: 20% !important;
+}*/
+
+
 /*
 td.foo div.dataGridMultiSelectCell{
     width: auto;
