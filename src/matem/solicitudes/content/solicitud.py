@@ -1231,6 +1231,8 @@ class Solicitud(BaseContent):
         for row in rows:
             if row['orderindex_'] != 'template_row_marker':
                 for columnN in columnsnumber:
+                    if row[columnN] == '':
+                        continue
                     try:
                         rowvalue = int(row[columnN])
                     except Exception:
