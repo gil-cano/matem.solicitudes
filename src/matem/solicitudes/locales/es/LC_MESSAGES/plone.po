@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-03-11 18:00+0000\n"
+"POT-Creation-Date: 2016-03-14 06:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,52 +16,52 @@ msgstr ""
 
 #: matem/solicitudes/profiles/default/types/SolicitudFolder.xml
 msgid "Folder de Solicitudes"
-msgstr ""
+msgstr "Carpeta de Solicitudes"
 
 #: matem/solicitudes/profiles/default/types/SolicitudFolder.xml
 msgid "Folder de solicitudes."
-msgstr ""
+msgstr "Carpeta de solicitudes."
 
 #: matem/solicitudes/profiles/default/types/SolicitudFolder.xml
 msgid "Import Applications"
-msgstr ""
+msgstr "Importar Aplicaciones"
 
 #: matem/solicitudes/profiles/default/actions.xml
 msgid "Ir a Solicitudes"
-msgstr ""
+msgstr "Ir a Solicitudes"
 
 #: matem/solicitudes/profiles/default/types/SolicitudFolder.xml
 msgid "Navigation"
-msgstr ""
+msgstr "Navegación"
 
 #: matem/solicitudes/profiles/default/types/SolicitudFolder.xml
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #: matem/solicitudes/profiles/default/types/SolicitudBecario.xml
 msgid "Solicitud de Becario"
-msgstr ""
+msgstr "Solicitud de de Becario"
 
 #: matem/solicitudes/profiles/default/types/Solicitud.xml
 msgid "Solicitud de Licencia/Comision"
-msgstr ""
+msgstr "Solicitud de Licencia/Comisión"
 
 #: matem/solicitudes/profiles/default/types/SolicitudVisitante.xml
 msgid "Solicitud de Visitante"
-msgstr ""
+msgstr "Solicitud de Visitante"
 
 #: matem/solicitudes/profiles/default/types/Solicitud.xml
 msgid "Solicitud de licencia o comision para investigadores. Importante: Consulte con la secretaria academica antes de llenar esta forma para saber si va a pedir licencia o va a pedir comision."
-msgstr ""
+msgstr "Solicitud de licencia o comisión para académicos. Importante: Consulte con la Secretaría Académica antes de llenar esta forma para saber si va a pedir licencia o va a pedir comisión."
 
 #: matem/solicitudes/profiles/default/types/SolicitudBecario.xml
 msgid "Solicitud de viaticos para becarios."
-msgstr ""
+msgstr "Solicitud de viáticos para becarios."
 
 #: matem/solicitudes/profiles/default/types/SolicitudVisitante.xml
 msgid "Solicitud de viaticos para investigadores visitantes."
-msgstr ""
+msgstr "Solicitud de viáticos para investigadores visitantes."
 
 #: matem/solicitudes/profiles/default/actions.xml
 msgid "Ver cuentas y presupuesto"
-msgstr ""
+msgstr "Ver cuentas y presupuesto"

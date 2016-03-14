@@ -194,8 +194,10 @@ a.datagridwidget-add-button{
 
 div.ArchetypesAssistanceWidget label.formQuestion{
     display: none;
+    /* color: white; */
 
 }
+
 
 div.ArchetypesConferenceWidget label.formQuestion{
     display: none;
@@ -217,13 +219,15 @@ div.ArchetypesOrganizationWidget label.formQuestion{
 
 }
 
-
-/*
-td.foo input.DataGridDatepicker{
-    width: 30% !important;
-
+span.dataGridMultiSelectCell label{
+    font-weight: normal;
 }
 
+td.gridwidget input.DataGridDatepicker{
+    width: 20% !important;
+
+}
+/*
 td.foo div.dataGridMultiSelectCell{
     width: auto;
 }

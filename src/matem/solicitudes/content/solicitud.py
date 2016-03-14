@@ -151,8 +151,9 @@ schema = BaseSchema + Schema((
             label="Solicitante",
             label_msgid="label_solicitante",
             i18n_domain='matem.solicitudes',
-            description="Nombre del investigador a nombre del cual es esta solicitud.",
-            description_msgid="help_solicitante",
+            description=_(u'help_sol_solicitante', default=u'Researcher Name'),
+            # description="Nombre del investigador a nombre del cual es esta solicitud.",
+            # description_msgid="help_solicitante",
         ),
         write_permission="Solicitud: Cambiar Solicitante",
     ),
@@ -191,8 +192,9 @@ schema = BaseSchema + Schema((
             label='Tipo de solicitud',
             label_msgid='label_licenciacomision',
             i18n_domain='matem.solicitudes',
-            description='Especifica si esta es una solicitud de comisión o de licencia',
-            description_msgid='help_licenciacomision',
+            description=_(u'help_sol_licenciacomision', default=u'Licencia/Comision'),
+            # description='Especifica si esta es una solicitud de comisión o de licencia',
+            # description_msgid='help_licenciacomision',
         ),
         write_permission="Solicitud: Modificar Solicitud",
     ),
@@ -249,8 +251,9 @@ schema = BaseSchema + Schema((
             label='Start date',
             label_msgid='label_fecha_desde',
             i18n_domain='matem.solicitudes',
-            description='Date on wich the visit will start (it can be approximate)',
-            description_msgid='help_fecha_desde',
+            description=_(u'help_sol_fecha_desde', default=u'Date on wich the visit will start (it can be approximate)'),
+            # description='Date on wich the visit will start (it can be approximate)',
+            # description_msgid='help_fecha_desde',
             starting_year=2011,
             future_years=1,
             show_hm=False,
@@ -267,8 +270,9 @@ schema = BaseSchema + Schema((
             label='End date',
             label_msgid='label_fecha_hasta',
             i18n_domain='matem.solicitudes',
-            description='Date on wich the visit will end (it can be approximate)',
-            description_msgid='help_fecha_hasta',
+            description=_(u'help_sol_fecha_hasta', default=u'Date on wich the visit will end (it can be approximate)'),
+            # description='Date on wich the visit will end (it can be approximate)',
+            # description_msgid='help_fecha_hasta',
             starting_year=2011,
             future_years=1,
             show_hm=False,
@@ -283,8 +287,9 @@ schema = BaseSchema + Schema((
         widget=PicklistWidget(
             label='Research areas',
             label_msgid='label_investigacionarea',
-            description="Doubts about the classification and how to find an area, go to the official website of the <a href=\"http://www.ams.org/msc\">ams</a>",
-            description_msgid='help_investigacionarea',
+            description=_(u'help_sol_investigacionarea', default=u'Doubts about the classification and how to find an area, go to the official website of the <a href=\"http://www.ams.org/msc\">ams</a>'),
+            # description="Doubts about the classification and how to find an area, go to the official website of the <a href=\"http://www.ams.org/msc\">ams</a>",
+            # description_msgid='help_investigacionarea',
             i18n_domain='matem.solicitudes',
         ),
         multiValued=1,
@@ -849,9 +854,16 @@ schema = BaseSchema + Schema((
 
     DataGridAssistanceField(
         name='assistance',
-        columns=('eventtype', 'eventName', 'place', 'assistancedate'),
+        columns=(
+            'eventtype',
+            'eventName',
+            'place',
+            'institution',
+            'assistancedate'
+        ),
         widget=AssistanceWidget(
             label=_(u"label_widgetassistance", default=u"Only Assists"),
+            # description=_(u'help_widgetassistance', default=u'Use this option in only assistance'),
             helper_js=('datagridwidget.js', 'datagriddatepicker.js'),
             columns={
                 'eventtype': SelectColumn(
@@ -863,6 +875,9 @@ schema = BaseSchema + Schema((
                 ),
                 'place': Column(
                     _(u"wplace_label", default=u"Place"),
+                ),
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
                 ),
                 'assistancedate': DateColumn(
                     _(u"wassistancedate_label", default=u"Date"),
@@ -878,14 +893,17 @@ schema = BaseSchema + Schema((
             'eventtype',
             'title',
             'eventName',
+            'institution',
             'isplenary',
             'participationtype',
             'conferencetype',
             'place',
-            'conferencedate'
+            'conferencedate',
+            'assistallevent',
         ),
         widget=ConferenceWidget(
             label=_(u"label_widgetconferences", default=u"Conferences"),
+            # description=_(u'help_widgetconferences', default=u'Use this option if you give a talk'),
             helper_js=(
                 'datagridwidget.js',
                 'datagridwidget_patches.js',
@@ -902,6 +920,9 @@ schema = BaseSchema + Schema((
                 ),
                 'eventName': Column(
                     _(u"weventname_label", default=u"Event Name"),
+                ),
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
                 ),
                 'isplenary': SelectColumn(
                     _(u"wisplenary_label", default="Is your conference plenary or masterly?"),
@@ -922,6 +943,10 @@ schema = BaseSchema + Schema((
                     _(u"wconferencedate_label", default=u"Date"),
                     date_format="dd/mm/yy",
                 ),
+                'assistallevent': SelectColumn(
+                    _(u"wassistallevent_label", default="Are you going to all congress?"),
+                    vocabulary=BooleanTypeVocabulary(),
+                ),
             },
         ),
     ),
@@ -930,7 +955,9 @@ schema = BaseSchema + Schema((
         name='courses',
         columns=(
             'title',
+            'duration',
             'eventName',
+            'institution',
             'level',
             'place',
             'coursetype',
@@ -943,8 +970,14 @@ schema = BaseSchema + Schema((
                 'title': Column(
                     _(u"wtitle_course_label", default=u"Title"),
                 ),
+                'duration': Column(
+                    _(u"wduration_course_label", default=u"Duration in hours"),
+                ),
                 'eventName': Column(
                     _(u"weventname_label", default=u"Event Name"),
+                ),
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
                 ),
                 'level': SelectColumn(
                     _(u"wlevel_label", default="Level"),
@@ -987,7 +1020,7 @@ schema = BaseSchema + Schema((
                     _(u"winstitution_label", default=u"Institution"),
                 ),
                 'sresearchdate': DateColumn(
-                    _(u"wcoursedate_label", default=u"Date"),
+                    _(u"sresearchdate_label", default=u"Date"),
                     date_format="dd/mm/yy",
                 ),
             },
@@ -1000,6 +1033,7 @@ schema = BaseSchema + Schema((
             'eventName',
             'imposition',
             'researcherposition',
+            'sessionName',
             'activitytype',
             'level',
             'speakersint',
@@ -1014,12 +1048,19 @@ schema = BaseSchema + Schema((
                 'eventName': Column(
                     _(u"weventname_label", default=u"Event Name"),
                 ),
-                'imposition': Column(
-                    _(u"wimposition_label", default=u"IM Position"),
+                # 'imposition': Column(
+                #     _(u"wimposition_label", default=u"IM Position"),
+                # ),
+                'imposition': MultiSelectColumn(
+                    _(u"wimposition_label", default="IM Position"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.IMPosition',
                 ),
                 'researcherposition': MultiSelectColumn(
                     _(u"wresearchposition_label", default="Researcher Position"),
                     vocabulary_factory='matem.solicitudes.vocabularies.ResearcherPosition',
+                ),
+                'sessionName': Column(
+                    _(u"wsessionName_label", default=u"If you are Responsible of session, please indicate the session name"),
                 ),
                 'activitytype': MultiSelectColumn(
                     _(u"wactivitytype_label", default="Activity Type"),
@@ -1059,8 +1100,9 @@ schema = BaseSchema + Schema((
             # label='Objective',
             # label_msgid='label_objeto_viaje',
             i18n_domain='matem.solicitudes',
-            description='Enter the other activities',
-            description_msgid='help_sol_otheractivity',
+            description=_(u'help_sol_otheractivity', default=u'Enter the other activities'),
+            # description='Enter the other activities',
+            # description_msgid='help_sol_otheractivity',
         ),
         write_permission="Solicitud: Modificar Solicitud",
     ),
@@ -1440,7 +1482,7 @@ class Solicitud(BaseContent):
         if len(act5) > 0:
             resumen.append('Organización de Actividades ' + str(len(act5)))
 
-        return self.getField('objeto_viaje').get(self) + '. ' + ', '.join(resumen)
+        return self.getField('objeto_viaje').get(self) + ' ' + ', '.join(resumen)
 
 
     def getComentarioCI(self):
