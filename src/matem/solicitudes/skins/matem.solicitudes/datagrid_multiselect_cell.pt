@@ -10,7 +10,8 @@
 <body>
     <!-- VIEW -->
     <metal:view_cell_macro define-macro="view_cell">
-      <span tal:content="python:context.displayValue(column_definition.getVocabulary(context), cell_value, widget)"></span>
+      <span tal:condition="python:context.displayValue(column_definition.getVocabulary(context), cell_value, widget)"
+      tal:content="python:context.displayValue(column_definition.getVocabulary(context), cell_value, widget)"></span>
       <div tal:condition="not:cell_value">-</div>
     </metal:view_cell_macro>
 
