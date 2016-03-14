@@ -35,4 +35,5 @@ class DataGridSResearchField(ExtensionField, DataGridField):
         # 'rows': [],
         'label_item': _(u'Research Stay'),
         'label_button': _(u'+ Research Stay'),
+        'help_button': _(u'Use this option if you will do a reseracher stay'),
     })

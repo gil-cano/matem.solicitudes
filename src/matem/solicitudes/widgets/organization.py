@@ -67,4 +67,5 @@ class DataGridOrganizationField(ExtensionField, DataGridField):
         'widget': OrganizationWidget,
         'label_item': _(u'Organized Activity'),
         'label_button': _(u'+ Organized Activity'),
+        'help_button': _(u'Use this option if you will organizer the activity'),
     })

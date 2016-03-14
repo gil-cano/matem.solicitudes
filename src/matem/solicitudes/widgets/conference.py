@@ -69,4 +69,5 @@ class DataGridConferenceField(ExtensionField, DataGridField):
         'widget': ConferenceWidget,
         'label_item': _(u'Conference'),
         'label_button': _(u'+ Conference'),
+        'help_button': _(u'Use this option if you will give a talk'),
     })

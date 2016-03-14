@@ -67,4 +67,5 @@ class DataGridCourseField(ExtensionField, DataGridField):
         'widget': CourseWidget,
         'label_item': _(u'Course'),
         'label_button': _(u'+ Course'),
+        'help_button': _(u'Use this option if you will give a course'),
     })

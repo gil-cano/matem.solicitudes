@@ -32,4 +32,5 @@ class DataGridAssistanceField(ExtensionField, DataGridField):
         'widget': AssistanceWidget,
         'label_item': _(u'Assistance'),
         'label_button': _(u'+ Assistance'),
+        'help_button': _(u'Use this option in only assistance'),
     })

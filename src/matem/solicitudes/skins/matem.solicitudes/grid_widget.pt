@@ -60,12 +60,14 @@
                     </tal:empty-row>
                  </tbody>
             </table>
-
+            <span i18n:translate="" tal:content="field/help_button">Help button</span><br/>
             <a class="datagridwidget-add-button" id="datagridwidget-add-button"
                    tal:condition="field/allow_insert"
                tal:attributes='onclick python: "dataGridFieldFunctions.addRow(\"" + field.getName() + "\")"'>
                <span i18n:translate="" tal:content="field/label_button">Add new row</span></a>
+
             <div class="visualClear"><!-- --></div>
+            <br/><hr/>
             <tal:comment replace="nothing">
                 <!-- Button that allows creation of the initial row when DGF is empty -->
             </tal:comment>
