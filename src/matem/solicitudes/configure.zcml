@@ -76,6 +76,11 @@
       />
 
     <utility
+      component=".widgets.vocabularies.IMPositionVocabulary"
+      name="matem.solicitudes.vocabularies.IMPosition"
+      />
+
+    <utility
       component=".widgets.vocabularies.CourselevelVocabularyFactory"
       name="matem.solicitudes.vocabularies.Courselevel"
       />

@@ -101,6 +101,7 @@ directlyProvides(CourselevelVocabularyFactory, IVocabularyFactory)
 #             ('divulgation', _(u'Divulgation')),
 #         ])
 
+
 def ResearcherPositionVocabulary(context):
     """Vocabulary factory for conference type"""
     return SimpleVocabulary([
@@ -127,3 +128,14 @@ directlyProvides(ResearcherPositionVocabulary, IVocabularyFactory)
 #             ('directivec', _(u'Directive Comitte')),
 #             ('other', _(u'Other')),
 #         ])
+
+
+def IMPositionVocabulary(context):
+    """Vocabulary factory for conference type"""
+    return SimpleVocabulary([
+        SimpleTerm(value='sponsor', title=_(u'Sponsor')),
+        SimpleTerm(value='campus', title=_(u'Campus')),
+        SimpleTerm(value='support', title=_(u'Support for the diffusion')),
+        SimpleTerm(value='other', title=_(u'Other')),
+    ])
+directlyProvides(IMPositionVocabulary, IVocabularyFactory)
