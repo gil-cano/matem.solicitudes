@@ -1166,11 +1166,29 @@ class Solicitud(BaseContent):
         if start > end:
             errors['fecha_hasta'] = u'La fecha de término debe ser posterior a la de inicio'
 
+        lassistance = REQUEST.get('assistance', [])
+        lconferences = REQUEST.get('conferences', [])
+        lcourses = REQUEST.get('courses', [])
+        lsresearch = REQUEST.get('sresearch', [])
+        lorganization = REQUEST.get('organization', [])
+
+        atleasterror = self.atleastwidget(
+            REQUEST.get('objeto_viaje', ''),
+            lassistance,
+            lconferences,
+            lcourses,
+            lsresearch,
+            lorganization,
+        )
+        if atleasterror:
+            k = atleasterror.keys()[0]
+            errors[k] = atleasterror[k]
+
         # Add validators for widgtes date in range
         widgetserrors = self.validateDateInRange(
             'assistance',
             'assistancedate',
-            REQUEST.get('assistance', []),
+            lassistance,
             start,
             end
         )
@@ -1179,7 +1197,7 @@ class Solicitud(BaseContent):
             self.validateDateInRange(
                 'conferences',
                 'conferencedate',
-                REQUEST.get('conferences', []),
+                lconferences,
                 start,
                 end
             )
@@ -1189,7 +1207,7 @@ class Solicitud(BaseContent):
             self.validateDateInRange(
                 'courses',
                 'coursedate',
-                REQUEST.get('courses', []),
+                lcourses,
                 start,
                 end
             )
@@ -1199,7 +1217,7 @@ class Solicitud(BaseContent):
             self.validateDateInRange(
                 'sresearch',
                 'sresearchdate',
-                REQUEST.get('sresearch', []),
+                lsresearch,
                 start,
                 end
             )
@@ -1209,7 +1227,7 @@ class Solicitud(BaseContent):
             self.validateIntNumbers(
                 'organization',
                 ['speakersint', 'speakersnac', 'assistants'],
-                REQUEST.get('organization', []),
+                lorganization,
             )
         )
 
@@ -1217,7 +1235,7 @@ class Solicitud(BaseContent):
             self.validateDateInRange(
                 'organization',
                 'organizationdate',
-                REQUEST.get('organization', []),
+                lorganization,
                 start,
                 end
             )
@@ -1225,6 +1243,18 @@ class Solicitud(BaseContent):
 
         for k, v in widgetserrors.iteritems():
             errors[k] = v
+
+    def atleastwidget(self, otheractivity, lassistance, lconferences, lcourses, lsresearch, lorganization):
+
+        atleasterror = {}
+        if (len(lassistance) >= 2) or (len(lconferences) >= 2) or (len(lcourses) >= 2) or (len(lsresearch) >= 2) or (len(lorganization) >= 2):
+            return atleasterror
+
+        if otheractivity:
+            return atleasterror
+
+        atleasterror['objeto_viaje'] = u'La solicitud debe tener al menos una actividad'
+        return atleasterror
 
     def validateIntNumbers(self, fieldName, columnsnumber, rows):
         columnerrors = {}
