@@ -60,6 +60,10 @@
           tal:define="navroot context/@@plone_portal_state/navigation_root_url"
           tal:attributes="href string:${navroot}/++resource++matem.solicitudes/print.css"
       />
+      <link rel="stylesheet" type="text/css"
+            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+            tal:attributes="href string:${navroot}/solwidgets.css"
+            />
     </metal:css>
 
 

@@ -27,6 +27,23 @@ from archetypes.multifile.MultiFileWidget import MultiFileWidget
 from matem.solicitudes.config import getCountriesVocabulary
 from matem.solicitudes import solicitudesMessageFactory as _
 
+from matem.solicitudes.widgets.course import DataGridCourseField
+from matem.solicitudes.widgets.course import CourseWidget
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
+from collective.datagridcolumns.DateColumn import DateColumn
+from collective.datagridcolumns.MultiSelectColumn import MultiSelectColumn
+# from matem.solicitudes.widgets.vocabularies import ConferenceTypeVocabulary
+# from matem.solicitudes.widgets.vocabularies import ConferenceAssistantVocabulary
+
+from matem.solicitudes.widgets.vocabularies import CourselevelVocabulary
+# from matem.solicitudes.widgets.vocabularies import CoursetypeVocabulary
+
+# from matem.solicitudes.widgets.vocabularies import ResearchPositionVocabulary
+
+# from matem.solicitudes.widgets.vocabularies import EventTypeVocabulary
+# from matem.solicitudes.widgets.vocabularies import BooleanTypeVocabulary
+
 
 schema = BaseSchema + Schema((
     ComputedField(
@@ -656,6 +673,53 @@ schema = BaseSchema + Schema((
         label_msgid='label_acuse_recibo',
         default=False,
         widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
+    ),
+
+    DataGridCourseField(
+        name='courses',
+        columns=(
+            'title',
+            'duration',
+            'eventName',
+            'institution',
+            'level',
+            'place',
+            'coursetype',
+            'coursedate'
+        ),
+        widget=CourseWidget(
+            label=_(u"label_widgetcourses", default=u"Courses"),
+            helper_js=('datagridwidget.js', 'datagriddatepicker.js'),
+            columns={
+                'title': Column(
+                    _(u"wtitle_course_label", default=u"Title"),
+                ),
+                'duration': Column(
+                    _(u"wduration_course_label", default=u"Duration in hours"),
+                ),
+                'eventName': Column(
+                    _(u"weventname_label", default=u"Event Name"),
+                ),
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
+                ),
+                'level': SelectColumn(
+                    _(u"wlevel_label", default="Level"),
+                    vocabulary=CourselevelVocabulary(),
+                ),
+                'place': Column(
+                    _(u"wplace_label", default=u"Place"),
+                ),
+                'coursetype': MultiSelectColumn(
+                    _(u"wcoursetype_label", default="Coursetype"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                ),
+                'coursedate': DateColumn(
+                    _(u"wcoursedate_label", default=u"Date"),
+                    date_format="dd/mm/yy",
+                ),
+            },
+        ),
     ),
 
 
