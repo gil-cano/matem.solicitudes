@@ -959,6 +959,7 @@ schema = BaseSchema + Schema((
             'eventName',
             'institution',
             'level',
+            'otherlevel',
             'place',
             'coursetype',
             'coursedate'
@@ -983,6 +984,10 @@ schema = BaseSchema + Schema((
                     _(u"wlevel_label", default="Level"),
                     vocabulary=CourselevelVocabulary(),
                 ),
+                'otherlevel': Column(
+                    _(u"wotherlevel_label", default=u"If you select \"Other\" in Level, please indicate it"),
+                ),
+
                 'place': Column(
                     _(u"wplace_label", default=u"Place"),
                 ),
@@ -1515,7 +1520,6 @@ class Solicitud(BaseContent):
             resumen.append('Organización de Actividades ' + str(len(act5)))
 
         return self.getField('objeto_viaje').get(self) + ' ' + ', '.join(resumen)
-
 
     def getComentarioCI(self):
         return self.getField('comentario_ci').get(self)
