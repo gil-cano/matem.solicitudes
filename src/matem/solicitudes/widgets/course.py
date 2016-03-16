@@ -69,3 +69,15 @@ class DataGridCourseField(ExtensionField, DataGridField):
         'label_button': _(u'+ Course'),
         'help_button': _(u'Use this option if you will give a course'),
     })
+
+
+class DataGridCourseGuestField(ExtensionField, DataGridField):
+
+    _properties = DataGridField._properties.copy()
+    _properties.update({
+        'type': 'datagridcoursefield',
+        'widget': CourseWidget,
+        'label_item': _(u'Course'),
+        'label_button': _(u'+ Course'),
+        'help_button': _(u'Use this option if you guest will be give a course'),
+    })

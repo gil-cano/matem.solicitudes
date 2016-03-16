@@ -27,22 +27,25 @@ from archetypes.multifile.MultiFileWidget import MultiFileWidget
 from matem.solicitudes.config import getCountriesVocabulary
 from matem.solicitudes import solicitudesMessageFactory as _
 
-from matem.solicitudes.widgets.course import DataGridCourseField
+
+from matem.solicitudes.widgets.conference import DataGridConferenceGuestField
+from matem.solicitudes.widgets.conference import ConferenceWidget
+from matem.solicitudes.widgets.course import DataGridCourseGuestField
 from matem.solicitudes.widgets.course import CourseWidget
 from Products.DataGridField.Column import Column
 from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.DateColumn import DateColumn
 from collective.datagridcolumns.MultiSelectColumn import MultiSelectColumn
 # from matem.solicitudes.widgets.vocabularies import ConferenceTypeVocabulary
-# from matem.solicitudes.widgets.vocabularies import ConferenceAssistantVocabulary
+from matem.solicitudes.widgets.vocabularies import ConferenceAssistantVocabulary
 
 from matem.solicitudes.widgets.vocabularies import CourselevelVocabulary
 # from matem.solicitudes.widgets.vocabularies import CoursetypeVocabulary
 
 # from matem.solicitudes.widgets.vocabularies import ResearchPositionVocabulary
 
-# from matem.solicitudes.widgets.vocabularies import EventTypeVocabulary
-# from matem.solicitudes.widgets.vocabularies import BooleanTypeVocabulary
+from matem.solicitudes.widgets.vocabularies import EventTypeVocabulary
+from matem.solicitudes.widgets.vocabularies import BooleanTypeVocabulary
 
 
 schema = BaseSchema + Schema((
@@ -675,7 +678,128 @@ schema = BaseSchema + Schema((
         widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
     ),
 
-    DataGridCourseField(
+    StringField(
+        'exchangeProgram',
+        searchable=1,
+        required=0,
+        default='no',
+        vocabulary=DisplayList((
+            ('no', _(u'No')), ('yes', _(u'Yes'))
+        )),
+        widget=MasterSelectWidget(
+            label=_(u"label_sol_exchangeprogram", default=u"Is your guest associated an exchange program?"),
+            i18n_domain='matem.solicitudes',
+            description=_(u'help_sol_exchangeprogram', default=u'Select \"Yes\" if your guest is participant of exchange program'),
+            slave_fields=(
+                {
+                    'name': 'programName',
+                    'action': 'hide',
+                    'hide_values': ('no',),
+                },
+            )
+        ),
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+    StringField(
+        'programName',
+        searchable=1,
+        # required=1,
+        widget=StringWidget(
+            label=_(u"label_sol_programname", default=u"Exchange Program Name"),
+            description=_(u'help_sol_programname', default=u'Complete name of exchange program'),
+            i18n_domain='matem.solicitudes',
+            # size=12
+        ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+
+    StringField(
+        'sabbatical',
+        searchable=0,
+        # required=1,
+        default='no',
+        vocabulary=DisplayList((
+            ('no', _(u'No')), ('yes', _(u'Yes'))
+        )),
+        widget=SelectionWidget(
+            label=_(u"label_sol_sabbatical", default=u"The visit of your guest, is sabatical?"),
+            description=_(u'help_sol_sabbatical', default=u'Select \"Yes\" if your guest will perform a sabbatical stay in his visit'),
+            i18n_domain='matem.solicitudes',
+        ),
+        write_permission="Solicitud: Cambiar Solicitante",
+    ),
+
+
+
+
+    DataGridConferenceGuestField(
+        name='conferences',
+        columns=(
+            'eventtype',
+            'title',
+            'eventName',
+            'institution',
+            'isplenary',
+            'participationtype',
+            'conferencetype',
+            'place',
+            'conferencedate',
+            'assistallevent',
+        ),
+        widget=ConferenceWidget(
+            label=_(u"label_widgetconferences", default=u"Conferences"),
+            # description=_(u'help_widgetconferences', default=u'Use this option if you give a talk'),
+            helper_js=(
+                'datagridwidget.js',
+                'datagridwidget_patches.js',
+                'datagridmultiselect.js',
+                'datagriddatepicker.js'
+            ),
+            columns={
+                'eventtype': SelectColumn(
+                    _(u"weventtype_label", default="Event Type"),
+                    vocabulary=EventTypeVocabulary(),
+                ),
+                'title': Column(
+                    _(u"wtitle_conference_label", default=u"Title"),
+                ),
+                'eventName': Column(
+                    _(u"weventname_label", default=u"Event Name"),
+                ),
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
+                ),
+                'isplenary': SelectColumn(
+                    _(u"wisplenary_label", default="Is your conference plenary or masterly?"),
+                    vocabulary=BooleanTypeVocabulary(),
+                ),
+                'participationtype': SelectColumn(
+                    _(u"wcparticipationtype_label", default="Participation type"),
+                    vocabulary=ConferenceAssistantVocabulary(),
+                ),
+                'conferencetype': MultiSelectColumn(
+                    _(u"wconferencetype_label", default="Conference type"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                ),
+                'place': Column(
+                    _(u"wplace_label", default=u"Place"),
+                ),
+                'conferencedate': DateColumn(
+                    _(u"wconferencedate_label", default=u"Date"),
+                    date_format="dd/mm/yy",
+                ),
+                'assistallevent': SelectColumn(
+                    _(u"wassistallevent_label", default="Are you going to all congress?"),
+                    vocabulary=BooleanTypeVocabulary(),
+                ),
+            },
+        ),
+    ),
+
+    DataGridCourseGuestField(
         name='courses',
         columns=(
             'title',
@@ -683,6 +807,7 @@ schema = BaseSchema + Schema((
             'eventName',
             'institution',
             'level',
+            'otherlevel',
             'place',
             'coursetype',
             'coursedate'
@@ -706,6 +831,9 @@ schema = BaseSchema + Schema((
                 'level': SelectColumn(
                     _(u"wlevel_label", default="Level"),
                     vocabulary=CourselevelVocabulary(),
+                ),
+                'otherlevel': Column(
+                    _(u"wotherlevel_label", default=u"If you select \"Other\" in Level, please indicate it"),
                 ),
                 'place': Column(
                     _(u"wplace_label", default=u"Place"),
@@ -999,7 +1127,22 @@ class SolicitudVisitante(BaseContent):
         return DateTime(self.getField('fecha_hasta').get(self))
 
     def getObjetoViaje(self):
-        return self.getField('objeto_viaje').get(self)
+        # return self.getField('objeto_viaje').get(self)
+        act2 = self.getField('conferences').getAccessor(self)()
+        act3 = self.getField('courses').getAccessor(self)()
+        resumen = []
+        if len(act2) > 0:
+            resumen.append('Conferencias a impartir' + str(len(act2)))
+        if len(act3) > 0:
+            resumen.append('Cursos a impartir' + str(len(act3)))
+        return self.getField('objeto_viaje').get(self) + ' ' + ', '.join(resumen)
+
+    def getEProgram(self):
+        isexchange = self.getField('exchangeProgram').getAccessor(self)()
+        if isexchange == 'yes':
+            programname = self.getField('programName').getAccessor(self)()
+            return '. '.join(['Sí', programname])
+        return 'No'
 
     def getComentarioCI(self):
         return self.getField('comentario_ci').get(self)

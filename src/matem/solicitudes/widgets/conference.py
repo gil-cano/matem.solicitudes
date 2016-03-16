@@ -71,3 +71,16 @@ class DataGridConferenceField(ExtensionField, DataGridField):
         'label_button': _(u'+ Conference'),
         'help_button': _(u'Use this option if you will give a talk'),
     })
+
+
+class DataGridConferenceGuestField(ExtensionField, DataGridField):
+
+    _properties = DataGridField._properties.copy()
+    _properties.update({
+        'type': 'datagridconferencefield',
+        # 'validators': DateFreeValidator(),
+        'widget': ConferenceWidget,
+        'label_item': _(u'Conference'),
+        'label_button': _(u'+ Conference'),
+        'help_button': _(u'Use this option if you guest will be give a talk'),
+    })
