@@ -5,29 +5,30 @@ from setuptools import find_packages
 from setuptools import setup
 
 long_description = (
-    open('README.rst').read()
-    + '\n' +
-    'Contributors\n'
-    '============\n'
-    + '\n' +
-    open('CONTRIBUTORS.rst').read()
-    + '\n' +
-    open('CHANGES.rst').read()
-    + '\n')
+    open('README.rst').read() +
+    '\n' +
+    'Contributors\n' +
+    '============\n' +
+    '\n' +
+    open('CONTRIBUTORS.rst').read() +
+    '\n' +
+    open('CHANGES.rst').read() +
+    '\n')
 
 
 setup(
     name='matem.solicitudes',
-    version='3.0.9',
+    version='3.1.0',
     description="Applications for institutional resources.",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Plone",
-        "Framework :: Plone :: 4.3.6",
+        "Framework :: Plone :: 4.3",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
+        "Operating System :: OS Independent",
     ],
     keywords='Plone Python',
     author='Informática Académica',
@@ -40,16 +41,13 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'Pillow',
-        'Plone',
+        'plone.api',
         'setuptools',
         'Products.FacultyStaffDirectory',
         'Products.ATCountryWidget',
         'Products.MasterSelectWidget',
         'Products.ATExtensions',
         'archetypes.multifile',
-        # 'matem.fsdextender',
-        # 'plone.app.jquerytools',
     ],
     extras_require={
         'develop': [
