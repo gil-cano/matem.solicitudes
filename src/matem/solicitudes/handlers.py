@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from Products.CMFCore.utils import getToolByName
 from matem.solicitudes.browser.queries import Queries
+from Products.CMFCore.utils import getToolByName
 
 
 def modificationHandler(obj, event):  # noqa
-    mt = getToolByName(obj, "portal_membership")
-    catalog = getToolByName(obj, "portal_catalog")
+    mt = getToolByName(obj, 'portal_membership')
+    catalog = getToolByName(obj, 'portal_catalog')
     userid = mt.getAuthenticatedMember().getId()
     try:
         if 'tuple' in str(type(obj.getSolicitante())):
@@ -17,11 +17,11 @@ def modificationHandler(obj, event):  # noqa
         fsdperson = Queries(obj, None).getPersonWrapper(userid)
         obj.setSede(fsdperson.getSede())
 
-        if "Solicitante Auxiliar" in list(mt.getAuthenticatedMember().getRoles()):
+        if 'Solicitante Auxiliar' in list(mt.getAuthenticatedMember().getRoles()):
             solicitante = mt.getMemberById(userid)
             obj.setCreators(userid)
             obj.changeOwnership(solicitante.getUser())
-            obj.manage_setLocalRoles(userid, ["Owner"])
+            obj.manage_setLocalRoles(userid, ['Owner'])
     except Exception:
         pass
     try:

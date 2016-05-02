@@ -4,14 +4,14 @@ from Products.CMFCore.utils import getToolByName
 
 
 def install_dependencies(portal):
-    """Install required products that does not have a profiles"""
+    """Install required products that does not have a profiles."""
     qi = getToolByName(portal, 'portal_quickinstaller')
     for product in ['FacultyStaffDirectory', 'ATCountryWidget']:
         if not qi.isProductInstalled(product):
             if qi.isProductInstallable(product):
                 qi.installProduct(product)
             else:
-                raise "Product %s not installable" % product
+                raise 'Product {0} not installable'.format(product)
 
 
 def setupVarious(context):

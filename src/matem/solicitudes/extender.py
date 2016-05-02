@@ -13,7 +13,7 @@ class PersonWrapper:
 
     def getLastName(self):
         fsdperson = self.fsdperson
-        apellidos = fsdperson.getLastName() + " " + fsdperson.getField('apellidoMaterno').get(fsdperson)
+        apellidos = fsdperson.getLastName() + ' ' + fsdperson.getField('apellidoMaterno').get(fsdperson)
         return apellidos
 
     def getSede(self):
