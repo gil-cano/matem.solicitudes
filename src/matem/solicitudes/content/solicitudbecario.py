@@ -1007,7 +1007,7 @@ class SolicitudBecario(BaseContent):
 
     def getNombreOwner(self):
 #        creator = self.getOwner().getId()
-        creator = self.getIdOwner()
+        creator = self.getIdOwner() or ''
         try:
             fsdperson = self.getPersonWrapper(creator)
             return fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName()

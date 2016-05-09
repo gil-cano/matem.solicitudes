@@ -90,9 +90,9 @@ class SolicitudView(BrowserView):
         member=queryObj.getPersonWrapper(usuarioActual)
         user=[]
 
-        cantidadAsignada=folder.getPresupuesto_asignado_solicitantes()[0].get(usuarioActual,0.0)
-        cantidadInicial=folder.getSolicitantes()[0].get(usuarioActual,[0,0,0,0,0.0])[4]
-        cantidadInicialApoyos=folder.getSolicitantes()[0].get(usuarioActual,[0,0,0,0,0.0])[5]
+        cantidadAsignada=folder.getPresupuesto_asignado_solicitantes()[0].get(usuarioActual, 0.0)
+        cantidadInicial=folder.getSolicitantes()[0].get(usuarioActual, [0, 0, 0 , 0, 0.0])[4]
+        cantidadInicialApoyos=folder.getSolicitantes()[0].get(usuarioActual, [0, 0, 0, 0, 0.0, 0.0])[5]
         user.append([member.getLastName()+', '+member.getFirstName() + " " + member.getMiddleName(),
                      cantidadAsignada,
                      cantidadInicial-cantidadAsignada,
