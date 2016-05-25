@@ -67,9 +67,9 @@ class DataGridConferenceField(ExtensionField, DataGridField):
         'type': 'datagridconferencefield',
         # 'validators': DateFreeValidator(),
         'widget': ConferenceWidget,
-        'label_item': _(u'Conference'),
+        'label_item': _(u'Conference to present'),
         'label_button': _(u'+ Conference'),
-        'help_button': _(u'Use this option if you will give a talk'),
+        'help_button': _(u'Use this option if you will give a talk (this cover assistants too)'),
     })
 
 

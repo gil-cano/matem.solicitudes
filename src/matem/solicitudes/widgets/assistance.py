@@ -30,7 +30,7 @@ class DataGridAssistanceField(ExtensionField, DataGridField):
     _properties.update({
         'type': 'datagridassistancefield',
         'widget': AssistanceWidget,
-        'label_item': _(u'Assistance'),
+        'label_item': _(u'Only Assistance'),
         'label_button': _(u'+ Assistance'),
         'help_button': _(u'Use this option in only assistance'),
     })

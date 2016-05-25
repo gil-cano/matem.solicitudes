@@ -760,7 +760,7 @@ schema = BaseSchema + Schema((
             ),
             columns={
                 'eventtype': SelectColumn(
-                    _(u"weventtype_label", default="Event Type"),
+                    _(u"weventtype_label", default="Academic Activity Type"),
                     vocabulary=EventTypeVocabulary(),
                 ),
                 'title': Column(

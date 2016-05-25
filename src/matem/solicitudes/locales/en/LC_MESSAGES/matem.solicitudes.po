@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-03-16 22:59+0000\n"
+"POT-Creation-Date: 2016-05-25 21:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,11 +66,7 @@ msgstr ""
 msgid "Asignación anual"
 msgstr ""
 
-#: matem/solicitudes/widgets/assistance.py:33
-msgid "Assistance"
-msgstr ""
-
-#: matem/solicitudes/content/solicitud.py:1893
+#: matem/solicitudes/content/solicitud.py:1919
 #: matem/solicitudes/content/solicitudbecario.py:1463
 #: matem/solicitudes/content/solicitudinstitucional.py:1583
 msgid "Available Annual Allocation"
@@ -80,12 +76,12 @@ msgstr ""
 msgid "Available Institucional Allocation"
 msgstr ""
 
-#: matem/solicitudes/content/solicitud.py:1897
+#: matem/solicitudes/content/solicitud.py:1923
 #: matem/solicitudes/content/solicitudinstitucional.py:1591
 msgid "Available licence days"
 msgstr ""
 
-#: matem/solicitudes/widgets/vocabularies.py:75
+#: matem/solicitudes/widgets/vocabularies.py:76
 msgid "Bachelor"
 msgstr ""
 
@@ -123,8 +119,12 @@ msgstr ""
 msgid "Comision"
 msgstr ""
 
-#: matem/solicitudes/widgets/conference.py:70
+#: matem/solicitudes/widgets/conference.py:83
 msgid "Conference"
+msgstr ""
+
+#: matem/solicitudes/widgets/conference.py:70
+msgid "Conference to present"
 msgstr ""
 
 #: matem/solicitudes/widgets/vocabularies.py:20
@@ -147,7 +147,7 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
-#: matem/solicitudes/widgets/vocabularies.py:74
+#: matem/solicitudes/widgets/vocabularies.py:77
 msgid "High School"
 msgstr ""
 
@@ -182,7 +182,7 @@ msgstr ""
 msgid "Local Comitte"
 msgstr ""
 
-#: matem/solicitudes/widgets/vocabularies.py:76
+#: matem/solicitudes/widgets/vocabularies.py:75
 msgid "Master"
 msgstr ""
 
@@ -194,6 +194,10 @@ msgstr ""
 #: matem/solicitudes/content/solicitudvisitante.py:687
 #: matem/solicitudes/widgets/vocabularies.py:35
 msgid "No"
+msgstr ""
+
+#: matem/solicitudes/widgets/assistance.py:33
+msgid "Only Assistance"
 msgstr ""
 
 #: matem/solicitudes/widgets/organization.py:68
@@ -236,7 +240,7 @@ msgstr ""
 msgid "Pending for send"
 msgstr ""
 
-#: matem/solicitudes/widgets/vocabularies.py:77
+#: matem/solicitudes/widgets/vocabularies.py:74
 msgid "PhD"
 msgstr ""
 
@@ -292,6 +296,12 @@ msgstr ""
 msgid "Solicitud con apoyo institucional"
 msgstr ""
 
+msgid "Solicitud en revision por Comision Especial"
+msgstr ""
+
+msgid "Solicitud en revision por Consejo Interno"
+msgstr ""
+
 #: matem/solicitudes/configure.zcml:31
 msgid "Solicitudes"
 msgstr ""
@@ -339,7 +349,7 @@ msgid "Use this option if you will give a course"
 msgstr ""
 
 #: matem/solicitudes/widgets/conference.py:72
-msgid "Use this option if you will give a talk"
+msgid "Use this option if you will give a talk (this cover assistants too)"
 msgstr ""
 
 #: matem/solicitudes/widgets/organization.py:70
@@ -615,7 +625,7 @@ msgid "help_sol_licenciacomision"
 msgstr ""
 
 #. Default: "Enter the other activities"
-#: matem/solicitudes/content/solicitud.py:1108
+#: matem/solicitudes/content/solicitud.py:1128
 msgid "help_sol_otheractivity"
 msgstr ""
 
@@ -647,14 +657,14 @@ msgid "help_viaticos"
 msgstr ""
 
 #. Default: "No. de Cuenta"
-#: matem/solicitudes/browser/solicitudbecario.pt:310
+#: matem/solicitudes/browser/solicitudbecario.pt:312
 msgid "label_account"
 msgstr ""
 
 #. Default: "Attachments"
-#: matem/solicitudes/browser/solicitud.pt:335
-#: matem/solicitudes/browser/solicitudbecario.pt:337
-#: matem/solicitudes/browser/solicitudinstitucional.pt:261
+#: matem/solicitudes/browser/solicitud.pt:336
+#: matem/solicitudes/browser/solicitudbecario.pt:339
+#: matem/solicitudes/browser/solicitudinstitucional.pt:262
 msgid "label_adjuntos"
 msgstr ""
 
@@ -682,7 +692,7 @@ msgid "label_any_creator"
 msgstr ""
 
 #. Default: "Extra support"
-#: matem/solicitudes/browser/solicitudbecario.pt:345
+#: matem/solicitudes/browser/solicitudbecario.pt:347
 #: matem/solicitudes/content/solicitudbecario.py:296
 msgid "label_apoyo_extra"
 msgstr ""
@@ -750,7 +760,7 @@ msgstr ""
 
 #. Default: "Advisor"
 #: matem/solicitudes/browser/global_request_search_form.pt:320
-#: matem/solicitudes/browser/solicitudbecario.pt:312
+#: matem/solicitudes/browser/solicitudbecario.pt:314
 msgid "label_asesor"
 msgstr ""
 
@@ -851,15 +861,15 @@ msgid "label_cantidad_consejo_viaticos_institucional"
 msgstr ""
 
 #. Default: "Registration cost"
-#: matem/solicitudes/browser/solicitud.pt:368
-#: matem/solicitudes/browser/solicitudbecario.pt:365
+#: matem/solicitudes/browser/solicitud.pt:369
+#: matem/solicitudes/browser/solicitudbecario.pt:367
 msgid "label_cantidad_inscripcion"
 msgstr ""
 
 #. Default: "Transportation cost"
-#: matem/solicitudes/browser/solicitud.pt:358
-#: matem/solicitudes/browser/solicitudbecario.pt:355
-#: matem/solicitudes/browser/solicitudvisitante.pt:321
+#: matem/solicitudes/browser/solicitud.pt:359
+#: matem/solicitudes/browser/solicitudbecario.pt:357
+#: matem/solicitudes/browser/solicitudvisitante.pt:330
 msgid "label_cantidad_pasaje"
 msgstr ""
 
@@ -900,9 +910,9 @@ msgid "label_cantidad_recomendada_viaticos_institucional"
 msgstr ""
 
 #. Default: "Travel allowances"
-#: matem/solicitudes/browser/solicitud.pt:363
-#: matem/solicitudes/browser/solicitudbecario.pt:360
-#: matem/solicitudes/browser/solicitudvisitante.pt:326
+#: matem/solicitudes/browser/solicitud.pt:364
+#: matem/solicitudes/browser/solicitudbecario.pt:362
+#: matem/solicitudes/browser/solicitudvisitante.pt:335
 msgid "label_cantidad_viaticos"
 msgstr ""
 
@@ -913,34 +923,34 @@ msgstr ""
 
 #. Default: "City"
 #: matem/solicitudes/browser/global_request_search_form.pt:226
-#: matem/solicitudes/browser/solicitud.pt:281
-#: matem/solicitudes/browser/solicitudbecario.pt:317
+#: matem/solicitudes/browser/solicitud.pt:282
+#: matem/solicitudes/browser/solicitudbecario.pt:319
 msgid "label_ciudad_pais"
 msgstr ""
 
 #. Default: "Comments by advisor in charge"
-#: matem/solicitudes/browser/solicitudbecario.pt:341
+#: matem/solicitudes/browser/solicitudbecario.pt:343
 msgid "label_comentario_asesor"
 msgstr ""
 
 #. Default: "Recommendation by Special Commission"
-#: matem/solicitudes/browser/solicitud.pt:386
-#: matem/solicitudes/browser/solicitudbecario.pt:383
-#: matem/solicitudes/browser/solicitudinstitucional.pt:322
+#: matem/solicitudes/browser/solicitud.pt:387
+#: matem/solicitudes/browser/solicitudbecario.pt:385
+#: matem/solicitudes/browser/solicitudinstitucional.pt:323
 msgid "label_comentario_ce"
 msgstr ""
 
 #. Default: "Comments by Consejo Interno"
-#: matem/solicitudes/browser/solicitud.pt:395
-#: matem/solicitudes/browser/solicitudbecario.pt:392
-#: matem/solicitudes/browser/solicitudinstitucional.pt:331
+#: matem/solicitudes/browser/solicitud.pt:396
+#: matem/solicitudes/browser/solicitudbecario.pt:394
+#: matem/solicitudes/browser/solicitudinstitucional.pt:332
 msgid "label_comentario_ci"
 msgstr ""
 
 #. Default: "Additional Comments"
-#: matem/solicitudes/browser/solicitud.pt:341
-#: matem/solicitudes/browser/solicitudbecario.pt:343
-#: matem/solicitudes/browser/solicitudinstitucional.pt:267
+#: matem/solicitudes/browser/solicitud.pt:342
+#: matem/solicitudes/browser/solicitudbecario.pt:345
+#: matem/solicitudes/browser/solicitudinstitucional.pt:268
 msgid "label_comentario_owner"
 msgstr ""
 
@@ -997,15 +1007,15 @@ msgstr ""
 
 #. Default: "From date"
 #: matem/solicitudes/browser/global_request_search_form.pt:254
-#: matem/solicitudes/browser/solicitud.pt:285
-#: matem/solicitudes/browser/solicitudbecario.pt:321
+#: matem/solicitudes/browser/solicitud.pt:286
+#: matem/solicitudes/browser/solicitudbecario.pt:323
 msgid "label_fecha_desde"
 msgstr ""
 
 #. Default: "To date"
 #: matem/solicitudes/browser/global_request_search_form.pt:271
-#: matem/solicitudes/browser/solicitud.pt:286
-#: matem/solicitudes/browser/solicitudbecario.pt:322
+#: matem/solicitudes/browser/solicitud.pt:287
+#: matem/solicitudes/browser/solicitudbecario.pt:324
 msgid "label_fecha_hasta"
 msgstr ""
 
@@ -1016,16 +1026,16 @@ msgid "label_fecha_revision_comision"
 msgstr ""
 
 #. Default: "Fecha de revisión por Comisión Especial"
-#: matem/solicitudes/browser/solicitud.pt:384
-#: matem/solicitudes/browser/solicitudbecario.pt:381
-#: matem/solicitudes/browser/solicitudinstitucional.pt:320
+#: matem/solicitudes/browser/solicitud.pt:385
+#: matem/solicitudes/browser/solicitudbecario.pt:383
+#: matem/solicitudes/browser/solicitudinstitucional.pt:321
 msgid "label_fecha_sesionce"
 msgstr ""
 
 #. Default: "Date of revision by the CI"
-#: matem/solicitudes/browser/solicitud.pt:391
-#: matem/solicitudes/browser/solicitudbecario.pt:388
-#: matem/solicitudes/browser/solicitudinstitucional.pt:327
+#: matem/solicitudes/browser/solicitud.pt:392
+#: matem/solicitudes/browser/solicitudbecario.pt:390
+#: matem/solicitudes/browser/solicitudinstitucional.pt:328
 msgid "label_fecha_sesionci"
 msgstr ""
 
@@ -1040,7 +1050,7 @@ msgid "label_go_pending"
 msgstr ""
 
 #. Default: "Degree"
-#: matem/solicitudes/browser/solicitudbecario.pt:311
+#: matem/solicitudes/browser/solicitudbecario.pt:313
 msgid "label_grado"
 msgstr ""
 
@@ -1059,33 +1069,33 @@ msgid "label_informacion_solicitante"
 msgstr ""
 
 #. Default: "Registration"
-#: matem/solicitudes/browser/solicitud.pt:353
-#: matem/solicitudes/browser/solicitudbecario.pt:352
-#: matem/solicitudes/browser/solicitudinstitucional.pt:274
+#: matem/solicitudes/browser/solicitud.pt:354
+#: matem/solicitudes/browser/solicitudbecario.pt:354
+#: matem/solicitudes/browser/solicitudinstitucional.pt:275
 msgid "label_inscripcion"
 msgstr ""
 
 #. Default: "Institution"
 #: matem/solicitudes/browser/global_request_search_form.pt:240
-#: matem/solicitudes/browser/solicitud.pt:282
-#: matem/solicitudes/browser/solicitudbecario.pt:318
+#: matem/solicitudes/browser/solicitud.pt:283
+#: matem/solicitudes/browser/solicitudbecario.pt:320
 msgid "label_institucion"
 msgstr ""
 
 #. Default: "Institution"
-#: matem/solicitudes/browser/solicitudvisitante.pt:268
+#: matem/solicitudes/browser/solicitudvisitante.pt:269
 msgid "label_institucion_procedencia"
 msgstr ""
 
 #. Default: "Area of Research"
 #: matem/solicitudes/browser/global_request_search_form.pt:288
-#: matem/solicitudes/browser/solicitud.pt:292
-#: matem/solicitudes/browser/solicitudbecario.pt:328
+#: matem/solicitudes/browser/solicitud.pt:293
+#: matem/solicitudes/browser/solicitudbecario.pt:330
 msgid "label_investigacionarea"
 msgstr ""
 
 #. Default: "Visitor"
-#: matem/solicitudes/browser/solicitudvisitante.pt:259
+#: matem/solicitudes/browser/solicitudvisitante.pt:260
 msgid "label_invitado"
 msgstr ""
 
@@ -1184,27 +1194,27 @@ msgstr ""
 
 #. Default: "Objective"
 #: matem/solicitudes/browser/global_request_search_form.pt:346
-#: matem/solicitudes/browser/solicitud.pt:290
-#: matem/solicitudes/browser/solicitudbecario.pt:326
+#: matem/solicitudes/browser/solicitud.pt:291
+#: matem/solicitudes/browser/solicitudbecario.pt:328
 msgid "label_objeto_viaje"
 msgstr ""
 
 #. Default: "Country"
 #: matem/solicitudes/browser/global_request_search_form.pt:202
-#: matem/solicitudes/browser/solicitud.pt:280
-#: matem/solicitudes/browser/solicitudbecario.pt:316
+#: matem/solicitudes/browser/solicitud.pt:281
+#: matem/solicitudes/browser/solicitudbecario.pt:318
 msgid "label_pais"
 msgstr ""
 
 #. Default: "Country"
-#: matem/solicitudes/browser/solicitudvisitante.pt:265
+#: matem/solicitudes/browser/solicitudvisitante.pt:266
 msgid "label_pais_procedencia"
 msgstr ""
 
 #. Default: "Transportation"
-#: matem/solicitudes/browser/solicitud.pt:345
-#: matem/solicitudes/browser/solicitudbecario.pt:348
-#: matem/solicitudes/browser/solicitudinstitucional.pt:270
+#: matem/solicitudes/browser/solicitud.pt:346
+#: matem/solicitudes/browser/solicitudbecario.pt:350
+#: matem/solicitudes/browser/solicitudinstitucional.pt:271
 msgid "label_pasaje"
 msgstr ""
 
@@ -1250,7 +1260,7 @@ msgid "label_presupuesto_asignado2"
 msgstr ""
 
 #. Default: "City"
-#: matem/solicitudes/browser/solicitudvisitante.pt:267
+#: matem/solicitudes/browser/solicitudvisitante.pt:268
 msgid "label_procedencia"
 msgstr ""
 
@@ -1288,9 +1298,9 @@ msgid "label_rechazada_propietario"
 msgstr ""
 
 #. Default: "Recomiendo Aprobar"
-#: matem/solicitudes/browser/solicitud.pt:388
-#: matem/solicitudes/browser/solicitudbecario.pt:385
-#: matem/solicitudes/browser/solicitudinstitucional.pt:324
+#: matem/solicitudes/browser/solicitud.pt:389
+#: matem/solicitudes/browser/solicitudbecario.pt:387
+#: matem/solicitudes/browser/solicitudinstitucional.pt:325
 msgid "label_recomienda_aprobar"
 msgstr ""
 
@@ -1448,7 +1458,7 @@ msgid "label_search_creator"
 msgstr ""
 
 #. Default: "Semblanza"
-#: matem/solicitudes/browser/solicitudvisitante.pt:261
+#: matem/solicitudes/browser/solicitudvisitante.pt:262
 msgid "label_semblanza"
 msgstr ""
 
@@ -1475,7 +1485,7 @@ msgstr ""
 
 #. Default: "Other Activities"
 #: matem/solicitudes/browser/global_request_search_form.pt:346
-#: matem/solicitudes/content/solicitud.py:1104
+#: matem/solicitudes/content/solicitud.py:1124
 msgid "label_sol_otheractivity"
 msgstr ""
 
@@ -1502,12 +1512,12 @@ msgid "label_solicitor"
 msgstr ""
 
 #. Default: "Exchange program"
-#: matem/solicitudes/browser/solicitudvisitante.pt:292
+#: matem/solicitudes/browser/solicitudvisitante.pt:293
 msgid "label_solpt_exchangeprogram"
 msgstr ""
 
 #. Default: "Sabbatical Stay"
-#: matem/solicitudes/browser/solicitudvisitante.pt:294
+#: matem/solicitudes/browser/solicitudvisitante.pt:295
 msgid "label_solpt_sabbatical"
 msgstr ""
 
@@ -1526,16 +1536,16 @@ msgid "label_state"
 msgstr ""
 
 #. Default: "Transportation means"
-#: matem/solicitudes/browser/solicitud.pt:347
-#: matem/solicitudes/browser/solicitudbecario.pt:349
-#: matem/solicitudes/browser/solicitudinstitucional.pt:271
+#: matem/solicitudes/browser/solicitud.pt:348
+#: matem/solicitudes/browser/solicitudbecario.pt:351
+#: matem/solicitudes/browser/solicitudinstitucional.pt:272
 msgid "label_tipo_pasaje"
 msgstr ""
 
 #. Default: "Title of the work to be presented"
 #: matem/solicitudes/browser/global_request_search_form.pt:356
-#: matem/solicitudes/browser/solicitud.pt:297
-#: matem/solicitudes/browser/solicitudbecario.pt:333
+#: matem/solicitudes/browser/solicitud.pt:298
+#: matem/solicitudes/browser/solicitudbecario.pt:335
 msgid "label_titulo_trabajo"
 msgstr ""
 
@@ -1573,51 +1583,51 @@ msgid "label_type_upload"
 msgstr ""
 
 #. Default: "Travel Allowances"
-#: matem/solicitudes/browser/solicitud.pt:351
-#: matem/solicitudes/browser/solicitudinstitucional.pt:273
-#: matem/solicitudes/browser/solicitudvisitante.pt:313
+#: matem/solicitudes/browser/solicitud.pt:352
+#: matem/solicitudes/browser/solicitudinstitucional.pt:274
+#: matem/solicitudes/browser/solicitudvisitante.pt:315
 msgid "label_viaticos"
 msgstr ""
 
 #. Default: "Travel Allowances"
-#: matem/solicitudes/browser/solicitudbecario.pt:351
+#: matem/solicitudes/browser/solicitudbecario.pt:353
 msgid "label_viaticos_becario"
 msgstr ""
 
 #. Default: "Foto Visitante"
-#: matem/solicitudes/browser/solicitudvisitante.pt:262
+#: matem/solicitudes/browser/solicitudvisitante.pt:263
 msgid "label_visitante"
 msgstr ""
 
 #. Default: "Only Assists"
-#: matem/solicitudes/browser/solicitud.pt:301
-#: matem/solicitudes/content/solicitud.py:865
+#: matem/solicitudes/browser/solicitud.pt:302
+#: matem/solicitudes/content/solicitud.py:866
 msgid "label_widgetassistance"
 msgstr ""
 
 #. Default: "Conferences"
-#: matem/solicitudes/browser/solicitud.pt:308
-#: matem/solicitudes/browser/solicitudvisitante.pt:299
-#: matem/solicitudes/content/solicitud.py:905
+#: matem/solicitudes/browser/solicitud.pt:309
+#: matem/solicitudes/browser/solicitudvisitante.pt:300
+#: matem/solicitudes/content/solicitud.py:909
 msgid "label_widgetconferences"
 msgstr ""
 
 #. Default: "Courses"
-#: matem/solicitudes/browser/solicitud.pt:315
-#: matem/solicitudes/browser/solicitudvisitante.pt:306
-#: matem/solicitudes/content/solicitud.py:968
+#: matem/solicitudes/browser/solicitud.pt:316
+#: matem/solicitudes/browser/solicitudvisitante.pt:307
+#: matem/solicitudes/content/solicitud.py:972
 msgid "label_widgetcourses"
 msgstr ""
 
 #. Default: "Organized Activities"
-#: matem/solicitudes/browser/solicitud.pt:329
-#: matem/solicitudes/content/solicitud.py:1050
+#: matem/solicitudes/browser/solicitud.pt:330
+#: matem/solicitudes/content/solicitud.py:1061
 msgid "label_widgetorganization"
 msgstr ""
 
 #. Default: "Research Stay"
-#: matem/solicitudes/browser/solicitud.pt:322
-#: matem/solicitudes/content/solicitud.py:1015
+#: matem/solicitudes/browser/solicitud.pt:323
+#: matem/solicitudes/content/solicitud.py:1019
 msgid "label_widgetsresearch"
 msgstr ""
 
@@ -1642,158 +1652,177 @@ msgstr ""
 msgid "legend_upload_auxiliar_forms"
 msgstr ""
 
-#. Default: "Date"
-#: matem/solicitudes/content/solicitud.py:1028
-msgid "sresearchdate_label"
+#. Default: "End Date"
+#: matem/solicitudes/content/solicitud.py:1036
+msgid "sresearchenddate_label"
+msgstr ""
+
+#. Default: "Init Date"
+#: matem/solicitudes/content/solicitud.py:1032
+msgid "sresearchinitdate_label"
 msgstr ""
 
 #. Default: "Activity Type"
-#: matem/solicitudes/content/solicitud.py:1071
+#: matem/solicitudes/content/solicitud.py:1088
 msgid "wactivitytype_label"
 msgstr ""
 
 #. Default: "Are you going to all congress?"
-#: matem/solicitudes/content/solicitud.py:947
 #: matem/solicitudes/content/solicitudvisitante.py:795
 msgid "wassistallevent_label"
 msgstr ""
 
 #. Default: "Date"
-#: matem/solicitudes/content/solicitud.py:883
+#: matem/solicitudes/content/solicitud.py:887
 msgid "wassistancedate_label"
 msgstr ""
 
 #. Default: "Expected number of Assistants"
-#: matem/solicitudes/content/solicitud.py:1086
+#: matem/solicitudes/content/solicitud.py:1106
 msgid "wassistants_label"
 msgstr ""
 
 #. Default: "Date"
-#: matem/solicitudes/content/solicitud.py:943
+#: matem/solicitudes/content/solicitud.py:947
 #: matem/solicitudes/content/solicitudvisitante.py:791
 msgid "wconferencedate_label"
 msgstr ""
 
 #. Default: "Conference type"
-#: matem/solicitudes/content/solicitud.py:936
+#: matem/solicitudes/content/solicitud.py:943
 #: matem/solicitudes/content/solicitudvisitante.py:784
 msgid "wconferencetype_label"
 msgstr ""
 
 #. Default: "Date"
-#: matem/solicitudes/content/solicitud.py:999
+#: matem/solicitudes/content/solicitud.py:1002
 #: matem/solicitudes/content/solicitudvisitante.py:846
 msgid "wcoursedate_label"
 msgstr ""
 
 #. Default: "Coursetype"
-#: matem/solicitudes/content/solicitud.py:995
+#: matem/solicitudes/content/solicitud.py:998
 #: matem/solicitudes/content/solicitudvisitante.py:842
 msgid "wcoursetype_label"
 msgstr ""
 
 #. Default: "Participation type"
-#: matem/solicitudes/content/solicitud.py:932
+#: matem/solicitudes/content/solicitud.py:939
 #: matem/solicitudes/content/solicitudvisitante.py:780
 msgid "wcparticipationtype_label"
 msgstr ""
 
 #. Default: "Duration in hours"
-#: matem/solicitudes/content/solicitud.py:975
+#: matem/solicitudes/content/solicitud.py:979
 #: matem/solicitudes/content/solicitudvisitante.py:823
 msgid "wduration_course_label"
 msgstr ""
 
 #. Default: "Event Name"
-#: matem/solicitudes/content/solicitud.py:874
+#: matem/solicitudes/content/solicitud.py:878
 #: matem/solicitudes/content/solicitudvisitante.py:770
 msgid "weventname_label"
 msgstr ""
 
-#. Default: "Event Type"
-#: matem/solicitudes/content/solicitud.py:870
+#. Default: "Academic Activity Type"
+#: matem/solicitudes/content/solicitud.py:871
 #: matem/solicitudes/content/solicitudvisitante.py:763
 msgid "weventtype_label"
 msgstr ""
 
 #. Default: "Host"
-#: matem/solicitudes/content/solicitud.py:1019
+#: matem/solicitudes/content/solicitud.py:1023
 msgid "whostresearcher_label"
 msgstr ""
 
 #. Default: "IM Position"
-#: matem/solicitudes/content/solicitud.py:1060
+#: matem/solicitudes/content/solicitud.py:1071
 msgid "wimposition_label"
 msgstr ""
 
 #. Default: "Institution"
-#: matem/solicitudes/content/solicitud.py:880
+#: matem/solicitudes/content/solicitud.py:881
 #: matem/solicitudes/content/solicitudvisitante.py:773
 msgid "winstitution_label"
 msgstr ""
 
 #. Default: "Is your conference plenary or masterly?"
-#: matem/solicitudes/content/solicitud.py:928
+#: matem/solicitudes/content/solicitud.py:935
 #: matem/solicitudes/content/solicitudvisitante.py:776
 msgid "wisplenary_label"
 msgstr ""
 
 #. Default: "Level"
-#: matem/solicitudes/content/solicitud.py:984
+#: matem/solicitudes/content/solicitud.py:988
 #: matem/solicitudes/content/solicitudvisitante.py:832
 msgid "wlevel_label"
 msgstr ""
 
 #. Default: "Objective"
-#: matem/solicitudes/content/solicitud.py:1022
+#: matem/solicitudes/content/solicitud.py:1026
 msgid "wobjective_label"
 msgstr ""
 
 #. Default: "Date"
-#: matem/solicitudes/content/solicitud.py:1089
+#: matem/solicitudes/content/solicitud.py:1109
 msgid "worganizationdate_label"
 msgstr ""
 
+#. Default: "If you select \"Other\" in Academic Activity Type, please indicate it"
+#: matem/solicitudes/content/solicitud.py:875
+msgid "wothereventtype_label"
+msgstr ""
+
+#. Default: "If you select \"Other\" in IM Position, please indicate it"
+#: matem/solicitudes/content/solicitud.py:1075
+msgid "wotherimposition_label"
+msgstr ""
+
 #. Default: "If you select \"Other\" in Level, please indicate it"
-#: matem/solicitudes/content/solicitud.py:988
+#: matem/solicitudes/content/solicitud.py:992
 #: matem/solicitudes/content/solicitudvisitante.py:836
 msgid "wotherlevel_label"
 msgstr ""
 
+#. Default: "If you select \"Other\" in Researcher Position, please indicate it"
+#: matem/solicitudes/content/solicitud.py:1082
+msgid "wotherresearcherposition_label"
+msgstr ""
+
 #. Default: "Place"
-#: matem/solicitudes/content/solicitud.py:877
+#: matem/solicitudes/content/solicitud.py:884
 #: matem/solicitudes/content/solicitudvisitante.py:788
 msgid "wplace_label"
 msgstr ""
 
 #. Default: "Researcher Position"
-#: matem/solicitudes/content/solicitud.py:1064
+#: matem/solicitudes/content/solicitud.py:1078
 msgid "wresearchposition_label"
 msgstr ""
 
 #. Default: "If you are Responsible of session, please indicate the session name"
-#: matem/solicitudes/content/solicitud.py:1068
+#: matem/solicitudes/content/solicitud.py:1085
 msgid "wsessionName_label"
 msgstr ""
 
 #. Default: "Expected number of International Speakers"
-#: matem/solicitudes/content/solicitud.py:1080
+#: matem/solicitudes/content/solicitud.py:1100
 msgid "wspeakersint_label"
 msgstr ""
 
 #. Default: "Expected number of National Speakers"
-#: matem/solicitudes/content/solicitud.py:1083
+#: matem/solicitudes/content/solicitud.py:1103
 msgid "wspeakersnac_label"
 msgstr ""
 
 #. Default: "Title"
-#: matem/solicitudes/content/solicitud.py:919
+#: matem/solicitudes/content/solicitud.py:923
 #: matem/solicitudes/content/solicitudvisitante.py:767
 msgid "wtitle_conference_label"
 msgstr ""
 
 #. Default: "Title"
-#: matem/solicitudes/content/solicitud.py:972
+#: matem/solicitudes/content/solicitud.py:976
 #: matem/solicitudes/content/solicitudvisitante.py:820
 msgid "wtitle_course_label"
 msgstr ""

@@ -71,10 +71,10 @@ class CourselevelVocabulary:
 
     def getDisplayList(self, instance):
         return DisplayList([
-            ('highschool', _(u'High School')),
-            ('bachelor', _(u'Bachelor')),
-            ('master', _(u'Master')),
             ('phd', _(u'PhD')),
+            ('master', _(u'Master')),
+            ('bachelor', _(u'Bachelor')),
+            ('highschool', _(u'High School')),
             ('other', _(u'Other')),
         ])
 
@@ -83,10 +83,10 @@ class CourselevelVocabulary:
 def CourselevelVocabularyFactory(context):
     """Vocabulary factory for conference type"""
     return SimpleVocabulary([
-        SimpleTerm(value='highschool', title=_(u'High School')),
-        SimpleTerm(value='bachelor', title=_(u'Bachelor')),
-        SimpleTerm(value='master', title=_(u'Master')),
         SimpleTerm(value='phd', title=_(u'PhD')),
+        SimpleTerm(value='master', title=_(u'Master')),
+        SimpleTerm(value='bachelor', title=_(u'Bachelor')),
+        SimpleTerm(value='highschool', title=_(u'High School')),
         SimpleTerm(value='other', title=_(u'Other')),
     ])
 directlyProvides(CourselevelVocabularyFactory, IVocabularyFactory)

@@ -181,8 +181,9 @@
           </span><!--Not propietario -->
 
           <h2><span tal:replace="here/pretty_title_or_id">content title or id</span></h2>
-
-          <p style="color: #FF0000;" tal:content="python:'Estado: '+str(here.getWFStateName())"></p>
+          <p style="color: #FF0000;">
+            Estado: <span i18n:translate="" tal:content="python:str(here.getWFStateName())"/>
+          </p>
           <div class="tabularView" tal:define="parent python:here.getParentNode()">
 
             <table class="fc" align="right" border="0">

@@ -87,7 +87,7 @@ schema = BaseSchema + Schema((
         name='title',
         required=1,
         searchable=1,
-        expression="((here.getOwner() and 'Solicitud (%s) de %s por %s (%s, %s, %s)' % (here.getLicenciacomision(),here.getNombreOwner(), here.getTotal(), here.getCiudadPais(), here.getInstitucion(), here.getFechaDesde() )) or 'Nueva solicitud')",
+        expression="((here.getOwner() and 'Solicitud (%s) de %s por %s (%s, %s, %s)' % (here.translateTypeTitle(),here.getNombreOwner(), here.getTotal(), here.getCiudadPais(), here.getInstitucion(), here.getFechaDesde() )) or 'Nueva solicitud')",
         accessor='Title',
         widget=ComputedWidget(
             visible={'view': 'invisible', 'edit': 'invisible'}
@@ -856,28 +856,32 @@ schema = BaseSchema + Schema((
         name='assistance',
         columns=(
             'eventtype',
+            'othereventtype',
             'eventName',
-            'place',
             'institution',
+            'place',
             'assistancedate'
         ),
         widget=AssistanceWidget(
             label=_(u"label_widgetassistance", default=u"Only Assists"),
             # description=_(u'help_widgetassistance', default=u'Use this option in only assistance'),
-            helper_js=('datagridwidget.js', 'datagriddatepicker.js'),
+            helper_js=('datagridwidget.js', 'datagriddatepicker.js', 'datagrid_assistance.js'),
             columns={
                 'eventtype': SelectColumn(
-                    _(u"weventtype_label", default="Event Type"),
+                    _(u"weventtype_label", default="Academic Activity Type"),
                     vocabulary=EventTypeVocabulary(),
+                ),
+                'othereventtype': Column(
+                    _(u"wothereventtype_label", default=u"If you select \"Other\" in Academic Activity Type, please indicate it"),
                 ),
                 'eventName': Column(
                     _(u"weventname_label", default=u"Event Name"),
                 ),
-                'place': Column(
-                    _(u"wplace_label", default=u"Place"),
-                ),
                 'institution': Column(
                     _(u"winstitution_label", default=u"Institution"),
+                ),
+                'place': Column(
+                    _(u"wplace_label", default=u"Place"),
                 ),
                 'assistancedate': DateColumn(
                     _(u"wassistancedate_label", default=u"Date"),
@@ -894,12 +898,12 @@ schema = BaseSchema + Schema((
             'title',
             'eventName',
             'institution',
+            'place',
             'isplenary',
             'participationtype',
             'conferencetype',
-            'place',
             'conferencedate',
-            'assistallevent',
+            # 'assistallevent',
         ),
         widget=ConferenceWidget(
             label=_(u"label_widgetconferences", default=u"Conferences"),
@@ -912,7 +916,7 @@ schema = BaseSchema + Schema((
             ),
             columns={
                 'eventtype': SelectColumn(
-                    _(u"weventtype_label", default="Event Type"),
+                    _(u"weventtype_label", default="Academic Activity Type"),
                     vocabulary=EventTypeVocabulary(),
                 ),
                 'title': Column(
@@ -923,6 +927,9 @@ schema = BaseSchema + Schema((
                 ),
                 'institution': Column(
                     _(u"winstitution_label", default=u"Institution"),
+                ),
+                'place': Column(
+                    _(u"wplace_label", default=u"Place"),
                 ),
                 'isplenary': SelectColumn(
                     _(u"wisplenary_label", default="Is your conference plenary or masterly?"),
@@ -936,17 +943,14 @@ schema = BaseSchema + Schema((
                     _(u"wconferencetype_label", default="Conference type"),
                     vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
                 ),
-                'place': Column(
-                    _(u"wplace_label", default=u"Place"),
-                ),
                 'conferencedate': DateColumn(
                     _(u"wconferencedate_label", default=u"Date"),
                     date_format="dd/mm/yy",
                 ),
-                'assistallevent': SelectColumn(
-                    _(u"wassistallevent_label", default="Are you going to all congress?"),
-                    vocabulary=BooleanTypeVocabulary(),
-                ),
+                # 'assistallevent': SelectColumn(
+                #     _(u"wassistallevent_label", default="Are you going to all congress?"),
+                #     vocabulary=BooleanTypeVocabulary(),
+                # ),
             },
         ),
     ),
@@ -987,7 +991,6 @@ schema = BaseSchema + Schema((
                 'otherlevel': Column(
                     _(u"wotherlevel_label", default=u"If you select \"Other\" in Level, please indicate it"),
                 ),
-
                 'place': Column(
                     _(u"wplace_label", default=u"Place"),
                 ),
@@ -1009,7 +1012,8 @@ schema = BaseSchema + Schema((
             'hostresearcher',
             'objective',
             'institution',
-            'sresearchdate'
+            'sresearchinitdate',
+            'sresearchenddate',
         ),
         widget=SResearchWidget(
             label=_(u"label_widgetsresearch", default=u"Research Stay"),
@@ -1024,8 +1028,12 @@ schema = BaseSchema + Schema((
                 'institution': Column(
                     _(u"winstitution_label", default=u"Institution"),
                 ),
-                'sresearchdate': DateColumn(
-                    _(u"sresearchdate_label", default=u"Date"),
+                'sresearchinitdate': DateColumn(
+                    _(u"sresearchinitdate_label", default=u"Init Date"),
+                    date_format="dd/mm/yy",
+                ),
+                'sresearchenddate': DateColumn(
+                    _(u"sresearchenddate_label", default=u"End Date"),
                     date_format="dd/mm/yy",
                 ),
             },
@@ -1037,10 +1045,13 @@ schema = BaseSchema + Schema((
         columns=(
             'eventName',
             'imposition',
+            'otherimposition',
             'researcherposition',
+            'otherresearcherposition',
             'sessionName',
             'activitytype',
             'level',
+            'otherlevel',
             'speakersint',
             'speakersnac',
             'assistants',
@@ -1060,9 +1071,15 @@ schema = BaseSchema + Schema((
                     _(u"wimposition_label", default="IM Position"),
                     vocabulary_factory='matem.solicitudes.vocabularies.IMPosition',
                 ),
+                'otherimposition': Column(
+                    _(u"wotherimposition_label", default=u"If you select \"Other\" in IM Position, please indicate it"),
+                ),
                 'researcherposition': MultiSelectColumn(
                     _(u"wresearchposition_label", default="Researcher Position"),
                     vocabulary_factory='matem.solicitudes.vocabularies.ResearcherPosition',
+                ),
+                'otherresearcherposition': Column(
+                    _(u"wotherresearcherposition_label", default=u"If you select \"Other\" in Researcher Position, please indicate it"),
                 ),
                 'sessionName': Column(
                     _(u"wsessionName_label", default=u"If you are Responsible of session, please indicate the session name"),
@@ -1075,6 +1092,9 @@ schema = BaseSchema + Schema((
                     _(u"wlevel_label", default="Level"),
                     vocabulary_factory='matem.solicitudes.vocabularies.Courselevel',
                     # vocabulary=CourselevelVocabulary(),
+                ),
+                'otherlevel': Column(
+                    _(u"wotherlevel_label", default=u"If you select \"Other\" in Level, please indicate it"),
                 ),
                 'speakersint': Column(
                     _(u"wspeakersint_label", default=u"Expected number of International Speakers"),
@@ -1281,6 +1301,8 @@ class Solicitud(BaseContent):
         fielderrors = {}
         for row in rows:
             if row['orderindex_'] != 'template_row_marker':
+                if not row[columndate]:
+                    continue
                 try:
                     # is necesarily change the order for the widget format
                     rowitem = row[columndate].split('/')
@@ -1296,6 +1318,11 @@ class Solicitud(BaseContent):
                 #         context=kwargs['REQUEST'],
                 #         default=_("Validation failed: The year, sponsor and amount are required, please correct.")
         return fielderrors
+
+    def translateTypeTitle(self):
+        if self.getLicenciacomision() == 'Comision':
+            return 'Comisión'
+        return self.getLicenciacomision()
 
     def addTranslation(self, language, **kwargs):
         # call orginal addTranslation

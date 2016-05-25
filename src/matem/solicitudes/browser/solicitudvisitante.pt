@@ -210,8 +210,9 @@
             </span>
 
             <h2><span tal:replace="here/pretty_title_or_id">content title or id</span></h2>
-
-                <p style="color: #FF0000;" tal:content="python:'Estado: '+str(here.getWFStateName())"></p>
+                <p style="color: #FF0000;">
+                  Estado: <span i18n:translate="" tal:content="python:str(here.getWFStateName())"/>
+                </p>
                 <div class="tabularView" tal:define="parent python:here.getParentNode()">
                 <table class="fc" align="right" border="0">
                 <tr class="btn-group">
@@ -252,7 +253,7 @@
   <tr><th colspan="2">Nombre</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][0]">Value</td></tr>
         <tr><th rowspan="2">Presupuesto:</th><th>Asignado</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][1]">Value</td></tr>
         <tr>                                 <th>Disponible</th><td style="color: #FFFFFF; background:#FF6600;" align="center" colspan="3" tal:content="python:datosAdicionales[0][2]">Value</td></tr>
-        <tr><th rowspan="2">Dias Aprobados:</th><th>Comision</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][3]">Value</td></tr>
+        <tr><th rowspan="2">Días Aprobados:</th><th>Comisión</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][3]">Value</td></tr>
         <tr>                                 <th>Licencia</th><td align="center" colspan="3" tal:content="python:datosAdicionales[0][4]">Value</td></tr>
   <tr><th colspan="5"><b>Información Sobre la Solicitud</b></th></tr>
         <tr><th colspan="2">Fecha de Solicitud</th><td align="center" colspan="3"><span tal:content="python:context.creation_date.strftime('%d/%m/%Y')">Value</span></td></tr>
@@ -325,7 +326,7 @@
           <td align="center" tal:content="python:view.getTipoTransporte(here.getTipo_pasaje()).rstrip(',')">Value</td>
         </tr>
         <tr><th colspan="5"><b>Cantidades</b></th></tr>
-        <tr><th>Concepto</th><th>Cantidad Solicitada</th><th>Cantidad Recomendada por Comision Especial</th><th>Cantidad Autorizada por el Consejo Interno</th><th>Cantidad Utilizada</th></tr>
+        <tr><th>Concepto</th><th>Cantidad Solicitada</th><th>Cantidad Recomendada por Comisión Especial</th><th>Cantidad Autorizada por el Consejo Interno</th><th>Cantidad Utilizada</th></tr>
         <tr><th i18n:translate="label_cantidad_pasaje">Transportation cost</th>
                       <td align="center" tal:content="here/getCantidad_pasaje">Cantidad Solicitada</td>
                       <td align="center" tal:content="here/getCantidad_recomendada_pasaje">Cantidad Recomendada</td>
@@ -352,7 +353,7 @@
             <tr><th i18n:translate="label_comentario_ce">Recommendation by Special Commission</th>
                 <td align="left" tal:content="here/getComentario_ce">Value</td></tr>
             <tr><th i18n:translate="label_recomienda_aprobar">Recomiendo Aprobar</th>
-                <td align="left" tal:content="here/getRecomienda_aprobar">Value</td></tr>
+                <td align="left" i18n:translate="" tal:content="here/getRecomienda_aprobar">Value</td></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th colspan="2"><b>Consejo Interno</b></th></tr>
             <tr tal:condition="python: consejero and (here.getWFState()=='revisionconsejo' or here.aprobada() or here.rechazada())"><th i18n:translate="label_fecha_sesionci">Date of revision by the CI</th>
                 <td align="left" tal:content="python:here.getFecha_sesionci() and here.getFecha_sesionci().strftime('%d/%m/%Y')">Value</td></tr>
