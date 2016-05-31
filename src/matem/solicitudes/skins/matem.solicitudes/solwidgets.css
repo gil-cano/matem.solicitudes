@@ -241,6 +241,16 @@ input[name="organization.assistants:records"]{
     width: 10% !important;
 }
 
+/*hidde the plone-jscalendar-popup*/
+span[id="edit_form_fecha_desde_0_popup"] img{
+    display: none !important;
+}
+
+span[id="edit_form_fecha_hasta_1_popup"] img{
+    display: none !important;
+}
+
+
 
 
 /*td.gridwidget input.DataGridDatepicker{
