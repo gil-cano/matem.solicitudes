@@ -257,6 +257,7 @@ schema = BaseSchema + Schema((
             starting_year=2011,
             future_years=1,
             show_hm=False,
+            # show_jscal=0, # This attribute does not work with the calendar template
         ),
         write_permission="Solicitud: Modificar Solicitud",
     ),
