@@ -18,6 +18,11 @@ table.datagridwidget-table-view {
 
 }
 
+table.datagridwidget-table-edit {
+    width: 100%;
+    line-height: 1.1em;
+}
+
 
 input.datagrid-radio-button {
     /* Radio buttons try to use Plone's default text input
