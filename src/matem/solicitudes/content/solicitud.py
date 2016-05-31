@@ -913,7 +913,8 @@ schema = BaseSchema + Schema((
                 'datagridwidget.js',
                 'datagridwidget_patches.js',
                 'datagridmultiselect.js',
-                'datagriddatepicker.js'
+                'datagriddatepicker.js',
+                'datagrid_conference.js'
             ),
             columns={
                 'eventtype': SelectColumn(
