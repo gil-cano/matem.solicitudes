@@ -27,6 +27,7 @@
                 <tal:cell tal:define="
                             column columnd/id;
                             column_label columnd/label;
+                            column_help columnd/col_description | nothing;
                             column_definition python: widget.getColumnDefinition(field, column);
                             valuesrequest python: field.widget.getType() in widgetsmultiselect and widget.getResquestValues(context.REQUEST.form, value, context, field, column) or [];
                             effectivevalues python:valuesrequest and [v[column]  for v in valuesrequest if v['orderindex_'] == str(rows.get('orderindex_'))][0] or [];
@@ -36,6 +37,9 @@
                   <label tal:attributes="for column">
                     <br/><span i18n:translate="" tal:content="column_label">label</span><br/>
                   </label>
+                  <tal:block tal:condition="column_help">
+                    <span class="formHelp" i18n:translate="" tal:content="column_help">help</span>
+                  </tal:block>
                   <span metal:use-macro="edit_macro"/>
                   <br/>
                 </tal:cell>
@@ -64,12 +68,16 @@
               <span class="field" tal:define="
                     column columnd/id;
                     column_label columnd/label;
+                    column_help columnd/col_description | nothing;
                     column_definition python: widget.getColumnDefinition(field, column);
                     cell_macro python: path('here/%s/macros' % column_definition.getMacro());
                     edit_empty_macro cell_macro/edit_empty_cell;">
                 <label tal:attributes="for column">
                   <br/><span i18n:translate="" tal:content="column_label">label</span><br/>
                 </label>
+                <tal:block tal:condition="column_help">
+                  <span class="formHelp" i18n:translate="" tal:content="column_help">help</span>
+                </tal:block>
                 <span metal:use-macro="edit_empty_macro"/>
                 <br/>
               </span>

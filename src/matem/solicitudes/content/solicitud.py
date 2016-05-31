@@ -979,6 +979,7 @@ schema = BaseSchema + Schema((
                 ),
                 'duration': Column(
                     _(u"wduration_course_label", default=u"Duration in hours"),
+                    col_description=_(u"wduration_course_help", default=u"Indicate a positive number"),
                 ),
                 'eventName': Column(
                     _(u"weventname_label", default=u"Event Name"),
