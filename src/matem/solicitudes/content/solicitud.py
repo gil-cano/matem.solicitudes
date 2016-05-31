@@ -1214,7 +1214,7 @@ class Solicitud(BaseContent):
         # Add validators for widgtes date in range
         widgetserrors = self.validateDateInRange(
             'assistance',
-            'assistancedate',
+            ['assistancedate'],
             lassistance,
             start,
             end
@@ -1223,7 +1223,7 @@ class Solicitud(BaseContent):
         widgetserrors.update(
             self.validateDateInRange(
                 'conferences',
-                'conferencedate',
+                ['conferencedate'],
                 lconferences,
                 start,
                 end
@@ -1231,9 +1231,17 @@ class Solicitud(BaseContent):
         )
 
         widgetserrors.update(
+            self.validateIntNumbers(
+                'courses',
+                ['duration'],
+                lcourses,
+            )
+        )
+
+        widgetserrors.update(
             self.validateDateInRange(
                 'courses',
-                'coursedate',
+                ['coursedate'],
                 lcourses,
                 start,
                 end
@@ -1243,10 +1251,19 @@ class Solicitud(BaseContent):
         widgetserrors.update(
             self.validateDateInRange(
                 'sresearch',
-                'sresearchdate',
+                ['sresearchinitdate', 'sresearchenddate'],
                 lsresearch,
                 start,
                 end
+            )
+        )
+
+        widgetserrors.update(
+            self.validateDateSResearch(
+                'sresearch',
+                'sresearchinitdate',
+                'sresearchenddate',
+                lsresearch,
             )
         )
 
@@ -1261,7 +1278,7 @@ class Solicitud(BaseContent):
         widgetserrors.update(
             self.validateDateInRange(
                 'organization',
-                'organizationdate',
+                ['organizationdate'],
                 lorganization,
                 start,
                 end
@@ -1299,27 +1316,49 @@ class Solicitud(BaseContent):
                         columnerrors[fieldName] = u'El valor del número esperado debe ser un número entero positivo'
         return columnerrors
 
-    def validateDateInRange(self, fieldName, columndate, rows, dstart, dend):
+    def validateDateInRange(self, fieldName, columnsdate, rows, dstart, dend):
         fielderrors = {}
         for row in rows:
             if row['orderindex_'] != 'template_row_marker':
-                if not row[columndate]:
+                for columndate in columnsdate:
+                    if not row[columndate]:
+                        continue
+                    try:
+                        # is necesarily change the order for the widget format
+                        rowitem = row[columndate].split('/')
+                        rowdate = DateTime(rowitem[2] + rowitem[1] + rowitem[0])
+                    except Exception:
+                        fielderrors[fieldName] = u'La fecha no es válida'
+                        return fielderrors
+                    if (rowdate < dstart) or (rowdate > dend):
+                        fielderrors[fieldName] = u'La fecha no está en el rango de fechas de la solicitud'
+                    #     return translate(
+                    #         "Validation failed: The year, sponsor and amount are required, please correct.",
+                    #         domain='UNAM.imateCVct',
+                    #         context=kwargs['REQUEST'],
+                    #         default=_("Validation failed: The year, sponsor and amount are required, please correct.")
+        return fielderrors
+
+    def validateDateSResearch(self, fieldName, columnstardate, columnenddate, rows):
+        fielderrors = {}
+        for row in rows:
+            if row['orderindex_'] != 'template_row_marker':
+                if not row[columnstardate] or (not row[columnenddate]):
                     continue
                 try:
                     # is necesarily change the order for the widget format
-                    rowitem = row[columndate].split('/')
-                    rowdate = DateTime(rowitem[2] + rowitem[1] + rowitem[0])
+                    rowitemstart = row[columnstardate].split('/')
+                    rowdatestart = DateTime(rowitemstart[2] + rowitemstart[1] + rowitemstart[0])
+                    rowitemend = row[columnenddate].split('/')
+                    rowdateend = DateTime(rowitemend[2] + rowitemend[1] + rowitemend[0])
+
                 except Exception:
                     fielderrors[fieldName] = u'La fecha no es válida'
                     return fielderrors
-                if (rowdate < dstart) or (rowdate > dend):
-                    fielderrors[fieldName] = u'La fecha no está en el rango de fechas de la solicitud'
-                #     return translate(
-                #         "Validation failed: The year, sponsor and amount are required, please correct.",
-                #         domain='UNAM.imateCVct',
-                #         context=kwargs['REQUEST'],
-                #         default=_("Validation failed: The year, sponsor and amount are required, please correct.")
+                if rowdatestart > rowdateend:
+                    fielderrors[fieldName] = u'La fecha de inicio debe ser menor'
         return fielderrors
+
 
     def translateTypeTitle(self):
         if self.getLicenciacomision() == 'Comision':
