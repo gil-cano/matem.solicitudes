@@ -1,5 +1,5 @@
 /**
- * JavaScript for the history widgets assistance
+ * JavaScript for the history widgets conference
  *
  *
  */
