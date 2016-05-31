@@ -972,7 +972,7 @@ schema = BaseSchema + Schema((
         ),
         widget=CourseWidget(
             label=_(u"label_widgetcourses", default=u"Courses"),
-            helper_js=('datagridwidget.js', 'datagriddatepicker.js'),
+            helper_js=('datagridwidget.js', 'datagriddatepicker.js', 'datagrid_course.js'),
             columns={
                 'title': Column(
                     _(u"wtitle_course_label", default=u"Title"),
