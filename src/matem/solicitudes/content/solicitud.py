@@ -1019,7 +1019,7 @@ schema = BaseSchema + Schema((
         ),
         widget=SResearchWidget(
             label=_(u"label_widgetsresearch", default=u"Research Stay"),
-            helper_js=('datagridwidget.js', 'datagriddatepicker.js'),
+            helper_js=('datagridwidget.js', 'datagriddatepicker.js', 'datagrid_sresearch.js'),
             columns={
                 'hostresearcher': Column(
                     _(u"whostresearcher_label", default=u"Host"),
