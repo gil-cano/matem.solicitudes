@@ -78,6 +78,17 @@ class CourselevelVocabulary:
             ('other', _(u'Other')),
         ])
 
+class ExpectedNumbersVocabulary:
+    implements(IVocabulary)
+
+    def getDisplayList(self, instance):
+        return DisplayList([
+            ('stage1', _(u'1 - 10')),
+            ('stage2', _(u'11 - 20')),
+            ('stage3', _(u'21 - 30')),
+            ('starge4', _(u'More than 30')),
+        ])
+
 
 # TOD0 Unify the course level vocabularies
 def CourselevelVocabularyFactory(context):

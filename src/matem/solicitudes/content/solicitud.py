@@ -71,6 +71,7 @@ from matem.solicitudes.widgets.vocabularies import ConferenceTypeVocabulary
 from matem.solicitudes.widgets.vocabularies import ConferenceAssistantVocabulary
 
 from matem.solicitudes.widgets.vocabularies import CourselevelVocabulary
+from matem.solicitudes.widgets.vocabularies import ExpectedNumbersVocabulary
 # from matem.solicitudes.widgets.vocabularies import CoursetypeVocabulary
 
 # from matem.solicitudes.widgets.vocabularies import ResearchPositionVocabulary
@@ -1099,14 +1100,17 @@ schema = BaseSchema + Schema((
                 'otherlevel': Column(
                     _(u"wotherlevel_label", default=u"If you select \"Other\" in Level, please indicate it"),
                 ),
-                'speakersint': Column(
+                'speakersint': SelectColumn(
                     _(u"wspeakersint_label", default=u"Expected number of International Speakers"),
+                    vocabulary=ExpectedNumbersVocabulary(),
                 ),
-                'speakersnac': Column(
+                'speakersnac': SelectColumn(
                     _(u"wspeakersnac_label", default=u"Expected number of National Speakers"),
+                    vocabulary=ExpectedNumbersVocabulary(),
                 ),
-                'assistants': Column(
+                'assistants': SelectColumn(
                     _(u"wassistants_label", default=u"Expected number of Assistants"),
+                    vocabulary=ExpectedNumbersVocabulary(),
                 ),
                 'organizationdate': DateColumn(
                     _(u"worganizationdate_label", default=u"Date"),
@@ -1268,13 +1272,13 @@ class Solicitud(BaseContent):
             )
         )
 
-        widgetserrors.update(
-            self.validateIntNumbers(
-                'organization',
-                ['speakersint', 'speakersnac', 'assistants'],
-                lorganization,
-            )
-        )
+        # widgetserrors.update(
+        #     self.validateIntNumbers(
+        #         'organization',
+        #         ['speakersint', 'speakersnac', 'assistants'],
+        #         lorganization,
+        #     )
+        # )
 
         widgetserrors.update(
             self.validateDateInRange(
