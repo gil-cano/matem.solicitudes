@@ -67,7 +67,7 @@
                <span i18n:translate="" tal:content="field/label_button">Add new row</span></a>
 
             <div class="visualClear"><!-- --></div>
-            <br/><hr/>
+            <br/><hr style="border: 1px solid black;"/>
             <tal:comment replace="nothing">
                 <!-- Button that allows creation of the initial row when DGF is empty -->
             </tal:comment>
