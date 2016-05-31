@@ -1063,7 +1063,7 @@ schema = BaseSchema + Schema((
         ),
         widget=OrganizationWidget(
             label=_(u"label_widgetorganization", default=u"Organized Activities"),
-            helper_js=('datagridwidget.js', 'datagriddatepicker.js'),
+            helper_js=('datagridwidget.js', 'datagriddatepicker.js', 'datagrid_organization.js'),
             columns={
                 'eventName': Column(
                     _(u"weventname_label", default=u"Event Name"),
