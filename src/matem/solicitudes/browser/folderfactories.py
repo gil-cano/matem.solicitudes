@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from plone.app.content.browser.folderfactories import FolderFactoriesView
 
+import urllib
+
 events = {
 2012: {
 'CLAM': {'event_title': 'IV Congreso Latinoamericano de Matemáticos (IV CLAM 2012)',
@@ -98,24 +100,35 @@ events = {
         'objeto_viaje': 'Asistir al XLVIII Congreso Nacional de la Sociedad Matemática Mexicana (XLVIII SMM 2015)'},
 },
 
-2016: {
-'CLAM': {'event_title': 'V Congreso Latinoamericano de Matemáticos (V CLAM 2016)',
-         'pais': 'CO',
-         'ciudad_pais': 'Barranquilla',
-         'institucion': 'Universidad del Norte',
-         'fecha_desde': '2016-07-11 00:00 ',
-         'fecha_hasta': '2016-07-15 00:00 ',
-         'objeto_viaje': 'Asistir al V Congreso Latinoamericano de Matemáticos (V CLAM 2016)'},
-'SMM': {'event_title': 'XLIX Congreso Nacional de la Sociedad Matemática Mexicana (XLIX SMM 2016)',
-        'pais': 'MX',
-        'ciudad_pais': 'Aguascalientes',
-        'institucion': 'Universidad Autónoma de Aguascalientes',
-        'fecha_desde': '2016-10-23 00:00 ',
-        'fecha_hasta': '2016-10-28 00:00 ',
-        'objeto_viaje': 'Asistir al XLIX Congreso Nacional de la Sociedad Matemática Mexicana (XLIX SMM 2016)'},
-},
-2017: {
-},
+    2016: {
+        'CLAM': {
+            'event_title': 'V Congreso Latinoamericano de Matemáticos (V CLAM 2016)',
+            'pais': 'CO',
+            'ciudad_pais': 'Barranquilla',
+            'institucion': 'Universidad del Norte',
+            'fecha_desde': '2016-07-11 00:00 ',
+            'fecha_hasta': '2016-07-15 00:00 ',
+            'objeto_viaje': 'Asistir al V Congreso Latinoamericano de Matemáticos (V CLAM 2016)'
+        },
+        'SMM': {
+            'event_title': 'XLIX Congreso Nacional de la Sociedad Matemática Mexicana (XLIX SMM 2016)',
+            'pais': 'MX',
+            'ciudad_pais': 'Aguascalientes',
+            'institucion': 'Universidad Autónoma de Aguascalientes',
+            'fecha_desde': '2016-10-23 00:00 ',
+            'fecha_hasta': '2016-10-28 00:00 ',
+            'objeto_viaje': 'Asistir al XLIX Congreso Nacional de la Sociedad Matemática Mexicana (XLIX SMM 2016)'
+        },
+        'EEPM': {'event_title': 'Segundo Encuentro de Estudiantes del Posgrado en Matemáticas',
+                'pais': 'MX',
+                'ciudad_pais': 'Cuernavaca',
+                'institucion': 'IMATE, Unidad Cuernavaca',
+                'fecha_desde': '2016-08-20',
+                'fecha_hasta': '2016-08-23',
+                'objeto_viaje': 'Asistir al Segundo Encuentro de Estudiantes del Posgrado en Matemáticas'},
+    },
+    2017: {
+    },
 }
 
 
@@ -130,8 +143,11 @@ class FolderFactoriesView(FolderFactoriesView):
             if 'event' in self.request.form and self.request.form.get('event') in events[year]:
                 url = self.context.createObject(type_name='SolicitudInstitucional')
                 event = events[year][self.request.form.get('event')]
-                parameters = ['%s=%s' % (k, v) for k, v in event.iteritems()]
-                url += '?%s' % '&'.join(parameters)
+                params = urllib.urlencode(event)
+                if '?' in url:
+                    url = url + '&' + params
+                else:
+                    url = url + '?' + params
             self.request.response.redirect(url)
             return ''
         else:
