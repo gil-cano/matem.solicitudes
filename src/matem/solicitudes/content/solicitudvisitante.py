@@ -739,13 +739,13 @@ schema = BaseSchema + Schema((
         name='conferences',
         columns=(
             'eventtype',
+            'conferencetype',
             'title',
             'eventName',
             'institution',
+            'place',
             'isplenary',
             'participationtype',
-            'conferencetype',
-            'place',
             'conferencedate',
             'assistallevent',
         ),
@@ -763,6 +763,11 @@ schema = BaseSchema + Schema((
                     _(u"weventtype_label", default="Academic Activity Type"),
                     vocabulary=EventTypeVocabulary(),
                 ),
+                'conferencetype': MultiSelectColumn(
+                    _(u"wconferencetype_label", default="Conference type"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                     col_description=_(u"wconferencetype_help", default=u"You can select one or many options"),
+                ),
                 'title': Column(
                     _(u"wtitle_conference_label", default=u"Title"),
                 ),
@@ -772,6 +777,9 @@ schema = BaseSchema + Schema((
                 'institution': Column(
                     _(u"winstitution_label", default=u"Institution"),
                 ),
+                'place': Column(
+                    _(u"wplace_label", default=u"Place of the Event"),
+                ),
                 'isplenary': SelectColumn(
                     _(u"wisplenary_label", default="Is your conference plenary or masterly?"),
                     vocabulary=BooleanTypeVocabulary(),
@@ -779,13 +787,6 @@ schema = BaseSchema + Schema((
                 'participationtype': SelectColumn(
                     _(u"wcparticipationtype_label", default="Participation type"),
                     vocabulary=ConferenceAssistantVocabulary(),
-                ),
-                'conferencetype': MultiSelectColumn(
-                    _(u"wconferencetype_label", default="Conference type"),
-                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
-                ),
-                'place': Column(
-                    _(u"wplace_label", default=u"Place"),
                 ),
                 'conferencedate': DateColumn(
                     _(u"wconferencedate_label", default=u"Date"),
@@ -802,31 +803,29 @@ schema = BaseSchema + Schema((
     DataGridCourseGuestField(
         name='courses',
         columns=(
+            'coursetype',
             'title',
             'duration',
-            'eventName',
-            'institution',
             'level',
             'otherlevel',
+            'eventName',
+            'institution',
             'place',
-            'coursetype',
-            'coursedate'
+            'coursedate',
         ),
         widget=CourseWidget(
             label=_(u"label_widgetcourses", default=u"Courses"),
             helper_js=('datagridwidget.js', 'datagriddatepicker.js'),
             columns={
+                'coursetype': MultiSelectColumn(
+                    _(u"wcoursetype_label", default="Coursetype"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                ),
                 'title': Column(
                     _(u"wtitle_course_label", default=u"Title"),
                 ),
                 'duration': Column(
                     _(u"wduration_course_label", default=u"Duration in hours"),
-                ),
-                'eventName': Column(
-                    _(u"weventname_label", default=u"Event Name"),
-                ),
-                'institution': Column(
-                    _(u"winstitution_label", default=u"Institution"),
                 ),
                 'level': SelectColumn(
                     _(u"wlevel_label", default="Level"),
@@ -835,12 +834,14 @@ schema = BaseSchema + Schema((
                 'otherlevel': Column(
                     _(u"wotherlevel_label", default=u"If you select \"Other\" in Level, please indicate it"),
                 ),
-                'place': Column(
-                    _(u"wplace_label", default=u"Place"),
+                'eventName': Column(
+                    _(u"weventname_course_label", default=u"Event Name of the course"),
                 ),
-                'coursetype': MultiSelectColumn(
-                    _(u"wcoursetype_label", default="Coursetype"),
-                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
+                ),
+                'place': Column(
+                    _(u"wplace_course_label", default=u"Place of the Course"),
                 ),
                 'coursedate': DateColumn(
                     _(u"wcoursedate_label", default=u"Date"),

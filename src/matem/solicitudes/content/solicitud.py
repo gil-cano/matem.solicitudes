@@ -854,6 +854,17 @@ schema = BaseSchema + Schema((
         widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
     ),
 
+    StringField(
+        name='message_activities',
+        widget=LabelWidget(
+            # label=u'Recuerde que el número máximo de días de Licencia es 45. Si los rebasa consulte con la Secretaría Académica.',
+            # label_msgid='label_mensaje_licencias',
+            label=_(u"message_activities_label", default=u"You can add many activities"),
+            i18n_domain='matem.solicitudes',
+            visible={'view': 'invisible', 'edit': 'visible'}
+        ),
+    ),
+
     DataGridAssistanceField(
         name='assistance',
         columns=(
@@ -883,7 +894,7 @@ schema = BaseSchema + Schema((
                     _(u"winstitution_label", default=u"Institution"),
                 ),
                 'place': Column(
-                    _(u"wplace_label", default=u"Place"),
+                    _(u"wplace_label", default=u"Place of the Event"),
                 ),
                 'assistancedate': DateColumn(
                     _(u"wassistancedate_label", default=u"Date"),
@@ -897,13 +908,13 @@ schema = BaseSchema + Schema((
         name='conferences',
         columns=(
             'eventtype',
+            'conferencetype',
             'title',
             'eventName',
             'institution',
             'place',
             'isplenary',
             'participationtype',
-            'conferencetype',
             'conferencedate',
             # 'assistallevent',
         ),
@@ -922,6 +933,11 @@ schema = BaseSchema + Schema((
                     _(u"weventtype_label", default="Academic Activity Type"),
                     vocabulary=EventTypeVocabulary(),
                 ),
+                'conferencetype': MultiSelectColumn(
+                    _(u"wconferencetype_label", default="Conference type"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                    col_description=_(u"wconferencetype_help", default=u"You can select one or many options"),
+                ),
                 'title': Column(
                     _(u"wtitle_conference_label", default=u"Title"),
                 ),
@@ -932,7 +948,7 @@ schema = BaseSchema + Schema((
                     _(u"winstitution_label", default=u"Institution"),
                 ),
                 'place': Column(
-                    _(u"wplace_label", default=u"Place"),
+                    _(u"wplace_label", default=u"Place of the Event"),
                 ),
                 'isplenary': SelectColumn(
                     _(u"wisplenary_label", default="Is your conference plenary or masterly?"),
@@ -941,10 +957,6 @@ schema = BaseSchema + Schema((
                 'participationtype': SelectColumn(
                     _(u"wcparticipationtype_label", default="Participation type"),
                     vocabulary=ConferenceAssistantVocabulary(),
-                ),
-                'conferencetype': MultiSelectColumn(
-                    _(u"wconferencetype_label", default="Conference type"),
-                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
                 ),
                 'conferencedate': DateColumn(
                     _(u"wconferencedate_label", default=u"Date"),
@@ -961,32 +973,30 @@ schema = BaseSchema + Schema((
     DataGridCourseField(
         name='courses',
         columns=(
+            'coursetype',
             'title',
             'duration',
-            'eventName',
-            'institution',
             'level',
             'otherlevel',
+            'eventName',
+            'institution',
             'place',
-            'coursetype',
-            'coursedate'
+            'coursedate',
         ),
         widget=CourseWidget(
             label=_(u"label_widgetcourses", default=u"Courses"),
             helper_js=('datagridwidget.js', 'datagriddatepicker.js', 'datagrid_course.js'),
             columns={
+                'coursetype': MultiSelectColumn(
+                        _(u"wcoursetype_label", default="Coursetype"),
+                        vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                ),
                 'title': Column(
                     _(u"wtitle_course_label", default=u"Title"),
                 ),
                 'duration': Column(
                     _(u"wduration_course_label", default=u"Duration in hours"),
                     col_description=_(u"wduration_course_help", default=u"Indicate a positive number"),
-                ),
-                'eventName': Column(
-                    _(u"weventname_label", default=u"Event Name"),
-                ),
-                'institution': Column(
-                    _(u"winstitution_label", default=u"Institution"),
                 ),
                 'level': SelectColumn(
                     _(u"wlevel_label", default="Level"),
@@ -995,12 +1005,14 @@ schema = BaseSchema + Schema((
                 'otherlevel': Column(
                     _(u"wotherlevel_label", default=u"If you select \"Other\" in Level, please indicate it"),
                 ),
-                'place': Column(
-                    _(u"wplace_label", default=u"Place"),
+                'eventName': Column(
+                    _(u"weventname_course_label", default=u"Event Name of the course"),
                 ),
-                'coursetype': MultiSelectColumn(
-                    _(u"wcoursetype_label", default="Coursetype"),
-                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
+                ),
+                'place': Column(
+                    _(u"wplace_course_label", default=u"Place of the Course"),
                 ),
                 'coursedate': DateColumn(
                     _(u"wcoursedate_label", default=u"Date"),
@@ -1047,15 +1059,15 @@ schema = BaseSchema + Schema((
     DataGridOrganizationField(
         name='organization',
         columns=(
+            'activitytype',
             'eventName',
-            'imposition',
-            'otherimposition',
+            'level',
+            'otherlevel',
             'researcherposition',
             'otherresearcherposition',
             'sessionName',
-            'activitytype',
-            'level',
-            'otherlevel',
+            'imposition',
+            'otherimposition',
             'speakersint',
             'speakersnac',
             'assistants',
@@ -1065,8 +1077,30 @@ schema = BaseSchema + Schema((
             label=_(u"label_widgetorganization", default=u"Organized Activities"),
             helper_js=('datagridwidget.js', 'datagriddatepicker.js', 'datagrid_organization.js'),
             columns={
+                'activitytype': MultiSelectColumn(
+                    _(u"wactivitytype_label", default="Activity Type"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                ),
                 'eventName': Column(
                     _(u"weventname_label", default=u"Event Name"),
+                ),
+                'level': MultiSelectColumn(
+                    _(u"wlevel_label", default="Level"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.Courselevel',
+                    # vocabulary=CourselevelVocabulary(),
+                ),
+                'otherlevel': Column(
+                    _(u"wotherlevel_label", default=u"If you select \"Other\" in Level, please indicate it"),
+                ),
+                'researcherposition': MultiSelectColumn(
+                    _(u"wresearchposition_label", default="Researcher Position"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.ResearcherPosition',
+                ),
+                'otherresearcherposition': Column(
+                    _(u"wotherresearcherposition_label", default=u"If you select \"Other\" in Researcher Position, please indicate it"),
+                ),
+                'sessionName': Column(
+                    _(u"wsessionName_label", default=u"If you are Responsible of session, please indicate the session name. If you are Responsible in many sessions, please indicate the sessions name separated by ;"),
                 ),
                 # 'imposition': Column(
                 #     _(u"wimposition_label", default=u"IM Position"),
@@ -1078,28 +1112,7 @@ schema = BaseSchema + Schema((
                 'otherimposition': Column(
                     _(u"wotherimposition_label", default=u"If you select \"Other\" in IM Position, please indicate it"),
                 ),
-                'researcherposition': MultiSelectColumn(
-                    _(u"wresearchposition_label", default="Researcher Position"),
-                    vocabulary_factory='matem.solicitudes.vocabularies.ResearcherPosition',
-                ),
-                'otherresearcherposition': Column(
-                    _(u"wotherresearcherposition_label", default=u"If you select \"Other\" in Researcher Position, please indicate it"),
-                ),
-                'sessionName': Column(
-                    _(u"wsessionName_label", default=u"If you are Responsible of session, please indicate the session name"),
-                ),
-                'activitytype': MultiSelectColumn(
-                    _(u"wactivitytype_label", default="Activity Type"),
-                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
-                ),
-                'level': MultiSelectColumn(
-                    _(u"wlevel_label", default="Level"),
-                    vocabulary_factory='matem.solicitudes.vocabularies.Courselevel',
-                    # vocabulary=CourselevelVocabulary(),
-                ),
-                'otherlevel': Column(
-                    _(u"wotherlevel_label", default=u"If you select \"Other\" in Level, please indicate it"),
-                ),
+
                 'speakersint': SelectColumn(
                     _(u"wspeakersint_label", default=u"Expected number of International Speakers"),
                     vocabulary=ExpectedNumbersVocabulary(),

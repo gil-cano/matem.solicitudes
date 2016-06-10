@@ -83,12 +83,13 @@ class ExpectedNumbersVocabulary:
 
     def getDisplayList(self, instance):
         return DisplayList([
-            ('stage1', _(u'1 - 10')),
-            ('stage2', _(u'11 - 20')),
-            ('stage3', _(u'21 - 30')),
-            ('starge4', _(u'More than 30')),
+            ('stage1', _(u'1 - 20')),
+            ('stage2', _(u'21 - 40')),
+            ('stage3', _(u'41 - 60')),
+            ('stage4', _(u'61 - 80')),
+            ('stage5', _(u'80 - 100')),
+            ('stage6', _(u'More than 100')),
         ])
-
 
 # TOD0 Unify the course level vocabularies
 def CourselevelVocabularyFactory(context):
