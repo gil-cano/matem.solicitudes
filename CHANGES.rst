@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.1.0 (unreleased)
+3.1.0 (2016-06-29)
 ------------------
 - pass rebuild_i18n
   [gil-cano]
