@@ -1,6 +1,11 @@
 Changelog
 =========
 
+4.0 (unreleased)
+----------------
+- Applications has more Licence details
+  [adriana-rv]
+
 3.1.0 (2016-06-29)
 ------------------
 - pass rebuild_i18n
