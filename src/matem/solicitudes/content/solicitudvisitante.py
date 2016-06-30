@@ -5,17 +5,17 @@ from zope.interface import implements
 from Products.Archetypes.public import *
 from matem.solicitudes.config import *
 from matem.solicitudes.extender import PersonWrapper
-from matem.solicitudes.interfaces import ISolicitud
+# from matem.solicitudes.interfaces import ISolicitud
 from matem.solicitudes.interfaces import ISolicitudVisitante
-from Products.Archetypes import atapi
+# from Products.Archetypes import atapi
 from Products.Archetypes.atapi import *
 from Products.ATContentTypes.utils import DT2dt
 from Products.Archetypes.public import *
 from Products.CMFCore.utils import getToolByName
 from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
 
-from Acquisition import aq_parent, aq_base, ImplicitAcquisitionWrapper
-from Products.ATCountryWidget.Widget import CountryWidget, AreaWidget
+from Acquisition import aq_parent  # aq_base, ImplicitAcquisitionWrapper
+# from Products.ATCountryWidget.Widget import CountryWidget, AreaWidget
 from Products.ATCountryWidget.config import COUNTRIES
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
 
@@ -28,88 +28,121 @@ from matem.solicitudes.config import getCountriesVocabulary
 from matem.solicitudes import solicitudesMessageFactory as _
 
 
+from matem.solicitudes.widgets.conference import DataGridConferenceGuestField
+from matem.solicitudes.widgets.conference import ConferenceWidget
+from matem.solicitudes.widgets.course import DataGridCourseGuestField
+from matem.solicitudes.widgets.course import CourseWidget
+from Products.DataGridField.Column import Column
+from Products.DataGridField.SelectColumn import SelectColumn
+from collective.datagridcolumns.DateColumn import DateColumn
+from collective.datagridcolumns.MultiSelectColumn import MultiSelectColumn
+# from matem.solicitudes.widgets.vocabularies import ConferenceTypeVocabulary
+from matem.solicitudes.widgets.vocabularies import ConferenceAssistantVocabulary
+
+from matem.solicitudes.widgets.vocabularies import CourselevelVocabulary
+# from matem.solicitudes.widgets.vocabularies import CoursetypeVocabulary
+
+# from matem.solicitudes.widgets.vocabularies import ResearchPositionVocabulary
+
+from matem.solicitudes.widgets.vocabularies import EventTypeVocabulary
+from matem.solicitudes.widgets.vocabularies import BooleanTypeVocabulary
+
 
 schema = BaseSchema + Schema((
-        ComputedField(name='title',
-                           required=1,
-                           searchable=1,
-                           expression="((here.getOwner() and 'Solicitud (Visitante) de %s por %s (%s, %s, %s)' % (here.getNombreOwner(), here.getTotal(), here.getProcedencia(), here.getInstitucion(), here.getFechaDesde() )) or 'Nueva solicitud')",
-                           accessor='Title',
-                           widget=ComputedWidget(visible={'view':'invisible','edit':'invisible'}),
-                           ),
-        ComputedField(name='text',
-                           required=0,
-                           searchable=1,
-                           expression="""(here.getOwner() and '%s %s %s %s %s %s' %
-                                        (here.esSolcitudBorrador(), here.esSolcitudPendiente(),
-                                        here.setFechaSolicitud(), here.esAcuseRecibo(), here.getResponsable(),
-                                        here.setFechaSesionCI() ))""",
-                           widget=ComputedWidget(visible={'view':'invisible','edit':'invisible'}),
-                           ),
-        ComputedField(name='description',
-                           required=0,
-                           searchable=1,
-                           expression="(here.getOwner() and ' %s, %s ' % (here.getWFTitle(), here.getWFTString() ))",
-                           widget=StringWidget(visible={'view':'invisible','edit':'invisible'}),
-                           ),
+    ComputedField(
+        name='title',
+        required=1,
+        searchable=1,
+        expression="((here.getOwner() and 'Solicitud (Visitante) de %s por %s (%s, %s, %s)' % (here.getNombreOwner(), here.getTotal(), here.getProcedencia(), here.getInstitucion(), here.getFechaDesde() )) or 'Nueva solicitud')",
+        accessor='Title',
+        widget=ComputedWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
+    ),
+    ComputedField(
+        name='text',
+        required=0,
+        searchable=1,
+        expression="""(here.getOwner() and '%s %s %s %s %s %s' %
+                    (here.esSolcitudBorrador(), here.esSolcitudPendiente(),
+                    here.setFechaSolicitud(), here.esAcuseRecibo(), here.getResponsable(),
+                    here.setFechaSesionCI() ))""",
+        widget=ComputedWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
+    ),
+    ComputedField(
+        name='description',
+        required=0,
+        searchable=1,
+        expression="(here.getOwner() and ' %s, %s ' % (here.getWFTitle(), here.getWFTString() ))",
+        widget=StringWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
+    ),
 
-        StringField(name='id',
-                           required=0,
-                           searchable=1,
-                           expression=" ",
-                           widget=StringWidget(visible={'view':'invisible','edit':'invisible'}),
-                           ),
+    StringField(
+        name='id',
+        required=0,
+        searchable=1,
+        expression=" ",
+        widget=StringWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
+    ),
 
-        StringField(name='sede',
-                           required=0,
-                           searchable=1,
-                           vocabulary=SEDE,
-                           widget=SelectionWidget(label='Sede',
-                                 label_msgid='label_sede',
-                                 i18n_domain='matem.solicitudes',
-                                 description='Especifica de donde es el investigador que pide la licencia',
-                                 description_msgid='help_sede',
-                                 visible={'view':'invisible','edit':'invisible'},
-                                ),
-                           ),
-
-        ComputedField(name='responsable',
-                           required=1,
-                           searchable=1,
-                           expression="here.getIdOwner()",
-                           widget=StringWidget(visible={'view':'invisible','edit':'invisible'}),
-                           ),
-
-        ComputedField(name='nombrecompletoresponsable',
-                           required=1,
-                           searchable=1,
-                           expression="here.getNombreOwner()",
-                           widget=StringWidget(label='Responsible researcher',
-                                               label_msgid='label_responsable',
-                                               i18n_domain='matem.solicitudes',
-                                               description='Name of the responsible researcher',
-                                               description_msgid='help_responsable',
-                                               visible={'view':'visible','edit':'visible'}),
-                           ),
-
-        StringField('solicitante',
-            searchable=0,
-            required=1,
-            vocabulary='getCreators',
-            default_method='getSolicitanteDefault',
-            widget=SelectionWidget(label="Solicitante",
-                                   label_msgid="label_solicitante",
-                                   i18n_domain='matem.solicitudes',
-                                   description="Nombre del investigador a nombre del cual es esta solicitud.",
-                                   description_msgid="help_solicitante"),
-            write_permission="Solicitud: Cambiar Solicitante",
+    StringField(
+        name='sede',
+        required=0,
+        searchable=1,
+        vocabulary=SEDE,
+        widget=SelectionWidget(
+            label='Sede',
+            label_msgid='label_sede',
+            i18n_domain='matem.solicitudes',
+            description='Especifica de donde es el investigador que pide la licencia',
+            description_msgid='help_sede',
+            visible={'view': 'invisible', 'edit': 'invisible'},
         ),
+    ),
 
-        StringField('nombre_owner',
-            searchable=0,
-            required=0,
-            widget=StringWidget(visible={'view':'invisible','edit':'invisible'}),
+    ComputedField(
+        name='responsable',
+        required=1,
+        searchable=1,
+        expression="here.getIdOwner()",
+        widget=StringWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
+    ),
+
+    ComputedField(
+        name='nombrecompletoresponsable',
+        required=1,
+        searchable=1,
+        expression="here.getNombreOwner()",
+        widget=StringWidget(
+            label='Responsible researcher',
+            label_msgid='label_responsable',
+            i18n_domain='matem.solicitudes',
+            description='Name of the responsible researcher',
+            description_msgid='help_responsable',
+            visible={'view': 'visible', 'edit': 'visible'}
         ),
+    ),
+
+    StringField(
+        'solicitante',
+        searchable=0,
+        required=1,
+        vocabulary='getCreators',
+        default_method='getSolicitanteDefault',
+        widget=SelectionWidget(
+            label="Solicitante",
+            label_msgid="label_solicitante",
+            i18n_domain='matem.solicitudes',
+            description="Nombre del investigador a nombre del cual es esta solicitud.",
+            description_msgid="help_solicitante"
+        ),
+        write_permission="Solicitud: Cambiar Solicitante",
+    ),
+
+    StringField(
+        'nombre_owner',
+        searchable=0,
+        required=0,
+        widget=StringWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
+    ),
 
     StringField(
         name='invitado',
@@ -121,33 +154,38 @@ schema = BaseSchema + Schema((
         write_permission="Solicitud: Modificar Solicitud",
     ),
 
-        StringField('semblanza',
-            searchable=1,
-            required=1,
-            widget=TextAreaWidget(label='Semblanza',
-                                label_msgid='label_semblanza',
-                                i18n_domain='matem.solicitudes',
-                                description='Breve semblanza curricular para el anuncio en la página web del Instituto',
-                                description_msgid='help_semblanza'),
-            write_permission="Solicitud: Modificar Solicitud",
+    StringField(
+        'semblanza',
+        searchable=1,
+        required=1,
+        widget=TextAreaWidget(
+            label='Semblanza',
+            label_msgid='label_semblanza',
+            i18n_domain='matem.solicitudes',
+            description='Breve semblanza curricular para el anuncio en la página web del Instituto',
+            description_msgid='help_semblanza'
         ),
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        ImageField(
-            name='image',
-            required=0,
-            widget=ImageWidget(label='Foto Visitante',
-                    label_msgid='label_image',
-                    i18n_domain='matem.solicitudes',
-                    description='Foto del visitante para el anuncio en la página web del Instituto (el formato del archivo debe ser gif, jpg o png)',
-                    description_msgid='help_foto_visitante',
-                    default_content_type='image/gif'),
-            storage=AttributeStorage(),
-            original_size=(400, 500),
-            sizes={'thumb': (100, 125), 'normal': (200, 250)},
-            default_output_type='image/jpeg',
-            allowable_content_types=('image/gif','image/jpeg','image/png'),
-            write_permission="Solicitud: Modificar Solicitud",
+    ImageField(
+        name='image',
+        required=0,
+        widget=ImageWidget(
+            label='Foto Visitante',
+            label_msgid='label_image',
+            i18n_domain='matem.solicitudes',
+            description='Foto del visitante para el anuncio en la página web del Instituto (el formato del archivo debe ser gif, jpg o png)',
+            description_msgid='help_foto_visitante',
+            default_content_type='image/gif'
         ),
+        storage=AttributeStorage(),
+        original_size=(400, 500),
+        sizes={'thumb': (100, 125), 'normal': (200, 250)},
+        default_output_type='image/jpeg',
+        allowable_content_types=('image/gif', 'image/jpeg', 'image/png'),
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
     LinesField(
         name='pais_procedencia',
@@ -216,220 +254,267 @@ schema = BaseSchema + Schema((
         validators='isGreaterthanStart',
     ),
 
-        StringField('objeto_viaje',
-            searchable=1,
-            required=1,
-            accessor='ObjetoViaje',
-            widget=TextAreaWidget(label='Objective',
-                                  label_msgid='label_objeto_viaje',
-                                  i18n_domain='matem.solicitudes',
-                                  description='Enter the expected objective of the visit',
-                                  description_msgid='help_objeto_viaje'),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+    StringField(
+        'objeto_viaje',
+        searchable=1,
+        required=1,
+        accessor='ObjetoViaje',
+        widget=TextAreaWidget(
+            label='Objective',
+            label_msgid='label_objeto_viaje',
+            i18n_domain='matem.solicitudes',
+            description='Enter the expected objective of the visit',
+            description_msgid='help_objeto_viaje'
         ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        LinesField('investigacionarea',
-#            mode='rw',
-#            read_permission=VIEW_PUBLIC_PERMISSION,
-#            write_permission=EDIT_PROPERTIES_PERMISSION,
-            required=1,
-            default=(),
-            widget=PicklistWidget(
-                              label='Research areas',
-                              label_msgid='label_investigacionarea',
-                              description="Doubts about the classification and how to find an area, go to the official website of the <a href=\"http://www.ams.org/msc\">ams</a>",
-                              description_msgid='help_investigacionarea',
-                              i18n_domain='matem.solicitudes',),
-            multiValued=1,
-            vocabulary=AREAS_INVESTIGACION,
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+    LinesField(
+        'investigacionarea',
+        # mode='rw',
+        # read_permission=VIEW_PUBLIC_PERMISSION,
+        # write_permission=EDIT_PROPERTIES_PERMISSION,
+        required=1,
+        default=(),
+        widget=PicklistWidget(
+            label='Research areas',
+            label_msgid='label_investigacionarea',
+            description="Doubts about the classification and how to find an area, go to the official website of the <a href=\"http://www.ams.org/msc\">ams</a>",
+            description_msgid='help_investigacionarea',
+            i18n_domain='matem.solicitudes',
         ),
+        multiValued=1,
+        vocabulary=AREAS_INVESTIGACION,
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        StringField('cargo_presupuesto',
-            required=1,
-            vocabulary=DisplayList((('Asignación anual', 'Asignación anual'),
-                                    ('Apoyo institucional', 'Apoyo institucional'))),
-            default='Asignación anual',
-            widget=SelectionWidget(label='Con cargo a',
-                                label_msgid='label_cargo_a',
-                                i18n_domain='matem.solicitudes',
-                                description="Seleccione el presupuesto de donde se descontara el total de está solicitud",
-                                description_msgid='help_cargo_a',
-                                visible={'view': 'invisible', 'edit': 'invisible'}),
-            write_permission="Solicitud: Modificar Solicitud",
+    StringField(
+        'cargo_presupuesto',
+        required=1,
+        vocabulary=DisplayList((
+            ('Asignación anual', 'Asignación anual'),
+            ('Apoyo institucional', 'Apoyo institucional')
+        )),
+        default='Asignación anual',
+        widget=SelectionWidget(
+            label='Con cargo a',
+            label_msgid='label_cargo_a',
+            i18n_domain='matem.solicitudes',
+            description="Seleccione el presupuesto de donde se descontara el total de está solicitud",
+            description_msgid='help_cargo_a',
+            visible={'view': 'invisible', 'edit': 'invisible'}
         ),
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        StringField('pasaje',
-            searchable=1,
-            required=0,
-            default='',
-            vocabulary=DisplayList((
-                                    ('No', 'No'), ('si', 'Si')
-                                    )),
-            widget=MasterSelectWidget(label='Transportation expenses',
-                                 label_msgid='label_pasaje',
-                                 i18n_domain='matem.solicitudes',
-                                 description='Specify if the airfare or other travel expenses are requested',
-                                 description_msgid='help_pasaje',
-                                 slave_fields=({'name': 'tipo_pasaje',
-                                                'action': 'hide',
-                                                'hide_values': ('No',),
-                                                },
-                                                {'name': 'cantidad_pasaje',
-                                                'action': 'hide',
-                                                'hide_values': ('No',),
-                                                },)
-                                ),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+    StringField(
+        'pasaje',
+        searchable=1,
+        required=0,
+        default='',
+        vocabulary=DisplayList((
+            ('No', 'No'),
+            ('si', 'Si')
+        )),
+        widget=MasterSelectWidget(
+            label='Transportation expenses',
+            label_msgid='label_pasaje',
+            i18n_domain='matem.solicitudes',
+            description='Specify if the airfare or other travel expenses are requested',
+            description_msgid='help_pasaje',
+            slave_fields=(
+                {
+                    'name': 'tipo_pasaje',
+                    'action': 'hide',
+                    'hide_values': ('No',),
+                },
+                {
+                    'name': 'cantidad_pasaje',
+                    'action': 'hide',
+                    'hide_values': ('No',),
+                },
+            )
         ),
-        LinesField('tipo_pasaje',
-#            mode='rw',
-#            read_permission=VIEW_PUBLIC_PERMISSION,
-#            write_permission=EDIT_PROPERTIES_PERMISSION,
-            required=0,
-            default=(),
-            widget=MultiSelectionWidget(
-                              label='Transportation means',
-                              i18n_domain='matem.solicitudes',
-                              label_msgid='label_tipo_pasaje',
-                              description="Specify the type of travel mean to be used'",
-                              description_msgid='help_tipo_pasaje',
-                              format='checkbox'),
-            multiValued=1,
-            vocabulary=DisplayList((
-                                    ('auto', 'Car'), ('autobus', 'Bus'), ('avion', 'Airplane')
-                                    )),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
-        FloatField('cantidad_pasaje',
-            searchable=1,
-            required=1,
-            default='0',
-            relationship="c_pasaje",
-            widget=StringWidget(label='Transportation cost',
-                                label_msgid='label_cantidad_pasaje',
-                                i18n_domain='matem.solicitudes',
-                                description="Amount requested for travel expenses in mexican pesos",
-                                description_msgid='help_cantidad_pasaje',
-                                tarifas=False,
-                                size=12),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        StringField('viaticos',
-            searchable=1,
-            required=0,
-            default='No',
-            vocabulary=DisplayList((
-                                    ('No', 'No'), ('Si', 'Si')
-                                    )),
-            widget=MasterSelectWidget(label='Travel allowances',
-                                 label_msgid='label_viaticos',
-                                 i18n_domain='matem.solicitudes',
-                                 description='Specify if daily expenses are requested. 900 daily pesos (Mexico) and 1200 daily pesos (other countries), it is necessary to deliver receipts for the total',
-                                 description_msgid='help_viaticos',
-                                 slave_fields = ({'name': 'cantidad_viaticos',
-                                                'action': 'hide',
-                                                'hide_values': ('No',),
-                                                },)
-                                ),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+    LinesField(
+        'tipo_pasaje',
+        # mode='rw',
+        # read_permission=VIEW_PUBLIC_PERMISSION,
+        # write_permission=EDIT_PROPERTIES_PERMISSION,
+        required=0,
+        default=(),
+        widget=MultiSelectionWidget(
+            label='Transportation means',
+            i18n_domain='matem.solicitudes',
+            label_msgid='label_tipo_pasaje',
+            description="Specify the type of travel mean to be used'",
+            description_msgid='help_tipo_pasaje',
+            format='checkbox'
         ),
-        FloatField('cantidad_viaticos',
-            searchable=1,
-            required=1,
-            default='0',
-            relationship="viaticos",
-            widget=StringWidget(label='Travel allowances',
-                                label_msgid='label_cantidad_viaticos',
-                                i18n_domain='matem.solicitudes',
-                                description="Amount requested for travel allowances, in mexican pesos",
-                                description_msgid='help_cantidad_viaticos',
-                                tarifas=False,
-                                size=12),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
+        multiValued=1,
+        vocabulary=DisplayList((
+            ('auto', 'Car'),
+            ('autobus', 'Bus'),
+            ('avion', 'Airplane')
+        )),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        StringField('fecha_solicitud',
-            searchable=1,
-            required=0,
-            default='',
-            widget=StringWidget(label='Date of application',
-                                  label_msgid='label_fecha_solicitud',
-                                  i18n_domain='matem.solicitudes',
-                                  description='Date on which the request is sent',
-                                  description_msgid='help_fecha_solicitud',
-                                  visible={'view':'invisible','edit':'hidden'}
-                                  ),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+    FloatField(
+        'cantidad_pasaje',
+        searchable=1,
+        required=1,
+        default='0',
+        relationship="c_pasaje",
+        widget=StringWidget(
+            label='Transportation cost',
+            label_msgid='label_cantidad_pasaje',
+            i18n_domain='matem.solicitudes',
+            description="Amount requested for travel expenses in mexican pesos",
+            description_msgid='help_cantidad_pasaje',
+            tarifas=False,
+            size=12
         ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        MultiFileField('displayAttachments',
-            primary=True,
-            languageIndependent=True,
-            storage = AnnotationStorage(migrate=True),
-            widget = MultiFileWidget(
-                     label= "Attachments",
-                     label_msgid='label_adjuntos',
-                     description = "Please attach invitation letter or any other related documents",
-                     description_msgid='help_adjuntos',
-                     show_content_type = False,
-                     i18n_domain='matem.solicitudes',),
-            write_permission="Solicitud: Modificar Solicitud",
+    StringField(
+        'viaticos',
+        searchable=1,
+        required=0,
+        default='No',
+        vocabulary=DisplayList((
+            ('No', 'No'),
+            ('Si', 'Si')
+        )),
+        widget=MasterSelectWidget(
+            label='Travel allowances',
+            label_msgid='label_viaticos',
+            i18n_domain='matem.solicitudes',
+            description='Specify if daily expenses are requested. 900 daily pesos (Mexico) and 1200 daily pesos (other countries), it is necessary to deliver receipts for the total',
+            description_msgid='help_viaticos',
+            slave_fields=(
+                {'name': 'cantidad_viaticos', 'action': 'hide', 'hide_values': ('No',), },
+            )
         ),
-#Comentarios del owner
-        StringField('comentario_owner',
-            searchable=1,
-            required=0,
-            default='',
-            widget=TextAreaWidget(label='Additional comments',
-                                label_msgid='label_comentario_owner',
-                                i18n_domain='matem.solicitudes',
-                                description="Add any comment that you consider important for your request",
-                                description_msgid='help_comentario_owner',
-                                tarifas=False),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-#Campos del CE
-        DateTimeField('fecha_sesionce',
-            searchable=1,
-            required=1,
-            default_method='',
-            widget=CalendarWidget(label='Fecha de Revisión por la Comisión Especial',
-                                  label_msgid='label_fecha_sesionce',
-                                  i18n_domain='matem.solicitudes',
-                                  description='Fecha en que la comisión revisó la solicitud.',
-                                  description_msgid='help_fecha_sesionce',
-                                  starting_year=2010,
-                                  future_years=1,
-                                  show_hm=False),
-            read_permission="Solicitud: Comision Revisa Solicitud",
-            write_permission="Solicitud: Comision Revisa Solicitud",
+    FloatField(
+        'cantidad_viaticos',
+        searchable=1,
+        required=1,
+        default='0',
+        relationship="viaticos",
+        widget=StringWidget(
+            label='Travel allowances',
+            label_msgid='label_cantidad_viaticos',
+            i18n_domain='matem.solicitudes',
+            description="Amount requested for travel allowances, in mexican pesos",
+            description_msgid='help_cantidad_viaticos',
+            tarifas=False,
+            size=12
         ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        StringField('comentario_ce',
-            searchable=1,
-            required=0,
-            default='',
-            widget=TextAreaWidget(label='Recommendation by special commission',
-                                label_msgid='label_comentario_ce',
-                                i18n_domain='matem.solicitudes',
-                                description="Add any comment related to your recommendation for this request",
-                                description_msgid='help_comentario_ce',
-                                tarifas=False),
-            read_permission="Solicitud: Comision Revisa Solicitud",
-            write_permission="Solicitud: Comision Revisa Solicitud",
+    StringField(
+        'fecha_solicitud',
+        searchable=1,
+        required=0,
+        default='',
+        widget=StringWidget(
+            label='Date of application',
+            label_msgid='label_fecha_solicitud',
+            i18n_domain='matem.solicitudes',
+            description='Date on which the request is sent',
+            description_msgid='help_fecha_solicitud',
+            visible={'view': 'invisible', 'edit': 'hidden'}
         ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+    MultiFileField(
+        'displayAttachments',
+        primary=True,
+        languageIndependent=True,
+        storage=AnnotationStorage(migrate=True),
+        widget=MultiFileWidget(
+            label="Attachments",
+            label_msgid='label_adjuntos',
+            description="Please attach invitation letter or any other related documents",
+            description_msgid='help_adjuntos',
+            show_content_type=False,
+            i18n_domain='matem.solicitudes',
+        ),
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+
+    # Comentarios del owner
+    StringField(
+        'comentario_owner',
+        searchable=1,
+        required=0,
+        default='',
+        widget=TextAreaWidget(
+            label='Additional comments',
+            label_msgid='label_comentario_owner',
+            i18n_domain='matem.solicitudes',
+            description="Add any comment that you consider important for your request",
+            description_msgid='help_comentario_owner',
+            tarifas=False
+        ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+    # Campos del CE
+    DateTimeField(
+        'fecha_sesionce',
+        searchable=1,
+        required=1,
+        default_method='',
+        widget=CalendarWidget(
+            label='Fecha de Revisión por la Comisión Especial',
+            label_msgid='label_fecha_sesionce',
+            i18n_domain='matem.solicitudes',
+            description='Fecha en que la comisión revisó la solicitud.',
+            description_msgid='help_fecha_sesionce',
+            starting_year=2010,
+            future_years=1,
+            show_hm=False
+        ),
+        read_permission="Solicitud: Comision Revisa Solicitud",
+        write_permission="Solicitud: Comision Revisa Solicitud",
+    ),
+
+    StringField(
+        'comentario_ce',
+        searchable=1,
+        required=0,
+        default='',
+        widget=TextAreaWidget(
+            label='Recommendation by special commission',
+            label_msgid='label_comentario_ce',
+            i18n_domain='matem.solicitudes',
+            description="Add any comment related to your recommendation for this request",
+            description_msgid='help_comentario_ce',
+            tarifas=False
+        ),
+        read_permission="Solicitud: Comision Revisa Solicitud",
+        write_permission="Solicitud: Comision Revisa Solicitud",
+    ),
 
     FloatField(
         name='cantidad_recomendada_pasaje',
@@ -473,20 +558,23 @@ schema = BaseSchema + Schema((
         write_permission="Solicitud: Comision Revisa Solicitud",
     ),
 
-#Campos del CI
-        StringField('comentario_ci',
-            searchable=1,
-            required=0,
-            default='',
-            widget=TextAreaWidget(label='Comments by Consejo Interno',
-                                label_msgid='label_comentario_ci',
-                                i18n_domain='matem.solicitudes',
-                                description="Add any comment related to the resolution taken for this request",
-                                description_msgid='help_comentario_ci',
-                                tarifas=False),
-            read_permission="Solicitud: Consejo Revisa Solicitud",
-            write_permission="Solicitud: Consejo Revisa Solicitud",
+    # Campos del CI
+    StringField(
+        'comentario_ci',
+        searchable=1,
+        required=0,
+        default='',
+        widget=TextAreaWidget(
+            label='Comments by Consejo Interno',
+            label_msgid='label_comentario_ci',
+            i18n_domain='matem.solicitudes',
+            description="Add any comment related to the resolution taken for this request",
+            description_msgid='help_comentario_ci',
+            tarifas=False
         ),
+        read_permission="Solicitud: Consejo Revisa Solicitud",
+        write_permission="Solicitud: Consejo Revisa Solicitud",
+    ),
 
     DateTimeField(
         name='fecha_sesionci',
@@ -570,63 +658,206 @@ schema = BaseSchema + Schema((
         write_permission="Solicitud: Consejo Cambia Solicitud",
     ),
 
-        BooleanField('estadoBorrador',
-            label = "Review data, if it is correct, you should send it to revision, by selecting 'state: solicitud no enviada' then 'enviar solicitud' inside the transitions menu in the top right corner",
-            label_msgid='label_estado_borrador',
-            widget=BooleanWidget(visible={'view':'invisible','edit':'hidden'}),
-        ),
-        BooleanField('estadoPendiente',
-            label = "If your request is ready, you should send it to revision, by selecting 'state: pendiente' then 'reenviar solicitud' inside the transitions menu in the top right corner",
-            label_msgid='label_estado_pendiente',
-            widget=BooleanWidget(visible={'view':'invisible','edit':'hidden'}),
-        ),
-        BooleanField('acuseRecibo',
-            label = "Your request has been received successfully, you can print this page as acknowledgement of receipt",
-            label_msgid='label_acuse_recibo',
-            default=False,
-            widget=BooleanWidget(visible={'view':'invisible','edit':'hidden'}),
-        ),
+    BooleanField(
+        'estadoBorrador',
+        label="Review data, if it is correct, you should send it to revision, by selecting 'state: solicitud no enviada' then 'enviar solicitud' inside the transitions menu in the top right corner",
+        label_msgid='label_estado_borrador',
+        widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
+    ),
+    BooleanField(
+        'estadoPendiente',
+        label="If your request is ready, you should send it to revision, by selecting 'state: pendiente' then 'reenviar solicitud' inside the transitions menu in the top right corner",
+        label_msgid='label_estado_pendiente',
+        widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
+    ),
+    BooleanField(
+        'acuseRecibo',
+        label="Your request has been received successfully, you can print this page as acknowledgement of receipt",
+        label_msgid='label_acuse_recibo',
+        default=False,
+        widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
+    ),
 
-#        StringField(
-#            'allowDiscussion',
-#            accessor="isDiscussable",
-#            mutator="allowDiscussion",
-#            edit_accessor="editIsDiscussable",
-#            default="1",
-#            enforceVocabulary=1,
-#            vocabulary=DisplayList((
-#        ('1',    'Enabled', 'label_discussion_enabled'),
-#        ('0',    'Disabled', 'label_discussion_disabled'),
-#        ('None', 'Default', 'label_discussion_default'),
-#        )),
-#            widget=SelectionWidget(
-#                visible={'view':'invisible','edit':'invisible'},
-#                label="Allow Discussion on this item",
-#                label_msgid="label_allow_discussion",
-#                description_msgid="help_allow_discussion",
-#                i18n_domain="plone"),
-#        ),
-#        ReferenceField('relatedItems',
-#            relationship = 'relatesTo',
-#            multiValued = True,
-#            isMetadata = True,
-#            languageIndependent = False,
-#            index = 'KeywordIndex',
-#            widget = StringWidget(
-#                label = "Related Item(s)",
-#                label_msgid = "label_related_items",
-#                description = "",
-#                description_msgid = "help_related_items",
-#                i18n_domain = "plone",
-#                visible = {'edit' : 'invisible', 'view' : 'invisible' }
-#                )
-#        ),
+    StringField(
+        'exchangeProgram',
+        searchable=1,
+        required=0,
+        default='no',
+        vocabulary=DisplayList((
+            ('no', _(u'No')), ('yes', _(u'Yes'))
+        )),
+        widget=MasterSelectWidget(
+            label=_(u"label_sol_exchangeprogram", default=u"Is your guest associated an exchange program?"),
+            i18n_domain='matem.solicitudes',
+            description=_(u'help_sol_exchangeprogram', default=u'Select \"Yes\" if your guest is participant of exchange program'),
+            slave_fields=(
+                {
+                    'name': 'programName',
+                    'action': 'hide',
+                    'hide_values': ('no',),
+                },
+            )
+        ),
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-    ),)
+    StringField(
+        'programName',
+        searchable=1,
+        # required=1,
+        widget=StringWidget(
+            label=_(u"label_sol_programname", default=u"Exchange Program Name"),
+            description=_(u'help_sol_programname', default=u'Complete name of exchange program'),
+            i18n_domain='matem.solicitudes',
+            # size=12
+        ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+
+    StringField(
+        'sabbatical',
+        searchable=0,
+        # required=1,
+        default='no',
+        vocabulary=DisplayList((
+            ('no', _(u'No')), ('yes', _(u'Yes'))
+        )),
+        widget=SelectionWidget(
+            label=_(u"label_sol_sabbatical", default=u"The visit of your guest, is sabatical?"),
+            description=_(u'help_sol_sabbatical', default=u'Select \"Yes\" if your guest will perform a sabbatical stay in his visit'),
+            i18n_domain='matem.solicitudes',
+        ),
+        write_permission="Solicitud: Cambiar Solicitante",
+    ),
+
+
+
+
+    DataGridConferenceGuestField(
+        name='conferences',
+        columns=(
+            'eventtype',
+            'conferencetype',
+            'title',
+            'eventName',
+            'institution',
+            'place',
+            'isplenary',
+            'participationtype',
+            'conferencedate',
+            'assistallevent',
+        ),
+        widget=ConferenceWidget(
+            label=_(u"label_widgetconferences", default=u"Conferences"),
+            # description=_(u'help_widgetconferences', default=u'Use this option if you give a talk'),
+            helper_js=(
+                'datagridwidget.js',
+                'datagridwidget_patches.js',
+                'datagridmultiselect.js',
+                'datagriddatepicker.js'
+            ),
+            columns={
+                'eventtype': SelectColumn(
+                    _(u"weventtype_label", default="Academic Activity Type"),
+                    vocabulary=EventTypeVocabulary(),
+                ),
+                'conferencetype': MultiSelectColumn(
+                    _(u"wconferencetype_label", default="Conference type"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                     col_description=_(u"wconferencetype_help", default=u"You can select one or many options"),
+                ),
+                'title': Column(
+                    _(u"wtitle_conference_label", default=u"Title"),
+                ),
+                'eventName': Column(
+                    _(u"weventname_label", default=u"Event Name"),
+                ),
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
+                ),
+                'place': Column(
+                    _(u"wplace_label", default=u"Place of the Event"),
+                ),
+                'isplenary': SelectColumn(
+                    _(u"wisplenary_label", default="Is your conference plenary or masterly?"),
+                    vocabulary=BooleanTypeVocabulary(),
+                ),
+                'participationtype': SelectColumn(
+                    _(u"wcparticipationtype_label", default="Participation type"),
+                    vocabulary=ConferenceAssistantVocabulary(),
+                ),
+                'conferencedate': DateColumn(
+                    _(u"wconferencedate_label", default=u"Date"),
+                    date_format="dd/mm/yy",
+                ),
+                'assistallevent': SelectColumn(
+                    _(u"wassistallevent_label", default="Are you going to all congress?"),
+                    vocabulary=BooleanTypeVocabulary(),
+                ),
+            },
+        ),
+    ),
+
+    DataGridCourseGuestField(
+        name='courses',
+        columns=(
+            'coursetype',
+            'title',
+            'duration',
+            'level',
+            'otherlevel',
+            'eventName',
+            'institution',
+            'place',
+            'coursedate',
+        ),
+        widget=CourseWidget(
+            label=_(u"label_widgetcourses", default=u"Courses"),
+            helper_js=('datagridwidget.js', 'datagriddatepicker.js'),
+            columns={
+                'coursetype': MultiSelectColumn(
+                    _(u"wcoursetype_label", default="Coursetype"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                ),
+                'title': Column(
+                    _(u"wtitle_course_label", default=u"Title"),
+                ),
+                'duration': Column(
+                    _(u"wduration_course_label", default=u"Duration in hours"),
+                ),
+                'level': SelectColumn(
+                    _(u"wlevel_label", default="Level"),
+                    vocabulary=CourselevelVocabulary(),
+                ),
+                'otherlevel': Column(
+                    _(u"wotherlevel_label", default=u"If you select \"Other\" in Level, please indicate it"),
+                ),
+                'eventName': Column(
+                    _(u"weventname_course_label", default=u"Event Name of the course"),
+                ),
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
+                ),
+                'place': Column(
+                    _(u"wplace_course_label", default=u"Place of the Course"),
+                ),
+                'coursedate': DateColumn(
+                    _(u"wcoursedate_label", default=u"Date"),
+                    date_format="dd/mm/yy",
+                ),
+            },
+        ),
+    ),
+
+
+
+),)
 
 
 for f in schema.filterFields(isMetadata=True):
-    f.widget.visible = { "edit" : "invisible" }
+    f.widget.visible = {"edit": "invisible"}
 
 
 class SolicitudVisitante(BaseContent):
@@ -708,27 +939,27 @@ class SolicitudVisitante(BaseContent):
         transitions = workflowTool.getTransitionsFor(self)
         return transitions
 
-    def toState(self,State):
+    def toState(self, State):
         workflowTool = getToolByName(self, "portal_workflow")
         mt = getToolByName(self, "portal_membership")
         member = mt.getAuthenticatedMember()
-        nivel=0
+        nivel = 0
 
         if not State.lower().find("com") == -1:
-            nivel=1
+            nivel = 1
         elif not State.lower().find("con") == -1 or not State.lower().find("cou") == -1:
-            nivel=2
+            nivel = 2
         elif not State.lower().find("ap") == -1:
-            nivel=3
+            nivel = 3
 
         if "Importador de Solicitudes" in list(member.getRoles()):
             if nivel > 0:
-                workflowTool.doActionFor(self, 'enviar',comment='')
+                workflowTool.doActionFor(self, 'enviar', comment='')
 #                getToolByName(self,'plone_utils').changeOwnershipOf(self,idPropietario)
             if nivel > 1:
-                workflowTool.doActionFor(self, 'enviaraconsejo',comment='')
+                workflowTool.doActionFor(self, 'enviaraconsejo', comment='')
             if nivel > 2:
-                workflowTool.doActionFor(self, 'aprobar',comment='')
+                workflowTool.doActionFor(self, 'aprobar', comment='')
 
 #        getToolByName(self,'plone_utils').changeOwnershipOf(self,idPropietario)
 
@@ -783,7 +1014,7 @@ class SolicitudVisitante(BaseContent):
         elif (wf_state == 'Retirada'):
             wf_title = 'Solicitud retirada'
         else:
-             wf_title = ''
+            wf_title = ''
         return wf_title
 
     def esSolcitudBecario(self):
@@ -832,8 +1063,8 @@ class SolicitudVisitante(BaseContent):
         return mt.getAuthenticatedMember()
 
     def getNombreActual(self):
-#        mt = getToolByName(self, 'portal_membership')
-#        member = mt.getAuthenticatedMember()
+        # mt = getToolByName(self, 'portal_membership')
+        # member = mt.getAuthenticatedMember()
         member = self.getIdActual()
         fsdperson = self.getPersonWrapper(member.getId())
         return fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName()
@@ -845,7 +1076,7 @@ class SolicitudVisitante(BaseContent):
         return self.getOwner().getId()
 
     def getNombreOwner(self):
-#        creator = self.getOwner().getId()
+        # creator = self.getOwner().getId()
         creator = self.getIdOwner()
         try:
             fsdperson = self.getPersonWrapper(creator)
@@ -887,25 +1118,40 @@ class SolicitudVisitante(BaseContent):
     def getInstitucion(self):
         return self.getField('institucion_procedencia').get(self)
 
-    #Estan en solicitud
+    # Estan en solicitud
     def getFechaDesde(self):
-        #return self.getField('fecha_desde').get(self)
+        # return self.getField('fecha_desde').get(self)
         return DateTime(self.getField('fecha_desde').get(self))
 
     def getFechaHasta(self):
-        #return self.getField('fecha_hasta').get(self)
+        # return self.getField('fecha_hasta').get(self)
         return DateTime(self.getField('fecha_hasta').get(self))
 
     def getObjetoViaje(self):
-        return self.getField('objeto_viaje').get(self)
+        # return self.getField('objeto_viaje').get(self)
+        act2 = self.getField('conferences').getAccessor(self)()
+        act3 = self.getField('courses').getAccessor(self)()
+        resumen = []
+        if len(act2) > 0:
+            resumen.append('Conferencias a impartir' + str(len(act2)))
+        if len(act3) > 0:
+            resumen.append('Cursos a impartir' + str(len(act3)))
+        return self.getField('objeto_viaje').get(self) + ' ' + ', '.join(resumen)
+
+    def getEProgram(self):
+        isexchange = self.getField('exchangeProgram').getAccessor(self)()
+        if isexchange == 'yes':
+            programname = self.getField('programName').getAccessor(self)()
+            return '. '.join(['Sí', programname])
+        return 'No'
 
     def getComentarioCI(self):
         return self.getField('comentario_ci').get(self)
 
     def getSolicitanteDefault(self):
         mt = getToolByName(self, 'portal_membership')
-        member=mt.getAuthenticatedMember()
-        tupla=(member.getId(),)
+        member = mt.getAuthenticatedMember()
+        tupla = (member.getId(),)
 
         return tupla
 
@@ -919,7 +1165,7 @@ class SolicitudVisitante(BaseContent):
             sort_on='getSortableName',
             review_state='active',
         )
-        users=[]
+        users = []
         for brain in brains:
             person = brain.getObject()
             tupla = (
@@ -1142,26 +1388,25 @@ La cantidad total que se le ha aprobado en lo que va del año: %s.
         # return int((d2-d1).days)+1
         t1 = str(DateTime(self.getFecha_desde())).split("/")
         t2 = str(DateTime(self.getFecha_hasta())).split("/")
-        d1=datetime(int(t1[0]),int(t1[1]),int(t1[2].split(" ")[0]))
-        d2=datetime(int(t2[0]),int(t2[1]),int(t2[2].split(" ")[0]))
+        d1 = datetime(int(t1[0]),int(t1[1]),int(t1[2].split(" ")[0]))
+        d2 = datetime(int(t2[0]),int(t2[1]),int(t2[2].split(" ")[0]))
         return int((d2-d1).days)+1
-
 
     def actualizarInvestigador(self):
         folder = self.aq_parent
 
         solicitante=self.getIdOwner()
 
-        folder.sumarACantidadAutorizada(None,self.getCantidadAutorizadaTotal(),0,solicitante,
+        folder.sumarACantidadAutorizada(None, self.getCantidadAutorizadaTotal(), 0, solicitante,
                                         self.getCargo_presupuesto())
         return
 
     def desactualizarInvestigador(self):
         folder = self.aq_parent
 
-        solicitante=self.getIdOwner()
+        solicitante = self.getIdOwner()
 
-        folder.restarACantidadAutorizada(None,self.getCantidadAutorizadaTotal(),0,solicitante)
+        folder.restarACantidadAutorizada(None, self.getCantidadAutorizadaTotal(), 0, solicitante)
         return
 
     def aprobada(self):
@@ -1202,7 +1447,7 @@ La cantidad total que se le ha aprobado en lo que va del año: %s.
         return fsdperson
 
     def getCountriesVocabulary(self):
-        #This function is defined in config.py
+        # This function is defined in config.py
         return getCountriesVocabulary(self)
 
     def getAddExtraTopInformation(self):

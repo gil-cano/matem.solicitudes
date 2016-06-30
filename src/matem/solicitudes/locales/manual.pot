@@ -79,3 +79,9 @@ msgstr ""
 
 msgid "help_fecha_sesionci"
 msgstr ""
+
+msgid "Solicitud en revision por Comision Especial"
+msgstr ""
+
+msgid "Solicitud en revision por Consejo Interno"
+msgstr ""

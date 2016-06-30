@@ -1,0 +1,283 @@
+/*
+  DataGridWidget CSS definitions
+  ------------------------------------------
+
+  Copyright 2006 Red Innovation <http://www.redinnovation.com>
+
+  <dtml-with base_properties> (Loads base_properties variables)
+
+  <dtml-call "REQUEST.set('portal_url', portal_url())"> (Do not change this)
+
+*/
+
+table.datagridwidget-table-view {
+    width: 100%;
+    /*table-layout: fixed;
+    word-wrap: break-word;*/
+
+
+}
+
+table.datagridwidget-table-edit {
+    width: 100%;
+    line-height: 1.1em;
+}
+
+
+input.datagrid-radio-button {
+    /* Radio buttons try to use Plone's default text input
+       field CSS properties, like borders and background shade image */
+    border: 0;
+    background: transparent;
+}
+
+td.datagridwidget-radio {
+    /* IE adds quite heavy padding - force more sensible values */
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
+td.datagridwidget-select {
+    /* Looks like browser want to shrink drop down menu boxes
+       to zero width if there is any fight from the space.
+
+       Workaround is to force select width. Override this value
+       according to your needs */
+    width: 5em;
+}
+
+/*
+Extend this style see below
+tr.datagridwidget-row {
+    vertical-align: top;
+}
+*/
+
+
+/*
+    Workaround for IE which cannot propeply handle
+    background images in cloned TR input fields.
+    Plone is shipped with default input background gradient image
+ */
+.datagridwidget-cell input {
+    background: white;
+    background-image: none;
+}
+
+tr.datagridwidget-empty-row {
+    /* Hidden row with default selection widget values */
+    display: none;
+}
+
+td.datagridwidget-cell {
+    vertical-align: top;
+    padding: 2px;
+}
+
+td.datagridwidget-manipulator {
+    width: 16px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+td.datagridwidget-manipulator img {
+    cursor: pointer;
+}
+
+td.datagridwidget-hidden-data {
+    display: none;
+}
+
+/*
+Extend this style see below
+
+a.datagridwidget-add-button, a.datagridwidget-add-button:hover {
+    text-decoration: none;
+    background: &dtml-globalBackgroundColor; url(&dtml-portal_url;/linkOpaque.png) 9px 1px no-repeat;
+    cursor: pointer;
+    font-size: &dtml-fontSmallSize;;
+    padding: 1px 1px 1px 15px;
+    text-transform: &dtml-textTransform;;
+    float: right;
+}*/
+
+.dgw-hidden-column {
+    display: none;
+}
+
+/*
+    Merged from historical datagridwidget.css file
+    as fix for: http://plone.org/products/datagridfield/issues/30
+*/
+
+/*  styling for the datagridfield */
+
+div.ArchetypesDataGridWidget table td img {
+    display: block;
+    cursor: pointer;
+}
+
+div.ArchetypesDataGridWidget table td input,
+div.ArchetypesDataGridWidget table td select {
+    width:100%;
+}
+
+/*Modificatios for the widgets */
+
+span.datagridwidget-cell {
+    vertical-align: top;
+    padding: 2px;
+}
+
+td.gridwidget{
+  padding: 0.5em;
+  width: 100%;
+}
+
+/*td.gridwidget input{
+    width: 80% !important;
+
+}*/
+
+.widgetbutton {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+tr.datagridwidget-row {
+    vertical-align: top;
+    box-shadow: inset 1px 1px 5px #888;
+    display: block;
+    padding-bottom: 3em;
+}
+
+
+td.tdbutton{
+  margin:auto;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+a.datagridwidget-add-button{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    float: left;
+}
+
+#content a.datagridwidget-add-button:hover{
+    background-color: #4CAF50;
+    border: none;
+    color: white !important;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    float: left;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+div.ArchetypesAssistanceWidget label.formQuestion{
+    display: none;
+    /* color: white; */
+
+}
+
+
+div.ArchetypesConferenceWidget label.formQuestion{
+    display: none;
+
+}
+
+div.ArchetypesCourseWidget label.formQuestion{
+    display: none;
+
+}
+
+div.ArchetypesSResearchWidget label.formQuestion{
+    display: none;
+
+}
+
+div.ArchetypesOrganizationWidget label.formQuestion{
+    display: none;
+
+}
+
+span.dataGridMultiSelectCell label{
+    font-weight: normal;
+}
+
+td.gridwidget input.DataGridDatepicker{
+    width: 20% !important;
+}
+
+input[name="courses.duration:records"]{
+    width: 10% !important;
+}
+
+input[name="organization.speakersint:records"]{
+    width: 10% !important;
+}
+input[name="organization.speakersnac:records"]{
+    width: 10% !important;
+}
+input[name="organization.assistants:records"]{
+    width: 10% !important;
+}
+
+/*hidde the plone-jscalendar-popup*/
+span[id="edit_form_fecha_desde_0_popup"] img{
+    display: none !important;
+}
+
+span[id="edit_form_fecha_hasta_1_popup"] img{
+    display: none !important;
+}
+
+
+
+
+/*td.gridwidget input.DataGridDatepicker{
+    width: 20% !important;
+}*/
+
+
+/*
+td.foo div.dataGridMultiSelectCell{
+    width: auto;
+}
+
+
+
+td.foo textarea{
+    width: 80% !important;
+
+}
+
+*/
+
+
+/* 
+  </dtml-with>  (end of loaded base_properties variables)
+*/

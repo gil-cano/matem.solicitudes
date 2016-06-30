@@ -342,7 +342,8 @@
             </div></tr>-->
 
             <tr><div class="field">
-                <td><label for="Objeto" i18n:translate="label_objeto_viaje">Objective</label></td>
+                <td><label for="Objeto">
+                  <span i18n:translate="label_objeto_viaje">Objective</span>/<span i18n:translate="label_sol_otheractivity">Other Activities</span></label></td>
 
                <td> <input type="text"
                        id="Objeto"

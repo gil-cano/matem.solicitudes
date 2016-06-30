@@ -218,34 +218,6 @@
                  <br><br>
             </span>
 
-            <p align="left"><img src="" tal:replace="structure here/user.png"/>
-              <span i18n:translate="label_current_roles">You have this roles</span>:
-            </p>
-            <dl>
-                <dt tal:condition="python:view.esConsejeroG(usuarioActual)"
-                    i18n:translate="label_consejero">Consejero</dt>
-                <dt tal:condition="python:view.esComisionadoG(usuarioActual)"
-                    i18n:translate="label_comisionado">Comisionado</dt>
-                <dt tal:condition="python:view.esConsejeroResponsableG(usuarioActual)"
-                    i18n:translate="label_responsable_consejo">Responsable del Consejo</dt>
-                <dt tal:condition="python:view.esComisionadoResponsableG(usuarioActual)"
-                    i18n:translate="label_responsable_comision">Responsable de la Comision</dt>
-                <dt tal:condition="python:view.esBecarioG(usuarioActual)"
-                    i18n:translate="label_becario">Becario</dt>
-                <dt tal:condition="python:view.esInvestigadorG(usuarioActual)"
-                    i18n:translate="label_investigador">Investigador</dt>
-                <dt tal:condition="python:view.esTecnicoAcademicoG(usuarioActual)"
-                    i18n:translate="label_tecnico">Tecnico Academico</dt>
-                <dt tal:condition="python:view.esImportadorDeSolicitudesG(usuarioActual)"
-                    i18n:translate="label_importador">Importador de Solicitudes</dt>
-                <dt tal:condition="python:view.esProgramadorDePresupuestoG(usuarioActual)"
-                    i18n:translate="label_programador_presupuesto">Programador de Presupuesto</dt>
-                <dt tal:condition="python:view.esSolicitanteAuxiliarG(usuarioActual)"
-                    i18n:translate="label_solicitante_auxiliar">Solicitante Auxiliar</dt>
-            </dl>
-
-            <br>
-
         </span>
     </dd>
 

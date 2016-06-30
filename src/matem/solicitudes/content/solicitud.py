@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
-import sys
-from datetime import datetime
-from zope.interface import implements
-from matem.solicitudes.interfaces import ISolicitud
-from matem.solicitudes.extender import PersonWrapper
 from AccessControl import ClassSecurityInfo
+from Acquisition import aq_parent
+from archetypes.multifile.MultiFileField import MultiFileField
+from archetypes.multifile.MultiFileWidget import MultiFileWidget
+from datetime import datetime
+from DateTime.DateTime import DateTime
+from matem.solicitudes import solicitudesMessageFactory as _
+from matem.solicitudes.config import AREAS_INVESTIGACION
+from matem.solicitudes.config import getCountriesVocabulary
+from matem.solicitudes.config import LICENCEDAYS
+from matem.solicitudes.config import PROJECTNAME
+from matem.solicitudes.config import SEDE
+from matem.solicitudes.extender import PersonWrapper
+from matem.solicitudes.interfaces import ISolicitud
 from Products.Archetypes.atapi import AnnotationStorage
 from Products.Archetypes.atapi import BaseContent
 from Products.Archetypes.atapi import BaseSchema
@@ -20,29 +28,59 @@ from Products.Archetypes.atapi import LabelWidget
 from Products.Archetypes.atapi import LinesField
 from Products.Archetypes.atapi import MultiSelectionWidget
 from Products.Archetypes.atapi import PicklistWidget
+from Products.Archetypes.atapi import registerType
 from Products.Archetypes.atapi import Schema
 from Products.Archetypes.atapi import SelectionWidget
 from Products.Archetypes.atapi import StringField
 from Products.Archetypes.atapi import StringWidget
 from Products.Archetypes.atapi import TextAreaWidget
-from Products.Archetypes.atapi import registerType
-
-from Products.CMFCore.utils import getToolByName
-from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
-
-from Acquisition import aq_parent
 from Products.ATCountryWidget.config import COUNTRIES
+from Products.CMFCore.utils import getToolByName
 from Products.MasterSelectWidget.MasterSelectWidget import MasterSelectWidget
-from archetypes.multifile.MultiFileField import MultiFileField
-from archetypes.multifile.MultiFileWidget import MultiFileWidget
+from Products.membrane.config import TOOLNAME as MEMBRANE_TOOL
+from zope.interface import implements
 
-from DateTime.DateTime import DateTime
-from matem.solicitudes.config import AREAS_INVESTIGACION
-from matem.solicitudes.config import LICENCEDAYS
-from matem.solicitudes.config import PROJECTNAME
-from matem.solicitudes.config import SEDE
-from matem.solicitudes.config import getCountriesVocabulary
-from matem.solicitudes import solicitudesMessageFactory as _
+
+from Products.DataGridField.Column import Column
+from matem.solicitudes.widgets.conference import DataGridConferenceField
+from matem.solicitudes.widgets.conference import ConferenceWidget
+from matem.solicitudes.widgets.course import DataGridCourseField
+from matem.solicitudes.widgets.course import CourseWidget
+from matem.solicitudes.widgets.sresearch import DataGridSResearchField
+from matem.solicitudes.widgets.sresearch import SResearchWidget
+from matem.solicitudes.widgets.assistance import DataGridAssistanceField
+from matem.solicitudes.widgets.assistance import AssistanceWidget
+from matem.solicitudes.widgets.organization import DataGridOrganizationField
+from matem.solicitudes.widgets.organization import OrganizationWidget
+
+from matem.solicitudes.widgets.other import DataGridOtherField
+from matem.solicitudes.widgets.other import OtherWidget
+
+from Products.DataGridField.SelectColumn import SelectColumn
+# from Products.DataGridField.LinesColumn import LinesColumn
+# from Products.DataGridField.DateColumn import DateColumn
+# from Products.DataGridField.DatetimeLocalColumn import DatetimeLocalColumn
+from collective.datagridcolumns.DateColumn import DateColumn
+from collective.datagridcolumns.MultiSelectColumn import MultiSelectColumn
+from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
+
+
+# from Products.DataGridField.CheckboxColumn import CheckboxColumn
+
+from matem.solicitudes.widgets.vocabularies import ConferenceTypeVocabulary
+from matem.solicitudes.widgets.vocabularies import ConferenceAssistantVocabulary
+
+from matem.solicitudes.widgets.vocabularies import CourselevelVocabulary
+from matem.solicitudes.widgets.vocabularies import ExpectedNumbersVocabulary
+# from matem.solicitudes.widgets.vocabularies import CoursetypeVocabulary
+
+# from matem.solicitudes.widgets.vocabularies import ResearchPositionVocabulary
+
+from matem.solicitudes.widgets.vocabularies import EventTypeVocabulary
+from matem.solicitudes.widgets.vocabularies import BooleanTypeVocabulary
+
+
+import sys
 
 
 schema = BaseSchema + Schema((
@@ -50,7 +88,7 @@ schema = BaseSchema + Schema((
         name='title',
         required=1,
         searchable=1,
-        expression="((here.getOwner() and 'Solicitud (%s) de %s por %s (%s, %s, %s)' % (here.getLicenciacomision(),here.getNombreOwner(), here.getTotal(), here.getCiudadPais(), here.getInstitucion(), here.getFechaDesde() )) or 'Nueva solicitud')",
+        expression="((here.getOwner() and 'Solicitud (%s) de %s por %s (%s, %s, %s)' % (here.translateTypeTitle(),here.getNombreOwner(), here.getTotal(), here.getCiudadPais(), here.getInstitucion(), here.getFechaDesde() )) or 'Nueva solicitud')",
         accessor='Title',
         widget=ComputedWidget(
             visible={'view': 'invisible', 'edit': 'invisible'}
@@ -114,8 +152,9 @@ schema = BaseSchema + Schema((
             label="Solicitante",
             label_msgid="label_solicitante",
             i18n_domain='matem.solicitudes',
-            description="Nombre del investigador a nombre del cual es esta solicitud.",
-            description_msgid="help_solicitante",
+            description=_(u'help_sol_solicitante', default=u'Researcher Name'),
+            # description="Nombre del investigador a nombre del cual es esta solicitud.",
+            # description_msgid="help_solicitante",
         ),
         write_permission="Solicitud: Cambiar Solicitante",
     ),
@@ -144,15 +183,19 @@ schema = BaseSchema + Schema((
         searchable=1,
         required=1,
         default='Licencia',
+        # vocabulary=DisplayList((
+        #     ('Licencia', 'Licencia'), ('Comision', 'Comision')
+        # )),
         vocabulary=DisplayList((
-            ('Licencia', 'Licencia'), ('Comision', 'Comision')
+            ('Licencia', _(u'Licencia')), ('Comision', _(u'Comision'))
         )),
         widget=SelectionWidget(
             label='Tipo de solicitud',
             label_msgid='label_licenciacomision',
             i18n_domain='matem.solicitudes',
-            description='Especifica si esta es una solicitud de comisión o de licencia',
-            description_msgid='help_licenciacomision',
+            description=_(u'help_sol_licenciacomision', default=u'Licencia/Comision'),
+            # description='Especifica si esta es una solicitud de comisión o de licencia',
+            # description_msgid='help_licenciacomision',
         ),
         write_permission="Solicitud: Modificar Solicitud",
     ),
@@ -209,11 +252,13 @@ schema = BaseSchema + Schema((
             label='Start date',
             label_msgid='label_fecha_desde',
             i18n_domain='matem.solicitudes',
-            description='Date on wich the visit will start (it can be approximate)',
-            description_msgid='help_fecha_desde',
+            description=_(u'help_sol_fecha_desde', default=u'Date on wich the visit will start (it can be approximate)'),
+            # description='Date on wich the visit will start (it can be approximate)',
+            # description_msgid='help_fecha_desde',
             starting_year=2011,
             future_years=1,
             show_hm=False,
+            # show_jscal=0, # This attribute does not work with the calendar template
         ),
         write_permission="Solicitud: Modificar Solicitud",
     ),
@@ -227,26 +272,12 @@ schema = BaseSchema + Schema((
             label='End date',
             label_msgid='label_fecha_hasta',
             i18n_domain='matem.solicitudes',
-            description='Date on wich the visit will end (it can be approximate)',
-            description_msgid='help_fecha_hasta',
+            description=_(u'help_sol_fecha_hasta', default=u'Date on wich the visit will end (it can be approximate)'),
+            # description='Date on wich the visit will end (it can be approximate)',
+            # description_msgid='help_fecha_hasta',
             starting_year=2011,
             future_years=1,
             show_hm=False,
-        ),
-        write_permission="Solicitud: Modificar Solicitud",
-    ),
-
-    StringField(
-        name='objeto_viaje',
-        searchable=1,
-        required=1,
-        accessor='ObjetoViaje',
-        widget=TextAreaWidget(
-            label='Objective',
-            label_msgid='label_objeto_viaje',
-            i18n_domain='matem.solicitudes',
-            description='Enter the expected objective of the visit',
-            description_msgid='help_objeto_viaje',
         ),
         write_permission="Solicitud: Modificar Solicitud",
     ),
@@ -258,8 +289,9 @@ schema = BaseSchema + Schema((
         widget=PicklistWidget(
             label='Research areas',
             label_msgid='label_investigacionarea',
-            description="Doubts about the classification and how to find an area, go to the official website of the <a href=\"http://www.ams.org/msc\">ams</a>",
-            description_msgid='help_investigacionarea',
+            description=_(u'help_sol_investigacionarea', default=u'Doubts about the classification and how to find an area, go to the official website of the <a href=\"http://www.ams.org/msc\">ams</a>'),
+            # description="Doubts about the classification and how to find an area, go to the official website of the <a href=\"http://www.ams.org/msc\">ams</a>",
+            # description_msgid='help_investigacionarea',
             i18n_domain='matem.solicitudes',
         ),
         multiValued=1,
@@ -272,8 +304,11 @@ schema = BaseSchema + Schema((
         searchable=1,
         required=0,
         default='No',
+        # vocabulary=DisplayList((
+        #     ('No', 'No'), ('Si', 'Si')
+        # )),
         vocabulary=DisplayList((
-            ('No', 'No'), ('Si', 'Si')
+            ('No', _(u'No')), ('Si', _(u'Si'))
         )),
         widget=MasterSelectWidget(
             label='Paper',
@@ -286,7 +321,7 @@ schema = BaseSchema + Schema((
                 'action': 'hide',
                 'hide_values': ('No',),
             },),
-            visible={'edit': 'visible', 'view': 'invisible'},
+            visible={'edit': 'invisible', 'view': 'invisible'},
         ),
         write_permission="Solicitud: Modificar Solicitud",
     ),
@@ -302,6 +337,7 @@ schema = BaseSchema + Schema((
             i18n_domain='matem.solicitudes',
             description='Enter the title of the paper to present',
             description_msgid='help_titulo_trabajo',
+            visible={'edit': 'invisible', 'view': 'invisible'},
         ),
         write_permission="Solicitud: Modificar Solicitud",
     ),
@@ -317,9 +353,13 @@ schema = BaseSchema + Schema((
     StringField(
         name='cargo_presupuesto',
         required=1,
+        # vocabulary=DisplayList((
+        #     ('Asignación anual', 'Asignación anual'),
+        #     ('Apoyo institucional', 'Apoyo institucional')
+        # )),
         vocabulary=DisplayList((
-            ('Asignación anual', 'Asignación anual'),
-            ('Apoyo institucional', 'Apoyo institucional')
+            ('Asignación anual', _(u'Asignación anual')),
+            ('Apoyo institucional', _(u'Apoyo institucional'))
         )),
         default='Asignación anual',
         widget=SelectionWidget(
@@ -338,8 +378,11 @@ schema = BaseSchema + Schema((
         searchable=1,
         required=0,
         default='',
+        # vocabulary=DisplayList((
+        #     ('No', _(u'No')), ('si', _(u'Si'))
+        # )),
         vocabulary=DisplayList((
-            ('No', 'No'), ('si', 'Si')
+            ('No', _(u'No')), ('si', _(u'Si'))
         )),
         widget=MasterSelectWidget(
             label='Transportation expenses',
@@ -374,7 +417,9 @@ schema = BaseSchema + Schema((
         ),
         multiValued=1,
         vocabulary=DisplayList((
-            ('auto', 'Car'), ('autobus', 'Bus'), ('avion', 'Airplane')
+            ('auto', _(u'Car')),
+            ('autobus', _(u'Bus')),
+            ('avion', _(u'Airplane'))
         )),
         write_permission="Solicitud: Modificar Solicitud",
     ),
@@ -403,7 +448,7 @@ schema = BaseSchema + Schema((
         required=0,
         default='No',
         vocabulary=DisplayList((
-            ('No', 'No'), ('Si', 'Si')
+            ('No', _(u'No')), ('Si', _(u'Si'))
         )),
         widget=MasterSelectWidget(
             label='Travel allowances',
@@ -458,7 +503,7 @@ schema = BaseSchema + Schema((
         required=0,
         default='No',
         vocabulary=DisplayList((
-            ('No', 'No'), ('Si', 'Si')
+            ('No', _(u'No')), ('Si', _(u'Si'))
         )),
         widget=MasterSelectWidget(
             label='Registration',
@@ -630,7 +675,7 @@ schema = BaseSchema + Schema((
         searchable=0,
         required=1,
         vocabulary=DisplayList((
-            ('No', 'No'), ('Si', 'Si')
+            ('No', _(u'No')), ('Si', _(u'Si'))
         )),
         default='Si',
         widget=SelectionWidget(
@@ -808,6 +853,305 @@ schema = BaseSchema + Schema((
         default=False,
         widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
     ),
+
+    StringField(
+        name='message_activities',
+        widget=LabelWidget(
+            # label=u'Recuerde que el número máximo de días de Licencia es 45. Si los rebasa consulte con la Secretaría Académica.',
+            # label_msgid='label_mensaje_licencias',
+            label=_(u"message_activities_label", default=u"You can add many activities"),
+            i18n_domain='matem.solicitudes',
+            visible={'view': 'invisible', 'edit': 'visible'}
+        ),
+    ),
+
+    DataGridAssistanceField(
+        name='assistance',
+        columns=(
+            'eventtype',
+            'othereventtype',
+            'eventName',
+            'institution',
+            'place',
+            'assistancedate'
+        ),
+        widget=AssistanceWidget(
+            label=_(u"label_widgetassistance", default=u"Only Assists"),
+            # description=_(u'help_widgetassistance', default=u'Use this option in only assistance'),
+            helper_js=('datagridwidget.js', 'datagriddatepicker.js', 'datagrid_assistance.js'),
+            columns={
+                'eventtype': SelectColumn(
+                    _(u"weventtype_label", default="Academic Activity Type"),
+                    vocabulary=EventTypeVocabulary(),
+                ),
+                'othereventtype': Column(
+                    _(u"wothereventtype_label", default=u"If you select \"Other\" in Academic Activity Type, please indicate it"),
+                ),
+                'eventName': Column(
+                    _(u"weventname_label", default=u"Event Name"),
+                ),
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
+                ),
+                'place': Column(
+                    _(u"wplace_label", default=u"Place of the Event"),
+                ),
+                'assistancedate': DateColumn(
+                    _(u"wassistancedate_label", default=u"Date"),
+                    date_format="dd/mm/yy",
+                ),
+            },
+        ),
+    ),
+
+    DataGridConferenceField(
+        name='conferences',
+        columns=(
+            'eventtype',
+            'conferencetype',
+            'title',
+            'eventName',
+            'institution',
+            'place',
+            'isplenary',
+            'participationtype',
+            'conferencedate',
+            # 'assistallevent',
+        ),
+        widget=ConferenceWidget(
+            label=_(u"label_widgetconferences", default=u"Conferences"),
+            # description=_(u'help_widgetconferences', default=u'Use this option if you give a talk'),
+            helper_js=(
+                'datagridwidget.js',
+                'datagridwidget_patches.js',
+                'datagridmultiselect.js',
+                'datagriddatepicker.js',
+                'datagrid_conference.js'
+            ),
+            columns={
+                'eventtype': SelectColumn(
+                    _(u"weventtype_label", default="Academic Activity Type"),
+                    vocabulary=EventTypeVocabulary(),
+                ),
+                'conferencetype': MultiSelectColumn(
+                    _(u"wconferencetype_label", default="Conference type"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                    col_description=_(u"wconferencetype_help", default=u"You can select one or many options"),
+                ),
+                'title': Column(
+                    _(u"wtitle_conference_label", default=u"Title"),
+                ),
+                'eventName': Column(
+                    _(u"weventname_label", default=u"Event Name"),
+                ),
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
+                ),
+                'place': Column(
+                    _(u"wplace_label", default=u"Place of the Event"),
+                ),
+                'isplenary': SelectColumn(
+                    _(u"wisplenary_label", default="Is your conference plenary or masterly?"),
+                    vocabulary=BooleanTypeVocabulary(),
+                ),
+                'participationtype': SelectColumn(
+                    _(u"wcparticipationtype_label", default="Participation type"),
+                    vocabulary=ConferenceAssistantVocabulary(),
+                ),
+                'conferencedate': DateColumn(
+                    _(u"wconferencedate_label", default=u"Date"),
+                    date_format="dd/mm/yy",
+                ),
+                # 'assistallevent': SelectColumn(
+                #     _(u"wassistallevent_label", default="Are you going to all congress?"),
+                #     vocabulary=BooleanTypeVocabulary(),
+                # ),
+            },
+        ),
+    ),
+
+    DataGridCourseField(
+        name='courses',
+        columns=(
+            'coursetype',
+            'title',
+            'duration',
+            'level',
+            'otherlevel',
+            'eventName',
+            'institution',
+            'place',
+            'coursedate',
+        ),
+        widget=CourseWidget(
+            label=_(u"label_widgetcourses", default=u"Courses"),
+            helper_js=('datagridwidget.js', 'datagriddatepicker.js', 'datagrid_course.js'),
+            columns={
+                'coursetype': MultiSelectColumn(
+                        _(u"wcoursetype_label", default="Coursetype"),
+                        vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                ),
+                'title': Column(
+                    _(u"wtitle_course_label", default=u"Title"),
+                ),
+                'duration': Column(
+                    _(u"wduration_course_label", default=u"Duration in hours"),
+                    col_description=_(u"wduration_course_help", default=u"Indicate a positive number"),
+                ),
+                'level': SelectColumn(
+                    _(u"wlevel_label", default="Level"),
+                    vocabulary=CourselevelVocabulary(),
+                ),
+                'otherlevel': Column(
+                    _(u"wotherlevel_label", default=u"If you select \"Other\" in Level, please indicate it"),
+                ),
+                'eventName': Column(
+                    _(u"weventname_course_label", default=u"Event Name of the course"),
+                ),
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
+                ),
+                'place': Column(
+                    _(u"wplace_course_label", default=u"Place of the Course"),
+                ),
+                'coursedate': DateColumn(
+                    _(u"wcoursedate_label", default=u"Date"),
+                    date_format="dd/mm/yy",
+                ),
+            },
+        ),
+    ),
+
+    DataGridSResearchField(
+        name='sresearch',
+        columns=(
+            'hostresearcher',
+            'objective',
+            'institution',
+            'sresearchinitdate',
+            'sresearchenddate',
+        ),
+        widget=SResearchWidget(
+            label=_(u"label_widgetsresearch", default=u"Research Stay"),
+            helper_js=('datagridwidget.js', 'datagriddatepicker.js', 'datagrid_sresearch.js'),
+            columns={
+                'hostresearcher': Column(
+                    _(u"whostresearcher_label", default=u"Host"),
+                ),
+                'objective': TextAreaColumn(
+                    _(u"wobjective_label", default=u"Objective"),
+                ),
+                'institution': Column(
+                    _(u"winstitution_label", default=u"Institution"),
+                ),
+                'sresearchinitdate': DateColumn(
+                    _(u"sresearchinitdate_label", default=u"Init Date"),
+                    date_format="dd/mm/yy",
+                ),
+                'sresearchenddate': DateColumn(
+                    _(u"sresearchenddate_label", default=u"End Date"),
+                    date_format="dd/mm/yy",
+                ),
+            },
+        ),
+    ),
+
+    DataGridOrganizationField(
+        name='organization',
+        columns=(
+            'activitytype',
+            'eventName',
+            'level',
+            'otherlevel',
+            'researcherposition',
+            'otherresearcherposition',
+            'sessionName',
+            'imposition',
+            'otherimposition',
+            'speakersint',
+            'speakersnac',
+            'assistants',
+            'organizationdate',
+        ),
+        widget=OrganizationWidget(
+            label=_(u"label_widgetorganization", default=u"Organized Activities"),
+            helper_js=('datagridwidget.js', 'datagriddatepicker.js', 'datagrid_organization.js'),
+            columns={
+                'activitytype': MultiSelectColumn(
+                    _(u"wactivitytype_label", default="Activity Type"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
+                ),
+                'eventName': Column(
+                    _(u"weventname_label", default=u"Event Name"),
+                ),
+                'level': MultiSelectColumn(
+                    _(u"wlevel_label", default="Level"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.Courselevel',
+                    # vocabulary=CourselevelVocabulary(),
+                ),
+                'otherlevel': Column(
+                    _(u"wotherlevel_label", default=u"If you select \"Other\" in Level, please indicate it"),
+                ),
+                'researcherposition': MultiSelectColumn(
+                    _(u"wresearchposition_label", default="Researcher Position"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.ResearcherPosition',
+                ),
+                'otherresearcherposition': Column(
+                    _(u"wotherresearcherposition_label", default=u"If you select \"Other\" in Researcher Position, please indicate it"),
+                ),
+                'sessionName': Column(
+                    _(u"wsessionName_label", default=u"If you are Responsible of session, please indicate the session name. If you are Responsible in many sessions, please indicate the sessions name separated by ;"),
+                ),
+                # 'imposition': Column(
+                #     _(u"wimposition_label", default=u"IM Position"),
+                # ),
+                'imposition': MultiSelectColumn(
+                    _(u"wimposition_label", default="IM Position"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.IMPosition',
+                ),
+                'otherimposition': Column(
+                    _(u"wotherimposition_label", default=u"If you select \"Other\" in IM Position, please indicate it"),
+                ),
+
+                'speakersint': SelectColumn(
+                    _(u"wspeakersint_label", default=u"Expected number of International Speakers"),
+                    vocabulary=ExpectedNumbersVocabulary(),
+                ),
+                'speakersnac': SelectColumn(
+                    _(u"wspeakersnac_label", default=u"Expected number of National Speakers"),
+                    vocabulary=ExpectedNumbersVocabulary(),
+                ),
+                'assistants': SelectColumn(
+                    _(u"wassistants_label", default=u"Expected number of Assistants"),
+                    vocabulary=ExpectedNumbersVocabulary(),
+                ),
+                'organizationdate': DateColumn(
+                    _(u"worganizationdate_label", default=u"Date"),
+                    date_format="dd/mm/yy",
+                ),
+
+            },
+        ),
+    ),
+
+    # For the new version this field is for other activity
+    StringField(
+        name='objeto_viaje',
+        searchable=1,
+        # required=1,
+        accessor='ObjetoViaje',
+        widget=TextAreaWidget(
+            label=_(u"label_sol_otheractivity", default=u"Other Activities"),
+            # label='Objective',
+            # label_msgid='label_objeto_viaje',
+            i18n_domain='matem.solicitudes',
+            description=_(u'help_sol_otheractivity', default=u'Enter the other activities'),
+            # description='Enter the other activities',
+            # description_msgid='help_sol_otheractivity',
+        ),
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
 ))
 
 for f in schema.filterFields(isMetadata=True):
@@ -826,6 +1170,7 @@ class Solicitud(BaseContent):
 
     # This method is only called once after object creation.
     security.declarePrivate('at_post_create_script')
+
     def at_post_create_script(self):
         if self.getLicenciacomision() == 'Licencia':
             folder = self.aq_parent
@@ -833,7 +1178,6 @@ class Solicitud(BaseContent):
             remainig_days = LICENCEDAYS - balance['licence_days']
             if self.getCantidadDeDias() > remainig_days:
                 self.setLicenciacomision('Comision')
-
 
     def canSetDefaultPage(self):
         return False
@@ -866,6 +1210,178 @@ class Solicitud(BaseContent):
 
         if start > end:
             errors['fecha_hasta'] = u'La fecha de término debe ser posterior a la de inicio'
+
+        lassistance = REQUEST.get('assistance', [])
+        lconferences = REQUEST.get('conferences', [])
+        lcourses = REQUEST.get('courses', [])
+        lsresearch = REQUEST.get('sresearch', [])
+        lorganization = REQUEST.get('organization', [])
+
+        atleasterror = self.atleastwidget(
+            REQUEST.get('objeto_viaje', ''),
+            lassistance,
+            lconferences,
+            lcourses,
+            lsresearch,
+            lorganization,
+        )
+        if atleasterror:
+            k = atleasterror.keys()[0]
+            errors[k] = atleasterror[k]
+
+        # Add validators for widgtes date in range
+        widgetserrors = self.validateDateInRange(
+            'assistance',
+            ['assistancedate'],
+            lassistance,
+            start,
+            end
+        )
+
+        widgetserrors.update(
+            self.validateDateInRange(
+                'conferences',
+                ['conferencedate'],
+                lconferences,
+                start,
+                end
+            )
+        )
+
+        widgetserrors.update(
+            self.validateIntNumbers(
+                'courses',
+                ['duration'],
+                lcourses,
+            )
+        )
+
+        widgetserrors.update(
+            self.validateDateInRange(
+                'courses',
+                ['coursedate'],
+                lcourses,
+                start,
+                end
+            )
+        )
+
+        widgetserrors.update(
+            self.validateDateInRange(
+                'sresearch',
+                ['sresearchinitdate', 'sresearchenddate'],
+                lsresearch,
+                start,
+                end
+            )
+        )
+
+        widgetserrors.update(
+            self.validateDateSResearch(
+                'sresearch',
+                'sresearchinitdate',
+                'sresearchenddate',
+                lsresearch,
+            )
+        )
+
+        # widgetserrors.update(
+        #     self.validateIntNumbers(
+        #         'organization',
+        #         ['speakersint', 'speakersnac', 'assistants'],
+        #         lorganization,
+        #     )
+        # )
+
+        widgetserrors.update(
+            self.validateDateInRange(
+                'organization',
+                ['organizationdate'],
+                lorganization,
+                start,
+                end
+            )
+        )
+
+        for k, v in widgetserrors.iteritems():
+            errors[k] = v
+
+    def atleastwidget(self, otheractivity, lassistance, lconferences, lcourses, lsresearch, lorganization):
+
+        atleasterror = {}
+        if (len(lassistance) >= 2) or (len(lconferences) >= 2) or (len(lcourses) >= 2) or (len(lsresearch) >= 2) or (len(lorganization) >= 2):
+            return atleasterror
+
+        if otheractivity:
+            return atleasterror
+
+        atleasterror['objeto_viaje'] = u'La solicitud debe tener al menos una actividad'
+        return atleasterror
+
+    def validateIntNumbers(self, fieldName, columnsnumber, rows):
+        columnerrors = {}
+        for row in rows:
+            if row['orderindex_'] != 'template_row_marker':
+                for columnN in columnsnumber:
+                    if row[columnN] == '':
+                        continue
+                    try:
+                        rowvalue = int(row[columnN])
+                    except Exception:
+                        columnerrors[fieldName] = u'El valor del número esperado debe ser un número entero positivo'
+                        return columnerrors
+                    if rowvalue < 0:
+                        columnerrors[fieldName] = u'El valor del número esperado debe ser un número entero positivo'
+        return columnerrors
+
+    def validateDateInRange(self, fieldName, columnsdate, rows, dstart, dend):
+        fielderrors = {}
+        for row in rows:
+            if row['orderindex_'] != 'template_row_marker':
+                for columndate in columnsdate:
+                    if not row[columndate]:
+                        continue
+                    try:
+                        # is necesarily change the order for the widget format
+                        rowitem = row[columndate].split('/')
+                        rowdate = DateTime(rowitem[2] + rowitem[1] + rowitem[0])
+                    except Exception:
+                        fielderrors[fieldName] = u'La fecha no es válida'
+                        return fielderrors
+                    if (rowdate < dstart) or (rowdate > dend):
+                        fielderrors[fieldName] = u'La fecha no está en el rango de fechas de la solicitud'
+                    #     return translate(
+                    #         "Validation failed: The year, sponsor and amount are required, please correct.",
+                    #         domain='UNAM.imateCVct',
+                    #         context=kwargs['REQUEST'],
+                    #         default=_("Validation failed: The year, sponsor and amount are required, please correct.")
+        return fielderrors
+
+    def validateDateSResearch(self, fieldName, columnstardate, columnenddate, rows):
+        fielderrors = {}
+        for row in rows:
+            if row['orderindex_'] != 'template_row_marker':
+                if not row[columnstardate] or (not row[columnenddate]):
+                    continue
+                try:
+                    # is necesarily change the order for the widget format
+                    rowitemstart = row[columnstardate].split('/')
+                    rowdatestart = DateTime(rowitemstart[2] + rowitemstart[1] + rowitemstart[0])
+                    rowitemend = row[columnenddate].split('/')
+                    rowdateend = DateTime(rowitemend[2] + rowitemend[1] + rowitemend[0])
+
+                except Exception:
+                    fielderrors[fieldName] = u'La fecha no es válida'
+                    return fielderrors
+                if rowdatestart > rowdateend:
+                    fielderrors[fieldName] = u'La fecha de inicio debe ser menor'
+        return fielderrors
+
+
+    def translateTypeTitle(self):
+        if self.getLicenciacomision() == 'Comision':
+            return 'Comisión'
+        return self.getLicenciacomision()
 
     def addTranslation(self, language, **kwargs):
         # call orginal addTranslation
@@ -1034,7 +1550,7 @@ class Solicitud(BaseContent):
             fsdperson = self.getPersonWrapper(creator)
             return fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName()
         except Exception:
-            print "Error Solicitud no encontrada persona " + creator + ", " + self.getId()
+            # print "Error Solicitud no encontrada persona " + creator + ", " + self.getId()
             return creator
 
     def getFechaSolicitud(self):
@@ -1072,7 +1588,24 @@ class Solicitud(BaseContent):
         return DateTime(self.getField('fecha_hasta').get(self))
 
     def getObjetoViaje(self):
-        return self.getField('objeto_viaje').get(self)
+        act1 = self.getField('assistance').getAccessor(self)()
+        act2 = self.getField('conferences').getAccessor(self)()
+        act3 = self.getField('courses').getAccessor(self)()
+        act4 = self.getField('sresearch').getAccessor(self)()
+        act5 = self.getField('organization').getAccessor(self)()
+        resumen = []
+        if len(act1) > 0:
+            resumen.append('Sólo asistencias ' + str(len(act1)))
+        if len(act2) > 0:
+            resumen.append('Conferencias a impartir' + str(len(act2)))
+        if len(act3) > 0:
+            resumen.append('Cursos a impartir' + str(len(act3)))
+        if len(act4) > 0:
+            resumen.append('Estancias de Investigación ' + str(len(act4)))
+        if len(act5) > 0:
+            resumen.append('Organización de Actividades ' + str(len(act5)))
+
+        return self.getField('objeto_viaje').get(self) + ' ' + ', '.join(resumen)
 
     def getComentarioCI(self):
         return self.getField('comentario_ci').get(self)
@@ -1443,7 +1976,7 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
         return [
             {
                 'label': _(u'Available Annual Allocation'),
-                'quantity': '${:,.2f}'.format(money)
+                'quantity': '${0:,.2f}'.format(money)
             },
             {
                 'label': _(u'Available licence days'),
