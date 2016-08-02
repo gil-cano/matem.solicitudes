@@ -1,7 +1,11 @@
 Changelog
 =========
 
-4.0 (unreleased)
+4.0.1 (unreleased)
+------------------
+
+
+4.0 (2016-06-29)
 ----------------
 - Applications has more Licence details
   [adriana-rv]

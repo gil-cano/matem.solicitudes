@@ -18,7 +18,7 @@ long_description = (
 
 setup(
     name='matem.solicitudes',
-    version='4.0',
+    version='4.0.1',
     description="Applications for institutional resources.",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -47,7 +47,9 @@ setup(
         'Products.ATCountryWidget',
         'Products.MasterSelectWidget',
         'Products.ATExtensions',
+        'Products.DataGridField',
         'archetypes.multifile',
+        'collective.datagridcolumns',
     ],
     extras_require={
         'develop': [
