@@ -36,8 +36,8 @@ class SolicitudFolderView(BrowserView):
     solicitudesauxiliares = ViewPageTemplateFile('solicitudes_auxiliares.pt')
     micuenta = ViewPageTemplateFile('micuenta.pt')
 
-    queryObj = None;
-    reqObj = None;
+    queryObj = None
+    reqObj = None
 
     def __call__(self):
         # fisrt time in folder
