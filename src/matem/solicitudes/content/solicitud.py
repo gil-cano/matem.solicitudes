@@ -13,6 +13,7 @@ from matem.solicitudes.config import PROJECTNAME
 from matem.solicitudes.config import SEDE
 from matem.solicitudes.extender import PersonWrapper
 from matem.solicitudes.interfaces import ISolicitud
+from plone import api
 from Products.Archetypes.atapi import AnnotationStorage
 from Products.Archetypes.atapi import BaseContent
 from Products.Archetypes.atapi import BaseSchema
@@ -1609,9 +1610,12 @@ class Solicitud(BaseContent):
     def gettext_assistances(self):
         """"Get the text representing the assistances of the aplication."""
         assistances = self.getField('assistance').getAccessor(self)()
+        import pdb; pdb.set_trace()
         if len(assistances) == 1:
             activity = assistances[0]
-            return 'Asistir al {0} "{1}"'.format(activity['eventtype'], activity['eventName'])
+            act_type = api.portal.translate(activity['eventtype'], lang='es')
+            return 'Asistir al {0} "{1}"'.format(act_type, activity['eventName'])
+        return ''
 
     def getComentarioCI(self):
         return self.getField('comentario_ci').get(self)
