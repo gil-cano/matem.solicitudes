@@ -86,7 +86,6 @@
             overflow:scroll;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"/>
   </metal:css>
 
 
@@ -422,7 +421,8 @@
     <div class="field" tal:condition="python:view.esResponsableDelConsejo(user.getId())">
        <label for="fechaderevisionCI" i18n:translate="consejo_review_date">Consejo Interno review date</label>
        <br>
-        <input type="date" name="fechaderevisionCI"/>
+        <input type="text" date_format="dd/mm/yy"
+              class="DataGridDatepicker" name="fechaderevisionCI"/>
         <input class="context"
                type="submit"
                name="revision.consejo.PonerFechaConsejo"
