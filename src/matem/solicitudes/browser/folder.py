@@ -33,37 +33,37 @@ class SolicitudFolderView(BrowserView):
         if not self.request.form:
             return self.menu()
 
-        self.queryObj = Queries(self.context,self.request)
-        self.reqObj = Requests(self.context,self.request)
+        self.queryObj = Queries(self.context, self.request)
+        self.reqObj = Requests(self.context, self.request)
         form = self.request.form
         req = self.request
         container = self.context
 
-        tipo=req.get('vistafolder')
-        letra=req.get('pagina','')
-        memberid=req.get('memberID',None)
-        user=req.get('user','')
-        adder=False
-        reviewer=False
-        usuarioAutenticado=self.context.portal_membership.getAuthenticatedMember()
+        tipo = req.get('vistafolder')
+        letra = req.get('pagina', '')
+        memberid = req.get('memberID', None)
+        user = req.get('user', '')
+        adder = False
+        reviewer = False
+        usuarioAutenticado = self.context.portal_membership.getAuthenticatedMember()
 
         if "Investigador" in list(usuarioAutenticado.getRoles()):
-            adder=True
+            adder = True
         elif "Postdoc" in list(usuarioAutenticado.getRoles()):
-            adder=True
+            adder = True
         elif "Tecnico Academico" in list(usuarioAutenticado.getRoles()):
-            adder=True
+            adder = True
         elif "Becario" in list(usuarioAutenticado.getRoles()):
-            adder=True
+            adder = True
 
         if "Comisionado" in list(usuarioAutenticado.getRoles()):
-            reviewer=True
+            reviewer = True
         elif "Consejero" in list(usuarioAutenticado.getRoles()):
-            reviewer=True
+            reviewer = True
         elif "Responsable de la Comision" in list(usuarioAutenticado.getRoles()):
-            reviewer=True
+            reviewer = True
         elif "Responsable del Consejo" in list(usuarioAutenticado.getRoles()):
-            reviewer=True
+            reviewer = True
 
         if tipo is None:
             if req.form.get('-C') is None:
@@ -87,102 +87,102 @@ class SolicitudFolderView(BrowserView):
                 return self.folderrechazadas()
             elif tipo == "presupuestolocal":
                 if letra is not None:
-                    self.request.set('pagina',letra)
+                    self.request.set('pagina', letra)
                 if memberid is not None:
-                    solicitantes=self.context.getSolicitantes()
+                    solicitantes = self.context.getSolicitantes()
                     try:
-                        solicitantes[0][memberid][4]=float(req.get('newBudget',solicitantes[0][memberid][4]))
+                        solicitantes[0][memberid][4] = float(req.get('newBudget', solicitantes[0][memberid][4]))
                         self.context.setSolicitantes(solicitantes)
                     except:
-                        print req.get('newBudget','')
+                        print req.get('newBudget', '')
                 return self.presupuestolocal()
             elif tipo == "solicitudesauxiliares":
                 return self.solicitudesauxiliares()
             elif tipo == "micuenta":
                 if user is not None:
-                    self.micuenta.pt_getContext().get('request','').set('user',user)
+                    self.micuenta.pt_getContext().get('request', '').set('user', user)
                 return self.micuenta()
             else:
                 return self.menu()
 
-    def esManager(self,usuario):
-        member=self.context.portal_membership.getMemberById(usuario)
+    def esManager(self, usuario):
+        member = self.context.portal_membership.getMemberById(usuario)
         if 'Manager' in list(member.getRoles()):
             return True
         return False
 
-    def esComisionado(self,usuario):
-        member=self.context.portal_membership.getMemberById(usuario)
+    def esComisionado(self, usuario):
+        member = self.context.portal_membership.getMemberById(usuario)
         if 'Comisionado' in list(member.getRoles()):
             return True
         elif 'Responsable de la Comision' in list(member.getRoles()):
             return True
         return False
 
-    def esResponsableDeLaComision(self,usuario):
-        member=self.context.portal_membership.getMemberById(usuario)
+    def esResponsableDeLaComision(self, usuario):
+        member = self.context.portal_membership.getMemberById(usuario)
         if 'Responsable de la Comision' in list(member.getRoles()):
             return True
         return False
 
-    def esConsejero(self,usuario):
-        member=self.context.portal_membership.getMemberById(usuario)
+    def esConsejero(self, usuario):
+        member = self.context.portal_membership.getMemberById(usuario)
         if 'Consejero' in list(member.getRoles()):
             return True
         elif 'Responsable del Consejo' in list(member.getRoles()):
             return True
         return False
 
-    def esResponsableDelConsejo(self,usuario):
-        member=self.context.portal_membership.getMemberById(usuario)
+    def esResponsableDelConsejo(self, usuario):
+        member = self.context.portal_membership.getMemberById(usuario)
         if 'Responsable del Consejo' in list(member.getRoles()):
             return True
         return False
 
-    def esTecnicoAcademico(self,usuario):
-        member=self.context.portal_membership.getMemberById(usuario)
+    def esTecnicoAcademico(self, usuario):
+        member = self.context.portal_membership.getMemberById(usuario)
         if 'Tecnico Academico' in list(member.getRoles()):
             return True
         return False
 
-    def esPostdoc(self,usuario):
-        member=self.context.portal_membership.getMemberById(usuario)
+    def esPostdoc(self, usuario):
+        member = self.context.portal_membership.getMemberById(usuario)
         if 'Postdoc' in list(member.getRoles()):
             return True
         return False
 
-    def esInvestigador(self,usuario):
-        member=self.context.portal_membership.getMemberById(usuario)
+    def esInvestigador(self, usuario):
+        member = self.context.portal_membership.getMemberById(usuario)
         if 'Investigador' in list(member.getRoles()):
             return True
         return False
 
-    def esBecario(self,usuario):
-        member=self.context.portal_membership.getMemberById(usuario)
+    def esBecario(self, usuario):
+        member = self.context.portal_membership.getMemberById(usuario)
         if 'Becario' in list(member.getRoles()):
             return True
         return False
 
-    def esSolicitanteNormal(self,usuario):
-        return self.esTecnicoAcademico(usuario) or self.esInvestigador(usuario) or self.esBecario(usuario) or self.esPostdoc(usuario);
+    def esSolicitanteNormal(self, usuario):
+        return self.esTecnicoAcademico(usuario) or self.esInvestigador(usuario) or self.esBecario(usuario) or self.esPostdoc(usuario)
 
-    def getSolicitudesPosibles(self,investigador): #getSolicitudes
+    def getSolicitudesPosibles(self, investigador):
         solicitudes = []
         mt = self.context.portal_membership
-        member=mt.getMemberById(investigador)
-        vertodo=False
-        queryObj=self.queryObj
+        member = mt.getMemberById(investigador)
+        vertodo = False
+        queryObj = self.queryObj
 
         if 'Manager' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
         elif 'Comisionado' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
         elif 'Consejero' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
         elif 'Responsable de la Comision' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
         elif 'Responsable del Consejo' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
 
         if vertodo is True:
             return queryObj.getCurrentFolderApplications()
@@ -194,43 +194,42 @@ class SolicitudFolderView(BrowserView):
         applications = queryObj.getFolderApplicationsByStateAndUser('aprobada', usuario)
         return applications
 
-    def getSolicitudesRechazadasIndividuales(self,usuario):
-        queryObj=self.queryObj
-        applications=queryObj.getFolderApplicationsByStateAndUser('rechazada',usuario)
+    def getSolicitudesRechazadasIndividuales(self, usuario):
+        queryObj = self.queryObj
+        applications = queryObj.getFolderApplicationsByStateAndUser('rechazada', usuario)
         return applications
 
-    def getSolicitudesEnviadasIndividuales(self,usuario):
-        applications=[]
-        queryObj=self.queryObj
-        applications+=queryObj.getFolderApplicationsByStateAndUser('revisioncomision',usuario)
-        applications+=queryObj.getFolderApplicationsByStateAndUser('revisionconsejo',usuario)
+    def getSolicitudesEnviadasIndividuales(self, usuario):
+        applications = []
+        queryObj = self.queryObj
+        applications += queryObj.getFolderApplicationsByStateAndUser('revisioncomision', usuario)
+        applications += queryObj.getFolderApplicationsByStateAndUser('revisionconsejo', usuario)
         return applications
 
-    def getInvestigadores(self,usuario):
-        folder=self.context
+    def getInvestigadores(self, usuario):
+        folder = self.context
         mt = self.context.portal_membership
-        member=mt.getMemberById(usuario)
-        fsdperson=self.queryObj.getPersonWrapper(usuario)
+        member = mt.getMemberById(usuario)
+        fsdperson = self.queryObj.getPersonWrapper(usuario)
         users = []
         rol = ""
-        append=False
+        append = False
 
         if 'Becario' in list(member.getRoles()):
             rol = "Becario"
-            append=True
+            append = True
         elif 'Investigador' in list(member.getRoles()):
             rol = "Investigador"
-            append=True
+            append = True
         elif 'Postdoc' in list(member.getRoles()):
             rol = "Postdoc"
-            append=True
+            append = True
         elif 'Tecnico Academico' in list(member.getRoles()):
             rol = "Tecnico Academico"
-            append=True
+            append = True
 
         if append:
-           # users.append([fsdperson.getLastName()+', '+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),fsdperson.getPresupuesto_asignado(),rol,str(fsdperson.getId())])
-             users[letter].append([fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),
+            users[letter].append([fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),
                        folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(),0.0),
                        rol,
                        fsdperson.getId(),
@@ -239,12 +238,12 @@ class SolicitudFolderView(BrowserView):
                        folder.getDias_licencia_utilizados_solicitantes()[0].get(fsdperson.getId(),0)])
         return users
 
-    def getPresupuestoIndividual(self,usuario):
-        folder=self.context
+    def getPresupuestoIndividual(self, usuario):
+        folder = self.context
         mt = self.context.portal_membership
-        member=mt.getMemberById(usuario)
+        member = mt.getMemberById(usuario)
 
-        fsdperson=self.queryObj.getPersonWrapper(usuario)
+        fsdperson = self.queryObj.getPersonWrapper(usuario)
         users = []
         rol = ""
 
