@@ -1589,13 +1589,14 @@ class Solicitud(BaseContent):
         return DateTime(self.getField('fecha_hasta').get(self))
 
     def getObjetoViaje(self):
+        resumen = []
+        act1 = self.gettext_attendances()
+        if act1 is not None:
+            resumen.append(act1)
         act2 = self.getField('conferences').getAccessor(self)()
         act3 = self.getField('courses').getAccessor(self)()
         act4 = self.getField('sresearch').getAccessor(self)()
         act5 = self.getField('organization').getAccessor(self)()
-        resumen = []
-
-        resumen.append(self.gettext_assistances())
         if len(act2) > 0:
             resumen.append('Conferencias a impartir' + str(len(act2)))
         if len(act3) > 0:
@@ -1607,15 +1608,20 @@ class Solicitud(BaseContent):
 
         return self.getField('objeto_viaje').get(self) + ' ' + ', '.join(resumen)
 
-    def gettext_assistances(self):
-        """"Get the text representing the assistances of the aplication."""
-        assistances = self.getField('assistance').getAccessor(self)()
-        import pdb; pdb.set_trace()
-        if len(assistances) == 1:
-            activity = assistances[0]
-            act_type = api.portal.translate(activity['eventtype'], lang='es')
-            return 'Asistir al {0} "{1}"'.format(act_type, activity['eventName'])
-        return ''
+    def gettext_attendances(self):
+        """"The text representing the attendance field of the aplication."""
+        attendances = self.getField('assistance').getAccessor(self)()
+        if not attendances:
+            return None
+
+        vocabulary = EventTypeVocabulary().getDisplayList(self)
+        events = []
+        for attendance in attendances:
+            value = vocabulary.getValue(attendance['eventtype'])
+            event_type = api.portal.translate(value, lang='es')
+            events.append('Asistir al {0} "{1}"'.format(
+                event_type.lower(), attendance['eventName']))
+        return ', '.join(events)
 
     def getComentarioCI(self):
         return self.getField('comentario_ci').get(self)
