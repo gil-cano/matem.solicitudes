@@ -1,23 +1,18 @@
 # -*- coding: utf-8 -*-
-from Products.CMFCore.utils import getToolByName
-
-from Products.Five.browser import BrowserView
-from matem.solicitudes.interfaces import ISolicitudFolder
-from matem.solicitudes.config import DICCIONARIO_AREAS
-from matem.solicitudes.extender import PersonWrapper
 from matem.solicitudes.browser.queries import Queries
 from matem.solicitudes.browser.requests import Requests
-
+from matem.solicitudes.config import DICCIONARIO_AREAS
+from matem.solicitudes.extender import PersonWrapper
+from matem.solicitudes.interfaces import ISolicitudFolder
+from matem.solicitudes.PyRTF import *
+from DateTime.DateTime import DateTime
+from operator import itemgetter
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from DateTime.DateTime import DateTime
-
-from operator import itemgetter
-
-from matem.solicitudes.PyRTF import *
-import re
-
 import datetime
+import re
 import sys
 
 
