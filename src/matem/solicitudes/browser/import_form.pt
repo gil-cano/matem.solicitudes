@@ -42,41 +42,6 @@
     </tal:block>
   </metal:javascript_head>
 
-  <metal:css fill-slot="css_slot">
-    <tal:comment replace="nothing">
-      Many of the following defines duplicated from the tal:defines in the
-      main slot. With base_edit, edit_macros could be reused as it was defined
-      for the entire document. base_view uses main_template and thus must
-      create additional defines for each slot it fills.
-    </tal:comment>
-    <tal:css define="fields python:here.Schema().viewableFields(here);
-                     css python:here.getUniqueWidgetAttr(fields, 'helper_css')"
-             condition="css"
-             repeat="item css">
-      <style type="text/css"
-             media="all"
-             tal:condition="python:exists('portal/%s' % item)"
-             tal:content="structure string:<!-- @import url($portal_url/$item); -->">
-      </style>
-    </tal:css>
-    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
-                       view_template python:'%s_view' % portal_type;
-                       view_macros python:path('here/%s/macros|nothing' % view_template);
-                       macro view_macros/css | nothing"
-               condition="macro">
-      <metal:block use-macro="macro" />
-    </tal:block>
-    <style type="text/css">
-        #contentActionMenus{
-            visibility: hidden;
-        }
-
-        #fieldsetlegend-metadata .{
-            visibility: hidden;
-        }
-    </style>
-  </metal:css>
-
   <body>
     <metal:fill fill-slot="main">
       <metal:main_macro define-macro="main"

@@ -27,43 +27,6 @@
     </script>
   </metal:javascript_head>
 
-  <metal:css fill-slot="css_slot">
-    <style type="text/css">
-        #contentActionMenus{
-            visibility: hidden;
-        }
-
-        #fieldsetlegend-metadata .{
-            visibility: hidden;
-        }
-
-        #navcontainer ul
-        {
-            margin: 0;
-            padding: 0;
-            list-style-type: none;
-            text-align: center;
-        }
-
-        #navcontainer ul li {
-            display: inline;
-        }
-
-        #navcontainer ul li form{
-            display: inline;
-            margin: 0;
-            padding: 0;
-        }
-
-        #navcontainer ul li a
-        {
-            text-decoration: none;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
-  </metal:css>
-
   <body>
     <metal:fill fill-slot="main">
       <metal:main_macro define-macro="main"
