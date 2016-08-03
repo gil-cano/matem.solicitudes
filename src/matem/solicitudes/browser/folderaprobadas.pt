@@ -123,18 +123,6 @@
                 <div class="tabularView" tal:condition="python: str(here.getWFState()) != 'historico'">
                 <table class="listing" align="right" border="0">
                 <tr>
-
-                     <td><form method="post" name="import" action="#" method="post"
-                                   tal:attributes="action string:${context/absolute_url}/import">
-                          <a href="javascript: document.import.submit()">Importar Solicitudes</a>
-                     </form></td>
-
-                     <td><form method="post" name="export" action="#" method="post"
-                                   tal:attributes="action string:${context/absolute_url}/export">
-                          <a href="javascript: document.export.submit()">Exportar Publicas Aprobadas</a>
-                          <input type="hidden" name="Opcion" value="5" />
-                     </form></td>
-
                      <td><a href="" tal:attributes="href string:${context/absolute_url}/folder_factories">
                                  <img src="" width="20" height="20" tal:attributes="src string:${context/absolute_url}/++resource++nueva.png"/>
                           </a>
@@ -180,12 +168,13 @@
                 (pesos)</th>
                 <th i18n:translate="consejo_review_date">Consejo Interno review date</th>
                 <th i18n:translate="acta_number">Acta number</th>
-                <th i18n:translate="label_link">Link</th>
         </tr>
         <tr tal:repeat="item python:items">
           <td tal:condition="python:view.esManager(user.getId())"><input type="checkbox" name="" tal:attributes="name python:str(item['id'])"></td>
-          <td
-          tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</td>
+          <td>
+            <a href="#" tal:attributes="href python:item['url']">
+          <span tal:replace="python:item['special_fields']['readable_meta_type']" /></a>
+          </td>
           <td tal:content="python:item['owner_name']">Solicitant</td>
           <td tal:content="python:item['objective']">Reason</td>
           <td i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</td>
@@ -198,8 +187,6 @@
           tal:content="python:item['total_approved_quantity']">Quantity</td>
           <td align="center" tal:content="python:item['revision_ci_date']">Fecha de Revision</td>
           <td align="center" tal:content="python:item['acta_ci']">Fecha de Revision</td>
-          <td><a href="#" tal:attributes="href python:item['url']"
-          tal:content="python:string('revisar')" /></td>
         </tr>
         </tbody>
     </table>

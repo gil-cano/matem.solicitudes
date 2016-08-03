@@ -3,7 +3,14 @@ Changelog
 
 4.0.1 (unreleased)
 ------------------
+- Remove old slot from browser views
+  [gil-cano]
 
+- Fix date widget in review view
+  [gil-cano]
+
+- Remove import/export from folder views
+  [gil-cano]
 
 4.0 (2016-06-29)
 ----------------

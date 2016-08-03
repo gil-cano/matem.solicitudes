@@ -91,17 +91,6 @@
                 <div class="tabularView">
                 <table class="listing" align="right" border="0">
                 <tr>
-                     <td><form method="post" name="import" action="#" method="post"
-                                   tal:attributes="action string:${context/absolute_url}/import">
-                          <a href="javascript: document.import.submit()">Importar Solicitudes</a>
-                     </form></td>
-
-                     <td><form method="post" name="export" action="#" method="post"
-                                   tal:attributes="action string:${context/absolute_url}/export">
-                          <a href="javascript: document.export.submit()">Exportar Mis Aprobadas</a>
-                          <input type="hidden" name="Opcion" value="1" />
-                     </form></td>
-
                      <td><a href="" tal:attributes="href string:${context/absolute_url}/folder_factories">
                                  <img src="" width="20" height="20" tal:attributes="src string:${context/absolute_url}/++resource++nueva.png"/>
                           </a>
