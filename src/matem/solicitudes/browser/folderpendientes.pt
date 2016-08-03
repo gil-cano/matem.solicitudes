@@ -97,20 +97,6 @@
                condition="macro">
       <metal:block use-macro="macro" />
     </tal:block>
-    <!-- <style type="text/css" media="all">
-        #contentActionMenus{
-            visibility: hidden;
-        }
-
-        #fieldsetlegend-metadata .{
-            visibility: hidden;
-        }
-
-        .overflowable {
-            overflow:scroll;
-        }
-    </style> -->
-    <!-- <link rel="stylesheet" type="text/css" href="http://jquerytools.org/media/css/dateinput/skin1.css"/>  -->
   </metal:css>
 
   <metal:css fill-slot="style_slot">
@@ -133,19 +119,6 @@
 
   <body>
     <metal:fill fill-slot="main">
-      <!--
-        header_macro view_macros/header | header_macro | base_macros/header;
-        footer_macro view_macros/footer | footer_macro | base_macros/footer;
-       -->
-       <!-- <span> view_template: </span>
-       <span tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
-                        view_template python:'%s_view' % portal_type;">
-        <span tal:content="view_template"/><br/>
-        <span> path:</span>
-        <span tal:content="base_macros/header"/><br/>
-      </span> -->
-
-<!--  -->
 
       <metal:main_macro define-macro="main"
             tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
@@ -180,17 +153,6 @@
                 <div class="tabularView" tal:condition="python: str(here.getWFState()) != 'historico'">
                 <table class="listing" align="right" border="0">
                 <tr>
-                     <td><form method="post" name="import" action="#" method="post"
-                                   tal:attributes="action string:${context/absolute_url}/import">
-                          <a href="javascript: document.import.submit()">Importar Solicitudes</a>
-                     </form></td>
-
-                     <td><form method="post" name="export" action="#" method="post"
-                                   tal:attributes="action string:${context/absolute_url}/export">
-                          <a href="javascript: document.export.submit()">Exportar Pendientes</a>
-                          <input type="hidden" name="Opcion" value="3" />
-                     </form></td>
-
                      <td><a href="" tal:attributes="href string:${context/absolute_url}/folder_factories">
                                  <img src="" width="20" height="20" tal:attributes="src string:${context/absolute_url}/++resource++nueva.png"/>
                           </a>
@@ -396,21 +358,10 @@
 
               <input class="context"
                 type="submit"
-                name="revision.comision.PonerFechaComision"
-                value="Poner fecha a seleccionadas"/>
-
-              <input class="context"
-                type="submit"
                 name="revision.comision.PonerFechaComisionYEnviar"
-                value="Poner fecha y enviar las seleccionadas"/>
+                value="Poner fecha y enviar las seleccionadas a consejo"/>
             </div>
           </fieldset>
-
-          <input class="context"
-            type="submit"
-            name="revision.comision.Enviar"
-            value="Enviar a revision por Consejo Interno"
-            tal:condition="python:view.esResponsableDeLaComision(user.getId())"/>
         </form>
       </div>
 
