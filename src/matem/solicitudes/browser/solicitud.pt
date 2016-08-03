@@ -234,16 +234,6 @@
                 <div class="tabularView" tal:define="parent python:here.getParentNode()">
                 <table class="fc" align="right" border="0">
                 <tr class="btn-group">
-                     <td><form method="post" name="import" action="#" method="post"
-                                   tal:attributes="action string:${parent/absolute_url}/import">
-                          <a class="context btn btn-small" href="javascript: document.import.submit()">Importar</a>
-                     </form></td>
-
-                     <td><form method="post" name="export" action="#" method="post"
-                                   tal:attributes="action string:${context/absolute_url}/export">
-                          <a class="context btn btn-small" href="javascript: document.export.submit()">Exportar</a>
-                     </form></td>
-
                      <td><form method="post" name="print" action="#" method="post"
                                    tal:attributes="action string:${context/absolute_url}/print">
                           <a class="context btn btn-small" href="javascript: this.print()">Imprimir</a>

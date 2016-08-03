@@ -9,7 +9,7 @@ Changelog
 - Fix date widget in review view
   [gil-cano]
 
-- Remove import/export from folder views
+- Remove import/export from views
   [gil-cano]
 
 4.0 (2016-06-29)
