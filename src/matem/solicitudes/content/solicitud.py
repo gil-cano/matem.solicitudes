@@ -1593,23 +1593,22 @@ class Solicitud(BaseContent):
         act1 = self.gettext_attendances()
         if act1 is not None:
             resumen.append(act1)
-        act2 = self.getField('conferences').getAccessor(self)()
-        act3 = self.getField('courses').getAccessor(self)()
-        act4 = self.getField('sresearch').getAccessor(self)()
-        act5 = self.getField('organization').getAccessor(self)()
-        if len(act2) > 0:
-            resumen.append('Conferencias a impartir' + str(len(act2)))
-        if len(act3) > 0:
-            resumen.append('Cursos a impartir' + str(len(act3)))
-        if len(act4) > 0:
-            resumen.append('Estancias de Investigación ' + str(len(act4)))
-        if len(act5) > 0:
-            resumen.append('Organización de Actividades ' + str(len(act5)))
-
+        act2 = self.gettext_conferences()
+        if act2 is not None:
+            resumen.append(act2)
+        act3 = self.gettext_courses()
+        if act3 is not None:
+            resumen.append(act3)
+        act4 = self.gettext_courses()
+        if act4 is not None:
+            resumen.append(act4)
+        act5 = self.gettext_organization()
+        if act5 is not None:
+            resumen.append(act5)
         return self.getField('objeto_viaje').get(self) + ' ' + ', '.join(resumen)
 
     def gettext_attendances(self):
-        """"The text representing the attendance field of the aplication."""
+        """"The text representation of  the attendances of the aplication."""
         attendances = self.getField('assistance').getAccessor(self)()
         if not attendances:
             return None
@@ -1622,6 +1621,47 @@ class Solicitud(BaseContent):
             events.append('Asistir al {0} "{1}"'.format(
                 event_type.lower(), attendance['eventName']))
         return ', '.join(events)
+
+    def gettext_conferences(self):
+        """The text representation of the conferences of the application."""
+        conferences = self.getField('conferences').getAccessor(self)()
+        if not conferences:
+            return None
+
+        vocabulary = EventTypeVocabulary().getDisplayList(self)
+        events = []
+        import pdb; pdb.set_trace()
+        for conference in conferences:
+            invitation = self.getField('conferences').getAccessor(self)()
+            text = 'Impartir una conferencia'
+            if invitation == 'invitation':
+                text = text + ' por invitacion'
+            value = vocabulary.getValue(conference['eventtype'])
+            event_type = api.portal.translate(value, lang='es')
+            events.append('{0} en el {1} "{2}"'.format(
+                text, event_type.lower(), conference['eventName']))
+        return ', '.join(events)
+
+    def gettext_courses(self):
+        """The text representation of the courses of the application."""
+        courses = self.getField('courses').getAccessor(self)()
+        if not courses:
+            return None
+        return 'Cursos a impartir' + str(len(courses))
+
+    def gettext_research(self):
+        """The text representation of the research of the application."""
+        research = self.getField('sresearch').getAccessor(self)()
+        if not research:
+            return None
+        return 'Estancias de Investigación ' + str(len(research))
+
+    def gettext_organization(self):
+        """The text representation of the organizations of the application."""
+        organizations = self.getField('organization').getAccessor(self)()
+        if not organizations:
+            return None
+        return 'Organización de Actividades ' + str(len(organizations))
 
     def getComentarioCI(self):
         return self.getField('comentario_ci').get(self)
