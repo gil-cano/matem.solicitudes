@@ -1630,16 +1630,18 @@ class Solicitud(BaseContent):
 
         vocabulary = EventTypeVocabulary().getDisplayList(self)
         events = []
-        import pdb; pdb.set_trace()
         for conference in conferences:
             invitation = self.getField('conferences').getAccessor(self)()
             text = 'Impartir una conferencia'
             if invitation == 'invitation':
-                text = text + ' por invitacion'
+                text = '{0} por invitacion'.format(text)
             value = vocabulary.getValue(conference['eventtype'])
             event_type = api.portal.translate(value, lang='es')
-            events.append('{0} en el {1} "{2}"'.format(
-                text, event_type.lower(), conference['eventName']))
+            # text = '{0} en el {1} "{2}". El trabajo que presentará se titula "{0}"'.format(
+            #     text, event_type.lower(), conference['eventName'], conference['title'])
+
+            events.append('{0} en el {1} "{2}". El trabajo que presentará se titula "{0}"'.format(
+                text, event_type.lower(), conference['eventName'], conference['title']))
         return ', '.join(events)
 
     def gettext_courses(self):
