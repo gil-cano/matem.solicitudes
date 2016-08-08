@@ -13,6 +13,7 @@ from matem.solicitudes.config import PROJECTNAME
 from matem.solicitudes.config import SEDE
 from matem.solicitudes.extender import PersonWrapper
 from matem.solicitudes.interfaces import ISolicitud
+from plone import api
 from Products.Archetypes.atapi import AnnotationStorage
 from Products.Archetypes.atapi import BaseContent
 from Products.Archetypes.atapi import BaseSchema
@@ -1588,30 +1589,95 @@ class Solicitud(BaseContent):
         return DateTime(self.getField('fecha_hasta').get(self))
 
     def getObjetoViaje(self):
-        act2 = self.getField('conferences').getAccessor(self)()
-        act3 = self.getField('courses').getAccessor(self)()
-        act4 = self.getField('sresearch').getAccessor(self)()
-        act5 = self.getField('organization').getAccessor(self)()
         resumen = []
-
-        resumen.append(self.gettext_assistances())
-        if len(act2) > 0:
-            resumen.append('Conferencias a impartir' + str(len(act2)))
-        if len(act3) > 0:
-            resumen.append('Cursos a impartir' + str(len(act3)))
-        if len(act4) > 0:
-            resumen.append('Estancias de Investigación ' + str(len(act4)))
-        if len(act5) > 0:
-            resumen.append('Organización de Actividades ' + str(len(act5)))
-
+        act1 = self.gettext_attendances()
+        if act1 is not None:
+            resumen.append(act1)
+        act2 = self.gettext_conferences()
+        if act2 is not None:
+            resumen.append(act2)
+        act3 = self.gettext_courses()
+        if act3 is not None:
+            resumen.append(act3)
+        act4 = self.gettext_research()
+        if act4 is not None:
+            resumen.append(act4)
+        act5 = self.gettext_organization()
+        if act5 is not None:
+            resumen.append(act5)
         return self.getField('objeto_viaje').get(self) + ' ' + ', '.join(resumen)
 
-    def gettext_assistances(self):
-        """"Get the text representing the assistances of the aplication."""
-        assistances = self.getField('assistance').getAccessor(self)()
-        if len(assistances) == 1:
-            activity = assistances[0]
-            return 'Asistir al {0} "{1}"'.format(activity['eventtype'], activity['eventName'])
+    def gettext_attendances(self):
+        """"The text representation of  the attendances of the aplication."""
+        attendances = self.getField('assistance').getAccessor(self)()
+        if not attendances:
+            return None
+
+        vocabulary = EventTypeVocabulary().getDisplayList(self)
+        template = 'Asistir al {eventtype} "{title}"'
+        events = []
+        for attendance in attendances:
+            value = vocabulary.getValue(attendance['eventtype'])
+            event_type = api.portal.translate(value, lang='es')
+            events.append(template.format(
+                eventtype=event_type.lower(), title=attendance['eventName']))
+        return ', '.join(events)
+
+    def gettext_conferences(self):
+        """The text representation of the conferences of the application."""
+        conferences = self.getField('conferences').getAccessor(self)()
+        if not conferences:
+            return None
+
+        vocabulary = EventTypeVocabulary().getDisplayList(self)
+        template = """Impartir una conferencia{invite} en el {eventtype} "{eventname}". El trabajo a presentar se titula "{talk}"."""
+        events = []
+        for conference in conferences:
+            text = ''
+            if conference['participationtype'] == 'invitation':
+                text = ' por invitación'
+            value = vocabulary.getValue(conference['eventtype'])
+            event_type = api.portal.translate(value, lang='es')
+            events.append(template.format(
+                invite=text,
+                eventtype=event_type.lower(),
+                eventname=conference['eventName'],
+                talk=conference['title']))
+        return ', '.join(events)
+
+    def gettext_courses(self):
+        """The text representation of the courses of the application."""
+        courses = self.getField('courses').getAccessor(self)()
+        if not courses:
+            return None
+        return 'Cursos a impartir' + str(len(courses))
+
+    def gettext_research(self):
+        """The text representation of the research of the application."""
+        research = self.getField('sresearch').getAccessor(self)()
+        if not research:
+            return None
+
+        template = """Realizar estancia de investigación con {name} en "{place}" con el objetivo de {objective}."""
+        events = []
+        for activity in research:
+            events.append(template.format(
+                name=activity['hostresearcher'],
+                place=activity['institution'],
+                objective=activity['objective']))
+        return ', '.join(events)
+
+    def gettext_organization(self):
+        """The text representation of the organizations of the application."""
+        organizations = self.getField('organization').getAccessor(self)()
+        if not organizations:
+            return None
+
+        template = """Participar en la organización de la "{event}"."""
+        events = []
+        for activity in organizations:
+            events.append(template.format(event=activity['eventName']))
+        return ', '.join(events)
 
     def getComentarioCI(self):
         return self.getField('comentario_ci').get(self)

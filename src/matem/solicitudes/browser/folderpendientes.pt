@@ -65,53 +65,12 @@
 
     (function($) {
      $(document).ready(function(){
-        $(":date").datepicker();
+        $("input.DataGridDatepicker").datepicker();
      });
     })(jQuery);
 
     </script>
-    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
   </metal:javascript_head>
-
-  <metal:css fill-slot="css_slot">
-    <tal:comment replace="nothing">
-      Many of the following defines duplicated from the tal:defines in the
-      main slot. With base_edit, edit_macros could be reused as it was defined
-      for the entire document. base_view uses main_template and thus must
-      create additional defines for each slot it fills.
-    </tal:comment>
-    <tal:css define="fields python:here.Schema().viewableFields(here);
-                     css python:here.getUniqueWidgetAttr(fields, 'helper_css')"
-             condition="css"
-             repeat="item css">
-      <style type="text/css"
-             media="all"
-             tal:condition="python:exists('portal/%s' % item)"
-             tal:content="structure string:<!-- @import url($portal_url/$item); -->">
-      </style>
-    </tal:css>
-    <tal:block define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
-                       view_template python:'%s_view' % portal_type;
-                       view_macros python:path('here/%s/macros|nothing' % view_template);
-                       macro view_macros/css | nothing"
-               condition="macro">
-      <metal:block use-macro="macro" />
-    </tal:block>
-    <!-- <style type="text/css" media="all">
-        #contentActionMenus{
-            visibility: hidden;
-        }
-
-        #fieldsetlegend-metadata .{
-            visibility: hidden;
-        }
-
-        .overflowable {
-            overflow:scroll;
-        }
-    </style> -->
-    <!-- <link rel="stylesheet" type="text/css" href="http://jquerytools.org/media/css/dateinput/skin1.css"/>  -->
-  </metal:css>
 
   <metal:css fill-slot="style_slot">
     <style type="text/css">
@@ -127,25 +86,11 @@
             overflow:scroll;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css"/>
   </metal:css>
 
 
   <body>
     <metal:fill fill-slot="main">
-      <!--
-        header_macro view_macros/header | header_macro | base_macros/header;
-        footer_macro view_macros/footer | footer_macro | base_macros/footer;
-       -->
-       <!-- <span> view_template: </span>
-       <span tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
-                        view_template python:'%s_view' % portal_type;">
-        <span tal:content="view_template"/><br/>
-        <span> path:</span>
-        <span tal:content="base_macros/header"/><br/>
-      </span> -->
-
-<!--  -->
 
       <metal:main_macro define-macro="main"
             tal:define="portal_type python:here.getPortalTypeName().lower().replace(' ', '_');
@@ -180,17 +125,6 @@
                 <div class="tabularView" tal:condition="python: str(here.getWFState()) != 'historico'">
                 <table class="listing" align="right" border="0">
                 <tr>
-                     <td><form method="post" name="import" action="#" method="post"
-                                   tal:attributes="action string:${context/absolute_url}/import">
-                          <a href="javascript: document.import.submit()">Importar Solicitudes</a>
-                     </form></td>
-
-                     <td><form method="post" name="export" action="#" method="post"
-                                   tal:attributes="action string:${context/absolute_url}/export">
-                          <a href="javascript: document.export.submit()">Exportar Pendientes</a>
-                          <input type="hidden" name="Opcion" value="3" />
-                     </form></td>
-
                      <td><a href="" tal:attributes="href string:${context/absolute_url}/folder_factories">
                                  <img src="" width="20" height="20" tal:attributes="src string:${context/absolute_url}/++resource++nueva.png"/>
                           </a>
@@ -392,25 +326,15 @@
             <div class="field" tal:condition="python:view.esResponsableDeLaComision(user.getId())">
               <label for="fechaderevisionCE" i18n:translate="label_fecha_revision_comision">Fecha de revision por la Comision Especial</label>
               <br />
-              <input type="date" name="fechaderevisionCE"/>
-
-              <input class="context"
-                type="submit"
-                name="revision.comision.PonerFechaComision"
-                value="Poner fecha a seleccionadas"/>
+              <input type="text" date_format="dd/mm/yy"
+                class="DataGridDatepicker" name="fechaderevisionCE"/>
 
               <input class="context"
                 type="submit"
                 name="revision.comision.PonerFechaComisionYEnviar"
-                value="Poner fecha y enviar las seleccionadas"/>
+                value="Poner fecha y enviar las seleccionadas a consejo"/>
             </div>
           </fieldset>
-
-          <input class="context"
-            type="submit"
-            name="revision.comision.Enviar"
-            value="Enviar a revision por Consejo Interno"
-            tal:condition="python:view.esResponsableDeLaComision(user.getId())"/>
         </form>
       </div>
 
@@ -497,7 +421,8 @@
     <div class="field" tal:condition="python:view.esResponsableDelConsejo(user.getId())">
        <label for="fechaderevisionCI" i18n:translate="consejo_review_date">Consejo Interno review date</label>
        <br>
-        <input type="date" name="fechaderevisionCI"/>
+        <input type="text" date_format="dd/mm/yy"
+              class="DataGridDatepicker" name="fechaderevisionCI"/>
         <input class="context"
                type="submit"
                name="revision.consejo.PonerFechaConsejo"
