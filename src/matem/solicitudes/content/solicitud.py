@@ -573,22 +573,6 @@ schema = BaseSchema + Schema((
         write_permission="Solicitud: Modificar Solicitud",
     ),
 
-    StringField(
-        name='comentario_owner',
-        searchable=1,
-        required=0,
-        default='',
-        widget=TextAreaWidget(
-            label='Additional comments',
-            label_msgid='label_comentario_owner',
-            i18n_domain='matem.solicitudes',
-            description="Add any comment that you consider important for your request",
-            description_msgid='help_comentario_owner',
-            tarifas=False,
-        ),
-        write_permission="Solicitud: Modificar Solicitud",
-    ),
-
     DateTimeField(
         name='fecha_sesionce',
         searchable=1,
@@ -864,6 +848,7 @@ schema = BaseSchema + Schema((
             i18n_domain='matem.solicitudes',
             visible={'view': 'invisible', 'edit': 'visible'}
         ),
+        write_permission='Solicitud: Modificar Solicitud',
     ),
 
     DataGridAssistanceField(
@@ -903,6 +888,7 @@ schema = BaseSchema + Schema((
                 ),
             },
         ),
+        write_permission='Solicitud: Modificar Solicitud',
     ),
 
     DataGridConferenceField(
@@ -969,6 +955,7 @@ schema = BaseSchema + Schema((
                 # ),
             },
         ),
+        write_permission='Solicitud: Modificar Solicitud',
     ),
 
     DataGridCourseField(
@@ -1021,6 +1008,7 @@ schema = BaseSchema + Schema((
                 ),
             },
         ),
+        write_permission='Solicitud: Modificar Solicitud',
     ),
 
     DataGridSResearchField(
@@ -1055,6 +1043,7 @@ schema = BaseSchema + Schema((
                 ),
             },
         ),
+        write_permission='Solicitud: Modificar Solicitud',
     ),
 
     DataGridOrganizationField(
@@ -1133,6 +1122,7 @@ schema = BaseSchema + Schema((
 
             },
         ),
+        write_permission='Solicitud: Modificar Solicitud',
     ),
 
     # For the new version this field is for other activity
@@ -1149,6 +1139,22 @@ schema = BaseSchema + Schema((
             description=_(u'help_sol_otheractivity', default=u'Enter the other activities'),
             # description='Enter the other activities',
             # description_msgid='help_sol_otheractivity',
+        ),
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+    StringField(
+        name='comentario_owner',
+        searchable=1,
+        required=0,
+        default='',
+        widget=TextAreaWidget(
+            label='Additional comments',
+            label_msgid='label_comentario_owner',
+            i18n_domain='matem.solicitudes',
+            description="Add any comment that you consider important for your request",
+            description_msgid='help_comentario_owner',
+            tarifas=False,
         ),
         write_permission="Solicitud: Modificar Solicitud",
     ),
