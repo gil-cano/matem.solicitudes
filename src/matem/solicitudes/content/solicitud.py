@@ -1599,7 +1599,7 @@ class Solicitud(BaseContent):
         act3 = self.gettext_courses()
         if act3 is not None:
             resumen.append(act3)
-        act4 = self.gettext_courses()
+        act4 = self.gettext_research()
         if act4 is not None:
             resumen.append(act4)
         act5 = self.gettext_organization()
@@ -1614,12 +1614,13 @@ class Solicitud(BaseContent):
             return None
 
         vocabulary = EventTypeVocabulary().getDisplayList(self)
+        template = 'Asistir al {eventtype} "{title}"'
         events = []
         for attendance in attendances:
             value = vocabulary.getValue(attendance['eventtype'])
             event_type = api.portal.translate(value, lang='es')
-            events.append('Asistir al {0} "{1}"'.format(
-                event_type.lower(), attendance['eventName']))
+            events.append(template.format(
+                eventtype=event_type.lower(), title=attendance['eventName']))
         return ', '.join(events)
 
     def gettext_conferences(self):
@@ -1629,19 +1630,19 @@ class Solicitud(BaseContent):
             return None
 
         vocabulary = EventTypeVocabulary().getDisplayList(self)
+        template = """Impartir una conferencia{invite} en el {eventtype} "{eventname}". El trabajo a presentar se titula "{talk}"."""
         events = []
         for conference in conferences:
-            invitation = self.getField('conferences').getAccessor(self)()
-            text = 'Impartir una conferencia'
-            if invitation == 'invitation':
-                text = '{0} por invitacion'.format(text)
+            text = ''
+            if conference['participationtype'] == 'invitation':
+                text = ' por invitación'
             value = vocabulary.getValue(conference['eventtype'])
             event_type = api.portal.translate(value, lang='es')
-            # text = '{0} en el {1} "{2}". El trabajo que presentará se titula "{0}"'.format(
-            #     text, event_type.lower(), conference['eventName'], conference['title'])
-
-            events.append('{0} en el {1} "{2}". El trabajo que presentará se titula "{0}"'.format(
-                text, event_type.lower(), conference['eventName'], conference['title']))
+            events.append(template.format(
+                invite=text,
+                eventtype=event_type.lower(),
+                eventname=conference['eventName'],
+                talk=conference['title']))
         return ', '.join(events)
 
     def gettext_courses(self):
@@ -1656,14 +1657,27 @@ class Solicitud(BaseContent):
         research = self.getField('sresearch').getAccessor(self)()
         if not research:
             return None
-        return 'Estancias de Investigación ' + str(len(research))
+
+        template = """Realizar estancia de investigación con {name} en "{place}" con el objetivo de {objective}."""
+        events = []
+        for activity in research:
+            events.append(template.format(
+                name=activity['hostresearcher'],
+                place=activity['institution'],
+                objective=activity['objective']))
+        return ', '.join(events)
 
     def gettext_organization(self):
         """The text representation of the organizations of the application."""
         organizations = self.getField('organization').getAccessor(self)()
         if not organizations:
             return None
-        return 'Organización de Actividades ' + str(len(organizations))
+
+        template = """Participar en la organización de la "{event}"."""
+        events = []
+        for activity in organizations:
+            events.append(template.format(event=activity['eventName']))
+        return ', '.join(events)
 
     def getComentarioCI(self):
         return self.getField('comentario_ci').get(self)
