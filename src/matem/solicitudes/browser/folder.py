@@ -2,6 +2,7 @@
 from matem.solicitudes.browser.queries import Queries
 from matem.solicitudes.browser.requests import Requests
 from matem.solicitudes.extender import PersonWrapper
+from matem.solicitudes.PyRTF import *
 from operator import itemgetter
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
