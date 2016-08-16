@@ -65,7 +65,7 @@
 
     (function($) {
      $(document).ready(function(){
-        $("input.DataGridDatepicker").datepicker();
+        $("input.DataGridDatepicker").datepicker({ dateFormat: 'dd/mm/yy' });
      });
     })(jQuery);
 

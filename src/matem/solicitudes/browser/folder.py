@@ -902,7 +902,12 @@ class SolicitudFolderView(BrowserView):
                 object_path=folder_path+"/"+key
                 try:
                     solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
-                    solicitud.setFecha_sesionce(dictionary.get('fechaderevisionCE',''))
+                    # solicitud.setFecha_sesionce(dictionary.get('fechaderevisionCE',''))
+                    fdaterev = dictionary.get('fechaderevisionCE','')
+                    if fdaterev:
+                        val_fdaterev = fdaterev.split('/')
+                        fdaterev = '/'.join([val_fdaterev[2], val_fdaterev[1], val_fdaterev[0]])
+                    solicitud.setFecha_sesionce(fdaterev)
                 except:
                     pass;
         elif dictionary.get('revision.comision.PonerNumeroActa','') is not '':
@@ -918,7 +923,12 @@ class SolicitudFolderView(BrowserView):
                 object_path=folder_path+"/"+key
                 try:
                     solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
-                    solicitud.setFecha_sesionce(dictionary.get('fechaderevisionCE',''))
+                    # solicitud.setFecha_sesionce(dictionary.get('fechaderevisionCE',''))
+                    fdaterev = dictionary.get('fechaderevisionCE','')
+                    if fdaterev:
+                        val_fdaterev = fdaterev.split('/')
+                        fdaterev = '/'.join([val_fdaterev[2], val_fdaterev[1], val_fdaterev[0]])
+                    solicitud.setFecha_sesionce(fdaterev)
                     solicitud.setActace(dictionary.get('numeroDeActaCE',''))
                 except:
                     pass;
@@ -935,7 +945,12 @@ class SolicitudFolderView(BrowserView):
                 object_path=folder_path+"/"+key
                 try:
                     solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
-                    solicitud.setFecha_sesionce(dictionary.get('fechaderevisionCE',''))
+                    # solicitud.setFecha_sesionce(dictionary.get('fechaderevisionCE',''))
+                    fdaterev = dictionary.get('fechaderevisionCE','')
+                    if fdaterev:
+                        val_fdaterev = fdaterev.split('/')
+                        fdaterev = '/'.join([val_fdaterev[2], val_fdaterev[1], val_fdaterev[0]])
+                    solicitud.setFecha_sesionce(fdaterev)
                     self.context.portal_workflow.doActionFor(solicitud,'enviaraconsejo')
                 except:
                     pass;
@@ -1329,7 +1344,12 @@ class SolicitudFolderView(BrowserView):
                 object_path=folder_path+"/"+key
                 try:
                     solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
-                    solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    fdaterev = dictionary.get('fechaderevisionCI','')
+                    if fdaterev:
+                        val_fdaterev = fdaterev.split('/')
+                        fdaterev = '/'.join([val_fdaterev[2], val_fdaterev[1], val_fdaterev[0]])
+                    solicitud.setFecha_sesionci(fdaterev)
                 except:
                     pass;
         elif dictionary.get('revision.consejo.PonerNumeroActa','') is not '':
@@ -1345,7 +1365,12 @@ class SolicitudFolderView(BrowserView):
                 object_path=folder_path+"/"+key
                 try:
                     solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
-                    solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    fdaterev = dictionary.get('fechaderevisionCI','')
+                    if fdaterev:
+                        val_fdaterev = fdaterev.split('/')
+                        fdaterev = '/'.join([val_fdaterev[2], val_fdaterev[1], val_fdaterev[0]])
+                    solicitud.setFecha_sesionci(fdaterev)
                     solicitud.setActaci(dictionary.get('numeroDeActaCI',''))
                 except:
                     pass;
@@ -1354,7 +1379,12 @@ class SolicitudFolderView(BrowserView):
                 object_path=folder_path+"/"+key
                 try:
                     solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
-                    solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    fdaterev = dictionary.get('fechaderevisionCI','')
+                    if fdaterev:
+                        val_fdaterev = fdaterev.split('/')
+                        fdaterev = '/'.join([val_fdaterev[2], val_fdaterev[1], val_fdaterev[0]])
+                    solicitud.setFecha_sesionci(fdaterev)
                     solicitud.setActaci(dictionary.get('numeroDeActaCI',''))
                     self.context.portal_workflow.doActionFor(solicitud,'aprobar')
                 except:
@@ -1364,7 +1394,12 @@ class SolicitudFolderView(BrowserView):
                 object_path=folder_path+"/"+key
                 try:
                     solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
-                    solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    fdaterev = dictionary.get('fechaderevisionCI','')
+                    if fdaterev:
+                        val_fdaterev = fdaterev.split('/')
+                        fdaterev = '/'.join([val_fdaterev[2], val_fdaterev[1], val_fdaterev[0]])
+                    solicitud.setFecha_sesionci(fdaterev)
                     solicitud.setActaci(dictionary.get('numeroDeActaCI',''))
                     self.context.portal_workflow.doActionFor(solicitud,'rechazar')
                 except:
@@ -1374,7 +1409,12 @@ class SolicitudFolderView(BrowserView):
                 object_path=folder_path+"/"+key
                 try:
                     solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
-                    solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    fdaterev = dictionary.get('fechaderevisionCI','')
+                    if fdaterev:
+                        val_fdaterev = fdaterev.split('/')
+                        fdaterev = '/'.join([val_fdaterev[2], val_fdaterev[1], val_fdaterev[0]])
+                    solicitud.setFecha_sesionci(fdaterev)
                 except:
                     pass;
             return self.folderaprobadas()
@@ -1392,7 +1432,12 @@ class SolicitudFolderView(BrowserView):
                 object_path=folder_path+"/"+key
                 try:
                     solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
-                    solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    fdaterev = dictionary.get('fechaderevisionCI','')
+                    if fdaterev:
+                        val_fdaterev = fdaterev.split('/')
+                        fdaterev = '/'.join([val_fdaterev[2], val_fdaterev[1], val_fdaterev[0]])
+                    solicitud.setFecha_sesionci(fdaterev)
                     solicitud.setActaci(dictionary.get('numeroDeActaCI',''))
                 except:
                     pass;
@@ -1402,7 +1447,12 @@ class SolicitudFolderView(BrowserView):
                 object_path=folder_path+"/"+key
                 try:
                     solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
-                    solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    fdaterev = dictionary.get('fechaderevisionCI','')
+                    if fdaterev:
+                        val_fdaterev = fdaterev.split('/')
+                        fdaterev = '/'.join([val_fdaterev[2], val_fdaterev[1], val_fdaterev[0]])
+                    solicitud.setFecha_sesionci(fdaterev)
                 except:
                     pass;
             return self.folderrechazadas()
@@ -1420,7 +1470,12 @@ class SolicitudFolderView(BrowserView):
                 object_path=folder_path+"/"+key
                 try:
                     solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
-                    solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
+                    fdaterev = dictionary.get('fechaderevisionCI','')
+                    if fdaterev:
+                        val_fdaterev = fdaterev.split('/')
+                        fdaterev = '/'.join([val_fdaterev[2], val_fdaterev[1], val_fdaterev[0]])
+                    solicitud.setFecha_sesionci(fdaterev)
                     solicitud.setActaci(dictionary.get('numeroDeActaCI',''))
                 except:
                     pass;

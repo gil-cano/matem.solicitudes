@@ -586,7 +586,8 @@ schema = BaseSchema + Schema((
             description_msgid='help_fecha_sesionce',
             starting_year=2010,
             future_years=1,
-            show_hm=False
+            show_hm=False,
+            format='%d/%m/%Y',
         ),
         read_permission="Solicitud: Comision Revisa Solicitud",
         write_permission="Solicitud: Comision Revisa Solicitud",
