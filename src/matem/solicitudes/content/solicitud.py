@@ -1621,13 +1621,26 @@ class Solicitud(BaseContent):
             return None
 
         vocabulary = EventTypeVocabulary().getDisplayList(self)
-        template = 'Asistir al {eventtype} "{title}"'
+        # template = 'Asistir al {eventtype} "{title}"'
+        templates = {
+            'male': 'Asistir al {eventtype} "{title}"',
+            'female': 'Asistir a la {eventtype} "{title}"',
+            'neutral': 'Asistir al "{title}"',
+        }
         events = []
         for attendance in attendances:
             value = vocabulary.getValue(attendance['eventtype'])
             event_type = api.portal.translate(value, lang='es')
-            events.append(template.format(
-                eventtype=event_type.lower(), title=attendance['eventName']))
+            # This templates using EventTypeVocabulary
+            if attendance['eventtype'] in ['congress', 'seminary', 'coloquio', 'workshop']:
+                events.append(templates['male'].format(
+                    eventtype=event_type.lower(), title=attendance['eventName']))
+            elif attendance['eventtype'] in ['school']:
+                events.append(templates['female'].format(
+                    eventtype=event_type.lower(), title=attendance['eventName']))
+            else:
+                events.append(templates['neutral'].format(
+                    title=attendance['eventName']))
         return ', '.join(events)
 
     def gettext_conferences(self):
@@ -1637,7 +1650,12 @@ class Solicitud(BaseContent):
             return None
 
         vocabulary = EventTypeVocabulary().getDisplayList(self)
-        template = """Impartir una conferencia{invite} en el {eventtype} "{eventname}". El trabajo a presentar se titula "{talk}"."""
+        templates = {
+            'male': """Impartir una conferencia{invite} en el {eventtype} "{eventname}". El trabajo a presentar se titula "{talk}".""",
+            'female': """Impartir una conferencia{invite} en la {eventtype} "{eventname}". El trabajo a presentar se titula "{talk}".""",
+            'neutral': """Impartir una conferencia{invite} en el evento "{eventname}". El trabajo a presentar se titula "{talk}".""",
+        }
+        # template = """Impartir una conferencia{invite} en el {eventtype} "{eventname}". El trabajo a presentar se titula "{talk}"."""
         events = []
         for conference in conferences:
             text = ''
@@ -1645,11 +1663,23 @@ class Solicitud(BaseContent):
                 text = ' por invitación'
             value = vocabulary.getValue(conference['eventtype'])
             event_type = api.portal.translate(value, lang='es')
-            events.append(template.format(
-                invite=text,
-                eventtype=event_type.lower(),
-                eventname=conference['eventName'],
-                talk=conference['title']))
+            if conference['eventtype'] in ['congress', 'seminary', 'coloquio', 'workshop']:
+                events.append(templates['male'].format(
+                    invite=text,
+                    eventtype=event_type.lower(),
+                    eventname=conference['eventName'],
+                    talk=conference['title']))
+            elif conference['eventtype'] in ['school']:
+                events.append(templates['female'].format(
+                    invite=text,
+                    eventtype=event_type.lower(),
+                    eventname=conference['eventName'],
+                    talk=conference['title']))
+            else:
+                events.append(templates['neutral'].format(
+                    invite=text,
+                    eventname=conference['eventName'],
+                    talk=conference['title']))
         return ', '.join(events)
 
     def gettext_courses(self):
@@ -1657,7 +1687,7 @@ class Solicitud(BaseContent):
         courses = self.getField('courses').getAccessor(self)()
         if not courses:
             return None
-        return 'Cursos a impartir' + str(len(courses))
+        return 'Curso(s) a impartir' + str(len(courses))
 
     def gettext_research(self):
         """The text representation of the research of the application."""
