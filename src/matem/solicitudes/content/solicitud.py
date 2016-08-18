@@ -1620,6 +1620,9 @@ class Solicitud(BaseContent):
         if not attendances:
             return None
 
+        if attendances == ({},):
+            return None
+
         vocabulary = EventTypeVocabulary().getDisplayList(self)
         # template = 'Asistir al {eventtype} "{title}"'
         templates = {
@@ -1647,6 +1650,9 @@ class Solicitud(BaseContent):
         """The text representation of the conferences of the application."""
         conferences = self.getField('conferences').getAccessor(self)()
         if not conferences:
+            return None
+
+        if conferences == ({},):
             return None
 
         vocabulary = EventTypeVocabulary().getDisplayList(self)
@@ -1687,12 +1693,17 @@ class Solicitud(BaseContent):
         courses = self.getField('courses').getAccessor(self)()
         if not courses:
             return None
+        if courses == ({},):
+            return None
         return 'Curso(s) a impartir' + str(len(courses))
 
     def gettext_research(self):
         """The text representation of the research of the application."""
         research = self.getField('sresearch').getAccessor(self)()
         if not research:
+            return None
+
+        if research == ({},):
             return None
 
         template = """Realizar estancia de investigación con {name} en "{place}" con el objetivo de {objective}."""
@@ -1708,6 +1719,9 @@ class Solicitud(BaseContent):
         """The text representation of the organizations of the application."""
         organizations = self.getField('organization').getAccessor(self)()
         if not organizations:
+            return None
+
+        if organizations == ({},):
             return None
 
         template = """Participar en la organización de la "{event}"."""
