@@ -798,6 +798,7 @@ schema = BaseSchema + Schema((
                 ),
             },
         ),
+        write_permission='Solicitud: Modificar Solicitud',
     ),
 
     DataGridCourseGuestField(
@@ -849,6 +850,7 @@ schema = BaseSchema + Schema((
                 ),
             },
         ),
+        write_permission='Solicitud: Modificar Solicitud',
     ),
 
 
