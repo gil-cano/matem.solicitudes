@@ -1657,33 +1657,27 @@ class Solicitud(BaseContent):
 
         vocabulary = EventTypeVocabulary().getDisplayList(self)
         templates = {
-            'male': """Impartir una conferencia{invite} en el {eventtype} "{eventname}". El trabajo a presentar se titula "{talk}".""",
-            'female': """Impartir una conferencia{invite} en la {eventtype} "{eventname}". El trabajo a presentar se titula "{talk}".""",
-            'neutral': """Impartir una conferencia{invite} en el evento "{eventname}". El trabajo a presentar se titula "{talk}".""",
+            'male': """Impartir una conferencia en el {eventtype} "{eventname}". El trabajo a presentar se titula "{talk}".""",
+            'female': """Impartir una conferencia en la {eventtype} "{eventname}". El trabajo a presentar se titula "{talk}".""",
+            'neutral': """Impartir una conferencia en el evento "{eventname}". El trabajo a presentar se titula "{talk}".""",
         }
         # template = """Impartir una conferencia{invite} en el {eventtype} "{eventname}". El trabajo a presentar se titula "{talk}"."""
         events = []
         for conference in conferences:
-            text = ''
-            if conference['participationtype'] == 'invitation':
-                text = ' por invitación'
             value = vocabulary.getValue(conference['eventtype'])
             event_type = api.portal.translate(value, lang='es')
             if conference['eventtype'] in ['congress', 'seminary', 'coloquio', 'workshop']:
                 events.append(templates['male'].format(
-                    invite=text,
                     eventtype=event_type.lower(),
                     eventname=conference['eventName'],
                     talk=conference['title']))
             elif conference['eventtype'] in ['school']:
                 events.append(templates['female'].format(
-                    invite=text,
                     eventtype=event_type.lower(),
                     eventname=conference['eventName'],
                     talk=conference['title']))
             else:
                 events.append(templates['neutral'].format(
-                    invite=text,
                     eventname=conference['eventName'],
                     talk=conference['title']))
         return ', '.join(events)
