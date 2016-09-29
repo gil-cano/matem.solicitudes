@@ -931,19 +931,23 @@ class SolicitudVisitante(BaseContent):
 
         close_prep = DateTime('2016/09/28 00:00:00 GMT+0')
         close_year = DateTime('2016/12/31 00:00:00 GMT+0')
+        pasaje_value = float(REQUEST.get('cantidad_pasaje', 0))
+        viaticos_value = float(REQUEST.get('cantidad_viaticos', 0))
 
-        if envios:
-            # Take the last enviar
-            if envios[-1] > close_prep:
-                pasaje_value = float(REQUEST.get('cantidad_pasaje', 0))
-                viaticos_value = float(REQUEST.get('cantidad_viaticos', 0))
-
-                if start >= close_prep and start <= close_year:
+        if start <= close_year:
+            if envios:
+                if envios[0] > close_prep:
                     if pasaje_value != 0.0:
                         errors['cantidad_pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor ponga la cantidad en 0.0'
 
                     if viaticos_value != 0.0:
                         errors['cantidad_viaticos'] = u'El cierre de presupuesto ya fue aplicado, por favor ponga la cantidad en 0.0'
+            else:
+                if pasaje_value != 0.0:
+                    errors['cantidad_pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor ponga la cantidad en 0.0'
+
+                if viaticos_value != 0.0:
+                    errors['cantidad_viaticos'] = u'El cierre de presupuesto ya fue aplicado, por favor ponga la cantidad en 0.0'
 
     # Metodos mios para hacer algunas cosas
 
