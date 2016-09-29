@@ -835,22 +835,34 @@ class SolicitudBecario(BaseContent):
             errors['fecha_hasta'] = u'La fecha de término debe ser posterior a la de inicio'
 
         # TODO: save dates in other space
+        workflow = getToolByName(self, 'portal_workflow')
+
+        envios = []
+        for i in workflow.getInfoFor(self, 'review_history'):
+            if i.get('action', None) == 'enviar':
+                envios.append(i.get('time', None))
+
+        envios.sort()
+
         close_prep = DateTime('2016/09/28 00:00:00 GMT+0')
         close_year = DateTime('2016/12/31 00:00:00 GMT+0')
-        pasaje_value = float(REQUEST.get('cantidad_pasaje', 0))
-        viaticos_value = float(REQUEST.get('cantidad_viaticos', 0))
-        inscripcion_value = float(REQUEST.get('cantidad_inscripcion', 0))
 
-        if start >= close_prep and start <= close_year:
-            if pasaje_value != 0.0:
-                errors['cantidad_pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor ponga la cantidad en 0.0'
+        if envios:
+            # Take the last enviar
+            if envios[-1] > close_prep:
+                pasaje_value = float(REQUEST.get('cantidad_pasaje', 0))
+                viaticos_value = float(REQUEST.get('cantidad_viaticos', 0))
+                inscripcion_value = float(REQUEST.get('cantidad_inscripcion', 0))
 
-            if viaticos_value != 0.0:
-                errors['cantidad_viaticos'] = u'El cierre de presupuesto ya fue aplicado, por favor ponga la cantidad en 0.0'
+                if start >= close_prep and start <= close_year:
+                    if pasaje_value != 0.0:
+                        errors['cantidad_pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor ponga la cantidad en 0.0'
 
-            if inscripcion_value != 0.0:
-                errors['cantidad_inscripcion'] = u'El cierre de presupuesto ya fue aplicado, por favor ponga la cantidad en 0.0'
+                    if viaticos_value != 0.0:
+                        errors['cantidad_viaticos'] = u'El cierre de presupuesto ya fue aplicado, por favor ponga la cantidad en 0.0'
 
+                    if inscripcion_value != 0.0:
+                        errors['cantidad_inscripcion'] = u'El cierre de presupuesto ya fue aplicado, por favor ponga la cantidad en 0.0'
 
 
     def addTranslation(self, language, **kwargs):
