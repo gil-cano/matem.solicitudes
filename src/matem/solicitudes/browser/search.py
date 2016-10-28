@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from DateTime.DateTime import DateTime
-from Products.CMFCore.utils import getToolByName
-from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from matem.solicitudes.browser.queries import Queries
 from matem.solicitudes.browser.requests import Requests
 from matem.solicitudes.config import DICCIONARIO_AREAS
 from matem.solicitudes.config import getCountriesVocabulary
 from matem.solicitudes.interfaces import ISolicitudFolder
+from operator import itemgetter
+from plone.i18n.normalizer import idnormalizer as idn
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component.hooks import getSite
 
 
@@ -305,14 +307,17 @@ class SearchView(BrowserView):
         return users
 
     def getCreatorsAll(self):
+        """List of users who could create an applicatioon."""
         folder = self.context
         solicitantes = folder.getSolicitantes()[0]
         users = []
         for solicitante in solicitantes.keys():
             fullname = ' '.join(solicitantes[solicitante][0:2])
             users.append([' '.join(fullname.split()), solicitante])
-        users.sort()
-        return users
+
+        aux = [(idn.normalize(user[0]), user) for user in users]
+        aux_sorted = sorted(aux, key=itemgetter(0))
+        return [user[1] for user in aux_sorted]
 
     def getCreatorsBecarioInvestigador(self):
         folder=self.context
