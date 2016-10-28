@@ -154,8 +154,6 @@ schema = BaseSchema + Schema((
             label_msgid="label_solicitante",
             i18n_domain='matem.solicitudes',
             description=_(u'help_sol_solicitante', default=u'Researcher Name'),
-            # description="Nombre del investigador a nombre del cual es esta solicitud.",
-            # description_msgid="help_solicitante",
         ),
         write_permission="Solicitud: Cambiar Solicitante",
     ),
@@ -1765,23 +1763,27 @@ class Solicitud(BaseContent):
         return tupla
 
     def getCreators(self):
-        ''' return list of Researchers
-        '''
+        """List of active user who can add an application."""
         portal_catalog = getToolByName(self, 'portal_catalog')
         brains = portal_catalog(
             portal_type='FSDPerson',
-            person_classification=['investigadores', 'tecnicos-academicos', 'posdoc'],
-            sort_on='getSortableName',
+            person_classification=[
+                'investigadores',
+                'tecnicos-academicos',
+                'posdoc',
+                'catedras-conacyt'
+            ],
+            sort_on='sortable_title',
             review_state='active',
         )
         users = []
         for brain in brains:
-            person = brain.getObject()
-            tupla = (
-                person.getId(),
-                person.getLastName() + ", " + person.getFirstName() + " " + person.getMiddleName()
-            )
-            users.append(tupla)
+            users.append((
+                brain.id,
+                '{0}, {1}'.format(
+                    brain.lastName.encode('utf-8'),
+                    brain.firstName.encode('utf-8'))
+            ))
         return DisplayList(users)
 
     def setCantidadPasaje(self):

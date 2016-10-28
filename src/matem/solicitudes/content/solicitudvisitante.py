@@ -122,7 +122,7 @@ schema = BaseSchema + Schema((
     ),
 
     StringField(
-        'solicitante',
+        name='solicitante',
         searchable=0,
         required=1,
         vocabulary='getCreators',
@@ -1184,23 +1184,27 @@ class SolicitudVisitante(BaseContent):
         return tupla
 
     def getCreators(self):
-        ''' return list of Researchers
-        '''
+        """List of active user who can add an application."""
         portal_catalog = getToolByName(self, 'portal_catalog')
         brains = portal_catalog(
             portal_type='FSDPerson',
-            person_classification=['investigadores', 'tecnicos-academicos', 'posdoc'],
-            sort_on='getSortableName',
+            person_classification=[
+                'investigadores',
+                'tecnicos-academicos',
+                'posdoc',
+                'catedras-conacyt'
+            ],
+            sort_on='sortable_title',
             review_state='active',
         )
         users = []
         for brain in brains:
-            person = brain.getObject()
-            tupla = (
-                person.getId(),
-                person.getLastName() + ", " + person.getFirstName() + " " + person.getMiddleName()
-            )
-            users.append(tupla)
+            users.append((
+                brain.id,
+                '{0}, {1}'.format(
+                    brain.lastName.encode('utf-8'),
+                    brain.firstName.encode('utf-8'))
+            ))
         return DisplayList(users)
 
     def setCantidadPasaje(self):
