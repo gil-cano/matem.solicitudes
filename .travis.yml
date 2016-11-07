@@ -30,4 +30,4 @@ after_failure:
   - bin/jscs --version
 notifications:
   email:
-    - gil@im.unam.mx
+    - computo.academico@matem.unam.mx
