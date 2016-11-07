@@ -30,4 +30,4 @@ after_failure:
   - bin/jscs --version
 notifications:
   email:
-    - computo.academico@matem.unam.mx
+    - informatica.academica@matem.unam.mx
