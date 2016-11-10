@@ -13,7 +13,7 @@
     "settings": {
         "python_interpreter": "/usr/local/bin/python2.7",
         "python_package_paths": [
-            "/Users/gil/projects/plone/matem/matem-buildout/parts/omelette"
+            "/Users/gil/projects/plone/matem-buildout/parts/omelette"
         ]
     }
 }

@@ -238,4 +238,12 @@
         permission="cmf.AddPortalContent"
         />
 
+    <browser:page
+        name="applicationstocv"
+        for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+        class=".tocv.ApplicationstoCVForm"
+        permission="cmf.AddPortalContent"
+        />
+
 </configure>
+

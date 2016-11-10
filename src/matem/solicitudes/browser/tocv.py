@@ -1,24 +1,55 @@
 # -*- coding: utf-8 -*-
 
 from plone import api
-from Acquisition import aq_base
-from DateTime import DateTime
-from Products.Archetypes.event import ObjectInitializedEvent
-from Products.Archetypes.event import ObjectEditedEvent
-from Products.CMFCore.utils import getToolByName
-from UNAM.imateCVct.vocabularies import RESEARCH
-from zope import event
-from zope.component import getUtility
-from plone.i18n.normalizer.interfaces import IIDNormalizer
+from z3c.form import button
+from z3c.form import form
 
-import os
-import csv
-import re
+import logging
 
-INSTANCEHOME = '/Users/gil/projects/plone/matem-buildout'
-# INSTANCEHOME = '/opt/infomatemPlone4/zeocluster'
-CSVFILE = os.path.join(INSTANCEHOME, 'Extensions/solicitudes-2015.csv')
 
+# from Acquisition import aq_base
+# from DateTime import DateTime
+# from Products.Archetypes.event import ObjectInitializedEvent
+# from Products.Archetypes.event import ObjectEditedEvent
+# from Products.CMFCore.utils import getToolByName
+# from UNAM.imateCVct.vocabularies import RESEARCH
+# from zope import event
+# from zope.component import getUtility
+# from plone.i18n.normalizer.interfaces import IIDNormalizer
+
+# import os
+# import csv
+# import re
+
+class ApplicationstoCVForm(form.Form):
+    """docstring for ApplicationstoCVForm"""
+
+    @button.buttonAndHandler(u'Dump applications to cv')
+    def dump_to_cv(self, action):
+        """Create cv items form applications"""
+        logging.info("Dumpping applications")
+        folder = api.content.get(
+            path='/servicios/servicios-internos/solicitudes/2016')
+        catalog = api.portal.get_tool('portal_catalog')
+        brains = catalog(
+            path={'query': '/'.join(folder.getPhysicalPath()), 'depth': 1},
+            review_state='aprobada',
+            portal_type=('Solicitud', 'SolicitudInstitucional', 'SolicitudVisitante'),
+            sort_on='created'
+        )
+        for brain in brains:
+            # test for applications in old format
+            aux_folder = api.content.get(
+                path='/servicios/servicios-internos/solicitudes/2006')
+            if brain.id in aux_folder:
+                application = aux_folder[brain.id]
+            else:
+                application = brain.getObject()
+            self.transform(application)
+
+
+    def transform(self, application):
+        pass
 
 def _compare(fieldval, itemval):
     """Compare a AT Field value with an item value
