@@ -2,6 +2,7 @@
 *.mo
 *.pyc
 *.DS_Store
+*.sublime-workspace
 *~
 .coverage
 .installed.cfg

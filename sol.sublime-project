@@ -1,0 +1,19 @@
+{
+    "folders":
+    [
+        {
+            "path": ".",
+            "folder_exclude_patterns": ["bin", "include", "lib", "develop-eggs", "var", "parts"],
+        },
+        {
+            "path": "../UNAM.imateCVct",
+            "folder_exclude_patterns": ["bin", "include", "lib", "develop-eggs", "var", "parts"],
+        },
+    ],
+    "settings": {
+        "python_interpreter": "/usr/local/bin/python2.7",
+        "python_package_paths": [
+            "/Users/gil/projects/plone/matem/matem-buildout/parts/omelette"
+        ]
+    }
+}
