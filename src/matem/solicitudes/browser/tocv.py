@@ -41,8 +41,8 @@ class ApplicationstoCVForm(form.Form):
             userid = application.getIdOwner()
             if brain.id in aux_folder:
                 application = aux_folder[brain.id]
-            prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
-            # prides = ['rajsbaum', ]
+            # prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
+            prides = ['rajsbaum', ]
             if userid not in prides:
                 continue
 
@@ -50,20 +50,29 @@ class ApplicationstoCVForm(form.Form):
                 self.app2cv_guest(application, userid)
 
     def get_folder(self, userid, content_type):
+        """Get cvitem folder inside user CVFolder"""
         path = '/fsd/{id}/cv/{ctype}folder'.format(id=userid, ctype=content_type)
         return api.content.get(path=path)
 
-    def app2cv_guest(self, application, userid):
+    def get_metacv(self, userid, content_type):
+        """Get cvitem folder inside meta-cv."""
+        path = '/catalogos/meta-cv/{ctype}folder'.format(ctype=content_type)
+        return api.content.get(path=path)
+
+    def app2cv_guest(self, application, userid, metacv=True):
         logging.info('{0} - {1}'.format(application.id, userid))
         content_type = 'CVGuest'
-        folder = self.get_folder(userid, content_type.lower())
+
+        folder = self.get_metacv(userid, content_type.lower())
+        if not metacv:
+            folder = self.get_folder(userid, content_type.lower())
         id = application.id.replace('solicitudvisitante', 'sv')
         date = application.fecha_desde
         begin_date = {
-            'Year': date.year(), 'Month': date.month(), 'Day': date.day()}
+            'Year': str(date.year()), 'Month': str(date.month()), 'Day': str(date.day())}
         date = application.fecha_hasta
         end_date = {
-            'Year': date.year(), 'Month': date.month(), 'Day': date.day()}
+            'Year': str(date.year()), 'Month': str(date.month()), 'Day': str(date.day())}
         fields = {
             'institutionCountry': application.getPais_procedencia()[0],
             'otherinstitution': application.getInstitucion_procedencia(),
@@ -71,7 +80,7 @@ class ApplicationstoCVForm(form.Form):
             'begin_date': begin_date,
             'end_date': end_date,
             'interchangeProgram': (application.getExchangeProgram() == 'yes') and 'si' or '',
-            'creators': (userid, ),
+            'creators': ([userid, 'admin']),
         }
         obj = api.content.create(
             type=content_type,
