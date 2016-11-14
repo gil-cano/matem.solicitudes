@@ -22,10 +22,11 @@ class ApplicationstoCVForm(form.Form):
         folder = api.content.get(
             path='/servicios/servicios-internos/solicitudes/2016')
         catalog = api.portal.get_tool('portal_catalog')
+        # 'Solicitud', 'SolicitudInstitucional', 'SolicitudVisitante'
         brains = catalog(
             path={'query': '/'.join(folder.getPhysicalPath()), 'depth': 1},
             review_state='aprobada',
-            portal_type=('Solicitud', 'SolicitudInstitucional', 'SolicitudVisitante'),
+            portal_type=('Solicitud', 'SolicitudInstitucional'),
             sort_on='created')
         for brain in brains:
             # test for applications in old format
@@ -36,9 +37,9 @@ class ApplicationstoCVForm(form.Form):
             if brain.id in aux_folder:
                 application = aux_folder[brain.id]
             # prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
-            # prides = ['rajsbaum', ]
-            # if userid not in prides:
-            #     continue
+            prides = ['rajsbaum', ]
+            if userid not in prides:
+                continue
 
             if isinstance(application, SolicitudVisitante):
                 self.app2cv_guest(application, userid)
