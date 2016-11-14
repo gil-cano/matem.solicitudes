@@ -41,8 +41,8 @@ class ApplicationstoCVForm(form.Form):
             userid = application.getIdOwner()
             if brain.id in aux_folder:
                 application = aux_folder[brain.id]
-            # prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
-            prides = ['rajsbaum', ]
+            prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
+            # prides = ['rajsbaum', ]
             if userid not in prides:
                 continue
 
@@ -79,16 +79,3 @@ class ApplicationstoCVForm(form.Form):
             title=application.invitado,
             container=folder,
             **fields)
-        # is_new_object = obj.checkCreationFlag()
-        # obj.unmarkCreationFlag()
-
-        # if is_new_object:
-        #     event.notify(ObjectInitializedEvent(obj))
-        #     obj.at_post_create_script()
-        # else:
-        #     event.notify(ObjectEditedEvent(obj))
-        #     obj.at_post_edit_script()
-        # obj.reindexObject()
-        # event.notify(ObjectInitializedEvent(obj))
-        # event.notify(ObjectEditedEvent(obj))
-        # obj.reindexObject()
