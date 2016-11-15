@@ -27,7 +27,7 @@ class ApplicationstoCVForm(form.Form):
         brains = catalog(
             path={'query': '/'.join(folder.getPhysicalPath()), 'depth': 1},
             review_state='aprobada',
-            portal_type=('SolicitudVisitante'),
+            portal_type=('Solicitud'),
             sort_on='created')
         for brain in brains:
             # test for applications in old format
@@ -37,14 +37,14 @@ class ApplicationstoCVForm(form.Form):
             userid = application.getIdOwner()
             if brain.id in aux_folder:
                 application = aux_folder[brain.id]
-            # prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
-            # # prides = ['rajsbaum', ]
-            # if userid not in prides:
-            #     continue
+            prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
+            # prides = ['rajsbaum', ]
+            if userid not in prides:
+                continue
             if isinstance(application, Solicitud):
                 self.app2cv(application, userid)
-            if isinstance(application, SolicitudVisitante):
-                self.app2cv_guest(application, userid)
+            # if isinstance(application, SolicitudVisitante):
+            #     self.app2cv_guest(application, userid)
 
         logging.info('Done')
 
@@ -78,26 +78,59 @@ class ApplicationstoCVForm(form.Form):
         logging.info('Asistencia: {0} - {1}'.format(application.id, userid))
         content_type = 'CVEvent'
         folder = self.get_folder(userid, content_type)
+        for i, item in enumerate(application.assistance):
+            pre = 'se-{0}'.format(i)
+            id = application.id.replace('solicitud', pre)
+            date = item['assistancedate'].split('/')
+            import pdb; pdb.set_trace()
+            begin_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
+            fields = {
+                'event_date': begin_date,
+                'creators': ([userid, 'admin'])}
+            obj = api.content.create(
+                type=content_type,
+                id=id,
+                title=item['eventName'],
+                container=folder,
+                **fields)
+        # {'othereventtype': '',
+         # 'eventtype': 'seminary',
+         # 'eventName': 'Seminario Iterino del grupo de Representaciones de Algebras',
+         # 'assistancedate': '25/02/2016',
+         # 'place': 'Guanajuato, M\xc3\xa9xico',
+         # 'institution': 'Centro de Investigaci\xc3\xb3n en Matem\xc3\xa1ticas (CIMAT)'}
 
     def app2cv_conference(self, application, userid):
         logging.info('Conferencia: {0} - {1}'.format(application.id, userid))
         content_type = 'CVConference'
         folder = self.get_folder(userid, content_type)
+        for i, item in enumerate(application.conferences):
+            pre = 'sconf-{0}'.format(i)
+            id = application.id.replace('solicitud', pre)
 
     def app2cv_courses(self, application, userid):
         logging.info('Curso: {0} - {1}'.format(application.id, userid))
         content_type = 'CVCourse'
         folder = self.get_folder(userid, content_type)
+        for i, item in enumerate(application.courses):
+            pre = 'sc-{0}'.format(i)
+            id = application.id.replace('solicitud', pre)
 
     def app2cv_research(self, application, userid):
         logging.info('Estancias de Inv: {0} - {1}'.format(application.id, userid))
         content_type = 'CVVisit'
         folder = self.get_folder(userid, content_type)
+        for i, item in enumerate(application.sresearch):
+            pre = 'sv-{0}'.format(i)
+            id = application.id.replace('solicitud', pre)
 
     def app2cv_organization(self, application, userid):
         logging.info('Organizador: {0} - {1}'.format(application.id, userid))
         content_type = 'CVEventOrg'
         folder = self.get_folder(userid, content_type)
+        for i, item in enumerate(application.organization):
+            pre = 'se-{0}'.format(i)
+            id = application.id.replace('solicitud', pre)
 
     def app2cv_guest(self, application, userid):
         logging.info('{0} - {1}'.format(application.id, userid))
