@@ -82,10 +82,15 @@ class ApplicationstoCVForm(form.Form):
             pre = 'se-{0}'.format(i)
             id = application.id.replace('solicitud', pre)
             date = item['assistancedate'].split('/')
-            import pdb; pdb.set_trace()
             begin_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
+            institution =  self.lookupInstitution(item['institution'])
+            otherinstitution = ''
+            if institution is None:
+                otherinstitution = item['institution']
             fields = {
                 'event_date': begin_date,
+                'institution': institution,
+                'otherinstitution': otherinstitution,
                 'creators': ([userid, 'admin'])}
             obj = api.content.create(
                 type=content_type,
@@ -107,6 +112,23 @@ class ApplicationstoCVForm(form.Form):
         for i, item in enumerate(application.conferences):
             pre = 'sconf-{0}'.format(i)
             id = application.id.replace('solicitud', pre)
+            fields = {
+                'creators': ([userid, 'admin'])}
+            # obj = api.content.create(
+            #     type=content_type,
+            #     id=id,
+            #     title=item[''],
+            #     container=folder,
+            #     **fields)
+            # ({'conferencedate': '10/01/2016',
+            # 'conferencetype': ['research'],
+            # 'title': 'Algebraic differential equations with single-valued solutions',
+            # 'eventtype': 'congress',
+            # 'participationtype': 'invitation',
+            # 'eventName': 'Geometric Aspects of Modern Dynamics',
+            # 'place': 'Oporto, Portugal',
+            # 'isplenary': 'no',
+            # 'institution': 'Universidad de Porto'},)
 
     def app2cv_courses(self, application, userid):
         logging.info('Curso: {0} - {1}'.format(application.id, userid))
@@ -116,6 +138,20 @@ class ApplicationstoCVForm(form.Form):
             pre = 'sc-{0}'.format(i)
             id = application.id.replace('solicitud', pre)
 
+            fields = {
+                'creators': ([userid, 'admin'])}
+            # obj = api.content.create(
+            #     type=content_type,
+            #     id=id,
+            #     title=item[''],
+            #     container=folder,
+            #     **fields)
+            # ({'objective': 'Trabajar en nuestro proyecto de investigacion acerca de Distributed Fault-tolerant Checkability apoyado por CONACYT-ECOS-NORD',
+            # 'hostresearcher': '',
+            # 'sresearchinitdate': '20/02/2016',
+            # 'institution': 'Universit\xc3\xa9 Paris Diderot - Paris 7',
+            # 'sresearchenddate': '29/02/2016'},)
+
     def app2cv_research(self, application, userid):
         logging.info('Estancias de Inv: {0} - {1}'.format(application.id, userid))
         content_type = 'CVVisit'
@@ -124,6 +160,20 @@ class ApplicationstoCVForm(form.Form):
             pre = 'sv-{0}'.format(i)
             id = application.id.replace('solicitud', pre)
 
+            fields = {
+                'creators': ([userid, 'admin'])}
+            # obj = api.content.create(
+            #     type=content_type,
+            #     id=id,
+            #     title=item[''],
+            #     container=folder,
+            #     **fields)
+            # ({'objective': 'Trabajar en nuestro proyecto de investigacion acerca de Distributed Fault-tolerant Checkability apoyado por CONACYT-ECOS-NORD',
+            # 'hostresearcher': '',
+            # 'sresearchinitdate': '20/02/2016',
+            # 'institution': 'Universit\xc3\xa9 Paris Diderot - Paris 7',
+            # 'sresearchenddate': '29/02/2016'},)
+
     def app2cv_organization(self, application, userid):
         logging.info('Organizador: {0} - {1}'.format(application.id, userid))
         content_type = 'CVEventOrg'
@@ -131,6 +181,27 @@ class ApplicationstoCVForm(form.Form):
         for i, item in enumerate(application.organization):
             pre = 'se-{0}'.format(i)
             id = application.id.replace('solicitud', pre)
+            fields = {
+                'creators': ([userid, 'admin'])}
+            # obj = api.content.create(
+            #     type=content_type,
+            #     id=id,
+            #     title=item[''],
+            #     container=folder,
+            #     **fields)
+            # ({'otherimposition': '',
+            # 'imposition': [],
+            # 'level': ['phd', 'master', 'bachelor'],
+            # 'otherresearcherposition': '',
+            # 'activitytype': ['research'],
+            # 'eventName': 'Bertinoro Seminar on Distributed Runtime Verification 2016',
+            # 'organizationdate': '15/05/2016',
+            # 'sessionName': '',
+            # 'assistants': 'stage2',
+            # 'researcherposition': ['co-organizer'],
+            # 'otherlevel': '',
+            # 'speakersnac': 'stage1',
+            # 'speakersint': 'stage1'},)
 
     def app2cv_guest(self, application, userid):
         logging.info('{0} - {1}'.format(application.id, userid))
