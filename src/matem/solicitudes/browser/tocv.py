@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from matem.solicitudes.content.solicitud import Solicitud
 from matem.solicitudes.content.solicitudvisitante import SolicitudVisitante
 from plone import api
 from Products.Archetypes.event import ObjectInitializedEvent
@@ -26,7 +27,7 @@ class ApplicationstoCVForm(form.Form):
         brains = catalog(
             path={'query': '/'.join(folder.getPhysicalPath()), 'depth': 1},
             review_state='aprobada',
-            portal_type=('Solicitud', 'SolicitudInstitucional'),
+            portal_type=('Solicitud'),
             sort_on='created')
         for brain in brains:
             # test for applications in old format
@@ -36,13 +37,15 @@ class ApplicationstoCVForm(form.Form):
             userid = application.getIdOwner()
             if brain.id in aux_folder:
                 application = aux_folder[brain.id]
-            # prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
-            prides = ['rajsbaum', ]
+            prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
+            # prides = ['rajsbaum', ]
             if userid not in prides:
                 continue
-
+            if isinstance(application, Solicitud):
+                self.app2cv(application, userid)
             if isinstance(application, SolicitudVisitante):
                 self.app2cv_guest(application, userid)
+
         logging.info('Done')
 
     def get_folder(self, userid, content_type):
@@ -55,10 +58,42 @@ class ApplicationstoCVForm(form.Form):
         path = '/catalogos/meta-cv/{ctype}folder'.format(ctype=content_type)
         return api.content.get(path=path)
 
+    def app2cv(self, application, userid, metacv=True):
+        """Splits an application in cvitems."""
+        # assistance
+        if application.assistance:
+            self.app2cv_assistance(application, userid, metacv=metacv)
+        # conferences
+        if application.conferences:
+            self.app2cv_conference(application, userid, metacv=metacv)
+        # courses
+        if application.courses:
+            self.app2cv_courses(application, userid, metacv=metacv)
+        # sresearch
+        if application.sresearch:
+            self.app2cv_research(application, userid, metacv=metacv)
+        # organization
+        if application.organization:
+            self.app2cv_organization(application, userid, metacv=metacv)
+
+    def app2cv_assistance(self, application, userid, metacv=True):
+        logging.info('Asistencia: {0} - {1}'.format(application.id, userid))
+
+    def app2cv_conference(self, application, userid, metacv=True):
+        logging.info('Conferencia: {0} - {1}'.format(application.id, userid))
+
+    def app2cv_courses(self, application, userid, metacv=True):
+        logging.info('Curso: {0} - {1}'.format(application.id, userid))
+
+    def app2cv_research(self, application, userid, metacv=True):
+        logging.info('Estancias de Inv: {0} - {1}'.format(application.id, userid))
+
+    def app2cv_organization(self, application, userid, metacv=True):
+        logging.info('Organizador: {0} - {1}'.format(application.id, userid))
+
     def app2cv_guest(self, application, userid, metacv=True):
         logging.info('{0} - {1}'.format(application.id, userid))
         content_type = 'CVGuest'
-
         folder = self.get_metacv(userid, content_type.lower())
         if not metacv:
             folder = self.get_folder(userid, content_type.lower())
@@ -89,7 +124,6 @@ class ApplicationstoCVForm(form.Form):
             title=application.invitado,
             container=folder,
             **fields)
-
 
     def lookupInstitution(self, institution):
         if not institution:
