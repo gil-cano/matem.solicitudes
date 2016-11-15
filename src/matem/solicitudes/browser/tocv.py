@@ -27,7 +27,7 @@ class ApplicationstoCVForm(form.Form):
         brains = catalog(
             path={'query': '/'.join(folder.getPhysicalPath()), 'depth': 1},
             review_state='aprobada',
-            portal_type=('Solicitud'),
+            portal_type=('SolicitudVisitante'),
             sort_on='created')
         for brain in brains:
             # test for applications in old format
@@ -37,10 +37,10 @@ class ApplicationstoCVForm(form.Form):
             userid = application.getIdOwner()
             if brain.id in aux_folder:
                 application = aux_folder[brain.id]
-            prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
-            # prides = ['rajsbaum', ]
-            if userid not in prides:
-                continue
+            # prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
+            # # prides = ['rajsbaum', ]
+            # if userid not in prides:
+            #     continue
             if isinstance(application, Solicitud):
                 self.app2cv(application, userid)
             if isinstance(application, SolicitudVisitante):
@@ -48,55 +48,61 @@ class ApplicationstoCVForm(form.Form):
 
         logging.info('Done')
 
-    def get_folder(self, userid, content_type):
-        """Get cvitem folder inside user CVFolder"""
-        path = '/fsd/{id}/cv/{ctype}folder'.format(id=userid, ctype=content_type)
+    def get_folder(self, userid, content_type, metacv=True):
+        """Get cvitem folder inside the metacv or the user CVFolder"""
+        ctype = content_type.lower()
+        path = '/catalogos/meta-cv/{ctype}folder'.format(ctype=ctype)
+        if not metacv:
+            path = '/fsd/{id}/cv/{ctype}folder'.format(id=userid, ctype=ctype)
         return api.content.get(path=path)
 
-    def get_metacv(self, userid, content_type):
-        """Get cvitem folder inside meta-cv."""
-        path = '/catalogos/meta-cv/{ctype}folder'.format(ctype=content_type)
-        return api.content.get(path=path)
-
-    def app2cv(self, application, userid, metacv=True):
+    def app2cv(self, application, userid):
         """Splits an application in cvitems."""
         # assistance
         if application.assistance:
-            self.app2cv_assistance(application, userid, metacv=metacv)
+            self.app2cv_assistance(application, userid)
         # conferences
         if application.conferences:
-            self.app2cv_conference(application, userid, metacv=metacv)
+            self.app2cv_conference(application, userid)
         # courses
         if application.courses:
-            self.app2cv_courses(application, userid, metacv=metacv)
+            self.app2cv_courses(application, userid)
         # sresearch
         if application.sresearch:
-            self.app2cv_research(application, userid, metacv=metacv)
+            self.app2cv_research(application, userid)
         # organization
         if application.organization:
-            self.app2cv_organization(application, userid, metacv=metacv)
+            self.app2cv_organization(application, userid)
 
-    def app2cv_assistance(self, application, userid, metacv=True):
+    def app2cv_assistance(self, application, userid):
         logging.info('Asistencia: {0} - {1}'.format(application.id, userid))
+        content_type = 'CVEvent'
+        folder = self.get_folder(userid, content_type)
 
-    def app2cv_conference(self, application, userid, metacv=True):
+    def app2cv_conference(self, application, userid):
         logging.info('Conferencia: {0} - {1}'.format(application.id, userid))
+        content_type = 'CVConference'
+        folder = self.get_folder(userid, content_type)
 
-    def app2cv_courses(self, application, userid, metacv=True):
+    def app2cv_courses(self, application, userid):
         logging.info('Curso: {0} - {1}'.format(application.id, userid))
+        content_type = 'CVCourse'
+        folder = self.get_folder(userid, content_type)
 
-    def app2cv_research(self, application, userid, metacv=True):
+    def app2cv_research(self, application, userid):
         logging.info('Estancias de Inv: {0} - {1}'.format(application.id, userid))
+        content_type = 'CVVisit'
+        folder = self.get_folder(userid, content_type)
 
-    def app2cv_organization(self, application, userid, metacv=True):
+    def app2cv_organization(self, application, userid):
         logging.info('Organizador: {0} - {1}'.format(application.id, userid))
+        content_type = 'CVEventOrg'
+        folder = self.get_folder(userid, content_type)
 
-    def app2cv_guest(self, application, userid, metacv=True):
+    def app2cv_guest(self, application, userid):
         logging.info('{0} - {1}'.format(application.id, userid))
         content_type = 'CVGuest'
-        folder = self.get_metacv(userid, content_type.lower())
-        if not metacv:
-            folder = self.get_folder(userid, content_type.lower())
+        folder = self.get_folder(userid, content_type)
         id = application.id.replace('solicitudvisitante', 'sv')
         date = application.fecha_desde
         begin_date = {
