@@ -66,18 +66,18 @@ class ApplicationstoCVForm(form.Form):
         # assistance
         if application.assistance:
             self.app2cv_assistance(application, userid)
-        # conferences
-        if application.conferences:
-            self.app2cv_conference(application, userid)
-        # courses
-        if application.courses:
-            self.app2cv_courses(application, userid)
-        # sresearch
-        if application.sresearch:
-            self.app2cv_research(application, userid)
-        # organization
-        if application.organization:
-            self.app2cv_organization(application, userid)
+        # # conferences
+        # if application.conferences:
+        #     self.app2cv_conference(application, userid)
+        # # courses
+        # if application.courses:
+        #     self.app2cv_courses(application, userid)
+        # # sresearch
+        # if application.sresearch:
+        #     self.app2cv_research(application, userid)
+        # # organization
+        # if application.organization:
+        #     self.app2cv_organization(application, userid)
 
     def app2cv_assistance(self, application, userid):
         logging.info('Asistencia: {0} - {1}'.format(application.id, userid))
