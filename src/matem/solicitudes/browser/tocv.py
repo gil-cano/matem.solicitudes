@@ -42,10 +42,10 @@ class ApplicationstoCVForm(form.Form):
             userid = application.getIdOwner()
             if brain.id in aux_folder:
                 application = aux_folder[brain.id]
-            # prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
+            prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
             # # prides = ['rajsbaum', ]
-            # if userid not in prides:
-            #     continue
+            if userid not in prides:
+                continue
             if isinstance(application, Solicitud):
                 self.app2cv(application, userid)
             # if isinstance(application, SolicitudVisitante):
@@ -65,19 +65,20 @@ class ApplicationstoCVForm(form.Form):
         """Splits an application in cvitems."""
         # assistance
         if application.assistance:
-            self.app2cv_assistance(application, userid)
-        # # conferences
-        # if application.conferences:
-        #     self.app2cv_conference(application, userid)
-        # # courses
-        # if application.courses:
-        #     self.app2cv_courses(application, userid)
-        # # sresearch
-        # if application.sresearch:
-        #     self.app2cv_research(application, userid)
-        # # organization
-        # if application.organization:
-        #     self.app2cv_organization(application, userid)
+            pass
+        #   self.app2cv_assistance(application, userid)
+        # conferences
+        if application.conferences:
+            self.app2cv_conference(application, userid)
+        # courses
+        if application.courses:
+            self.app2cv_courses(application, userid)
+        # sresearch
+        if application.sresearch:
+            self.app2cv_research(application, userid)
+        # organization
+        if application.organization:
+            self.app2cv_organization(application, userid)
 
     def app2cv_assistance(self, application, userid):
         logging.info('Asistencia: {0} - {1}'.format(application.id, userid))
