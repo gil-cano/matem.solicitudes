@@ -37,10 +37,10 @@ class ApplicationstoCVForm(form.Form):
             userid = application.getIdOwner()
             if brain.id in aux_folder:
                 application = aux_folder[brain.id]
-            prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
-            # prides = ['rajsbaum', ]
-            if userid not in prides:
-                continue
+            # prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
+            # # prides = ['rajsbaum', ]
+            # if userid not in prides:
+            #     continue
             if isinstance(application, Solicitud):
                 self.app2cv(application, userid)
             # if isinstance(application, SolicitudVisitante):
@@ -89,6 +89,10 @@ class ApplicationstoCVForm(form.Form):
                 otherinstitution = item['institution']
             fields = {
                 'event_date': begin_date,
+                'numberOfDays': application.getCantidadDeDias(),
+                'audienceType': u'assistant',
+                'where': u'institution',
+                'institutionCountry': application.pais[0],
                 'institution': institution,
                 'otherinstitution': otherinstitution,
                 'creators': ([userid, 'admin'])}
@@ -98,12 +102,12 @@ class ApplicationstoCVForm(form.Form):
                 title=item['eventName'],
                 container=folder,
                 **fields)
-        # {'othereventtype': '',
-         # 'eventtype': 'seminary',
-         # 'eventName': 'Seminario Iterino del grupo de Representaciones de Algebras',
-         # 'assistancedate': '25/02/2016',
-         # 'place': 'Guanajuato, M\xc3\xa9xico',
-         # 'institution': 'Centro de Investigaci\xc3\xb3n en Matem\xc3\xa1ticas (CIMAT)'}
+            # {'othereventtype': '',
+            # 'eventtype': 'seminary',
+            # 'eventName': 'Seminario Iterino del grupo de Representaciones de Algebras',
+            # 'assistancedate': '25/02/2016',
+            # 'place': 'Guanajuato, M\xc3\xa9xico',
+            # 'institution': 'Centro de Investigaci\xc3\xb3n en Matem\xc3\xa1ticas (CIMAT)'}
 
     def app2cv_conference(self, application, userid):
         logging.info('Conferencia: {0} - {1}'.format(application.id, userid))
