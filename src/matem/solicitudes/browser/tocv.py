@@ -66,13 +66,14 @@ class ApplicationstoCVForm(form.Form):
         # assistance
         if application.assistance:
             pass
-        #   self.app2cv_assistance(application, userid)
+            # self.app2cv_assistance(application, userid)
         # conferences
         if application.conferences:
             self.app2cv_conference(application, userid)
         # courses
         if application.courses:
-            self.app2cv_courses(application, userid)
+            pass
+            # self.app2cv_courses(application, userid)
         # sresearch
         if application.sresearch:
             self.app2cv_research(application, userid)
@@ -210,20 +211,43 @@ class ApplicationstoCVForm(form.Form):
         for i, item in enumerate(application.courses):
             pre = 'sc-{0}'.format(i)
             id = application.id.replace('solicitud', pre)
-
+            date = item['coursedate'].split('/')
+            begin_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
+            hours = ''
+            if unicode(item['duration']).isnumeric():
+                hours = item['duration']
+            institution = self.lookupInstitution(item['institution'])
+            otherinstitution = ''
+            if institution is None:
+                otherinstitution = item['institution']
             fields = {
+                'courseName': item['title'],
+                'level': item['level'],
+                'otherLevel': item['otherlevel'],
+                'coursetype': u'other',
+                'duration': u'otro',
+                'numberOfHours': hours,
+                'hourType': u'in-total',
+                'institutionCountry': application.pais[0],
+                'institution': institution,
+                'otherinstitution': otherinstitution,
+                'eventNotes': item['eventName'],
+                'begin_date': begin_date,
                 'creators': ([userid, 'admin'])}
-            # obj = api.content.create(
-            #     type=content_type,
-            #     id=id,
-            #     title=item[''],
-            #     container=folder,
-            #     **fields)
-            # ({'objective': 'Trabajar en nuestro proyecto de investigacion acerca de Distributed Fault-tolerant Checkability apoyado por CONACYT-ECOS-NORD',
-            # 'hostresearcher': '',
-            # 'sresearchinitdate': '20/02/2016',
-            # 'institution': 'Universit\xc3\xa9 Paris Diderot - Paris 7',
-            # 'sresearchenddate': '29/02/2016'},)
+            obj = api.content.create(
+                type=content_type,
+                id=id,
+                container=folder,
+                **fields)
+                # ({'coursetype': ['human_resources'],
+                # 'level': 'bachelor',
+                # 'title': 'Formas cuadr\xc3\xa1ticas (Minicurso)',
+                # 'eventName': 'X jornadas de f\xc3\xadsica y matem\xc3\xa1ticas de la UACJ',
+                # 'place': 'Chihuahua, M\xc3\xa9xico',
+                # 'duration': '',
+                # 'coursedate': '18/04/2016',
+                # 'otherlevel': '',
+                # 'institution': 'Universidad Aut\xc3\xb3noma de Ciudad Ju\xc3\xa1rez (UACJ)'},)
 
     def app2cv_research(self, application, userid):
         logging.info('Estancias de Inv: {0} - {1}'.format(application.id, userid))
@@ -235,12 +259,12 @@ class ApplicationstoCVForm(form.Form):
 
             fields = {
                 'creators': ([userid, 'admin'])}
-            # obj = api.content.create(
-            #     type=content_type,
-            #     id=id,
-            #     title=item[''],
-            #     container=folder,
-            #     **fields)
+            obj = api.content.create(
+                type=content_type,
+                id=id,
+                title=item[''],
+                container=folder,
+                **fields)
             # ({'objective': 'Trabajar en nuestro proyecto de investigacion acerca de Distributed Fault-tolerant Checkability apoyado por CONACYT-ECOS-NORD',
             # 'hostresearcher': '',
             # 'sresearchinitdate': '20/02/2016',
