@@ -136,7 +136,6 @@ class ApplicationstoCVForm(form.Form):
         for i, item in enumerate(application.conferences):
             pre = 'sconf-{0}'.format(i)
             id = application.id.replace('solicitud', pre)
-
             fields = {}
             fields['creators'] = ([userid, 'admin'])
 
@@ -144,56 +143,74 @@ class ApplicationstoCVForm(form.Form):
                 content_type = 'CVConferencePlus'
             else:
                 content_type = 'CVConference'
-                # Campos que sólo los tiene conference
+                # #### Campos que sólo los tiene conference ###
 
-                # En solicitudes: congress, seminary, coloquio, school, workshop, other
                 # En conference: u'conference', u'discussion_metting'
                 fields['modality'] = u'conference'
 
                 # En solicitudes: 'invitation', 'application'
                 # En conference: u'invitation', u'application'
-                fields['assist'] = item['participationtype']
+                fields['assist'] = unicode(item['participationtype'])
 
             folder = self.get_folder(userid, content_type)
 
-            date = item['conferencedate'].split('/')
-            event_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
+            if item['conferencedate']:
+                date = item['conferencedate'].split('/')
+                event_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
+            else:
+                date = application.fecha_desde
+                event_date = {'Year': str(date.year()), 'Month': date.mm(), 'Day': date.dd()}
+            fields['event_date'] = event_date
 
-            for confvalue in item['conferencetype']:
-                # Puedes elegir varios tipos en la solicitud y en el contenido
-                # sólo uno: research, divulgation, human_resources
-                # en solicitud son str y en contenidos son unicode
-                conftype = confvalue
+            # Puedes elegir varios tipos en la solicitud y en el contenido
+            # sólo uno: u'research', u'divulgation', u'human_resources'
+            # en solicitud son str y en contenidos son unicode
+            conferencetypes = item['conferencetype']
+            conftype = u'divulgation'
+            speakto = u'Público en general'
+            if 'research' in conferencetypes:
+                conftype = u'research'
+                speakto = u'Investigadores'
+            else:
+                if 'human_resources' in conferencetypes:
+                    conftype = u'human_resources'
+                    speakto = u'Estudiantes'
+            fields['conftype'] = conftype
+            fields['speakto'] = speakto
+
+            # En solicitudes: congress, seminary, coloquio, school, workshop, other
+            fields['eventtype'] = unicode(item['eventtype'])
 
             meetingName = item['eventName']
+            fields['meetingName'] = meetingName
 
             # En conferencias: u'metting', u'institution', u'other'
             if item['institution']:
                 where = u'institution'
-                fields['otherinstitution'] = item['institution']
-
+                newinst = self.lookupInstitution(item['institution'])
+                if newinst is None:
+                    fields['otherinstitution'] = item['institution']
+                else:
+                    fields['institution'] = newinst
             else:
                 where = u'other'
                 fields['other'] = item['place']
 
-            fields['institutionCountry'] = 'MX'
+            fields['where'] = where
+
+            fields['institutionCountry'] = application.pais[0]
             countries = self.getCountriesVocabulary()
             for country in item['place'].split(' '):
                 ncountry = country.replace(',', '').replace('.', '')
                 iscountry = countries.get(idn.normalize(ncountry), '')
                 if iscountry:
                     fields['institutionCountry'] = iscountry
-
-            fields['event_date'] = event_date
-            fields['conftype'] = conftype
-            fields['meetingName'] = meetingName
-            fields['where'] = where
-            # obj = api.content.create(
-            #     type=content_type,
-            #     id=id,
-            #     title=item['title'],
-            #     container=folder,
-            #     **fields)
+            obj = api.content.create(
+                type=content_type,
+                id=id,
+                title=item['title'],
+                container=folder,
+                **fields)
             # ({'conferencedate': '10/01/2016',
             # 'conferencetype': ['research'],
             # 'title': 'Algebraic differential equations with single-valued solutions',
