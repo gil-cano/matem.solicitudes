@@ -10,6 +10,11 @@ from z3c.form import button
 from z3c.form import form
 from zope import event
 
+
+from zope.component.hooks import getSite
+from Products.ATCountryWidget.config import COUNTRIES
+from plone.i18n.normalizer import idnormalizer as idn
+
 import logging
 
 
@@ -92,12 +97,12 @@ class ApplicationstoCVForm(form.Form):
                 'institution': institution,
                 'otherinstitution': otherinstitution,
                 'creators': ([userid, 'admin'])}
-            obj = api.content.create(
-                type=content_type,
-                id=id,
-                title=item['eventName'],
-                container=folder,
-                **fields)
+            # obj = api.content.create(
+            #     type=content_type,
+            #     id=id,
+            #     title=item['eventName'],
+            #     container=folder,
+            #     **fields)
         # {'othereventtype': '',
          # 'eventtype': 'seminary',
          # 'eventName': 'Seminario Iterino del grupo de Representaciones de Algebras',
@@ -105,19 +110,83 @@ class ApplicationstoCVForm(form.Form):
          # 'place': 'Guanajuato, M\xc3\xa9xico',
          # 'institution': 'Centro de Investigaci\xc3\xb3n en Matem\xc3\xa1ticas (CIMAT)'}
 
+    def getCountriesVocabulary(self):
+        translation_service = getSite().translation_service
+        sorted_list = [x for x in COUNTRIES.iteritems()]
+        # sorted_list.append(('', ''))
+        spanish_list =[(x[0],translation_service.translate(x[1], domain="plone", target_language="es"))  for x in sorted_list]
+        spanish_list.sort(key=lambda x: idn.normalize(x[1]))
+
+        foo = {}
+        for ctry in spanish_list:
+            foo[idn.normalize(ctry[1])] = ctry[0]
+        # return DisplayList(spanish_list)
+        return foo
+
     def app2cv_conference(self, application, userid):
         logging.info('Conferencia: {0} - {1}'.format(application.id, userid))
-        content_type = 'CVConference'
-        folder = self.get_folder(userid, content_type)
+        # content_type = 'CVConference'
+        # folder = self.get_folder(userid, content_type)
         for i, item in enumerate(application.conferences):
             pre = 'sconf-{0}'.format(i)
             id = application.id.replace('solicitud', pre)
-            fields = {
-                'creators': ([userid, 'admin'])}
+
+            fields = {}
+            fields['creators'] = ([userid, 'admin'])
+
+            if item['isplenary'] == 'yes':
+                content_type = 'CVConferencePlus'
+            else:
+                content_type = 'CVConference'
+                # Campos que sólo los tiene conference
+
+                # En solicitudes: congress, seminary, coloquio, school, workshop, other
+                # En conference: u'conference', u'discussion_metting'
+                fields['modality'] = u'conference'
+
+                # En solicitudes: 'invitation', 'application'
+                # En conference: u'invitation', u'application'
+                fields['assist'] = item['participationtype']
+
+            folder = self.get_folder(userid, content_type)
+
+            date = item['conferencedate'].split('/')
+            event_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
+
+            for confvalue in item['conferencetype']:
+                # Puedes elegir varios tipos en la solicitud y en el contenido
+                # sólo uno: research, divulgation, human_resources
+                # en solicitud son str y en contenidos son unicode
+                conftype = confvalue
+
+            meetingName = item['eventName']
+
+            # En conferencias: u'metting', u'institution', u'other'
+            if item['institution']:
+                where = u'institution'
+                fields['otherinstitution'] = item['institution']
+
+            else:
+                where = u'other'
+                fields['other'] = item['place']
+
+            fields['institutionCountry'] = 'MX'
+            countries = self.getCountriesVocabulary()
+            for country in item['place'].split(' '):
+                ncountry = country.replace(',', '').replace('.', '')
+                iscountry = countries.get(idn.normalize(ncountry), '')
+                if iscountry:
+                    fields['institutionCountry'] = iscountry
+
+            fields['event_date'] = event_date
+            fields['conftype'] = conftype
+            fields['meetingName'] = meetingName
+            fields['where'] = where
+        
             # obj = api.content.create(
             #     type=content_type,
             #     id=id,
-            #     title=item[''],
+            #     title=item['title'],
             #     container=folder,
             #     **fields)
             # ({'conferencedate': '10/01/2016',
