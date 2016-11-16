@@ -42,10 +42,10 @@ class ApplicationstoCVForm(form.Form):
             userid = application.getIdOwner()
             if brain.id in aux_folder:
                 application = aux_folder[brain.id]
-            prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
+            # prides = ['rajsbaum', 'folchgab', 'dolivero', 'flopez', 'geronimo', 'adolfo', 'acano', 'omendoza']
             # # prides = ['rajsbaum', ]
-            if userid not in prides:
-                continue
+            # if userid not in prides:
+            #     continue
             if isinstance(application, Solicitud):
                 self.app2cv(application, userid)
             # if isinstance(application, SolicitudVisitante):
@@ -69,6 +69,7 @@ class ApplicationstoCVForm(form.Form):
             # self.app2cv_assistance(application, userid)
         # conferences
         if application.conferences:
+            pass
             self.app2cv_conference(application, userid)
         # courses
         if application.courses:
