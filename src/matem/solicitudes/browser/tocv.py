@@ -312,6 +312,73 @@ class ApplicationstoCVForm(form.Form):
             id = application.id.replace('solicitud', pre)
             fields = {
                 'creators': ([userid, 'admin'])}
+
+            # 'activitytype',
+            # En solicitudes: 'research', 'divulgation', 'human_resources'
+            # En eventorg: u'researcher', u'rhuman', u'divulgation'
+            newactivitiestype = []
+            activitiestype = item['activitytype']
+            if 'research' in activitiestype:
+                newactivitiestype.append(u'researcher')
+            if 'divulgation' in activitiestype:
+                newactivitiestype.append(u'divulgation')
+            if 'human_resources' in activitiestype:
+                newactivitiestype.append(u'rhuman')
+            fields['speakto'] = newactivitiestype
+    
+            # 'eventName'
+            # En eventorg es 'meetingName'
+            fields['meetingName'] = item['eventName']
+
+            # 'level',
+            # En solicitudes: 'phd', 'master', 'bachelor', 'highschool', 'other'
+            # En eventorg: u'phd', u'master', u'bachelor', u'highschool', 'other'
+            newlevels = []
+            for level in item['level']:
+                newlevels.append(unicode(level))
+            fields['level'] = newlevels
+
+            # 'otherlevel',
+            fields['otherlevel'] = item['otherlevel']
+
+            # 'researcherposition',
+            # En solicitudes: 'organizer', 'co-organizer', 'responsible', 'scientific', 'localc', 'directivec', 'other'
+            fields['researcherposition'] = item['researcherposition']
+
+            # 'otherresearcherposition',
+            fields['otherresearcherposition'] = item['otherresearcherposition']
+
+            # 'sessionName',
+            fields['sessionName'] = item['sessionName']
+
+
+            # 'imposition',
+            # En solicitudes: 'sponsor', 'campus', 'support' (Support for the diffusion), 'other'
+            # En eventorg: u'campus', u'organizer', u'co-organizer', u'sponsor'
+            # En solicitudes es multiselection y en eventorg no
+            fields['instituteParticipation'] = item['imposition']
+
+            # 'otherimposition',
+
+            # 'speakersint',
+            fields['foreignSpeakers'] = item['speakersint']
+
+            # 'speakersnac',
+            fields['nationalSpeakers'] = item['speakersnac']
+
+            # 'assistants',
+            fields['assistants'] = item['assistants']
+
+
+            # 'organizationdate',
+            if item['organizationdate']:
+                date = item['organizationdate'].split('/')
+                event_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
+            else:
+                date = application.event_date
+                event_date = {'Year': str(date.year()), 'Month': date.mm(), 'Day': date.dd()}
+            fields['event_date'] = event_date
+
             # obj = api.content.create(
             #     type=content_type,
             #     id=id,
