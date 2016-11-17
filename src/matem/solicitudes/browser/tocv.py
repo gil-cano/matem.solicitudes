@@ -274,8 +274,22 @@ class ApplicationstoCVForm(form.Form):
         for i, item in enumerate(application.sresearch):
             pre = 'sv-{0}'.format(i)
             id = application.id.replace('solicitud', pre)
-
+            date = item['sresearchinitdate'].split('/')
+            begin_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
+            date = item['sresearchenddate'].split('/')
+            end_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
+            institution = self.lookupInstitution(item['institution'])
+            otherinstitution = ''
+            if institution is None:
+                otherinstitution = item['institution']
             fields = {
+                'institutionCountry': application.pais[0],
+                'institution': institution,
+                'otherinstitution': otherinstitution,
+                'begin_date': begin_date,
+                'end_date': end_date,
+                'goalVisit': item['objective'],
+                'researchVisit': True,
                 'creators': ([userid, 'admin'])}
             obj = api.content.create(
                 type=content_type,
