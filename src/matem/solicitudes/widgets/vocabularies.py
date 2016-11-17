@@ -83,6 +83,7 @@ class ExpectedNumbersVocabulary:
 
     def getDisplayList(self, instance):
         return DisplayList([
+            ('stage0', _(u'No one')),
             ('stage1', _(u'1 - 20')),
             ('stage2', _(u'21 - 40')),
             ('stage3', _(u'41 - 60')),
