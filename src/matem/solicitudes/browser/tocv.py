@@ -70,14 +70,15 @@ class ApplicationstoCVForm(form.Form):
         # conferences
         if application.conferences:
             pass
-            self.app2cv_conference(application, userid)
+            # self.app2cv_conference(application, userid)
         # courses
         if application.courses:
             pass
             # self.app2cv_courses(application, userid)
         # sresearch
         if application.sresearch:
-            self.app2cv_research(application, userid)
+            pass
+            # self.app2cv_research(application, userid)
         # organization
         if application.organization:
             self.app2cv_organization(application, userid)
@@ -325,10 +326,10 @@ class ApplicationstoCVForm(form.Form):
             if 'human_resources' in activitiestype:
                 newactivitiestype.append(u'rhuman')
             fields['speakto'] = newactivitiestype
-    
+
             # 'eventName'
             # En eventorg es 'meetingName'
-            fields['meetingName'] = item['eventName']
+            # fields['title'] = item['eventName']
 
             # 'level',
             # En solicitudes: 'phd', 'master', 'bachelor', 'highschool', 'other'
@@ -354,37 +355,67 @@ class ApplicationstoCVForm(form.Form):
 
             # 'imposition',
             # En solicitudes: 'sponsor', 'campus', 'support' (Support for the diffusion), 'other'
-            # En eventorg: u'campus', u'organizer', u'co-organizer', u'sponsor'
+            # En eventorg: u'sponsor', u'campus', u'organizer', u'co-organizer', u'support', u'other'
             # En solicitudes es multiselection y en eventorg no
-            fields['instituteParticipation'] = item['imposition']
+            impositions = item['imposition']
+            instituteParticipation = u'other'
+            if 'campus' in impositions:
+                instituteParticipation = u'campus'
+            else:
+                if 'sponsor' in impositions:
+                    instituteParticipation = u'sponsor'
+                else:
+                    if 'support' in impositions:
+                        instituteParticipation = u'support'
+
+            fields['instituteParticipation'] = instituteParticipation
 
             # 'otherimposition',
+            fields['otherimposition'] = item['otherimposition']
 
             # 'speakersint',
-            fields['foreignSpeakers'] = item['speakersint']
+            # Values of ExpectedNumbersVocabulary:
+            nassistants = {
+                'stage1': '1 - 20',
+                'stage2': '21 - 40',
+                'stage3': '41 - 60',
+                'stage4': '61 - 80',
+                'stage5': '80 - 100',
+                'stage6': 'More than 100',
+            }
+
+            fields['foreignSpeakers'] = nassistants.get(item['speakersint'], '0')
 
             # 'speakersnac',
-            fields['nationalSpeakers'] = item['speakersnac']
+            fields['nationalSpeakers'] = nassistants.get(item['speakersnac'], '0')
 
             # 'assistants',
-            fields['assistants'] = item['assistants']
-
+            fields['assistants'] = nassistants.get(item['assistants'], '0')
 
             # 'organizationdate',
             if item['organizationdate']:
                 date = item['organizationdate'].split('/')
                 event_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
             else:
-                date = application.event_date
+                date = application.fecha_desde
                 event_date = {'Year': str(date.year()), 'Month': date.mm(), 'Day': date.dd()}
             fields['event_date'] = event_date
 
-            # obj = api.content.create(
-            #     type=content_type,
-            #     id=id,
-            #     title=item[''],
-            #     container=folder,
-            #     **fields)
+            # En eventorg: u'national', u'international', u'international-mx'
+            if application.pais[0] == 'MX':
+                fields['eventType'] = u'international-mx'
+            else:
+                fields['eventType'] = u'international'
+
+            fields['country'] = application.pais[0]
+            fields['city'] = application.ciudad_pais
+
+            obj = api.content.create(
+                type=content_type,
+                id=id,
+                title=item['eventName'],
+                container=folder,
+                **fields)
             # ({'otherimposition': '',
             # 'imposition': [],
             # 'level': ['phd', 'master', 'bachelor'],
