@@ -77,8 +77,7 @@ class ApplicationstoCVForm(form.Form):
             self.app2cv_research(application, userid)
         # organization
         if application.organization:
-            pass
-            # self.app2cv_organization(application, userid)
+            self.app2cv_organization(application, userid)
 
     def app2cv_assistance(self, application, userid):
         logging.info('Asistencia: {0} - {1}'.format(application.id, userid))
