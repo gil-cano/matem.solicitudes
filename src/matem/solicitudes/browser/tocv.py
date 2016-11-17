@@ -70,17 +70,19 @@ class ApplicationstoCVForm(form.Form):
         # conferences
         if application.conferences:
             pass
-            self.app2cv_conference(application, userid)
+            # self.app2cv_conference(application, userid)
         # courses
         if application.courses:
             pass
             # self.app2cv_courses(application, userid)
         # sresearch
         if application.sresearch:
+            # pass
             self.app2cv_research(application, userid)
         # organization
         if application.organization:
-            self.app2cv_organization(application, userid)
+            pass
+            # self.app2cv_organization(application, userid)
 
     def app2cv_assistance(self, application, userid):
         logging.info('Asistencia: {0} - {1}'.format(application.id, userid))
@@ -238,10 +240,15 @@ class ApplicationstoCVForm(form.Form):
             otherinstitution = ''
             if institution is None:
                 otherinstitution = item['institution']
+            coursetype = {
+                'research': u'researcher',
+                'divulgation': u'divulgation',
+                'human_resources': u'rhuman'}
             fields = {
                 'courseName': item['title'],
                 'level': item['level'],
                 'otherLevel': item['otherlevel'],
+                'speaktype': [coursetype[i] for i in item['coursetype']],
                 'coursetype': u'other',
                 'duration': u'otro',
                 'numberOfHours': hours,
@@ -294,7 +301,6 @@ class ApplicationstoCVForm(form.Form):
             obj = api.content.create(
                 type=content_type,
                 id=id,
-                title=item[''],
                 container=folder,
                 **fields)
             # ({'objective': 'Trabajar en nuestro proyecto de investigacion acerca de Distributed Fault-tolerant Checkability apoyado por CONACYT-ECOS-NORD',
