@@ -3,17 +3,11 @@
 from matem.solicitudes.content.solicitud import Solicitud
 from matem.solicitudes.content.solicitudvisitante import SolicitudVisitante
 from plone import api
-from Products.Archetypes.event import ObjectInitializedEvent
-from Products.Archetypes.event import ObjectEditedEvent
-from unidecode import unidecode
+from plone.i18n.normalizer import idnormalizer as idn
+from Products.ATCountryWidget.config import COUNTRIES
 from z3c.form import button
 from z3c.form import form
-from zope import event
-
-
 from zope.component.hooks import getSite
-from Products.ATCountryWidget.config import COUNTRIES
-from plone.i18n.normalizer import idnormalizer as idn
 
 import logging
 
@@ -28,11 +22,10 @@ class ApplicationstoCVForm(form.Form):
         folder = api.content.get(
             path='/servicios/servicios-internos/solicitudes/2016')
         catalog = api.portal.get_tool('portal_catalog')
-        # 'Solicitud', 'SolicitudInstitucional', 'SolicitudVisitante'
         brains = catalog(
             path={'query': '/'.join(folder.getPhysicalPath()), 'depth': 1},
             review_state='aprobada',
-            portal_type=('Solicitud'),
+            portal_type=('Solicitud', 'SolicitudInstitucional', 'SolicitudVisitante'),
             sort_on='created')
         for brain in brains:
             # test for applications in old format
@@ -47,9 +40,8 @@ class ApplicationstoCVForm(form.Form):
             #     continue
             if isinstance(application, Solicitud):
                 self.app2cv(application, userid)
-            # if isinstance(application, SolicitudVisitante):
-            #     self.app2cv_guest(application, userid)
-
+            if isinstance(application, SolicitudVisitante):
+                self.app2cv_guest(application, userid)
         logging.info('Done')
 
     def get_folder(self, userid, content_type, metacv=True):
@@ -64,8 +56,7 @@ class ApplicationstoCVForm(form.Form):
         """Splits an application in cvitems."""
         # assistance
         if application.assistance:
-            pass
-            # self.app2cv_assistance(application, userid)
+            self.app2cv_assistance(application, userid)
         # conferences
         if application.conferences:
             self.app2cv_conference(application, userid)
@@ -101,7 +92,7 @@ class ApplicationstoCVForm(form.Form):
                 'institution': institution,
                 'otherinstitution': otherinstitution,
                 'creators': ([userid, 'admin'])}
-            obj = api.content.create(
+            api.content.create(
                 type=content_type,
                 id=id,
                 title=item['eventName'],
@@ -203,7 +194,7 @@ class ApplicationstoCVForm(form.Form):
                 iscountry = countries.get(idn.normalize(ncountry), '')
                 if iscountry:
                     fields['institutionCountry'] = iscountry
-            obj = api.content.create(
+            api.content.create(
                 type=content_type,
                 id=id,
                 title=item['title'],
@@ -254,20 +245,20 @@ class ApplicationstoCVForm(form.Form):
                 'eventNotes': item['eventName'],
                 'begin_date': begin_date,
                 'creators': ([userid, 'admin'])}
-            obj = api.content.create(
+            api.content.create(
                 type=content_type,
                 id=id,
                 container=folder,
                 **fields)
-                # ({'coursetype': ['human_resources'],
-                # 'level': 'bachelor',
-                # 'title': 'Formas cuadr\xc3\xa1ticas (Minicurso)',
-                # 'eventName': 'X jornadas de f\xc3\xadsica y matem\xc3\xa1ticas de la UACJ',
-                # 'place': 'Chihuahua, M\xc3\xa9xico',
-                # 'duration': '',
-                # 'coursedate': '18/04/2016',
-                # 'otherlevel': '',
-                # 'institution': 'Universidad Aut\xc3\xb3noma de Ciudad Ju\xc3\xa1rez (UACJ)'},)
+            # ({'coursetype': ['human_resources'],
+            # 'level': 'bachelor',
+            # 'title': 'Formas cuadr\xc3\xa1ticas (Minicurso)',
+            # 'eventName': 'X jornadas de f\xc3\xadsica y matem\xc3\xa1ticas de la UACJ',
+            # 'place': 'Chihuahua, M\xc3\xa9xico',
+            # 'duration': '',
+            # 'coursedate': '18/04/2016',
+            # 'otherlevel': '',
+            # 'institution': 'Universidad Aut\xc3\xb3noma de Ciudad Ju\xc3\xa1rez (UACJ)'},)
 
     def app2cv_research(self, application, userid):
         logging.info('Estancias de Inv: {0} - {1}'.format(application.id, userid))
@@ -293,7 +284,7 @@ class ApplicationstoCVForm(form.Form):
                 'goalVisit': item['objective'],
                 'researchVisit': True,
                 'creators': ([userid, 'admin'])}
-            obj = api.content.create(
+            api.content.create(
                 type=content_type,
                 id=id,
                 container=folder,
@@ -352,7 +343,6 @@ class ApplicationstoCVForm(form.Form):
             # 'sessionName',
             fields['sessionName'] = item['sessionName']
 
-
             # 'imposition',
             # En solicitudes: 'sponsor', 'campus', 'support' (Support for the diffusion), 'other'
             # En eventorg: u'sponsor', u'campus', u'organizer', u'co-organizer', u'support', u'other'
@@ -410,7 +400,7 @@ class ApplicationstoCVForm(form.Form):
             fields['country'] = application.pais[0]
             fields['city'] = application.ciudad_pais
 
-            obj = api.content.create(
+            api.content.create(
                 type=content_type,
                 id=id,
                 title=item['eventName'],
@@ -441,7 +431,7 @@ class ApplicationstoCVForm(form.Form):
         date = application.fecha_hasta
         end_date = {
             'Year': str(date.year()), 'Month': str(date.month()), 'Day': str(date.day())}
-        institution =  self.lookupInstitution(
+        institution = self.lookupInstitution(
             application.getInstitucion_procedencia())
         otherinstitution = ''
         if institution is None:
@@ -455,7 +445,7 @@ class ApplicationstoCVForm(form.Form):
             'end_date': end_date,
             'interchangeProgram': (application.getExchangeProgram() == 'yes') and 'si' or '',
             'creators': ([userid, 'admin'])}
-        obj = api.content.create(
+        api.content.create(
             type=content_type,
             id=id,
             title=application.invitado,
