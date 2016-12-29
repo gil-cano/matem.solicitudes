@@ -84,7 +84,7 @@ class ApplicationstoCVForm(form.Form):
         content_type = 'CVEvent'
         folder = self.get_folder(userid, content_type)
         for i, item in enumerate(application.assistance):
-            pre = 'se-{0}'.format(i)
+            pre = 'sea-{0}'.format(i)
             id = application.id.replace('solicitud', pre)
             date = item['assistancedate'].split('/')
             begin_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
