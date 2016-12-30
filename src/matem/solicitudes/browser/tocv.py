@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from matem.solicitudes.content.solicitud import Solicitud
+from matem.solicitudes.content.solicitudinstitucional import SolicitudInstitucional
 from matem.solicitudes.content.solicitudvisitante import SolicitudVisitante
 from plone import api
 from plone.i18n.normalizer import idnormalizer as idn
@@ -38,10 +39,12 @@ class ApplicationstoCVForm(form.Form):
             # prides = []
             # if userid not in prides:
             #     continue
-            if isinstance(application, Solicitud):
-                self.app2cv(application, userid)
-            if isinstance(application, SolicitudVisitante):
-                self.app2cv_guest(application, userid)
+            # if isinstance(application, Solicitud):
+            #     self.app2cv(application, userid)
+            # if isinstance(application, SolicitudVisitante):
+            #     self.app2cv_guest(application, userid)
+            if isinstance(application, SolicitudInstitucional):
+                self.app2cv_inst(application, userid)
         logging.info('Done')
 
     def get_folder(self, userid, content_type, metacv=True):
@@ -105,11 +108,57 @@ class ApplicationstoCVForm(form.Form):
             # 'place': 'Guanajuato, M\xc3\xa9xico',
             # 'institution': 'Centro de Investigaci\xc3\xb3n en Matem\xc3\xa1ticas (CIMAT)'}
 
+    def app2cv_inst(self, application, userid):
+        if not application.titulo_trabajo:
+            return
+        logging.info('Conferencia: {0} - {1}'.format(application.id, userid))
+        id = application.id.replace('solicitudinstitucional', 'siconf-')
+        fields = {}
+        fields['creators'] = ([userid, 'admin'])
+
+        content_type = 'CVConference'
+        fields['modality'] = u'conference'
+        fields['conftype'] = u'research'
+        # En solicitudes: congress, seminary, coloquio, school, workshop, other
+        fields['eventtype'] = u'congress'
+        fields['meetingName'] = application.event_title
+
+        date = application.fecha_desde
+        event_date = {'Year': str(date.year()), 'Month': date.mm(), 'Day': date.dd()}
+        fields['event_date'] = event_date
+
+        fields['assist'] = u'application'
+        folder = self.get_folder(userid, content_type)
+
+        fields['city'] = application.ciudad_pais
+        fields['where'] = application.ciudad_pais
+        fields['speakto'] = u'Investigadores'
+
+        # En conferencias: u'metting', u'institution', u'other'
+        institution = self.lookupInstitution(application.institucion)
+        fields['institution'] = institution
+        fields['otherinstitution'] = ''
+        if institution is None:
+            fields['otherinstitution'] = application.institucion
+            fields['institution'] = None
+
+        fields['institutionCountry'] = application.pais[0]
+        countries = self.getCountriesVocabulary()
+        iscountry = countries.get(application.pais[0], '')
+        if iscountry:
+            fields['institutionCountry'] = iscountry
+        api.content.create(
+            type=content_type,
+            id=id,
+            title=application.titulo_trabajo,
+            container=folder,
+            **fields)
+
     def getCountriesVocabulary(self):
         translation_service = getSite().translation_service
         sorted_list = [x for x in COUNTRIES.iteritems()]
         # sorted_list.append(('', ''))
-        spanish_list =[(x[0],translation_service.translate(x[1], domain="plone", target_language="es"))  for x in sorted_list]
+        spanish_list = [(x[0], translation_service.translate(x[1], domain="plone", target_language="es")) for x in sorted_list]
         spanish_list.sort(key=lambda x: idn.normalize(x[1]))
 
         foo = {}
@@ -463,7 +512,7 @@ class ApplicationstoCVForm(form.Form):
             sort_on='sortable_title')
         if brains:
             return brains[0].UID
-        logging.warning('Institution: "{0}" not in catalog'.format(institution))
+        logging.warning('Institution: not in catalog')
         return None
 
     def normalize(self, title):
