@@ -930,8 +930,8 @@ class SolicitudVisitante(BaseContent):
 
         envios.sort()
 
-        close_prep = DateTime('2016/09/28 23:58:00 GMT+0')
-        close_year = DateTime('2016/12/31 00:00:00 GMT+0')
+        close_prep = DateTime('2017/12/30 23:58:00 GMT+0')
+        close_year = DateTime('2017/12/31 00:00:00 GMT+0')
         pasaje_value = float(REQUEST.get('cantidad_pasaje', 0))
         viaticos_value = float(REQUEST.get('cantidad_viaticos', 0))
 
@@ -1477,7 +1477,7 @@ La cantidad total que se le ha aprobado en lo que va del año: %s.
             return "Revision por Consejo Interno"
 
     def getDefaultDate(self):
-        return DateTime('2016/1/1')
+        return DateTime('2017/1/1')
 
     def getPersonWrapper(self, userid):
         mb = getToolByName(self, MEMBRANE_TOOL)
