@@ -893,6 +893,7 @@ schema = BaseSchema + Schema((
     DataGridConferenceField(
         name='conferences',
         columns=(
+            'reportassist',
             'eventtype',
             'conferencetype',
             'title',
@@ -915,6 +916,10 @@ schema = BaseSchema + Schema((
                 'datagrid_conference.js'
             ),
             columns={
+                'reportassist': SelectColumn(
+                    _(u"wseportassist_label", default="Do you want report this activity in assistants for the next activities report?"),
+                    vocabulary=BooleanTypeVocabulary(), default='no',
+                ),
                 'eventtype': SelectColumn(
                     _(u"weventtype_label", default="Academic Activity Type"),
                     vocabulary=EventTypeVocabulary(),
