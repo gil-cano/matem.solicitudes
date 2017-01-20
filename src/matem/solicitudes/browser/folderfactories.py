@@ -135,7 +135,38 @@ events = {
             'objeto_viaje': 'Asistir al Segundo Encuentro de Estudiantes del Posgrado en Matemáticas'},
     },
     2017: {
-
+        'SMM': {
+            'event_title': 'L Congreso Nacional de la Sociedad Matemática Mexicana (L SMM 2017)',
+            'pais': 'MX',
+            'ciudad_pais': 'CDMX',
+            'institucion': 'Instituto de Matemáticas y la Facultad de Ciencias, UNAM',
+            'fecha_desde': '2017-10-22 00:00 ',
+            'fecha_hasta': '2017-10-27 00:00 ',
+            'objeto_viaje': 'Asistir al L Congreso Nacional de la Sociedad Matemática Mexicana (L SMM 2017)'},
+        'RSME-SMM': {
+            'event_title': 'IV Encuentro Conjunto entre la Real Sociedad Matemática Española y la Sociedad Matemática Mexicana (RSME-SMM)',
+            'pais': 'ES',
+            'ciudad_pais': 'Valladolid',
+            'institucion': 'Universidad de Valladolid',
+            'fecha_desde': '2017-06-19 00:00 ',
+            'fecha_hasta': '2017-06-22 00:00 ',
+            'objeto_viaje': 'Asistir al IV Encuentro Conjunto RSME-SMM'},
+        'PRIMA': {
+            'event_title': 'The Third Pacific Rim Mathematical Association (PRIMA)',
+            'pais': 'MX',
+            'ciudad_pais': 'Oaxaca',
+            'institucion': 'Instituto Tecnológico de Oaxaca',
+            'fecha_desde': '2017-09-14 00:00 ',
+            'fecha_hasta': '2017-09-18 00:00 ',
+            'objeto_viaje': 'Asistir a The Third Pacific Rim Mathematical Association'},
+        'CMA': {
+            'event_title': 'Congreso Matemático de las Américas (CMA 2017)',
+            'pais': 'CA',
+            'ciudad_pais': 'Montreal',
+            'institucion': 'Unversidad Mc Gill',
+            'fecha_desde': '2017-07-24 00:00 ',
+            'fecha_hasta': '2017-07-28 00:00 ',
+            'objeto_viaje': 'Asistir al Congreso Matemático de las Américas (CMA 2017)'},
     },
 }
 
