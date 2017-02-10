@@ -325,11 +325,13 @@
       </h3>
       <a tal:condition="items" href="javascript: printTable('pendientesRevisionComision')">Imprimir</a>
       <div class="tabularView">
-        Por favor seleccione las sedes que desea ver<br/>
+        <tal:block tal:condition="items">
+          Por favor seleccione las sedes que desea ver<br/>
           <tal:block tal:repeat="campus view/getCampus">
             <input type="checkbox" checked name="checkpendientes" id="checkpendientes" tal:attributes="value campus; onclick string:hideshowrow('$campus');"/>
             <span tal:content="campus"/>
           </tal:block>
+        </tal:block>
         <form action="#" method="post" id="pendientesDeRevisionComision"
               tal:condition="items" tal:attributes="action string:${context/absolute_url}/view">
           <table id = "tablescroll" class="listing" tal:condition="items">
