@@ -1621,3 +1621,6 @@ class SolicitudFolderView(BrowserView):
             extra_data[item['id']] = solicitud
 
         return extra_data
+
+    def getCampus(self):
+        return ['C.U.', 'Cuernavaca', 'Juriquilla', 'Oaxaca', 'Morelia']
