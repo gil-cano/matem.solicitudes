@@ -57,20 +57,31 @@
          var isChecked = document.getElementById(fieldName).checked;
          for (i=0; i<nodoCheck.length; i++){
              if (nodoCheck[i].type == "checkbox" && nodoCheck[i].disabled == false) {
+                console.log(nodoCheck[i]);
+                console.log(isChecked);
                  nodoCheck[i].checked = isChecked;
              }
          }
       }
 
+      /* Init case */
+      campuses = document.getElementsByName('checkpendientes')
+      for(i=0; i<campuses.length; i++){
+        rows = document.getElementsByClassName(campuses[i].value);
+        for(j=0; j<rows.length; j++){
+          rows[j].style.display = '';
+          rows[j].getElementsByTagName("input")[0].disabled = false
+        }
+      }
+
       function hideshowrow(campus) {
-        console.log('entre');
-        console.log(campus)
         campuses = document.getElementsByName('checkpendientes')
         for(i=0; i<campuses.length; i++){
           if (campuses[i].checked){
             rows = document.getElementsByClassName(campuses[i].value);
             for(j=0; j<rows.length; j++){
               rows[j].style.display = '';
+              rows[j].getElementsByTagName("input")[0].disabled = false
             }
           }
 
@@ -78,6 +89,7 @@
             rows = document.getElementsByClassName(campuses[i].value);
               for(k=0; k<rows.length; k++){
                 rows[k].style.display = 'none';
+                rows[k].getElementsByTagName("input")[0].disabled = true
               }
           }
 
