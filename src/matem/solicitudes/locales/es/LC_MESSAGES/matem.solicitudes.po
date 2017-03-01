@@ -532,7 +532,7 @@ msgid "help_objeto_viaje"
 msgstr "Escriba el objetivo esperado de la visita"
 
 msgid "help_pais"
-msgstr "País destino"
+msgstr "País que visitará"
 
 #. Default: "Country of origin"
 #: matem/solicitudes/content/solicitudvisitante.py:196
