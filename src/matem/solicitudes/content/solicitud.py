@@ -1655,7 +1655,7 @@ class Solicitud(BaseContent):
         act5 = self.gettext_organization()
         if act5 is not None:
             resumen.append(act5)
-        return self.getField('objeto_viaje').get(self) + ' ' + ', '.join(resumen)
+        return (self.getField('objeto_viaje').get(self) + ' ' + '. '.join(resumen)).replace('..', '.')
 
     def gettext_attendances(self):
         """"The text representation of  the attendances of the aplication."""
@@ -1732,7 +1732,17 @@ class Solicitud(BaseContent):
             return None
         if courses == ({},):
             return None
-        return 'Curso(s) a impartir' + str(len(courses))
+        if len(courses) > 1:
+            textcoursesobj = 'Cursos a impartir ' + str(len(courses)) + '. Con los títulos: '
+            titlescourses = []
+            for i in courses:
+                titlei = '"' + i['title'] + '"'
+                titlescourses.append(titlei)
+            textcoursesobj += ', '.join(titlescourses[:-1]) + ' y ' + titlescourses[-1] + '.'
+            return textcoursesobj
+        elif len(courses) == 1:
+            textcoursesobj = courses[0]['title']
+            return 'Curso a impartir: "' + courses[0]['title'] + '".'
 
     def gettext_research(self):
         """The text representation of the research of the application."""
