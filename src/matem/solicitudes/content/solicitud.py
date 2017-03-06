@@ -1733,7 +1733,7 @@ class Solicitud(BaseContent):
         if courses == ({},):
             return None
         if len(courses) > 1:
-            textcoursesobj = 'Cursos a impartir ' + str(len(courses)) + '. Con los títulos: '
+            textcoursesobj = 'Cursos a impartir ' + str(len(courses)) + ' con los títulos: '
             titlescourses = []
             for i in courses:
                 titlei = '"' + i['title'] + '"'
