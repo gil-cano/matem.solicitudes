@@ -415,15 +415,6 @@
                     </div>
                   </div>
                 </td>
-
-
-
-
-
-
-
-
-
                 <td tal:attributes="style python:extra_data[item['id']]['style-country']">
                   <span i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</span>
                   <span tal:replace="structure python:extra_data[item['id']]['style-country-text']"/>
