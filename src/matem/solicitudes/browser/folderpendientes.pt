@@ -109,8 +109,6 @@
           }
         }
 
-
-
       (function($) {
         $(document).ready(function(){
           $("input.DataGridDatepicker").datepicker({ dateFormat: 'dd/mm/yy' });
@@ -125,6 +123,45 @@
             "sScrollX": "100%",
             "sScrollXInner": "100%",
           });
+
+          var rows = document.getElementById('tablescroll').rows,
+            len = rows.length,
+            i,
+            cellNum = 2,
+            countcu = 0,
+            countcuernavaca = 0,
+            countjuriquilla = 0,
+            countoaxaca = 0,
+            countmorelia = 0,
+            cell;
+
+          for (i = 0; i < len; i++) {
+            cell = rows[i].cells[cellNum];
+            if (cell.innerHTML === 'C.U.') {
+                countcu++;
+            }
+            else if(cell.innerHTML === 'Cuernavaca'){
+              countcuernavaca++;
+            }
+            else if(cell.innerHTML === 'Cuernavaca'){
+              countcuernavaca++;
+            }
+            else if(cell.innerHTML === 'Juriquilla'){
+              countjuriquilla++;
+            }
+            else if(cell.innerHTML === 'Oaxaca'){
+              countoaxaca++;
+            }
+            else if(cell.innerHTML === 'Morelia'){
+              countmorelia++;
+            }
+          }
+          document.getElementById('valueC.U.').innerHTML = countcu;
+          document.getElementById('valueCuernavaca').innerHTML = countcuernavaca;
+          document.getElementById('valueJuriquilla').innerHTML = countjuriquilla;
+          document.getElementById('valueOaxaca').innerHTML = countoaxaca;
+          document.getElementById('valueMorelia').innerHTML = countmorelia;
+
         });
       })(jQuery);
 
@@ -357,6 +394,7 @@
           <tal:block tal:repeat="campus view/getCampus">
             <input type="checkbox" checked name="checkpendientes" id="checkpendientes" tal:attributes="value campus; onclick string:hideshowrow('$campus');"/>
             <span tal:content="campus"/>
+            (<b tal:attributes="id python:'value'+ campus">0</b>)
           </tal:block>
         </tal:block>
         <form action="#" method="post" id="pendientesDeRevisionComision"
@@ -397,12 +435,12 @@
                 <td tal:content="python:item['owner_name']">Solicitante</td>
                 <td>
                   <div tal:condition="python:item['objective']">
-                    <div tal:condition="python:len(item['objective'].split(' ')) > 10"
+                    <div tal:condition="python:len(item['objective'].split(' ')) > 20"
                       tal:define="uid python:item['id']; uidshow python:uid+'-show'; uidhide python:uid+'-hide';">
-                      <span tal:content="python:' '.join(item['objective'].split(' ')[:10])"/>
+                      <span tal:content="python:' '.join(item['objective'].split(' ')[:20])"/>
                         <a href="#" tal:attributes="id uidshow; onclick string:showHide('${uid}');; return false;;" class="showLink">&hellip;Ver más</a>
                         <span tal:attributes="id uid" class="more">
-                          <span tal:content="python:' '.join(item['objective'].split(' ')[10:])"/>
+                          <span tal:content="python:' '.join(item['objective'].split(' ')[20:])"/>
                           <p><a href="#"
                             tal:attributes="id uidhide; onclick string:showHide('${uid}');; return false;;"
                             class="hideLink"
@@ -410,7 +448,7 @@
                             i18n:translate="hide_objective">Ver menos</a></p>
                         </span>
                     </div>
-                    <div tal:condition="python:len(item['objective'].split(' ')) <= 10">
+                    <div tal:condition="python:len(item['objective'].split(' ')) <= 20">
                       <span tal:content="python:item['objective']"/>
                     </div>
                   </div>
