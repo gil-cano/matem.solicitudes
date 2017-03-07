@@ -96,6 +96,19 @@
         }
       }
 
+      function showHide(shID) {
+          if (document.getElementById(shID)) {
+            if (document.getElementById(shID+'-show').style.display != 'none') {
+              document.getElementById(shID+'-show').style.display = 'none';
+              document.getElementById(shID).style.display = 'block';
+            }
+            else {
+              document.getElementById(shID+'-show').style.display = 'inline';
+              document.getElementById(shID).style.display = 'none';
+            }
+          }
+        }
+
 
 
       (function($) {
@@ -113,7 +126,6 @@
             "sScrollXInner": "100%",
           });
         });
-
       })(jQuery);
 
     </script>
@@ -127,7 +139,7 @@
   <metal:css fill-slot="style_slot">
     <!-- width: -webkit-max-content; -->
     <style type="text/css">
-      div.position-3\3a 4 {margin-left:26.875%;} /* .position-3:4 */
+      div.position-3\3a 4 {margin-left:36.875%;} /* .position-3:4 */
       #contentActionMenus{
             visibility: hidden;
       }
@@ -153,6 +165,21 @@
         width: intrinsic !important;
         width: -moz-fit-content !important;
       }
+
+
+      /* This CSS is used for the Show/Hide functionality. */
+      .more {
+          display: none;
+      }
+      a.showLink, a.hideLink {
+          text-decoration: none;
+          color: #36f;
+          padding-left: 8px;
+      }
+      a.showLink:hover, a.hideLink:hover {
+        border-bottom: 1px dotted #36f;
+      }
+
 
     </style>
   </metal:css>
@@ -337,13 +364,14 @@
           <table id = "tablescroll" class="listing" tal:condition="items">
             <thead>
               <tr>
+                <th></th>
                 <th>
                   <input type="checkbox" name="allComision" id="allComision"
                       onclick="checkAll('pendientesDeRevisionComision','allComision');" /> </th>
                 <th>Sede</th>
                 <th i18n:translate="label_type">Type</th>
                 <th i18n:translate="label_solicitor">Solicitante</th>
-                <th i18n:translate="label_reason">Reason</th>
+                <th style="width: 300px;" i18n:translate="label_reason">Reason</th>
                 <th i18n:translate="label_place">Place</th>
                 <th i18n:translate="label_creation_date">Solicitud Creada</th>
                 <th i18n:translate="label_start_date">Fecha de Inicio</th>
@@ -359,6 +387,7 @@
             </thead>
               <tbody class="scrollable">
               <tr tal:attributes="class python:item['sede'];" tal:repeat="item python:items">
+                <td tal:content="repeat/item/number">number</td>
                 <td>
                   <input type="checkbox" name=""
                       tal:attributes="name python: '/'.join([item['parentid'], item['id']])" /> </td>
@@ -366,7 +395,35 @@
                 <td><a href="#" tal:attributes="href python:item['url']"
                       tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</a></td>
                 <td tal:content="python:item['owner_name']">Solicitante</td>
-                <td tal:content="python:item['objective']">Reason</td>
+                <td>
+                  <div tal:condition="python:item['objective']">
+                    <div tal:condition="python:len(item['objective'].split(' ')) > 10"
+                      tal:define="uid python:item['id']; uidshow python:uid+'-show'; uidhide python:uid+'-hide';">
+                      <span tal:content="python:' '.join(item['objective'].split(' ')[:10])"/>
+                        <a href="#" tal:attributes="id uidshow; onclick string:showHide('${uid}');; return false;;" class="showLink">&hellip;Ver más</a>
+                        <span tal:attributes="id uid" class="more">
+                          <span tal:content="python:' '.join(item['objective'].split(' ')[10:])"/>
+                          <p><a href="#"
+                            tal:attributes="id uidhide; onclick string:showHide('${uid}');; return false;;"
+                            class="hideLink"
+                            i18n:domain="matem.solicitudes"
+                            i18n:translate="hide_objective">Ver menos</a></p>
+                        </span>
+                    </div>
+                    <div tal:condition="python:len(item['objective'].split(' ')) <= 10">
+                      <span tal:content="python:item['objective']"/>
+                    </div>
+                  </div>
+                </td>
+
+
+
+
+
+
+
+
+
                 <td tal:attributes="style python:extra_data[item['id']]['style-country']">
                   <span i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</span>
                   <span tal:replace="structure python:extra_data[item['id']]['style-country-text']"/>
