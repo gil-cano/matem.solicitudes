@@ -96,6 +96,66 @@
         }
       }
 
+
+      function hideshowbyname(name) {
+        names = document.getElementsByName('checkpendientesnames')
+        nameschecked = []
+        cellAuthor = 4;
+        for(i=0; i<names.length; i++){
+          if (names[i].checked){
+            nameschecked.push(names[i].value)
+          }
+
+        }
+        var rows = document.getElementById('tablescroll').rows;
+        for(j=0; j<rows.length; j++){
+          cell = rows[j].cells[cellAuthor];
+          valuecell = cell.innerHTML;
+
+          if (nameschecked.indexOf(valuecell) >= 0) {
+            rows[j].style.display = 'table-row';
+            rows[j].getElementsByTagName("input")[0].disabled = false;
+          }
+          else{
+            rows[j].style.display = 'none';
+            rows[j].getElementsByTagName("input")[0].disabled = true
+          }
+
+        }
+
+      }
+
+
+      function toggleOption(thisselect) {
+        var selected = thisselect.options[thisselect.selectedIndex].value;
+        console.log(selected);
+        toggleRow(selected);
+      }
+
+      function toggleRow(id) {
+
+        var rows = document.getElementById('tablescroll').rows;
+          for(j=1; j<rows.length; j++){
+            cell = rows[j].cells[4];
+            valuecell = cell.innerHTML;
+            rows[j].style.display = ''
+            if (id === 'all-sol'){
+              rows[j].style.display = '';
+              rows[j].getElementsByTagName("input")[0].disabled = false;
+            }
+
+            else if (valuecell === id) {
+              rows[j].style.display = '';
+              rows[j].getElementsByTagName("input")[0].disabled = false;
+            }
+            else{
+              rows[j].style.display = 'none';
+              rows[j].getElementsByTagName("input")[0].disabled = true
+            }
+
+          }
+      }
+
       function showHide(shID) {
           if (document.getElementById(shID)) {
             if (document.getElementById(shID+'-show').style.display != 'none') {
@@ -124,6 +184,7 @@
             "sScrollXInner": "100%",
           });
 
+          /*this lines count the number of sol by campus */
           var rows = document.getElementById('tablescroll').rows,
             len = rows.length,
             i,
@@ -161,6 +222,28 @@
           document.getElementById('valueJuriquilla').innerHTML = countjuriquilla;
           document.getElementById('valueOaxaca').innerHTML = countoaxaca;
           document.getElementById('valueMorelia').innerHTML = countmorelia;
+
+          cellauthors = [];
+          dictauthors = {}
+          cellAuthor = 4;
+          vcell = '<option value="all-sol">Todos</option>'
+          for (i = 1; i < len; i++) {
+            cell = rows[i].cells[cellAuthor];
+            valuecell = cell.innerHTML;
+              if(!dictauthors.hasOwnProperty(valuecell)) {
+                cellauthors.push(valuecell);
+                dictauthors[valuecell] = 1;
+                vcell +=  '<option ';
+                vcell += 'value="';
+                vcell += valuecell;
+                vcell += '"';
+                vcell += '>'
+                vcell += valuecell;
+                vcell += '</option>';
+            }
+          }
+          document.getElementById('cellautorslist').innerHTML = vcell;
+
 
         });
       })(jQuery);
@@ -202,7 +285,6 @@
         width: intrinsic !important;
         width: -moz-fit-content !important;
       }
-
 
       /* This CSS is used for the Show/Hide functionality. */
       .more {
@@ -396,6 +478,10 @@
             <span tal:content="campus"/>
             (<b tal:attributes="id python:'value'+ campus">0</b>)
           </tal:block>
+
+          <select id="cellautorslist" onchange="toggleOption(this)">
+          </select>
+
         </tal:block>
         <form action="#" method="post" id="pendientesDeRevisionComision"
               tal:condition="items" tal:attributes="action string:${context/absolute_url}/view">
@@ -424,7 +510,7 @@
               </tr>
             </thead>
               <tbody class="scrollable">
-              <tr tal:attributes="class python:item['sede'];" tal:repeat="item python:items">
+              <tr tal:attributes="class python:item['sede']" tal:repeat="item python:items" style="display: '';">
                 <td tal:content="repeat/item/number">number</td>
                 <td>
                   <input type="checkbox" name=""
