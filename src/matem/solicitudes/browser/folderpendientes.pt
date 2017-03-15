@@ -64,71 +64,8 @@
          }
       }
 
-      /* Init case */
-      campuses = document.getElementsByName('checkpendientes')
-      for(i=0; i<campuses.length; i++){
-        rows = document.getElementsByClassName(campuses[i].value);
-        for(j=0; j<rows.length; j++){
-          rows[j].style.display = '';
-          rows[j].getElementsByTagName("input")[0].disabled = false
-        }
-      }
-
-      function hideshowrow(campus) {
-        campuses = document.getElementsByName('checkpendientes')
-        for(i=0; i<campuses.length; i++){
-          if (campuses[i].checked){
-            rows = document.getElementsByClassName(campuses[i].value);
-            for(j=0; j<rows.length; j++){
-              rows[j].style.display = '';
-              rows[j].getElementsByTagName("input")[0].disabled = false
-            }
-          }
-
-          else{
-            rows = document.getElementsByClassName(campuses[i].value);
-              for(k=0; k<rows.length; k++){
-                rows[k].style.display = 'none';
-                rows[k].getElementsByTagName("input")[0].disabled = true
-              }
-          }
-
-        }
-      }
-
-
-      function hideshowbyname(name) {
-        names = document.getElementsByName('checkpendientesnames')
-        nameschecked = []
-        cellAuthor = 4;
-        for(i=0; i<names.length; i++){
-          if (names[i].checked){
-            nameschecked.push(names[i].value)
-          }
-
-        }
-        var rows = document.getElementById('tablescroll').rows;
-        for(j=0; j<rows.length; j++){
-          cell = rows[j].cells[cellAuthor];
-          valuecell = cell.innerHTML;
-
-          if (nameschecked.indexOf(valuecell) >= 0) {
-            rows[j].style.display = 'table-row';
-            rows[j].getElementsByTagName("input")[0].disabled = false;
-          }
-          else{
-            rows[j].style.display = 'none';
-            rows[j].getElementsByTagName("input")[0].disabled = true
-          }
-
-        }
-
-      }
-
-
       function toggleOption(thisselect) {
         var selected = thisselect.options[thisselect.selectedIndex].value;
-        console.log(selected);
         toggleRow(selected);
       }
 
@@ -157,17 +94,17 @@
       }
 
       function showHide(shID) {
-          if (document.getElementById(shID)) {
-            if (document.getElementById(shID+'-show').style.display != 'none') {
-              document.getElementById(shID+'-show').style.display = 'none';
-              document.getElementById(shID).style.display = 'block';
-            }
-            else {
-              document.getElementById(shID+'-show').style.display = 'inline';
-              document.getElementById(shID).style.display = 'none';
-            }
+        if (document.getElementById(shID)) {
+          if (document.getElementById(shID+'-show').style.display != 'none') {
+            document.getElementById(shID+'-show').style.display = 'none';
+            document.getElementById(shID).style.display = 'block';
+          }
+          else {
+            document.getElementById(shID+'-show').style.display = 'inline';
+            document.getElementById(shID).style.display = 'none';
           }
         }
+      }
 
       (function($) {
         $(document).ready(function(){
@@ -196,7 +133,7 @@
             countmorelia = 0,
             cell;
 
-          for (i = 0; i < len; i++) {
+          for (i = 1; i < len; i++) {
             cell = rows[i].cells[cellNum];
             if (cell.innerHTML === 'C.U.') {
                 countcu++;
@@ -469,20 +406,22 @@
       <h3 tal:condition="items" i18n:translate="Pending for review by Special Comission">
         Pending for review by Special Comission
       </h3>
-      <a tal:condition="items" href="javascript: printTable('pendientesRevisionComision')">Imprimir</a>
-      <div class="tabularView">
-        <tal:block tal:condition="items">
-          Por favor seleccione las sedes que desea ver<br/>
+
+      <tal:block tal:condition="items">
           <tal:block tal:repeat="campus view/getCampus">
-            <input type="checkbox" checked name="checkpendientes" id="checkpendientes" tal:attributes="value campus; onclick string:hideshowrow('$campus');"/>
             <span tal:content="campus"/>
             (<b tal:attributes="id python:'value'+ campus">0</b>)
           </tal:block>
+          <br/>Para ver las solicitud(es) de un sólo académico seleccione su nombre<br/>
 
           <select id="cellautorslist" onchange="toggleOption(this)">
           </select>
-
+          <br/>
         </tal:block>
+
+      <a tal:condition="items" href="javascript: printTable('pendientesRevisionComision')">Imprimir</a>
+      <div class="tabularView">
+
         <form action="#" method="post" id="pendientesDeRevisionComision"
               tal:condition="items" tal:attributes="action string:${context/absolute_url}/view">
           <table id = "tablescroll" class="listing" tal:condition="items">
