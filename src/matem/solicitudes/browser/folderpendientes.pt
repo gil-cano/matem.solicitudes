@@ -154,11 +154,30 @@
               countmorelia++;
             }
           }
-          document.getElementById('valueC.U.').innerHTML = countcu;
-          document.getElementById('valueCuernavaca').innerHTML = countcuernavaca;
-          document.getElementById('valueJuriquilla').innerHTML = countjuriquilla;
-          document.getElementById('valueOaxaca').innerHTML = countoaxaca;
-          document.getElementById('valueMorelia').innerHTML = countmorelia;
+          if (countcu > 0){
+            document.getElementById('valueC.U.').innerHTML = countcu;
+          }
+
+          if (countcuernavaca > 0){
+            document.getElementById('valueCuernavaca').innerHTML = countcuernavaca;
+          }
+
+          if (countjuriquilla > 0){
+            document.getElementById('valueJuriquilla').innerHTML = countjuriquilla;
+          }
+
+          if (countoaxaca > 0){
+            document.getElementById('valueOaxaca').innerHTML = countoaxaca;
+          }
+
+          if (countmorelia > 0){
+            document.getElementById('valueMorelia').innerHTML = countmorelia;
+          }
+
+
+
+
+
 
           cellauthors = [];
           dictauthors = {}
@@ -401,7 +420,9 @@
     </span>
 
     <span name="pendientesRevisionComision" class="overflowable"
-          tal:define="items python:view.getSolicitudesPendientesRevisionComision(); extra_data python:view.getStyles(items)">
+          tal:define="all_items python:view.getSolicitudesPendientesRevisionComision();
+          items python:view.itemsVisible(all_items);
+          extra_data python:view.getStyles(items)">
 
       <h3 tal:condition="items" i18n:translate="Pending for review by Special Comission">
         Pending for review by Special Comission

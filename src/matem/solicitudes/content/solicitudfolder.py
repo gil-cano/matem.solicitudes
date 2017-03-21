@@ -22,7 +22,6 @@ from Products.DataGridField import DataGridWidget
 from Products.DataGridField.SelectColumn import SelectColumn
 from collective.datagridcolumns.MultiSelectColumn import MultiSelectColumn
 from matem.solicitudes.widgets.vocabularies import SolResponsibleVocabulary
-from zope.component.hooks import getSite
 
 
 import logging
@@ -65,7 +64,7 @@ schema = ATFolder.schema.copy() + Schema((
         widget=DataGridWidget(
             label=_(u"label_widget_useresponsible", default=u"Responsibles for view"),
             # helper_js=('datagridwidget.js', 'datagriddatepicker.js', 'datagrid_course.js'),
-            helper_js=('datagridwidget.js',),
+            helper_js=('datagridwidget.js', 'datagridwidget_patches.js', 'datagridmultiselect.js',),
             columns={
                 'nameresponsable': SelectColumn(
                     _(u"useresponsible_nameresponsable_label", default="Responsable name"),
