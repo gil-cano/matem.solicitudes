@@ -1626,7 +1626,13 @@ class SolicitudFolderView(BrowserView):
     def getCampus(self):
 
         current = api.user.get_current()
-        sedes = [comisionado['sede'] for comisionado in self.context.useresponsible if comisionado['nameresponsable'] == current.id]
+        usersrestrictedview = []
+        try:
+            usersrestrictedview = self.context.useresponsible
+        except AttributeError:
+            pass
+
+        sedes = [comisionado['sede'] for comisionado in usersrestrictedview if comisionado['nameresponsable'] == current.id]
         if sedes:
             return sedes[0]
 
@@ -1635,8 +1641,13 @@ class SolicitudFolderView(BrowserView):
     def itemsVisible(self, items):
         # comisionados = [comisionado['nameresponsable'] for comisionado in self.context.useresponsible]
         current = api.user.get_current()
+        usersrestrictedview = []
+        try:
+            usersrestrictedview = self.context.useresponsible
+        except AttributeError:
+            pass
         # if current.id in comisionados:
-        sedes = [comisionado['sede'] for comisionado in self.context.useresponsible if comisionado['nameresponsable'] == current.id]
+        sedes = [comisionado['sede'] for comisionado in usersrestrictedview if comisionado['nameresponsable'] == current.id]
         if sedes:
             subitems = []
             sedes = sedes[0]
