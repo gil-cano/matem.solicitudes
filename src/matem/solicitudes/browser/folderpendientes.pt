@@ -40,10 +40,9 @@
                condition="macro">
       <metal:block use-macro="macro" />
     </tal:block>
-
     <script type="text/javascript"
               charset="iso-8859-1">
-     function printTable(spanName){
+      function printTable(spanName){
          var head = "<html><head><\/head>";
          var body = document.getElementsByName(spanName)[0].innerHTML;
          var foot = "<\/body><\/html>";
@@ -53,28 +52,224 @@
          myWindow.print();
          myWindow.close();}
 
-     function checkAll(formName, fieldName) {
+      function checkAll(formName, fieldName) {
          var nodoCheck = document.getElementById(formName).getElementsByTagName("input");
          var isChecked = document.getElementById(fieldName).checked;
          for (i=0; i<nodoCheck.length; i++){
              if (nodoCheck[i].type == "checkbox" && nodoCheck[i].disabled == false) {
+                console.log(nodoCheck[i]);
+                console.log(isChecked);
                  nodoCheck[i].checked = isChecked;
              }
          }
-     }
+      }
 
-    (function($) {
-     $(document).ready(function(){
-        $("input.DataGridDatepicker").datepicker({ dateFormat: 'dd/mm/yy' });
-     });
-    })(jQuery);
+      function toggleOption(thisselect) {
+        var selected = thisselect.options[thisselect.selectedIndex].value;
+        toggleRow(selected);
+      }
 
+      function toggleRow(id) {
+
+        var rows = document.getElementById('tablescroll').rows;
+          for(j=1; j<rows.length; j++){
+            cell = rows[j].cells[4];
+            valuecell = cell.innerHTML;
+            rows[j].style.display = ''
+            if (id === 'all-sol'){
+              rows[j].style.display = '';
+              rows[j].getElementsByTagName("input")[0].disabled = false;
+            }
+
+            else if (valuecell === id) {
+              rows[j].style.display = '';
+              rows[j].getElementsByTagName("input")[0].disabled = false;
+            }
+            else{
+              rows[j].style.display = 'none';
+              rows[j].getElementsByTagName("input")[0].disabled = true
+            }
+
+          }
+      }
+
+      function showHide(shID) {
+        if (document.getElementById(shID)) {
+          if (document.getElementById(shID+'-show').style.display != 'none') {
+            document.getElementById(shID+'-show').style.display = 'none';
+            document.getElementById(shID).style.display = 'block';
+          }
+          else {
+            document.getElementById(shID+'-show').style.display = 'inline';
+            document.getElementById(shID).style.display = 'none';
+          }
+        }
+      }
+
+      /* Init case */
+      campuses = document.getElementsByName('checkpendientes')
+      for(i=0; i<campuses.length; i++){
+        rows = document.getElementsByClassName(campuses[i].value);
+        for(j=0; j<rows.length; j++){
+          rows[j].style.display = '';
+          rows[j].getElementsByTagName("input")[0].disabled = false
+        }
+      }
+
+      function hideshowrow(campus) {
+        var authorlistup = [];
+        var dictauthors = {};
+        campuses = document.getElementsByName('checkpendientes');
+        var authorlist = document.getElementById('cellautorslist');
+        for(i=0; i<campuses.length; i++){
+          if (campuses[i].checked){
+            rows = document.getElementsByClassName(campuses[i].value);
+            for(j=0; j<rows.length; j++){
+              rows[j].style.display = '';
+              rows[j].getElementsByTagName("input")[0].disabled = false;
+              valuecell = rows[j].cells[4].innerHTML;
+              if(!dictauthors.hasOwnProperty(valuecell)) {
+                authorlistup.push(valuecell);
+                dictauthors[valuecell] = 1;
+              }
+            }
+          }
+
+          else{
+            rows = document.getElementsByClassName(campuses[i].value);
+              for(k=0; k<rows.length; k++){
+                rows[k].style.display = 'none';
+                rows[k].getElementsByTagName("input")[0].disabled = true
+              }
+          }
+        }
+
+        updateSelectionList(authorlistup);
+      }
+
+      function updateSelectionList(authorslistup){
+
+        len = authorslistup.length,
+        vcell = '<option value="all-sol">Todos</option>'
+        for (i = 0; i < len; i++) {
+          valuecell = authorslistup[i];
+          vcell +=  '<option ';
+          vcell += 'value="';
+          vcell += valuecell;
+          vcell += '"';
+          vcell += '>'
+          vcell += valuecell;
+          vcell += '</option>';
+        }
+        document.getElementById('cellautorslist').innerHTML = vcell;
+      }
+
+
+      (function($) {
+        $(document).ready(function(){
+          $("input.DataGridDatepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+
+          $('#tablescroll').DataTable( {
+            "sScrollY": "600px",
+            "bPaginate": false,
+            "bScrollCollapse": true,
+            "bAutoWidth": true,
+            "info":     false,
+            "searching": false,
+            "sScrollX": "100%",
+            "sScrollXInner": "100%",
+          });
+
+          /*this lines count the number of sol by campus */
+          var rows = document.getElementById('tablescroll').rows,
+            len = rows.length,
+            i,
+            cellNum = 2,
+            countcu = 0,
+            countcuernavaca = 0,
+            countjuriquilla = 0,
+            countoaxaca = 0,
+            countmorelia = 0,
+            cell;
+
+          for (i = 1; i < len; i++) {
+            cell = rows[i].cells[cellNum];
+            if (cell.innerHTML === 'C.U.') {
+                countcu++;
+            }
+            else if(cell.innerHTML === 'Cuernavaca'){
+              countcuernavaca++;
+            }
+            else if(cell.innerHTML === 'Cuernavaca'){
+              countcuernavaca++;
+            }
+            else if(cell.innerHTML === 'Juriquilla'){
+              countjuriquilla++;
+            }
+            else if(cell.innerHTML === 'Oaxaca'){
+              countoaxaca++;
+            }
+            else if(cell.innerHTML === 'Morelia'){
+              countmorelia++;
+            }
+          }
+          if (countcu > 0){
+            document.getElementById('valueC.U.').innerHTML = countcu;
+          }
+
+          if (countcuernavaca > 0){
+            document.getElementById('valueCuernavaca').innerHTML = countcuernavaca;
+          }
+
+          if (countjuriquilla > 0){
+            document.getElementById('valueJuriquilla').innerHTML = countjuriquilla;
+          }
+
+          if (countoaxaca > 0){
+            document.getElementById('valueOaxaca').innerHTML = countoaxaca;
+          }
+
+          if (countmorelia > 0){
+            document.getElementById('valueMorelia').innerHTML = countmorelia;
+          }
+
+          cellauthors = [];
+          dictauthors = {}
+          cellAuthor = 4;
+          vcell = '<option value="all-sol">Todos</option>'
+          for (i = 1; i < len; i++) {
+            cell = rows[i].cells[cellAuthor];
+            valuecell = cell.innerHTML;
+              if(!dictauthors.hasOwnProperty(valuecell)) {
+                cellauthors.push(valuecell);
+                dictauthors[valuecell] = 1;
+                vcell +=  '<option ';
+                vcell += 'value="';
+                vcell += valuecell;
+                vcell += '"';
+                vcell += '>'
+                vcell += valuecell;
+                vcell += '</option>';
+            }
+          }
+          document.getElementById('cellautorslist').innerHTML = vcell;
+
+
+        });
+      })(jQuery);
+
+    </script>
+
+
+    <script type="text/javascript"
+      src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js">
     </script>
   </metal:javascript_head>
 
   <metal:css fill-slot="style_slot">
+    <!-- width: -webkit-max-content; -->
     <style type="text/css">
-      div.position-3\3a 4 {margin-left:26.875%;} /* .position-3:4 */
+      div.position-3\3a 4 {margin-left:36.875%;} /* .position-3:4 */
       #contentActionMenus{
             visibility: hidden;
       }
@@ -85,6 +280,36 @@
         .overflowable {
             overflow:scroll;
         }
+
+      #tablescroll{
+        table-layout: fixed;
+      }
+
+      .dataTables_scrollBody{
+        width: intrinsic !important;
+        width: -moz-fit-content !important;
+
+      }
+
+      .dataTables_scrollHead{
+        width: intrinsic !important;
+        width: -moz-fit-content !important;
+      }
+
+      /* This CSS is used for the Show/Hide functionality. */
+      .more {
+          display: none;
+      }
+      a.showLink, a.hideLink {
+          text-decoration: none;
+          color: #36f;
+          padding-left: 8px;
+      }
+      a.showLink:hover, a.hideLink:hover {
+        border-bottom: 1px dotted #36f;
+      }
+
+
     </style>
   </metal:css>
 
@@ -249,25 +474,44 @@
     </span>
 
     <span name="pendientesRevisionComision" class="overflowable"
-          tal:define="items python:view.getSolicitudesPendientesRevisionComision(); extra_data python:view.getStyles(items)">
+          tal:define="all_items python:view.getSolicitudesPendientesRevisionComision();
+          items python:view.itemsVisible(all_items);
+          extra_data python:view.getStyles(items)">
 
       <h3 tal:condition="items" i18n:translate="Pending for review by Special Comission">
         Pending for review by Special Comission
       </h3>
+
+      <tal:block tal:condition="items">
+          <tal:block tal:repeat="campus view/getCampus">
+
+            <input type="checkbox" checked name="checkpendientes" id="checkpendientes" tal:attributes="value campus; onclick string:hideshowrow('$campus');"/>
+            <span tal:content="campus"/>
+            (<b tal:attributes="id python:'value'+ campus">0</b>)
+          </tal:block>
+          <br/>Para ver las solicitud(es) de un sólo académico seleccione su nombre<br/>
+
+          <select id="cellautorslist" onchange="toggleOption(this)">
+          </select>
+          <br/>
+        </tal:block>
+
       <a tal:condition="items" href="javascript: printTable('pendientesRevisionComision')">Imprimir</a>
       <div class="tabularView">
+
         <form action="#" method="post" id="pendientesDeRevisionComision"
               tal:condition="items" tal:attributes="action string:${context/absolute_url}/view">
-          <table class="listing" border="1" width="100%" tal:condition="items">
-            <tbody>
+          <table id = "tablescroll" class="listing" tal:condition="items">
+            <thead>
               <tr>
+                <th></th>
                 <th>
                   <input type="checkbox" name="allComision" id="allComision"
                       onclick="checkAll('pendientesDeRevisionComision','allComision');" /> </th>
                 <th>Sede</th>
                 <th i18n:translate="label_type">Type</th>
                 <th i18n:translate="label_solicitor">Solicitante</th>
-                <th i18n:translate="label_reason">Reason</th>
+                <th style="width: 300px;" i18n:translate="label_reason">Reason</th>
                 <th i18n:translate="label_place">Place</th>
                 <th i18n:translate="label_creation_date">Solicitud Creada</th>
                 <th i18n:translate="label_start_date">Fecha de Inicio</th>
@@ -280,7 +524,10 @@
                 <th>Con cargo a:</th>
                 <th i18n:translate="label_fecha_revision_comision">Fecha de revision por la Comision Especial</th>
               </tr>
-              <tr tal:repeat="item python:items">
+            </thead>
+              <tbody class="scrollable">
+              <tr tal:attributes="class python:item['sede']" tal:repeat="item python:items" style="display: '';">
+                <td tal:content="repeat/item/number">number</td>
                 <td>
                   <input type="checkbox" name=""
                       tal:attributes="name python: '/'.join([item['parentid'], item['id']])" /> </td>
@@ -288,7 +535,26 @@
                 <td><a href="#" tal:attributes="href python:item['url']"
                       tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</a></td>
                 <td tal:content="python:item['owner_name']">Solicitante</td>
-                <td tal:content="python:item['objective']">Reason</td>
+                <td>
+                  <div tal:condition="python:item['objective']">
+                    <div tal:condition="python:len(item['objective'].split(' ')) > 20"
+                      tal:define="uid python:item['id']; uidshow python:uid+'-show'; uidhide python:uid+'-hide';">
+                      <span tal:content="python:' '.join(item['objective'].split(' ')[:20])"/>
+                        <a href="#" tal:attributes="id uidshow; onclick string:showHide('${uid}');; return false;;" class="showLink">&hellip;Ver más</a>
+                        <span tal:attributes="id uid" class="more">
+                          <span tal:content="python:' '.join(item['objective'].split(' ')[20:])"/>
+                          <p><a href="#"
+                            tal:attributes="id uidhide; onclick string:showHide('${uid}');; return false;;"
+                            class="hideLink"
+                            i18n:domain="matem.solicitudes"
+                            i18n:translate="hide_objective">Ver menos</a></p>
+                        </span>
+                    </div>
+                    <div tal:condition="python:len(item['objective'].split(' ')) <= 20">
+                      <span tal:content="python:item['objective']"/>
+                    </div>
+                  </div>
+                </td>
                 <td tal:attributes="style python:extra_data[item['id']]['style-country']">
                   <span i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</span>
                   <span tal:replace="structure python:extra_data[item['id']]['style-country-text']"/>

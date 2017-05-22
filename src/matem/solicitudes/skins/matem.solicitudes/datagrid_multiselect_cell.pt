@@ -22,14 +22,17 @@
                 tal:define="opt_index repeat/opt/index;
                             opt_val python:opt[0];
                             opt_label python:opt[1];
+                            effectivevalues2 python:[];
+                            myvalues effectivevalues | effectivevalues2;
                             ">
-               <input class="noborder" type="checkbox" value="1" id="" style="width: auto;"
+                <input class="noborder" type="checkbox" value="1" id="" style="width: auto;"
                       tal:attributes="name string:${fieldName}.${column}.${opt_val}.${repeat/rows/number};
                                       id string:${fieldName}_${column}_${opt_val}_${repeat/rows/number}_${opt_index};
                                       title column_label|nothing;
                                       value opt_val;
-                                      checked python:opt_val in rows.get(column, effectivevalues) and 'checked' or False;
+                                      checked python:opt_val in rows.get(column, myvalues) and 'checked' or False;
                                       "/>
+
                <label for="" tal:attributes="for string:${fieldName}_${column}_${opt_val}_${repeat/rows/number}_${opt_index}"
                              tal:content="opt_label"></label>
             </span>

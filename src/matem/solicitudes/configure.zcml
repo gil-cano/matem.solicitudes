@@ -85,6 +85,10 @@
       name="matem.solicitudes.vocabularies.Courselevel"
       />
 
+    <utility
+      component=".widgets.vocabularies.IMCampusVocabulary"
+      name="matem.solicitudes.vocabularies.IMCampus"
+      />
 
 
 </configure>

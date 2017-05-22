@@ -1655,7 +1655,7 @@ class Solicitud(BaseContent):
         act5 = self.gettext_organization()
         if act5 is not None:
             resumen.append(act5)
-        return self.getField('objeto_viaje').get(self) + ' ' + ', '.join(resumen)
+        return (self.getField('objeto_viaje').get(self) + ' ' + '. '.join(resumen)).replace('..', '.')
 
     def gettext_attendances(self):
         """"The text representation of  the attendances of the aplication."""

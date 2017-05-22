@@ -7,6 +7,7 @@ from operator import itemgetter
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone import api
 
 import re
 
@@ -1621,3 +1622,41 @@ class SolicitudFolderView(BrowserView):
             extra_data[item['id']] = solicitud
 
         return extra_data
+
+    def getCampus(self):
+
+        current = api.user.get_current()
+        usersrestrictedview = []
+        try:
+            usersrestrictedview = self.context.useresponsible
+        except AttributeError:
+            pass
+
+        sedes = [comisionado['sede'] for comisionado in usersrestrictedview if comisionado['nameresponsable'] == current.id]
+        if sedes:
+            return sedes[0]
+
+        return ['C.U.', 'Cuernavaca', 'Juriquilla', 'Oaxaca', 'Morelia']
+
+    def itemsVisible(self, items):
+        # comisionados = [comisionado['nameresponsable'] for comisionado in self.context.useresponsible]
+        current = api.user.get_current()
+        usersrestrictedview = []
+        try:
+            usersrestrictedview = self.context.useresponsible
+        except AttributeError:
+            pass
+        # if current.id in comisionados:
+        sedes = [comisionado['sede'] for comisionado in usersrestrictedview if comisionado['nameresponsable'] == current.id]
+        if sedes:
+            subitems = []
+            sedes = sedes[0]
+            for item in items:
+                if item['sede'] in sedes:
+                    subitems.append(item)
+
+            return subitems
+
+        else:
+            return items
+

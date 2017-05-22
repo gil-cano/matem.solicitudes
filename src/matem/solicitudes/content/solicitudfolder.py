@@ -15,6 +15,15 @@ from Products.ATExtensions.widget.records import RecordsWidget
 from Products.CMFCore.utils import getToolByName
 from zope.interface import implements
 
+
+from matem.solicitudes import solicitudesMessageFactory as _
+from Products.DataGridField import DataGridField
+from Products.DataGridField import DataGridWidget
+from Products.DataGridField.SelectColumn import SelectColumn
+from collective.datagridcolumns.MultiSelectColumn import MultiSelectColumn
+from matem.solicitudes.widgets.vocabularies import SolResponsibleVocabulary
+
+
 import logging
 
 logger = logging.getLogger("Plone")
@@ -46,6 +55,26 @@ schema = ATFolder.schema.copy() + Schema((
             description='Date on which this period ends',
             description_msgid='help_fecha_hasta_folder',
             show_hm=False
+        ),
+    ),
+
+    DataGridField(
+        name='useresponsible',
+        columns=('nameresponsable', 'sede'),
+        widget=DataGridWidget(
+            label=_(u"label_widget_useresponsible", default=u"Responsibles for view"),
+            # helper_js=('datagridwidget.js', 'datagriddatepicker.js', 'datagrid_course.js'),
+            helper_js=('datagridwidget.js', 'datagridwidget_patches.js', 'datagridmultiselect.js',),
+            columns={
+                'nameresponsable': SelectColumn(
+                    _(u"useresponsible_nameresponsable_label", default="Responsable name"),
+                    vocabulary=SolResponsibleVocabulary(),
+                ),
+                'sede': MultiSelectColumn(
+                    _(u"useresponsible_sede_label", default="Campus"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.IMCampus',
+                ),
+            },
         ),
     ),
 

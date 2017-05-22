@@ -8,6 +8,9 @@ from zope.interface import directlyProvides
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
+from zope.component.hooks import getSite
+from plone import api
+from AccessControl import getSecurityManager
 
 # Vocabularies for the widgets
 
@@ -152,3 +155,63 @@ def IMPositionVocabulary(context):
         SimpleTerm(value='other', title=_(u'Other')),
     ])
 directlyProvides(IMPositionVocabulary, IVocabularyFactory)
+
+
+def IMCampusVocabulary(context):
+    """Vocabulary factory for campus"""
+    return SimpleVocabulary([
+        SimpleTerm(value='C.U.', title='C.U.'),
+        SimpleTerm(value='Cuernavaca', title='Cuernavaca'),
+        SimpleTerm(value='Juriquilla', title='Juriquilla'),
+        SimpleTerm(value='Oaxaca', title='Oaxaca'),
+    ])
+directlyProvides(IMCampusVocabulary, IVocabularyFactory)
+
+
+class SolResponsibleVocabulary:
+    implements(IVocabulary)
+
+    # local_roles = self.context.portal_membership.getAuthenticatedMember().getRolesInContext(getSite())
+    # if 'Manager' in local_roles:
+    #     return 'enable_border'
+    # return 'disable_border'
+
+    def getDisplayList(self, instance):
+        # import pdb; pdb.set_trace()
+
+        canview = [('----', '----')]
+        # # localroles = instance.portal_membership.getAuthenticatedMember().getRolesInContext(getSite())
+        # current = api.user.get_current()
+        # # userid = current.id
+        # # member.getRolesInContext(portal)
+        # roles = current.getRolesInContext(instance)
+        # import pdb; pdb.set_trace()
+
+        # if 'Comisionado' in roles or 'Manager' in roles:
+        #     canview.append((current.id, current.getProperty('fullname')))
+
+        for comuser in api.user.get_users():
+            roles = comuser.getRolesInContext(instance)
+            if 'Comisionado' in roles and 'Manager' not in roles:
+                canview.append((comuser.id, comuser.getProperty('fullname')))
+
+        # import pdb; pdb.set_trace()
+        # sm = getSecurityManager()
+        # sm.checkPermission('UNAM.imateCVct: Add portal cv content', self.context)
+        # # Comisionado
+        # permissions = [p['name'] for p in self.context.permissionsOfRole('Owner') if p['selected']]
+
+        # (Pdb) from AccessControl import getSecurityManager
+        # (Pdb) sm = getSecurityManager()
+        # (Pdb) sm.checkPermission('UNAM.imateCVct: Add portal cv content', self.context)
+
+
+        # return DisplayList([
+        #     ('C.U.', 'C.U.'),
+        #     ('Cuernavaca', 'Cuernavaca'),
+        #     ('Juriquilla', 'Juriquilla'),
+        #     ('Oaxaca', 'Oaxaca'),
+        # ])
+        return DisplayList(canview)
+
+
