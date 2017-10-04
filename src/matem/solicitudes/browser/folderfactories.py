@@ -168,6 +168,8 @@ events = {
             'fecha_hasta': '2017-07-28 00:00 ',
             'objeto_viaje': 'Asistir al Congreso Matemático de las Américas (CMA 2017)'},
     },
+    2018: {
+    },
 }
 
 
