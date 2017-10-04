@@ -680,7 +680,7 @@ msgid "help_trabajo"
 msgstr "Especifique si presentará un trabajo"
 
 msgid "help_viaticos"
-msgstr "Especifique si solicita viáticos. Los máximos son: $900 diarios en México y $2000 diarios para Otros países"
+msgstr "Especifique si solicita viáticos. Los máximos son: $2000 diarios al extranjero. La cuota diaria para viáticos en territorio nacional es la que autoriza cada año la UNAM"
 
 #. Default: "No. de Cuenta"
 #: matem/solicitudes/browser/solicitudbecario.pt:302

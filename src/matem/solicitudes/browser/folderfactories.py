@@ -156,8 +156,8 @@ events = {
             'pais': 'MX',
             'ciudad_pais': 'Oaxaca',
             'institucion': 'Instituto Tecnológico de Oaxaca',
-            'fecha_desde': '2017-09-14 00:00 ',
-            'fecha_hasta': '2017-09-18 00:00 ',
+            'fecha_desde': '2017-08-14 00:00 ',
+            'fecha_hasta': '2017-08-18 00:00 ',
             'objeto_viaje': 'Asistir a The Third Pacific Rim Mathematical Association'},
         'CMA': {
             'event_title': 'Congreso Matemático de las Américas (CMA 2017)',
