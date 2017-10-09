@@ -391,14 +391,14 @@
     <div class="fc" tal:define="realtransicions python:here.getLegalTransitions()">
 
       <span tal:condition="context/getMessageCierre">
-              <dl class="portalMessage warning"
-                tal:condition="view/esBorrador">
-                <dt i18n:translate="label_atencion">
-                    Attention!
-                </dt>
-                <dd tal:content="context/getMessageCierre"/>
-              </dl>
-            </span>
+        <dl class="portalMessage warning"
+            tal:condition="view/esBorrador">
+          <dt i18n:translate="label_atencion">
+            Attention!
+          </dt>
+          <dd tal:content="context/getMessageCierre"/>
+        </dl>
+      </span>
 
       <span class="btn-group">
         <span tal:repeat="transicion realtransicions">

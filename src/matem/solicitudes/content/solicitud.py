@@ -1223,6 +1223,7 @@ class Solicitud(BaseContent):
         if start > end:
             errors['fecha_hasta'] = u'La fecha de término debe ser posterior a la de inicio'
 
+        # Fix hiden fields errors
         if REQUEST.get('pasaje', '') == 'No':
             try:
                 float(REQUEST.get('cantidad_pasaje', 0))
@@ -1520,7 +1521,6 @@ class Solicitud(BaseContent):
     def getLegalTransitions(self):
         workflowTool = getToolByName(self, "portal_workflow")
         transitions = workflowTool.getTransitionsFor(self)
-        # import pdb; pdb.set_trace()
         # return transitions
 
         envios = []
@@ -1538,7 +1538,6 @@ class Solicitud(BaseContent):
         end = self.getFechaHasta()
         realtransitions = []
 
-        # import pdb; pdb.set_trace()
         # Inician y terminan en 2017
         if start <= close_year and end <= close_year:
             if envios:
@@ -1548,7 +1547,7 @@ class Solicitud(BaseContent):
                         for item in transitions:
                             if item['id'] != 'enviar':
                                 realtransitions.append(item)
-                        self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elije No en Pasaje, Viáticos  o Inscripción'
+                        self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elija No en Pasaje, Viáticos  o Inscripción'
                         return realtransitions
             else:
                 if DateTime() > close_prep:
@@ -1556,7 +1555,7 @@ class Solicitud(BaseContent):
                         for item in transitions:
                             if item['id'] != 'enviar':
                                 realtransitions.append(item)
-                        self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elije No en Pasaje, Viáticos  o Inscripción'
+                        self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elija No en Pasaje, Viáticos  o Inscripción'
                         return realtransitions
 
         # si inician en el 2017 y terminan en el 2018
@@ -1570,7 +1569,7 @@ class Solicitud(BaseContent):
                         for item in transitions:
                             if item['id'] != 'enviar':
                                 realtransitions.append(item)
-                        self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elije No en Pasaje, Viáticos  o Inscripción'
+                        self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elija No en Pasaje, Viáticos  o Inscripción'
                         return realtransitions
                 else:
                     if DateTime() > close_prep:
@@ -1578,7 +1577,7 @@ class Solicitud(BaseContent):
                             for item in transitions:
                                 if item['id'] != 'enviar':
                                     realtransitions.append(item)
-                            self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elije No en Pasaje, Viáticos  o Inscripción'
+                            self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elija No en Pasaje, Viáticos  o Inscripción'
                             return realtransitions
 
         self.message_cierre = ''
