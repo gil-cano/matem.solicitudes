@@ -949,7 +949,7 @@ class SolicitudVisitante(BaseContent):
         envios.sort()
 
         # This dates must be the same in getLegalTransitions() method
-        close_prep = DateTime('2017/10/09 15:19:00 GMT-5')
+        close_prep = DateTime('2017/10/15 23:59:00 GMT-5')
         close_year = DateTime('2017/12/31 23:59:00 GMT-5')
         next_year = DateTime('2018/01/01 00:00:00 GMT-5')
 
@@ -1027,7 +1027,7 @@ class SolicitudVisitante(BaseContent):
 
         envios.sort()
 
-        close_prep = DateTime('2017/10/09 15:19:00 GMT-5')
+        close_prep = DateTime('2017/10/15 23:59:00 GMT-5')
         close_year = DateTime('2017/12/31 23:59:00 GMT-5')
         next_year = DateTime('2018/01/01 00:00:00 GMT-5')
 
