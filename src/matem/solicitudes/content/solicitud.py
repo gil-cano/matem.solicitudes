@@ -1178,6 +1178,8 @@ class Solicitud(BaseContent):
 
     _at_rename_after_creation = False
 
+    message_cierre = ''
+
     # This method is only called once after object creation.
     security.declarePrivate('at_post_create_script')
 
@@ -1205,12 +1207,12 @@ class Solicitud(BaseContent):
         rendDate = REQUEST.get('fecha_hasta', None)
 
         try:
-            end = DateTime(rendDate)
+            end = DateTime(rendDate + ' GMT-5')
         except Exception:
             errors['fecha_hasta'] = u'La fecha de término no es valida'
 
         try:
-            start = DateTime(rstartDate)
+            start = DateTime(rstartDate + ' GMT-5')
         except Exception:
             errors['fecha_desde'] = u'La fecha de inicio no es valida'
 
@@ -1255,10 +1257,13 @@ class Solicitud(BaseContent):
 
         envios.sort()
 
-        close_prep = DateTime('2017/10/04 23:59:00 GMT+0')
-        close_year = DateTime('2017/12/31 23:59:00 GMT+0')
+        # This dates must be the same in getLegalTransitions() method
+        close_prep = DateTime('2017/10/15 23:59:00 GMT-5')
+        close_year = DateTime('2017/12/31 23:59:00 GMT-5')
+        next_year = DateTime('2018/01/01 00:00:00 GMT-5')
 
-        if start <= close_year:
+        # Inician y terminan en 2017
+        if start <= close_year and end <= close_year:
             if envios:
                 # Este caso ya no pasará sólo el primer año que se aplique el cirre
                 if envios[0] > close_prep:
@@ -1270,9 +1275,6 @@ class Solicitud(BaseContent):
 
                     if REQUEST.get('inscripcion', '') == 'Si':
                         errors['inscripcion'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
-
-            # elif end > close_year:
-
             else:
                 if DateTime() > close_prep:
                     if REQUEST.get('pasaje', '') == 'si':
@@ -1283,6 +1285,33 @@ class Solicitud(BaseContent):
 
                     if REQUEST.get('inscripcion', '') == 'Si':
                         errors['inscripcion'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+
+        # si inician en el 2017 y terminan en el 2018
+        elif start <= close_year and end >= next_year:
+
+            parentid = self.aq_parent.id
+            # Si viven en el 2017 hay que aplicar cambios de cierre de presupuesto
+            if parentid == str(close_year.year()):
+                if envios:
+                    if envios[0] > close_prep:
+                        if REQUEST.get('pasaje', '') == 'si':
+                            errors['pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+
+                        if REQUEST.get('viaticos', '') == 'Si':
+                            errors['viaticos'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+
+                        if REQUEST.get('inscripcion', '') == 'Si':
+                            errors['inscripcion'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+                else:
+                    if DateTime() > close_prep:
+                        if REQUEST.get('pasaje', '') == 'si':
+                            errors['pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+
+                        if REQUEST.get('viaticos', '') == 'Si':
+                            errors['viaticos'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+
+                        if REQUEST.get('inscripcion', '') == 'Si':
+                            errors['inscripcion'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
 
         # End money validator
 
@@ -1485,10 +1514,77 @@ class Solicitud(BaseContent):
         statename = workflowTool.getTitleForStateOnType(current_state, self.meta_type)
         return statename
 
+    def getMessageCierre(self):
+        return self.message_cierre
+
     def getLegalTransitions(self):
         workflowTool = getToolByName(self, "portal_workflow")
         transitions = workflowTool.getTransitionsFor(self)
+        # import pdb; pdb.set_trace()
+        # return transitions
+
+        envios = []
+        for i in workflowTool.getInfoFor(self, 'review_history'):
+            if i.get('action', None) == 'enviar':
+                envios.append(i.get('time', None))
+
+        envios.sort()
+
+        close_prep = DateTime('2017/10/15 23:59:00 GMT-5')
+        close_year = DateTime('2017/12/31 23:59:00 GMT-5')
+        next_year = DateTime('2018/01/01 00:00:00 GMT-5')
+
+        start = self.getFechaDesde()  # DateTime('2017/12/01 00:00:00 US/Central')
+        end = self.getFechaHasta()
+        realtransitions = []
+
+        # import pdb; pdb.set_trace()
+        # Inician y terminan en 2017
+        if start <= close_year and end <= close_year:
+            if envios:
+                # Este caso ya no pasará sólo el primer año que se aplique el cirre
+                if envios[0] > close_prep:
+                    if self.getPasaje() == 'si' or self.getViaticos() == 'Si' or self.getInscripcion() == 'Si':
+                        for item in transitions:
+                            if item['id'] != 'enviar':
+                                realtransitions.append(item)
+                        self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elije No en Pasaje, Viáticos  o Inscripción'
+                        return realtransitions
+            else:
+                if DateTime() > close_prep:
+                    if self.getPasaje() == 'si' or self.getViaticos() == 'Si' or self.getInscripcion() == 'Si':
+                        for item in transitions:
+                            if item['id'] != 'enviar':
+                                realtransitions.append(item)
+                        self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elije No en Pasaje, Viáticos  o Inscripción'
+                        return realtransitions
+
+        # si inician en el 2017 y terminan en el 2018
+        elif start <= close_year and end >= next_year:
+
+            parentid = self.aq_parent.id
+            # Si viven en el 2017 hay que aplicar cambios de cierre de presupuesto
+            if parentid == str(close_year.year()):
+                if envios:
+                    if self.getPasaje() == 'si' or self.getViaticos() == 'Si' or self.getInscripcion() == 'Si':
+                        for item in transitions:
+                            if item['id'] != 'enviar':
+                                realtransitions.append(item)
+                        self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elije No en Pasaje, Viáticos  o Inscripción'
+                        return realtransitions
+                else:
+                    if DateTime() > close_prep:
+                        if self.getPasaje() == 'si' or self.getViaticos() == 'Si' or self.getInscripcion() == 'Si':
+                            for item in transitions:
+                                if item['id'] != 'enviar':
+                                    realtransitions.append(item)
+                            self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elije No en Pasaje, Viáticos  o Inscripción'
+                            return realtransitions
+
+        self.message_cierre = ''
         return transitions
+
+
 
     def toState(self, State):
         workflowTool = getToolByName(self, "portal_workflow")
