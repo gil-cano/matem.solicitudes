@@ -867,7 +867,6 @@ class SolicitudBecario(BaseContent):
         # # TODO: save dates in other space
         # local_roles = self.portal_membership.getAuthenticatedMember().getRolesInContext(self)
 
-        # # import pdb; pdb.set_trace()
         # if 'Manager' not in local_roles:
 
         #     envios = []
