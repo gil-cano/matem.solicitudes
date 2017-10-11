@@ -940,45 +940,29 @@ class SolicitudVisitante(BaseContent):
 
         # TODO: save dates in other space
         # Start money validator
-        workflow = getToolByName(self, 'portal_workflow')
-        envios = []
-        for i in workflow.getInfoFor(self, 'review_history'):
-            if i.get('action', None) == 'enviar':
-                envios.append(i.get('time', None))
 
-        envios.sort()
+        local_roles = self.portal_membership.getAuthenticatedMember().getRolesInContext(self)
 
-        # This dates must be the same in getLegalTransitions() method
-        close_prep = DateTime('2017/10/15 23:59:00 GMT-5')
-        close_year = DateTime('2017/12/31 23:59:00 GMT-5')
-        next_year = DateTime('2018/01/01 00:00:00 GMT-5')
+        if 'Manager' not in local_roles:
 
-        # Inician y terminan en 2017
-        if start <= close_year and end <= close_year:
-            if envios:
-                # Este caso ya no pasará sólo el primer año que se aplique el cirre
-                if envios[0] > close_prep:
-                    if REQUEST.get('pasaje', '') == 'si':
-                        errors['pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+            envios = []
+            shistory = self.workflow_history.get('solicitud_workflow', [])
 
-                    if REQUEST.get('viaticos', '') == 'Si':
-                        errors['viaticos'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+            for i in shistory:
+                if i.get('action', None) == 'enviar':
+                    envios.append(i.get('time', None))
 
-            else:
-                if DateTime() > close_prep:
-                    if REQUEST.get('pasaje', '') == 'si':
-                        errors['pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+            envios.sort()
 
-                    if REQUEST.get('viaticos', '') == 'Si':
-                        errors['viaticos'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+            # This dates must be the same in getLegalTransitions() method
+            close_prep = DateTime('2017/10/15 23:59:00 GMT-5')
+            close_year = DateTime('2017/12/31 23:59:00 GMT-5')
+            next_year = DateTime('2018/01/01 00:00:00 GMT-5')
 
-        # si inician en el 2017 y terminan en el 2018
-        elif start <= close_year and end >= next_year:
-
-            parentid = self.aq_parent.id
-            # Si viven en el 2017 hay que aplicar cambios de cierre de presupuesto
-            if parentid == str(close_year.year()):
+            # Inician y terminan en 2017
+            if start <= close_year and end <= close_year:
                 if envios:
+                    # Este caso ya no pasará sólo el primer año que se aplique el cirre
                     if envios[0] > close_prep:
                         if REQUEST.get('pasaje', '') == 'si':
                             errors['pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
@@ -994,7 +978,29 @@ class SolicitudVisitante(BaseContent):
                         if REQUEST.get('viaticos', '') == 'Si':
                             errors['viaticos'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
 
-        # End money validator
+            # si inician en el 2017 y terminan en el 2018
+            elif start <= close_year and end >= next_year:
+
+                parentid = self.aq_parent.id
+                # Si viven en el 2017 hay que aplicar cambios de cierre de presupuesto
+                if parentid == str(close_year.year()):
+                    if envios:
+                        if envios[0] > close_prep:
+                            if REQUEST.get('pasaje', '') == 'si':
+                                errors['pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+
+                            if REQUEST.get('viaticos', '') == 'Si':
+                                errors['viaticos'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+
+                    else:
+                        if DateTime() > close_prep:
+                            if REQUEST.get('pasaje', '') == 'si':
+                                errors['pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+
+                            if REQUEST.get('viaticos', '') == 'Si':
+                                errors['viaticos'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
+
+            # End money validator
 
     # Metodos mios para hacer algunas cosas
 
@@ -1020,8 +1026,14 @@ class SolicitudVisitante(BaseContent):
         workflowTool = getToolByName(self, "portal_workflow")
         transitions = workflowTool.getTransitionsFor(self)
         # return transitions
+        local_roles = self.portal_membership.getAuthenticatedMember().getRolesInContext(self)
+        if 'Manager' in local_roles:
+            self.message_cierre = ''
+            return transitions
+
         envios = []
-        for i in workflowTool.getInfoFor(self, 'review_history'):
+        shistory = self.workflow_history.get('solicitud_workflow', [])
+        for i in shistory:
             if i.get('action', None) == 'enviar':
                 envios.append(i.get('time', None))
 
