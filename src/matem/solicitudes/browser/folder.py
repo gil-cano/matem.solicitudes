@@ -9,6 +9,8 @@ from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 
+from DateTime.DateTime import DateTime
+
 import re
 
 
@@ -1538,6 +1540,50 @@ class SolicitudFolderView(BrowserView):
             solicitud['style-overlap'] = ""
             solicitud['style-overlap-text'] = ""
 
+            # ############## Inicio de cierre de presupuesto ##################
+            solicitud['style-cierre'] = ""
+            solicitud['style-cierre-text'] = ""
+
+            if item['meta_type'] in ['Solicitud', 'SolicitudVisitante']:
+
+                sol = catalog(id=item['id'])
+                sol_obj = sol[0].getObject()
+                workflowTool = getToolByName(sol_obj, "portal_workflow")
+
+                envios = []
+                for i in workflowTool.getInfoFor(sol_obj, 'review_history'):
+                    if i.get('action', None) == 'enviar':
+                        envios.append(i.get('time', None))
+
+                envios.sort()
+
+                close_prep = DateTime('2017/10/15 23:59:00 GMT-5')
+                close_year = DateTime('2017/12/31 23:59:00 GMT-5')
+                next_year = DateTime('2018/01/01 00:00:00 GMT-5')
+
+                start = sol_obj.getFechaDesde()  # DateTime('2017/12/01 00:00:00 US/Central')
+                end = sol_obj.getFechaHasta()
+
+                # Inician y terminan en 2017
+                if start <= close_year and end <= close_year:
+                    if envios:
+                        # Este caso ya no pasará sólo el primer año que se aplique el cirre
+                        if envios[0] > close_prep:
+                            if sol_obj.getPasaje() == 'si' or sol_obj.getViaticos() == 'Si' or sol_obj.getInscripcion() == 'Si':
+                                solicitud['style-cierre'] = "color: #FFFFFF; background:#FA58AC;"
+                                solicitud['style-cierre-text'] = 'Se creo antes del cierre de presupuesto, pero fue enviada después'
+
+                # si inician en el 2017 y terminan en el 2018
+                elif start <= close_year and end >= next_year:
+                    parentid = item['parentid']
+                    # Si viven en el 2017 hay que aplicar cambios de cierre de presupuesto
+                    if parentid == str(close_year.year()):
+                        if envios[0] > close_prep:
+                            if sol_obj.getPasaje() == 'si' or sol_obj.getViaticos() == 'Si' or sol_obj.getInscripcion() == 'Si':
+                                solicitud['style-cierre'] = "color: #FFFFFF; background:#FA58AC;"
+                                solicitud['style-cierre-text'] = 'Se creo antes del cierre presupuesto, pero fue enviada después'
+
+            # ######################  Fin del cierre de presupuesto ##################
             if item['meta_type'] in ['Solicitud', 'SolicitudInstitucional']:
                 if item['special_fields']['type'] == 'Licencia':
                     if item['quantity_of_days'] > 45 - solicitud['dlicencia']:
