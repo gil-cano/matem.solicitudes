@@ -1548,10 +1548,12 @@ class SolicitudFolderView(BrowserView):
 
                 sol = catalog(id=item['id'])
                 sol_obj = sol[0].getObject()
-                workflowTool = getToolByName(sol_obj, "portal_workflow")
 
                 envios = []
-                for i in workflowTool.getInfoFor(sol_obj, 'review_history'):
+
+                shistory = sol_obj.workflow_history.get('solicitud_workflow', [])
+
+                for i in shistory:
                     if i.get('action', None) == 'enviar':
                         envios.append(i.get('time', None))
 
