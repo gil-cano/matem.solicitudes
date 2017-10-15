@@ -1571,7 +1571,7 @@ class SolicitudFolderView(BrowserView):
                     if envios:
                         # Este caso ya no pasará sólo el primer año que se aplique el cirre
                         if envios[0] > close_prep:
-                            if sol_obj.getPasaje() == 'si' or sol_obj.getViaticos() == 'Si' or sol_obj.getInscripcion() == 'Si':
+                            if sol_obj.getPasaje() == 'si' or sol_obj.getViaticos() == 'Si':
                                 solicitud['style-cierre'] = "color: #FFFFFF; background:#FA58AC;"
                                 solicitud['style-cierre-text'] = 'Se creo antes del cierre de presupuesto, pero fue enviada después'
 
