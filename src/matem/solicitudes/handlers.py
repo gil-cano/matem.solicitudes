@@ -48,6 +48,13 @@ def modificationHandler(obj, event):  # noqa
         obj.setNombre_asesor(obj.getNombreAsesor())
     except Exception:
         pass
+
+    try:
+        if obj.getViaticos_becario() == 'No':
+            obj.setCantidad_viaticos(0.0)
+    except Exception:
+        pass
+
     catalog.reindexObject(obj)
 
 

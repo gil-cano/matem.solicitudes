@@ -559,7 +559,12 @@
                   <span i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</span>
                   <span tal:replace="structure python:extra_data[item['id']]['style-country-text']"/>
                 </td>
-                <td tal:content="python:item['creation_date']">Creation Date</td>
+                <td tal:attributes="style python:extra_data[item['id']]['style-cierre']">
+                  <span tal:content="python:item['creation_date']">Creation Date</span>
+                  <span tal:replace="structure python:extra_data[item['id']]['style-cierre-text']"/>
+                </td>
+
+
                 <td tal:attributes="style python:extra_data[item['id']]['style-overlap']">
                   <span tal:content="python:item['from']">Creation Date</span>
                   <span tal:replace="structure python:extra_data[item['id']]['style-overlap-text']"/>
@@ -649,7 +654,12 @@
             <span i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</span>
             <span tal:replace="structure python:extra_data[item['id']]['style-country-text']"/>
           </td>
-          <td tal:content="python:item['creation_date']">Creation Date</td>
+          <!-- <td tal:content="python:item['creation_date']">Creation Date</td> -->
+          <td tal:attributes="style python:extra_data[item['id']]['style-cierre']">
+            <span tal:content="python:item['creation_date']">Creation Date</span>
+            <span tal:replace="structure python:extra_data[item['id']]['style-cierre-text']"/>
+          </td>
+
 
           <td tal:attributes="style python:extra_data[item['id']]['style-overlap']">
             <span tal:content="python:item['from']">Creation Date</span>
