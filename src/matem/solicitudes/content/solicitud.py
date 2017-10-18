@@ -1456,7 +1456,7 @@ class Solicitud(BaseContent):
                     try:
                         # is necesarily change the order for the widget format
                         rowitem = row[columndate].split('/')
-                        rowdate = DateTime(rowitem[2] + rowitem[1] + rowitem[0])
+                        rowdate = DateTime(rowitem[2] + '-' + rowitem[1] + '-' + rowitem[0] + ' 00:00 GMT-5')
                     except Exception:
                         fielderrors[fieldName] = u'La fecha no es válida'
                         return fielderrors
