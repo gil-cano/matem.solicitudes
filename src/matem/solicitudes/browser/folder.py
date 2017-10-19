@@ -1544,7 +1544,7 @@ class SolicitudFolderView(BrowserView):
             solicitud['style-cierre'] = ""
             solicitud['style-cierre-text'] = ""
 
-            if item['meta_type'] in ['Solicitud', 'SolicitudVisitante']:
+            if item['meta_type'] in ['Solicitud', 'SolicitudVisitante',  'SolicitudInstitucional']:
 
                 sol = catalog(id=item['id'])
                 sol_obj = sol[0].getObject()
@@ -1571,15 +1571,15 @@ class SolicitudFolderView(BrowserView):
                     if envios:
                         # Este caso ya no pasará sólo el primer año que se aplique el cirre
                         if envios[0] > close_prep:
-                            if item['meta_type'] == 'Solicitud':
+                            if item['meta_type'] in ['Solicitud', 'SolicitudInstitucional']:
                                 if sol_obj.getPasaje() == 'si' or sol_obj.getViaticos() == 'Si' or sol_obj.getInscripcion() == 'Si':
                                     solicitud['style-cierre'] = "color: #FFFFFF; background:#FA58AC;"
-                                    solicitud['style-cierre-text'] = 'Se creo antes del cierre de presupuesto, pero fue enviada después'
+                                    solicitud['style-cierre-text'] = 'Fue enviada después del cierre de presupuesto'
 
                             else:
                                 if sol_obj.getPasaje() == 'si' or sol_obj.getViaticos() == 'Si':
                                     solicitud['style-cierre'] = "color: #FFFFFF; background:#FA58AC;"
-                                    solicitud['style-cierre-text'] = 'Se creo antes del cierre de presupuesto, pero fue enviada después'
+                                    solicitud['style-cierre-text'] = 'Fue enviada después del cierre de presupuesto'
 
                 # si inician en el 2017 y terminan en el 2018
                 elif start <= close_year and end >= next_year:
@@ -1594,12 +1594,12 @@ class SolicitudFolderView(BrowserView):
                             if item['meta_type'] == 'Solicitud':
                                 if sol_obj.getPasaje() == 'si' or sol_obj.getViaticos() == 'Si' or sol_obj.getInscripcion() == 'Si':
                                     solicitud['style-cierre'] = "color: #FFFFFF; background:#FA58AC;"
-                                    solicitud['style-cierre-text'] = 'Se creo antes del cierre presupuesto, pero fue enviada después'
+                                    solicitud['style-cierre-text'] = 'Fue enviada después del cierre de presupuesto'
 
                             else:
                                 if sol_obj.getPasaje() == 'si' or sol_obj.getViaticos() == 'Si':
                                     solicitud['style-cierre'] = "color: #FFFFFF; background:#FA58AC;"
-                                    solicitud['style-cierre-text'] = 'Se creo antes del cierre presupuesto, pero fue enviada después'
+                                    solicitud['style-cierre-text'] = 'Fue enviada después del cierre de presupuesto'
 
             # ######################  Fin del cierre de presupuesto ##################
             if item['meta_type'] in ['Solicitud', 'SolicitudInstitucional']:
