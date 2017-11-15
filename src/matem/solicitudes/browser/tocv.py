@@ -30,19 +30,19 @@ class ApplicationstoCVForm(form.Form):
             sort_on='created')
         for brain in brains:
             # test for applications in old format
-            aux_folder = api.content.get(
-                path='/servicios/servicios-internos/solicitudes/2006')
+            # aux_folder = api.content.get(
+            #     path='/servicios/servicios-internos/solicitudes/2006')
             application = brain.getObject()
             userid = application.getIdOwner()
-            if brain.id in aux_folder:
-                application = aux_folder[brain.id]
+            # if brain.id in aux_folder:
+            #     application = aux_folder[brain.id]
             # prides = []
             # if userid not in prides:
             #     continue
-            # if isinstance(application, Solicitud):
-            #     self.app2cv(application, userid)
-            # if isinstance(application, SolicitudVisitante):
-            #     self.app2cv_guest(application, userid)
+            if isinstance(application, Solicitud):
+                self.app2cv(application, userid)
+            if isinstance(application, SolicitudVisitante):
+                self.app2cv_guest(application, userid)
             if isinstance(application, SolicitudInstitucional):
                 self.app2cv_inst(application, userid)
         logging.info('Done')
