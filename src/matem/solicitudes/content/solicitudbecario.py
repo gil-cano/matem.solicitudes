@@ -1620,7 +1620,7 @@ Para más detalles vaya a %s.
         return
 
     def getDefaultDate(self):
-        return DateTime('2017/1/1')
+        return DateTime('2018/1/1')
 
     def getNumeroDeCuenta(self):
         person = self.getPersonWrapper(self.getIdOwner())

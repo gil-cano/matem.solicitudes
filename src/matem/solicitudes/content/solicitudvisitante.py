@@ -1595,7 +1595,7 @@ La cantidad total que se le ha aprobado en lo que va del año: %s.
             return "Revision por Consejo Interno"
 
     def getDefaultDate(self):
-        return DateTime('2017/1/1')
+        return DateTime('2018/1/1')
 
     def getPersonWrapper(self, userid):
         mb = getToolByName(self, MEMBRANE_TOOL)
