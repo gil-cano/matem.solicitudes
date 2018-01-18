@@ -729,7 +729,7 @@ schema = BaseSchema + Schema((
             description=_(u'help_sol_sabbatical', default=u'Select \"Yes\" if your guest will perform a sabbatical stay in his visit'),
             i18n_domain='matem.solicitudes',
         ),
-        write_permission="Solicitud: Cambiar Solicitante",
+        write_permission="Solicitud: Modificar Solicitud",
     ),
 
 
