@@ -169,6 +169,30 @@ events = {
             'objeto_viaje': 'Asistir al Congreso Matemático de las Américas (CMA 2017)'},
     },
     2018: {
+        'SMM': {
+            'event_title': 'LI Congreso Nacional de la Sociedad Matemática Mexicana (LI SMM 2018)',
+            'pais': 'MX',
+            'ciudad_pais': 'Tabasco',
+            'institucion': 'Universidad Juárez Autónoma de Tabasco',
+            'fecha_desde': '2018-10-21 00:00 ',
+            'fecha_hasta': '2018-10-26 00:00 ',
+            'objeto_viaje': 'Asistir al LI Congreso Nacional de la Sociedad Matemática Mexicana (LI SMM 2018)'},
+        'ICM': {
+            'event_title': 'XXVII Congreso Internacional de Matemáticos (ICM) 2018',
+            'pais': 'BR',
+            'ciudad_pais': 'Río de Janeiro',
+            'institucion': 'Centro de Convenciones Riocentro en la Barra da Tijuca de Río de Janeiro, Brasil.',
+            'fecha_desde': '2018-08-01 00:00 ',
+            'fecha_hasta': '2018-08-09 00:00 ',
+            'objeto_viaje': 'Asistir al IXXVII Congreso Internacional de Matemáticos (ICM) 2018'},
+        'SCM': {
+            'event_title': 'Encuentro de Sociedades de Matemáticas de Colombia y México',
+            'pais': 'CO',
+            'ciudad_pais': 'Barranquilla',
+            'institucion': 'Universidad del Norte',
+            'fecha_desde': '2018-05-30 00:00 ',
+            'fecha_hasta': '2018-06-02 00:00 ',
+            'objeto_viaje': 'Asistir al Encuentro de Sociedades de Matemáticas de Colombia y México'},
     },
 }
 
