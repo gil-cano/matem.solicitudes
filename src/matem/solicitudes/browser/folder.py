@@ -1,15 +1,22 @@
 # -*- coding: utf-8 -*-
+
+from DateTime.DateTime import DateTime
 from matem.solicitudes.browser.queries import Queries
 from matem.solicitudes.browser.requests import Requests
 from matem.solicitudes.extender import PersonWrapper
-from matem.solicitudes.PyRTF import *
+from matem.solicitudes.PyRTF.Elements import Document
+from matem.solicitudes.PyRTF.Elements import LINE
+from matem.solicitudes.PyRTF.Elements import Paragraph
+from matem.solicitudes.PyRTF.Elements import Section
+from matem.solicitudes.PyRTF.Elements import Text
+from matem.solicitudes.PyRTF.PropertySets import ParagraphPropertySet
+from matem.solicitudes.PyRTF.PropertySets import TextPropertySet
+from matem.solicitudes.PyRTF.Renderer import Renderer
 from operator import itemgetter
+from plone import api
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from plone import api
-
-from DateTime.DateTime import DateTime
 
 import re
 
@@ -957,10 +964,9 @@ class SolicitudFolderView(BrowserView):
                     self.context.portal_workflow.doActionFor(solicitud,'enviaraconsejo')
                 except:
                     pass;
-        elif dictionary.get('revision.consejo.GenerarActa','') is not '':
-
+        elif dictionary.get('revision.consejo.GenerarActa', '') is not '':
             boldText = TextPropertySet(bold='bold')
-            boldUnderlineText = TextPropertySet(bold='bold',underline='underline')
+            boldUnderlineText = TextPropertySet(bold='bold', underline='underline')
             smallText = TextPropertySet(size=18)
             alignRight = ParagraphPropertySet(alignment=ParagraphPropertySet.RIGHT)
             alignCenter = ParagraphPropertySet(alignment=ParagraphPropertySet.CENTER)
@@ -976,11 +982,19 @@ class SolicitudFolderView(BrowserView):
             comision.append(Paragraph(ss.ParagraphStyles.Heading2,
                                       Text(self.rtf_repr(u"Comisión"), boldUnderlineText)))
             visitante = Section()
-            visitante.append(Paragraph(ss.ParagraphStyles.Heading2,
-                                      Text(self.rtf_repr(u"Visitante"), boldUnderlineText)))
+            visitante.append(
+                Paragraph(
+                    ss.ParagraphStyles.Heading2,
+                    Text(self.rtf_repr(u"Visitante"), boldUnderlineText)
+                )
+            )
             estudiante = Section()
-            estudiante.append(Paragraph(ss.ParagraphStyles.Heading2,
-                                      Text(self.rtf_repr(u"Estudiante"), boldUnderlineText)))
+            estudiante.append(
+                Paragraph(
+                    ss.ParagraphStyles.Heading2,
+                    Text(self.rtf_repr(u"Estudiante"), boldUnderlineText)
+                )
+            )
             signers = Section()
 
             doc.Sections.append(header)
@@ -990,34 +1004,24 @@ class SolicitudFolderView(BrowserView):
             doc.Sections.append(estudiante)
             doc.Sections.append(signers)
 
-            l=0
-            c=0
-            v=0
-            e=0
-
+            l = c = v = e = 0
             fecha = None
 
             # Sort applications by submitter name
-            parent_id = [k.split('/') for k in dictionary.keys()
-                        if 'solicitud' in k]
+            parent_id = [k.split('/') for k in dictionary if 'solicitud' in k]
             sorted_list = [(self.context.aq_inner.aq_parent[parent][id], self.context.aq_inner.aq_parent[parent][id].getNombreOwner()) for parent, id in parent_id]
-            sorted_list.sort(key=lambda  x: x[1])
+            sorted_list.sort(key=lambda x: x[1])
             for solicitud, name in sorted_list:
-                tempText= ''
-                extraInfo=""
+                tempText = ''
+                extraInfo = ""
                 try:
-                    person=self.queryObj.getPersonWrapper(solicitud.getIdOwner())
+                    person = self.queryObj.getPersonWrapper(solicitud.getIdOwner())
                     author = unicode(' '.join((person.getSuffix(), person.getFirstName(), person.getMiddleName(), person.getLastName())), 'utf-8')
                     t_objeto = unicode(' '.join(solicitud.getObjetoViaje().splitlines()), 'utf-8')
                     institution_u = unicode(solicitud.getInstitucion(), 'utf-8')
                     city_u = unicode(solicitud.getCiudadPais(), 'utf-8')
                     text_objective = '%s. A realizarse en %s, %s, %s.' % (t_objeto, institution_u, city_u, solicitud.translate(solicitud.getPais()))
-                            #t_objeto.encode('utf-8'), solicitud.getInstitucion().encode('utf-8'), solicitud.getCiudadPais().encode('utf-8'), solicitud.translate(solicitud.getPais()).encode('utf-8'))
 
-                    # text_dates = 'Duración %s días, del %s al %s.' % (
-                    #         solicitud.getCantidadDeDias(),
-                    #         solicitud.getFechaDesde().strftime('%d/%m/%Y'),
-                    #         solicitud.getFechaHasta().strftime('%d/%m/%Y'))
                     text_dates = unicode('Duración %s días, del %s al %s.' % (solicitud.getCantidadDeDias(), solicitud.getFechaDesde().strftime('%d/%m/%Y'), solicitud.getFechaHasta().strftime('%d/%m/%Y')), 'utf-8')
 
                     if solicitud.getTotal() > 0:
@@ -1031,20 +1035,6 @@ class SolicitudFolderView(BrowserView):
                             expenses = 'Solicita %s, %s. Tipo de pasaje %s y %s. %s.' % (exp_viaticos, exp_pasaje, tipopasaje, exp_inscripcion, exp_total)
                         rec_expenses = unicode('Cantidad recomendada: %s.' % solicitud.getCantidadRecomendadaTotal(), 'utf-8')
                         text_expenses = ' '.join((expenses, rec_expenses))
-
-                        ##########################################################################################
-                        ##VERSION ORIGINAL
-                        # exp_viaticos = u'%s para viáticos' % solicitud.getCantidad_viaticos()
-                        # exp_pasaje = u'%s para pasaje' % solicitud.getCantidad_pasaje()
-                        # exp_inscripcion = u'%s para inscripción' % solicitud.getCantidad_inscripcion()
-                        # exp_total = u'Total: %s' % solicitud.getTotal()
-                        # expenses = u'Solicita %s, %s y %s. %s.' % (exp_viaticos, exp_pasaje, exp_inscripcion, exp_total)
-                        # if solicitud.getPasaje() == 'si':
-                        #     tipopasaje = ' '.join(solicitud.getTipo_pasaje())
-                        #     expenses = u'Solicita %s, %s. Tipo de pasaje %s y %s. %s.' % (exp_viaticos, exp_pasaje, tipopasaje, exp_inscripcion, exp_total)
-                        # rec_expenses = u'Cantidad recomendada: %s.' % solicitud.getCantidadRecomendadaTotal()
-                        # text_expenses = ' '.join((expenses, rec_expenses))
-                        ##########################################################################################
                     else:
                         text_expenses = ''
                         # text_expenses = unicode('Erogación: Ninguna.', 'utf-8')
@@ -1053,21 +1043,20 @@ class SolicitudFolderView(BrowserView):
                     text_ccomments = unicode('Comentario de la comisión: %s' % solicitud.getComentario_ce(), 'utf-8')
 
                     if solicitud.recomiendaAprobar():
-                        recomendacion =unicode("RECOMENDACIÓN: APROBAR.", 'utf-8')
+                        recomendacion = unicode("RECOMENDACIÓN: APROBAR.", 'utf-8')
                     else:
-                        recomendacion =unicode("RECOMENDACIÓN: RECHAZAR.", 'utf-8')
+                        recomendacion = unicode("RECOMENDACIÓN: RECHAZAR.", 'utf-8')
 
                     if solicitud.meta_type == "Solicitud":
                         if solicitud.getTrabajo() == 'Si':
                             t_titulo = ' '.join(solicitud.getTituloTrabajo().splitlines())
-                            #text_talk = 'El trabajo que presentará se titula "%s".' % t_titulo
                             text_talk = unicode('El trabajo que presentará se titula "%s".' % t_titulo, 'utf-8')
                         else:
                             text_talk = unicode('', 'utf-8')
                         tempText = ' '.join([text_objective, text_talk, text_dates, text_expenses])
 
                         p = Paragraph(ss.ParagraphStyles.Normal)
-                        p.append(Text(self.rtf_repr(author),boldText), ' ', self.rtf_repr(tempText))
+                        p.append(Text(self.rtf_repr(author), boldText), ' ', self.rtf_repr(tempText))
                         if solicitud.getComentario_owner():
                             p.append(LINE, self.rtf_repr(text_comments))
                         if solicitud.getComentario_ce():
@@ -1076,37 +1065,19 @@ class SolicitudFolderView(BrowserView):
                             p.append(LINE, self.rtf_repr(unicode('Erogación: Ninguna.', 'utf-8')))
                         p.append(LINE, Text(self.rtf_repr(recomendacion),boldText))
 
-
-                        ##########################################################################################
-                        ##VERSION ORIGINAL
-                        # # p.append(Text(self.rtf_repr(author.decode('utf-8')),boldText), ' ',
-                        # #          self.rtf_repr(tempText.decode('utf-8')))
-                        # p.append(Text(self.rtf_repr(author.decode('utf-8')),boldText), ' ', self.rtf_repr(tempText.encode('utf-8')))
-
-                        # if solicitud.getComentario_owner():
-                        #     #p.append(LINE, self.rtf_repr(text_comments.decode('utf-8')))
-                        #     p.append(LINE, self.rtf_repr(text_comments.encode('utf-8')))
-                        # if solicitud.getComentario_ce():
-                        #     #p.append(LINE, self.rtf_repr(text_ccomments.decode('utf-8')))
-                        #     p.append(LINE, self.rtf_repr(text_ccomments.encode('utf-8')))
-                        # #p.append(LINE, Text(self.rtf_repr(recomendacion.decode('utf-8')),boldText))
-                        # p.append(LINE, Text(self.rtf_repr(recomendacion.encode('utf-8')),boldText))
-                        ##########################################################################################
-
-                        if solicitud.getLicenciacomision()=="Licencia":
-                            l+=1
+                        if solicitud.getLicenciacomision() == "Licencia":
+                            l += 1
                             numeracion = "L%d." % l
                             p.insert(0, numeracion)
                             licencia.append(p)
                         else:
-                            c+=1
+                            c += 1
                             numeracion = "C%d." % c
                             p.insert(0, numeracion)
                             comision.append(p)
                     elif solicitud.meta_type == "SolicitudInstitucional":
                         if solicitud.getTrabajo() == 'Si':
                             t_titulo = ' '.join(solicitud.getTituloTrabajo().splitlines())
-                            #text_talk = 'El trabajo que presentara se titula "%s".' % t_titulo
                             text_talk = unicode('El trabajo que presentará se titula "%s".' % t_titulo, 'utf-8')
                         else:
                             text_talk = unicode('', 'utf-8')
@@ -1133,66 +1104,32 @@ class SolicitudFolderView(BrowserView):
                             text_expenses = ' '.join((expenses, apoyo_expenses, rec_expenses))
 
                         tempText = ' '.join([text_objective, text_talk, text_dates, text_expenses])
-                        p = Paragraph( ss.ParagraphStyles.Normal)
-                        p.append(Text(self.rtf_repr(author),boldText), ' ', self.rtf_repr(tempText))
+                        p = Paragraph(ss.ParagraphStyles.Normal)
+                        p.append(Text(self.rtf_repr(author), boldText), ' ', self.rtf_repr(tempText))
                         if solicitud.getComentario_owner():
                             p.append(LINE, self.rtf_repr(text_comments))
                         if solicitud.getComentario_ce():
                             p.append(LINE, self.rtf_repr(text_ccomments))
                         if not text_expenses:
                             p.append(LINE, self.rtf_repr(unicode('Erogación: Ninguna.', 'utf-8')))
-                        p.append(LINE, Text(self.rtf_repr(recomendacion),boldText))
+                        p.append(LINE, Text(self.rtf_repr(recomendacion), boldText))
 
-                        ##########################################################################################
-                        ##VERSION ORIGINAL
-                        # # Solicitudes institucionales deben desplegar los dos presupuestos.
-                        # if solicitud.getTotal() > 0:
-                        #     exp_viaticos = u'%s para viáticos' % solicitud.getCantidad_viaticos()
-                        #     exp_pasaje = u'%s para pasaje' % solicitud.getCantidad_pasaje()
-                        #     exp_inscripcion = u'%s para inscripción' % solicitud.getCantidad_inscripcion()
-                        #     expenses = u'Solicita %s, %s y %s.' % (exp_viaticos, exp_pasaje, exp_inscripcion)
-                        #     if solicitud.getPasaje() == 'si':
-                        #         tipopasaje = ' '.join(solicitud.getTipo_pasaje())
-                        #         expenses = u'Solicita %s, %s. Tipo de pasaje %s y %s.' % (exp_viaticos, exp_pasaje, tipopasaje, exp_inscripcion)
-
-                        #     apoyo_viaticos = u'%s para viáticos' % solicitud.getCantidad_viaticos_apoyo()
-                        #     apoyo_pasaje = u'%s para pasaje' % solicitud.getCantidad_pasaje_apoyo()
-                        #     apoyo_inscripcion = u'%s para inscripción' % solicitud.getCantidad_inscripcion_apoyo()
-                        #     exp_total = u'Total: %s' % solicitud.getTotal()
-                        #     apoyo_expenses = u'Solicita de apoyo institucional %s, %s y %s. %s.' % (apoyo_viaticos, apoyo_pasaje, apoyo_inscripcion, exp_total)
-                        #     if solicitud.getPasaje() == 'si':
-                        #         tipopasaje = ' '.join(solicitud.getTipo_pasaje())
-                        #         apoyo_expenses = u'Solicita de apoyo institucional %s, %s. Tipo de pasaje %s y %s. %s.' % (apoyo_viaticos, apoyo_pasaje, tipopasaje, apoyo_inscripcion, exp_total)
-                        #     rec_expenses = u'Cantidad recomendada: %s.' % solicitud.getCantidadRecomendadaTotal()
-                        #     text_expenses = ' '.join((expenses, apoyo_expenses, rec_expenses))
-
-                        # tempText = ' '.join([text_objective, text_talk, text_dates, text_expenses])
-                        # p = Paragraph( ss.ParagraphStyles.Normal)
-                        # p.append(Text(self.rtf_repr(author.decode('utf-8')),boldText), ' ',
-                        #          self.rtf_repr(tempText.decode('utf-8')))
-                        # if solicitud.getComentario_owner():
-                        #     p.append(LINE, self.rtf_repr(text_comments.decode('utf-8')))
-                        # if solicitud.getComentario_ce():
-                        #     p.append(LINE, self.rtf_repr(text_ccomments.decode('utf-8')))
-                        # p.append(LINE, Text(self.rtf_repr(recomendacion.decode('utf-8')),boldText))
-                        ##########################################################################################
-
-                        if solicitud.getLicenciacomision()=="Licencia":
-                            l+=1
+                        if solicitud.getLicenciacomision() == "Licencia":
+                            l += 1
                             numeracion = "L%d." % l
                             p.insert(0, numeracion)
                             licencia.append(p)
                         else:
-                            c+=1
+                            c += 1
                             numeracion = "C%d." % c
                             p.insert(0, numeracion)
                             comision.append(p)
                     elif solicitud.meta_type == "SolicitudVisitante":
-                        v+=1
+                        v += 1
                         numeracion = unicode("V%d. " % v, 'utf-8')
                         guest = unicode(solicitud.getNombreInvitado(), 'utf-8')
                         semblanza = unicode(solicitud.getSemblanza(), 'utf-8')
-                        #text_place = unicode('de la %s, %s.' % (solicitud.getInstitucion(), solicitud.getPais()), 'utf-8')
+
                         text_place = 'de la %s, %s.' % (
                             unicode(solicitud.getInstitucion(), 'utf-8'),
                             solicitud.translate(solicitud.getPais())
@@ -1200,7 +1137,7 @@ class SolicitudFolderView(BrowserView):
 
                         travel_obj_u = unicode(solicitud.getObjetoViaje(), 'utf-8')
                         tempText = ' '.join([' para', travel_obj_u, text_dates, text_expenses])
-                        p = Paragraph( ss.ParagraphStyles.Normal)
+                        p = Paragraph(ss.ParagraphStyles.Normal)
 
                         p.append(self.rtf_repr(numeracion),
                                  Text(self.rtf_repr(guest), boldText), ' ',
@@ -1214,43 +1151,20 @@ class SolicitudFolderView(BrowserView):
                             p.append(LINE, self.rtf_repr(text_ccomments))
                         if not text_expenses:
                             p.append(LINE, self.rtf_repr(unicode('Erogación: Ninguna.', 'utf-8')))
-                        p.append(LINE, Text(self.rtf_repr(recomendacion),boldText))
+                        p.append(LINE, Text(self.rtf_repr(recomendacion), boldText))
                         visitante.append(p)
-
-                        ##########################################################################################
-                        ##VERSION ORIGINAL
-                        # v+=1
-                        # numeracion = "V%d. " % v
-                        # guest = solicitud.getNombreInvitado()
-                        # semblanza = solicitud.getSemblanza()
-                        # text_place = 'de la %s, %s.' % (solicitud.getInstitucion(), solicitud.getPais())
-                        # tempText = ' '.join([' para', solicitud.getObjetoViaje(), text_dates, text_expenses])
-                        # p = Paragraph( ss.ParagraphStyles.Normal)
-                        # p.append(self.rtf_repr(numeracion.decode('utf-8')),
-                        #          Text(self.rtf_repr(guest.decode('utf-8')), boldText), ' ',
-                        #          self.rtf_repr(text_place.decode('utf-8')), ' Invitado de: ',
-                        #          Text(self.rtf_repr(author.decode('utf-8')), boldText),
-                        #          self.rtf_repr(tempText.decode('utf-8')))
-                        # p.append(LINE, self.rtf_repr(semblanza.decode('utf-8')))
-                        # if solicitud.getComentario_owner():
-                        #     p.append(LINE, self.rtf_repr(text_comments.decode('utf-8')))
-                        # if solicitud.getComentario_ce():
-                        #     p.append(LINE, self.rtf_repr(text_ccomments.decode('utf-8')))
-                        # p.append(LINE, Text(self.rtf_repr(recomendacion.decode('utf-8')),boldText))
-                        # visitante.append(p)
-                        ##########################################################################################
                     else:
-                        e+=1
+                        e += 1
                         if solicitud.getTrabajo() == 'Si':
                             text_talk = unicode('El trabajo que presentará se titula "%s".' % solicitud.getTituloTrabajo(), 'utf-8')
                         else:
                             text_talk = unicode('', 'utf-8')
                         numeracion = unicode('E%d. ' % e, 'utf-8')
                         tempText = ' '.join([text_objective, text_talk, text_dates, text_expenses])
-                        p = Paragraph( ss.ParagraphStyles.Normal)
+                        p = Paragraph(ss.ParagraphStyles.Normal)
                         p.append(self.rtf_repr(numeracion),
-                                 Text(self.rtf_repr(author),boldText), ' Asesor: ',
-                                 Text(self.rtf_repr(solicitud.getNombreAsesor()),boldText),
+                                 Text(self.rtf_repr(author), boldText), ' Asesor: ',
+                                 Text(self.rtf_repr(solicitud.getNombreAsesor()), boldText),
                                  self.rtf_repr(tempText))
                         if solicitud.getComentario_owner():
                             p.append(LINE, self.rtf_repr(text_comments))
@@ -1260,87 +1174,45 @@ class SolicitudFolderView(BrowserView):
                         p.append(LINE, self.rtf_repr(apoyo_comments))
                         if not text_expenses:
                             p.append(LINE, self.rtf_repr(unicode('Erogación: Ninguna.', 'utf-8')))
-                        p.append(LINE, Text(self.rtf_repr(recomendacion),boldText))
+                        p.append(LINE, Text(self.rtf_repr(recomendacion), boldText))
                         estudiante.append(p)
 
-                        ##########################################################################################
-                        ##VERSION ORIGINAL
-                        # e+=1
-                        # if solicitud.getTrabajo() == 'Si':
-                        #     text_talk = 'El trabajo que presentara se titula "%s".' % solicitud.getTituloTrabajo()
-                        # else:
-                        #     text_talk = ''
-                        # numeracion = 'E%d. ' % e
-                        # tempText = ' '.join([text_objective, text_talk, text_dates, text_expenses])
-                        # p = Paragraph( ss.ParagraphStyles.Normal)
-                        # p.append(self.rtf_repr(numeracion.decode('utf-8')),
-                        #          Text(self.rtf_repr(author.decode('utf-8')),boldText), ' Asesor: ',
-                        #          Text(self.rtf_repr(solicitud.getNombreAsesor().decode('utf-8')),boldText),
-                        #          self.rtf_repr(tempText.decode('utf-8')))
-                        # apoyo_comments = u'Comentario de apoyo extra: %s' % solicitud.getApoyo_texto()
-                        # p.append(LINE, self.rtf_repr(apoyo_comments.decode('utf-8')))
-                        # if solicitud.getComentario_owner():
-                        #     p.append(LINE, self.rtf_repr(text_comments.decode('utf-8')))
-                        # if solicitud.getComentario_ce():
-                        #     p.append(LINE, self.rtf_repr(text_ccomments.decode('utf-8')))
-                        # p.append(LINE, Text(self.rtf_repr(recomendacion.decode('utf-8')),boldText))
-                        # estudiante.append(p)
-                        ##########################################################################################
-
                     if fecha is None:
-                        fecha=solicitud.getFecha_sesionce().strftime('%d/%m/%Y')
-                        #fecha='25/11/2013'
+                        fecha = solicitud.getFecha_sesionce().strftime('%d/%m/%Y')
+
                 except Exception, excep:
                     print excep
-                    pass;
+                    pass
 
-            reunionDate="REUNION xx-xx"
-            mainHeader="RECOMENDACIONES DE LA COMISION ESPECIAL DEL CONSEJO INTERNO ENCARGADA DE LAS SOLICITUDES DE VIATICOS Y PASAJES QUE SERAN PRESENTADAS AL CONSEJO INTERNO EN SU SESION DEL "
-            mainHeader+=str(fecha)
-            subHeader="Fueron estudiadas las siguientes solicitudes:"
+            reunionDate = "REUNION xx-xx"
+            mainHeader = "RECOMENDACIONES DE LA COMISION ESPECIAL DEL CONSEJO INTERNO ENCARGADA DE LAS SOLICITUDES DE VIATICOS Y PASAJES QUE SERAN PRESENTADAS AL CONSEJO INTERNO EN SU SESION DEL "
+            mainHeader += str(fecha)
+            subHeader = "Fueron estudiadas las siguientes solicitudes:"
 
-            p = Paragraph( ss.ParagraphStyles.Heading2, alignRight)
+            p = Paragraph(ss.ParagraphStyles.Heading2, alignRight)
             p.append(self.rtf_repr(reunionDate))
             header.append(p)
 
-            p = Paragraph( ss.ParagraphStyles.Heading2)
+            p = Paragraph(ss.ParagraphStyles.Heading2)
             p.append(self.rtf_repr(mainHeader))
             header.append(p)
 
-            p = Paragraph( ss.ParagraphStyles.Heading2)
+            p = Paragraph(ss.ParagraphStyles.Heading2)
             p.append(self.rtf_repr(subHeader))
             header.append(p)
 
-            generationDate="Cd. Universitaria, a _ de _ de 2016"
-            #This source insert/delete the comisations
-            # signersTitle="LA COMISION ESPECIAL"
-            # signersNames=""
+            generationDate = "Cd. Universitaria, a _ de _ de 2016"
 
-            # p = Paragraph( ss.ParagraphStyles.Heading2,alignCenter)
-            # p.append(self.rtf_repr(generationDate))
-            # signers.append(p)
-
-            # p = Paragraph( ss.ParagraphStyles.Heading2,alignCenter)
-            # p.append(self.rtf_repr(signersNames))
-            # signers.append(p)
-
-            # comisionados=self.queryObj.getMiembrosComision()
-
-            # for comisionado in comisionados.keys():
-            #     p = Paragraph( ss.ParagraphStyles.Normal)
-            #     p.append(Text(self.rtf_repr(unicode(comisionados[comisionado][0], 'utf-8')),boldText))
-            #     signers.append(p)
-
-            p = Paragraph( ss.ParagraphStyles.Normal)
-            p.append(Text(self.rtf_repr("SRG/gcv*"),smallText))
+            p = Paragraph(ss.ParagraphStyles.Normal)
+            p.append(Text(self.rtf_repr("SRG/gcv*"), smallText))
             signers.append(p)
 
             acta = 'attachment; filename=%s.rtf' % (self.context.id)
-            self.request.response.setHeader('Content-Type','application/rtf;charset=utf-8')
+            self.request.response.setHeader('Content-Type', 'application/rtf;charset=utf-8')
             self.request.response.setHeader("Content-Transfer-Encoding", "8bit")
-            self.request.response.setHeader('Content-Disposition',acta)
+            self.request.response.setHeader('Content-Disposition', acta)
 
-            DR.Write(doc,self.request.response)
+            DR.Write(doc, self.request.response)
 
         elif dictionary.get('revision.consejo.PonerFechaConsejo','') is not '':
             for key in dictionary:
