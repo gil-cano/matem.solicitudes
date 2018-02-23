@@ -193,6 +193,14 @@ events = {
             'fecha_desde': '2018-05-30 00:00 ',
             'fecha_hasta': '2018-06-02 00:00 ',
             'objeto_viaje': 'Asistir al Encuentro de Sociedades de Matemáticas de Colombia y México'},
+        'EMMM': {
+            'event_title': '2o Encuentro de Mujeres Matemáticas Mexicanas',
+            'pais': 'MX',
+            'ciudad_pais': 'San Luis Potosí',
+            'institucion': 'Universidad Autónoma de San Luis Potosí',
+            'fecha_desde': '2018-04-19 00:00 ',
+            'fecha_hasta': '2018-04-21 00:00 ',
+            'objeto_viaje': 'Asistir al 2o Encuentro de Mujeres Matemáticas Mexicanas'},
     },
 }
 
