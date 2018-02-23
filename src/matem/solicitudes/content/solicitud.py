@@ -1886,7 +1886,7 @@ class Solicitud(BaseContent):
         if research == ({},):
             return None
 
-        template = """Realizar estancia de investigación con {name} en "{place}" con el objetivo de {objective}."""
+        template = """Realizar estancia de investigación con {name} en {place} con el objetivo de {objective}."""
         events = []
         for activity in research:
             events.append(template.format(
