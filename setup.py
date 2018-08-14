@@ -18,7 +18,7 @@ long_description = (
 
 setup(
     name='matem.solicitudes',
-    version='4.1',
+    version='4.2.dev0',
     description="Applications for institutional resources.",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
