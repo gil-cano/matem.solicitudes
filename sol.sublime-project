@@ -3,17 +3,18 @@
     [
         {
             "path": ".",
-            "folder_exclude_patterns": ["bin", "include", "lib", "develop-eggs", "var", "parts"],
+            "folder_exclude_patterns": ["bin", "include", "lib", "develop-eggs", "parts", "var"],
+            "file_exclude_patterns": ["*.sublime-workspace", "*.json"],
         },
         {
             "path": "../UNAM.imateCVct",
-            "folder_exclude_patterns": ["bin", "include", "lib", "develop-eggs", "var", "parts"],
+            "folder_exclude_patterns": ["bin", "include", "lib", "develop-eggs", "parts", "var"],
+            "file_exclude_patterns": ["*.sublime-workspace", "*.json"],
         },
     ],
-    "settings": {
-        "python_interpreter": "/usr/local/bin/python2.7",
-        "python_package_paths": [
-            "/Users/gil/projects/plone/matem-buildout/parts/omelette"
-        ]
+    "settings":
+    {
+        "python_interpreter": "$project_path/bin/python2.7",
+        "python_package_paths": ["$project_path/parts/omelette"]
     }
 }

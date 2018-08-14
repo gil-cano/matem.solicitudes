@@ -1,8 +1,8 @@
 Changelog
 =========
 
-4.0.1 (unreleased)
-------------------
+4.1 (2018-09-14)
+----------------
 - Remove old slot from browser views
   [gil-cano]
 
