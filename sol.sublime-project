@@ -4,7 +4,12 @@
         {
             "path": ".",
             "folder_exclude_patterns": ["bin", "include", "lib", "develop-eggs", "parts", "var"],
-            "file_exclude_patterns": ["*.sublime-workspace", "*.json"],
+            "file_exclude_patterns": [
+                "*.sublime-workspace",
+                ".mr.developer.cfg",
+                ".installed.cfg",
+                "*.json"
+            ],
         },
         {
             "path": "../UNAM.imateCVct",
