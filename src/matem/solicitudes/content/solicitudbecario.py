@@ -1439,7 +1439,11 @@ class SolicitudBecario(BaseContent):
         portal_catalog = getToolByName(self, 'portal_catalog')
         brains = portal_catalog(
             portal_type='FSDPerson',
-            person_classification='investigadores',
+            person_classification=[
+                'investigadores',
+                'tecnicos-academicos',
+                'catedras-conacyt'
+            ],
             sort_on='getSortableName',
             review_state='active',
         )
