@@ -1,5 +1,6 @@
+=======================
 IM Applications package
-==============================================================================
+=======================
 
 .. image:: https://travis-ci.org/gil-cano/matem.solicitudes.svg?branch=master
     :alt: Travis CI badge

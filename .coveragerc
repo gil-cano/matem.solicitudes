@@ -1,9 +1,2 @@
 [report]
-include =
-    src/matem/*
-omit =
-    */test*
-    */upgrades/*
-    eggs/*
-    parts/*
-    src-git/*
+include = src/matem/solicitudes/*
