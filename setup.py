@@ -5,11 +5,12 @@ from setuptools import setup
 
 version = '4.2.dev0'
 description = 'license applications'
-long_description = (
-    open('README.rst').read() + '\n' +
-    open('CONTRIBUTORS.rst').read() + '\n' +
-    open('CHANGES.rst').read()
-)
+long_description = '\n\n'.join([
+    open('README.rst').read(),
+    open('CONTRIBUTORS.rst').read(),
+    open('CHANGES.rst').read(),
+])
+
 
 setup(
     name='matem.solicitudes',
@@ -18,16 +19,17 @@ setup(
     long_description=long_description,
     classifiers=[
         'Environment :: Web Environment',
-        'Framework :: Plone :: 4.3',
         'Framework :: Plone',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python',
+        'Framework :: Plone :: 4.3',
+        'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
         'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.7',
     ],
-    keywords='plone license',
+    keywords='Python Plone',
     author='Informática Académica',
     author_email='informaticaacademica@matem.unam.mx',
-    url='https://github.com/imatem/matem.solicitudes',
+    url='https://github.com/gil-cano/matem.solicitudes',
     packages=find_packages('src'),
     package_dir={'': 'src'},
     namespace_packages=['matem'],

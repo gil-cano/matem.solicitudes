@@ -46,6 +46,26 @@ Install matem.solicitudes by adding it to your buildout::
 and then running "bin/buildout"
 
 
+Using the development buildout
+------------------------------
+
+Create a virtualenv in the package::
+
+    $ virtualenv --clear .
+
+Install requirements with pip::
+
+    $ ./bin/pip install -r requirements.txt
+
+Run buildout::
+
+    $ ./bin/buildout
+
+Start Plone in foreground:
+
+    $ ./bin/instance fg
+
+
 Contribute
 ----------
 
@@ -58,7 +78,7 @@ Support
 -------
 
 If you are having issues, please let us know.
-We have a mailing list located at: computoacademico@im.unam.mx
+We have a mailing list located at: informatica.academica@matem.unam.mx
 
 License
 -------

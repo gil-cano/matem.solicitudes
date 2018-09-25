@@ -2,5 +2,4 @@ global-exclude *.pyc
 global-exclude **/.DS_Store
 graft docs
 graft src
-include *.cfg
 include *.rst

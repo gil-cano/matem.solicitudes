@@ -12,9 +12,10 @@
             ],
         },
         {
-            "path": "../UNAM.imateCVct",
-            "folder_exclude_patterns": ["bin", "include", "lib", "develop-eggs", "parts", "var"],
-            "file_exclude_patterns": ["*.sublime-workspace", "*.json"],
+            "path": "/Users/gil/projects/collective/collective.fingerpointing",
+        },
+                {
+            "path": "../collective.bibliographies",
         },
     ],
     "settings":
