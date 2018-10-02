@@ -1,6 +1,11 @@
 Changelog
 =========
 
+4.2 (unreleased)
+----------------
+
+- Nothing changed yet
+
 4.1 (2018-09-14)
 ----------------
 - Remove old slot from browser views
