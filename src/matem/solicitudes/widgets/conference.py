@@ -52,6 +52,7 @@ class ConferenceWidget(DataGridWidget):
             newValue.append(newRow)
         return newValue
 
+
 registerWidget(
     ConferenceWidget,
     title='ConferenceWidget',

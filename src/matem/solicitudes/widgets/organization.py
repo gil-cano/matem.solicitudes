@@ -51,6 +51,7 @@ class OrganizationWidget(DataGridWidget):
             newValue.append(newRow)
         return newValue
 
+
 registerWidget(
     OrganizationWidget,
     title='OrganizationWidget',

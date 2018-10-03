@@ -1631,4 +1631,5 @@ La cantidad total que se le ha aprobado en lo que va del año: %s.
             },
         ]
 
+
 registerType(SolicitudVisitante, PROJECTNAME)

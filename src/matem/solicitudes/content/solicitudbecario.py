@@ -1664,4 +1664,5 @@ Para más detalles vaya a %s.
             },
         ]
 
+
 registerType(SolicitudBecario, PROJECTNAME)

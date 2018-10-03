@@ -51,6 +51,7 @@ class CourseWidget(DataGridWidget):
             newValue.append(newRow)
         return newValue
 
+
 registerWidget(
     CourseWidget,
     title='CourseWidget',

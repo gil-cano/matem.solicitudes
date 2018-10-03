@@ -16,6 +16,7 @@ class OtherWidget(DataGridWidget):
 
     security = ClassSecurityInfo()
 
+
 registerWidget(
     OtherWidget,
     title='OtherWidget',

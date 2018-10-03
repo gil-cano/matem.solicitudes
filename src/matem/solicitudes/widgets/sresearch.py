@@ -17,6 +17,7 @@ class SResearchWidget(DataGridWidget):
 
     security = ClassSecurityInfo()
 
+
 registerWidget(
     SResearchWidget,
     title='SResearchWidget',

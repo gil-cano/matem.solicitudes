@@ -1598,4 +1598,5 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
             },
         ]
 
+
 atapi.registerType(SolicitudInstitucional, PROJECTNAME)
