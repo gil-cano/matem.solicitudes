@@ -8,11 +8,7 @@ from zope.interface import directlyProvides
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-from zope.component.hooks import getSite
 from plone import api
-from AccessControl import getSecurityManager
-
-# Vocabularies for the widgets
 
 
 class EventTypeVocabulary:
@@ -56,17 +52,7 @@ def ConferenceTypeVocabulary(context):
         SimpleTerm(value='divulgation', title=_(u'Divulgation')),
         SimpleTerm(value='human_resources', title=_(u'Human resources training')),
     ])
-directlyProvides(ConferenceTypeVocabulary, IVocabularyFactory)
-
-# class ConferenceTypeVocabulary:
-#     implements(IVocabulary)
-
-#     def getDisplayList(self, instance):
-#         return DisplayList([
-#             ('research', _(u'Research')),
-#             ('divulgation', _(u'Divulgation')),
-#             ('human_resources', _(u'Human resources training')),
-#         ])
+directlyProvides(ConferenceTypeVocabulary, IVocabularyFactory)  # noqa: E305
 
 
 class CourselevelVocabulary:
@@ -80,6 +66,7 @@ class CourselevelVocabulary:
             ('highschool', _(u'High School')),
             ('other', _(u'Other')),
         ])
+
 
 class ExpectedNumbersVocabulary:
     implements(IVocabulary)
@@ -95,6 +82,7 @@ class ExpectedNumbersVocabulary:
             ('stage6', _(u'More than 100')),
         ])
 
+
 # TOD0 Unify the course level vocabularies
 def CourselevelVocabularyFactory(context):
     """Vocabulary factory for conference type"""
@@ -105,17 +93,7 @@ def CourselevelVocabularyFactory(context):
         SimpleTerm(value='highschool', title=_(u'High School')),
         SimpleTerm(value='other', title=_(u'Other')),
     ])
-directlyProvides(CourselevelVocabularyFactory, IVocabularyFactory)
-
-# class CoursetypeVocabulary:
-#     implements(IVocabulary)
-
-#     def getDisplayList(self, instance):
-#         return DisplayList([
-#             ('research', _(u'Research')),
-#             ('teaching', _(u'Teaching')),
-#             ('divulgation', _(u'Divulgation')),
-#         ])
+directlyProvides(CourselevelVocabularyFactory, IVocabularyFactory)  # noqa: E305
 
 
 def ResearcherPositionVocabulary(context):
@@ -129,21 +107,7 @@ def ResearcherPositionVocabulary(context):
         SimpleTerm(value='directivec', title=_(u'Directive Comitte')),
         SimpleTerm(value='other', title=_(u'Other')),
     ])
-directlyProvides(ResearcherPositionVocabulary, IVocabularyFactory)
-
-# class ResearcherPositionVocabulary:
-#     implements(IVocabulary)
-
-#     def getDisplayList(self, instance):
-#         return DisplayList([
-#             ('organizer', _(u'Organizer')),
-#             ('co-organizer', _(u'Co-Organizer')),
-#             ('responsible', _(u'Responsible of session')),
-#             ('scientificc', _(u'Scientific Comittee')),
-#             ('localc', _(u'Local Comitte')),
-#             ('directivec', _(u'Directive Comitte')),
-#             ('other', _(u'Other')),
-#         ])
+directlyProvides(ResearcherPositionVocabulary, IVocabularyFactory)  # noqa: E305
 
 
 def IMPositionVocabulary(context):
@@ -154,7 +118,7 @@ def IMPositionVocabulary(context):
         SimpleTerm(value='support', title=_(u'Support for the diffusion')),
         SimpleTerm(value='other', title=_(u'Other')),
     ])
-directlyProvides(IMPositionVocabulary, IVocabularyFactory)
+directlyProvides(IMPositionVocabulary, IVocabularyFactory)  # noqa: E305
 
 
 def IMCampusVocabulary(context):
@@ -165,53 +129,16 @@ def IMCampusVocabulary(context):
         SimpleTerm(value='Juriquilla', title='Juriquilla'),
         SimpleTerm(value='Oaxaca', title='Oaxaca'),
     ])
-directlyProvides(IMCampusVocabulary, IVocabularyFactory)
+directlyProvides(IMCampusVocabulary, IVocabularyFactory)  # noqa: E305
 
 
 class SolResponsibleVocabulary:
     implements(IVocabulary)
 
-    # local_roles = self.context.portal_membership.getAuthenticatedMember().getRolesInContext(getSite())
-    # if 'Manager' in local_roles:
-    #     return 'enable_border'
-    # return 'disable_border'
-
     def getDisplayList(self, instance):
-        # import pdb; pdb.set_trace()
-
         canview = [('----', '----')]
-        # # localroles = instance.portal_membership.getAuthenticatedMember().getRolesInContext(getSite())
-        # current = api.user.get_current()
-        # # userid = current.id
-        # # member.getRolesInContext(portal)
-        # roles = current.getRolesInContext(instance)
-        # import pdb; pdb.set_trace()
-
-        # if 'Comisionado' in roles or 'Manager' in roles:
-        #     canview.append((current.id, current.getProperty('fullname')))
-
         for comuser in api.user.get_users():
             roles = comuser.getRolesInContext(instance)
             if 'Comisionado' in roles and 'Manager' not in roles:
                 canview.append((comuser.id, comuser.getProperty('fullname')))
-
-        # import pdb; pdb.set_trace()
-        # sm = getSecurityManager()
-        # sm.checkPermission('UNAM.imateCVct: Add portal cv content', self.context)
-        # # Comisionado
-        # permissions = [p['name'] for p in self.context.permissionsOfRole('Owner') if p['selected']]
-
-        # (Pdb) from AccessControl import getSecurityManager
-        # (Pdb) sm = getSecurityManager()
-        # (Pdb) sm.checkPermission('UNAM.imateCVct: Add portal cv content', self.context)
-
-
-        # return DisplayList([
-        #     ('C.U.', 'C.U.'),
-        #     ('Cuernavaca', 'Cuernavaca'),
-        #     ('Juriquilla', 'Juriquilla'),
-        #     ('Oaxaca', 'Oaxaca'),
-        # ])
         return DisplayList(canview)
-
-
