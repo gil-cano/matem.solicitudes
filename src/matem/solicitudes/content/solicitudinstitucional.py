@@ -50,7 +50,7 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
     ComputedField(name='title',
         required=1,
         searchable=1,
-        expression="((here.getOwner() and 'Solicitud (%s) de %s por %s (%s, %s, %s)' % (here.getLicenciacomision(),here.getNombreOwner(), here.getTotal(), here.getCiudadPais(), here.getInstitucion(), here.getFechaDesde() )) or 'Nueva solicitud')",
+        expression="((here.getOwner() and 'Solicitud (%s) de %s (%s, %s, %s)' % (here.getLicenciacomision(),here.getNombreOwner(), here.getCiudadPais(), here.getInstitucion(), here.getFechaDesde().strftime('%d/%m/%Y') )) or 'Nueva solicitud')",
         accessor='Title',
         widget=ComputedWidget(visible={'view':'invisible','edit':'invisible'}),
     ),

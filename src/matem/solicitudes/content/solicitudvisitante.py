@@ -53,7 +53,7 @@ schema = BaseSchema + Schema((
         name='title',
         required=1,
         searchable=1,
-        expression="((here.getOwner() and 'Solicitud (Visitante) de %s por %s (%s, %s, %s)' % (here.getNombreOwner(), here.getTotal(), here.getProcedencia(), here.getInstitucion(), here.getFechaDesde() )) or 'Nueva solicitud')",
+        expression="((here.getOwner() and 'Solicitud (Visitante) de %s (%s, %s, %s)' % (here.getNombreOwner(), here.getProcedencia(), here.getInstitucion(), here.getFechaDesde().strftime('%d/%m/%Y') )) or 'Nueva solicitud')",
         accessor='Title',
         widget=ComputedWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
     ),
