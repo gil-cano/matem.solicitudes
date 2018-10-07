@@ -1070,7 +1070,7 @@ class SolicitudInstitucional(BaseContent):
         elif (wf_state == 'Retirada'):
             wf_title = 'Solicitud retirada'
         else:
-             wf_title = ''
+            wf_title = ''
         return wf_title
 
     def esSolcitudBecario(self):
@@ -1328,8 +1328,8 @@ class SolicitudInstitucional(BaseContent):
             else:
                 return float(f)
         except:
-                a = sys.exc_info()
-                raise a[0], a[1], a[2]
+            a = sys.exc_info()
+            raise a[0], a[1], a[2]
 
     def getTotal(self):
         pasaje = self.getCantidad_pasaje()

@@ -1345,8 +1345,8 @@ class SolicitudVisitante(BaseContent):
             f = self.setCantidadPasaje()
             return self.getCantidad(f)
         except:
-                a = sys.exc_info()
-                raise a[0], a[1], a[2]
+            a = sys.exc_info()
+            raise a[0], a[1], a[2]
 
     def setCantidadViaticos(self):
         f = self.getField('cantidad_viaticos')
@@ -1373,10 +1373,10 @@ class SolicitudVisitante(BaseContent):
             raise a[0], a[1], a[2]
 
     def getCantidadInscripcion(self):
-            return 0.0
+        return 0.0
 
     def getCantidad_inscripcion(self):
-            return 0.0
+        return 0.0
 
     def getCantidadAutorizadaPasaje(self):
         try:
@@ -1459,8 +1459,8 @@ class SolicitudVisitante(BaseContent):
             else:
                 return float(f)
         except:
-                a = sys.exc_info()
-                raise a[0], a[1], a[2]
+            a = sys.exc_info()
+            raise a[0], a[1], a[2]
 
     def getTotal(self):
         pasaje = self.getCantidadPasaje()

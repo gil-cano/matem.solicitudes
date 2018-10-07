@@ -17,7 +17,7 @@ class isFloat:
             if value < 0:
                 return("Transportation cost is required, please correct.")
         except:
-                return("'%s' is not float (illegal value)" % str(value))
+            return("'%s' is not float (illegal value)" % str(value))
 
 
 
