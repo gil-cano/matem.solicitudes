@@ -41,3 +41,12 @@ etc/
 
 # sublime project
 *.sublime-workspace
+
+# excludes
+!.coveragerc
+!.editorconfig
+!.gitattributes
+!.gitignore
+!.gitkeep
+!.travis.yml
+!src/matem
