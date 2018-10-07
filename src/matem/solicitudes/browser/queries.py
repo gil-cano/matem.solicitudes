@@ -226,7 +226,7 @@ class Queries(BrowserView):
                       'visitor_name':obj.getNombreInvitado(),
                   }
               else:
-                  #'SolicitudInstitucional'
+                  # 'SolicitudInstitucional'
                   special_dictionary={
                       'type':obj.getLicenciacomision(),
                       'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),

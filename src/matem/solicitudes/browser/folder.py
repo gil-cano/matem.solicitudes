@@ -821,7 +821,7 @@ class SolicitudFolderView(BrowserView):
 
                 meta = dictionary['meta_type']
 
-                #¿Que hice aqui?
+                # ¿Que hice aqui?
                 if dictionary['owner_id'].find(searchStr)!=-1 and searchStr is not "":
                     append=True
                     if append and unEstado is not None:

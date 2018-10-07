@@ -141,7 +141,6 @@ class BudgetView(BrowserView):
                 url=brain.getURL()
                 folder=brain.getObject()
                 if not folder.historico():
-                    #folder.actualizarPeriodo()
                     folders.append([folder.getId(),str(folder.getFecha_desde()),str(folder.getFecha_hasta()),folder.getPresupuesto_inicial(),folder.getPresupuesto_asignado(),folder.absolute_url()])
             return folders
         except:

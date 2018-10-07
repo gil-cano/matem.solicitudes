@@ -568,7 +568,7 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
             write_permission="Solicitud: Comision Revisa Solicitud",
         ),
 
-#Campos CE
+# Campos CE
         StringField('comentario_ce',
             searchable=1,
             required=0,
@@ -675,7 +675,7 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
         write_permission="Solicitud: Comision Revisa Solicitud",
     ),
 
-    #Campos CI
+    # Campos CI
     StringField(
         name='comentario_ci',
         required=0,
@@ -960,7 +960,7 @@ class SolicitudInstitucional(BaseContent):
         if start > end:
             errors['fecha_hasta'] = u'La fecha de término debe ser posterior a la de inicio'
 
-## desde aqui peg\'o eduardo ...
+# desde aqui peg\'o eduardo ...
     def addTranslation(self, language, **kwargs):
         # call orginal addTranslation
         BaseContent.addTranslation(self, language, **kwargs)
@@ -1165,11 +1165,11 @@ class SolicitudInstitucional(BaseContent):
         return self.getField('institucion').get(self)
 
     def getFechaDesde(self):
-        #return self.getField('fecha_desde').get(self)
+        # return self.getField('fecha_desde').get(self)
         return DateTime(self.getField('fecha_desde').get(self))
 
     def getFechaHasta(self):
-        #return self.getField('fecha_hasta').get(self)
+        # return self.getField('fecha_hasta').get(self)
         return DateTime(self.getField('fecha_hasta').get(self))
 
     def getObjetoViaje(self):
@@ -1462,7 +1462,7 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
         getToolByName(self,'MailHost').send(msg, mail_to, mail_from, subject)
         return
 
-    #Esta definida en solicitud
+    # Esta definida en solicitud
     def getCantidadDeDias(self):
         # t1=str(self.getFecha_desde()).split("/")
         # t2=str(self.getFecha_hasta()).split("/")
@@ -1562,7 +1562,7 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
         return fsdperson
 
     def getCountriesVocabulary(self):
-        #This function is defined in config.py
+        # This function is defined in config.py
         return getCountriesVocabulary(self)
 
     def getAddExtraTopInformation(self):

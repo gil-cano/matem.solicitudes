@@ -169,7 +169,6 @@ SolicitudBecarioSchema = BaseSchema + Schema((
           name='pais',
           required=True,
           default=('MX'),
-          #storage=atapi.AnnotationStorage(),
           widget=SelectionWidget(
             label='Country',
             label_msgid='label_pais',
@@ -180,22 +179,6 @@ SolicitudBecarioSchema = BaseSchema + Schema((
           vocabulary="getCountriesVocabulary",
           write_permission="Solicitud: Modificar Solicitud",
     ),
-
-    # LinesField('pais',
-    #     searchable=1,
-    #     required=1,
-    #     default=('MX'),
-    #     widget=CountryWidget(
-    #         label='Country',
-    #         label_msgid='label_pais',
-    #         provideNullValue=1,
-    #         omitCountries=None,
-    #         description='Country to visit',
-    #         description_msgid='help_pais',
-    #         i18n_domain='matem.solicitudes',
-    #     ),
-    #     write_permission="Solicitud: Modificar Solicitud",
-    # ),
 
     StringField('ciudad_pais',
         searchable=1,
@@ -523,7 +506,7 @@ SolicitudBecarioSchema = BaseSchema + Schema((
 
 
 
-#Archivos ...
+# Archivos ...
         MultiFileField('displayAttachments',
             primary=True,
             languageIndependent=True,
@@ -537,7 +520,7 @@ SolicitudBecarioSchema = BaseSchema + Schema((
                      i18n_domain='matem.solicitudes',),
             write_permission="Solicitud: Modificar Solicitud",
         ),
-#Comentarios del asesor
+# Comentarios del asesor
         StringField('comentario_asesor',
             searchable=1,
             required=0,
@@ -551,7 +534,7 @@ SolicitudBecarioSchema = BaseSchema + Schema((
         ),
 
 
-#Comentarios del owner
+# Comentarios del owner
         StringField('comentario_owner',
             searchable=1,
             required=0,
@@ -566,7 +549,7 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             write_permission="Solicitud: Modificar Solicitud",
         ),
 
-#Campos del CE
+# Campos del CE
         DateTimeField('fecha_sesionce',
             searchable=1,
             required=1,
@@ -650,7 +633,7 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             write_permission="Solicitud: Comision Revisa Solicitud",
         ),
 
-#Campos del CI
+# Campos del CI
         StringField('comentario_ci',
             searchable=1,
             required=0,
@@ -862,82 +845,6 @@ class SolicitudBecario(BaseContent):
                 REQUEST['cantidad_inscripcion'] = '0.0'
                 REQUEST.form['cantidad_inscripcion'] = '0.0'
 
-
-        # return
-        # # TODO: save dates in other space
-        # local_roles = self.portal_membership.getAuthenticatedMember().getRolesInContext(self)
-
-        # if 'Manager' not in local_roles:
-
-        #     envios = []
-        #     shistory = self.workflow_history.get('solicitud_workflow', [])
-
-        #     for i in shistory:
-        #         if i.get('action', None) == 'enviarainvestigador':
-        #             envios.append(i.get('time', None))
-
-        #     envios.sort()
-
-        #     # This dates must be the same in getLegalTransitions() method
-        #     # and in the class browser/folder.py
-        #     close_prep = DateTime('2017/10/15 23:59:00 GMT-5')
-        #     close_year = DateTime('2017/12/31 23:59:00 GMT-5')
-        #     next_year = DateTime('2018/01/01 00:00:00 GMT-5')
-
-        #     # Inician y terminan en 2017
-        #     if start <= close_year and end <= close_year:
-        #         if envios:
-        #             # Este caso ya no pasará sólo el primer año que se aplique el cirre
-        #             if envios[0] > close_prep:
-        #                 if REQUEST.get('pasaje', '') == 'si':
-        #                     errors['pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
-
-        #                 if REQUEST.get('viaticos_becario', '') == 'Si':
-        #                     errors['viaticos_becario'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
-
-        #                 if REQUEST.get('inscripcion', '') == 'Si':
-        #                     errors['inscripcion'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
-        #         else:
-        #             if DateTime() > close_prep:
-        #                 if REQUEST.get('pasaje', '') == 'si':
-        #                     errors['pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
-
-        #                 if REQUEST.get('viaticos_becario', '') == 'Si':
-        #                     errors['viaticos_becario'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
-
-        #                 if REQUEST.get('inscripcion', '') == 'Si':
-        #                     errors['inscripcion'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
-
-        #     # si inician en el 2017 y terminan en el 2018
-        #     elif start <= close_year and end >= next_year:
-
-        #         parentid = self.aq_parent.id
-        #         # Si viven en el 2017 hay que aplicar cambios de cierre de presupuesto
-        #         if parentid == str(close_year.year()):
-        #             if envios:
-        #                 if envios[0] > close_prep:
-        #                     if REQUEST.get('pasaje', '') == 'si':
-        #                         errors['pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
-
-        #                     if REQUEST.get('viaticos_becario', '') == 'Si':
-        #                         errors['viaticos_becario'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
-
-        #                     if REQUEST.get('inscripcion', '') == 'Si':
-        #                         errors['inscripcion'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
-        #             else:
-        #                 if DateTime() > close_prep:
-        #                     if REQUEST.get('pasaje', '') == 'si':
-        #                         errors['pasaje'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
-
-        #                     if REQUEST.get('viaticos_becario', '') == 'Si':
-        #                         errors['viaticos_becario'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
-
-        #                     if REQUEST.get('inscripcion', '') == 'Si':
-        #                         errors['inscripcion'] = u'El cierre de presupuesto ya fue aplicado, por favor elija No'
-
-        #     # End money validator
-
-
     def addTranslation(self, language, **kwargs):
         # call orginal addTranslation
         BaseContent.addTranslation(self, language, **kwargs)
@@ -973,95 +880,6 @@ class SolicitudBecario(BaseContent):
         workflowTool = getToolByName(self, "portal_workflow")
         transitions = workflowTool.getTransitionsFor(self)
         return transitions
-        # # Not validation for Managers
-        # local_roles = self.portal_membership.getAuthenticatedMember().getRolesInContext(self)
-        # if 'Manager' in local_roles:
-        #     self.message_cierre = ''
-        #     return transitions
-
-        # envios = []
-        # envios_tutor = []
-
-        # shistory = self.workflow_history.get('solicitud_workflow', [])
-        # for i in shistory:
-        #     if i.get('action', None) == 'enviarainvestigador':
-        #         envios.append(i.get('time', None))
-
-        #     if i.get('action', None) == 'enviar':
-        #         envios_tutor.append(i.get('time', None))
-
-        # envios.sort()
-        # envios_tutor.sort()
-
-        # close_prep = DateTime('2017/10/15 23:59:00 GMT-5')
-        # close_year = DateTime('2017/12/31 23:59:00 GMT-5')
-        # next_year = DateTime('2018/01/01 00:00:00 GMT-5')
-
-        # start = self.getFechaDesde()  # DateTime('2017/12/01 00:00:00 US/Central')
-        # end = self.getFechaHasta()
-        # realtransitions = []
-
-        # # Inician y terminan en 2017
-        # if start <= close_year and end <= close_year:
-        #     if envios:
-        #         # Este caso ya no pasará sólo el primer año que se aplique el cirre
-        #         if envios[0] > close_prep:
-        #             if self.getPasaje() == 'si' or self.getViaticos_becario() == 'Si' or self.getInscripcion() == 'Si':
-        #                 for item in transitions:
-        #                     if item['id'] != 'enviarainvestigador':
-        #                         realtransitions.append(item)
-        #                 self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar a Investigador, por favor elija No en Pasaje, Viáticos  o Inscripción'
-        #                 return realtransitions
-        #     else:
-        #         if DateTime() > close_prep:
-        #             if self.getPasaje() == 'si' or self.getViaticos_becario() == 'Si' or self.getInscripcion() == 'Si':
-        #                 for item in transitions:
-        #                     if item['id'] != 'enviarainvestigador':
-        #                         realtransitions.append(item)
-        #                 self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar a Investigador, por favor elija No en Pasaje, Viáticos  o Inscripción'
-        #                 return realtransitions
-
-        #     if envios_tutor:
-        #         if envios_tutor[0] > close_prep:
-        #             if self.getPasaje() == 'si' or self.getViaticos_becario() == 'Si' or self.getInscripcion() == 'Si':
-        #                 for item in transitions:
-        #                     if item['id'] != 'enviar':
-        #                         realtransitions.append(item)
-        #                 self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elija No en Pasaje, Viáticos  o Inscripción'
-        #                 return realtransitions
-
-        # # si inician en el 2017 y terminan en el 2018
-        # elif start <= close_year and end >= next_year:
-
-        #     parentid = self.aq_parent.id
-        #     # Si viven en el 2017 hay que aplicar cambios de cierre de presupuesto
-        #     if parentid == str(close_year.year()):
-        #         if envios:
-        #             if self.getPasaje() == 'si' or self.getViaticos_becario() == 'Si' or self.getInscripcion() == 'Si':
-        #                 for item in transitions:
-        #                     if item['id'] != 'enviarainvestigador':
-        #                         realtransitions.append(item)
-        #                 self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar a Investigador, por favor elija No en Pasaje, Viáticos  o Inscripción'
-        #                 return realtransitions
-        #         else:
-        #             if DateTime() > close_prep:
-        #                 if self.getPasaje() == 'si' or self.getViaticos_becario() == 'Si' or self.getInscripcion() == 'Si':
-        #                     for item in transitions:
-        #                         if item['id'] != 'enviarainvestigador':
-        #                             realtransitions.append(item)
-        #                     self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar a Investigador, por favor elija No en Pasaje, Viáticos  o Inscripción'
-        #                     return realtransitions
-        #         if envios_tutor:
-        #             if envios_tutor[0] > close_prep:
-        #                 if self.getPasaje() == 'si' or self.getViaticos_becario() == 'Si' or self.getInscripcion() == 'Si':
-        #                     for item in transitions:
-        #                         if item['id'] != 'enviar':
-        #                             realtransitions.append(item)
-        #                     self.message_cierre = 'Ya se aplicó el cierre de presupuesto: Para ver el botón de Enviar, por favor elija No en Pasaje, Viáticos  o Inscripción'
-        #                     return realtransitions
-
-        # self.message_cierre = ''
-        # return transitions
 
     def toState(self, State):
         workflowTool = getToolByName(self, "portal_workflow")
@@ -1269,11 +1087,9 @@ class SolicitudBecario(BaseContent):
         return self.getField('titulo_trabajo').get(self)
 
     def getFechaDesde(self):
-        #return self.getField('fecha_desde').get(self)
         return DateTime(self.getField('fecha_desde').get(self))
 
     def getFechaHasta(self):
-        #return self.getField('fecha_hasta').get(self)
         return DateTime(self.getField('fecha_hasta').get(self))
 
     def getObjetoViaje(self):
@@ -1432,7 +1248,7 @@ class SolicitudBecario(BaseContent):
 
         return tupla
 
-## regresa NombreCompleto_investigador (id_investigador)
+# regresa NombreCompleto_investigador (id_investigador)
     def getInvestigadores(self):
         ''' return list of Researchers
         '''
@@ -1554,13 +1370,8 @@ Para más detalles vaya a %s.
             getToolByName(self, 'MailHost').send(msg, mail_to, mail_from, subject)
         return
 
-    #Esta definida en solicitud
+    # Esta definida en solicitud
     def getCantidadDeDias(self):
-        # t1 = str(self.getFecha_desde()).split("/")
-        # t2 = str(self.getFecha_hasta()).split("/")
-        # d1 = datetime(int(t1[0]), int(t1[1]), int(t1[2]))
-        # d2 = datetime(int(t2[0]), int(t2[1]), int(t2[2]))
-        # return int((d2 - d1).days) + 1
         t1 = str(DateTime(self.getFecha_desde())).split("/")
         t2 = str(DateTime(self.getFecha_hasta())).split("/")
         d1=datetime(int(t1[0]),int(t1[1]),int(t1[2].split(" ")[0]))
@@ -1637,7 +1448,7 @@ Para más detalles vaya a %s.
         return fsdperson
 
     def getCountriesVocabulary(self):
-        #This function is defined in config.py
+        # This function is defined in config.py
         return getCountriesVocabulary(self)
 
     def getAddExtraTopInformation(self):
