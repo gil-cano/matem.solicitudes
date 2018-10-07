@@ -826,13 +826,13 @@ class SolicitudFolderView(BrowserView):
                     append=True
                     if append and unEstado is not None:
                         if unEstado == "aprobada" and not dictionary['workflow_state']=="aprobada":
-                                append=False
+                            append=False
                         elif unEstado == "rechazada" and not dictionary['workflow_state']=="rechazada":
-                                append=False
+                            append=False
                         elif unEstado == "revision" and dictionary['workflow_state']=="aprobada":
-                                append=False
+                            append=False
                         elif unEstado == "revision" and dictionary['workflow_state']=="rechazada":
-                                append=False
+                            append=False
 
                     if append:
                         applications.append(dictionary)
@@ -872,8 +872,8 @@ class SolicitudFolderView(BrowserView):
     def getUserApplicationsInState(self,user,state):
         applications=[]
         for dictionary in queryObj.getUserApplications(user):
-           if dictionary['workflow_state'] == state:
-               applications.append(dictionary)
+            if dictionary['workflow_state'] == state:
+                applications.append(dictionary)
         return applications
 
     def changeBlockState(self,dictionary):
