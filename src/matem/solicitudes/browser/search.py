@@ -79,7 +79,7 @@ class SearchView(BrowserView):
             'getActaci',
             'getCargo_presupuesto',
             'getWFStateName',
-            ]
+        ]
         items = []
         for b in brains:
             o = b.getObject()
