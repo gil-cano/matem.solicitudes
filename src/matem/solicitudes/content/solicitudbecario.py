@@ -1009,8 +1009,6 @@ class SolicitudBecario(BaseContent):
         return mt.getAuthenticatedMember()
 
     def getNombreActual(self):
-#        mt = getToolByName(self, 'portal_membership')
-#        member = mt.getAuthenticatedMember()
         member = self.getIdActual()
         fsdperson = self.getPersonWrapper(member.getId())
         return fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName()
@@ -1019,7 +1017,6 @@ class SolicitudBecario(BaseContent):
         return self.getOwner().getId()
 
     def getNombreOwner(self):
-#        creator = self.getOwner().getId()
         creator = self.getIdOwner() or ''
         try:
             fsdperson = self.getPersonWrapper(creator)
@@ -1426,12 +1423,10 @@ Para más detalles vaya a %s.
             return True
 
     def mandarInvestigador(self):
-#        getToolByName(self,'plone_utils').changeOwnershipOf(self,self.getField('asesor').get(self))
         self.manage_addLocalRoles(self.getField('asesor').get(self), ('Owner',))
         return
 
     def mandarBecario(self):
-#        getToolByName(self,'plone_utils').changeOwnershipOf(self,self.getField('nombrebecario').get(self))
         return
 
     def getDefaultDate(self):

@@ -218,6 +218,7 @@ class SolicitudFolderView(BrowserView):
         return applications
 
     def getInvestigadores(self, usuario):
+        # TODO: REMOVE USELESS METHOD
         folder = self.context
         mt = self.context.portal_membership
         member = mt.getMemberById(usuario)
@@ -314,7 +315,6 @@ class SolicitudFolderView(BrowserView):
 
                 try:
                     if append :
-#                        users[letter].append([fsdperson.getLastName()+","+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),fsdperson.getPresupuesto_asignado(),rol,fsdperson.getId(),fsdperson.getPresupuesto_inicial()-fsdperson.getPresupuesto_asignado(),fsdperson.getDias_comision_utilizados(),fsdperson.getDias_licencia_utilizados()])
                         append = False
                 except:
                     pass
