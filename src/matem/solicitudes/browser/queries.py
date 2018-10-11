@@ -188,7 +188,7 @@ class Queries(BrowserView):
 
             return folders
         except Exception, err:
-            print obj.getId()+": "+str(err);
+            print obj.getId()+": "+str(err)
             return []
         return folders
 
@@ -268,8 +268,7 @@ class Queries(BrowserView):
                           'cargo_presupuesto': obj.getCargo_presupuesto(),
               })
           except Exception, err:
-              print obj.getId()+": "+str(err);
-              pass;
+              print obj.getId()+": "+str(err)
         return applications
 
     @forever.memoize
@@ -355,8 +354,7 @@ class Queries(BrowserView):
                             'cargo_presupuesto': obj.getCargo_presupuesto(),
                 })
             except Exception, err:
-                print obj.getId()+": "+str(err);
-                pass;
+                print obj.getId()+": "+str(err)
         return applications
 
     @forever.memoize
@@ -435,8 +433,7 @@ class Queries(BrowserView):
                 })
 
             except Exception, err:
-                print obj.getId()+": "+str(err);
-                pass;
+                print obj.getId()+": "+str(err)
         return applications
 
     @forever.memoize
@@ -557,8 +554,7 @@ class Queries(BrowserView):
                 })
 
             except Exception, err:
-                print obj.getId()+": "+str(err);
-                pass;
+                print obj.getId()+": "+str(err)
         return applications
 
     @forever.memoize
@@ -720,8 +716,7 @@ class Queries(BrowserView):
                 })
 
             except Exception, err:
-                print obj.getId()+": "+str(err);
-                pass;
+                print obj.getId()+": "+str(err)
 
         return applications
 
@@ -750,6 +745,5 @@ class Queries(BrowserView):
             try:
                 applications.append(obj)
             except Exception, err:
-                print obj.getId()+": "+str(err);
-                pass;
+                print obj.getId()+": "+str(err)
         return applications

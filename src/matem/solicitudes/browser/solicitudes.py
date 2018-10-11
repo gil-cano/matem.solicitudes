@@ -423,7 +423,7 @@ class ExportView(BrowserView):
         return areas
 
     def getTipoTransporte(self, codigoTrans):
-        temp="";
+        temp=""
 
         for codigo in codigoTrans:
             try:
