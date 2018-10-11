@@ -1,10 +1,10 @@
 from AccessControl.unauthorized import Unauthorized
 from Products.Archetypes.event import ObjectInitializedEvent
-from Products.CMFPlone.utils import _createObjectByType
 from matem.solicitudes.tests.base import TestCase
 from zope.event import notify
 
 import unittest
+
 
 class TestsDeCreacion(TestCase):
     """
@@ -52,7 +52,8 @@ class TestsDeCreacion(TestCase):
 
     def testCrearFolderDeSolicitudes(self):
         self.changeUser('solicitante')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             self.portal.invokeFactory,
             type_name='SolicitudFolder',
             id='TestSolicitudFolder',
@@ -61,7 +62,8 @@ class TestsDeCreacion(TestCase):
         )
 
         self.changeUser('investigador')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             self.portal.invokeFactory,
             type_name='SolicitudFolder',
             id='TestSolicitudFolder',
@@ -70,7 +72,8 @@ class TestsDeCreacion(TestCase):
         )
 
         self.changeUser('tecnico')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             self.portal.invokeFactory,
             type_name='SolicitudFolder',
             id='TestSolicitudFolder',
@@ -79,7 +82,8 @@ class TestsDeCreacion(TestCase):
         )
 
         self.changeUser('becario')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             self.portal.invokeFactory,
             type_name='SolicitudFolder',
             id='TestSolicitudFolder',
@@ -88,7 +92,8 @@ class TestsDeCreacion(TestCase):
         )
 
         self.changeUser('comisionado')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             self.portal.invokeFactory,
             type_name='SolicitudFolder',
             id='TestSolicitudFolder',
@@ -97,7 +102,8 @@ class TestsDeCreacion(TestCase):
         )
 
         self.changeUser('consejero')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             self.portal.invokeFactory,
             type_name='SolicitudFolder',
             id='TestSolicitudFolder',
@@ -106,7 +112,8 @@ class TestsDeCreacion(TestCase):
         )
 
         self.changeUser('responsablecomision')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             self.portal.invokeFactory,
             type_name='SolicitudFolder',
             id='TestSolicitudFolder',
@@ -115,7 +122,8 @@ class TestsDeCreacion(TestCase):
         )
 
         self.changeUser('responsableconsejo')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             self.portal.invokeFactory,
             type_name='SolicitudFolder',
             id='TestSolicitudFolder',
@@ -124,10 +132,11 @@ class TestsDeCreacion(TestCase):
         )
 
         self.changeUser('manager')
-        folderAdded = self.portal.invokeFactory(type_name='SolicitudFolder',
-                id='TestSolicitudFolder',
-                fecha_desde='',
-                fecha_hasta='')
+        folderAdded = self.portal.invokeFactory(
+            type_name='SolicitudFolder',
+            id='TestSolicitudFolder',
+            fecha_desde='',
+            fecha_hasta='')
 
         folderSolicitudes = self.portal.TestSolicitudFolder
 
@@ -168,19 +177,22 @@ class TestsDeCreacion(TestCase):
         self.portal.portal_workflow.doActionFor(folderSolicitudes, 'noaceptar')
 
         self.changeUser('solicitante')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='Solicitud',
             id='TestSolicitudLicencia',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudVisitante',
             id='TestSolicitudVisitante',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudBecario',
             id='TestSolicitudBecario',
@@ -190,19 +202,22 @@ class TestsDeCreacion(TestCase):
         self.portal.portal_workflow.doActionFor(folderSolicitudes, 'archivar')
 
         self.changeUser('solicitante')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='Solicitud',
             id='TestSolicitudLicencia',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudVisitante',
             id='TestSolicitudVisitante',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudBecario',
             id='TestSolicitudBecario',
@@ -242,13 +257,15 @@ class TestsDeCreacion(TestCase):
         self.portal.portal_workflow.doActionFor(folderSolicitudes, 'noaceptar')
 
         self.changeUser('investigador')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='Solicitud',
             id='TestSolicitudLicencia',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudVisitante',
             id='TestSolicitudVisitante',
@@ -258,13 +275,15 @@ class TestsDeCreacion(TestCase):
         self.portal.portal_workflow.doActionFor(folderSolicitudes, 'archivar')
 
         self.changeUser('investigador')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='Solicitud',
             id='TestSolicitudLicencia',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudVisitante',
             id='TestSolicitudVisitante',
@@ -289,13 +308,15 @@ class TestsDeCreacion(TestCase):
         self.portal.portal_workflow.doActionFor(folderSolicitudes, 'noaceptar')
 
         self.changeUser('tecnico')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='Solicitud',
             id='TestSolicitudLicencia',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudVisitante',
             id='TestSolicitudVisitante',
@@ -305,13 +326,15 @@ class TestsDeCreacion(TestCase):
         self.portal.portal_workflow.doActionFor(folderSolicitudes, 'archivar')
 
         self.changeUser('tecnico')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='Solicitud',
             id='TestSolicitudLicencia',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudVisitante',
             id='TestSolicitudVisitante',
@@ -336,13 +359,15 @@ class TestsDeCreacion(TestCase):
         self.portal.portal_workflow.doActionFor(folderSolicitudes, 'noaceptar')
 
         self.changeUser('postdoc')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='Solicitud',
             id='TestSolicitudLicencia',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudVisitante',
             id='TestSolicitudVisitante',
@@ -352,13 +377,15 @@ class TestsDeCreacion(TestCase):
         self.portal.portal_workflow.doActionFor(folderSolicitudes, 'archivar')
 
         self.changeUser('postdoc')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='Solicitud',
             id='TestSolicitudLicencia',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudVisitante',
             id='TestSolicitudVisitante',
@@ -383,7 +410,8 @@ class TestsDeCreacion(TestCase):
         self.portal.portal_workflow.doActionFor(folderSolicitudes, 'noaceptar')
 
         self.changeUser('becario')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudBecario',
             id='TestSolicitudBecario',
@@ -393,7 +421,8 @@ class TestsDeCreacion(TestCase):
         self.portal.portal_workflow.doActionFor(folderSolicitudes, 'archivar')
 
         self.changeUser('becario')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudBecario',
             id='TestSolicitudBecario',
@@ -412,33 +441,38 @@ class TestsDeCreacion(TestCase):
         folderSolicitudes = self.portal.folderSolicitudes
 
         self.changeUser('becario')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='Solicitud',
             id='TestSolicitudLicencia',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudVisitante',
             id='TestSolicitudVisitante',
         )
 
         self.changeUser('investigador')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudBecario',
             id='TestSolicitudLicencia',
         )
         self.changeUser('postdoc')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudBecario',
             id='TestSolicitudLicencia',
         )
 
         self.changeUser('tecnico')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudBecario',
             id='TestSolicitudLicencia',
@@ -449,80 +483,93 @@ class TestsDeCreacion(TestCase):
         folderSolicitudes = self.portal.folderSolicitudes
 
         self.changeUser('comisionado')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='Solicitud',
             id='TestSolicitudLicencia',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudVisitante',
             id='TestSolicitudVisitante',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudBecario',
             id='TestSolicitudLicencia',
         )
 
         self.changeUser('responsablecomision')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='Solicitud',
             id='TestSolicitudLicencia',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudVisitante',
             id='TestSolicitudVisitante',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudBecario',
             id='TestSolicitudLicencia',
         )
 
         self.changeUser('consejero')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='Solicitud',
             id='TestSolicitudLicencia',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudVisitante',
             id='TestSolicitudVisitante',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudBecario',
             id='TestSolicitudLicencia',
         )
 
         self.changeUser('responsableconsejo')
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='Solicitud',
             id='TestSolicitudLicencia',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudVisitante',
             id='TestSolicitudVisitante',
         )
 
-        self.failUnlessRaises(Unauthorized,
+        self.failUnlessRaises(
+            Unauthorized,
             folderSolicitudes.invokeFactory,
             type_name='SolicitudBecario',
             id='TestSolicitudLicencia',
         )
+
 
 def test_suite():
     suite = unittest.TestSuite()
