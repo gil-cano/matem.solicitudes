@@ -16,6 +16,7 @@ class AssistanceWidget(DataGridWidget):
 
     security = ClassSecurityInfo()
 
+
 registerWidget(
     AssistanceWidget,
     title='AssistanceWidget',
