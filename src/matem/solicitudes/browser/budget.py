@@ -174,7 +174,7 @@ class BudgetView(BrowserView):
                 url=brain.getURL()
                 folder=brain.getObject()
                 if not folder.historico():
-                    folder.actualizarPeriodo();
+                    folder.actualizarPeriodo()
         except:
             return False
 
@@ -197,9 +197,9 @@ class BudgetView(BrowserView):
         if 'Programador de Presupuesto' in list(member.getRoles()):
             for person in list(fsd_tool.getDirectoryRoot().getSortedPeople()):
                 fsdperson = PersonWrapper(person)
-                letter=unicode(fsdperson.getLastName())[0].upper();
-                letter=letter.replace('Á', 'A').replace('É', 'E').replace('Í', 'I').replace('Ó', 'O').replace('Ú', 'U').replace('Ñ', 'N').replace('Ö', 'O');
-                user=mt.getMemberById(fsdperson.getId());
+                letter=unicode(fsdperson.getLastName())[0].upper()
+                letter=letter.replace('Á', 'A').replace('É', 'E').replace('Í', 'I').replace('Ó', 'O').replace('Ú', 'U').replace('Ñ', 'N').replace('Ö', 'O')
+                user=mt.getMemberById(fsdperson.getId())
 
                 if 'Investigador' in list(user.getRoles()):
                     rol="Investigador"
@@ -230,8 +230,8 @@ class BudgetView(BrowserView):
             llaves=self.solicitantes.keys()
             for person in llaves:
                 personinfo=self.solicitantes[person]
-                letter=unicode(personinfo[0])[0].upper();
-                letter=letter.replace('Á', 'A').replace('É', 'E').replace('Í', 'I').replace('Ó', 'O').replace('Ú', 'U').replace('Ñ', 'N').replace('Ö', 'O');
+                letter=unicode(personinfo[0])[0].upper()
+                letter=letter.replace('Á', 'A').replace('É', 'E').replace('Í', 'I').replace('Ó', 'O').replace('Ú', 'U').replace('Ñ', 'N').replace('Ö', 'O')
                 users[letter].append([personinfo[0]+", "+personinfo[1]+" "+personinfo[2],
                           personinfo[3],
                           person])
@@ -351,7 +351,7 @@ class BudgetView(BrowserView):
                 if not folder.historico():
                     folders.append(folder)
         except:
-            pass;
+            pass
 
         f= 0.0
 
@@ -379,13 +379,17 @@ class BudgetView(BrowserView):
 
         if 'Programador de Presupuesto' in list(member.getRoles()):
             if tipodato.find('investigador') != -1:
-                for folder in folders: folder.setPresupuesto_maximo_investigadores(f);
+                for folder in folders:
+                    folder.setPresupuesto_maximo_investigadores(f)
             elif tipodato.find('becario') != -1:
-                for folder in folders: folder.setPresupuesto_maximo_becarios(f);
+                for folder in folders:
+                    folder.setPresupuesto_maximo_becarios(f)
             elif tipodato.find('tecnico') != -1:
-                for folder in folders: folder.setPresupuesto_maximo_tecnicos(f);
+                for folder in folders:
+                    folder.setPresupuesto_maximo_tecnicos(f)
             elif tipodato.find('postdoc') != -1:
-                for folder in folders: folder.setPresupuesto_maximo_postdocs(f);
+                for folder in folders:
+                    folder.setPresupuesto_maximo_postdocs(f)
 
             for fsdperson in list(fsd_tool.getDirectoryRoot().getSortedPeople()):
                 user=mt.getMemberById(fsdperson.getId())
