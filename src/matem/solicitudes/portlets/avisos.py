@@ -68,18 +68,18 @@ class Renderer(base.Renderer):
 
     @property
     def available(self):
-        esVisible=False
+        esVisible = False
 
         if self.context.meta_type == "Solicitud":
-            esVisible=True
+            esVisible = True
         elif self.context.meta_type == "SolicitudBecario":
-            esVisible=True
+            esVisible = True
         elif self.context.meta_type == "SolicitudVisitante":
-            esVisible=True
+            esVisible = True
         elif self.context.meta_type == "SolicitudFolder":
-            esVisible=True
+            esVisible = True
         elif self.context.meta_type == 'SolicitudInstitucional':
-            esVisible=True
+            esVisible = True
 
         return esVisible
 
@@ -93,22 +93,22 @@ class Renderer(base.Renderer):
 #                       image_tag=banner_provider.tag)
 
     def getHeader(self):
-        usuarioActual=self.context.portal_membership.getAuthenticatedMember().getId()
-        header="Desconocido"
+        usuarioActual = self.context.portal_membership.getAuthenticatedMember().getId()
+        header = "Desconocido"
 
         if self.context.meta_type == "Solicitud":
-            header="Solicitud de Licencia"
+            header = "Solicitud de Licencia"
         elif self.context.meta_type == "SolicitudBecario":
-            header="Solicitud de Becario"
+            header = "Solicitud de Becario"
         elif self.context.meta_type == "SolicitudVisitante":
-            header="Solicitud de Visitante"
+            header = "Solicitud de Visitante"
         elif self.context.meta_type == "SolicitudFolder":
-            header="Folder de Solicitudes"
+            header = "Folder de Solicitudes"
         elif self.context.meta_type == "SolicitudInstitucional":
-            header="Solicitud de Licencia"
+            header = "Solicitud de Licencia"
 
         if self.esPropietario(usuarioActual):
-            return "Tu "+header
+            return "Tu " + header
 
         return header
 
@@ -116,7 +116,7 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        if self.context.getIdOwner()==usuarioActual:
+        if self.context.getIdOwner() == usuarioActual:
             return True
         return False
 
@@ -124,7 +124,7 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Comisionado' in list(member.getRoles()):
             return True
         return False
@@ -133,7 +133,7 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Consejero' in list(member.getRoles()):
             return True
         return False
@@ -142,7 +142,7 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Becario' in list(member.getRoles()):
             return True
         return False
@@ -151,7 +151,7 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Investigador' in list(member.getRoles()):
             return True
         return False
@@ -160,7 +160,7 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Tecnico Academico' in list(member.getRoles()):
             return True
         return False
@@ -169,7 +169,7 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Importador de Solicitudes' in list(member.getRoles()):
             return True
         return False
@@ -178,74 +178,74 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Programador de Presupuesto' in list(member.getRoles()):
             return True
         return False
 
     def esTecnicoAcademicoG(self, usuarioActual):
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Tecnico Academico' in list(member.getRoles()):
             return True
         return False
 
     def esImportadorDeSolicitudesG(self, usuarioActual):
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Importador de Solicitudes' in list(member.getRoles()):
             return True
         return False
 
     def esProgramadorDePresupuestoG(self, usuarioActual):
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Programador de Presupuesto' in list(member.getRoles()):
             return True
         return False
 
 
     def esComisionadoG(self, usuarioActual):
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Comisionado' in list(member.getRoles()):
             return True
         return False
 
     def esConsejeroG(self, usuarioActual):
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Consejero' in list(member.getRoles()):
             return True
         return False
 
     def esComisionadoResponsableG(self, usuarioActual):
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Responsable de la Comision' in list(member.getRoles()):
             return True
         return False
 
     def esConsejeroResponsableG(self, usuarioActual):
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Responsable del Consejo' in list(member.getRoles()):
             return True
         return False
 
     def esSolicitanteAuxiliarG(self, usuarioActual):
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Solicitante Auxiliar' in list(member.getRoles()):
             return True
         return False
 
     def esBecarioG(self, usuarioActual):
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Becario' in list(member.getRoles()):
             return True
         return False
 
     def esInvestigadorG(self, usuarioActual):
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Investigador' in list(member.getRoles()):
             return True
         return False
 
     def esTecnicoAcademicoG(self, usuarioActual):
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Tecnico Academico' in list(member.getRoles()):
             return True
         return False
@@ -261,7 +261,7 @@ class Renderer(base.Renderer):
             return False
 
 
-        member=self.context.portal_membership.getMemberById(usuarioActual)
+        member = self.context.portal_membership.getMemberById(usuarioActual)
         if 'Investigador' in list(member.getRoles()):
             return True
         return False
@@ -275,7 +275,7 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        if self.context.getWFState()=="borrador":
+        if self.context.getWFState() == "borrador":
             return True
         return False
 
@@ -283,7 +283,7 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        if self.context.getWFState()=="revisioncomision":
+        if self.context.getWFState() == "revisioncomision":
             return True
         return False
 
@@ -291,7 +291,7 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        if self.context.getWFState()=="revisionconsejo":
+        if self.context.getWFState() == "revisionconsejo":
             return True
         return False
 
@@ -299,7 +299,7 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        if self.context.getWFState()=="aprobada":
+        if self.context.getWFState() == "aprobada":
             return True
         return False
 
@@ -307,7 +307,7 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        if self.context.getWFState()=="rechazada":
+        if self.context.getWFState() == "rechazada":
             return True
         return False
 
@@ -315,7 +315,7 @@ class Renderer(base.Renderer):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
-        if self.context.getWFState()=="preeliminar":
+        if self.context.getWFState() == "preeliminar":
             return True
         return False
 

@@ -17,11 +17,11 @@ class TestsDeCreacion(TestCase):
         self.setRoles(['Manager', 'Member'])
 
         self.portal.invokeFactory(type_name='FSDFacultyStaffDirectory', id='FSDFolder')
-        FSDFolder=self.portal.FSDFolder
+        FSDFolder = self.portal.FSDFolder
         FSDFolder.reindexObject()
 
         self.portal.invokeFactory(type_name='SolicitudFolder', id='folderSolicitudes', fecha_desde='', fecha_hasta='')
-        folderSolicitudes=self.portal.folderSolicitudes
+        folderSolicitudes = self.portal.folderSolicitudes
         folderSolicitudes.reindexObject()
 
         self.portal.portal_workflow.doActionFor(FSDFolder, 'publish')
@@ -124,7 +124,7 @@ class TestsDeCreacion(TestCase):
         )
 
         self.changeUser('manager')
-        folderAdded=self.portal.invokeFactory(type_name='SolicitudFolder',
+        folderAdded = self.portal.invokeFactory(type_name='SolicitudFolder',
                 id='TestSolicitudFolder',
                 fecha_desde='',
                 fecha_hasta='')
@@ -213,21 +213,21 @@ class TestsDeCreacion(TestCase):
 
         self.changeUser('solicitante')
 
-        createdId=folderSolicitudes.invokeFactory(type_name='Solicitud', id='TestSolicitudLicencia', solicitante='investigador')
+        createdId = folderSolicitudes.invokeFactory(type_name='Solicitud', id='TestSolicitudLicencia', solicitante='investigador')
         self.assertEquals('TestSolicitudLicencia', createdId)
 
         notify(ObjectInitializedEvent(folderSolicitudes.TestSolicitudLicencia))
         self.assertEquals('investigador', folderSolicitudes.TestSolicitudLicencia.getIdOwner())
         self.failUnless(self.hasPermission('Delete objects', folderSolicitudes.TestSolicitudLicencia))
 
-        createdId=folderSolicitudes.invokeFactory(type_name='SolicitudVisitante', id='TestSolicitudVisitante', solicitante='investigador')
+        createdId = folderSolicitudes.invokeFactory(type_name='SolicitudVisitante', id='TestSolicitudVisitante', solicitante='investigador')
         self.assertEquals('TestSolicitudVisitante', createdId)
 
         notify(ObjectInitializedEvent(folderSolicitudes.TestSolicitudVisitante))
         self.assertEquals('investigador', folderSolicitudes.TestSolicitudVisitante.getIdOwner())
         self.failUnless(self.hasPermission('Delete objects', folderSolicitudes.TestSolicitudVisitante))
 
-        createdId=folderSolicitudes.invokeFactory(type_name='SolicitudBecario', id='TestSolicitudBecario', solicitante='becario')
+        createdId = folderSolicitudes.invokeFactory(type_name='SolicitudBecario', id='TestSolicitudBecario', solicitante='becario')
         self.assertEquals('TestSolicitudBecario', createdId)
 
         notify(ObjectInitializedEvent(folderSolicitudes.TestSolicitudBecario))
@@ -275,10 +275,10 @@ class TestsDeCreacion(TestCase):
 
         self.changeUser('investigador')
 
-        createdId=folderSolicitudes.invokeFactory(type_name='Solicitud', id='TestSolicitudLicencia')
+        createdId = folderSolicitudes.invokeFactory(type_name='Solicitud', id='TestSolicitudLicencia')
         self.assertEquals('TestSolicitudLicencia', createdId)
 
-        createdId=folderSolicitudes.invokeFactory(type_name='SolicitudVisitante', id='TestSolicitudVisitante')
+        createdId = folderSolicitudes.invokeFactory(type_name='SolicitudVisitante', id='TestSolicitudVisitante')
         self.assertEquals('TestSolicitudVisitante', createdId)
 
     def testTecnicoAcademicoCreaSolicitudes(self):
@@ -322,10 +322,10 @@ class TestsDeCreacion(TestCase):
 
         self.changeUser('tecnico')
 
-        createdId=folderSolicitudes.invokeFactory(type_name='Solicitud', id='TestSolicitudLicencia')
+        createdId = folderSolicitudes.invokeFactory(type_name='Solicitud', id='TestSolicitudLicencia')
         self.assertEquals('TestSolicitudLicencia', createdId)
 
-        createdId=folderSolicitudes.invokeFactory(type_name='SolicitudVisitante', id='TestSolicitudVisitante')
+        createdId = folderSolicitudes.invokeFactory(type_name='SolicitudVisitante', id='TestSolicitudVisitante')
         self.assertEquals('TestSolicitudVisitante', createdId)
 
     def testPostdocCreaSolicitudes(self):
@@ -369,10 +369,10 @@ class TestsDeCreacion(TestCase):
 
         self.changeUser('postdoc')
 
-        createdId=folderSolicitudes.invokeFactory(type_name='Solicitud', id='TestSolicitudLicencia')
+        createdId = folderSolicitudes.invokeFactory(type_name='Solicitud', id='TestSolicitudLicencia')
         self.assertEquals('TestSolicitudLicencia', createdId)
 
-        createdId=folderSolicitudes.invokeFactory(type_name='SolicitudVisitante', id='TestSolicitudVisitante')
+        createdId = folderSolicitudes.invokeFactory(type_name='SolicitudVisitante', id='TestSolicitudVisitante')
         self.assertEquals('TestSolicitudVisitante', createdId)
 
     def testBecarioCreaSolicitudes(self):
@@ -404,7 +404,7 @@ class TestsDeCreacion(TestCase):
 
         self.changeUser('becario')
 
-        createdId=folderSolicitudes.invokeFactory(type_name='SolicitudBecario', id='TestSolicitudBecario')
+        createdId = folderSolicitudes.invokeFactory(type_name='SolicitudBecario', id='TestSolicitudBecario')
         self.assertEquals('TestSolicitudBecario', createdId)
 
     def testSoloCrearTiposAutorizados(self):

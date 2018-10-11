@@ -999,14 +999,14 @@ class SolicitudInstitucional(BaseContent):
         workflowTool = getToolByName(self, "portal_workflow")
         mt = getToolByName(self, "portal_membership")
         member = mt.getAuthenticatedMember()
-        nivel=0
+        nivel = 0
 
         if not State.lower().find("com") == -1:
-            nivel=1
+            nivel = 1
         elif not State.lower().find("con") == -1 or not State.lower().find("cou") == -1:
-            nivel=2
+            nivel = 2
         elif not State.lower().find("ap") == -1:
-            nivel=3
+            nivel = 3
 
         if "Importador de Solicitudes" in list(member.getRoles()):
             if nivel > 0:
@@ -1120,7 +1120,7 @@ class SolicitudInstitucional(BaseContent):
 
     def getNombreActual(self):
         fsdperson = self.getPersonWrapper(self.getIdActual())
-        return fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName()
+        return fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName()
 
     def getIdCreator(self):
         return self.getOwner().getId()
@@ -1132,9 +1132,9 @@ class SolicitudInstitucional(BaseContent):
         creator = self.getIdOwner()
         try:
             fsdperson = self.getPersonWrapper(creator)
-            return fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName()
+            return fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName()
         except:
-            print "Error SolicitudInstitucional no encontrada persona "+ creator + ", "+ self.getId()
+            print "Error SolicitudInstitucional no encontrada persona " + creator + ", " + self.getId()
             return creator
 
     def getFechaSolicitud(self):
@@ -1147,12 +1147,12 @@ class SolicitudInstitucional(BaseContent):
         return self.getField('pais').get(self)
 
     def getPais(self):
-        pais=self.getField('pais').get(self)
+        pais = self.getField('pais').get(self)
         try:
-            pais=COUNTRIES[pais[0]]
+            pais = COUNTRIES[pais[0]]
             return pais
         except Exception, e:
-            pais=""
+            pais = ""
             return pais
 
     def getInvestigacionArea(self):
@@ -1180,8 +1180,8 @@ class SolicitudInstitucional(BaseContent):
 
     def getSolicitanteDefault(self):
         mt = getToolByName(self, 'portal_membership')
-        member=mt.getAuthenticatedMember()
-        tupla=(member.getId(),)
+        member = mt.getAuthenticatedMember()
+        tupla = (member.getId(),)
 
         return tupla
 
@@ -1341,30 +1341,30 @@ class SolicitudInstitucional(BaseContent):
         return (pasaje + viaticos + inscripcion + pasaje_a + viaticos_a + inscripcion_a)
 
     def getCantidadAutorizadaTotal(self):
-        pasaje=self.getCantidadAutorizadaPasaje()
-        viaticos=self.getCantidadAutorizadaViaticos()
-        inscripcion=self.getCantidadAutorizadaInscripcion()
+        pasaje = self.getCantidadAutorizadaPasaje()
+        viaticos = self.getCantidadAutorizadaViaticos()
+        inscripcion = self.getCantidadAutorizadaInscripcion()
         pasaje_a = self.getCantidad_autorizada_pasaje_apoyo()
         viaticos_a = self.getCantidad_autorizada_viaticos_apoyo()
         inscripcion_a = self.getCantidad_autorizada_inscripcion_apoyo()
         return (pasaje + viaticos + inscripcion + pasaje_a + viaticos_a + inscripcion_a)
 
     def getCantidadConsejoTotal(self):
-        pasaje=self.getCantidad_consejo_pasaje()
-        viaticos=self.getCantidad_consejo_viaticos()
-        inscripcion=self.getCantidad_consejo_inscripcion()
-        pasaje_a=self.getCantidad_consejo_pasaje_apoyo()
-        viaticos_a=self.getCantidad_consejo_viaticos_apoyo()
-        inscripcion_a=self.getCantidad_consejo_inscripcion_apoyo()
+        pasaje = self.getCantidad_consejo_pasaje()
+        viaticos = self.getCantidad_consejo_viaticos()
+        inscripcion = self.getCantidad_consejo_inscripcion()
+        pasaje_a = self.getCantidad_consejo_pasaje_apoyo()
+        viaticos_a = self.getCantidad_consejo_viaticos_apoyo()
+        inscripcion_a = self.getCantidad_consejo_inscripcion_apoyo()
         return (pasaje + viaticos + inscripcion + pasaje_a + viaticos_a + inscripcion_a)
 
     def getCantidadRecomendadaTotal(self):
-        pasaje=self.getCantidad_recomendada_pasaje()
-        viaticos=self.getCantidad_recomendada_viaticos()
-        inscripcion=self.getCantidad_recomendada_inscripcion()
-        pasaje_a=self.getCantidad_recomendada_pasaje_apoyo()
-        viaticos_a=self.getCantidad_recomendada_viaticos_apoyo()
-        inscripcion_a=self.getCantidad_recomendada_inscripcion_apoyo()
+        pasaje = self.getCantidad_recomendada_pasaje()
+        viaticos = self.getCantidad_recomendada_viaticos()
+        inscripcion = self.getCantidad_recomendada_inscripcion()
+        pasaje_a = self.getCantidad_recomendada_pasaje_apoyo()
+        viaticos_a = self.getCantidad_recomendada_viaticos_apoyo()
+        inscripcion_a = self.getCantidad_recomendada_inscripcion_apoyo()
         return (pasaje + viaticos + inscripcion + pasaje_a + viaticos_a + inscripcion_a)
 
     def pasarValorComisionado(self):
@@ -1400,12 +1400,12 @@ class SolicitudInstitucional(BaseContent):
         return
 
     def pasarValorAutorizado(self):
-        pasaje=self.getCantidad_consejo_pasaje()
-        viaticos=self.getCantidad_consejo_viaticos()
-        inscripcion=self.getCantidad_consejo_inscripcion()
-        pasaje_a=self.getCantidad_consejo_pasaje_apoyo()
-        viaticos_a=self.getCantidad_consejo_viaticos_apoyo()
-        inscripcion_a=self.getCantidad_consejo_inscripcion_apoyo()
+        pasaje = self.getCantidad_consejo_pasaje()
+        viaticos = self.getCantidad_consejo_viaticos()
+        inscripcion = self.getCantidad_consejo_inscripcion()
+        pasaje_a = self.getCantidad_consejo_pasaje_apoyo()
+        viaticos_a = self.getCantidad_consejo_viaticos_apoyo()
+        inscripcion_a = self.getCantidad_consejo_inscripcion_apoyo()
 
         self.setCantidad_autorizada_pasaje(pasaje)
         self.setCantidad_autorizada_viaticos(viaticos)
@@ -1471,28 +1471,28 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
         # return int((d2-d1).days)+1
         t1 = str(DateTime(self.getFecha_desde())).split("/")
         t2 = str(DateTime(self.getFecha_hasta())).split("/")
-        d1=datetime(int(t1[0]), int(t1[1]), int(t1[2].split(" ")[0]))
-        d2=datetime(int(t2[0]), int(t2[1]), int(t2[2].split(" ")[0]))
-        return int((d2-d1).days)+1
+        d1 = datetime(int(t1[0]), int(t1[1]), int(t1[2].split(" ")[0]))
+        d2 = datetime(int(t2[0]), int(t2[1]), int(t2[2].split(" ")[0]))
+        return int((d2 - d1).days) + 1
 
     def actualizarInvestigador(self):
         folder = self.aq_parent
 
-        solicitante=self.getIdOwner()
-        dias=self.getCantidadDeDias()
+        solicitante = self.getIdOwner()
+        dias = self.getCantidadDeDias()
         if (dias < 0):
             dias = 0
 
-        if(self.getLicenciacomision()=="Licencia"):
-            esComision=False
+        if(self.getLicenciacomision() == "Licencia"):
+            esComision = False
         else:
-            esComision=True
+            esComision = True
         # suma de valores normales y luego los de apoyo
         # vocabulary=DisplayList((('Asignación anual', 'Asignación anual'),
         #                         ('Apoyo institucional', 'Apoyo institucional'),
-        pasaje=self.getCantidadAutorizadaPasaje()
-        viaticos=self.getCantidadAutorizadaViaticos()
-        inscripcion=self.getCantidadAutorizadaInscripcion()
+        pasaje = self.getCantidadAutorizadaPasaje()
+        viaticos = self.getCantidadAutorizadaViaticos()
+        inscripcion = self.getCantidadAutorizadaInscripcion()
         anual = pasaje + viaticos + inscripcion
         # los dias se  suman en la siguiente llamada
         folder.sumarACantidadAutorizada(esComision, anual, 0, solicitante, 'Asignación anual')
@@ -1507,19 +1507,19 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
     def desactualizarInvestigador(self):
         folder = self.aq_parent
 
-        solicitante=self.getIdOwner()
-        dias=self.getCantidadDeDias()
+        solicitante = self.getIdOwner()
+        dias = self.getCantidadDeDias()
         if (dias < 0):
             dias = 0
 
-        if(self.getLicenciacomision()=="Licencia"):
-            esComision=False
+        if(self.getLicenciacomision() == "Licencia"):
+            esComision = False
         else:
-            esComision=True
+            esComision = True
 
-        pasaje=self.getCantidadAutorizadaPasaje()
-        viaticos=self.getCantidadAutorizadaViaticos()
-        inscripcion=self.getCantidadAutorizadaInscripcion()
+        pasaje = self.getCantidadAutorizadaPasaje()
+        viaticos = self.getCantidadAutorizadaViaticos()
+        inscripcion = self.getCantidadAutorizadaInscripcion()
         anual = pasaje + viaticos + inscripcion
         folder.restarACantidadAutorizada(esComision, anual, dias, solicitante)
         return

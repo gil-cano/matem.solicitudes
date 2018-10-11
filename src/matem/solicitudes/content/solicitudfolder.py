@@ -247,7 +247,7 @@ class SolicitudFolder(ATFolder):
             return False
 
     def restante(self):
-        return (self.getPresupuesto_inicial()-self.getPresupuesto_asignado())
+        return (self.getPresupuesto_inicial() - self.getPresupuesto_asignado())
 
     def sumarACantidadAutorizada(self, esComision, cantidad, dias, idCreador, cargo):
         try:

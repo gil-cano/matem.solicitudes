@@ -1220,7 +1220,7 @@ class SolicitudVisitante(BaseContent):
         # member = mt.getAuthenticatedMember()
         member = self.getIdActual()
         fsdperson = self.getPersonWrapper(member.getId())
-        return fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName()
+        return fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName()
 
     def getIdCreator(self):
         return self.getOwner().getId()
@@ -1233,9 +1233,9 @@ class SolicitudVisitante(BaseContent):
         creator = self.getIdOwner()
         try:
             fsdperson = self.getPersonWrapper(creator)
-            return fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName()
+            return fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName()
         except:
-            print "Error SolicitudVisitante no encontrada persona "+ creator + ", "+self.getId()
+            print "Error SolicitudVisitante no encontrada persona " + creator + ", " + self.getId()
             return creator
 
     def getNombreInvitado(self):
@@ -1254,12 +1254,12 @@ class SolicitudVisitante(BaseContent):
         return self.getField('pais_procedencia').get(self)
 
     def getPais(self):
-        pais=self.getField('pais_procedencia').get(self)
+        pais = self.getField('pais_procedencia').get(self)
         try:
-            pais=COUNTRIES[pais[0]]
+            pais = COUNTRIES[pais[0]]
             return pais
         except Exception, e:
-            pais=""
+            pais = ""
             return pais
 
     def getTituloTrabajo(self):
@@ -1468,8 +1468,8 @@ class SolicitudVisitante(BaseContent):
         return (pasaje + viaticos)
 
     def getCantidadRecomendadaTotal(self):
-        pasaje=self.getCantidad_recomendada_pasaje()
-        viaticos=self.getCantidad_recomendada_viaticos()
+        pasaje = self.getCantidad_recomendada_pasaje()
+        viaticos = self.getCantidad_recomendada_viaticos()
         return (pasaje + viaticos)
 
     def pasarValorComisionado(self):
@@ -1488,21 +1488,21 @@ class SolicitudVisitante(BaseContent):
         return
 
     def pasarValorAutorizado(self):
-        pasaje=self.getCantidad_consejo_pasaje()
-        viaticos=self.getCantidad_consejo_viaticos()
+        pasaje = self.getCantidad_consejo_pasaje()
+        viaticos = self.getCantidad_consejo_viaticos()
 
         self.setCantidad_autorizada_pasaje(pasaje)
         self.setCantidad_autorizada_viaticos(viaticos)
         return
 
     def getCantidadConsejoTotal(self):
-        pasaje=self.getCantidad_consejo_pasaje()
-        viaticos=self.getCantidad_consejo_viaticos()
+        pasaje = self.getCantidad_consejo_pasaje()
+        viaticos = self.getCantidad_consejo_viaticos()
         return (pasaje + viaticos)
 
     def getCantidadAutorizadaTotal(self):
-        pasaje=self.getCantidadAutorizadaPasaje()
-        viaticos=self.getCantidadAutorizadaViaticos()
+        pasaje = self.getCantidadAutorizadaPasaje()
+        viaticos = self.getCantidadAutorizadaViaticos()
         return (pasaje + viaticos)
 
     def sendMail(self, state='aprobada'):
@@ -1547,12 +1547,12 @@ La cantidad total que se le ha aprobado en lo que va del año: %s.
         t2 = str(DateTime(self.getFecha_hasta())).split("/")
         d1 = datetime(int(t1[0]), int(t1[1]), int(t1[2].split(" ")[0]))
         d2 = datetime(int(t2[0]), int(t2[1]), int(t2[2].split(" ")[0]))
-        return int((d2-d1).days)+1
+        return int((d2 - d1).days) + 1
 
     def actualizarInvestigador(self):
         folder = self.aq_parent
 
-        solicitante=self.getIdOwner()
+        solicitante = self.getIdOwner()
 
         folder.sumarACantidadAutorizada(None, self.getCantidadAutorizadaTotal(), 0, solicitante,
                                         self.getCargo_presupuesto())

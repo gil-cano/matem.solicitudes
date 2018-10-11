@@ -1263,7 +1263,7 @@ class SolicitudBecario(BaseContent):
             sort_on='getSortableName',
             review_state='active',
         )
-        users=[]
+        users = []
         for brain in brains:
             person = brain.getObject()
             tupla = (
@@ -1281,7 +1281,7 @@ class SolicitudBecario(BaseContent):
             sort_on='getSortableName',
             review_state='active',
         )
-        users=[]
+        users = []
         for brain in brains:
             person = brain.getObject()
             tupla = (
@@ -1374,9 +1374,9 @@ Para más detalles vaya a %s.
     def getCantidadDeDias(self):
         t1 = str(DateTime(self.getFecha_desde())).split("/")
         t2 = str(DateTime(self.getFecha_hasta())).split("/")
-        d1=datetime(int(t1[0]), int(t1[1]), int(t1[2].split(" ")[0]))
-        d2=datetime(int(t2[0]), int(t2[1]), int(t2[2].split(" ")[0]))
-        return int((d2-d1).days)+1
+        d1 = datetime(int(t1[0]), int(t1[1]), int(t1[2].split(" ")[0]))
+        d2 = datetime(int(t2[0]), int(t2[1]), int(t2[2].split(" ")[0]))
+        return int((d2 - d1).days) + 1
 
     def actualizarInvestigador(self):
         folder = self.aq_parent
