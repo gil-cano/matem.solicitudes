@@ -112,7 +112,7 @@ class Renderer(base.Renderer):
 
         return header
 
-    def esPropietario(self,usuarioActual):
+    def esPropietario(self, usuarioActual):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
@@ -120,7 +120,7 @@ class Renderer(base.Renderer):
             return True
         return False
 
-    def esComisionado(self,usuarioActual):
+    def esComisionado(self, usuarioActual):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
@@ -129,7 +129,7 @@ class Renderer(base.Renderer):
             return True
         return False
 
-    def esConsejero(self,usuarioActual):
+    def esConsejero(self, usuarioActual):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
@@ -138,7 +138,7 @@ class Renderer(base.Renderer):
             return True
         return False
 
-    def esBecario(self,usuarioActual):
+    def esBecario(self, usuarioActual):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
@@ -147,7 +147,7 @@ class Renderer(base.Renderer):
             return True
         return False
 
-    def esInvestigador(self,usuarioActual):
+    def esInvestigador(self, usuarioActual):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
@@ -156,7 +156,7 @@ class Renderer(base.Renderer):
             return True
         return False
 
-    def esTecnicoAcademico(self,usuarioActual):
+    def esTecnicoAcademico(self, usuarioActual):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
@@ -165,7 +165,7 @@ class Renderer(base.Renderer):
             return True
         return False
 
-    def esImportadorDeSolicitudes(self,usuarioActual):
+    def esImportadorDeSolicitudes(self, usuarioActual):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
@@ -174,7 +174,7 @@ class Renderer(base.Renderer):
             return True
         return False
 
-    def esProgramadorDePresupuesto(self,usuarioActual):
+    def esProgramadorDePresupuesto(self, usuarioActual):
         if self.context.meta_type == "SolicitudFolder":
             return False
 
@@ -183,74 +183,74 @@ class Renderer(base.Renderer):
             return True
         return False
 
-    def esTecnicoAcademicoG(self,usuarioActual):
+    def esTecnicoAcademicoG(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Tecnico Academico' in list(member.getRoles()):
             return True
         return False
 
-    def esImportadorDeSolicitudesG(self,usuarioActual):
+    def esImportadorDeSolicitudesG(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Importador de Solicitudes' in list(member.getRoles()):
             return True
         return False
 
-    def esProgramadorDePresupuestoG(self,usuarioActual):
+    def esProgramadorDePresupuestoG(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Programador de Presupuesto' in list(member.getRoles()):
             return True
         return False
 
 
-    def esComisionadoG(self,usuarioActual):
+    def esComisionadoG(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Comisionado' in list(member.getRoles()):
             return True
         return False
 
-    def esConsejeroG(self,usuarioActual):
+    def esConsejeroG(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Consejero' in list(member.getRoles()):
             return True
         return False
 
-    def esComisionadoResponsableG(self,usuarioActual):
+    def esComisionadoResponsableG(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Responsable de la Comision' in list(member.getRoles()):
             return True
         return False
 
-    def esConsejeroResponsableG(self,usuarioActual):
+    def esConsejeroResponsableG(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Responsable del Consejo' in list(member.getRoles()):
             return True
         return False
 
-    def esSolicitanteAuxiliarG(self,usuarioActual):
+    def esSolicitanteAuxiliarG(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Solicitante Auxiliar' in list(member.getRoles()):
             return True
         return False
 
-    def esBecarioG(self,usuarioActual):
+    def esBecarioG(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Becario' in list(member.getRoles()):
             return True
         return False
 
-    def esInvestigadorG(self,usuarioActual):
+    def esInvestigadorG(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Investigador' in list(member.getRoles()):
             return True
         return False
 
-    def esTecnicoAcademicoG(self,usuarioActual):
+    def esTecnicoAcademicoG(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Tecnico Academico' in list(member.getRoles()):
             return True
         return False
 
-    def esInvestigadorACargo(self,usuarioActual):
+    def esInvestigadorACargo(self, usuarioActual):
         if self.context.meta_type == "SolicitudFolder":
             return False
         elif self.context.meta_type == "Solicitud":
@@ -322,11 +322,11 @@ class Renderer(base.Renderer):
     def getPresupuestoAprobadoSolicitud(self):
         return self.context.getCantidadAutorizadaTotal()
 
-    def getNombreAsesor(self,asesor):
+    def getNombreAsesor(self, asesor):
         return self.context.portal_membership.getMemberById(asesor).getProperty('fullname')
 
     @forever.memoize
-    def hasPendingReviews(self,usuarioActual):
+    def hasPendingReviews(self, usuarioActual):
         folder_path = '/'.join(self.context.getPhysicalPath())
         catalog = self.context.portal_catalog
 
@@ -345,10 +345,10 @@ class Renderer(base.Renderer):
             return True
         return False
 
-    def hasSentReviews(self,usuarioActual):
+    def hasSentReviews(self, usuarioActual):
         folder_path = '/'.join(self.context.getPhysicalPath())
         catalog = self.context.portal_catalog
-        results1 = catalog(path={'query': folder_path, 'depth': 1},portal_type=('Solicitud','SolicitudVisitante','SolicitudBecario', 'SolicitudInstitucional'),review_state=('revisioncomision','revisionconsejo'),Creator=usuarioActual)
+        results1 = catalog(path={'query': folder_path, 'depth': 1}, portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'), review_state=('revisioncomision', 'revisionconsejo'), Creator=usuarioActual)
 
         if len(results1) == 0:
             return False

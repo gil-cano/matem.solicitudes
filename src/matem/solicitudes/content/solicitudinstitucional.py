@@ -52,7 +52,7 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
         searchable=1,
         expression="((here.getOwner() and 'Solicitud (%s) de %s (%s, %s, %s)' % (here.getLicenciacomision(),here.getNombreOwner(), here.getCiudadPais(), here.getInstitucion(), here.getFechaDesde().strftime('%d/%m/%Y') )) or 'Nueva solicitud')",
         accessor='Title',
-        widget=ComputedWidget(visible={'view':'invisible','edit':'invisible'}),
+        widget=ComputedWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
     ),
 
         ComputedField(name='text',
@@ -62,20 +62,20 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
                                         (here.esSolcitudBorrador(), here.esSolcitudPendiente(),
                                         here.setFechaSolicitud(), here.esAcuseRecibo(),
                                         here.setFechaSesionCI() ))""",
-                           widget=ComputedWidget(visible={'view':'invisible','edit':'invisible'}),
+                           widget=ComputedWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
                            ),
 
         ComputedField(name='description',
                            required=0,
                            searchable=1,
                            expression="(here.getOwner() and ' %s, %s ' % (here.getWFTitle(), here.getWFTString() ))",
-                           widget=StringWidget(visible={'view':'invisible','edit':'invisible'}),
+                           widget=StringWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
                            ),
 
     StringField(name='id',
         required=0,
         searchable=1,
-        widget=StringWidget(visible={'view':'invisible','edit':'invisible'}),
+        widget=StringWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
         ),
 
     StringField(name='sede',
@@ -87,7 +87,7 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
              i18n_domain='plone',
              description='Especifica de donde es el investigador que pide la licencia',
              description_msgid='help_sede',
-             visible={'view':'invisible','edit':'invisible'},
+             visible={'view': 'invisible', 'edit': 'invisible'},
             ),
         ),
 
@@ -109,7 +109,7 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
         StringField('nombre_owner',
             searchable=0,
             required=0,
-            widget=StringWidget(visible={'view':'invisible','edit':'invisible'}),
+            widget=StringWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
         ),
 
         StringField('mensaje_licencias',
@@ -132,7 +132,7 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
             required=1,
             default='Licencia',
             vocabulary=DisplayList((
-                                    ('Licencia','Licencia'), ('Comision','Comision')
+                                    ('Licencia', 'Licencia'), ('Comision', 'Comision')
                                     )),
             widget=SelectionWidget(label='Tipo de solicitud',
                                  label_msgid='label_licenciacomision',
@@ -518,7 +518,7 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
                                   i18n_domain='matem.solicitudes',
                                   description='Date on which the request is sent',
                                   description_msgid='help_fecha_solicitud',
-                                  visible={'view':'invisible','edit':'hidden'}
+                                  visible={'view': 'invisible', 'edit': 'hidden'}
                                   ),
 #            read_permission="Solicitud: Modificar Solicitud",
             write_permission="Solicitud: Modificar Solicitud",
@@ -884,21 +884,21 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
             label = "Review data, if it is correct, you should send it to revision, by selecting 'state: solicitud no enviada' then 'enviar solicitud' inside the transitions menu in the top right corner",
             label_msgid='label_estado_borrador',
             default=False,
-            widget=BooleanWidget(visible={'view':'invisible','edit':'hidden'}),
+            widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
         ),
 
         BooleanField('estadoPendiente',
             label = "Review data, if it is correct, you should send it to revision, by selecting 'state: pendiente' then 'reenviar solicitud' inside the transitions menu in the top right corner",
             label_msgid='label_estado_pendiente',
             default=False,
-            widget=BooleanWidget(visible={'view':'invisible','edit':'hidden'}),
+            widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
         ),
 
         BooleanField('acuseRecibo',
             label = "Your request has been received successfully, you can print this page as acknowledgement of receipt",
             label_msgid='label_acuse_recibo',
             default=False,
-            widget=BooleanWidget(visible={'view':'invisible','edit':'hidden'}),
+            widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
         ),
 ))
 
@@ -995,7 +995,7 @@ class SolicitudInstitucional(BaseContent):
         transitions = workflowTool.getTransitionsFor(self)
         return transitions
 
-    def toState(self,State):
+    def toState(self, State):
         workflowTool = getToolByName(self, "portal_workflow")
         mt = getToolByName(self, "portal_membership")
         member = mt.getAuthenticatedMember()
@@ -1010,12 +1010,12 @@ class SolicitudInstitucional(BaseContent):
 
         if "Importador de Solicitudes" in list(member.getRoles()):
             if nivel > 0:
-                workflowTool.doActionFor(self, 'enviar',comment='')
+                workflowTool.doActionFor(self, 'enviar', comment='')
 #                getToolByName(self,'plone_utils').changeOwnershipOf(self,idPropietario)
             if nivel > 1:
-                workflowTool.doActionFor(self, 'enviaraconsejo',comment='')
+                workflowTool.doActionFor(self, 'enviaraconsejo', comment='')
             if nivel > 2:
-                workflowTool.doActionFor(self, 'aprobar',comment='')
+                workflowTool.doActionFor(self, 'aprobar', comment='')
 
 #        getToolByName(self,'plone_utils').changeOwnershipOf(self,idPropietario)
 
@@ -1416,7 +1416,7 @@ class SolicitudInstitucional(BaseContent):
         return
 
     def sendMail(self):
-        mt = getToolByName(self,'portal_membership')
+        mt = getToolByName(self, 'portal_membership')
         member = mt.getMemberById(self.getIdOwner())
         mail_to = member.getProperty('email', None)
         mail_from = 'solicitudes@matem.unam.mx'
@@ -1459,7 +1459,7 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
                      self.aq_parent.getPresupuesto_asignado_solicitantes()[0].get(self.getIdOwner(), 0.0),
                      self.aq_parent.getDias_licencia_utilizados_solicitantes()[0].get(self.getIdOwner(), 0),
                      self.aq_parent.getDias_comision_utilizados_solicitantes()[0].get(self.getIdOwner(), 0))
-        getToolByName(self,'MailHost').send(msg, mail_to, mail_from, subject)
+        getToolByName(self, 'MailHost').send(msg, mail_to, mail_from, subject)
         return
 
     # Esta definida en solicitud
@@ -1471,8 +1471,8 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
         # return int((d2-d1).days)+1
         t1 = str(DateTime(self.getFecha_desde())).split("/")
         t2 = str(DateTime(self.getFecha_hasta())).split("/")
-        d1=datetime(int(t1[0]),int(t1[1]),int(t1[2].split(" ")[0]))
-        d2=datetime(int(t2[0]),int(t2[1]),int(t2[2].split(" ")[0]))
+        d1=datetime(int(t1[0]), int(t1[1]), int(t1[2].split(" ")[0]))
+        d2=datetime(int(t2[0]), int(t2[1]), int(t2[2].split(" ")[0]))
         return int((d2-d1).days)+1
 
     def actualizarInvestigador(self):
@@ -1521,7 +1521,7 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
         viaticos=self.getCantidadAutorizadaViaticos()
         inscripcion=self.getCantidadAutorizadaInscripcion()
         anual = pasaje + viaticos + inscripcion
-        folder.restarACantidadAutorizada(esComision,anual,dias,solicitante)
+        folder.restarACantidadAutorizada(esComision, anual, dias, solicitante)
         return
 
     def aprobada(self):

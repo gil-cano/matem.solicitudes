@@ -284,7 +284,7 @@ class SolicitudFolder(ATFolder):
         except:
             return False
 
-    def restarACantidadAutorizada(self,esComision,cantidad,dias,idCreador):
+    def restarACantidadAutorizada(self, esComision, cantidad, dias, idCreador):
         try:
             cantidad = float(cantidad)
             dias = int(dias)
