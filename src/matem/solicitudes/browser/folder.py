@@ -240,13 +240,15 @@ class SolicitudFolderView(BrowserView):
             append = True
 
         if append:
-            users[letter].append([fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName(),
-                       folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
-                       rol,
-                       fsdperson.getId(),
-                       folder.getSolicitantes()[0].get(fsdperson.getId(), [0, 0, 0, 0, 0.0])[4] - folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
-                       folder.getDias_comision_utilizados_solicitantes()[0].get(fsdperson.getId(), 0),
-                       folder.getDias_licencia_utilizados_solicitantes()[0].get(fsdperson.getId(), 0)])
+            users[letter].append([
+                fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName(),
+                folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
+                rol,
+                fsdperson.getId(),
+                folder.getSolicitantes()[0].get(fsdperson.getId(), [0, 0, 0, 0, 0.0])[4] - folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
+                folder.getDias_comision_utilizados_solicitantes()[0].get(fsdperson.getId(), 0),
+                folder.getDias_licencia_utilizados_solicitantes()[0].get(fsdperson.getId(), 0)
+            ])
         return users
 
     def getPresupuestoIndividual(self, usuario):
@@ -270,14 +272,15 @@ class SolicitudFolderView(BrowserView):
             rol = "No puede solicitar recursos"
 
 #        users.append([fsdperson.getLastName()+', '+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),fsdperson.getPresupuesto_asignado(),fsdperson.getDias_licencia_utilizados(),fsdperson.getDias_comision_utilizados(),rol,str(fsdperson.getId())])
-        users.append([fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName(),
-                  folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
-                  rol,
-                  fsdperson.getId(),
-                  folder.getSolicitantes()[0].get(fsdperson.getId(), [0, 0, 0, 0, 0.0])[4] - folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
-                  folder.getDias_comision_utilizados_solicitantes()[0].get(fsdperson.getId(), 0),
-                  folder.getDias_licencia_utilizados_solicitantes()[0].get(fsdperson.getId(), 0)])
-
+        users.append([
+            fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName(),
+            folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
+            rol,
+            fsdperson.getId(),
+            folder.getSolicitantes()[0].get(fsdperson.getId(), [0, 0, 0, 0, 0.0])[4] - folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
+            folder.getDias_comision_utilizados_solicitantes()[0].get(fsdperson.getId(), 0),
+            folder.getDias_licencia_utilizados_solicitantes()[0].get(fsdperson.getId(), 0)
+        ])
         return users
 
     def getInvestigadoresLocalAlfabeticamentePerson(self, usuario):
@@ -329,16 +332,17 @@ class SolicitudFolderView(BrowserView):
                 personinfo = folder.getSolicitantes()[0][person]
                 letter = unicode(personinfo[0], "utf-8")[0].upper()
                 letter = letter.replace(u'Á', 'A').replace(u'É', 'E').replace(u'Í', 'I').replace(u'Ó', 'O').replace(u'Ú', 'U').replace(u'Ñ', 'N').replace(u'Ö', 'O')
-                users[letter].append([personinfo[0] + ", " + personinfo[1] + " " + personinfo[2],
-                          folder.getPresupuesto_asignado_solicitantes()[0].get(person, 0.0),
-                          personinfo[3],
-                          person,
-                          personinfo[4] - folder.getPresupuesto_asignado_solicitantes()[0].get(person, 0.0),
-                          folder.getDias_comision_utilizados_solicitantes()[0].get(person, 0),
-                          folder.getDias_licencia_utilizados_solicitantes()[0].get(person, 0),
-                          folder.getApoyoinst_asignado_solicitantes()[0].get(person, 0.0),
-                          personinfo[5] - folder.getApoyoinst_asignado_solicitantes()[0].get(person, 0.0)],
-                          )
+                users[letter].append([
+                    personinfo[0] + ", " + personinfo[1] + " " + personinfo[2],
+                    folder.getPresupuesto_asignado_solicitantes()[0].get(person, 0.0),
+                    personinfo[3],
+                    person,
+                    personinfo[4] - folder.getPresupuesto_asignado_solicitantes()[0].get(person, 0.0),
+                    folder.getDias_comision_utilizados_solicitantes()[0].get(person, 0),
+                    folder.getDias_licencia_utilizados_solicitantes()[0].get(person, 0),
+                    folder.getApoyoinst_asignado_solicitantes()[0].get(person, 0.0),
+                    personinfo[5] - folder.getApoyoinst_asignado_solicitantes()[0].get(person, 0.0)
+                ])
 
             for letter in users.keys():
                 users[letter].sort()

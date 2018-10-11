@@ -110,20 +110,22 @@ class SearchView(BrowserView):
         queryObj = self.queryObj
 
         try:
-            searchStr = [ self.request.form['Creator'], #0
-                        self.request.form['Pais'],    #1
-                        self.request.form['Ciudad'].lower(),#2
-                        self.request.form['Institucion'].lower(),#3
-                        self.request.form['Desde'],#4
-                        self.request.form['Hasta'],#5
-                        self.request.form['Objeto'].lower(),#6
-                        self.request.form['Area'],#7
-                        self.request.form['TTrabajo'].lower(),#8
-                        self.request.form['Becario'],#9
-                        self.request.form['Asesor'],#10
-                        self.request.form['Cantidad'],#11
-                        self.request.form['CantidadLarger'],#12
-                        self.request.form['CantidadLower']]#13
+            searchStr = [
+                self.request.form['Creator'],
+                self.request.form['Pais'],
+                self.request.form['Ciudad'].lower(),
+                self.request.form['Institucion'].lower(),
+                self.request.form['Desde'],
+                self.request.form['Hasta'],
+                self.request.form['Objeto'].lower(),
+                self.request.form['Area'],
+                self.request.form['TTrabajo'].lower(),
+                self.request.form['Becario'],
+                self.request.form['Asesor'],
+                self.request.form['Cantidad'],
+                self.request.form['CantidadLarger'],
+                self.request.form['CantidadLower']
+            ]
 
             unTipo = self.request.form['Type']
             unEstado = self.request.form['State']
@@ -263,8 +265,10 @@ class SearchView(BrowserView):
 
         for solicitante in solicitantes.keys():
             if 'Becario' in solicitantes[solicitante][3]:
-                users.append([solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
-                          solicitante])
+                users.append([
+                    solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
+                    solicitante
+                ])
         users.sort()
 
         return users
@@ -276,8 +280,10 @@ class SearchView(BrowserView):
 
         for solicitante in solicitantes.keys():
             if 'Investigador' in solicitantes[solicitante][3]:
-                users.append([solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
-                          solicitante])
+                users.append([
+                    solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
+                    solicitante
+                ])
         users.sort()
 
         return users
@@ -289,8 +295,10 @@ class SearchView(BrowserView):
 
         for solicitante in solicitantes.keys():
             if 'Postdoc' in solicitantes[solicitante][3]:
-                users.append([solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
-                          solicitante])
+                users.append([
+                    solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
+                    solicitante
+                ])
         users.sort()
         return users
 
@@ -301,8 +309,10 @@ class SearchView(BrowserView):
 
         for solicitante in solicitantes.keys():
             if 'Tecnico Academico' in solicitantes[solicitante][3]:
-                users.append([solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
-                          solicitante])
+                users.append([
+                    solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
+                    solicitante
+                ])
         users.sort()
         return users
 
@@ -332,8 +342,10 @@ class SearchView(BrowserView):
                 insertar = True
 
             if insertar:
-                users.append([solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
-                          solicitante])
+                users.append([
+                    solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
+                    solicitante
+                ])
                 insertar = False
 
         users.sort()

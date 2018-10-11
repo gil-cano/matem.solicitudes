@@ -232,9 +232,11 @@ class BudgetView(BrowserView):
                 personinfo = self.solicitantes[person]
                 letter = unicode(personinfo[0])[0].upper()
                 letter = letter.replace('Á', 'A').replace('É', 'E').replace('Í', 'I').replace('Ó', 'O').replace('Ú', 'U').replace('Ñ', 'N').replace('Ö', 'O')
-                users[letter].append([personinfo[0] + ", " + personinfo[1] + " " + personinfo[2],
-                          personinfo[3],
-                          person])
+                users[letter].append([
+                    personinfo[0] + ", " + personinfo[1] + " " + personinfo[2],
+                    personinfo[3],
+                    person
+                ])
 
             for letter in users.keys():
                 users[letter].sort()
