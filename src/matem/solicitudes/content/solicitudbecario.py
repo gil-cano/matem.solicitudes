@@ -166,18 +166,18 @@ SolicitudBecarioSchema = BaseSchema + Schema((
 
 
     LinesField(
-          name='pais',
-          required=True,
-          default=('MX'),
-          widget=SelectionWidget(
+        name='pais',
+        required=True,
+        default=('MX'),
+        widget=SelectionWidget(
             label='Country',
             label_msgid='label_pais',
             description='Country to visit',
             description_msgid='help_pais',
             i18n_domain='matem.solicitudes',
-          ),
-          vocabulary="getCountriesVocabulary",
-          write_permission="Solicitud: Modificar Solicitud",
+        ),
+        vocabulary="getCountriesVocabulary",
+        write_permission="Solicitud: Modificar Solicitud",
     ),
 
     StringField('ciudad_pais',
