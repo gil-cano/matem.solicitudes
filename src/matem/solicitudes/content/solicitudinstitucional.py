@@ -144,22 +144,6 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
             write_permission="Solicitud: Modificar Solicitud",
         ),
 
-#         LinesField('pais',
-#             searchable=1,
-#             required=1,
-#             default=('MX'),
-#             widget=CountryWidget(label='Country',
-#                                 label_msgid='label_pais',
-#                                 provideNullValue=1,   # this is default
-#                                 omitCountries=None,   # this is default, can be a
-#                                                       # list of country codes which
-#                                                       # are not displayed
-#                                 description='Country to visit',
-#                                 description_msgid='help_pais'),
-# #            read_permission="Solicitud: Modificar Solicitud",
-#             write_permission="Solicitud: Modificar Solicitud",
-#         ),
-
         LinesField(
             name='pais',
             required=True,
@@ -568,7 +552,7 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
             write_permission="Solicitud: Comision Revisa Solicitud",
         ),
 
-# Campos CE
+        # Campos CE
         StringField('comentario_ce',
             searchable=1,
             required=0,

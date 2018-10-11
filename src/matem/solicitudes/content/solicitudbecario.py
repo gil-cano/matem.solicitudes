@@ -485,7 +485,7 @@ SolicitudBecarioSchema = BaseSchema + Schema((
                                 description_msgid='help_cantidad_inscripcion',
                                 tarifas=False,
                                 size=12),
-#            read_permission="Solicitud: Modificar Solicitud",
+            # read_permission="Solicitud: Modificar Solicitud",
             write_permission="Solicitud: Modificar Solicitud",
         ),
 
@@ -500,13 +500,11 @@ SolicitudBecarioSchema = BaseSchema + Schema((
                                   description_msgid='help_fecha_solicitud',
                                   visible={'view': 'invisible', 'edit': 'hidden'}
                                   ),
-#            read_permission="Solicitud: Modificar Solicitud",
+            # read_permission="Solicitud: Modificar Solicitud",
             write_permission="Solicitud: Modificar Solicitud",
         ),
 
-
-
-# Archivos ...
+        # Archivos ...
         MultiFileField('displayAttachments',
             primary=True,
             languageIndependent=True,
@@ -520,7 +518,8 @@ SolicitudBecarioSchema = BaseSchema + Schema((
                      i18n_domain='matem.solicitudes',),
             write_permission="Solicitud: Modificar Solicitud",
         ),
-# Comentarios del asesor
+
+        # Comentarios del asesor
         StringField('comentario_asesor',
             searchable=1,
             required=0,
@@ -534,7 +533,7 @@ SolicitudBecarioSchema = BaseSchema + Schema((
         ),
 
 
-# Comentarios del owner
+        # Comentarios del owner
         StringField('comentario_owner',
             searchable=1,
             required=0,
@@ -549,7 +548,7 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             write_permission="Solicitud: Modificar Solicitud",
         ),
 
-# Campos del CE
+        # Campos del CE
         DateTimeField('fecha_sesionce',
             searchable=1,
             required=1,
@@ -633,7 +632,7 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             write_permission="Solicitud: Comision Revisa Solicitud",
         ),
 
-# Campos del CI
+        # Campos del CI
         StringField('comentario_ci',
             searchable=1,
             required=0,
@@ -647,6 +646,7 @@ SolicitudBecarioSchema = BaseSchema + Schema((
             read_permission="Solicitud: Consejo Revisa Solicitud",
             write_permission="Solicitud: Consejo Revisa Solicitud",
         ),
+
         DateTimeField('fecha_sesionci',
             searchable=1,
             required=1,
