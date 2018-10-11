@@ -240,11 +240,11 @@ class SolicitudFolderView(BrowserView):
             append = True
 
         if append:
-            users[letter].append([fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),
+            users[letter].append([fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName(),
                        folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
                        rol,
                        fsdperson.getId(),
-                       folder.getSolicitantes()[0].get(fsdperson.getId(), [0, 0, 0, 0, 0.0])[4]-folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
+                       folder.getSolicitantes()[0].get(fsdperson.getId(), [0, 0, 0, 0, 0.0])[4] - folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
                        folder.getDias_comision_utilizados_solicitantes()[0].get(fsdperson.getId(), 0),
                        folder.getDias_licencia_utilizados_solicitantes()[0].get(fsdperson.getId(), 0)])
         return users
@@ -270,74 +270,74 @@ class SolicitudFolderView(BrowserView):
             rol = "No puede solicitar recursos"
 
 #        users.append([fsdperson.getLastName()+', '+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),fsdperson.getPresupuesto_asignado(),fsdperson.getDias_licencia_utilizados(),fsdperson.getDias_comision_utilizados(),rol,str(fsdperson.getId())])
-        users.append([fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),
+        users.append([fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName(),
                   folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
                   rol,
                   fsdperson.getId(),
-                  folder.getSolicitantes()[0].get(fsdperson.getId(), [0, 0, 0, 0, 0.0])[4]-folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
+                  folder.getSolicitantes()[0].get(fsdperson.getId(), [0, 0, 0, 0, 0.0])[4] - folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0),
                   folder.getDias_comision_utilizados_solicitantes()[0].get(fsdperson.getId(), 0),
                   folder.getDias_licencia_utilizados_solicitantes()[0].get(fsdperson.getId(), 0)])
 
         return users
 
     def getInvestigadoresLocalAlfabeticamentePerson(self, usuario):
-        folder=self.context
+        folder = self.context
         mt = self.context.portal_membership
-        member=mt.getMemberById(usuario)
-        append=False
-        rol=""
+        member = mt.getMemberById(usuario)
+        append = False
+        rol = ""
         fsd_tool = self.context.facultystaffdirectory_tool
         users = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': [], 'J': [], 'K': [], 'L': [], 'M': [], 'N': [], 'O': [], 'P': [], 'Q': [], 'R': [], 'S': [], 'T': [], 'U': [], 'V': [], 'W': [], 'X': [], 'Y': [], 'Z': []}
 
         if 'Programador de Presupuesto' in list(member.getRoles()):
             for person in list(fsd_tool.getDirectoryRoot().getSortedPeople()):
                 fsdperson = PersonWrapper(person)
-                letter=unicode(fsdperson.getLastName())[0].upper()
-                letter=letter.replace('Á', 'A').replace('É', 'E').replace('Í', 'I').replace('Ó', 'O').replace('Ú', 'U').replace('Ñ', 'N').replace('Ö', 'O')
-                user=mt.getMemberById(fsdperson.getId())
+                letter = unicode(fsdperson.getLastName())[0].upper()
+                letter = letter.replace('Á', 'A').replace('É', 'E').replace('Í', 'I').replace('Ó', 'O').replace('Ú', 'U').replace('Ñ', 'N').replace('Ö', 'O')
+                user = mt.getMemberById(fsdperson.getId())
 
                 if 'Investigador' in list(user.getRoles()):
-                    rol="Investigador"
-                    append=True
+                    rol = "Investigador"
+                    append = True
                 elif 'Postdoc' in list(user.getRoles()):
-                    rol="Postdoc"
-                    append=True
+                    rol = "Postdoc"
+                    append = True
                 elif 'Tecnico Academico' in list(user.getRoles()):
-                    rol="Tecnico Academico"
-                    append=True
+                    rol = "Tecnico Academico"
+                    append = True
                 elif 'Becario' in list(user.getRoles()):
-                    rol="Becario"
-                    append=True
+                    rol = "Becario"
+                    append = True
 
                 try:
                     if append :
 #                        users[letter].append([fsdperson.getLastName()+","+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),fsdperson.getPresupuesto_asignado(),rol,fsdperson.getId(),fsdperson.getPresupuesto_inicial()-fsdperson.getPresupuesto_asignado(),fsdperson.getDias_comision_utilizados(),fsdperson.getDias_licencia_utilizados()])
-                        append=False
+                        append = False
                 except:
                     pass
         return users
 
     def getInvestigadoresLocalAlfabeticamente(self, usuario):
-        folder=self.context
+        folder = self.context
         mt = self.context.portal_membership
-        member=mt.getMemberById(usuario)
+        member = mt.getMemberById(usuario)
         users = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': [], 'J': [], 'K': [], 'L': [], 'M': [], 'N': [], 'O': [], 'P': [], 'Q': [], 'R': [], 'S': [], 'T': [], 'U': [], 'V': [], 'W': [], 'X': [], 'Y': [], 'Z': []}
 
         if 'Programador de Presupuesto' in list(member.getRoles()):
-            llaves=folder.getSolicitantes()[0].keys()
+            llaves = folder.getSolicitantes()[0].keys()
             for person in llaves:
-                personinfo=folder.getSolicitantes()[0][person]
+                personinfo = folder.getSolicitantes()[0][person]
                 letter = unicode(personinfo[0], "utf-8")[0].upper()
                 letter = letter.replace(u'Á', 'A').replace(u'É', 'E').replace(u'Í', 'I').replace(u'Ó', 'O').replace(u'Ú', 'U').replace(u'Ñ', 'N').replace(u'Ö', 'O')
-                users[letter].append([personinfo[0]+", "+personinfo[1]+" "+personinfo[2],
+                users[letter].append([personinfo[0] + ", " + personinfo[1] + " " + personinfo[2],
                           folder.getPresupuesto_asignado_solicitantes()[0].get(person, 0.0),
                           personinfo[3],
                           person,
-                          personinfo[4]-folder.getPresupuesto_asignado_solicitantes()[0].get(person, 0.0),
+                          personinfo[4] - folder.getPresupuesto_asignado_solicitantes()[0].get(person, 0.0),
                           folder.getDias_comision_utilizados_solicitantes()[0].get(person, 0),
                           folder.getDias_licencia_utilizados_solicitantes()[0].get(person, 0),
                           folder.getApoyoinst_asignado_solicitantes()[0].get(person, 0.0),
-                          personinfo[5]-folder.getApoyoinst_asignado_solicitantes()[0].get(person, 0.0)],
+                          personinfo[5] - folder.getApoyoinst_asignado_solicitantes()[0].get(person, 0.0)],
                           )
 
             for letter in users.keys():
@@ -347,7 +347,7 @@ class SolicitudFolderView(BrowserView):
     def getIndividualBudgets(self):
         solicitantes = self.context.getSolicitantes()
         mt = self.context.portal_membership
-        member=mt.getAuthenticatedMember()
+        member = mt.getAuthenticatedMember()
         users = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': [], 'J': [], 'K': [], 'L': [], 'M': [], 'N': [], 'O': [], 'P': [], 'Q': [], 'R': [], 'S': [], 'T': [], 'U': [], 'V': [], 'W': [], 'X': [], 'Y': [], 'Z': []}
 
         if 'Programador de Presupuesto' in list(member.getRoles()):
@@ -364,14 +364,14 @@ class SolicitudFolderView(BrowserView):
 
     def getAlphabetLetters(self):
         users = {'A': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'G': {}, 'H': {}, 'I': {}, 'J': {}, 'K': {}, 'L': {}, 'M': {}, 'N': {}, 'O': {}, 'P': {}, 'Q': {}, 'R': {}, 'S': {}, 'T': {}, 'U': {}, 'V': {}, 'W': {}, 'X': {}, 'Y': {}, 'Z': {}}
-        result=users.keys()
+        result = users.keys()
         result.sort()
         return result
 
     def getPageAlphabetic(self, tipodato):
         try:
             req = self.request
-            tipo=req.get(tipodato, '')
+            tipo = req.get(tipodato, '')
             if str(tipo) != '':
                 return str(tipo)
             else:
@@ -381,9 +381,9 @@ class SolicitudFolderView(BrowserView):
 
     def getPageAlphabeticNumber(self, tipodato):
         try:
-            alphabet=self.getAlphabetLetters()
+            alphabet = self.getAlphabetLetters()
             req = self.request
-            tipo=req.get(tipodato, '')
+            tipo = req.get(tipodato, '')
             for x in range(0, len(alphabet)):
                 if alphabet[x] is str(tipo):
                     return x
@@ -398,7 +398,7 @@ class SolicitudFolderView(BrowserView):
     def getPage(self, tipodato):
         try:
             req = self.request
-            tipo=req.get(tipodato, '')
+            tipo = req.get(tipodato, '')
             f = int(tipo)
             if tipo is None:
                 return 0
@@ -417,7 +417,7 @@ class SolicitudFolderView(BrowserView):
     def getReqDataStr(self, tipodato):
         try:
             req = self.request
-            tipo=req.get(tipodato, '')
+            tipo = req.get(tipodato, '')
             if tipo is None:
                 return None
             else:
@@ -426,84 +426,84 @@ class SolicitudFolderView(BrowserView):
             return None
 
     def getIndexedList(self, data, qty_of_results):
-        i=0
-        page=[]
-        temp=[]
+        i = 0
+        page = []
+        temp = []
 
         try:
-            qty_of_results=int(qty_of_results)-1
+            qty_of_results = int(qty_of_results) - 1
             if qty_of_results < 1 :
-                qty_of_results=9
+                qty_of_results = 9
         except:
-            qty_of_results=9
+            qty_of_results = 9
 
         for result in data:
             page.append(result)
-            i+=1
+            i += 1
             if i > qty_of_results:
                 temp.append(page[:])
-                i=0
-                page=[]
+                i = 0
+                page = []
 
-        if i>0:
+        if i > 0:
             temp.append(page)
 
         return temp
 
     def getCantidadAsignadaTotal(self, usuario):
         mt = self.context.portal_membership
-        member=mt.getMemberById(usuario)
+        member = mt.getMemberById(usuario)
         users = []
-        vertodo=False
-        cantidadTotal=0.0
-        presupuestoInicial=0.0
+        vertodo = False
+        cantidadTotal = 0.0
+        presupuestoInicial = 0.0
 
         if 'Manager' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
         elif 'Comisionado' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
         elif 'Consejero' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
         elif 'Responsable de la Comision' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
         elif 'Responsable del Consejo' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
         elif 'Programador de Presupuesto' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
 
         if vertodo is True:
             for user in mt.listMembers():
                 if 'Becario' in list(user.getRoles()) or 'Investigador' in list(user.getRoles()) or 'Tecnico Academico' in list(user.getRoles()) or 'Postdoc' in list(user.getRoles()):
-                    cantidadTotal+=user.getProperty('presupuesto_asignado')
-                    presupuestoInicial+=user.getProperty('presupuesto_inicial')
+                    cantidadTotal += user.getProperty('presupuesto_asignado')
+                    presupuestoInicial += user.getProperty('presupuesto_inicial')
         else:
-            cantidadTotal=member.getProperty('presupuesto_asignado')
-            presupuestoInicial=member.getProperty('presupuesto_inicial')
+            cantidadTotal = member.getProperty('presupuesto_asignado')
+            presupuestoInicial = member.getProperty('presupuesto_inicial')
 
         users.append(["Presupuesto Maximo", presupuestoInicial])
         users.append(["Total Ejercido", cantidadTotal])
-        users.append(["Restante", presupuestoInicial-cantidadTotal])
+        users.append(["Restante", presupuestoInicial - cantidadTotal])
 
         return users
 
     def calcularTotal(self, items):
-        itemtotal=0.0
+        itemtotal = 0.0
         for item in items:
-            itemtotal+=item['total_approved_quantity']
+            itemtotal += item['total_approved_quantity']
         return itemtotal
 
     def calcularTotalInvDict(self, investigadores):
-        itemtotal=0.0
+        itemtotal = 0.0
         for key in list(investigadores):
             for investigador in investigadores[key]:
-                itemtotal+=investigador[1]
+                itemtotal += investigador[1]
         return itemtotal
 
     def calcularTotalInv(self, investigadores):
-        itemtotal=0.0
+        itemtotal = 0.0
         for page in investigadores:
             for investigador in page:
-                itemtotal+=investigador[1]
+                itemtotal += investigador[1]
         return itemtotal
 
     def compararValores(self, cantidadAsignada, cantidadCalculada):
@@ -515,46 +515,46 @@ class SolicitudFolderView(BrowserView):
         return True
 
     def getCantidadAsignadaLocal(self, usuario):
-        folder=self.context
+        folder = self.context
         mt = self.context.portal_membership
-        member=mt.getMemberById(usuario)
+        member = mt.getMemberById(usuario)
         fsdperson = self.queryObj.getPersonWrapper(usuario)
         users = []
-        vertodo=False
-        cantidadTotal=0.0
-        presupuestoInicial=0.0
+        vertodo = False
+        cantidadTotal = 0.0
+        presupuestoInicial = 0.0
 
         if vertodo is True:
             for user in mt.listMembers():
                 if 'Becario' in list(user.getRoles()) or 'Investigador' in list(user.getRoles()) or 'Tecnico Academico' in list(user.getRoles()) or 'Postdoc' in list(user.getRoles()):
-                    cantidadTotal+=user.getProperty('presupuesto_asignado')
-                    presupuestoInicial+=user.getProperty('presupuesto_inicial')
+                    cantidadTotal += user.getProperty('presupuesto_asignado')
+                    presupuestoInicial += user.getProperty('presupuesto_inicial')
         else:
-            cantidadTotal=folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0)
-            presupuestoInicial=folder.getSolicitantes()[0].get(fsdperson.getId(), [0, 0, 0, 0, 0.0])[4]
+            cantidadTotal = folder.getPresupuesto_asignado_solicitantes()[0].get(fsdperson.getId(), 0.0)
+            presupuestoInicial = folder.getSolicitantes()[0].get(fsdperson.getId(), [0, 0, 0, 0, 0.0])[4]
 
         users.append(["Presupuesto Maximo", presupuestoInicial])
         users.append(["Total Ejercido", cantidadTotal])
-        users.append(["Restante", presupuestoInicial-cantidadTotal])
+        users.append(["Restante", presupuestoInicial - cantidadTotal])
 
         return users
 
 
     def isTotal(self, usuario):
         mt = self.context.portal_membership
-        member=mt.getMemberById(usuario)
-        vertodo=False
+        member = mt.getMemberById(usuario)
+        vertodo = False
 
         if 'Manager' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
         elif 'Comisionado' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
         elif 'Consejero' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
         elif 'Responsable de la Comision' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
         elif 'Responsable del Consejo' in list(member.getRoles()):
-            vertodo=True
+            vertodo = True
 
         return vertodo
 
@@ -585,51 +585,51 @@ class SolicitudFolderView(BrowserView):
 
     def getTodasSolicitudesProcesadas(self): #Aprobadas y Rechazadas como Dictionario
         queryObj = self.queryObj
-        applications = self.getTodasSolicitudesAprobadas()+self.getTodasSolicitudesRechazadas()
-        applicationDict={}
+        applications = self.getTodasSolicitudesAprobadas() + self.getTodasSolicitudesRechazadas()
+        applicationDict = {}
         for application in applications:
             if applicationDict.get(application['acta_ci'], None) is None:
-                applicationDict[application['acta_ci']]=[]
+                applicationDict[application['acta_ci']] = []
             applicationDict[application['acta_ci']].append(application)
         return applicationDict
 
     def getTodasSolicitudesAprobadas(self): #getSolicitudesAprobadas
-        queryObj=self.queryObj
-        applications=queryObj.getFolderApplicationsByState('aprobada')
+        queryObj = self.queryObj
+        applications = queryObj.getFolderApplicationsByState('aprobada')
         # sort by acta
         sorted_list = [('%s-%s' % (a['acta_ci'], a['owner_name']), a) for a in applications]
         sorted_list.sort(key=lambda  x: x[0])
         return [dic for name, dic in sorted_list]
 
     def getTodasSolicitudesRechazadas(self): #getSolicitudesRechazadas
-        queryObj=self.queryObj
-        applications=queryObj.getFolderApplicationsByState('rechazada')
+        queryObj = self.queryObj
+        applications = queryObj.getFolderApplicationsByState('rechazada')
         return applications
 
     def getSolicitudesPendientes(self, usuario):
-        applications=[]
+        applications = []
         mt = self.context.portal_membership
         memberdataObj = mt.getMemberById(usuario)
 
-        applications+=self.getSolicitudesPendientesEnvio(usuario)
-        applications+=self.getSolicitudesPendientesRevisionPreeliminar(usuario)
-        applications+=self.getSolicitudesPendientesRevisionComision()
-        applications+=self.getSolicitudesPendientesRevisionConsejo()
+        applications += self.getSolicitudesPendientesEnvio(usuario)
+        applications += self.getSolicitudesPendientesRevisionPreeliminar(usuario)
+        applications += self.getSolicitudesPendientesRevisionComision()
+        applications += self.getSolicitudesPendientesRevisionConsejo()
 
         return applications
 
     def getSolicitudesPendientesEnvio(self, usuario):
-        queryObj=self.queryObj
-        applications=queryObj.getFolderApplicationsByStateAndUser('borrador', usuario)
+        queryObj = self.queryObj
+        applications = queryObj.getFolderApplicationsByStateAndUser('borrador', usuario)
         return applications
 
     def getSolicitudesPendientesRevisionPreeliminar(self, usuario):
-        queryObj=self.queryObj
-        temp=queryObj.getFolderApplicationsByState('preeliminar')
-        applications=[]
+        queryObj = self.queryObj
+        temp = queryObj.getFolderApplicationsByState('preeliminar')
+        applications = []
         for form in temp:
             try:
-                if form['special_fields']['researcher_id']==usuario:
+                if form['special_fields']['researcher_id'] == usuario:
                     applications.append(form)
             except:
                 print "No es solicitud de becario."
@@ -677,44 +677,44 @@ class SolicitudFolderView(BrowserView):
 
     def getBudget(self):
         mt = self.context.portal_membership
-        member= mt.getAuthenticatedMember()
+        member = mt.getAuthenticatedMember()
         return member.getProperty('presupuesto_inicial')
 
     def getBudgetBecario(self):
         mt = self.context.portal_membership
-        member= mt.getAuthenticatedMember()
+        member = mt.getAuthenticatedMember()
         return member.getProperty('presupuesto_inicial_becario')
 
     def setBudget(self, tipodato):
         mt = self.context.portal_membership
-        member= mt.getAuthenticatedMember()
+        member = mt.getAuthenticatedMember()
 
-        f= 0.0
+        f = 0.0
 
 
         viejo = self.context.getSolicitantes()[0].get(member.getId(), [0, 0, 0, 0, 0.0])[4]
         req = self.request
-        tipo=req.get(tipodato, '')
+        tipo = req.get(tipodato, '')
         if tipo is None:
             return viejo
         else:
-            f=float(tipo)
+            f = float(tipo)
             if f < 0:
                 return viejo
 
         if 'Programador de Presupuesto' in list(member.getRoles()):
-            solicitantes=getSolicitantes()[0]
-            solicitantes.get(fsdperson.getId(), [0, 0, 0, 0, 0.0])[4]=f
+            solicitantes = getSolicitantes()[0]
+            solicitantes.get(fsdperson.getId(), [0, 0, 0, 0, 0.0])[4] = f
             self.context.setSolicitantes(solicitantes)
 
         return f
 
     def setBudgets(self, tipodato):
         mt = self.context.portal_membership
-        member= mt.getAuthenticatedMember()
-        folder=self.context
+        member = mt.getAuthenticatedMember()
+        folder = self.context
 
-        f= 0.0
+        f = 0.0
         try:
             if tipodato.find('budgetvalueinvestigador') != -1:
                 viejo = float(folder.getPresupuesto_maximo_investigadores())
@@ -735,11 +735,11 @@ class SolicitudFolderView(BrowserView):
             else:
                 viejo = 0.0
             req = self.request
-            tipo=req.get(tipodato, None)
+            tipo = req.get(tipodato, None)
             if tipo is None:
                 return viejo
             else:
-                f=float(tipo)
+                f = float(tipo)
                 if f < 0:
                     return viejo
         except:
@@ -763,24 +763,24 @@ class SolicitudFolderView(BrowserView):
             elif tipodato.find('apoyovaluepostdoc') != -1:
                 folder.setApoyoinst_maximo_postdocs(f)
 
-            solicitantes=folder.getSolicitantes()
+            solicitantes = folder.getSolicitantes()
             for person in solicitantes[0]:
                 if "Investigador" in solicitantes[0][person][3] and tipodato.find('budgetvalueinvestigador') != -1:
-                    solicitantes[0][person][4]=f
+                    solicitantes[0][person][4] = f
                 elif "Becario" in solicitantes[0][person][3] and tipodato.find('budgetvaluebecario') != -1:
-                    solicitantes[0][person][4]=f
+                    solicitantes[0][person][4] = f
                 elif "Tecnico Academico" in solicitantes[0][person][3] and tipodato.find('budgetvaluetecnico') != -1:
-                    solicitantes[0][person][4]=f
+                    solicitantes[0][person][4] = f
                 elif "Postdoc" in solicitantes[0][person][3] and tipodato.find('budgetvaluepostdoc') != -1:
-                    solicitantes[0][person][4]=f
+                    solicitantes[0][person][4] = f
                 elif "Investigador" in solicitantes[0][person][3] and tipodato.find('apoyovalueinvestigador') != -1:
-                    solicitantes[0][person][5]=f
+                    solicitantes[0][person][5] = f
                 elif "Becario" in solicitantes[0][person][3] and tipodato.find('apoyovaluebecario') != -1:
-                    solicitantes[0][person][5]=f
+                    solicitantes[0][person][5] = f
                 elif "Tecnico Academico" in solicitantes[0][person][3] and tipodato.find('apoyovaluetecnico') != -1:
-                    solicitantes[0][person][5]=f
+                    solicitantes[0][person][5] = f
                 elif "Postdoc" in solicitantes[0][person][3] and tipodato.find('apoyovaluepostdoc') != -1:
-                    solicitantes[0][person][5]=f
+                    solicitantes[0][person][5] = f
 
             folder.setSolicitantes(solicitantes)
         return f
@@ -788,7 +788,7 @@ class SolicitudFolderView(BrowserView):
     def hasReqData(self, tipodato):
         try:
             req = self.request
-            tipo=req.get(tipodato, None)
+            tipo = req.get(tipodato, None)
             f = float(tipo)
             if tipo is None:
                 return False
@@ -801,38 +801,38 @@ class SolicitudFolderView(BrowserView):
         form = self.request.form
         req = self.request
 
-        applications=[]
+        applications = []
 
         mt = self.context.portal_membership
-        member=mt.getAuthenticatedMember()
+        member = mt.getAuthenticatedMember()
 
-        queryObj=self.queryObj
+        queryObj = self.queryObj
 
         try:
-            searchStr=self.request.form['Creator']
-            unEstado=self.request.form['State']
+            searchStr = self.request.form['Creator']
+            unEstado = self.request.form['State']
         except:
             return applications
 
         if self.context.meta_type == "SolicitudFolder":
-            folder=self.context
+            folder = self.context
             for dictionary in queryObj.getCurrentFolderApplications():
-                append=False
+                append = False
 
                 meta = dictionary['meta_type']
 
                 # ¿Que hice aqui?
-                if dictionary['owner_id'].find(searchStr)!=-1 and searchStr is not "":
-                    append=True
+                if dictionary['owner_id'].find(searchStr) != -1 and searchStr is not "":
+                    append = True
                     if append and unEstado is not None:
-                        if unEstado == "aprobada" and not dictionary['workflow_state']=="aprobada":
-                            append=False
-                        elif unEstado == "rechazada" and not dictionary['workflow_state']=="rechazada":
-                            append=False
-                        elif unEstado == "revision" and dictionary['workflow_state']=="aprobada":
-                            append=False
-                        elif unEstado == "revision" and dictionary['workflow_state']=="rechazada":
-                            append=False
+                        if unEstado == "aprobada" and not dictionary['workflow_state'] == "aprobada":
+                            append = False
+                        elif unEstado == "rechazada" and not dictionary['workflow_state'] == "rechazada":
+                            append = False
+                        elif unEstado == "revision" and dictionary['workflow_state'] == "aprobada":
+                            append = False
+                        elif unEstado == "revision" and dictionary['workflow_state'] == "rechazada":
+                            append = False
 
                     if append:
                         applications.append(dictionary)
@@ -849,7 +849,7 @@ class SolicitudFolderView(BrowserView):
         """ return true if user has 'Programador de Presupuesto' rol
         """
         mt = getToolByName(self.context, 'portal_membership')
-        member=mt.getAuthenticatedMember()
+        member = mt.getAuthenticatedMember()
         if 'Programador de Presupuesto' in list(member.getRoles()):
             return True
         return False
@@ -858,7 +858,7 @@ class SolicitudFolderView(BrowserView):
         """ return true if user has 'Solicitante Auxiliar' rol
         """
         mt = getToolByName(self.context, 'portal_membership')
-        member=mt.getAuthenticatedMember()
+        member = mt.getAuthenticatedMember()
         if 'Solicitante Auxiliar' in list(member.getRoles()):
             return True
         return False
@@ -870,7 +870,7 @@ class SolicitudFolderView(BrowserView):
         return self.queryObj.getProductUsers()
 
     def getUserApplicationsInState(self, user, state):
-        applications=[]
+        applications = []
         for dictionary in queryObj.getUserApplications(user):
             if dictionary['workflow_state'] == state:
                 applications.append(dictionary)
@@ -882,9 +882,9 @@ class SolicitudFolderView(BrowserView):
         folder_path = "/".join(folder_path)
         if dictionary.get('borrador.Enviar', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     try:
                         self.context.portal_workflow.doActionFor(solicitud, 'enviar')
                     except:
@@ -893,25 +893,25 @@ class SolicitudFolderView(BrowserView):
                     pass
         elif dictionary.get('revision.preeliminar.Enviar', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     self.context.portal_workflow.doActionFor(solicitud, 'enviar')
                 except:
                     pass
         elif dictionary.get('revision.preeliminar.Regresar', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     self.context.portal_workflow.doActionFor(solicitud, 'rechazarabecario')
                 except:
                     pass
         elif dictionary.get('revision.comision.PonerFechaComision', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     # solicitud.setFecha_sesionce(dictionary.get('fechaderevisionCE',''))
                     fdaterev = dictionary.get('fechaderevisionCE', '')
                     if fdaterev:
@@ -922,17 +922,17 @@ class SolicitudFolderView(BrowserView):
                     pass
         elif dictionary.get('revision.comision.PonerNumeroActa', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     solicitud.setActace(dictionary.get('numeroDeActaCE', ''))
                 except:
                     pass
         elif dictionary.get('revision.comision.PonerActaYFecha', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     # solicitud.setFecha_sesionce(dictionary.get('fechaderevisionCE',''))
                     fdaterev = dictionary.get('fechaderevisionCE', '')
                     if fdaterev:
@@ -944,17 +944,17 @@ class SolicitudFolderView(BrowserView):
                     pass
         elif dictionary.get('revision.comision.Enviar', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     self.context.portal_workflow.doActionFor(solicitud, 'enviaraconsejo')
                 except:
                     pass
         elif dictionary.get('revision.comision.PonerFechaComisionYEnviar', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     # solicitud.setFecha_sesionce(dictionary.get('fechaderevisionCE',''))
                     fdaterev = dictionary.get('fechaderevisionCE', '')
                     if fdaterev:
@@ -1216,9 +1216,9 @@ class SolicitudFolderView(BrowserView):
 
         elif dictionary.get('revision.consejo.PonerFechaConsejo', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
                     fdaterev = dictionary.get('fechaderevisionCI', '')
                     if fdaterev:
@@ -1229,17 +1229,17 @@ class SolicitudFolderView(BrowserView):
                     pass
         elif dictionary.get('revision.consejo.PonerNumeroActa', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     solicitud.setActaci(dictionary.get('numeroDeActaCI', ''))
                 except:
                     pass
         elif dictionary.get('revision.consejo.PonerActaYFecha', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
                     fdaterev = dictionary.get('fechaderevisionCI', '')
                     if fdaterev:
@@ -1251,9 +1251,9 @@ class SolicitudFolderView(BrowserView):
                     pass
         elif dictionary.get('revision.consejo.PonerActaYFechaYAprobar', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
                     fdaterev = dictionary.get('fechaderevisionCI', '')
                     if fdaterev:
@@ -1266,9 +1266,9 @@ class SolicitudFolderView(BrowserView):
                     pass
         elif dictionary.get('revision.consejo.PonerActaYFechaYRechazar', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
                     fdaterev = dictionary.get('fechaderevisionCI', '')
                     if fdaterev:
@@ -1281,9 +1281,9 @@ class SolicitudFolderView(BrowserView):
                     pass
         elif dictionary.get('aprobadas.consejo.PonerFechaConsejo', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
                     fdaterev = dictionary.get('fechaderevisionCI', '')
                     if fdaterev:
@@ -1295,18 +1295,18 @@ class SolicitudFolderView(BrowserView):
             return self.folderaprobadas()
         elif dictionary.get('aprobadas.consejo.PonerNumeroActa', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     solicitud.setActaci(dictionary.get('numeroDeActaCI', ''))
                 except:
                     pass
             return self.folderaprobadas()
         elif dictionary.get('aprobadas.consejo.PonerActaYFecha', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
                     fdaterev = dictionary.get('fechaderevisionCI', '')
                     if fdaterev:
@@ -1319,9 +1319,9 @@ class SolicitudFolderView(BrowserView):
             return self.folderaprobadas()
         elif dictionary.get('rechazadas.consejo.PonerFechaConsejo', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
                     fdaterev = dictionary.get('fechaderevisionCI', '')
                     if fdaterev:
@@ -1333,18 +1333,18 @@ class SolicitudFolderView(BrowserView):
             return self.folderrechazadas()
         elif dictionary.get('rechazadas.consejo.PonerNumeroActa', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     solicitud.setActaci(dictionary.get('numeroDeActaCI', ''))
                 except:
                     pass
             return self.folderrechazadas()
         elif dictionary.get('rechazadas.consejo.PonerActaYFecha', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     # solicitud.setFecha_sesionci(dictionary.get('fechaderevisionCI',''))
                     fdaterev = dictionary.get('fechaderevisionCI', '')
                     if fdaterev:
@@ -1357,17 +1357,17 @@ class SolicitudFolderView(BrowserView):
             return self.folderrechazadas()
         elif dictionary.get('revision.consejo.Aprobar', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     self.context.portal_workflow.doActionFor(solicitud, 'aprobar')
                 except:
                     pass
         elif dictionary.get('revision.consejo.Rechazar', '') is not '':
             for key in dictionary:
-                object_path=folder_path+"/"+key
+                object_path = folder_path + "/" + key
                 try:
-                    solicitud=self.context.portal_catalog(path=object_path)[0].getObject()
+                    solicitud = self.context.portal_catalog(path=object_path)[0].getObject()
                     self.context.portal_workflow.doActionFor(solicitud, 'rechazar')
                 except:
                     pass
@@ -1402,7 +1402,7 @@ class SolicitudFolderView(BrowserView):
             solicitud['resto'] = resto
             solicitud['dcomision'] = folder.getDias_comision_utilizados_solicitantes()[0].get(usuarioActual, 0.0)
             solicitud['dlicencia'] = folder.getDias_licencia_utilizados_solicitantes()[0].get(usuarioActual, 0.0)
-            solicitud['apoyo'] = cantidadInicialApoyos-folder.getApoyoinst_asignado_solicitantes()[0].get(usuarioActual, 0.0)
+            solicitud['apoyo'] = cantidadInicialApoyos - folder.getApoyoinst_asignado_solicitantes()[0].get(usuarioActual, 0.0)
             solicitud['style-days'] = ""
             solicitud['style-days-text'] = item['quantity_of_days']
             solicitud['style-quantity'] = ""

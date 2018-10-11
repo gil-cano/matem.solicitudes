@@ -13,7 +13,7 @@ class Requests(BrowserView):
     def hasReqData(self, tipodato):
         try:
             req = self.request
-            tipo=req.get(tipodato, None)
+            tipo = req.get(tipodato, None)
             if tipo is None:
                 return False
             else:
@@ -24,7 +24,7 @@ class Requests(BrowserView):
     def hasReqDataStr(self, tipodato):
         try:
             req = self.request
-            tipo=req.get(tipodato, '')
+            tipo = req.get(tipodato, '')
             if tipo is None:
                 return False
             elif tipo is '':

@@ -15,41 +15,41 @@ class Queries(BrowserView):
     def getProductUsers(self):
         mt = self.context.portal_membership
         fsd_tool = self.context.facultystaffdirectory_tool
-        member=mt.getAuthenticatedMember()
+        member = mt.getAuthenticatedMember()
         users = {}
 
         for fsdperson in list(fsd_tool.getDirectoryRoot().getSortedPeople()):
-            member=mt.getMemberById(fsdperson.getId())
+            member = mt.getMemberById(fsdperson.getId())
 
-            esPermitido=False
-            roles=""
+            esPermitido = False
+            roles = ""
             if 'Becario' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Becario,'
+                esPermitido = True
+                roles += 'Becario,'
             if 'Investigador' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Investigador,'
+                esPermitido = True
+                roles += 'Investigador,'
             if 'Postdoc' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Postdoc,'
+                esPermitido = True
+                roles += 'Postdoc,'
             if 'Tecnico Academico' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Tecnico Academico,'
+                esPermitido = True
+                roles += 'Tecnico Academico,'
             if 'Comisionado' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Comisionado,'
+                esPermitido = True
+                roles += 'Comisionado,'
             if 'Consejero' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Consejero,'
+                esPermitido = True
+                roles += 'Consejero,'
             if 'Responsable de la Comision' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Responsable de la Comision,'
+                esPermitido = True
+                roles += 'Responsable de la Comision,'
             if 'Responsable del Consejo' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Responsable del Consejo,'
+                esPermitido = True
+                roles += 'Responsable del Consejo,'
 
             if esPermitido:
-                users[fsdperson.getId()]=[fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(), roles]
+                users[fsdperson.getId()] = [fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName(), roles]
 
         return users
 
@@ -61,23 +61,23 @@ class Queries(BrowserView):
         users = {}
 
         for member in members:
-            fsdperson=self.getPersonWrapper(member.getId())
+            fsdperson = self.getPersonWrapper(member.getId())
 
-            esPermitido=False
-            roles=""
+            esPermitido = False
+            roles = ""
             if 'Comisionado' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Comisionado,'
+                esPermitido = True
+                roles += 'Comisionado,'
             if 'Consejero' in list(member.getRoles()):
-                roles+='Consejero,'
+                roles += 'Consejero,'
             if 'Responsable de la Comision' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Responsable de la Comision,'
+                esPermitido = True
+                roles += 'Responsable de la Comision,'
             if 'Responsable del Consejo' in list(member.getRoles()):
-                roles+='Responsable del Consejo,'
+                roles += 'Responsable del Consejo,'
 
             if esPermitido:
-                users[fsdperson.getId()]=[fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(), roles]
+                users[fsdperson.getId()] = [fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName(), roles]
 
         return users
 
@@ -85,29 +85,29 @@ class Queries(BrowserView):
     def getProductReviewers(self):
         mt = self.context.portal_membership
         fsd_tool = self.context.facultystaffdirectory_tool
-        member=mt.getAuthenticatedMember()
+        member = mt.getAuthenticatedMember()
         users = {}
 
         for fsdperson in list(fsd_tool.getDirectoryRoot().getSortedPeople()):
-            member=mt.getMemberById(fsdperson.getId())
+            member = mt.getMemberById(fsdperson.getId())
 
-            esPermitido=False
-            roles=""
+            esPermitido = False
+            roles = ""
             if 'Comisionado' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Comisionado,'
+                esPermitido = True
+                roles += 'Comisionado,'
             if 'Consejero' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Consejero,'
+                esPermitido = True
+                roles += 'Consejero,'
             if 'Responsable de la Comision' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Responsable de la Comision,'
+                esPermitido = True
+                roles += 'Responsable de la Comision,'
             if 'Responsable del Consejo' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Responsable del Consejo,'
+                esPermitido = True
+                roles += 'Responsable del Consejo,'
 
             if esPermitido:
-                users[fsdperson.getId()]=[fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(), roles]
+                users[fsdperson.getId()] = [fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName(), roles]
 
         return users
 
@@ -116,29 +116,29 @@ class Queries(BrowserView):
 
         mt = self.context.portal_membership
         fsd_tool = self.context.facultystaffdirectory_tool
-        member=mt.getAuthenticatedMember()
+        member = mt.getAuthenticatedMember()
         users = {}
 
         for fsdperson in list(fsd_tool.getDirectoryRoot().getSortedPeople()):
-            member=mt.getMemberById(fsdperson.getId())
+            member = mt.getMemberById(fsdperson.getId())
 
-            esPermitido=False
-            roles=""
+            esPermitido = False
+            roles = ""
             if 'Becario' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Becario,'
+                esPermitido = True
+                roles += 'Becario,'
             if 'Investigador' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Investigador,'
+                esPermitido = True
+                roles += 'Investigador,'
             if 'Postdoc' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Postdoc,'
+                esPermitido = True
+                roles += 'Postdoc,'
             if 'Tecnico Academico' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Tecnico Academico,'
+                esPermitido = True
+                roles += 'Tecnico Academico,'
 
             if esPermitido:
-                users[fsdperson.getId()]=[fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(), roles]
+                users[fsdperson.getId()] = [fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName(), roles]
 
         return users
 
@@ -147,48 +147,48 @@ class Queries(BrowserView):
 
         mt = self.context.portal_membership
         fsd_tool = self.context.facultystaffdirectory_tool
-        member=mt.getAuthenticatedMember()
-        listUsers=list(fsd_tool.getDirectoryRoot().getSortedPeople())
+        member = mt.getAuthenticatedMember()
+        listUsers = list(fsd_tool.getDirectoryRoot().getSortedPeople())
         users = []
 
         for fsdperson in listUsers:
-            member=mt.getMemberById(fsdperson.getId())
+            member = mt.getMemberById(fsdperson.getId())
 
-            esPermitido=False
-            roles=""
+            esPermitido = False
+            roles = ""
             if 'Becario' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Becario,'
+                esPermitido = True
+                roles += 'Becario,'
             if 'Investigador' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Investigador,'
+                esPermitido = True
+                roles += 'Investigador,'
             if 'Postdoc' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Postdoc,'
+                esPermitido = True
+                roles += 'Postdoc,'
             if 'Tecnico Academico' in list(member.getRoles()):
-                esPermitido=True
-                roles+='Tecnico Academico,'
+                esPermitido = True
+                roles += 'Tecnico Academico,'
 
             if esPermitido:
-                users.append([fsdperson.getId(), fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(), roles])
+                users.append([fsdperson.getId(), fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName(), roles])
         return users
 
     @forever.memoize
     def getApplicationContainers(self):
         catalog = self.context.portal_catalog
         results = catalog(portal_type='SolicitudFolder')
-        folders={}
+        folders = {}
 
         try:
             for brain in results:
-                start=brain.start
-                url=brain.getURL()
-                folder=brain.getObject()
-                folders[folder.getId()]=[folder.getFecha_desde(), folder.getFecha_hasta(), folder.getPresupuesto_inicial(), folder.getPresupuesto_asignado(), folder.getWFState()]
+                start = brain.start
+                url = brain.getURL()
+                folder = brain.getObject()
+                folders[folder.getId()] = [folder.getFecha_desde(), folder.getFecha_hasta(), folder.getPresupuesto_inicial(), folder.getPresupuesto_asignado(), folder.getWFState()]
 
             return folders
         except Exception, err:
-            print obj.getId()+": "+str(err)
+            print obj.getId() + ": " + str(err)
             return []
         return folders
 
@@ -196,22 +196,22 @@ class Queries(BrowserView):
     def getAllApplications(self):
         catalog = self.context.portal_catalog
         results = catalog(portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'))
-        applications=[]
+        applications = []
 
         for brain in results:
-            start=brain.start
-            url=brain.getURL()
-            obj=brain.getObject()
+            start = brain.start
+            url = brain.getURL()
+            obj = brain.getObject()
             try:
                 if obj.meta_type == "Solicitud":
-                    special_dictionary={
+                    special_dictionary = {
                         'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
                         'inscription_quantity': obj.getCantidadInscripcion(),
                         'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudBecario":
-                    special_dictionary={
+                    special_dictionary = {
                         'readable_meta_type': "Solicitud de Becario",
                         'researcher_name': obj.getNombreAsesor(),
                         'researcher_id': obj.getIdAsesor(),
@@ -220,13 +220,13 @@ class Queries(BrowserView):
                         'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudVisitante":
-                    special_dictionary={
+                    special_dictionary = {
                         'readable_meta_type': "Solicitud de Visitante",
                         'visitor_name': obj.getNombreInvitado(),
                     }
                 else:
                     # 'SolicitudInstitucional'
-                    special_dictionary={
+                    special_dictionary = {
                         'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
                         'inscription_quantity': obj.getCantidadInscripcion(),
@@ -267,14 +267,14 @@ class Queries(BrowserView):
                     'cargo_presupuesto': obj.getCargo_presupuesto(),
                 })
             except Exception, err:
-                print obj.getId()+": "+str(err)
+                print obj.getId() + ": " + str(err)
         return applications
 
     @forever.memoize
     def getMyApplications(self):
         mt = self.context.portal_membership
-        member=mt.getAuthenticatedMember()
-        userid=member.getId()
+        member = mt.getAuthenticatedMember()
+        userid = member.getId()
         return self.getUserApplications(userid)
 
     @forever.memoize
@@ -282,23 +282,23 @@ class Queries(BrowserView):
         folder_path = '/'.join(self.context.getPhysicalPath())
         catalog = self.context.portal_catalog
         results = catalog(path={'query': folder_path, 'depth': 1}, portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'), Creator=userid)
-        applications=[]
+        applications = []
 
         for brain in results:
-            start=brain.start
-            url=brain.getURL()
-            obj=brain.getObject()
+            start = brain.start
+            url = brain.getURL()
+            obj = brain.getObject()
 
             try:
                 if obj.meta_type == "Solicitud":
-                    special_dictionary={
+                    special_dictionary = {
                         'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
                         'inscription_quantity': obj.getCantidadInscripcion(),
                         'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudBecario":
-                    special_dictionary={
+                    special_dictionary = {
                         'readable_meta_type': "Solicitud de Becario",
                         'researcher_name': obj.getNombreAsesor(),
                         'researcher_id': obj.getIdAsesor(),
@@ -307,12 +307,12 @@ class Queries(BrowserView):
                         'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudVisitante":
-                    special_dictionary={
+                    special_dictionary = {
                         'readable_meta_type': "Solicitud de Visitante",
                         'visitor_name': obj.getNombreInvitado(),
                     }
                 else:
-                    special_dictionary={
+                    special_dictionary = {
                         'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
                         'inscription_quantity': obj.getCantidadInscripcion(),
@@ -353,7 +353,7 @@ class Queries(BrowserView):
                             'cargo_presupuesto': obj.getCargo_presupuesto(),
                 })
             except Exception, err:
-                print obj.getId()+": "+str(err)
+                print obj.getId() + ": " + str(err)
         return applications
 
     @forever.memoize
@@ -361,22 +361,22 @@ class Queries(BrowserView):
         folder_path = '/'.join(self.context.getPhysicalPath())
         catalog = self.context.portal_catalog
         results = catalog(path={'query': folder_path, 'depth': 1}, portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'))
-        applications=[]
+        applications = []
 
         for brain in results:
-            start=brain.start
-            url=brain.getURL()
-            obj=brain.getObject()
+            start = brain.start
+            url = brain.getURL()
+            obj = brain.getObject()
             try:
                 if obj.meta_type == "Solicitud":
-                    special_dictionary={
+                    special_dictionary = {
                         'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
                         'inscription_quantity': obj.getCantidadInscripcion(),
                         'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudBecario":
-                    special_dictionary={
+                    special_dictionary = {
                         'readable_meta_type': "Solicitud de Becario",
                         'researcher_name': obj.getNombreAsesor(),
                         'researcher_id': obj.getIdAsesor(),
@@ -385,12 +385,12 @@ class Queries(BrowserView):
                         'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudVisitante":
-                    special_dictionary={
+                    special_dictionary = {
                         'readable_meta_type': "Solicitud de Visitante",
                         'visitor_name': obj.getNombreInvitado(),
                     }
                 else:
-                    special_dictionary={
+                    special_dictionary = {
                         'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
                         'inscription_quantity': obj.getCantidadInscripcion(),
@@ -432,7 +432,7 @@ class Queries(BrowserView):
                 })
 
             except Exception, err:
-                print obj.getId()+": "+str(err)
+                print obj.getId() + ": " + str(err)
         return applications
 
     @forever.memoize
@@ -443,22 +443,22 @@ class Queries(BrowserView):
             results = catalog(path={'query': folder_path, 'depth': 1}, portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'), review_state=wfstateid)
         else:
             results = catalog(portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'), review_state=wfstateid)
-        applications=[]
+        applications = []
 
         for brain in results:
-            start=brain.start
-            url=brain.getURL()
-            obj=brain.getObject()
+            start = brain.start
+            url = brain.getURL()
+            obj = brain.getObject()
             try:
                 if obj.meta_type == "Solicitud":
-                    special_dictionary={
+                    special_dictionary = {
                         'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
                         'inscription_quantity': obj.getCantidadInscripcion(),
                         'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudBecario":
-                    special_dictionary={
+                    special_dictionary = {
                         'readable_meta_type': "Solicitud de Becario",
                         'researcher_name': obj.getNombreAsesor(),
                         'researcher_id': obj.getIdAsesor(),
@@ -467,12 +467,12 @@ class Queries(BrowserView):
                         'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudVisitante":
-                    special_dictionary={
+                    special_dictionary = {
                         'readable_meta_type': "Solicitud de Visitante ({0})".format(obj.getNombreInvitado()),
                         'visitor_name': obj.getNombreInvitado(),
                     }
                 else:
-                    special_dictionary={
+                    special_dictionary = {
                         'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
                         'inscription_quantity': obj.getCantidadInscripcion(),
@@ -553,7 +553,7 @@ class Queries(BrowserView):
                 })
 
             except Exception, err:
-                print obj.getId()+": "+str(err)
+                print obj.getId() + ": " + str(err)
         return applications
 
     @forever.memoize
@@ -637,7 +637,7 @@ class Queries(BrowserView):
                 })
 
             except Exception, err:
-                print obj.getId()+": "+str(err)
+                print obj.getId() + ": " + str(err)
 
         return applications
 
@@ -645,21 +645,21 @@ class Queries(BrowserView):
         folder_path = '/'.join(self.context.getPhysicalPath())
         catalog = self.context.portal_catalog
         results = catalog(path={'query': folder_path, 'depth': 1}, portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'), **kwargs)
-        applications=[]
+        applications = []
         for brain in results:
-            start=brain.start
-            url=brain.getURL()
-            obj=brain.getObject()
+            start = brain.start
+            url = brain.getURL()
+            obj = brain.getObject()
             try:
                 if obj.meta_type == "Solicitud":
-                    special_dictionary={
+                    special_dictionary = {
                         'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
                         'inscription_quantity': obj.getCantidadInscripcion(),
                         'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudBecario":
-                    special_dictionary={
+                    special_dictionary = {
                         'readable_meta_type': "Solicitud de Becario",
                         'researcher_name': obj.getNombreAsesor(),
                         'researcher_id': obj.getIdAsesor(),
@@ -668,12 +668,12 @@ class Queries(BrowserView):
                         'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudVisitante":
-                    special_dictionary={
+                    special_dictionary = {
                         'readable_meta_type': "Solicitud de Visitante ({0})".format(obj.getNombreInvitado()),
                         'visitor_name': obj.getNombreInvitado(),
                     }
                 else:
-                    special_dictionary={
+                    special_dictionary = {
                         'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
                         'inscription_quantity': obj.getCantidadInscripcion(),
@@ -715,7 +715,7 @@ class Queries(BrowserView):
                 })
 
             except Exception, err:
-                print obj.getId()+": "+str(err)
+                print obj.getId() + ": " + str(err)
 
         return applications
 
@@ -725,7 +725,7 @@ class Queries(BrowserView):
         portal_catalog = self.context.portal_catalog
 
         results = portal_catalog(path='/'.join(fsdtool.getDirectoryRoot().getPhysicalPath()), portal_type='FSDPerson', id=userId, depth=1)
-        encontrados=[brain.getObject() for brain in results]
+        encontrados = [brain.getObject() for brain in results]
 
         investigador = PersonWrapper(encontrados[0])
         return investigador
@@ -735,14 +735,14 @@ class Queries(BrowserView):
         folder_path = '/'.join(self.context.getPhysicalPath())
         catalog = self.context.portal_catalog
         results = catalog(path={'query': folder_path, 'depth': 1}, portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'))
-        applications=[]
+        applications = []
 
         for brain in results:
-            start=brain.start
-            url=brain.getURL()
-            obj=brain.getObject()
+            start = brain.start
+            url = brain.getURL()
+            obj = brain.getObject()
             try:
                 applications.append(obj)
             except Exception, err:
-                print obj.getId()+": "+str(err)
+                print obj.getId() + ": " + str(err)
         return applications
