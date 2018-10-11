@@ -1595,4 +1595,3 @@ class SolicitudFolderView(BrowserView):
 
         else:
             return items
-
