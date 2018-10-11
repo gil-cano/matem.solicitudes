@@ -1478,7 +1478,7 @@ class SolicitudFolderView(BrowserView):
                 if item['special_fields']['type'] == 'Licencia':
                     if item['quantity_of_days'] > 45 - solicitud['dlicencia']:
                         solicitud['style-days'] = "background:#FFCC00;"
-                        text = 'Solicita %s  días de Licencia y dispone de %s \n'%(item['quantity_of_days'], 45 - solicitud['dlicencia'])
+                        text = 'Solicita %s  días de Licencia y dispone de %s \n' % (item['quantity_of_days'], 45 - solicitud['dlicencia'])
                         solicitud['style-days-text'] = text
 
                 # # comission type
@@ -1492,13 +1492,13 @@ class SolicitudFolderView(BrowserView):
             if item['meta_type'] != 'SolicitudBecario':
                 if institutional_budget > solicitud['apoyo'] and institutional_budget > 0.0:
                     solicitud['style-quantity'] = "color: #FFFFFF; background:#FF0000;"
-                    text = 'Solicita de apoyo institucional %.2f y dispone de %.2f \n'%(institutional_budget, solicitud['apoyo'])
+                    text = 'Solicita de apoyo institucional %.2f y dispone de %.2f \n' % (institutional_budget, solicitud['apoyo'])
                     solicitud['style-quantity-text'].append(text)
 
                 annual_budget = item['annual_budget']['transport_expenses'] + item['annual_budget']['registration_expenses'] + item['annual_budget']['food_expenses']
                 if annual_budget > solicitud['resto'] and annual_budget > 0.0:
                     solicitud['style-quantity'] = "color: #FFFFFF; background:#FF0000;"
-                    text = 'Solicita de asignación anual %.2f y dispone de %.2f \n'%(annual_budget, solicitud['resto'])
+                    text = 'Solicita de asignación anual %.2f y dispone de %.2f \n' % (annual_budget, solicitud['resto'])
                     solicitud['style-quantity-text'].append(text)
 
             # if item['meta_type'] == 'SolicitudBecario':
@@ -1528,11 +1528,11 @@ class SolicitudFolderView(BrowserView):
                         if user_level == 'phd' and len(unique_countries['Doctorado']) > 0:
                             text = "Ya solicitó salida al extranjero"
                             solicitud['style-country'] = "color: #FFFFFF; background:#006600;"
-                            solicitud['style-country-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>"%(text, solicitudesbylevel['Doctorado'][0].getURL())
+                            solicitud['style-country-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>" % (text, solicitudesbylevel['Doctorado'][0].getURL())
                         if user_level == 'master' and len(unique_countries['Maestria']) > 0:
                             text = "Ya solicitó salida al extranjero"
                             solicitud['style-country'] = "color: #FFFFFF; background:#006600;"
-                            solicitud['style-country-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>"%(text, solicitudesbylevel['Maestria'][0].getURL())
+                            solicitud['style-country-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>" % (text, solicitudesbylevel['Maestria'][0].getURL())
 
             if item['meta_type'] != 'SolicitudVisitante':
                 sol = catalog(id=item['id'])
@@ -1553,7 +1553,7 @@ class SolicitudFolderView(BrowserView):
                 if len(effective_sol) > 0:
                     text = 'Tiene otra salida para esas fechas'
                     solicitud['style-overlap'] = "color: #FFFFFF; background:#0066FF;"
-                    solicitud['style-overlap-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>"%(text, effective_sol[0].getURL())
+                    solicitud['style-overlap-text'] = "%s <a style=\"color: #000000\" href=%s> ver solicitud </a>" % (text, effective_sol[0].getURL())
 
             extra_data[item['id']] = solicitud
 
