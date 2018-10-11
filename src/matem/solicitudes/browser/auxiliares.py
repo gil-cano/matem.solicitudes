@@ -18,17 +18,17 @@ class AuxiliaresView(BrowserView):
 
     queryObj=None
 
-    def __init__(self,context,request):
+    def __init__(self, context, request):
         self.context=context
         self.request=request
-        self.queryObj=Queries(context,request)
+        self.queryObj=Queries(context, request)
 
     def __call__(self):
-        self.queryObj=Queries(context,request)
+        self.queryObj=Queries(context, request)
         form = self.request.form
         req = self.request
         container = self.context
-        realowner = req.get('Creator',None)
+        realowner = req.get('Creator', None)
         tipo=req.get('tiposolicitud', None)
         auxiliar_but = form.get('form.button.Create', None) is not None
         usuarioAutenticado=self.context.portal_membership.getAuthenticatedMember()

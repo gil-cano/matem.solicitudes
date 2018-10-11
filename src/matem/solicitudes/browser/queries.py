@@ -49,7 +49,7 @@ class Queries(BrowserView):
                 roles+='Responsable del Consejo,'
 
             if esPermitido:
-                users[fsdperson.getId()]=[fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),roles]
+                users[fsdperson.getId()]=[fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(), roles]
 
         return users
 
@@ -77,7 +77,7 @@ class Queries(BrowserView):
                 roles+='Responsable del Consejo,'
 
             if esPermitido:
-                users[fsdperson.getId()]=[fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),roles]
+                users[fsdperson.getId()]=[fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(), roles]
 
         return users
 
@@ -107,7 +107,7 @@ class Queries(BrowserView):
                 roles+='Responsable del Consejo,'
 
             if esPermitido:
-                users[fsdperson.getId()]=[fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),roles]
+                users[fsdperson.getId()]=[fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(), roles]
 
         return users
 
@@ -138,7 +138,7 @@ class Queries(BrowserView):
                 roles+='Tecnico Academico,'
 
             if esPermitido:
-                users[fsdperson.getId()]=[fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),roles]
+                users[fsdperson.getId()]=[fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(), roles]
 
         return users
 
@@ -170,7 +170,7 @@ class Queries(BrowserView):
                 roles+='Tecnico Academico,'
 
             if esPermitido:
-                users.append([fsdperson.getId(),fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),roles])
+                users.append([fsdperson.getId(), fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(), roles])
         return users
 
     @forever.memoize
@@ -184,7 +184,7 @@ class Queries(BrowserView):
                 start=brain.start
                 url=brain.getURL()
                 folder=brain.getObject()
-                folders[folder.getId()]=[folder.getFecha_desde(),folder.getFecha_hasta(),folder.getPresupuesto_inicial(),folder.getPresupuesto_asignado(),folder.getWFState()]
+                folders[folder.getId()]=[folder.getFecha_desde(), folder.getFecha_hasta(), folder.getPresupuesto_inicial(), folder.getPresupuesto_asignado(), folder.getWFState()]
 
             return folders
         except Exception, err:
@@ -195,7 +195,7 @@ class Queries(BrowserView):
     @forever.memoize
     def getAllApplications(self):
         catalog = self.context.portal_catalog
-        results = catalog(portal_type=('Solicitud','SolicitudVisitante','SolicitudBecario', 'SolicitudInstitucional'))
+        results = catalog(portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'))
         applications=[]
 
 
@@ -206,66 +206,66 @@ class Queries(BrowserView):
           try:
               if obj.meta_type == "Solicitud":
                   special_dictionary={
-                      'type':obj.getLicenciacomision(),
+                      'type': obj.getLicenciacomision(),
                       'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
-                      'inscription_quantity':obj.getCantidadInscripcion(),
-                      'work_title':obj.getTituloTrabajo(),
+                      'inscription_quantity': obj.getCantidadInscripcion(),
+                      'work_title': obj.getTituloTrabajo(),
                   }
               elif obj.meta_type == "SolicitudBecario":
                   special_dictionary={
                       'readable_meta_type': "Solicitud de Becario",
-                      'researcher_name':obj.getNombreAsesor(),
-                      'researcher_id':obj.getIdAsesor(),
-                      'researcher_comments':obj.getComentario_asesor(),
-                      'inscription_quantity':obj.getCantidadInscripcion(),
-                      'work_title':obj.getTituloTrabajo(),
+                      'researcher_name': obj.getNombreAsesor(),
+                      'researcher_id': obj.getIdAsesor(),
+                      'researcher_comments': obj.getComentario_asesor(),
+                      'inscription_quantity': obj.getCantidadInscripcion(),
+                      'work_title': obj.getTituloTrabajo(),
                   }
               elif obj.meta_type == "SolicitudVisitante":
                   special_dictionary={
                       'readable_meta_type': "Solicitud de Visitante",
-                      'visitor_name':obj.getNombreInvitado(),
+                      'visitor_name': obj.getNombreInvitado(),
                   }
               else:
                   # 'SolicitudInstitucional'
                   special_dictionary={
-                      'type':obj.getLicenciacomision(),
+                      'type': obj.getLicenciacomision(),
                       'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
-                      'inscription_quantity':obj.getCantidadInscripcion(),
-                      'work_title':obj.getTituloTrabajo(),
+                      'inscription_quantity': obj.getCantidadInscripcion(),
+                      'work_title': obj.getTituloTrabajo(),
                   }
 
               applications.append({
-                          'meta_type':obj.meta_type,
-                          'id':obj.getId(),
-                          'sede':obj.getSede(),
-                          'owner_name':obj.getNombreOwner(),
-                          'owner_id':obj.getIdOwner(),
-                          'institution':obj.getInstitucion(),
-                          'city':obj.getCiudadPais(),
-                          'country':obj.getPais(),
-                          'country_code':obj.getPaisCodigo(),
-                          'from':obj.getFechaDesde().strftime('%d/%m/%Y'),
-                          'to':obj.getFechaHasta().strftime('%d/%m/%Y'),
-                          'quantity_of_days':obj.getCantidadDeDias(),
-                          'research_areas':obj.getInvestigacionArea(),
-                          'objective':obj.getObjetoViaje(),
-                          'owner_comments':obj.getComentario_owner(),
-                          'transportation_means':obj.getTipo_pasaje(),
-                          'travel_expense_quantity':obj.getCantidadViaticos(),
-                          'transportation_quantity':obj.getCantidadPasaje(),
-                          'total_quantity':obj.getTotal(),
-                          'total_recommended_quantity':obj.getCantidadRecomendadaTotal(),
-                          'total_consejo_quantity':obj.getCantidadConsejoTotal(),
-                          'total_approved_quantity':obj.getCantidadAutorizadaTotal(),
-                          'creation_date':obj.creation_date.strftime('%d/%m/%Y'),
-                          'revision_ci_date':obj.getFecha_sesionci(),
-                          'revision_ce_date':obj.getFecha_sesionce(),
-                          'acta_ci':obj.getActaci(),
-                          'workflow_state':obj.getWFState(),
-                          'workflow_state_name':obj.getWFStateName(),
-                          'url':obj.absolute_url(),
-                          'special_fields':special_dictionary,
-                          'cargo_presupuesto':obj.getCargo_presupuesto(),
+                          'meta_type': obj.meta_type,
+                          'id': obj.getId(),
+                          'sede': obj.getSede(),
+                          'owner_name': obj.getNombreOwner(),
+                          'owner_id': obj.getIdOwner(),
+                          'institution': obj.getInstitucion(),
+                          'city': obj.getCiudadPais(),
+                          'country': obj.getPais(),
+                          'country_code': obj.getPaisCodigo(),
+                          'from': obj.getFechaDesde().strftime('%d/%m/%Y'),
+                          'to': obj.getFechaHasta().strftime('%d/%m/%Y'),
+                          'quantity_of_days': obj.getCantidadDeDias(),
+                          'research_areas': obj.getInvestigacionArea(),
+                          'objective': obj.getObjetoViaje(),
+                          'owner_comments': obj.getComentario_owner(),
+                          'transportation_means': obj.getTipo_pasaje(),
+                          'travel_expense_quantity': obj.getCantidadViaticos(),
+                          'transportation_quantity': obj.getCantidadPasaje(),
+                          'total_quantity': obj.getTotal(),
+                          'total_recommended_quantity': obj.getCantidadRecomendadaTotal(),
+                          'total_consejo_quantity': obj.getCantidadConsejoTotal(),
+                          'total_approved_quantity': obj.getCantidadAutorizadaTotal(),
+                          'creation_date': obj.creation_date.strftime('%d/%m/%Y'),
+                          'revision_ci_date': obj.getFecha_sesionci(),
+                          'revision_ce_date': obj.getFecha_sesionce(),
+                          'acta_ci': obj.getActaci(),
+                          'workflow_state': obj.getWFState(),
+                          'workflow_state_name': obj.getWFStateName(),
+                          'url': obj.absolute_url(),
+                          'special_fields': special_dictionary,
+                          'cargo_presupuesto': obj.getCargo_presupuesto(),
               })
           except Exception, err:
               print obj.getId()+": "+str(err);
@@ -280,10 +280,10 @@ class Queries(BrowserView):
         return self.getUserApplications(userid)
 
     @forever.memoize
-    def getUserApplications(self,userid):
+    def getUserApplications(self, userid):
         folder_path = '/'.join(self.context.getPhysicalPath())
         catalog = self.context.portal_catalog
-        results = catalog(path={'query': folder_path, 'depth': 1},portal_type=('Solicitud','SolicitudVisitante','SolicitudBecario', 'SolicitudInstitucional'),Creator=userid)
+        results = catalog(path={'query': folder_path, 'depth': 1}, portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'), Creator=userid)
         applications=[]
 
         for brain in results:
@@ -294,65 +294,65 @@ class Queries(BrowserView):
             try:
                 if obj.meta_type == "Solicitud":
                     special_dictionary={
-                        'type':obj.getLicenciacomision(),
+                        'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
-                        'inscription_quantity':obj.getCantidadInscripcion(),
-                        'work_title':obj.getTituloTrabajo(),
+                        'inscription_quantity': obj.getCantidadInscripcion(),
+                        'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudBecario":
                     special_dictionary={
                         'readable_meta_type': "Solicitud de Becario",
-                        'researcher_name':obj.getNombreAsesor(),
-                        'researcher_id':obj.getIdAsesor(),
-                        'researcher_comments':obj.getComentario_asesor(),
-                        'inscription_quantity':obj.getCantidadInscripcion(),
-                        'work_title':obj.getTituloTrabajo(),
+                        'researcher_name': obj.getNombreAsesor(),
+                        'researcher_id': obj.getIdAsesor(),
+                        'researcher_comments': obj.getComentario_asesor(),
+                        'inscription_quantity': obj.getCantidadInscripcion(),
+                        'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudVisitante":
                     special_dictionary={
                         'readable_meta_type': "Solicitud de Visitante",
-                        'visitor_name':obj.getNombreInvitado(),
+                        'visitor_name': obj.getNombreInvitado(),
                     }
                 else:
                     special_dictionary={
-                        'type':obj.getLicenciacomision(),
+                        'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
-                        'inscription_quantity':obj.getCantidadInscripcion(),
-                        'work_title':obj.getTituloTrabajo(),
+                        'inscription_quantity': obj.getCantidadInscripcion(),
+                        'work_title': obj.getTituloTrabajo(),
                     }
 
                 applications.append({
-                            'meta_type':obj.meta_type,
-                            'id':obj.getId(),
-                            'sede':obj.getSede(),
-                            'owner_name':obj.getNombreOwner(),
-                            'owner_id':obj.getIdOwner(),
-                            'institution':obj.getInstitucion(),
-                            'city':obj.getCiudadPais(),
-                            'country':obj.getPais(),
-                            'country_code':obj.getPaisCodigo(),
-                            'from':obj.getFechaDesde().strftime('%d/%m/%Y'),
-                            'to':obj.getFechaHasta().strftime('%d/%m/%Y'),
-                            'quantity_of_days':obj.getCantidadDeDias(),
-                            'research_areas':obj.getInvestigacionArea(),
-                            'objective':obj.getObjetoViaje(),
-                            'owner_comments':obj.getComentario_owner(),
-                            'transportation_means':obj.getTipo_pasaje(),
-                            'travel_expense_quantity':obj.getCantidadViaticos(),
-                            'transportation_quantity':obj.getCantidadPasaje(),
-                            'total_quantity':obj.getTotal(),
-                            'total_recommended_quantity':obj.getCantidadRecomendadaTotal(),
-                            'total_consejo_quantity':obj.getCantidadConsejoTotal(),
-                            'total_approved_quantity':obj.getCantidadAutorizadaTotal(),
-                            'creation_date':obj.creation_date.strftime('%d/%m/%Y'),
-                            'revision_ci_date':obj.getFecha_sesionci(),
-                            'revision_ce_date':obj.getFecha_sesionce(),
-                            'acta_ci':obj.getActaci(),
-                            'workflow_state':obj.getWFState(),
-                            'workflow_state_name':obj.getWFStateName(),
-                            'url':obj.absolute_url(),
-                            'special_fields':special_dictionary,
-                            'cargo_presupuesto':obj.getCargo_presupuesto(),
+                            'meta_type': obj.meta_type,
+                            'id': obj.getId(),
+                            'sede': obj.getSede(),
+                            'owner_name': obj.getNombreOwner(),
+                            'owner_id': obj.getIdOwner(),
+                            'institution': obj.getInstitucion(),
+                            'city': obj.getCiudadPais(),
+                            'country': obj.getPais(),
+                            'country_code': obj.getPaisCodigo(),
+                            'from': obj.getFechaDesde().strftime('%d/%m/%Y'),
+                            'to': obj.getFechaHasta().strftime('%d/%m/%Y'),
+                            'quantity_of_days': obj.getCantidadDeDias(),
+                            'research_areas': obj.getInvestigacionArea(),
+                            'objective': obj.getObjetoViaje(),
+                            'owner_comments': obj.getComentario_owner(),
+                            'transportation_means': obj.getTipo_pasaje(),
+                            'travel_expense_quantity': obj.getCantidadViaticos(),
+                            'transportation_quantity': obj.getCantidadPasaje(),
+                            'total_quantity': obj.getTotal(),
+                            'total_recommended_quantity': obj.getCantidadRecomendadaTotal(),
+                            'total_consejo_quantity': obj.getCantidadConsejoTotal(),
+                            'total_approved_quantity': obj.getCantidadAutorizadaTotal(),
+                            'creation_date': obj.creation_date.strftime('%d/%m/%Y'),
+                            'revision_ci_date': obj.getFecha_sesionci(),
+                            'revision_ce_date': obj.getFecha_sesionce(),
+                            'acta_ci': obj.getActaci(),
+                            'workflow_state': obj.getWFState(),
+                            'workflow_state_name': obj.getWFStateName(),
+                            'url': obj.absolute_url(),
+                            'special_fields': special_dictionary,
+                            'cargo_presupuesto': obj.getCargo_presupuesto(),
                 })
             except Exception, err:
                 print obj.getId()+": "+str(err);
@@ -363,7 +363,7 @@ class Queries(BrowserView):
     def getCurrentFolderApplications(self):
         folder_path = '/'.join(self.context.getPhysicalPath())
         catalog = self.context.portal_catalog
-        results = catalog(path={'query': folder_path, 'depth': 1},portal_type=('Solicitud','SolicitudVisitante','SolicitudBecario', 'SolicitudInstitucional'))
+        results = catalog(path={'query': folder_path, 'depth': 1}, portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'))
         applications=[]
 
         for brain in results:
@@ -373,65 +373,65 @@ class Queries(BrowserView):
             try:
                 if obj.meta_type == "Solicitud":
                     special_dictionary={
-                        'type':obj.getLicenciacomision(),
+                        'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
-                        'inscription_quantity':obj.getCantidadInscripcion(),
-                        'work_title':obj.getTituloTrabajo(),
+                        'inscription_quantity': obj.getCantidadInscripcion(),
+                        'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudBecario":
                     special_dictionary={
                         'readable_meta_type': "Solicitud de Becario",
-                        'researcher_name':obj.getNombreAsesor(),
-                        'researcher_id':obj.getIdAsesor(),
-                        'researcher_comments':obj.getComentario_asesor(),
-                        'inscription_quantity':obj.getCantidadInscripcion(),
-                        'work_title':obj.getTituloTrabajo(),
+                        'researcher_name': obj.getNombreAsesor(),
+                        'researcher_id': obj.getIdAsesor(),
+                        'researcher_comments': obj.getComentario_asesor(),
+                        'inscription_quantity': obj.getCantidadInscripcion(),
+                        'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudVisitante":
                     special_dictionary={
                         'readable_meta_type': "Solicitud de Visitante",
-                        'visitor_name':obj.getNombreInvitado(),
+                        'visitor_name': obj.getNombreInvitado(),
                     }
                 else:
                     special_dictionary={
-                        'type':obj.getLicenciacomision(),
+                        'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
-                        'inscription_quantity':obj.getCantidadInscripcion(),
-                        'work_title':obj.getTituloTrabajo(),
+                        'inscription_quantity': obj.getCantidadInscripcion(),
+                        'work_title': obj.getTituloTrabajo(),
                     }
 
                 applications.append({
-                            'meta_type':obj.meta_type,
-                            'id':obj.getId(),
-                            'sede':obj.getSede(),
-                            'owner_name':obj.getNombreOwner(),
-                            'owner_id':obj.getIdOwner(),
-                            'institution':obj.getInstitucion(),
-                            'city':obj.getCiudadPais(),
-                            'country':obj.getPais(),
-                            'country_code':obj.getPaisCodigo(),
-                            'from':obj.getFechaDesde().strftime('%d/%m/%Y'),
-                            'to':obj.getFechaHasta().strftime('%d/%m/%Y'),
-                            'quantity_of_days':obj.getCantidadDeDias(),
-                            'research_areas':obj.getInvestigacionArea(),
-                            'objective':obj.getObjetoViaje(),
-                            'owner_comments':obj.getComentario_owner(),
-                            'transportation_means':obj.getTipo_pasaje(),
-                            'travel_expense_quantity':obj.getCantidadViaticos(),
-                            'transportation_quantity':obj.getCantidadPasaje(),
-                            'total_quantity':obj.getTotal(),
-                            'total_recommended_quantity':obj.getCantidadRecomendadaTotal(),
-                            'total_consejo_quantity':obj.getCantidadConsejoTotal(),
-                            'total_approved_quantity':obj.getCantidadAutorizadaTotal(),
-                            'creation_date':obj.creation_date.strftime('%d/%m/%Y'),
-                            'revision_ci_date':obj.getFecha_sesionci(),
-                            'revision_ce_date':obj.getFecha_sesionce(),
-                            'acta_ci':obj.getActaci(),
-                            'workflow_state':obj.getWFState(),
-                            'workflow_state_name':obj.getWFStateName(),
-                            'url':obj.absolute_url(),
-                            'special_fields':special_dictionary,
-                            'cargo_presupuesto':obj.getCargo_presupuesto(),
+                            'meta_type': obj.meta_type,
+                            'id': obj.getId(),
+                            'sede': obj.getSede(),
+                            'owner_name': obj.getNombreOwner(),
+                            'owner_id': obj.getIdOwner(),
+                            'institution': obj.getInstitucion(),
+                            'city': obj.getCiudadPais(),
+                            'country': obj.getPais(),
+                            'country_code': obj.getPaisCodigo(),
+                            'from': obj.getFechaDesde().strftime('%d/%m/%Y'),
+                            'to': obj.getFechaHasta().strftime('%d/%m/%Y'),
+                            'quantity_of_days': obj.getCantidadDeDias(),
+                            'research_areas': obj.getInvestigacionArea(),
+                            'objective': obj.getObjetoViaje(),
+                            'owner_comments': obj.getComentario_owner(),
+                            'transportation_means': obj.getTipo_pasaje(),
+                            'travel_expense_quantity': obj.getCantidadViaticos(),
+                            'transportation_quantity': obj.getCantidadPasaje(),
+                            'total_quantity': obj.getTotal(),
+                            'total_recommended_quantity': obj.getCantidadRecomendadaTotal(),
+                            'total_consejo_quantity': obj.getCantidadConsejoTotal(),
+                            'total_approved_quantity': obj.getCantidadAutorizadaTotal(),
+                            'creation_date': obj.creation_date.strftime('%d/%m/%Y'),
+                            'revision_ci_date': obj.getFecha_sesionci(),
+                            'revision_ce_date': obj.getFecha_sesionce(),
+                            'acta_ci': obj.getActaci(),
+                            'workflow_state': obj.getWFState(),
+                            'workflow_state_name': obj.getWFStateName(),
+                            'url': obj.absolute_url(),
+                            'special_fields': special_dictionary,
+                            'cargo_presupuesto': obj.getCargo_presupuesto(),
                 })
 
             except Exception, err:
@@ -440,13 +440,13 @@ class Queries(BrowserView):
         return applications
 
     @forever.memoize
-    def getFolderApplicationsByState(self,wfstateid):
+    def getFolderApplicationsByState(self, wfstateid):
         folder_path = '/'.join(self.context.getPhysicalPath())
         catalog = self.context.portal_catalog
         if wfstateid == 'aprobada' or wfstateid == 'rechazada':
-            results = catalog(path={'query': folder_path, 'depth': 1},portal_type=('Solicitud','SolicitudVisitante','SolicitudBecario', 'SolicitudInstitucional'),review_state=wfstateid)
+            results = catalog(path={'query': folder_path, 'depth': 1}, portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'), review_state=wfstateid)
         else:
-            results = catalog(portal_type=('Solicitud','SolicitudVisitante','SolicitudBecario', 'SolicitudInstitucional'),review_state=wfstateid)
+            results = catalog(portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'), review_state=wfstateid)
         applications=[]
 
         for brain in results:
@@ -456,19 +456,19 @@ class Queries(BrowserView):
             try:
                 if obj.meta_type == "Solicitud":
                     special_dictionary={
-                        'type':obj.getLicenciacomision(),
+                        'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
-                        'inscription_quantity':obj.getCantidadInscripcion(),
-                        'work_title':obj.getTituloTrabajo(),
+                        'inscription_quantity': obj.getCantidadInscripcion(),
+                        'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudBecario":
                     special_dictionary={
                         'readable_meta_type': "Solicitud de Becario",
-                        'researcher_name':obj.getNombreAsesor(),
-                        'researcher_id':obj.getIdAsesor(),
-                        'researcher_comments':obj.getComentario_asesor(),
-                        'inscription_quantity':obj.getCantidadInscripcion(),
-                        'work_title':obj.getTituloTrabajo(),
+                        'researcher_name': obj.getNombreAsesor(),
+                        'researcher_id': obj.getIdAsesor(),
+                        'researcher_comments': obj.getComentario_asesor(),
+                        'inscription_quantity': obj.getCantidadInscripcion(),
+                        'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudVisitante":
                     special_dictionary={
@@ -477,10 +477,10 @@ class Queries(BrowserView):
                     }
                 else:
                     special_dictionary={
-                        'type':obj.getLicenciacomision(),
+                        'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
-                        'inscription_quantity':obj.getCantidadInscripcion(),
-                        'work_title':obj.getTituloTrabajo(),
+                        'inscription_quantity': obj.getCantidadInscripcion(),
+                        'work_title': obj.getTituloTrabajo(),
                     }
                 # standar date format for no required fields
                 date_sesionci = ''
@@ -511,38 +511,38 @@ class Queries(BrowserView):
                   ifood = 0.0
 
                 applications.append({
-                            'meta_type':obj.meta_type,
-                            'id':obj.getId(),
-                            'parentid':obj.aq_parent.getId(),
-                            'sede':obj.getSede(),
-                            'owner_name':obj.getNombreOwner(),
-                            'owner_id':obj.getIdOwner(),
-                            'institution':obj.getInstitucion(),
-                            'city':obj.getCiudadPais(),
-                            'country':obj.getPais(),
-                            'country_code':obj.getPaisCodigo(),
-                            'from':obj.getFechaDesde().strftime('%d/%m/%Y'),
-                            'to':obj.getFechaHasta().strftime('%d/%m/%Y'),
-                            'quantity_of_days':obj.getCantidadDeDias(),
-                            'research_areas':obj.getInvestigacionArea(),
-                            'objective':obj.getObjetoViaje(),
-                            'owner_comments':obj.getComentario_owner(),
-                            'transportation_means':obj.getTipo_pasaje(),
-                            'travel_expense_quantity':obj.getCantidadViaticos(),
-                            'transportation_quantity':obj.getCantidadPasaje(),
-                            'total_quantity':obj.getTotal(),
-                            'total_recommended_quantity':obj.getCantidadRecomendadaTotal(),
-                            'total_consejo_quantity':obj.getCantidadConsejoTotal(),
-                            'total_approved_quantity':obj.getCantidadAutorizadaTotal(),
-                            'creation_date':obj.creation_date.strftime('%d/%m/%Y'),
-                            'revision_ci_date':date_sesionci,
-                            'revision_ce_date':date_sesionce,
-                            'acta_ci':obj.getActaci(),
-                            'workflow_state':obj.getWFState(),
-                            'workflow_state_name':obj.getWFStateName(),
-                            'url':obj.absolute_url(),
-                            'special_fields':special_dictionary,
-                            'cargo_presupuesto':obj.getCargo_presupuesto(),
+                            'meta_type': obj.meta_type,
+                            'id': obj.getId(),
+                            'parentid': obj.aq_parent.getId(),
+                            'sede': obj.getSede(),
+                            'owner_name': obj.getNombreOwner(),
+                            'owner_id': obj.getIdOwner(),
+                            'institution': obj.getInstitucion(),
+                            'city': obj.getCiudadPais(),
+                            'country': obj.getPais(),
+                            'country_code': obj.getPaisCodigo(),
+                            'from': obj.getFechaDesde().strftime('%d/%m/%Y'),
+                            'to': obj.getFechaHasta().strftime('%d/%m/%Y'),
+                            'quantity_of_days': obj.getCantidadDeDias(),
+                            'research_areas': obj.getInvestigacionArea(),
+                            'objective': obj.getObjetoViaje(),
+                            'owner_comments': obj.getComentario_owner(),
+                            'transportation_means': obj.getTipo_pasaje(),
+                            'travel_expense_quantity': obj.getCantidadViaticos(),
+                            'transportation_quantity': obj.getCantidadPasaje(),
+                            'total_quantity': obj.getTotal(),
+                            'total_recommended_quantity': obj.getCantidadRecomendadaTotal(),
+                            'total_consejo_quantity': obj.getCantidadConsejoTotal(),
+                            'total_approved_quantity': obj.getCantidadAutorizadaTotal(),
+                            'creation_date': obj.creation_date.strftime('%d/%m/%Y'),
+                            'revision_ci_date': date_sesionci,
+                            'revision_ce_date': date_sesionce,
+                            'acta_ci': obj.getActaci(),
+                            'workflow_state': obj.getWFState(),
+                            'workflow_state_name': obj.getWFStateName(),
+                            'url': obj.absolute_url(),
+                            'special_fields': special_dictionary,
+                            'cargo_presupuesto': obj.getCargo_presupuesto(),
                             'institutional_budget': {
                                 'transport_expenses': itransport,
                                 'registration_expenses': iregistration,
@@ -646,10 +646,10 @@ class Queries(BrowserView):
 
         return applications
 
-    def searchWithCatalog(self,*args,**kwargs):
+    def searchWithCatalog(self, *args, **kwargs):
         folder_path = '/'.join(self.context.getPhysicalPath())
         catalog = self.context.portal_catalog
-        results = catalog(path={'query': folder_path, 'depth': 1},portal_type=('Solicitud','SolicitudVisitante','SolicitudBecario', 'SolicitudInstitucional'),**kwargs)
+        results = catalog(path={'query': folder_path, 'depth': 1}, portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'), **kwargs)
         applications=[]
         for brain in results:
             start=brain.start
@@ -658,65 +658,65 @@ class Queries(BrowserView):
             try:
                 if obj.meta_type == "Solicitud":
                     special_dictionary={
-                        'type':obj.getLicenciacomision(),
+                        'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
-                        'inscription_quantity':obj.getCantidadInscripcion(),
-                        'work_title':obj.getTituloTrabajo(),
+                        'inscription_quantity': obj.getCantidadInscripcion(),
+                        'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudBecario":
                     special_dictionary={
                         'readable_meta_type': "Solicitud de Becario",
-                        'researcher_name':obj.getNombreAsesor(),
-                        'researcher_id':obj.getIdAsesor(),
-                        'researcher_comments':obj.getComentario_asesor(),
-                        'inscription_quantity':obj.getCantidadInscripcion(),
-                        'work_title':obj.getTituloTrabajo(),
+                        'researcher_name': obj.getNombreAsesor(),
+                        'researcher_id': obj.getIdAsesor(),
+                        'researcher_comments': obj.getComentario_asesor(),
+                        'inscription_quantity': obj.getCantidadInscripcion(),
+                        'work_title': obj.getTituloTrabajo(),
                     }
                 elif obj.meta_type == "SolicitudVisitante":
                     special_dictionary={
                         'readable_meta_type': "Solicitud de Visitante ({0})".format(obj.getNombreInvitado()),
-                        'visitor_name':obj.getNombreInvitado(),
+                        'visitor_name': obj.getNombreInvitado(),
                     }
                 else:
                     special_dictionary={
-                        'type':obj.getLicenciacomision(),
+                        'type': obj.getLicenciacomision(),
                         'readable_meta_type': "Solicitud de " + obj.getLicenciacomision(),
-                        'inscription_quantity':obj.getCantidadInscripcion(),
-                        'work_title':obj.getTituloTrabajo(),
+                        'inscription_quantity': obj.getCantidadInscripcion(),
+                        'work_title': obj.getTituloTrabajo(),
                     }
 
                 applications.append({
-                            'meta_type':obj.meta_type,
-                            'id':obj.getId(),
-                            'sede':obj.getSede(),
-                            'owner_name':obj.getNombreOwner(),
-                            'owner_id':obj.getIdOwner(),
-                            'institution':obj.getInstitucion(),
-                            'city':obj.getCiudadPais(),
-                            'country':obj.getPais(),
-                            'country_code':obj.getPaisCodigo(),
-                            'from':obj.getFechaDesde().strftime('%d/%m/%Y'),
-                            'to':obj.getFechaHasta().strftime('%d/%m/%Y'),
-                            'quantity_of_days':obj.getCantidadDeDias(),
-                            'research_areas':obj.getInvestigacionArea(),
-                            'objective':obj.getObjetoViaje(),
-                            'owner_comments':obj.getComentario_owner(),
-                            'transportation_means':obj.getTipo_pasaje(),
-                            'travel_expense_quantity':obj.getCantidadViaticos(),
-                            'transportation_quantity':obj.getCantidadPasaje(),
-                            'total_quantity':obj.getTotal(),
-                            'total_recommended_quantity':obj.getCantidadRecomendadaTotal(),
-                            'total_consejo_quantity':obj.getCantidadConsejoTotal(),
-                            'total_approved_quantity':obj.getCantidadAutorizadaTotal(),
-                            'creation_date':obj.creation_date.strftime('%d/%m/%Y'),
-                            'revision_ci_date':obj.getFecha_sesionci(),
-                            'revision_ce_date':obj.getFecha_sesionce(),
-                            'acta_ci':obj.getActaci(),
-                            'workflow_state':obj.getWFState(),
-                            'workflow_state_name':obj.getWFStateName(),
-                            'url':obj.absolute_url(),
-                            'special_fields':special_dictionary,
-                            'cargo_presupuesto':obj.getCargo_presupuesto(),
+                            'meta_type': obj.meta_type,
+                            'id': obj.getId(),
+                            'sede': obj.getSede(),
+                            'owner_name': obj.getNombreOwner(),
+                            'owner_id': obj.getIdOwner(),
+                            'institution': obj.getInstitucion(),
+                            'city': obj.getCiudadPais(),
+                            'country': obj.getPais(),
+                            'country_code': obj.getPaisCodigo(),
+                            'from': obj.getFechaDesde().strftime('%d/%m/%Y'),
+                            'to': obj.getFechaHasta().strftime('%d/%m/%Y'),
+                            'quantity_of_days': obj.getCantidadDeDias(),
+                            'research_areas': obj.getInvestigacionArea(),
+                            'objective': obj.getObjetoViaje(),
+                            'owner_comments': obj.getComentario_owner(),
+                            'transportation_means': obj.getTipo_pasaje(),
+                            'travel_expense_quantity': obj.getCantidadViaticos(),
+                            'transportation_quantity': obj.getCantidadPasaje(),
+                            'total_quantity': obj.getTotal(),
+                            'total_recommended_quantity': obj.getCantidadRecomendadaTotal(),
+                            'total_consejo_quantity': obj.getCantidadConsejoTotal(),
+                            'total_approved_quantity': obj.getCantidadAutorizadaTotal(),
+                            'creation_date': obj.creation_date.strftime('%d/%m/%Y'),
+                            'revision_ci_date': obj.getFecha_sesionci(),
+                            'revision_ce_date': obj.getFecha_sesionce(),
+                            'acta_ci': obj.getActaci(),
+                            'workflow_state': obj.getWFState(),
+                            'workflow_state_name': obj.getWFStateName(),
+                            'url': obj.absolute_url(),
+                            'special_fields': special_dictionary,
+                            'cargo_presupuesto': obj.getCargo_presupuesto(),
                 })
 
             except Exception, err:
@@ -725,12 +725,12 @@ class Queries(BrowserView):
 
         return applications
 
-    def getPersonWrapper(self,userId):
+    def getPersonWrapper(self, userId):
         mt = self.context.portal_membership
         fsdtool = self.context.facultystaffdirectory_tool
         portal_catalog = self.context.portal_catalog
 
-        results = portal_catalog(path='/'.join(fsdtool.getDirectoryRoot().getPhysicalPath()), portal_type='FSDPerson', id=userId,depth=1)
+        results = portal_catalog(path='/'.join(fsdtool.getDirectoryRoot().getPhysicalPath()), portal_type='FSDPerson', id=userId, depth=1)
         encontrados=[brain.getObject() for brain in results]
 
         investigador = PersonWrapper(encontrados[0])
@@ -740,7 +740,7 @@ class Queries(BrowserView):
     def getCurrentFolderApplicationObjects(self):
         folder_path = '/'.join(self.context.getPhysicalPath())
         catalog = self.context.portal_catalog
-        results = catalog(path={'query': folder_path, 'depth': 1},portal_type=('Solicitud','SolicitudVisitante','SolicitudBecario', 'SolicitudInstitucional'))
+        results = catalog(path={'query': folder_path, 'depth': 1}, portal_type=('Solicitud', 'SolicitudVisitante', 'SolicitudBecario', 'SolicitudInstitucional'))
         applications=[]
 
         for brain in results:

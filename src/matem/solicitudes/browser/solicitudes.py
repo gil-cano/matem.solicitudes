@@ -17,17 +17,17 @@ class SolicitudView(BrowserView):
         self.context = context
         self.request = request
 
-    def esEditor(self,usuarioActual):
+    def esEditor(self, usuarioActual):
         if 'Owner' in self.context.get_local_roles_for_userid(self.context.getIdOwner()):
             return True
         return False
 
-    def esPropietario(self,usuarioActual):
+    def esPropietario(self, usuarioActual):
         if self.context.getIdOwner()==usuarioActual:
             return True
         return False
 
-    def esComisionado(self,usuarioActual):
+    def esComisionado(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Comisionado' in list(member.getRoles()):
             return True
@@ -35,7 +35,7 @@ class SolicitudView(BrowserView):
             return True
         return False
 
-    def esConsejero(self,usuarioActual):
+    def esConsejero(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Consejero' in list(member.getRoles()):
             return True
@@ -43,13 +43,13 @@ class SolicitudView(BrowserView):
             return True
         return False
 
-    def esResponsableConsejo(self,usuarioActual):
+    def esResponsableConsejo(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Responsable del Consejo' in list(member.getRoles()):
             return True
         return False
 
-    def esInvestigadorACargo(self,usuarioActual):
+    def esInvestigadorACargo(self, usuarioActual):
         member=self.context.portal_membership.getMemberById(usuarioActual)
         if 'Investigador' in list(member.getRoles()):
             return True
@@ -88,7 +88,7 @@ class SolicitudView(BrowserView):
     def getPresupuestoOwner(self):
         folder=self.context.aq_inner.aq_parent
         usuarioActual=self.context.getIdOwner()
-        queryObj = Queries(self.context,self.request)
+        queryObj = Queries(self.context, self.request)
         member=queryObj.getPersonWrapper(usuarioActual)
         user=[]
 
@@ -98,10 +98,10 @@ class SolicitudView(BrowserView):
         user.append([member.getLastName()+', '+member.getFirstName() + " " + member.getMiddleName(),
                      cantidadAsignada,
                      cantidadInicial-cantidadAsignada,
-                     folder.getDias_comision_utilizados_solicitantes()[0].get(usuarioActual,0.0),
-                     folder.getDias_licencia_utilizados_solicitantes()[0].get(usuarioActual,0.0),
-                     folder.getApoyoinst_asignado_solicitantes()[0].get(usuarioActual,0.0),
-                     cantidadInicialApoyos-folder.getApoyoinst_asignado_solicitantes()[0].get(usuarioActual,0.0)
+                     folder.getDias_comision_utilizados_solicitantes()[0].get(usuarioActual, 0.0),
+                     folder.getDias_licencia_utilizados_solicitantes()[0].get(usuarioActual, 0.0),
+                     folder.getApoyoinst_asignado_solicitantes()[0].get(usuarioActual, 0.0),
+                     cantidadInicialApoyos-folder.getApoyoinst_asignado_solicitantes()[0].get(usuarioActual, 0.0)
                      ])
 
         return user
@@ -117,7 +117,7 @@ class SolicitudView(BrowserView):
             return title
         return title
 
-    def getArea(self,codigoArea):
+    def getArea(self, codigoArea):
         areas=[]
         for area in codigoArea:
             try:
@@ -160,8 +160,8 @@ class SolicitudView(BrowserView):
     def getPresupuestoAprobadoSolicitud(self):
         return self.context.getCantidadAutorizadaTotal()
 
-    def getNombreAsesor(self,asesor):
-        queryObj = Queries(self.context,self.request)
+    def getNombreAsesor(self, asesor):
+        queryObj = Queries(self.context, self.request)
         member = queryObj.getPersonWrapper(asesor)
         return member.getLastName()+', '+member.getFirstName() + " " + member.getMiddleName()
 
@@ -170,7 +170,7 @@ class ExportView(BrowserView):
 
     def __call__(self):
         usuarioActual=self.context.getIdOwner()
-        queryObj = Queries(self.context,self.request)
+        queryObj = Queries(self.context, self.request)
         fsdperson=queryObj.getPersonWrapper(usuarioActual)
         mt = self.context.portal_membership
         member=mt.getMemberById(usuarioActual)
@@ -178,12 +178,12 @@ class ExportView(BrowserView):
 
         cantidadAsignada=fsdperson.getPresupuesto_asignado()
         cantidadInicial=fsdperson.getPresupuesto_inicial()
-        user.append([fsdperson.getLastName()+', '+fsdperson.getFirstName(),cantidadAsignada,cantidadInicial-cantidadAsignada])
+        user.append([fsdperson.getLastName()+', '+fsdperson.getFirstName(), cantidadAsignada, cantidadInicial-cantidadAsignada])
 
         # Hide the editable-object border
         self.request.set('disable_border', True)
-        self.request.response.setHeader('Content-Type','application/octet-stream')
-        self.request.response.setHeader('Content-Disposition','attachment; filename=solicitud.txt')
+        self.request.response.setHeader('Content-Type', 'application/octet-stream')
+        self.request.response.setHeader('Content-Disposition', 'attachment; filename=solicitud.txt')
 
         obj=self.context
 
@@ -413,7 +413,7 @@ class ExportView(BrowserView):
 
         return raw
 
-    def getArea(self,codigoArea):
+    def getArea(self, codigoArea):
         areas=[]
         for area in codigoArea:
             try:
@@ -422,7 +422,7 @@ class ExportView(BrowserView):
                 areas.append("")
         return areas
 
-    def getTipoTransporte(self,codigoTrans):
+    def getTipoTransporte(self, codigoTrans):
         temp="";
 
         for codigo in codigoTrans:
@@ -434,7 +434,7 @@ class ExportView(BrowserView):
 
         return temp
 
-    def getNombreAsesor(self,asesor):
+    def getNombreAsesor(self, asesor):
         return self.context.portal_membership.getMemberById(asesor).getProperty('fullname')
 
     def esComisionado(self):

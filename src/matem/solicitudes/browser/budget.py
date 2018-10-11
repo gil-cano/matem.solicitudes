@@ -25,13 +25,13 @@ class BudgetView(BrowserView):
     def __init__(self, context, request):
         self.context = context
         self.request = request
-        self.queryObj=Queries(self.context,self.request)
+        self.queryObj=Queries(self.context, self.request)
 
     def __call__(self):
         mt = self.context.portal_membership
         member= mt.getAuthenticatedMember()
 
-        self.queryObj=Queries(self.context,self.request)
+        self.queryObj=Queries(self.context, self.request)
 
         if 'Programador de Presupuesto' in list(member.getRoles()):
             return self.template()
@@ -58,7 +58,7 @@ class BudgetView(BrowserView):
         else:
             return False
 
-    def hasReqData(self,tipodato):
+    def hasReqData(self, tipodato):
         try:
             req = self.request
             tipo=req.get(tipodato, None)
@@ -70,7 +70,7 @@ class BudgetView(BrowserView):
         except:
             return False
 
-    def hasReqDataStr(self,tipodato):
+    def hasReqDataStr(self, tipodato):
         try:
             req = self.request
             tipo=req.get(tipodato, '')
@@ -81,7 +81,7 @@ class BudgetView(BrowserView):
         except:
             return False
 
-    def getPage(self,tipodato):
+    def getPage(self, tipodato):
         try:
             req = self.request
             tipo=req.get(tipodato, '')
@@ -93,7 +93,7 @@ class BudgetView(BrowserView):
         except:
             return 0
 
-    def getReqDataStr(self,tipodato):
+    def getReqDataStr(self, tipodato):
         try:
             req = self.request
             tipo=req.get(tipodato, '')
@@ -104,7 +104,7 @@ class BudgetView(BrowserView):
         except:
             return None
 
-    def getCantidadAsignadaTotal(self,usuarioActual):
+    def getCantidadAsignadaTotal(self, usuarioActual):
         mt = self.context.portal_membership
         catalog = self.context.portal_catalog
         results = catalog(portal_type='SolicitudFolder')
@@ -121,9 +121,9 @@ class BudgetView(BrowserView):
                     suma=suma+folder.getPresupuesto_asignado()
                     inicial=inicial+folder.getPresupuesto_inicial()
 
-            users.append(["Presupuesto maximo total (todos los periodos)",inicial])
-            users.append(["Presupuesto ejercido en todos los periodos",suma])
-            users.append(["Presupuesto restante",inicial-suma])
+            users.append(["Presupuesto maximo total (todos los periodos)", inicial])
+            users.append(["Presupuesto ejercido en todos los periodos", suma])
+            users.append(["Presupuesto restante", inicial-suma])
 
             return users
         except:
@@ -141,7 +141,7 @@ class BudgetView(BrowserView):
                 url=brain.getURL()
                 folder=brain.getObject()
                 if not folder.historico():
-                    folders.append([folder.getId(),str(folder.getFecha_desde()),str(folder.getFecha_hasta()),folder.getPresupuesto_inicial(),folder.getPresupuesto_asignado(),folder.absolute_url()])
+                    folders.append([folder.getId(), str(folder.getFecha_desde()), str(folder.getFecha_hasta()), folder.getPresupuesto_inicial(), folder.getPresupuesto_asignado(), folder.absolute_url()])
             return folders
         except:
             return []
@@ -180,7 +180,7 @@ class BudgetView(BrowserView):
 
         return True
 
-    def actualizar(self,userID,newBudget):
+    def actualizar(self, userID, newBudget):
         user = self.queryObj.getPersonWrapper(userID)
         nuevo=float(newBudget)
         user.setPresupuesto_inicial(nuevo)
@@ -192,13 +192,13 @@ class BudgetView(BrowserView):
         append=False
         rol=""
         fsd_tool = self.context.facultystaffdirectory_tool
-        users = {'A':[],'B':[],'C':[],'D':[],'E':[],'F':[],'G':[],'H':[],'I':[],'J':[],'K':[],'L':[],'M':[],'N':[],'O':[],'P':[],'Q':[],'R':[],'S':[],'T':[],'U':[],'V':[],'W':[],'X':[],'Y':[],'Z':[]}
+        users = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': [], 'J': [], 'K': [], 'L': [], 'M': [], 'N': [], 'O': [], 'P': [], 'Q': [], 'R': [], 'S': [], 'T': [], 'U': [], 'V': [], 'W': [], 'X': [], 'Y': [], 'Z': []}
 
         if 'Programador de Presupuesto' in list(member.getRoles()):
             for person in list(fsd_tool.getDirectoryRoot().getSortedPeople()):
                 fsdperson = PersonWrapper(person)
                 letter=unicode(fsdperson.getLastName())[0].upper();
-                letter=letter.replace('Á','A').replace('É','E').replace('Í','I').replace('Ó','O').replace('Ú','U').replace('Ñ','N').replace('Ö','O');
+                letter=letter.replace('Á', 'A').replace('É', 'E').replace('Í', 'I').replace('Ó', 'O').replace('Ú', 'U').replace('Ñ', 'N').replace('Ö', 'O');
                 user=mt.getMemberById(fsdperson.getId());
 
                 if 'Investigador' in list(user.getRoles()):
@@ -215,7 +215,7 @@ class BudgetView(BrowserView):
                     append=True
 
                 if append :
-                    users[letter].append([fsdperson.getId(),fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(),fsdperson.getPresupuesto_inicial()])
+                    users[letter].append([fsdperson.getId(), fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName(), fsdperson.getPresupuesto_inicial()])
 
                     append=False
         return users
@@ -224,14 +224,14 @@ class BudgetView(BrowserView):
         mt = self.context.portal_membership
         member=mt.getAuthenticatedMember()
         rol=""
-        users = {'A':[],'B':[],'C':[],'D':[],'E':[],'F':[],'G':[],'H':[],'I':[],'J':[],'K':[],'L':[],'M':[],'N':[],'O':[],'P':[],'Q':[],'R':[],'S':[],'T':[],'U':[],'V':[],'W':[],'X':[],'Y':[],'Z':[]}
+        users = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': [], 'J': [], 'K': [], 'L': [], 'M': [], 'N': [], 'O': [], 'P': [], 'Q': [], 'R': [], 'S': [], 'T': [], 'U': [], 'V': [], 'W': [], 'X': [], 'Y': [], 'Z': []}
 
         if 'Programador de Presupuesto' in list(member.getRoles()):
             llaves=self.solicitantes.keys()
             for person in llaves:
                 personinfo=self.solicitantes[person]
                 letter=unicode(personinfo[0])[0].upper();
-                letter=letter.replace('Á','A').replace('É','E').replace('Í','I').replace('Ó','O').replace('Ú','U').replace('Ñ','N').replace('Ö','O');
+                letter=letter.replace('Á', 'A').replace('É', 'E').replace('Í', 'I').replace('Ó', 'O').replace('Ú', 'U').replace('Ñ', 'N').replace('Ö', 'O');
                 users[letter].append([personinfo[0]+", "+personinfo[1]+" "+personinfo[2],
                           personinfo[3],
                           person])
@@ -242,12 +242,12 @@ class BudgetView(BrowserView):
         return users
 
     def getAlphabetLetters(self):
-        users = {'A':{},'B':{},'C':{},'D':{},'E':{},'F':{},'G':{},'H':{},'I':{},'J':{},'K':{},'L':{},'M':{},'N':{},'O':{},'P':{},'Q':{},'R':{},'S':{},'T':{},'U':{},'V':{},'W':{},'X':{},'Y':{},'Z':{}}
+        users = {'A': {}, 'B': {}, 'C': {}, 'D': {}, 'E': {}, 'F': {}, 'G': {}, 'H': {}, 'I': {}, 'J': {}, 'K': {}, 'L': {}, 'M': {}, 'N': {}, 'O': {}, 'P': {}, 'Q': {}, 'R': {}, 'S': {}, 'T': {}, 'U': {}, 'V': {}, 'W': {}, 'X': {}, 'Y': {}, 'Z': {}}
         result=users.keys()
         result.sort()
         return result
 
-    def getPageAlphabetic(self,tipodato):
+    def getPageAlphabetic(self, tipodato):
         try:
             req = self.request
             tipo=req.get(tipodato, '')
@@ -258,12 +258,12 @@ class BudgetView(BrowserView):
         except:
             return 'A'
 
-    def getPageAlphabeticNumber(self,tipodato):
+    def getPageAlphabeticNumber(self, tipodato):
         try:
             alphabet=self.getAlphabetLetters()
             req = self.request
             tipo=req.get(tipodato, '')
-            for x in range(0,len(alphabet)):
+            for x in range(0, len(alphabet)):
                 if alphabet[x] is str(tipo):
                     return x
                 else:
@@ -335,7 +335,7 @@ class BudgetView(BrowserView):
         except:
             return 0.0
 
-    def setBudget(self,tipodato):
+    def setBudget(self, tipodato):
         mt = self.context.portal_membership
         fsd_tool = self.context.facultystaffdirectory_tool
         member= mt.getAuthenticatedMember()
@@ -416,7 +416,7 @@ class BudgetView(BrowserView):
                 prefix=str(folder.getId())
                 for solicitud in folder.objectValues():
 
-                    if personas.get(solicitud.getIdOwner(),None) is None:
+                    if personas.get(solicitud.getIdOwner(), None) is None:
                         personas[solicitud.getIdOwner()]=[]
 
                     reference = prefix +";"+ str(solicitud.getId())

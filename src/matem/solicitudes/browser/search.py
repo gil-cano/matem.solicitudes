@@ -131,15 +131,15 @@ class SearchView(BrowserView):
         except:
             return applications
 
-        zeroDate=DateTime(1920,1,1)
+        zeroDate=DateTime(1920, 1, 1)
 
         try:
-            fechaDesde=DateTime(int(self.request.form['Desde_year']),int(self.request.form['Desde_month']),int(self.request.form['Desde_day']))
+            fechaDesde=DateTime(int(self.request.form['Desde_year']), int(self.request.form['Desde_month']), int(self.request.form['Desde_day']))
         except:
             fechaDesde=zeroDate
 
         try:
-            fechaHasta=DateTime(int(self.request.form['Hasta_year']),int(self.request.form['Hasta_month']),int(self.request.form['Hasta_day']))
+            fechaHasta=DateTime(int(self.request.form['Hasta_year']), int(self.request.form['Hasta_month']), int(self.request.form['Hasta_day']))
         except:
             fechaHasta=zeroDate
 
@@ -233,7 +233,7 @@ class SearchView(BrowserView):
             append=False
         return applications
 
-    def hasPendingReviews(self,usuarioActual):
+    def hasPendingReviews(self, usuarioActual):
         mt = self.context.portal_membership
         member=mt.getMemberById(usuarioActual)
 

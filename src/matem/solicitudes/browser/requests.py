@@ -10,7 +10,7 @@ class Requests(BrowserView):
         self.context = context
         self.request = request
 
-    def hasReqData(self,tipodato):
+    def hasReqData(self, tipodato):
         try:
             req = self.request
             tipo=req.get(tipodato, None)
@@ -21,7 +21,7 @@ class Requests(BrowserView):
         except:
             return False
 
-    def hasReqDataStr(self,tipodato):
+    def hasReqDataStr(self, tipodato):
         try:
             req = self.request
             tipo=req.get(tipodato, '')
