@@ -976,8 +976,8 @@ class SolicitudInstitucional(BaseContent):
     # Metodos mios para hacer algunas cosas
 
     def getCreationDate(self):
-        dt = self.CreationDate().split();
-        return dt[0];
+        dt = self.CreationDate().split()
+        return dt[0]
 
     def getWFState(self):
         workflowTool = getToolByName(self, "portal_workflow")
@@ -1484,9 +1484,9 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
             dias = 0
 
         if(self.getLicenciacomision()=="Licencia"):
-            esComision=False;
+            esComision=False
         else:
-            esComision=True;
+            esComision=True
         # suma de valores normales y luego los de apoyo
         # vocabulary=DisplayList((('Asignación anual', 'Asignación anual'),
         #                         ('Apoyo institucional', 'Apoyo institucional'),
@@ -1513,9 +1513,9 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
             dias = 0
 
         if(self.getLicenciacomision()=="Licencia"):
-            esComision=False;
+            esComision=False
         else:
-            esComision=True;
+            esComision=True
 
         pasaje=self.getCantidadAutorizadaPasaje()
         viaticos=self.getCantidadAutorizadaViaticos()
