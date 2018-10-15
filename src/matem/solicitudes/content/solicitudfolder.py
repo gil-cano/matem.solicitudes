@@ -247,7 +247,7 @@ class SolicitudFolder(ATFolder):
             return False
 
     def restante(self):
-        return (self.getPresupuesto_inicial()-self.getPresupuesto_asignado())
+        return (self.getPresupuesto_inicial() - self.getPresupuesto_asignado())
 
     def sumarACantidadAutorizada(self, esComision, cantidad, dias, idCreador, cargo):
         try:
@@ -284,7 +284,7 @@ class SolicitudFolder(ATFolder):
         except:
             return False
 
-    def restarACantidadAutorizada(self,esComision,cantidad,dias,idCreador):
+    def restarACantidadAutorizada(self, esComision, cantidad, dias, idCreador):
         try:
             cantidad = float(cantidad)
             dias = int(dias)

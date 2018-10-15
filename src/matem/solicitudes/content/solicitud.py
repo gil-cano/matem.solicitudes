@@ -1957,8 +1957,8 @@ class Solicitud(BaseContent):
             f = self.setCantidadPasaje()
             return self.getCantidad(f)
         except Exception:
-                a = sys.exc_info()
-                raise a[0], a[1], a[2]
+            a = sys.exc_info()
+            raise a[0], a[1], a[2]
 
     def setCantidadViaticos(self):
         f = self.getField('cantidad_viaticos')
@@ -2078,8 +2078,8 @@ class Solicitud(BaseContent):
             else:
                 return float(f)
         except Exception:
-                a = sys.exc_info()
-                raise a[0], a[1], a[2]
+            a = sys.exc_info()
+            raise a[0], a[1], a[2]
 
     def getTotal(self):
         pasaje = self.getCantidadPasaje()

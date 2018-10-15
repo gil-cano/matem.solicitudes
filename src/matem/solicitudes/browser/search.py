@@ -79,7 +79,7 @@ class SearchView(BrowserView):
             'getActaci',
             'getCargo_presupuesto',
             'getWFStateName',
-            ]
+        ]
         items = []
         for b in brains:
             o = b.getObject()
@@ -105,151 +105,153 @@ class SearchView(BrowserView):
         form = self.request.form
         req = self.request
 
-        applications=[]
+        applications = []
 
-        queryObj=self.queryObj
+        queryObj = self.queryObj
 
         try:
-            searchStr=[ self.request.form['Creator'], #0
-                        self.request.form['Pais'],    #1
-                        self.request.form['Ciudad'].lower(),#2
-                        self.request.form['Institucion'].lower(),#3
-                        self.request.form['Desde'],#4
-                        self.request.form['Hasta'],#5
-                        self.request.form['Objeto'].lower(),#6
-                        self.request.form['Area'],#7
-                        self.request.form['TTrabajo'].lower(),#8
-                        self.request.form['Becario'],#9
-                        self.request.form['Asesor'],#10
-                        self.request.form['Cantidad'],#11
-                        self.request.form['CantidadLarger'],#12
-                        self.request.form['CantidadLower']]#13
+            searchStr = [
+                self.request.form['Creator'],
+                self.request.form['Pais'],
+                self.request.form['Ciudad'].lower(),
+                self.request.form['Institucion'].lower(),
+                self.request.form['Desde'],
+                self.request.form['Hasta'],
+                self.request.form['Objeto'].lower(),
+                self.request.form['Area'],
+                self.request.form['TTrabajo'].lower(),
+                self.request.form['Becario'],
+                self.request.form['Asesor'],
+                self.request.form['Cantidad'],
+                self.request.form['CantidadLarger'],
+                self.request.form['CantidadLower']
+            ]
 
-            unTipo=self.request.form['Type']
-            unEstado=self.request.form['State']
+            unTipo = self.request.form['Type']
+            unEstado = self.request.form['State']
 
         except:
             return applications
 
-        zeroDate=DateTime(1920,1,1)
+        zeroDate = DateTime(1920, 1, 1)
 
         try:
-            fechaDesde=DateTime(int(self.request.form['Desde_year']),int(self.request.form['Desde_month']),int(self.request.form['Desde_day']))
+            fechaDesde = DateTime(int(self.request.form['Desde_year']), int(self.request.form['Desde_month']), int(self.request.form['Desde_day']))
         except:
-            fechaDesde=zeroDate
+            fechaDesde = zeroDate
 
         try:
-            fechaHasta=DateTime(int(self.request.form['Hasta_year']),int(self.request.form['Hasta_month']),int(self.request.form['Hasta_day']))
+            fechaHasta = DateTime(int(self.request.form['Hasta_year']), int(self.request.form['Hasta_month']), int(self.request.form['Hasta_day']))
         except:
-            fechaHasta=zeroDate
+            fechaHasta = zeroDate
 
         for obj in queryObj.getAllApplications():
-            append=False
+            append = False
 
             try:
 
-                if obj['owner_id'].find(searchStr[0])!=-1 and searchStr[0] is not "":
-                    append=True
-                elif searchStr[0]=='todos':
-                    append=True
-                elif obj['country_code'][0].find(searchStr[1])!=-1 and searchStr[1] is not "":
-                    append=True
-                elif obj['country'].lower().find(searchStr[2])!=-1 and searchStr[2] is not "":
-                    append=True
-                elif obj['institution'].lower().find(searchStr[3])!=-1 and searchStr[3] is not "":
-                    append=True
+                if obj['owner_id'].find(searchStr[0]) != -1 and searchStr[0] is not "":
+                    append = True
+                elif searchStr[0] == 'todos':
+                    append = True
+                elif obj['country_code'][0].find(searchStr[1]) != -1 and searchStr[1] is not "":
+                    append = True
+                elif obj['country'].lower().find(searchStr[2]) != -1 and searchStr[2] is not "":
+                    append = True
+                elif obj['institution'].lower().find(searchStr[3]) != -1 and searchStr[3] is not "":
+                    append = True
                 elif obj['from'] >= fechaDesde and fechaDesde != zeroDate:
                     if fechaHasta == zeroDate :
-                        append=True
+                        append = True
                     else:
                         if obj['to'] <= fechaHasta:
-                            append=True
+                            append = True
                 elif obj['to'] <= fechaHasta and fechaHasta != zeroDate:
                     if fechaDesde == zeroDate :
-                        append=True
+                        append = True
                     else:
                         if obj['from'] >= fechaDesde:
-                            append=True
-                elif obj['objective'].lower().find(searchStr[6])!=-1 and searchStr[6] is not "":
-                    append=True
-                elif obj['special_fields']['work_title'].lower().find(searchStr[8])!=-1 and searchStr[8] is not "":
-                    append=True
+                            append = True
+                elif obj['objective'].lower().find(searchStr[6]) != -1 and searchStr[6] is not "":
+                    append = True
+                elif obj['special_fields']['work_title'].lower().find(searchStr[8]) != -1 and searchStr[8] is not "":
+                    append = True
             except:
-                append=False
+                append = False
 
             for area in obj['research_areas']:
-                if area.find(searchStr[7])!=-1 and searchStr[7] is not "":
-                    append=True
+                if area.find(searchStr[7]) != -1 and searchStr[7] is not "":
+                    append = True
 
             if obj['meta_type'] == 'SolicitudBecario':
 
-                if obj['owner_id'].find(searchStr[9])!=-1 and searchStr[9] is not "":
-                    append=True
-                if obj['special_fields']['researcher_id'].find(searchStr[10])!=-1 and searchStr[10] is not "":
-                    append=True
+                if obj['owner_id'].find(searchStr[9]) != -1 and searchStr[9] is not "":
+                    append = True
+                if obj['special_fields']['researcher_id'].find(searchStr[10]) != -1 and searchStr[10] is not "":
+                    append = True
 
             try:
-                equal=float(searchStr[11])
-                larger=float(searchStr[12])
-                lower=float(searchStr[13])
+                equal = float(searchStr[11])
+                larger = float(searchStr[12])
+                lower = float(searchStr[13])
             except:
-                equal=larger=lower=0.0
+                equal = larger = lower = 0.0
 
-            if obj['workflow_state']=="aprobada":
-                referencia=obj['total_approved_quantity']
+            if obj['workflow_state'] == "aprobada":
+                referencia = obj['total_approved_quantity']
             else:
-                referencia=obj['total_quantity']
+                referencia = obj['total_quantity']
 
             if equal == referencia and equal > 0:
-                append=True
+                append = True
             elif referencia > larger and larger > 0:
-                append=True
+                append = True
             elif referencia < lower and lower > 0:
-                append=True
+                append = True
 
             if append and unTipo is not None:
                 if unTipo == "becario":
                     if not obj['meta_type'] == "SolicitudBecario":
-                        append=False
+                        append = False
                 elif unTipo == "visitante":
                     if not obj['meta_type'] == "SolicitudVisitante":
-                        append=False
+                        append = False
                 elif unTipo == "licencia":
                     if not obj['meta_type'] == "Solicitud":
-                        append=False
+                        append = False
 
             if append and unEstado is not None:
-                if unEstado == "aprobada" and not obj['workflow_state']=="aprobada":
-                        append=False
-                elif unEstado == "rechazada" and not obj['workflow_state']=="rechazada":
-                        append=False
-                elif unEstado == "revision" and obj['workflow_state']=="aprobada":
-                        append=False
-                elif unEstado == "revision" and obj['workflow_state']=="rechazada":
-                        append=False
+                if unEstado == "aprobada" and not obj['workflow_state'] == "aprobada":
+                        append = False
+                elif unEstado == "rechazada" and not obj['workflow_state'] == "rechazada":
+                        append = False
+                elif unEstado == "revision" and obj['workflow_state'] == "aprobada":
+                        append = False
+                elif unEstado == "revision" and obj['workflow_state'] == "rechazada":
+                        append = False
 
             if append:
                 applications.append(obj)
-            append=False
+            append = False
         return applications
 
-    def hasPendingReviews(self,usuarioActual):
+    def hasPendingReviews(self, usuarioActual):
         mt = self.context.portal_membership
-        member=mt.getMemberById(usuarioActual)
+        member = mt.getMemberById(usuarioActual)
 
         for obj in self.context.objectValues():
-            if obj.getWFState()=="borrador":
+            if obj.getWFState() == "borrador":
                 if usuarioActual == obj.getIdOwner():
                     return True
-            elif obj.getWFState()=="preeliminar":
+            elif obj.getWFState() == "preeliminar":
                 if usuarioActual == obj.getIdAsesor():
                     return True
-            elif obj.getWFState()=="revisioncomision":
+            elif obj.getWFState() == "revisioncomision":
                 if 'Comisionado' in list(member.getRoles()):
                     return True
                 elif 'Responsable de la Comision' in list(member.getRoles()):
                     return True
-            elif obj.getWFState()=="revisionconsejo":
+            elif obj.getWFState() == "revisionconsejo":
                 if 'Consejero' in list(member.getRoles()):
                     return True
                 elif 'Responsable del Consejo' in list(member.getRoles()):
@@ -257,52 +259,60 @@ class SearchView(BrowserView):
         return False
 
     def getCreatorsBecario(self):
-        folder=self.context
-        solicitantes=folder.getSolicitantes()[0]
+        folder = self.context
+        solicitantes = folder.getSolicitantes()[0]
         users = []
 
         for solicitante in solicitantes.keys():
             if 'Becario' in solicitantes[solicitante][3]:
-                users.append([solicitantes[solicitante][0]+", "+solicitantes[solicitante][1]+" "+solicitantes[solicitante][2],
-                          solicitante])
+                users.append([
+                    solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
+                    solicitante
+                ])
         users.sort()
 
         return users
 
     def getCreatorsInvestigador(self):
-        folder=self.context
-        solicitantes=folder.getSolicitantes()[0]
+        folder = self.context
+        solicitantes = folder.getSolicitantes()[0]
         users = []
 
         for solicitante in solicitantes.keys():
             if 'Investigador' in solicitantes[solicitante][3]:
-                users.append([solicitantes[solicitante][0]+", "+solicitantes[solicitante][1]+" "+solicitantes[solicitante][2],
-                          solicitante])
+                users.append([
+                    solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
+                    solicitante
+                ])
         users.sort()
 
         return users
 
     def getCreatorsPostdoc(self):
-        folder=self.context
-        solicitantes=folder.getSolicitantes()[0]
+        folder = self.context
+        solicitantes = folder.getSolicitantes()[0]
         users = []
 
         for solicitante in solicitantes.keys():
             if 'Postdoc' in solicitantes[solicitante][3]:
-                users.append([solicitantes[solicitante][0]+", "+solicitantes[solicitante][1]+" "+solicitantes[solicitante][2],
-                          solicitante])
+                users.append([
+                    solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
+                    solicitante
+                ])
         users.sort()
         return users
 
     def getCreatorsTecnicoAcademico(self):
-        folder=self.context
-        solicitantes=folder.getSolicitantes()[0]
+        folder = self.context
+        solicitantes = folder.getSolicitantes()[0]
         users = []
 
         for solicitante in solicitantes.keys():
             if 'Tecnico Academico' in solicitantes[solicitante][3]:
-                users.append([solicitantes[solicitante][0]+", "+solicitantes[solicitante][1]+" "+solicitantes[solicitante][2],
-                          solicitante])
+                users.append([
+                    solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
+                    solicitante
+                ])
         users.sort()
         return users
 
@@ -320,8 +330,8 @@ class SearchView(BrowserView):
         return [user[1] for user in aux_sorted]
 
     def getCreatorsBecarioInvestigador(self):
-        folder=self.context
-        solicitantes=folder.getSolicitantes()[0]
+        folder = self.context
+        solicitantes = folder.getSolicitantes()[0]
         users = []
         insertar = False
 
@@ -332,8 +342,10 @@ class SearchView(BrowserView):
                 insertar = True
 
             if insertar:
-                users.append([solicitantes[solicitante][0]+", "+solicitantes[solicitante][1]+" "+solicitantes[solicitante][2],
-                          solicitante])
+                users.append([
+                    solicitantes[solicitante][0] + ", " + solicitantes[solicitante][1] + " " + solicitantes[solicitante][2],
+                    solicitante
+                ])
                 insertar = False
 
         users.sort()

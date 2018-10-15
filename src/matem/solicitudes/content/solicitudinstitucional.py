@@ -47,49 +47,54 @@ from matem.solicitudes.extender import PersonWrapper
 
 SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
 
-    ComputedField(name='title',
+    ComputedField(
+        name='title',
         required=1,
         searchable=1,
-        expression="((here.getOwner() and 'Solicitud (%s) de %s (%s, %s, %s)' % (here.getLicenciacomision(),here.getNombreOwner(), here.getCiudadPais(), here.getInstitucion(), here.getFechaDesde().strftime('%d/%m/%Y') )) or 'Nueva solicitud')",
+        expression="((here.getOwner() and 'Solicitud (%s) de %s (%s, %s, %s)' % (here.translateTypeTitle(),here.getNombreOwner(), here.getCiudadPais(), here.getInstitucion(), here.getFechaDesde().strftime('%d/%m/%Y') )) or 'Nueva solicitud')",
         accessor='Title',
-        widget=ComputedWidget(visible={'view':'invisible','edit':'invisible'}),
+        widget=ComputedWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
     ),
 
-        ComputedField(name='text',
-                           required=0,
-                           searchable=1,
-                           expression="""(here.getOwner() and '%s %s %s %s %s' %
-                                        (here.esSolcitudBorrador(), here.esSolcitudPendiente(),
-                                        here.setFechaSolicitud(), here.esAcuseRecibo(),
-                                        here.setFechaSesionCI() ))""",
-                           widget=ComputedWidget(visible={'view':'invisible','edit':'invisible'}),
-                           ),
+    ComputedField(
+        name='text',
+        required=0,
+        searchable=1,
+        expression="""(here.getOwner() and '%s %s %s %s %s' %
+                    (here.esSolcitudBorrador(), here.esSolcitudPendiente(),
+                    here.setFechaSolicitud(), here.esAcuseRecibo(),
+                    here.setFechaSesionCI() ))""",
+        widget=ComputedWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
+    ),
 
-        ComputedField(name='description',
-                           required=0,
-                           searchable=1,
-                           expression="(here.getOwner() and ' %s, %s ' % (here.getWFTitle(), here.getWFTString() ))",
-                           widget=StringWidget(visible={'view':'invisible','edit':'invisible'}),
-                           ),
+    ComputedField(
+        name='description',
+        required=0,
+        searchable=1,
+        expression="(here.getOwner() and ' %s, %s ' % (here.getWFTitle(), here.getWFTString() ))",
+        widget=StringWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
+    ),
 
     StringField(name='id',
         required=0,
         searchable=1,
-        widget=StringWidget(visible={'view':'invisible','edit':'invisible'}),
+        widget=StringWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
         ),
 
-    StringField(name='sede',
+    StringField(
+        name='sede',
         required=0,
         searchable=1,
         vocabulary=SEDE,
-        widget=SelectionWidget(label='Sede',
-             label_msgid='label_sede',
-             i18n_domain='plone',
-             description='Especifica de donde es el investigador que pide la licencia',
-             description_msgid='help_sede',
-             visible={'view':'invisible','edit':'invisible'},
-            ),
+        widget=SelectionWidget(
+            label='Sede',
+            label_msgid='label_sede',
+            i18n_domain='plone',
+            description='Especifica de donde es el investigador que pide la licencia',
+            description_msgid='help_sede',
+            visible={'view': 'invisible', 'edit': 'invisible'},
         ),
+    ),
 
     StringField(
         name='solicitante',
@@ -106,74 +111,64 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
         write_permission="Solicitud: Cambiar Solicitante",
     ),
 
-        StringField('nombre_owner',
-            searchable=0,
-            required=0,
-            widget=StringWidget(visible={'view':'invisible','edit':'invisible'}),
-        ),
+    StringField(
+        name='nombre_owner',
+        searchable=0,
+        required=0,
+        widget=StringWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
+    ),
 
-        StringField('mensaje_licencias',
-            widget=LabelWidget(
-                label=u'Recuerde que el número máximo de días de Licencia es 45. Si los rebasa consulte con la Secretaría Académica.',
-                label_msgid='label_mensaje_licencias',
-                i18n_domain='plone',
-                visible = {'view': 'invisible', 'edit': 'visible' })
-        ),
+    StringField(
+        name='mensaje_licencias',
+        widget=LabelWidget(
+            label=u'Recuerde que el número máximo de días de Licencia es 45. Si los rebasa consulte con la Secretaría Académica.',
+            label_msgid='label_mensaje_licencias',
+            i18n_domain='plone',
+            visible = {'view': 'invisible', 'edit': 'visible' }
+        )
+    ),
 
-        StringField('event_title',
-            widget=StringWidget(
-                label=u'Evento',
-                size=90,
-            ),
+    StringField(
+        name='event_title',
+        widget=StringWidget(
+            label=u'Evento',
+            size=90,
         ),
+    ),
 
-        StringField('licenciacomision',
-            searchable=1,
-            required=1,
-            default='Licencia',
-            vocabulary=DisplayList((
-                                    ('Licencia','Licencia'), ('Comision','Comision')
-                                    )),
-            widget=SelectionWidget(label='Tipo de solicitud',
-                                 label_msgid='label_licenciacomision',
-                                 i18n_domain='plone',
-                                 description='Especifica si esta es una solicitud de comisión o de licencia',
-                                 description_msgid='help_licenciacomision',
-                                ),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+    StringField(
+        name='licenciacomision',
+        searchable=1,
+        required=1,
+        default='Licencia',
+        vocabulary=DisplayList((
+            ('Licencia', _(u'Licencia')), ('Comision', _(u'Comision'))
+        )),
+        widget=SelectionWidget(
+            label='Tipo de solicitud',
+            label_msgid='label_licenciacomision',
+            i18n_domain='plone',
+            description='Especifica si esta es una solicitud de comisión o de licencia',
+            description_msgid='help_licenciacomision',
         ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-#         LinesField('pais',
-#             searchable=1,
-#             required=1,
-#             default=('MX'),
-#             widget=CountryWidget(label='Country',
-#                                 label_msgid='label_pais',
-#                                 provideNullValue=1,   # this is default
-#                                 omitCountries=None,   # this is default, can be a
-#                                                       # list of country codes which
-#                                                       # are not displayed
-#                                 description='Country to visit',
-#                                 description_msgid='help_pais'),
-# #            read_permission="Solicitud: Modificar Solicitud",
-#             write_permission="Solicitud: Modificar Solicitud",
-#         ),
-
-        LinesField(
-            name='pais',
-            required=True,
-            default='MX',
-            widget=SelectionWidget(
-                label='Country',
-                label_msgid='label_pais',
-                description='Country to visit',
-                description_msgid='help_pais',
-                i18n_domain='matem.solicitudes',
-            ),
-            vocabulary="getCountriesVocabulary",
-            write_permission="Solicitud: Modificar Solicitud",
+    LinesField(
+        name='pais',
+        required=True,
+        default='MX',
+        widget=SelectionWidget(
+            label='Country',
+            label_msgid='label_pais',
+            description='Country to visit',
+            description_msgid='help_pais',
+            i18n_domain='matem.solicitudes',
         ),
+        vocabulary="getCountriesVocabulary",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
     StringField(
         name='ciudad_pais',
@@ -230,313 +225,333 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
         write_permission="Solicitud: Modificar Solicitud",
     ),
 
-        StringField('objeto_viaje',
-            searchable=1,
-            required=1,
-            accessor='ObjetoViaje',
-            widget=TextAreaWidget(label='Objective',
-                                  label_msgid='label_objeto_viaje',
-                                  i18n_domain='matem.solicitudes',
-                                  description='Enter the expected objective of the visit',
-                                  description_msgid='help_objeto_viaje'),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+    StringField(
+        name='objeto_viaje',
+        searchable=1,
+        required=1,
+        accessor='ObjetoViaje',
+        widget=TextAreaWidget(
+            label='Objective',
+            label_msgid='label_objeto_viaje',
+            i18n_domain='matem.solicitudes',
+            description='Enter the expected objective of the visit',
+            description_msgid='help_objeto_viaje'
         ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        LinesField('investigacionarea',
-#            mode='rw',
-#            read_permission=VIEW_PUBLIC_PERMISSION,
-#            write_permission=EDIT_PROPERTIES_PERMISSION,
-            required=1,
-            widget=PicklistWidget(
-                              label='Research areas',
-                              label_msgid='label_investigacionarea',
-                              description="Doubts about the classification and how to find an area, go to the official website of the <a href=\"http://www.ams.org/msc\">ams</a>",
-                              description_msgid='help_investigacionarea',
-                              i18n_domain='matem.solicitudes',),
-            multiValued=1,
-            vocabulary=AREAS_INVESTIGACION,
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+    LinesField(
+        name='investigacionarea',
+        # mode='rw',
+        # read_permission=VIEW_PUBLIC_PERMISSION,
+        # write_permission=EDIT_PROPERTIES_PERMISSION,
+        required=1,
+        widget=PicklistWidget(
+            label='Research areas',
+            label_msgid='label_investigacionarea',
+            description="Doubts about the classification and how to find an area, go to the official website of the <a href=\"http://www.ams.org/msc\">ams</a>",
+            description_msgid='help_investigacionarea',
+            i18n_domain='matem.solicitudes',
         ),
+        multiValued=1,
+        vocabulary=AREAS_INVESTIGACION,
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        StringField('trabajo',
-            searchable=1,
-            required=0,
-            default='No',
-            vocabulary=DisplayList((
-                                    ('No', 'No'), ('Si', 'Si')
-                                    )),
-            widget=MasterSelectWidget(label='Paper',
-                                 label_msgid='label_trabajo',
-                                 i18n_domain='matem.solicitudes',
-                                 description='Specify if a paper will be presented',
-                                 description_msgid='help_trabajo',
-                                 slave_fields = ({'name': 'titulo_trabajo',
-                                                'action': 'hide',
-                                                'hide_values': ('No',),
-                                                },),
-                                 visible = {'edit' : 'visible', 'view' : 'invisible'},
-                                ),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+    StringField(
+        name='trabajo',
+        searchable=1,
+        required=0,
+        default='No',
+        vocabulary=DisplayList((('No', 'No'), ('Si', 'Si'))),
+        widget=MasterSelectWidget(
+            label='Paper',
+            label_msgid='label_trabajo',
+            i18n_domain='matem.solicitudes',
+            description='Specify if a paper will be presented',
+            description_msgid='help_trabajo',
+            slave_fields = (
+                {
+                    'name': 'titulo_trabajo',
+                    'action': 'hide',
+                    'hide_values': ('No',),
+                },
+            ),
+            visible = {'edit' : 'visible', 'view' : 'invisible'},
         ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        StringField('titulo_trabajo',
-            searchable=1,
-            required=0,
-#            accessor='TituloTrabajo',
-            default='',
-#            relationship="trabajo",
-            widget=TextAreaWidget(label='Title of the work to be presented',
-                                  label_msgid='label_titulo_trabajo',
-                                  i18n_domain='matem.solicitudes',
-                                  description='Enter the title of the paper to present',
-                                  description_msgid='help_titulo_trabajo'),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
-
-        # StringField('warning',
-        #     widget=LabelWidget(
-        #         label=u'Especifique las cantidades que desea se carguen a su asignación anual (cantidades que usará de otras fuentes como proyectos CONACYT/PAPIIT no se deben especificar aquí)',
-        #         visible = {'view': 'invisible', 'edit': 'visible' })
-        # ),
-
-        StringField('cargo_presupuesto',
-            required=1,
-            vocabulary=DisplayList((('Asignación anual', 'Asignación anual'),
-                                    ('Apoyo institucional', 'Apoyo institucional'),
-                                    ('Asignación anual/Apoyo institucional', 'Asignación anual/Apoyo institucional'))),
-            default='Asignación anual/Apoyo institucional',
-            widget=SelectionWidget(label='Con cargo a',
-                                label_msgid='label_cargo_a',
-                                i18n_domain='matem.solicitudes',
-                                description="Seleccione el presupuesto de donde se descontara el total de está solicitud",
-                                description_msgid='help_cargo_a',
-                                visible = {'view': 'invisible', 'edit': 'invisible'}),
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
-
-        StringField('pasaje',
-            searchable=1,
-            required=0,
-            default='',
-            vocabulary=DisplayList((
-                                    ('No', 'No'), ('si', 'Si')
-                                    )),
-            widget=MasterSelectWidget(label='Transportation expenses',
-                                 label_msgid='label_pasaje',
-                                 i18n_domain='matem.solicitudes',
-                                 description='Specify if the airfare or other travel expenses are requested',
-                                 description_msgid='help_pasaje',
-                                 slave_fields = ({'name': 'tipo_pasaje',
-                                                'action': 'hide',
-                                                'hide_values': ('No',),
-                                                },
-                                                {'name': 'cantidad_pasaje',
-                                                'action': 'hide',
-                                                'hide_values': ('No',),
-                                                },
-                                                {'name': 'cantidad_pasaje_apoyo',
-                                                'action': 'hide',
-                                                'hide_values': ('No',),
-                                                },)
-                                ),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
-
-        LinesField('tipo_pasaje',
-#            mode='rw',
-#            read_permission=VIEW_PUBLIC_PERMISSION,
-#            write_permission=EDIT_PROPERTIES_PERMISSION,
-            required=0,
-            default=(),
-            widget=MultiSelectionWidget(
-                              label='Transportation means',
+    StringField(
+        name='titulo_trabajo',
+        searchable=1,
+        required=0,
+        # accessor='TituloTrabajo',
+        default='',
+        # relationship="trabajo",
+        widget=TextAreaWidget(label='Title of the work to be presented',
+                              label_msgid='label_titulo_trabajo',
                               i18n_domain='matem.solicitudes',
-                              label_msgid='label_tipo_pasaje',
-                              description="Specify the type of travel mean to be used'",
-                              description_msgid='help_tipo_pasaje',
-                              format='checkbox'),
-            multiValued=1,
-            vocabulary=DisplayList((
-                                    ('auto', 'Car'), ('autobus', 'Bus'), ('avion', 'Airplane')
-                                    )),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+                              description='Enter the title of the paper to present',
+                              description_msgid='help_titulo_trabajo'),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+    StringField(
+        name='cargo_presupuesto',
+        required=1,
+        vocabulary=DisplayList((('Asignación anual', 'Asignación anual'),
+                                ('Apoyo institucional', 'Apoyo institucional'),
+                                ('Asignación anual/Apoyo institucional', 'Asignación anual/Apoyo institucional'))),
+        default='Asignación anual/Apoyo institucional',
+        widget=SelectionWidget(label='Con cargo a',
+                            label_msgid='label_cargo_a',
+                            i18n_domain='matem.solicitudes',
+                            description="Seleccione el presupuesto de donde se descontara el total de está solicitud",
+                            description_msgid='help_cargo_a',
+                            visible = {'view': 'invisible', 'edit': 'invisible'}),
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+    StringField(
+        name='pasaje',
+        searchable=1,
+        required=0,
+        default='',
+        vocabulary=DisplayList((('No', 'No'), ('si', 'Si'))),
+        widget=MasterSelectWidget(
+            label='Transportation expenses',
+            label_msgid='label_pasaje',
+            i18n_domain='matem.solicitudes',
+            description='Specify if the airfare or other travel expenses are requested',
+            description_msgid='help_pasaje',
+            slave_fields = ({'name': 'tipo_pasaje',
+                        'action': 'hide',
+                        'hide_values': ('No',),
+                        },
+                        {'name': 'cantidad_pasaje',
+                        'action': 'hide',
+                        'hide_values': ('No',),
+                        },
+                        {'name': 'cantidad_pasaje_apoyo',
+                        'action': 'hide',
+                        'hide_values': ('No',),
+                        },)
         ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        FloatField('cantidad_pasaje_apoyo',
-            searchable=1,
-            required=1,
-            default='0',
-            widget=StringWidget(label='Cantidad para pasajes tomado del presupuesto de apoyo institucional',
-                                i18n_domain='matem.solicitudes',
-                                description="Amount requested for travel expenses in mexican pesos",
-                                description_msgid='help_cantidad_pasaje',
-                                tarifas=False,
-                                size=12),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+    LinesField(
+        name='tipo_pasaje',
+        # mode='rw',
+        # read_permission=VIEW_PUBLIC_PERMISSION,
+        # write_permission=EDIT_PROPERTIES_PERMISSION,
+        required=0,
+        default=(),
+        widget=MultiSelectionWidget(
+                          label='Transportation means',
+                          i18n_domain='matem.solicitudes',
+                          label_msgid='label_tipo_pasaje',
+                          description="Specify the type of travel mean to be used'",
+                          description_msgid='help_tipo_pasaje',
+                          format='checkbox'),
+        multiValued=1,
+        vocabulary=DisplayList((
+            ('auto', 'Car'), ('autobus', 'Bus'), ('avion', 'Airplane')
+        )),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+    FloatField(
+        name='cantidad_pasaje_apoyo',
+        searchable=1,
+        required=1,
+        default='0',
+        widget=StringWidget(label='Cantidad para pasajes tomado del presupuesto de apoyo institucional',
+                            i18n_domain='matem.solicitudes',
+                            description="Amount requested for travel expenses in mexican pesos",
+                            description_msgid='help_cantidad_pasaje',
+                            tarifas=False,
+                            size=12),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+    FloatField(
+        name='cantidad_pasaje',
+        searchable=1,
+        required=1,
+        default='0',
+        relationship="c_pasaje",
+        widget=StringWidget(label='Cantidad para pasajes tomado de su presupuesto anual',
+                            i18n_domain='matem.solicitudes',
+                            description="Amount requested for travel expenses in mexican pesos",
+                            description_msgid='help_cantidad_pasaje',
+                            tarifas=False,
+                            size=12),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+    StringField(
+        name='viaticos',
+        searchable=1,
+        required=0,
+        default='No',
+        vocabulary=DisplayList((
+            ('No', 'No'), ('Si', 'Si')
+        )),
+        widget=MasterSelectWidget(
+            label='Travel allowances',
+            label_msgid='label_viaticos',
+            i18n_domain='matem.solicitudes',
+            description='Specify if daily expenses are requested. 900 daily pesos (Mexico) and 1200 daily pesos (other countries), it is necessary to deliver receipts for the total',
+            description_msgid='help_viaticos',
+            slave_fields = ({'name': 'cantidad_viaticos',
+                        'action': 'hide',
+                        'hide_values': ('No',),
+                        },
+                        {'name': 'cantidad_viaticos_apoyo',
+                        'action': 'hide',
+                        'hide_values': ('No',),
+                        },)
         ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        FloatField('cantidad_pasaje',
-            searchable=1,
-            required=1,
-            default='0',
-            relationship="c_pasaje",
-            widget=StringWidget(label='Cantidad para pasajes tomado de su presupuesto anual',
-                                i18n_domain='matem.solicitudes',
-                                description="Amount requested for travel expenses in mexican pesos",
-                                description_msgid='help_cantidad_pasaje',
-                                tarifas=False,
-                                size=12),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+    FloatField(
+        name='cantidad_viaticos_apoyo',
+        searchable=1,
+        required=1,
+        default='0',
+        relationship="viaticos",
+        widget=StringWidget(
+            label='Cantidad para viáticos, tomado del presupuesto de apoyo Institucional',
+            i18n_domain='matem.solicitudes',
+            description="Amount requested for travel allowances, in mexican pesos",
+            description_msgid='help_cantidad_viaticos',
+            tarifas=False,
+            size=12),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+    FloatField(
+        name='cantidad_viaticos',
+        searchable=1,
+        required=1,
+        default='0',
+        relationship="viaticos",
+        widget=StringWidget(
+            label='Cantidad para viáticos, tomado de su presupuesto anual',
+            i18n_domain='matem.solicitudes',
+            description="Amount requested for travel allowances, in mexican pesos",
+            description_msgid='help_cantidad_viaticos',
+            tarifas=False,
+            size=12),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+    StringField(
+        name='inscripcion',
+        searchable=1,
+        required=0,
+        default='No',
+        vocabulary=DisplayList((
+            ('No', 'No'), ('Si', 'Si')
+        )),
+        widget=MasterSelectWidget(
+            label='Registration',
+            label_msgid='label_inscripcion',
+            i18n_domain='matem.solicitudes',
+            description='Specify if the registration cost is requested',
+            description_msgid='help_inscripcion',
+            slave_fields = ({'name': 'cantidad_inscripcion',
+                        'action': 'hide',
+                        'hide_values': ('No',),
+                        },
+                        {'name': 'cantidad_inscripcion_apoyo',
+                        'action': 'hide',
+                        'hide_values': ('No',),
+                        },)
         ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
+    FloatField(
+        name='cantidad_inscripcion_apoyo',
+        searchable=1,
+        required=1,
+        default='0',
+        relationship="inscripcion",
+        widget=StringWidget(
+            label='Cantidad para inscripción del presupuesto de apoyo institucional',
+            i18n_domain='matem.solicitudes',
+            description="Amount requested for registration in mexican pesos",
+            description_msgid='help_cantidad_inscripcion',
+            tarifas=False,
+            size=12),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        StringField('viaticos',
-            searchable=1,
-            required=0,
-            default='No',
-            vocabulary=DisplayList((
-                                    ('No', 'No'), ('Si', 'Si')
-                                    )),
-            widget=MasterSelectWidget(label='Travel allowances',
-                                 label_msgid='label_viaticos',
-                                 i18n_domain='matem.solicitudes',
-                                 description='Specify if daily expenses are requested. 900 daily pesos (Mexico) and 1200 daily pesos (other countries), it is necessary to deliver receipts for the total',
-                                 description_msgid='help_viaticos',
-                                 slave_fields = ({'name': 'cantidad_viaticos',
-                                                'action': 'hide',
-                                                'hide_values': ('No',),
-                                                },
-                                                {'name': 'cantidad_viaticos_apoyo',
-                                                'action': 'hide',
-                                                'hide_values': ('No',),
-                                                },)
-                                ),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
+    FloatField(
+        name='cantidad_inscripcion',
+        searchable=1,
+        required=1,
+        default='0',
+        relationship="inscripcion",
+        widget=StringWidget(
+            label='Cantidad para inscripción de su presupuesto anual',
+            i18n_domain='matem.solicitudes',
+            description="Amount requested for registration in mexican pesos",
+            description_msgid='help_cantidad_inscripcion',
+            tarifas=False,
+            size=12),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+    StringField(
+        name='fecha_solicitud',
+        searchable=1,
+        required=0,
+        default='',
+        widget=StringWidget(
+            label='Date of application',
+            label_msgid='label_fecha_solicitud',
+            i18n_domain='matem.solicitudes',
+            description='Date on which the request is sent',
+            description_msgid='help_fecha_solicitud',
+            visible={'view': 'invisible', 'edit': 'hidden'}
         ),
+        # read_permission="Solicitud: Modificar Solicitud",
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
-        FloatField('cantidad_viaticos_apoyo',
-            searchable=1,
-            required=1,
-            default='0',
-            relationship="viaticos",
-            widget=StringWidget(label='Cantidad para viáticos, tomado del presupuesto de apoyo Institucional',
-                                i18n_domain='matem.solicitudes',
-                                description="Amount requested for travel allowances, in mexican pesos",
-                                description_msgid='help_cantidad_viaticos',
-                                tarifas=False,
-                                size=12),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
-
-        FloatField('cantidad_viaticos',
-            searchable=1,
-            required=1,
-            default='0',
-            relationship="viaticos",
-            widget=StringWidget(label='Cantidad para viáticos, tomado de su presupuesto anual',
-                                i18n_domain='matem.solicitudes',
-                                description="Amount requested for travel allowances, in mexican pesos",
-                                description_msgid='help_cantidad_viaticos',
-                                tarifas=False,
-                                size=12),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
-
-        StringField('inscripcion',
-            searchable=1,
-            required=0,
-            default='No',
-            vocabulary=DisplayList((
-                                    ('No', 'No'), ('Si', 'Si')
-                                    )),
-            widget=MasterSelectWidget(label='Registration',
-                                 label_msgid='label_inscripcion',
-                                 i18n_domain='matem.solicitudes',
-                                 description='Specify if the registration cost is requested',
-                                 description_msgid='help_inscripcion',
-                                 slave_fields = ({'name': 'cantidad_inscripcion',
-                                                'action': 'hide',
-                                                'hide_values': ('No',),
-                                                },
-                                                {'name': 'cantidad_inscripcion_apoyo',
-                                                'action': 'hide',
-                                                'hide_values': ('No',),
-                                                },)
-                                 ),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
-
-        FloatField('cantidad_inscripcion_apoyo',
-            searchable=1,
-            required=1,
-            default='0',
-            relationship="inscripcion",
-            widget=StringWidget(label='Cantidad para inscripción del presupuesto de apoyo institucional',
-                                i18n_domain='matem.solicitudes',
-                                description="Amount requested for registration in mexican pesos",
-                                description_msgid='help_cantidad_inscripcion',
-                                tarifas=False,
-                                size=12),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
-
-
-        FloatField('cantidad_inscripcion',
-            searchable=1,
-            required=1,
-            default='0',
-            relationship="inscripcion",
-            widget=StringWidget(label='Cantidad para inscripción de su presupuesto anual',
-                                i18n_domain='matem.solicitudes',
-                                description="Amount requested for registration in mexican pesos",
-                                description_msgid='help_cantidad_inscripcion',
-                                tarifas=False,
-                                size=12),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
-
-        StringField('fecha_solicitud',
-            searchable=1,
-            required=0,
-            default='',
-            widget=StringWidget(label='Date of application',
-                                  label_msgid='label_fecha_solicitud',
-                                  i18n_domain='matem.solicitudes',
-                                  description='Date on which the request is sent',
-                                  description_msgid='help_fecha_solicitud',
-                                  visible={'view':'invisible','edit':'hidden'}
-                                  ),
-#            read_permission="Solicitud: Modificar Solicitud",
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
-
-        MultiFileField('displayAttachments',
-            primary=True,
-            languageIndependent=True,
-            storage = atapi.AnnotationStorage(migrate=True),
-            widget = MultiFileWidget(
-                     label= "Attachments",
-                     label_msgid='label_adjuntos',
-                     description = "Please attach invitation letter or any other related documents",
-                     description_msgid='help_adjuntos',
-                     show_content_type = False,
-                     i18n_domain='matem.solicitudes',),
-            write_permission="Solicitud: Modificar Solicitud",
-        ),
+    MultiFileField(
+        name='displayAttachments',
+        primary=True,
+        languageIndependent=True,
+        storage = atapi.AnnotationStorage(migrate=True),
+        widget = MultiFileWidget(
+                 label= "Attachments",
+                 label_msgid='label_adjuntos',
+                 description = "Please attach invitation letter or any other related documents",
+                 description_msgid='help_adjuntos',
+                 show_content_type = False,
+                 i18n_domain='matem.solicitudes',),
+        write_permission="Solicitud: Modificar Solicitud",
+    ),
 
         StringField('comentario_owner',
             searchable=1,
@@ -568,7 +583,7 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
             write_permission="Solicitud: Comision Revisa Solicitud",
         ),
 
-#Campos CE
+        # Campos CE
         StringField('comentario_ce',
             searchable=1,
             required=0,
@@ -675,7 +690,7 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
         write_permission="Solicitud: Comision Revisa Solicitud",
     ),
 
-    #Campos CI
+    # Campos CI
     StringField(
         name='comentario_ci',
         required=0,
@@ -884,21 +899,21 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
             label = "Review data, if it is correct, you should send it to revision, by selecting 'state: solicitud no enviada' then 'enviar solicitud' inside the transitions menu in the top right corner",
             label_msgid='label_estado_borrador',
             default=False,
-            widget=BooleanWidget(visible={'view':'invisible','edit':'hidden'}),
+            widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
         ),
 
         BooleanField('estadoPendiente',
             label = "Review data, if it is correct, you should send it to revision, by selecting 'state: pendiente' then 'reenviar solicitud' inside the transitions menu in the top right corner",
             label_msgid='label_estado_pendiente',
             default=False,
-            widget=BooleanWidget(visible={'view':'invisible','edit':'hidden'}),
+            widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
         ),
 
         BooleanField('acuseRecibo',
             label = "Your request has been received successfully, you can print this page as acknowledgement of receipt",
             label_msgid='label_acuse_recibo',
             default=False,
-            widget=BooleanWidget(visible={'view':'invisible','edit':'hidden'}),
+            widget=BooleanWidget(visible={'view': 'invisible', 'edit': 'hidden'}),
         ),
 ))
 
@@ -927,6 +942,11 @@ class SolicitudInstitucional(BaseContent):
             remainig_days = LICENCEDAYS - balance['licence_days']
             if self.getCantidadDeDias() > remainig_days:
                 self.setLicenciacomision('Comision')
+
+    def translateTypeTitle(self):
+        if self.getLicenciacomision() == 'Comision':
+            return 'Comisión'
+        return self.getLicenciacomision()
 
     def canSetDefaultPage(self):
         return False
@@ -960,7 +980,7 @@ class SolicitudInstitucional(BaseContent):
         if start > end:
             errors['fecha_hasta'] = u'La fecha de término debe ser posterior a la de inicio'
 
-## desde aqui peg\'o eduardo ...
+# desde aqui peg\'o eduardo ...
     def addTranslation(self, language, **kwargs):
         # call orginal addTranslation
         BaseContent.addTranslation(self, language, **kwargs)
@@ -976,8 +996,8 @@ class SolicitudInstitucional(BaseContent):
     # Metodos mios para hacer algunas cosas
 
     def getCreationDate(self):
-        dt = self.CreationDate().split();
-        return dt[0];
+        dt = self.CreationDate().split()
+        return dt[0]
 
     def getWFState(self):
         workflowTool = getToolByName(self, "portal_workflow")
@@ -995,27 +1015,27 @@ class SolicitudInstitucional(BaseContent):
         transitions = workflowTool.getTransitionsFor(self)
         return transitions
 
-    def toState(self,State):
+    def toState(self, State):
         workflowTool = getToolByName(self, "portal_workflow")
         mt = getToolByName(self, "portal_membership")
         member = mt.getAuthenticatedMember()
-        nivel=0
+        nivel = 0
 
         if not State.lower().find("com") == -1:
-            nivel=1
+            nivel = 1
         elif not State.lower().find("con") == -1 or not State.lower().find("cou") == -1:
-            nivel=2
+            nivel = 2
         elif not State.lower().find("ap") == -1:
-            nivel=3
+            nivel = 3
 
         if "Importador de Solicitudes" in list(member.getRoles()):
             if nivel > 0:
-                workflowTool.doActionFor(self, 'enviar',comment='')
+                workflowTool.doActionFor(self, 'enviar', comment='')
 #                getToolByName(self,'plone_utils').changeOwnershipOf(self,idPropietario)
             if nivel > 1:
-                workflowTool.doActionFor(self, 'enviaraconsejo',comment='')
+                workflowTool.doActionFor(self, 'enviaraconsejo', comment='')
             if nivel > 2:
-                workflowTool.doActionFor(self, 'aprobar',comment='')
+                workflowTool.doActionFor(self, 'aprobar', comment='')
 
 #        getToolByName(self,'plone_utils').changeOwnershipOf(self,idPropietario)
 
@@ -1070,7 +1090,7 @@ class SolicitudInstitucional(BaseContent):
         elif (wf_state == 'Retirada'):
             wf_title = 'Solicitud retirada'
         else:
-             wf_title = ''
+            wf_title = ''
         return wf_title
 
     def esSolcitudBecario(self):
@@ -1120,7 +1140,7 @@ class SolicitudInstitucional(BaseContent):
 
     def getNombreActual(self):
         fsdperson = self.getPersonWrapper(self.getIdActual())
-        return fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName()
+        return fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName()
 
     def getIdCreator(self):
         return self.getOwner().getId()
@@ -1132,9 +1152,9 @@ class SolicitudInstitucional(BaseContent):
         creator = self.getIdOwner()
         try:
             fsdperson = self.getPersonWrapper(creator)
-            return fsdperson.getLastName()+", "+fsdperson.getFirstName()+" "+fsdperson.getMiddleName()
+            return fsdperson.getLastName() + ", " + fsdperson.getFirstName() + " " + fsdperson.getMiddleName()
         except:
-            print "Error SolicitudInstitucional no encontrada persona "+ creator + ", "+ self.getId()
+            print "Error SolicitudInstitucional no encontrada persona " + creator + ", " + self.getId()
             return creator
 
     def getFechaSolicitud(self):
@@ -1147,12 +1167,12 @@ class SolicitudInstitucional(BaseContent):
         return self.getField('pais').get(self)
 
     def getPais(self):
-        pais=self.getField('pais').get(self)
+        pais = self.getField('pais').get(self)
         try:
-            pais=COUNTRIES[pais[0]]
+            pais = COUNTRIES[pais[0]]
             return pais
         except Exception, e:
-            pais=""
+            pais = ""
             return pais
 
     def getInvestigacionArea(self):
@@ -1165,11 +1185,11 @@ class SolicitudInstitucional(BaseContent):
         return self.getField('institucion').get(self)
 
     def getFechaDesde(self):
-        #return self.getField('fecha_desde').get(self)
+        # return self.getField('fecha_desde').get(self)
         return DateTime(self.getField('fecha_desde').get(self))
 
     def getFechaHasta(self):
-        #return self.getField('fecha_hasta').get(self)
+        # return self.getField('fecha_hasta').get(self)
         return DateTime(self.getField('fecha_hasta').get(self))
 
     def getObjetoViaje(self):
@@ -1180,8 +1200,8 @@ class SolicitudInstitucional(BaseContent):
 
     def getSolicitanteDefault(self):
         mt = getToolByName(self, 'portal_membership')
-        member=mt.getAuthenticatedMember()
-        tupla=(member.getId(),)
+        member = mt.getAuthenticatedMember()
+        tupla = (member.getId(),)
 
         return tupla
 
@@ -1328,8 +1348,8 @@ class SolicitudInstitucional(BaseContent):
             else:
                 return float(f)
         except:
-                a = sys.exc_info()
-                raise a[0], a[1], a[2]
+            a = sys.exc_info()
+            raise a[0], a[1], a[2]
 
     def getTotal(self):
         pasaje = self.getCantidad_pasaje()
@@ -1341,30 +1361,30 @@ class SolicitudInstitucional(BaseContent):
         return (pasaje + viaticos + inscripcion + pasaje_a + viaticos_a + inscripcion_a)
 
     def getCantidadAutorizadaTotal(self):
-        pasaje=self.getCantidadAutorizadaPasaje()
-        viaticos=self.getCantidadAutorizadaViaticos()
-        inscripcion=self.getCantidadAutorizadaInscripcion()
+        pasaje = self.getCantidadAutorizadaPasaje()
+        viaticos = self.getCantidadAutorizadaViaticos()
+        inscripcion = self.getCantidadAutorizadaInscripcion()
         pasaje_a = self.getCantidad_autorizada_pasaje_apoyo()
         viaticos_a = self.getCantidad_autorizada_viaticos_apoyo()
         inscripcion_a = self.getCantidad_autorizada_inscripcion_apoyo()
         return (pasaje + viaticos + inscripcion + pasaje_a + viaticos_a + inscripcion_a)
 
     def getCantidadConsejoTotal(self):
-        pasaje=self.getCantidad_consejo_pasaje()
-        viaticos=self.getCantidad_consejo_viaticos()
-        inscripcion=self.getCantidad_consejo_inscripcion()
-        pasaje_a=self.getCantidad_consejo_pasaje_apoyo()
-        viaticos_a=self.getCantidad_consejo_viaticos_apoyo()
-        inscripcion_a=self.getCantidad_consejo_inscripcion_apoyo()
+        pasaje = self.getCantidad_consejo_pasaje()
+        viaticos = self.getCantidad_consejo_viaticos()
+        inscripcion = self.getCantidad_consejo_inscripcion()
+        pasaje_a = self.getCantidad_consejo_pasaje_apoyo()
+        viaticos_a = self.getCantidad_consejo_viaticos_apoyo()
+        inscripcion_a = self.getCantidad_consejo_inscripcion_apoyo()
         return (pasaje + viaticos + inscripcion + pasaje_a + viaticos_a + inscripcion_a)
 
     def getCantidadRecomendadaTotal(self):
-        pasaje=self.getCantidad_recomendada_pasaje()
-        viaticos=self.getCantidad_recomendada_viaticos()
-        inscripcion=self.getCantidad_recomendada_inscripcion()
-        pasaje_a=self.getCantidad_recomendada_pasaje_apoyo()
-        viaticos_a=self.getCantidad_recomendada_viaticos_apoyo()
-        inscripcion_a=self.getCantidad_recomendada_inscripcion_apoyo()
+        pasaje = self.getCantidad_recomendada_pasaje()
+        viaticos = self.getCantidad_recomendada_viaticos()
+        inscripcion = self.getCantidad_recomendada_inscripcion()
+        pasaje_a = self.getCantidad_recomendada_pasaje_apoyo()
+        viaticos_a = self.getCantidad_recomendada_viaticos_apoyo()
+        inscripcion_a = self.getCantidad_recomendada_inscripcion_apoyo()
         return (pasaje + viaticos + inscripcion + pasaje_a + viaticos_a + inscripcion_a)
 
     def pasarValorComisionado(self):
@@ -1400,12 +1420,12 @@ class SolicitudInstitucional(BaseContent):
         return
 
     def pasarValorAutorizado(self):
-        pasaje=self.getCantidad_consejo_pasaje()
-        viaticos=self.getCantidad_consejo_viaticos()
-        inscripcion=self.getCantidad_consejo_inscripcion()
-        pasaje_a=self.getCantidad_consejo_pasaje_apoyo()
-        viaticos_a=self.getCantidad_consejo_viaticos_apoyo()
-        inscripcion_a=self.getCantidad_consejo_inscripcion_apoyo()
+        pasaje = self.getCantidad_consejo_pasaje()
+        viaticos = self.getCantidad_consejo_viaticos()
+        inscripcion = self.getCantidad_consejo_inscripcion()
+        pasaje_a = self.getCantidad_consejo_pasaje_apoyo()
+        viaticos_a = self.getCantidad_consejo_viaticos_apoyo()
+        inscripcion_a = self.getCantidad_consejo_inscripcion_apoyo()
 
         self.setCantidad_autorizada_pasaje(pasaje)
         self.setCantidad_autorizada_viaticos(viaticos)
@@ -1416,7 +1436,7 @@ class SolicitudInstitucional(BaseContent):
         return
 
     def sendMail(self):
-        mt = getToolByName(self,'portal_membership')
+        mt = getToolByName(self, 'portal_membership')
         member = mt.getMemberById(self.getIdOwner())
         mail_to = member.getProperty('email', None)
         mail_from = 'solicitudes@matem.unam.mx'
@@ -1459,10 +1479,10 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
                      self.aq_parent.getPresupuesto_asignado_solicitantes()[0].get(self.getIdOwner(), 0.0),
                      self.aq_parent.getDias_licencia_utilizados_solicitantes()[0].get(self.getIdOwner(), 0),
                      self.aq_parent.getDias_comision_utilizados_solicitantes()[0].get(self.getIdOwner(), 0))
-        getToolByName(self,'MailHost').send(msg, mail_to, mail_from, subject)
+        getToolByName(self, 'MailHost').send(msg, mail_to, mail_from, subject)
         return
 
-    #Esta definida en solicitud
+    # Esta definida en solicitud
     def getCantidadDeDias(self):
         # t1=str(self.getFecha_desde()).split("/")
         # t2=str(self.getFecha_hasta()).split("/")
@@ -1471,28 +1491,28 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
         # return int((d2-d1).days)+1
         t1 = str(DateTime(self.getFecha_desde())).split("/")
         t2 = str(DateTime(self.getFecha_hasta())).split("/")
-        d1=datetime(int(t1[0]),int(t1[1]),int(t1[2].split(" ")[0]))
-        d2=datetime(int(t2[0]),int(t2[1]),int(t2[2].split(" ")[0]))
-        return int((d2-d1).days)+1
+        d1 = datetime(int(t1[0]), int(t1[1]), int(t1[2].split(" ")[0]))
+        d2 = datetime(int(t2[0]), int(t2[1]), int(t2[2].split(" ")[0]))
+        return int((d2 - d1).days) + 1
 
     def actualizarInvestigador(self):
         folder = self.aq_parent
 
-        solicitante=self.getIdOwner()
-        dias=self.getCantidadDeDias()
+        solicitante = self.getIdOwner()
+        dias = self.getCantidadDeDias()
         if (dias < 0):
             dias = 0
 
-        if(self.getLicenciacomision()=="Licencia"):
-            esComision=False;
+        if(self.getLicenciacomision() == "Licencia"):
+            esComision = False
         else:
-            esComision=True;
+            esComision = True
         # suma de valores normales y luego los de apoyo
         # vocabulary=DisplayList((('Asignación anual', 'Asignación anual'),
         #                         ('Apoyo institucional', 'Apoyo institucional'),
-        pasaje=self.getCantidadAutorizadaPasaje()
-        viaticos=self.getCantidadAutorizadaViaticos()
-        inscripcion=self.getCantidadAutorizadaInscripcion()
+        pasaje = self.getCantidadAutorizadaPasaje()
+        viaticos = self.getCantidadAutorizadaViaticos()
+        inscripcion = self.getCantidadAutorizadaInscripcion()
         anual = pasaje + viaticos + inscripcion
         # los dias se  suman en la siguiente llamada
         folder.sumarACantidadAutorizada(esComision, anual, 0, solicitante, 'Asignación anual')
@@ -1507,21 +1527,21 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
     def desactualizarInvestigador(self):
         folder = self.aq_parent
 
-        solicitante=self.getIdOwner()
-        dias=self.getCantidadDeDias()
+        solicitante = self.getIdOwner()
+        dias = self.getCantidadDeDias()
         if (dias < 0):
             dias = 0
 
-        if(self.getLicenciacomision()=="Licencia"):
-            esComision=False;
+        if(self.getLicenciacomision() == "Licencia"):
+            esComision = False
         else:
-            esComision=True;
+            esComision = True
 
-        pasaje=self.getCantidadAutorizadaPasaje()
-        viaticos=self.getCantidadAutorizadaViaticos()
-        inscripcion=self.getCantidadAutorizadaInscripcion()
+        pasaje = self.getCantidadAutorizadaPasaje()
+        viaticos = self.getCantidadAutorizadaViaticos()
+        inscripcion = self.getCantidadAutorizadaInscripcion()
         anual = pasaje + viaticos + inscripcion
-        folder.restarACantidadAutorizada(esComision,anual,dias,solicitante)
+        folder.restarACantidadAutorizada(esComision, anual, dias, solicitante)
         return
 
     def aprobada(self):
@@ -1562,7 +1582,7 @@ Nota: Si en su viaje dispuso de una cantidad menor de recursos, deberá acudir a
         return fsdperson
 
     def getCountriesVocabulary(self):
-        #This function is defined in config.py
+        # This function is defined in config.py
         return getCountriesVocabulary(self)
 
     def getAddExtraTopInformation(self):

@@ -16,30 +16,30 @@ import sys
 class AuxiliaresView(BrowserView):
     """Clase para importar solicitudes auxiliares"""
 
-    queryObj=None
+    queryObj = None
 
-    def __init__(self,context,request):
-        self.context=context
-        self.request=request
-        self.queryObj=Queries(context,request)
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+        self.queryObj = Queries(context, request)
 
     def __call__(self):
-        self.queryObj=Queries(context,request)
+        self.queryObj = Queries(context, request)
         form = self.request.form
         req = self.request
         container = self.context
-        realowner = req.get('Creator',None)
-        tipo=req.get('tiposolicitud', None)
+        realowner = req.get('Creator', None)
+        tipo = req.get('tiposolicitud', None)
         auxiliar_but = form.get('form.button.Create', None) is not None
-        usuarioAutenticado=self.context.portal_membership.getAuthenticatedMember()
+        usuarioAutenticado = self.context.portal_membership.getAuthenticatedMember()
 
         if (tipo is not None) and (realowner is not None):
-            usuarioDestino=self.context.portal_membership.getMemberById(realowner)
+            usuarioDestino = self.context.portal_membership.getMemberById(realowner)
         else:
-            usuarioDestino=usuarioAutenticado
+            usuarioDestino = usuarioAutenticado
 
         if "Solicitante Auxiliar" in list(usuarioAutenticado.getRoles()):
-            if tipo=="becario":
+            if tipo == "becario":
                 if "Becario" in list(usuarioDestino.getRoles()):
                     return ViewPageTemplateFile('solicitudfolder.pt')()
             else:

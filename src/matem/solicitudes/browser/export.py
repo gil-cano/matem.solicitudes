@@ -56,7 +56,7 @@ class ExportView(BrowserView):
         encabezado.append("attachments")
         encabezado.append("additionalComments")
 
-        ################COMMISSION FIELDS####################
+        # --- COMMISSION FIELDS ---
 
         encabezado.append("commissionSessionDate")
         encabezado.append("commissionComments")
@@ -65,7 +65,7 @@ class ExportView(BrowserView):
         encabezado.append("recommendedRegistrationCosts")
         encabezado.append("recommendApproval")
 
-        ################COUNCIL FIELDS####################
+        # --- COUNCIL FIELDS ---
 
         encabezado.append("councilSessionDate")
         encabezado.append("councilRecord")
@@ -75,7 +75,7 @@ class ExportView(BrowserView):
         encabezado.append("authorizedRegistrationCosts")
         encabezado.append("willBeApproved")
 
-        ################COUNCIL CHANGING FIELDS####################
+        # --- COUNCIL CHANGING FIELDS ---
 
         encabezado.append("lastCouncilComments")
         encabezado.append("previouslyAuthorizedTransportationCosts")
@@ -90,8 +90,7 @@ class ExportView(BrowserView):
 
         csvWriter.writerow(encabezado)
         for obj in queryObj.getCurrentFolderApplicationObjects():
-            #lcform
-
+            # lcform
             renglon = []
 
             portal_type = "matem.solicitudes.lcform"
@@ -99,10 +98,8 @@ class ExportView(BrowserView):
             isPresentingPaper = False
             papersTitle = ""
             hasTransportationCosts = False
-            transportationCosts = 0.0
             transportationMeans = []
             hasTravelExpenses = False
-            travelExpenses = 0.0
             hasRegistrationCosts = False
             registrationCosts = 0.0
             recommendedRegistrationCosts = 0.0
@@ -113,12 +110,12 @@ class ExportView(BrowserView):
             approved = False
             review_state = "draft"
 
-            #stform
+            # stform
             draftReviewersId = ""
             degree = "none"
             draftReviewerAdditionalComments = ""
 
-            #visitorform
+            # visitorform
             visitorFullname = ""
 
             try:
@@ -163,7 +160,6 @@ class ExportView(BrowserView):
             try:
                 if obj.getPasaje().lower() in "si":
                     hasTransportationCosts = True
-                    transportationCosts = obj.getCantidad_pasaje()
 
                 for transport in obj.getTipo_pasaje():
                     if transport in "auto":
@@ -189,7 +185,6 @@ class ExportView(BrowserView):
             try:
                 if obj.getViaticos().lower() in "si":
                     hasTravelExpenses = True
-                    travelExpenses = obj.getCantidad_viaticos()
             except:
                 pass
 
@@ -242,7 +237,7 @@ class ExportView(BrowserView):
                 renglon.append(str(attachments).replace("[", "").replace("]", "").rstrip(","))
                 renglon.append(str(obj.getComentario_owner()).replace("\"", "'").replace("\r", " ").replace("\n", ""))
 
-                ################COMMISSION FIELDS####################
+                # -- COMMISSION FIELDS ---
 
                 renglon.append(str(obj.getFecha_sesionce()).replace("/", "-"))
                 renglon.append(str(obj.getComentario_ce()).replace("\"", "'").replace("\r", " ").replace("\n", ""))
@@ -251,7 +246,7 @@ class ExportView(BrowserView):
                 renglon.append(str(recommendedRegistrationCosts))
                 renglon.append(str(recommendApproval))
 
-                ################COUNCIL FIELDS####################
+                # --- COUNCIL FIELDS ---
 
                 renglon.append(str(obj.getFecha_sesionci()).replace("/", "-"))
                 renglon.append(str(obj.getActaci()))
@@ -261,7 +256,7 @@ class ExportView(BrowserView):
                 renglon.append(str(authorizedRegistrationCosts))
                 renglon.append(str(approved))
 
-                ################COUNCIL CHANGING FIELDS####################
+                # --- COUNCIL CHANGING FIELDS ---
 
                 renglon.append(str(obj.getComentario_ci()).replace("\"", "'").replace("\r", " ").replace("\n", ""))
                 renglon.append(str(obj.getCantidad_consejo_pasaje()))

@@ -11,7 +11,7 @@ class MyRenderer(Renderer):
         context = self.context
         portal_properties = getToolByName(context, 'portal_properties')
         navtree_properties = getattr(portal_properties, 'navtree_properties')
-        nueva=list(navtree_properties.metaTypesNotToList)
+        nueva = list(navtree_properties.metaTypesNotToList)
         nueva.append("Solicitud")
         nueva.append("SolicitudVisitante")
         nueva.append("SolicitudBecario")

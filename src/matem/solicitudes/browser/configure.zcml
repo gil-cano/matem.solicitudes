@@ -132,14 +132,6 @@
 
     <browser:page
         for="matem.solicitudes.interfaces.ISolicitudFolder"
-        name="import"
-        layer="matem.solicitudes.interfaces.ISolicitudSpecific"
-        class=".import.ImportView"
-        permission="zope2.View"
-        />
-
-    <browser:page
-        for="matem.solicitudes.interfaces.ISolicitudFolder"
         name="auxiliares"
         layer="matem.solicitudes.interfaces.ISolicitudSpecific"
         class=".auxiliares.AuxiliaresView"
