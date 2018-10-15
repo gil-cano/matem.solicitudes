@@ -202,6 +202,9 @@ events = {
             'fecha_hasta': '2018-04-21 00:00 ',
             'objeto_viaje': 'Asistir al 2o Encuentro de Mujeres Matemáticas Mexicanas'},
     },
+    2019: {
+
+    }
 }
 
 
