@@ -51,7 +51,7 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
         name='title',
         required=1,
         searchable=1,
-        expression="((here.getOwner() and 'Solicitud (%s) de %s (%s, %s, %s)' % (here.getLicenciacomision(),here.getNombreOwner(), here.getCiudadPais(), here.getInstitucion(), here.getFechaDesde().strftime('%d/%m/%Y') )) or 'Nueva solicitud')",
+        expression="((here.getOwner() and 'Solicitud (%s) de %s (%s, %s, %s)' % (here.translateTypeTitle(),here.getNombreOwner(), here.getCiudadPais(), here.getInstitucion(), here.getFechaDesde().strftime('%d/%m/%Y') )) or 'Nueva solicitud')",
         accessor='Title',
         widget=ComputedWidget(visible={'view': 'invisible', 'edit': 'invisible'}),
     ),
@@ -142,7 +142,7 @@ SolicitudInstitucionalSchema = BaseSchema.copy() + atapi.Schema((
         required=1,
         default='Licencia',
         vocabulary=DisplayList((
-            ('Licencia', 'Licencia'), ('Comision', 'Comision')
+            ('Licencia', _(u'Licencia')), ('Comision', _(u'Comision'))
         )),
         widget=SelectionWidget(
             label='Tipo de solicitud',
@@ -942,6 +942,11 @@ class SolicitudInstitucional(BaseContent):
             remainig_days = LICENCEDAYS - balance['licence_days']
             if self.getCantidadDeDias() > remainig_days:
                 self.setLicenciacomision('Comision')
+
+    def translateTypeTitle(self):
+        if self.getLicenciacomision() == 'Comision':
+            return 'Comisión'
+        return self.getLicenciacomision()
 
     def canSetDefaultPage(self):
         return False
