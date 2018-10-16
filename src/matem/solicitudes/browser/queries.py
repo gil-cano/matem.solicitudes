@@ -482,7 +482,7 @@ class Queries(BrowserView):
                 date_sesionci = ''
                 if obj.getFecha_sesionci():
                     date_sesionci = obj.getFecha_sesionci().strftime('%d/%m/%Y')
-                    date_sesionce = ''
+                date_sesionce = ''
                 if obj.getFecha_sesionce():
                     date_sesionce = obj.getFecha_sesionce().strftime('%d/%m/%Y')
 
