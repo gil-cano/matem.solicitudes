@@ -1435,9 +1435,9 @@ class SolicitudFolderView(BrowserView):
 
                 envios.sort()
 
-                close_prep = DateTime('2017/10/15 23:59:00 GMT-5')
-                close_year = DateTime('2017/12/31 23:59:00 GMT-5')
-                next_year = DateTime('2018/01/01 00:00:00 GMT-5')
+                close_prep = DateTime('2018/10/28 23:59:00 GMT-5')
+                close_year = DateTime('2018/12/31 23:59:00 GMT-5')
+                next_year = DateTime('2019/01/01 00:00:00 GMT-5')
 
                 start = sol_obj.getFechaDesde()  # DateTime('2017/12/01 00:00:00 US/Central')
                 end = sol_obj.getFechaHasta()
