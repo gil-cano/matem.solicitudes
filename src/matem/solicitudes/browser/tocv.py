@@ -21,7 +21,7 @@ class ApplicationstoCVForm(form.Form):
         """Create cv items form applications"""
         logging.info('Dumpping applications')
         folder = api.content.get(
-            path='/servicios/servicios-internos/solicitudes/2017')
+            path='/servicios/servicios-internos/solicitudes/2018')
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(
             path={'query': '/'.join(folder.getPhysicalPath()), 'depth': 1},
@@ -50,7 +50,7 @@ class ApplicationstoCVForm(form.Form):
     def get_folder(self, userid, content_type, metacv=True):
         """Get cvitem folder inside the metacv or the user CVFolder"""
         ctype = content_type.lower()
-        path = '/catalogos/meta-cv/{ctype}folder'.format(ctype=ctype)
+        path = '/catalogos/copy_of_meta-cv/{ctype}folder'.format(ctype=ctype)
         if not metacv:
             path = '/fsd/{id}/cv/{ctype}folder'.format(id=userid, ctype=ctype)
         return api.content.get(path=path)
