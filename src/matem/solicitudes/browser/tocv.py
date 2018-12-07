@@ -50,7 +50,7 @@ class ApplicationstoCVForm(form.Form):
     def get_folder(self, userid, content_type, metacv=True):
         """Get cvitem folder inside the metacv or the user CVFolder"""
         ctype = content_type.lower()
-        path = '/catalogos/meta-cv/{ctype}folder'.format(ctype=ctype)
+        path = '/catalogos/copy_of_meta-cv/{ctype}folder'.format(ctype=ctype)
         if not metacv:
             path = '/fsd/{id}/cv/{ctype}folder'.format(id=userid, ctype=ctype)
         return api.content.get(path=path)
