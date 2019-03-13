@@ -203,7 +203,14 @@ events = {
             'objeto_viaje': 'Asistir al 2o Encuentro de Mujeres Matemáticas Mexicanas'},
     },
     2019: {
-
+        'SMM': {
+            'event_title': 'LII Congreso Nacional de la Sociedad Matemática Mexicana (LII SMM 2019)',
+            'pais': 'MX',
+            'ciudad_pais': 'Monterrey, N.L.',
+            'institucion': 'Universidad Autónoma de Nuevo León',
+            'fecha_desde': '2019-10-21 00:00 ',
+            'fecha_hasta': '2019-10-25 00:00 ',
+            'objeto_viaje': 'Asistir al LII Congreso Nacional de la Sociedad Matemática Mexicana (LII SMM 2019)'},
     }
 }
 
