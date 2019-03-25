@@ -115,7 +115,7 @@ msgstr "Autobús"
 
 #: matem/solicitudes/widgets/vocabularies.py:45
 msgid "By Application"
-msgstr "Por Aplicación"
+msgstr "Por solicitud"
 
 #: matem/solicitudes/widgets/vocabularies.py:44
 msgid "By Invitation"
