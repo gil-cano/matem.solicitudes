@@ -58,24 +58,16 @@ from matem.solicitudes.widgets.other import DataGridOtherField
 from matem.solicitudes.widgets.other import OtherWidget
 
 from Products.DataGridField.SelectColumn import SelectColumn
-# from Products.DataGridField.LinesColumn import LinesColumn
-# from Products.DataGridField.DateColumn import DateColumn
-# from Products.DataGridField.DatetimeLocalColumn import DatetimeLocalColumn
 from collective.datagridcolumns.DateColumn import DateColumn
 from collective.datagridcolumns.MultiSelectColumn import MultiSelectColumn
 from collective.datagridcolumns.TextAreaColumn import TextAreaColumn
 
-
-# from Products.DataGridField.CheckboxColumn import CheckboxColumn
 
 from matem.solicitudes.widgets.vocabularies import ConferenceTypeVocabulary
 from matem.solicitudes.widgets.vocabularies import ConferenceAssistantVocabulary
 
 from matem.solicitudes.widgets.vocabularies import CourselevelVocabulary
 from matem.solicitudes.widgets.vocabularies import ExpectedNumbersVocabulary
-# from matem.solicitudes.widgets.vocabularies import CoursetypeVocabulary
-
-# from matem.solicitudes.widgets.vocabularies import ResearchPositionVocabulary
 
 from matem.solicitudes.widgets.vocabularies import EventTypeVocabulary
 from matem.solicitudes.widgets.vocabularies import BooleanTypeVocabulary
@@ -1160,6 +1152,17 @@ schema = BaseSchema + Schema((
             tarifas=False,
         ),
         write_permission="Solicitud: Modificar Solicitud",
+    ),
+
+    BooleanField(
+        name='sabbatical',
+        default=False,
+        widget=BooleanWidget(
+            label=_(u'label_sabbatical', default=u"Is user in Sabbattcal?"),
+            description=_(u'help_sabbatical', default=u"Sabbatical applications do not discount days"),
+            i18n_domain='matem.solicitudes',),
+        read_permission="Solicitud: Consejo Cambia Solicitud",
+        write_permission="Solicitud: Consejo Cambia Solicitud",
     ),
 
 ))
