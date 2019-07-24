@@ -80,6 +80,30 @@ jQuery(function($) {
                     </dd>
                     <!-- </div> -->
                     </tal:typelist>
+
+                    <tal:block tal:define="imapplications view/imapplications;">
+                      <tal:block tal:repeat="imapp imapplications">
+                        <tal:block tal:define="itemsx nocall: imapp/@@folder_factories/addable_types">
+                          <span tal:content="imapp/title"/>
+                          <tal:block tal:repeat="itemx itemsx">
+                            <dt>
+                              <input type="radio" name="url"
+                                   tal:attributes="value itemx/action;
+                                                   id string:form-field-${itemx/extra/id}" />
+                            <label tal:attributes="class string:contenttype-${itemx/extra/id};
+                                                   for string:form-field-${itemx/extra/id};">
+                                <img tal:attributes="src itemx/icon" alt="" />
+                                <span tal:replace="itemx/title">Type title</span>
+                            </label>
+                            </dt>
+                            <dd>
+                              <span tal:replace="itemx/description">Type description</span>
+                            </dd>
+                          </tal:block>
+                        </tal:block>
+                      </tal:block>
+                    </tal:block>
+
                 </dl>
 
                 <div class="formControls">
