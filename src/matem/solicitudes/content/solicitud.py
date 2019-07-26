@@ -1165,6 +1165,23 @@ schema = BaseSchema + Schema((
         write_permission="Solicitud: Consejo Cambia Solicitud",
     ),
 
+
+    BooleanField(
+        name='supermoneysack',
+        default=False,
+        widget=BooleanWidget(
+            # visible={'view': 'invisible', 'edit': 'hidden'}
+            label=_(u'label_supermoneysack', default=u'Con cargo a super bolsa'),
+            description=_(
+                u'des_supermoneysack',
+                default=u'Si la solicitud es con cargo al presupuesto institucional, sin afectar la bolsa anual del académico, este campo debe estar activado'
+            ),
+            i18n_domain='matem.solicitudes',
+        ),
+        read_permission="Solicitud: Consejo Revisa Solicitud",
+        write_permission="Solicitud: Consejo Revisa Solicitud",
+    ),
+
 ))
 
 for f in schema.filterFields(isMetadata=True):
@@ -2128,6 +2145,13 @@ class Solicitud(BaseContent):
         return
 
     def pasarValorAutorizado(self):
+
+        if self.supermoneysack:
+            self.setCantidad_autorizada_pasaje(0.0)
+            self.setCantidad_autorizada_viaticos(0.0)
+            self.setCantidad_autorizada_inscripcion(0.0)
+            return
+
         pasaje = self.getCantidad_consejo_pasaje()
         viaticos = self.getCantidad_consejo_viaticos()
         inscripcion = self.getCantidad_consejo_inscripcion()
