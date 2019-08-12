@@ -905,9 +905,6 @@ class SolicitudVisitante(BaseContent):
         if start > end:
             errors['fecha_hasta'] = u'La fecha de término debe ser posterior a la de inicio'
         else:
-            start_dt = DT2dt(start)
-            end_dt = DT2dt(end)
-            ndays = int((end_dt - start_dt).days) + 1
             img = REQUEST.get('image_file', None)
             img_del = REQUEST.get('image_delete', None)
 
@@ -917,9 +914,6 @@ class SolicitudVisitante(BaseContent):
                     img = 'nochange'
                 else:
                     img = None  # delete
-
-            if ndays > 13 and not img:
-                errors['image'] = u'La Foto es requerida para visitas con duración mayor a 13 días.'
 
         # Fix hiden fields errors
         if REQUEST.get('pasaje', '') == 'No':
