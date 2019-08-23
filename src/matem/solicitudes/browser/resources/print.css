@@ -4,7 +4,10 @@
       margin: .5cm 1.5cm;
     }
 
-    #portal-header, #portal-footer-wrapper, #header-info{
+    #main-header,
+    .portalMessage,
+    #footer-wrapper,
+    #header-info{
         display: none;
     }
 

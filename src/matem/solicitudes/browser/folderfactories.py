@@ -211,7 +211,10 @@ events = {
             'fecha_desde': '2019-10-21 00:00 ',
             'fecha_hasta': '2019-10-25 00:00 ',
             'objeto_viaje': 'Asistir al LII Congreso Nacional de la Sociedad Matemática Mexicana (LII SMM 2019)'},
-    }
+    },
+    2020: {
+
+    },
 }
 
 
