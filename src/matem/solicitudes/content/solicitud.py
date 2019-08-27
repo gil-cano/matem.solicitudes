@@ -266,7 +266,7 @@ schema = BaseSchema + Schema((
             # description='Date on wich the visit will end (it can be approximate)',
             # description_msgid='help_fecha_hasta',
             starting_year=2011,
-            future_years=1,
+            future_years=2,
             show_hm=False,
         ),
         write_permission="Solicitud: Modificar Solicitud",
