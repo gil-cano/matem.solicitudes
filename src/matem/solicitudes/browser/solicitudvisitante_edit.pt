@@ -42,6 +42,27 @@
               </table>
             </div>
 
+            <dl class="portalMessage warning">
+              <dt i18n:translate="label_informacion">
+                  Info
+              </dt>
+              <dd i18n:translate="label_authorization_information">
+                En caso de proporcionar la fotografía de su invitado es necesario contar con el
+                <b>consentimiento explícito</b> para publicarla en el portal del IM. Si todavía no lo tiene y desea hacerlo,
+                el procedimiento es el siguiente:
+                <ul>
+                  <li>El formato de consentimiento puede obtenerse en línea
+                    <a href="https://paginas.matem.unam.mx/formularios/autorizacion-foto-portalim">dando clic aquí</a>, o recogiendo el formato impreso en el
+                      departamento de Comunicación para que su invitado lo llene y lo firme.
+                  </li>
+                  <li>
+                    El Consentimiento explícito firmado por el invitado debe entregarse en el
+                    departamento de Comunicación o enviarlo en un archivo JPG o PDF al correo:
+                    comunicacion@im.unam.mx
+                  </li>
+                </ul>
+              </dd>
+            </dl>
           </metal:block>
 
           <!-- <metal:block fill-slot="widgets">

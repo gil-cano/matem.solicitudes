@@ -50,7 +50,7 @@
         for="matem.solicitudes.interfaces.ISolicitudVisitante"
         name="solicitudvisitante_edit"
         layer="matem.solicitudes.interfaces.ISolicitudSpecific"
-        template="solicitud_edit.pt"
+        template="solicitudvisitante_edit.pt"
         permission="cmf.ModifyPortalContent"
         />
 
