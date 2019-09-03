@@ -6,6 +6,14 @@
     <include package="Products.CMFCore" file="permissions.zcml" />
 
     <browser:page
+        name="etyview"
+        for="*"
+        class=".etyview.EtyView"
+        permission="cmf.ManagePortal"
+        template="ety.pt"
+        />
+
+    <browser:page
         for="matem.solicitudes.interfaces.ISolicitudFolder"
         class=".folder.SolicitudFolderView"
         name="solicitudfolder_view"
@@ -155,6 +163,8 @@
         layer="matem.solicitudes.interfaces.ISolicitudSpecific"
         permission="zope2.View"
         />
+
+
 
     <browser:resource
         name="ma.png"
