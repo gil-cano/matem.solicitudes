@@ -9,7 +9,7 @@
         name="etyview"
         for="*"
         class=".etyview.EtyView"
-        permission="cmf.ManagePortal"
+        permission="zope2.View"
         template="ety.pt"
         />
 

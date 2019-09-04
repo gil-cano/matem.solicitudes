@@ -25,18 +25,16 @@
   <body>
     <div id="content-core" metal:fill-slot="main">
       <div class="fc" tal:define="academics view/staff_on_leave_or_commission_days">
-        <h1> Académicos en Licencia o Comisión</h1>
+        <h1> Académicos en Licencia o Comisión el día de hoy</h1>
         <table class="listing">
           <thead>
             <th>Nombre</th>
-            <th>Salida</th>
             <th>Regreso</th>
           </thead>
           <tbody>
             <tr tal:repeat="academic academics">
               <td tal:content="python:academic[0]"/>
               <td tal:content="python:academic[1]"/>
-              <td tal:content="python:academic[2]"/>
             </tr>
           </tbody>
         </table>
