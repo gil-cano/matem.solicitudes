@@ -949,9 +949,9 @@ class SolicitudVisitante(BaseContent):
             envios.sort()
 
             # This dates must be the same in getLegalTransitions() method
-            close_prep = DateTime('2018/10/28 21:59:00 GMT-5')
-            close_year = DateTime('2018/12/31 23:59:00 GMT-5')
-            next_year = DateTime('2019/01/01 00:00:00 GMT-5')
+            close_prep = DateTime('2019/10/13 23:59:00 GMT-5')
+            close_year = DateTime('2019/12/31 23:59:00 GMT-5')
+            next_year = DateTime('2020/01/01 00:00:00 GMT-5')
 
             # Inician y terminan en 2017
             if start <= close_year and end <= close_year:
@@ -1033,9 +1033,9 @@ class SolicitudVisitante(BaseContent):
 
         envios.sort()
 
-        close_prep = DateTime('2018/10/28 21:59:00 GMT-5')
-        close_year = DateTime('2018/12/31 23:59:00 GMT-5')
-        next_year = DateTime('2019/01/01 00:00:00 GMT-5')
+        close_prep = DateTime('2019/10/13 23:59:00 GMT-5')
+        close_year = DateTime('2019/12/31 23:59:00 GMT-5')
+        next_year = DateTime('2020/01/01 00:00:00 GMT-5')
 
         start = self.getFechaDesde()  # DateTime('2017/12/01 00:00:00 US/Central')
         end = self.getFechaHasta()
