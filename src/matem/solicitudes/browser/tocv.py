@@ -21,7 +21,7 @@ class ApplicationstoCVForm(form.Form):
         """Create cv items form applications"""
         logging.info('Dumpping applications')
         folder = api.content.get(
-            path='/servicios/servicios-internos/solicitudes/2018')
+            path='/servicios/servicios-internos/solicitudes/2019')
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(
             path={'query': '/'.join(folder.getPhysicalPath()), 'depth': 1},
@@ -29,9 +29,6 @@ class ApplicationstoCVForm(form.Form):
             portal_type=('Solicitud', 'SolicitudInstitucional', 'SolicitudVisitante'),
             sort_on='created')
         for brain in brains:
-            # test for applications in old format
-            # aux_folder = api.content.get(
-            #     path='/servicios/servicios-internos/solicitudes/2006')
             application = brain.getObject()
             userid = application.getIdOwner()
             # if brain.id in aux_folder:
@@ -39,11 +36,14 @@ class ApplicationstoCVForm(form.Form):
             # prides = []
             # if userid not in prides:
             #     continue
+            # if userid != 'javier':
+            #     continue
             if isinstance(application, Solicitud):
-                self.app2cv(application, userid)
-            if isinstance(application, SolicitudVisitante):
+                pass
+                # self.app2cv(application, userid)
+            elif isinstance(application, SolicitudVisitante):
                 self.app2cv_guest(application, userid)
-            if isinstance(application, SolicitudInstitucional):
+            elif isinstance(application, SolicitudInstitucional):
                 self.app2cv_inst(application, userid)
         logging.info('Done')
 
@@ -135,24 +135,46 @@ class ApplicationstoCVForm(form.Form):
         fields['speakto'] = u'Investigadores'
 
         # En conferencias: u'metting', u'institution', u'other'
-        institution = self.lookupInstitution(application.institucion)
-        fields['institution'] = institution
-        fields['otherinstitution'] = ''
-        if institution is None:
-            fields['otherinstitution'] = application.institucion
-            fields['institution'] = None
+        # institution = self.lookupInstitution(application.institucion)
+        fields['institution'] = None
+        fields['otherinstitution'] = application.institucion
+        # if institution is None:
+        #     fields['otherinstitution'] = application.institucion
+        #     fields['institution'] = None
 
         fields['institutionCountry'] = application.pais[0]
         countries = self.getCountriesVocabulary()
         iscountry = countries.get(application.pais[0], '')
         if iscountry:
             fields['institutionCountry'] = iscountry
-        api.content.create(
-            type=content_type,
-            id=id,
-            title=application.titulo_trabajo,
-            container=folder,
-            **fields)
+        if id not in folder:
+            api.content.create(
+                type=content_type,
+                id=id,
+                title=application.titulo_trabajo,
+                container=folder,
+                **fields)
+        # reportamos asistencias
+        content_type = 'CVEvent'
+        folder = self.get_folder(userid, content_type)
+        fields = {
+            'event_date': event_date,
+            'numberOfDays': application.getCantidadDeDias(),
+            'audienceType': u'assistant',
+            'where': u'institution',
+            'institutionCountry': application.pais[0],
+            'institution': None,
+            'otherinstitution': application.institucion,
+            'creators': ([userid, 'admin'])}
+
+        if id not in folder:
+            api.content.create(
+                type=content_type,
+                id=id,
+                title=application.event_title,
+                container=folder,
+                **fields)
+
 
     def getCountriesVocabulary(self):
         translation_service = getSite().translation_service
@@ -476,10 +498,14 @@ class ApplicationstoCVForm(form.Form):
         id = application.id.replace('solicitudvisitante', 'sv')
         date = application.fecha_desde
         begin_date = {
-            'Year': str(date.year()), 'Month': str(date.month()), 'Day': str(date.day())}
+            'Year': str(date.year()),
+            'Month': str(date.month()),
+            'Day': str(date.day())}
         date = application.fecha_hasta
         end_date = {
-            'Year': str(date.year()), 'Month': str(date.month()), 'Day': str(date.day())}
+            'Year': str(date.year()),
+            'Month': str(date.month()),
+            'Day': str(date.day())}
         institution = self.lookupInstitution(
             application.getInstitucion_procedencia())
         otherinstitution = ''
@@ -487,24 +513,25 @@ class ApplicationstoCVForm(form.Form):
             otherinstitution = application.getInstitucion_procedencia()
         fields = {
             'institutionCountry': application.getPais_procedencia()[0],
-            'institution': institution,
-            'otherinstitution': otherinstitution,
+            'institution': None,
+            'otherinstitution': application.getInstitucion_procedencia(),
             'goalGuest': application.ObjetoViaje(),
             'begin_date': begin_date,
             'end_date': end_date,
             'interchangeProgram': (application.getExchangeProgram() == 'yes') and 'si' or '',
             'creators': ([userid, 'admin'])}
-        api.content.create(
-            type=content_type,
-            id=id,
-            title=application.invitado,
-            container=folder,
-            **fields)
+        if id not in folder:
+            api.content.create(
+                type=content_type,
+                id=id,
+                title=application.invitado,
+                container=folder,
+                **fields)
 
     def lookupInstitution(self, institution):
+        institution = self.normalize(institution)
         if not institution:
             return None
-        institution = self.normalize(institution)
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(
             portal_type='CVInstitution',
