@@ -36,11 +36,10 @@ class ApplicationstoCVForm(form.Form):
             # prides = []
             # if userid not in prides:
             #     continue
-            # if userid != 'javier':
-            #     continue
+            if userid == 'mclapp':
+                continue
             if isinstance(application, Solicitud):
-                pass
-                # self.app2cv(application, userid)
+                self.app2cv(application, userid)
             elif isinstance(application, SolicitudVisitante):
                 self.app2cv_guest(application, userid)
             elif isinstance(application, SolicitudInstitucional):
@@ -80,12 +79,15 @@ class ApplicationstoCVForm(form.Form):
         for i, item in enumerate(application.assistance):
             pre = 'sea-{0}'.format(i)
             id = application.id.replace('solicitud', pre)
-            date = item['assistancedate'].split('/')
-            begin_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
-            institution = self.lookupInstitution(item['institution'])
-            otherinstitution = ''
-            if institution is None:
-                otherinstitution = item['institution']
+            try:
+                date = item['assistancedate'].split('/')
+                begin_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
+            except IndexError as e:
+                continue
+            institution = None
+            otherinstitution = item['institution']
+            # if institution is None:
+            #     otherinstitution = item['institution']
             fields = {
                 'event_date': begin_date,
                 'numberOfDays': application.getCantidadDeDias(),
@@ -247,11 +249,12 @@ class ApplicationstoCVForm(form.Form):
             # En conferencias: u'metting', u'institution', u'other'
             if item['institution']:
                 where = u'institution'
-                newinst = self.lookupInstitution(item['institution'])
-                if newinst is None:
-                    fields['otherinstitution'] = item['institution']
-                else:
-                    fields['institution'] = newinst
+                fields['otherinstitution'] = item['institution']
+                # newinst = self.lookupInstitution(item['institution'])
+                # if newinst is None:
+                #     fields['otherinstitution'] = item['institution']
+                # else:
+                #     fields['institution'] = newinst
             else:
                 where = u'other'
                 fields['other'] = item['place']
@@ -293,8 +296,8 @@ class ApplicationstoCVForm(form.Form):
             hours = ''
             if unicode(item['duration']).isnumeric():
                 hours = item['duration']
-            institution = self.lookupInstitution(item['institution'])
-            otherinstitution = ''
+            institution = None
+            otherinstitution = item['institution']
             if institution is None:
                 otherinstitution = item['institution']
             coursetype = {
@@ -342,10 +345,10 @@ class ApplicationstoCVForm(form.Form):
             begin_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
             date = item['sresearchenddate'].split('/')
             end_date = {'Year': date[2], 'Month': date[1], 'Day': date[0]}
-            institution = self.lookupInstitution(item['institution'])
-            otherinstitution = ''
-            if institution is None:
-                otherinstitution = item['institution']
+            institution = None
+            otherinstitution = item['institution']
+            # if institution is None:
+            #     otherinstitution = item['institution']
             fields = {
                 'institutionCountry': application.pais[0],
                 'institution': institution,
