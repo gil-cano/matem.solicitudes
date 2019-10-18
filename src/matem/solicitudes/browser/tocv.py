@@ -46,7 +46,7 @@ class ApplicationstoCVForm(form.Form):
                 self.app2cv_inst(application, userid)
         logging.info('Done')
 
-    def get_folder(self, userid, content_type, metacv=True):
+    def get_folder(self, userid, content_type, metacv=False):
         """Get cvitem folder inside the metacv or the user CVFolder"""
         ctype = content_type.lower()
         path = '/catalogos/copy_of_meta-cv/{ctype}folder'.format(ctype=ctype)
