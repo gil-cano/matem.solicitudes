@@ -36,7 +36,7 @@ class ApplicationstoCVForm(form.Form):
             # prides = []
             # if userid not in prides:
             #     continue
-            if userid == 'mclapp':
+            if userid in ['mclapp', 'dalatorre', 'ruben', 'gil', 'federico', 'vdominguez', 'jlongi', 'carlosgonzalez', 'eric', 'fernando', 'angelica', 'francisco', 'monica', 'pilar', 'felipe', 'radiaz', 'adriana_rv', 'cro', 'rosell', 'esacristan', 'ftoledo', 'mvalencia', 'paloma']:
                 continue
             if isinstance(application, Solicitud):
                 self.app2cv(application, userid)
