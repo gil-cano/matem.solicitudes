@@ -39,7 +39,7 @@ class EtyView(BrowserView):
         with api.env.adopt_user(username='admin'):
 
             brains = api.content.find(
-                Type='Solicitud de Licencia/Comision',
+                Type=['Solicitud de Licencia/Comision','Solicitud con apoyo institucional'],
                 review_state='aprobada',
                 fecha_hasta={'query': [start_date, ], 'range': 'min'},
                 fecha_desde={'query': [end_date, ], 'range': 'max'},
