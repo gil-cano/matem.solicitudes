@@ -234,20 +234,19 @@
           }
 
           cellauthors = [];
-          dictauthors = {}
+          dictauthors = {};
           cellAuthor = 4;
-          vcell = '<option value="all-sol">Todos</option>'
+          vcell = '<option value="all-sol">Todos</option>';
           for (i = 1; i < len; i++) {
             cell = rows[i].cells[cellAuthor];
-            valuecell = cell.innerHTML;
+            valuecell = cell.innerHTML.trim();
               if(!dictauthors.hasOwnProperty(valuecell)) {
                 cellauthors.push(valuecell);
                 dictauthors[valuecell] = 1;
                 vcell +=  '<option ';
                 vcell += 'value="';
                 vcell += valuecell;
-                vcell += '"';
-                vcell += '>'
+                vcell += '">';
                 vcell += valuecell;
                 vcell += '</option>';
             }
