@@ -650,12 +650,43 @@
                 <th i18n:translate="acta_number">Acta number</th>
         </tr>
         <tr tal:repeat="item python:items">
-          <td><input type="checkbox" name="" tal:attributes="name python: '/'.join([item['parentid'], item['id']])"></td>
+          <td tal:condition="python:item['meta_type'] not in ['coloquio_application', 'campus_application']">
+            <input type="checkbox" name=""
+                tal:attributes="name python: '/'.join([item['parentid'], item['id']])" />
+          </td>
+          <td tal:condition="python:item['meta_type'] in ['coloquio_application', 'campus_application']">
+            <input type="checkbox" name="im.applications" tal:attributes="value item/uid">
+          </td>
+
+
+
+
           <td tal:attributes="class python:item['sede'].replace('.','').lower()" tal:content="python:item['sede']">Sede</td>
           <td><a href="#" tal:attributes="href python:item['url']"
           tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</a></td>
           <td tal:content="python:item['owner_name']">Solicitant</td>
-          <td tal:content="python:item['objective']">Reason</td>
+          <!-- <td tal:content="python:item['objective']">Reason</td> -->
+          <td>
+            <div tal:condition="python:item['objective']">
+              <div tal:condition="python:len(item['objective'].split(' ')) > 20"
+                tal:define="uid python:item['id']; uidshow python:uid+'-show'; uidhide python:uid+'-hide';">
+                <span tal:content="python:' '.join(item['objective'].split(' ')[:20])"/>
+                  <a href="#" tal:attributes="id uidshow; onclick string:showHide('${uid}');; return false;;" class="showLink">&hellip;Ver más</a>
+                  <span tal:attributes="id uid" class="more">
+                    <span tal:content="python:' '.join(item['objective'].split(' ')[20:])"/>
+                    <p><a href="#"
+                      tal:attributes="id uidhide; onclick string:showHide('${uid}');; return false;;"
+                      class="hideLink"
+                      i18n:domain="matem.solicitudes"
+                      i18n:translate="hide_objective">Ver menos</a></p>
+                  </span>
+              </div>
+              <div tal:condition="python:len(item['objective'].split(' ')) <= 20">
+                <span tal:content="python:item['objective']"/>
+              </div>
+            </div>
+          </td>
+
           <td tal:attributes="style python:extra_data[item['id']]['style-country']">
             <span i18n:translate="" i18n:domain="plone" tal:content="python:item['country']">Place</span>
             <span tal:replace="structure python:extra_data[item['id']]['style-country-text']"/>
