@@ -1273,6 +1273,23 @@ class SolicitudFolderView(BrowserView):
                     solicitud.setFecha_sesionci(fdaterev)
                 except:
                     pass
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        # dd/mm/yyyy
+                        fdaterev = dictionary.get('fechaderevisionCI', '')
+                        if fdaterev:
+                            val_fdaterev = fdaterev.split('/')
+                            imapplication.internalc_date = datetime.date(int(val_fdaterev[2]), int(val_fdaterev[1]), int(val_fdaterev[0]))
+                    except:
+                        pass
+
         elif dictionary.get('revision.consejo.PonerNumeroActa', '') is not '':
             for key in dictionary:
                 object_path = folder_path + "/" + key
@@ -1281,6 +1298,19 @@ class SolicitudFolderView(BrowserView):
                     solicitud.setActaci(dictionary.get('numeroDeActaCI', ''))
                 except:
                     pass
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        imapplication.minute = dictionary.get('numeroDeActaCI', '')
+                    except:
+                        pass
+
         elif dictionary.get('revision.consejo.PonerActaYFecha', '') is not '':
             for key in dictionary:
                 object_path = folder_path + "/" + key
@@ -1295,6 +1325,25 @@ class SolicitudFolderView(BrowserView):
                     solicitud.setActaci(dictionary.get('numeroDeActaCI', ''))
                 except:
                     pass
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        # dd/mm/yyyy
+                        fdaterev = dictionary.get('fechaderevisionCI', '')
+                        if fdaterev:
+                            val_fdaterev = fdaterev.split('/')
+                            imapplication.internalc_date = datetime.date(int(val_fdaterev[2]), int(val_fdaterev[1]), int(val_fdaterev[0]))
+
+                        imapplication.minute = dictionary.get('numeroDeActaCI', '')
+                    except:
+                        pass
+
         elif dictionary.get('revision.consejo.PonerActaYFechaYAprobar', '') is not '':
             for key in dictionary:
                 object_path = folder_path + "/" + key
@@ -1310,6 +1359,26 @@ class SolicitudFolderView(BrowserView):
                     self.context.portal_workflow.doActionFor(solicitud, 'aprobar')
                 except:
                     pass
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        # dd/mm/yyyy
+                        fdaterev = dictionary.get('fechaderevisionCI', '')
+                        if fdaterev:
+                            val_fdaterev = fdaterev.split('/')
+                            imapplication.internalc_date = datetime.date(int(val_fdaterev[2]), int(val_fdaterev[1]), int(val_fdaterev[0]))
+
+                        imapplication.minute = dictionary.get('numeroDeActaCI', '')
+                        api.content.transition(obj=imapplication, transition='approve')
+                    except:
+                        pass
+
         elif dictionary.get('revision.consejo.PonerActaYFechaYRechazar', '') is not '':
             for key in dictionary:
                 object_path = folder_path + "/" + key
@@ -1325,6 +1394,26 @@ class SolicitudFolderView(BrowserView):
                     self.context.portal_workflow.doActionFor(solicitud, 'rechazar')
                 except:
                     pass
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        # dd/mm/yyyy
+                        fdaterev = dictionary.get('fechaderevisionCI', '')
+                        if fdaterev:
+                            val_fdaterev = fdaterev.split('/')
+                            imapplication.internalc_date = datetime.date(int(val_fdaterev[2]), int(val_fdaterev[1]), int(val_fdaterev[0]))
+
+                        imapplication.minute = dictionary.get('numeroDeActaCI', '')
+                        api.content.transition(obj=imapplication, transition='reject')
+                    except:
+                        pass
+
         elif dictionary.get('aprobadas.consejo.PonerFechaConsejo', '') is not '':
             for key in dictionary:
                 object_path = folder_path + "/" + key
@@ -1409,6 +1498,22 @@ class SolicitudFolderView(BrowserView):
                     self.context.portal_workflow.doActionFor(solicitud, 'aprobar')
                 except:
                     pass
+
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        api.content.transition(obj=imapplication, transition='approve')
+                    except:
+                        pass
+
+
+
         elif dictionary.get('revision.consejo.Rechazar', '') is not '':
             for key in dictionary:
                 object_path = folder_path + "/" + key
@@ -1417,6 +1522,20 @@ class SolicitudFolderView(BrowserView):
                     self.context.portal_workflow.doActionFor(solicitud, 'rechazar')
                 except:
                     pass
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        api.content.transition(obj=imapplication, transition='reject')
+                    except:
+                        pass
+
+
         else:
             return self.menu()
 
