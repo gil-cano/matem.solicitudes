@@ -527,9 +527,16 @@
               <tbody class="scrollable">
               <tr tal:attributes="class python:item['sede']" tal:repeat="item python:items" style="display: '';">
                 <td tal:content="repeat/item/number">number</td>
-                <td>
+
+                <td tal:condition="python:item.get('meta_type', '') not in ['coloquio_application', 'campus_application']">
                   <input type="checkbox" name=""
-                      tal:attributes="name python: '/'.join([item['parentid'], item['id']])" /> </td>
+                      tal:attributes="name python: '/'.join([item['parentid'], item['id']])" />
+                </td>
+                <td tal:condition="python:item.get('meta_type', '') in ['coloquio_application', 'campus_application']">
+                  <input type="checkbox" name="im.applications" tal:attributes="value item/uid">
+                </td>
+
+
                 <td tal:attributes="class python:item['sede'].replace('.','').lower()" tal:content="python:item['sede']">Sede</td>
                 <td><a href="#" tal:attributes="href python:item['url']"
                       tal:content="python:item['special_fields']['readable_meta_type']">Meta-Type</a></td>
