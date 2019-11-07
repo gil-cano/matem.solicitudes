@@ -1171,7 +1171,7 @@ schema = BaseSchema + Schema((
         default=False,
         widget=BooleanWidget(
             # visible={'view': 'invisible', 'edit': 'hidden'}
-            label=_(u'label_supermoneysack', default=u'Con cargo a super bolsa'),
+            label=_(u'label_supermoneysack', default=u'Con cargo al Instituto'),
             description=_(
                 u'des_supermoneysack',
                 default=u'Si la solicitud es con cargo al presupuesto institucional, sin afectar la bolsa anual del académico, este campo debe estar activado'
