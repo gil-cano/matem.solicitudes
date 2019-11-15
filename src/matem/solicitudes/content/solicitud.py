@@ -1174,7 +1174,7 @@ schema = BaseSchema + Schema((
             label=_(u'label_supermoneysack', default=u'Con cargo al Instituto'),
             description=_(
                 u'des_supermoneysack',
-                default=u'Si la solicitud es con cargo al presupuesto institucional, sin afectar la bolsa anual del académico, este campo debe estar activado'
+                default=u'Si la solicitud es con cargo al Instituto, sin afectar la bolsa anual del académico, este campo debe estar activado'
             ),
             i18n_domain='matem.solicitudes',
         ),
