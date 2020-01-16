@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  metal:use-macro="context/main_template/macros/master"
+  i18n:domain="matem.solicitudes">
+  <head>
+
+    <metal:css fill-slot="style_slot" tal:define="resources_url string:${context/portal_url}/++resource++wcfc">
+      <link href="++resource++wcfc/bootstrap/bootstrap-fixed.css" tal:attributes="href string:${resources_url}/bootstrap/bootstrap-fixed.css" rel="stylesheet" type="text/css"/>
+    </metal:css>
+
+    <metal:block fill-slot="top_slot"
+      tal:define="dummy python:request.set('disable_border',1);
+                disable_column_one python:request.set('disable_plone.leftcolumn',1);
+                disable_column_two python:request.set('disable_plone.rightcolumn',1);"
+    />
+    <metal:js fill-slot="javascript_head_slot" tal:define="resources_url string:${context/portal_url}/++resource++wcfc">
+      <script type="text/javascript" src="++resource++wcfc/bootstrap/bootstrap.min.js"
+                tal:attributes="src string:${resources_url}/bootstrap/bootstrap.min.js">
+      </script>
+    </metal:js>
+
+  </head>
+  <body>
+    <div id="content-core" metal:fill-slot="main">
+      <div class="fc" tal:define="items view/foo">
+
+        <table class="listing" border="1" width="100%" tal:condition="items">
+          <tr>
+              <th></th>
+              <th i18n:translate="label_type">Type</th>
+              <th i18n:translate="label_solicitor">Solicitante</th>
+              <!-- <th i18n:translate="label_reason">Reason</th> -->
+              <th i18n:translate="label_place">Place</th>
+              <th i18n:translate="label_start_date">Fecha de Inicio</th>
+              <th i18n:translate="label_end_date">End date</th>
+              <th i18n:translate="label_quantity_days">days</th>
+              <th i18n:translate="label_approved_quantity">Approved Quantity (pesos)</th>
+              <th i18n:translate="consejo_review_date">Consejo Interno review date</th>
+              <th i18n:translate="acta_number">Acta number</th>
+              <th>con cargo a:</th>
+              <th i18n:translate="label_state">State</th>
+              <th>Comentario CI</th>
+          </tr>
+          <tr tal:repeat="item python:items">
+            <td tal:content="repeat/item/number">number</td>
+            <td><a href="#" tal:attributes="href item/absolute_url"
+            tal:content="item/Type">Meta-Type</a></td>
+            <td tal:content="item/getNombreOwner">Solicitant</td>
+            <!-- <td tal:content="item/getObjetoViaje">Reason</td> -->
+            <td i18n:translate="" i18n:domain="plone" tal:content="item/getPais">Place</td>
+            <td tal:content="item/getFechaDesde">Creation Date</td>
+            <td tal:content="item/getFechaHasta">Creation Date</td>
+            <td tal:content="item/getCantidadDeDias">Quantity of Days</td>
+            <td align="center" tal:content="item/getCantidadAutorizadaTotal">Quantity</td>
+            <td align="center" tal:content="item/getFecha_sesionci">Fecha de Revision</td>
+            <td tal:content="item/getActaci">Solicitud Creada</td>
+            <td tal:content="item/getCargo_presupuesto">Con cargo</td>
+            <td tal:content="item/getWFStateName">workflow state</td>
+            <td tal:content="item/commentsci">Comentario CI</td>
+          </tr>
+        </table>
+
+
+
+
+
+      </div>
+    </div>
+  </body>
+</html>

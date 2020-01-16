@@ -20,6 +20,10 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 import re
 
+from im.applications.utilities import getIMApplicationsByWState
+from im.applications.utilities import getIMApplicationsByWStateAndUser
+import datetime
+
 
 class SolicitudFolderView(BrowserView):
     """A view of the application folder."""
@@ -203,19 +207,25 @@ class SolicitudFolderView(BrowserView):
     def getSolicitudesAprobadasIndividuales(self, usuario):
         queryObj = self.queryObj
         applications = queryObj.getFolderApplicationsByStateAndUser('aprobada', usuario)
-        return applications
+        imapplications = getIMApplicationsByWStateAndUser('approved', usuario)
+        return applications + imapplications
 
     def getSolicitudesRechazadasIndividuales(self, usuario):
         queryObj = self.queryObj
         applications = queryObj.getFolderApplicationsByStateAndUser('rechazada', usuario)
-        return applications
+        imapplications = getIMApplicationsByWStateAndUser('rejected', usuario)
+        return applications + imapplications
 
     def getSolicitudesEnviadasIndividuales(self, usuario):
         applications = []
         queryObj = self.queryObj
         applications += queryObj.getFolderApplicationsByStateAndUser('revisioncomision', usuario)
         applications += queryObj.getFolderApplicationsByStateAndUser('revisionconsejo', usuario)
-        return applications
+        imapplications = []
+        imapplications += getIMApplicationsByWStateAndUser('commission', usuario)
+        imapplications += getIMApplicationsByWStateAndUser('consejo', usuario)
+
+        return applications + imapplications
 
     def getInvestigadores(self, usuario):
         # TODO: REMOVE USELESS METHOD
@@ -625,7 +635,8 @@ class SolicitudFolderView(BrowserView):
     def getSolicitudesPendientesEnvio(self, usuario):
         queryObj = self.queryObj
         applications = queryObj.getFolderApplicationsByStateAndUser('borrador', usuario)
-        return applications
+        imapplications = getIMApplicationsByWStateAndUser('private', usuario)
+        return applications + imapplications
 
     def getSolicitudesPendientesRevisionPreeliminar(self, usuario):
         queryObj = self.queryObj
@@ -653,9 +664,15 @@ class SolicitudFolderView(BrowserView):
         if hasPermission:
             applications = queryObj.getFolderApplicationsByState('revisioncomision')
             # regresamos lista ordenada por sede y luego por solicitante
-            applications.sort(key=itemgetter('owner_name'))
-            applications.sort(key=itemgetter('sede'))
-            return applications
+            # applications.sort(key=itemgetter('owner_name'))
+            # applications.sort(key=itemgetter('sede'))
+            # for include imapplications
+            imapplications = getIMApplicationsByWState('commission')
+            allapplications = applications + imapplications
+            allapplications.sort(key=itemgetter('owner_name'))
+            allapplications.sort(key=itemgetter('sede'))
+            # return applications
+            return allapplications
         else:
             return []
 
@@ -672,10 +689,17 @@ class SolicitudFolderView(BrowserView):
 
         if hasPermission:
             applications = queryObj.getFolderApplicationsByState('revisionconsejo')
-            # regresamos lista ordenada por sede y luego por solicitante
-            applications.sort(key=itemgetter('owner_name'))
-            applications.sort(key=itemgetter('sede'))
-            return applications
+            # # regresamos lista ordenada por sede y luego por solicitante
+            # applications.sort(key=itemgetter('owner_name'))
+            # applications.sort(key=itemgetter('sede'))
+            # return applications
+            # for include imapplications
+            imapplications = getIMApplicationsByWState('consejo')
+            allapplications = applications + imapplications
+            allapplications.sort(key=itemgetter('owner_name'))
+            allapplications.sort(key=itemgetter('sede'))
+            return allapplications
+
         else:
             return []
 
@@ -968,6 +992,24 @@ class SolicitudFolderView(BrowserView):
                     self.context.portal_workflow.doActionFor(solicitud, 'enviaraconsejo')
                 except:
                     pass
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        # dd/mm/yyyy
+                        fdaterev = dictionary.get('fechaderevisionCE', '')
+                        if fdaterev:
+                            val_fdaterev = fdaterev.split('/')
+                            imapplication.specialc_date = datetime.date(int(val_fdaterev[2]), int(val_fdaterev[1]), int(val_fdaterev[0]))
+                            api.content.transition(obj=imapplication, transition='submit_consejo')
+                    except:
+                        pass
+
         elif dictionary.get('revision.consejo.GenerarActa', '') is not '':
             boldText = TextPropertySet(bold='bold')
             boldUnderlineText = TextPropertySet(bold='bold', underline='underline')
@@ -1231,6 +1273,23 @@ class SolicitudFolderView(BrowserView):
                     solicitud.setFecha_sesionci(fdaterev)
                 except:
                     pass
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        # dd/mm/yyyy
+                        fdaterev = dictionary.get('fechaderevisionCI', '')
+                        if fdaterev:
+                            val_fdaterev = fdaterev.split('/')
+                            imapplication.internalc_date = datetime.date(int(val_fdaterev[2]), int(val_fdaterev[1]), int(val_fdaterev[0]))
+                    except:
+                        pass
+
         elif dictionary.get('revision.consejo.PonerNumeroActa', '') is not '':
             for key in dictionary:
                 object_path = folder_path + "/" + key
@@ -1239,6 +1298,19 @@ class SolicitudFolderView(BrowserView):
                     solicitud.setActaci(dictionary.get('numeroDeActaCI', ''))
                 except:
                     pass
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        imapplication.minute = dictionary.get('numeroDeActaCI', '')
+                    except:
+                        pass
+
         elif dictionary.get('revision.consejo.PonerActaYFecha', '') is not '':
             for key in dictionary:
                 object_path = folder_path + "/" + key
@@ -1253,6 +1325,25 @@ class SolicitudFolderView(BrowserView):
                     solicitud.setActaci(dictionary.get('numeroDeActaCI', ''))
                 except:
                     pass
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        # dd/mm/yyyy
+                        fdaterev = dictionary.get('fechaderevisionCI', '')
+                        if fdaterev:
+                            val_fdaterev = fdaterev.split('/')
+                            imapplication.internalc_date = datetime.date(int(val_fdaterev[2]), int(val_fdaterev[1]), int(val_fdaterev[0]))
+
+                        imapplication.minute = dictionary.get('numeroDeActaCI', '')
+                    except:
+                        pass
+
         elif dictionary.get('revision.consejo.PonerActaYFechaYAprobar', '') is not '':
             for key in dictionary:
                 object_path = folder_path + "/" + key
@@ -1268,6 +1359,26 @@ class SolicitudFolderView(BrowserView):
                     self.context.portal_workflow.doActionFor(solicitud, 'aprobar')
                 except:
                     pass
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        # dd/mm/yyyy
+                        fdaterev = dictionary.get('fechaderevisionCI', '')
+                        if fdaterev:
+                            val_fdaterev = fdaterev.split('/')
+                            imapplication.internalc_date = datetime.date(int(val_fdaterev[2]), int(val_fdaterev[1]), int(val_fdaterev[0]))
+
+                        imapplication.minute = dictionary.get('numeroDeActaCI', '')
+                        api.content.transition(obj=imapplication, transition='approve')
+                    except:
+                        pass
+
         elif dictionary.get('revision.consejo.PonerActaYFechaYRechazar', '') is not '':
             for key in dictionary:
                 object_path = folder_path + "/" + key
@@ -1283,6 +1394,26 @@ class SolicitudFolderView(BrowserView):
                     self.context.portal_workflow.doActionFor(solicitud, 'rechazar')
                 except:
                     pass
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        # dd/mm/yyyy
+                        fdaterev = dictionary.get('fechaderevisionCI', '')
+                        if fdaterev:
+                            val_fdaterev = fdaterev.split('/')
+                            imapplication.internalc_date = datetime.date(int(val_fdaterev[2]), int(val_fdaterev[1]), int(val_fdaterev[0]))
+
+                        imapplication.minute = dictionary.get('numeroDeActaCI', '')
+                        api.content.transition(obj=imapplication, transition='reject')
+                    except:
+                        pass
+
         elif dictionary.get('aprobadas.consejo.PonerFechaConsejo', '') is not '':
             for key in dictionary:
                 object_path = folder_path + "/" + key
@@ -1367,6 +1498,22 @@ class SolicitudFolderView(BrowserView):
                     self.context.portal_workflow.doActionFor(solicitud, 'aprobar')
                 except:
                     pass
+
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        api.content.transition(obj=imapplication, transition='approve')
+                    except:
+                        pass
+
+
+
         elif dictionary.get('revision.consejo.Rechazar', '') is not '':
             for key in dictionary:
                 object_path = folder_path + "/" + key
@@ -1375,6 +1522,20 @@ class SolicitudFolderView(BrowserView):
                     self.context.portal_workflow.doActionFor(solicitud, 'rechazar')
                 except:
                     pass
+
+            if 'im.applications' in dictionary.keys():
+                applications = dictionary['im.applications']
+                if isinstance(dictionary['im.applications'], str):
+                    applications = [dictionary['im.applications']]
+
+                for app in applications:
+                    try:
+                        imapplication = api.content.find(UID=app)[0].getObject()
+                        api.content.transition(obj=imapplication, transition='reject')
+                    except:
+                        pass
+
+
         else:
             return self.menu()
 
@@ -1399,14 +1560,24 @@ class SolicitudFolderView(BrowserView):
             solicitud = {}
             folder = item['parent_folder']
             usuarioActual = item['owner_id']
-            cantidadAsignada = folder.getPresupuesto_asignado_solicitantes()[0].get(usuarioActual, 0.0)
-            cantidadInicial = folder.getSolicitantes()[0].get(usuarioActual, [0, 0, 0, 0, 0.0])[4]
-            cantidadInicialApoyos = folder.getSolicitantes()[0].get(usuarioActual, [0, 0, 0, 0, 0.0])[5]
-            resto = cantidadInicial - cantidadAsignada
-            solicitud['resto'] = resto
-            solicitud['dcomision'] = folder.getDias_comision_utilizados_solicitantes()[0].get(usuarioActual, 0.0)
-            solicitud['dlicencia'] = folder.getDias_licencia_utilizados_solicitantes()[0].get(usuarioActual, 0.0)
-            solicitud['apoyo'] = cantidadInicialApoyos - folder.getApoyoinst_asignado_solicitantes()[0].get(usuarioActual, 0.0)
+            if item['meta_type'] == 'coloquio_application':
+                cantidadAsignada = 0.0
+                cantidadInicial = 0.0
+                cantidadInicialApoyos = 0.0
+                resto = 0.0
+                solicitud['resto'] = resto
+                solicitud['dcomision'] = 0.0
+                solicitud['dlicencia'] = 0.0
+                solicitud['apoyo'] = 0.0
+            else:
+                cantidadAsignada = folder.getPresupuesto_asignado_solicitantes()[0].get(usuarioActual, 0.0)
+                cantidadInicial = folder.getSolicitantes()[0].get(usuarioActual, [0, 0, 0, 0, 0.0])[4]
+                cantidadInicialApoyos = folder.getSolicitantes()[0].get(usuarioActual, [0, 0, 0, 0, 0.0])[5]
+                resto = cantidadInicial - cantidadAsignada
+                solicitud['resto'] = resto
+                solicitud['dcomision'] = folder.getDias_comision_utilizados_solicitantes()[0].get(usuarioActual, 0.0)
+                solicitud['dlicencia'] = folder.getDias_licencia_utilizados_solicitantes()[0].get(usuarioActual, 0.0)
+                solicitud['apoyo'] = cantidadInicialApoyos - folder.getApoyoinst_asignado_solicitantes()[0].get(usuarioActual, 0.0)
             solicitud['style-days'] = ""
             solicitud['style-days-text'] = item['quantity_of_days']
             solicitud['style-quantity'] = ""
@@ -1415,10 +1586,17 @@ class SolicitudFolderView(BrowserView):
             solicitud['style-country-text'] = ""
             solicitud['style-overlap'] = ""
             solicitud['style-overlap-text'] = ""
-
-            # ############## Inicio de cierre de presupuesto ##################
             solicitud['style-cierre'] = ""
             solicitud['style-cierre-text'] = ""
+
+            if item['meta_type'] == 'coloquio_application':  # this must be the general case for imapplications
+                extra_data[item['id']] = solicitud
+                continue
+                # return extra_data
+
+            # ############## Inicio de cierre de presupuesto ##################
+            # solicitud['style-cierre'] = ""
+            # solicitud['style-cierre-text'] = ""
 
             if item['meta_type'] in ['Solicitud', 'SolicitudVisitante',  'SolicitudInstitucional']:
 

@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from plone.app.content.browser.folderfactories import FolderFactoriesView
+from plone import api
+# from zope.browsermenu.interfaces import IBrowserMenu
+# from zope.component import getUtility
 
 import urllib
 
@@ -242,3 +245,12 @@ class FolderFactoriesView(FolderFactoriesView):
     def institutional_events(self):
         year = int(self.aq_parent.id)
         return [{'value': k, 'title': v['event_title']} for k, v in events[year].items()]
+
+
+    def imapplications(self):
+        imapplications = []
+
+        for ms in api.content.find(portal_type='moneysack', review_state='private'):
+            obj = ms.getObject()
+            imapplications.append(obj)
+        return imapplications

@@ -247,5 +247,13 @@
         permission="cmf.AddPortalContent"
         />
 
+    <browser:page
+        for="*"
+        name="ecocomments"
+        template="ecocomments.pt"
+        permission="cmf.AddPortalContent"
+        class=".ecocomments.SolComments"
+    />
+
 </configure>
 

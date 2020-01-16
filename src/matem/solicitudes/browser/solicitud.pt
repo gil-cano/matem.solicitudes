@@ -132,7 +132,8 @@
                     Info
                 </dt>
                 <dd>
-                    <span i18n:translate="label_aprobada_propietario">Congratulations, your application was approved! The total amount approved for this application is </span><span tal:content="view/getPresupuestoAprobadoSolicitud">cantidad</span> pesos.
+                    <span i18n:translate="label_aprobada_propietario">Congratulations, your application was approved! The total amount approved for this application is </span>
+                    <span tal:condition="python: not here.getSupermoneysack()" tal:content="view/getPresupuestoAprobadoSolicitud">cantidad</span><span tal:condition="here/supermoneysack" tal:content="here/getCantidadConsejoTotal">cantidad</span> pesos.
                 </dd>
             </dl>
 
@@ -212,7 +213,8 @@
                     Info
                 </dt>
                 <dd>
-                    <span i18n:translate="label_aprobada_nopropietario">This application has been aproved. If you have any doubt please contact the site manager. The total amount approved for this application is </span><span tal:content="view/getPresupuestoAprobadoSolicitud">cantidad</span> pesos.
+                    <span i18n:translate="label_aprobada_nopropietario">This application has been aproved. If you have any doubt please contact the site manager. The total amount approved for this application is </span><span tal:condition="python: not here.getSupermoneysack()" tal:content="view/getPresupuestoAprobadoSolicitud">cantidad</span><span tal:condition="here/supermoneysack" tal:content="here/getCantidadConsejoTotal">cantidad</span> pesos.
+
                 </dd>
             </dl>
 
@@ -345,7 +347,14 @@
           <td align="center" i18n:translate="" tal:content="python:view.getDisplayListTitle('inscripcion')">Value</td>
         </tr>
         <tr><th colspan="5"><b>Cantidades</b></th></tr>
-        <tr><th>Concepto</th><th>Cantidad Solicitada</th><th>Cantidad Recomendada por Comisión Especial</th><th>Cantidad Autorizada por el Consejo Interno</th><th>Cantidad Utilizada</th></tr>
+        <tr>
+          <th>Concepto</th>
+          <th>Cantidad Solicitada</th>
+          <th>Cantidad Recomendada por Comisión Especial</th>
+          <th tal:condition="python: not here.getSupermoneysack()">Cantidad Autorizada por el Consejo Interno</th>
+          <th tal:condition="here/supermoneysack">Cantidad Autorizada por el Consejo Interno con cargo al Instituto</th>
+          <th>Cantidad Utilizada</th>
+        </tr>
         <tr><th i18n:translate="label_cantidad_pasaje">Transportation cost</th>
                       <td align="center" tal:content="here/getCantidad_pasaje">Cantidad Solicitada</td>
                       <td align="center" tal:content="here/getCantidad_recomendada_pasaje">Cantidad Recomendada</td>
