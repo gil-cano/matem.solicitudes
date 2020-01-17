@@ -68,6 +68,7 @@ from matem.solicitudes.widgets.vocabularies import ConferenceAssistantVocabulary
 
 from matem.solicitudes.widgets.vocabularies import CourselevelVocabulary
 from matem.solicitudes.widgets.vocabularies import ExpectedNumbersVocabulary
+from matem.solicitudes.widgets.vocabularies import OrgClassificationVocabulary
 
 from matem.solicitudes.widgets.vocabularies import EventTypeVocabulary
 from matem.solicitudes.widgets.vocabularies import BooleanTypeVocabulary
@@ -1044,6 +1045,7 @@ schema = BaseSchema + Schema((
     DataGridOrganizationField(
         name='organization',
         columns=(
+            'activityclass',
             'activitytype',
             'eventName',
             'level',
@@ -1065,7 +1067,7 @@ schema = BaseSchema + Schema((
             columns={
                 'activityclass': SelectColumn(
                     _(u"wactivityclass_label", default=u"Tipo de Actividad"),
-                    vocabulary_factory='matem.solicitudes.vocabularies.OrgClassification',
+                    vocabulary=OrgClassificationVocabulary(),
                 ),
                 'activitytype': MultiSelectColumn(
                     _(u"wactivitytype_label", default="Activity Type"),

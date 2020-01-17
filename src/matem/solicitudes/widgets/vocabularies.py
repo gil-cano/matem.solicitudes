@@ -82,6 +82,33 @@ class ExpectedNumbersVocabulary:
             ('stage6', _(u'More than 100')),
         ])
 
+class OrgClassificationVocabulary:
+    implements(IVocabulary)
+
+    def getDisplayList(self, instance):
+        return DisplayList([
+            # ('00', u'--'),
+            ('01', u'Coloquio'),
+            ('02', u'Conferencia'),
+            ('03', u'Congreso'),
+            ('04', u'Curso'),
+            ('05', u'Diplomado'),
+            ('06', u'Encuentro'),
+            ('07', u'Foro'),
+            ('08', u'Jornada'),
+            ('09', u'Mesa redonda'),
+            ('10', u'Módulo de exposición'),
+            ('11', u'Módulo de feria'),
+            ('12', u'Reunión'),
+            ('13', u'Seminario'),
+            ('14', u'Simposio'),
+            ('15', u'Taller'),
+            ('16', u'Videoconferencia'),
+            ('17', u'Feria'),
+            ('32', u'Cátedra'),
+            ('99', u'Otra actividad'),
+        ])
+
 
 # TOD0 Unify the course level vocabularies
 def CourselevelVocabularyFactory(context):
@@ -130,33 +157,6 @@ def IMCampusVocabulary(context):
         SimpleTerm(value='Oaxaca', title='Oaxaca'),
     ])
 directlyProvides(IMCampusVocabulary, IVocabularyFactory)  # noqa: E305
-
-
-def OrgClassificationVocabularyFactory(context):
-    """Vocabulary."""
-    return SimpleVocabulary([
-        SimpleTerm(value='00', title=u'--'),
-        SimpleTerm(value='01', title=u'Coloquios'),
-        SimpleTerm(value='02', title=u'Conferencias'),
-        SimpleTerm(value='03', title=u'Congresos'),
-        SimpleTerm(value='04', title=u'Cursos'),
-        SimpleTerm(value='05', title=u'Diplomados'),
-        SimpleTerm(value='06', title=u'Encuentros'),
-        SimpleTerm(value='07', title=u'Foros'),
-        SimpleTerm(value='08', title=u'Jornadas'),
-        SimpleTerm(value='09', title=u'Mesas redondas'),
-        SimpleTerm(value='10', title=u'Módulos exposiciones'),
-        SimpleTerm(value='11', title=u'Módulos ferias'),
-        SimpleTerm(value='12', title=u'Reuniones'),
-        SimpleTerm(value='13', title=u'Seminarios'),
-        SimpleTerm(value='14', title=u'Simposios'),
-        SimpleTerm(value='15', title=u'Talleres'),
-        SimpleTerm(value='16', title=u'Videoconferencias'),
-        SimpleTerm(value='17', title=u'Ferias'),
-        SimpleTerm(value='32', title=u'Cátedras'),
-        SimpleTerm(value='99', title=u'Otras actividades'),
-    ])
-directlyProvides(OrgClassificationVocabularyFactory, IVocabularyFactory)
 
 
 class SolResponsibleVocabulary:
