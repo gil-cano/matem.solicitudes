@@ -1061,7 +1061,12 @@ schema = BaseSchema + Schema((
         widget=OrganizationWidget(
             label=_(u"label_widgetorganization", default=u"Organized Activities"),
             helper_js=('datagridwidget.js', 'datagriddatepicker.js', 'datagrid_organization.js'),
+            # Alert with the fields names
             columns={
+                'activityclass': SelectColumn(
+                    _(u"wactivityclass_label", default=u"Tipo de Actividad"),
+                    vocabulary_factory='matem.solicitudes.vocabularies.OrgClassification',
+                ),
                 'activitytype': MultiSelectColumn(
                     _(u"wactivitytype_label", default="Activity Type"),
                     vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',

@@ -1691,7 +1691,7 @@ msgstr "Fecha de inicio de la estancia"
 #. Default: "Activity Type"
 #: matem/solicitudes/content/solicitud.py:1075
 msgid "wactivitytype_label"
-msgstr "Tipo de Actividad"
+msgstr "Dirigido a"
 
 #. Default: "Are you going to all congress?"
 #: matem/solicitudes/content/solicitudvisitante.py:796

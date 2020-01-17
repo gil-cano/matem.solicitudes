@@ -90,5 +90,10 @@
       name="matem.solicitudes.vocabularies.IMCampus"
       />
 
+    <utility
+      component=".widgets.vocabularies.OrgClassificationVocabularyFactory"
+      name="matem.solicitudes.vocabularies.OrgClassification"
+      />
+
 
 </configure>

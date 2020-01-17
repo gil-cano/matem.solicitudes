@@ -132,6 +132,33 @@ def IMCampusVocabulary(context):
 directlyProvides(IMCampusVocabulary, IVocabularyFactory)  # noqa: E305
 
 
+def OrgClassificationVocabularyFactory(context):
+    """Vocabulary."""
+    return SimpleVocabulary([
+        SimpleTerm(value='00', title=u'--'),
+        SimpleTerm(value='01', title=u'Coloquios'),
+        SimpleTerm(value='02', title=u'Conferencias'),
+        SimpleTerm(value='03', title=u'Congresos'),
+        SimpleTerm(value='04', title=u'Cursos'),
+        SimpleTerm(value='05', title=u'Diplomados'),
+        SimpleTerm(value='06', title=u'Encuentros'),
+        SimpleTerm(value='07', title=u'Foros'),
+        SimpleTerm(value='08', title=u'Jornadas'),
+        SimpleTerm(value='09', title=u'Mesas redondas'),
+        SimpleTerm(value='10', title=u'Módulos exposiciones'),
+        SimpleTerm(value='11', title=u'Módulos ferias'),
+        SimpleTerm(value='12', title=u'Reuniones'),
+        SimpleTerm(value='13', title=u'Seminarios'),
+        SimpleTerm(value='14', title=u'Simposios'),
+        SimpleTerm(value='15', title=u'Talleres'),
+        SimpleTerm(value='16', title=u'Videoconferencias'),
+        SimpleTerm(value='17', title=u'Ferias'),
+        SimpleTerm(value='32', title=u'Cátedras'),
+        SimpleTerm(value='99', title=u'Otras actividades'),
+    ])
+directlyProvides(OrgClassificationVocabularyFactory, IVocabularyFactory)
+
+
 class SolResponsibleVocabulary:
     implements(IVocabulary)
 
