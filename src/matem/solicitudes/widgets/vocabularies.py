@@ -82,6 +82,33 @@ class ExpectedNumbersVocabulary:
             ('stage6', _(u'More than 100')),
         ])
 
+class OrgClassificationVocabulary:
+    implements(IVocabulary)
+
+    def getDisplayList(self, instance):
+        return DisplayList([
+            # ('00', u'--'),
+            ('01', u'Coloquio'),
+            ('02', u'Conferencia'),
+            ('03', u'Congreso'),
+            ('04', u'Curso'),
+            ('05', u'Diplomado'),
+            ('06', u'Encuentro'),
+            ('07', u'Foro'),
+            ('08', u'Jornada'),
+            ('09', u'Mesa redonda'),
+            ('10', u'Módulo de exposición'),
+            ('11', u'Módulo de feria'),
+            ('12', u'Reunión'),
+            ('13', u'Seminario'),
+            ('14', u'Simposio'),
+            ('15', u'Taller'),
+            ('16', u'Videoconferencia'),
+            ('17', u'Feria'),
+            ('32', u'Cátedra'),
+            ('99', u'Otra actividad'),
+        ])
+
 
 # TOD0 Unify the course level vocabularies
 def CourselevelVocabularyFactory(context):
