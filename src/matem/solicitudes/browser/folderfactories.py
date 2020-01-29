@@ -232,6 +232,14 @@ events = {
             'fecha_desde': '2020-07-20 00:00 ',
             'fecha_hasta': '2020-07-24 00:00 ',
             'objeto_viaje': 'Asistir al VI Congreso Latinoamericano de Matemáticos (VI CLAM 2020)'},
+        'ICG': {
+            'event_title': 'VIII Iberoamerican Congress on Geometry',
+            'pais': 'MX',
+            'ciudad_pais': 'Morelia',
+            'institucion': 'Centro de Ciencias Matemáticas, UNAM',
+            'fecha_desde': '2020-06-22 00:00 ',
+            'fecha_hasta': '2020-06-26 00:00 ',
+            'objeto_viaje': 'Asistir al VIII Iberoamerican Congress on Geometry'},
     },
 }
 
