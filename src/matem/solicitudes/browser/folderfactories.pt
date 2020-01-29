@@ -58,7 +58,7 @@ jQuery(function($) {
 
                 <dl>
                     <tal:typelist repeat="item view/addable_types">
-                      <div tal:condition="python:item['extra']['id'] != 'solicitudinstitucional'">
+                      <!-- <div tal:condition="python:item['extra']['id'] != 'solicitudinstitucional'"> -->
                         <dt>
                             <input type="radio" name="url"
                                    tal:attributes="value item/action;
@@ -78,7 +78,7 @@ jQuery(function($) {
                         </tal:block>
                       </select>
                     </dd>
-                    </div>
+                    <!-- </div> -->
                     </tal:typelist>
 
                     <tal:block tal:define="imapplications view/imapplications;">

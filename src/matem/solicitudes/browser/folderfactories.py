@@ -216,7 +216,22 @@ events = {
             'objeto_viaje': 'Asistir al LII Congreso Nacional de la Sociedad Matemática Mexicana (LII SMM 2019)'},
     },
     2020: {
-
+        'SMESMM': {
+            'event_title': 'Reunión Conjunta de la Real Sociedad Matemática Española y la Sociedad Matemática Mexicana',
+            'pais': 'MX',
+            'ciudad_pais': 'Guanajuato',
+            'institucion': 'Centro de Investigación en Matemáticas',
+            'fecha_desde': '2020-06-15 00:00 ',
+            'fecha_hasta': '2020-06-19 00:00 ',
+            'objeto_viaje': 'Asistir ala Reunión Conjunta de la Real Sociedad Matemática Española y la Sociedad Matemática Mexicana'},
+        'CLAM': {
+            'event_title': 'VI Congreso Latinoamericano de Matemáticos (VI CLAM 2020)',
+            'pais': 'UY',
+            'ciudad_pais': 'Montevideo',
+            'institucion': '',
+            'fecha_desde': '2020-07-20 00:00 ',
+            'fecha_hasta': '2020-07-24 00:00 ',
+            'objeto_viaje': 'Asistir al VI Congreso Latinoamericano de Matemáticos (VI CLAM 2020)'},
     },
 }
 
