@@ -46,6 +46,7 @@ from matem.solicitudes.widgets.vocabularies import CourselevelVocabulary
 
 from matem.solicitudes.widgets.vocabularies import EventTypeVocabulary
 from matem.solicitudes.widgets.vocabularies import BooleanTypeVocabulary
+from matem.solicitudes.widgets.vocabularies import ScopeTypeVocabulary
 
 
 schema = BaseSchema + Schema((
@@ -740,6 +741,7 @@ schema = BaseSchema + Schema((
         columns=(
             'eventtype',
             'conferencetype',
+            'scopetype',
             'title',
             'eventName',
             'institution',
@@ -766,7 +768,11 @@ schema = BaseSchema + Schema((
                 'conferencetype': MultiSelectColumn(
                     _(u"wconferencetype_label", default="Conference type"),
                     vocabulary_factory='matem.solicitudes.vocabularies.ConferenceType',
-                     col_description=_(u"wconferencetype_help", default=u"You can select one or many options"),
+                    col_description=_(u"wconferencetype_help", default=u"You can select one or many options"),
+                ),
+                'scopetype': SelectColumn(
+                    _(u"wscopetype_label", default="Academic Activity Scope"),
+                    vocabulary=ScopeTypeVocabulary(),
                 ),
                 'title': Column(
                     _(u"wtitle_conference_label", default=u"Title"),

@@ -14,14 +14,48 @@ from plone import api
 class EventTypeVocabulary:
     implements(IVocabulary)
 
+    # TO DO: Unify the values in the migration. Alert see line comments
     def getDisplayList(self, instance):
         return DisplayList([
             ('congress', _(u'Congress')),
+            # ('03', 'Congresos'),
             ('seminary', _(u'Seminary')),
+            # ('13', title=u'Seminarios'),
             ('coloquio', _(u'Coloquio')),
+            # ('01', title=u'Coloquios'),
             ('school', _(u'School')),
             ('workshop', _('Workshop')),
+            # ('15', title=u'Talleres'),
+            ('02', _(u'Conferencias')),
+            ('04', _(u'Cursos')),
+            ('05', _(u'Diplomados')),
+            ('06', _(u'Encuentros')),
+            ('17', _(u'Ferias')),
+            ('07', _(u'Foros')),
+            ('08', _(u'Jornadas')),
+            ('09', _(u'Mesas redondas')),
+            ('10', _(u'Módulos exposiciones')),
+            ('11', _(u'Módulos ferias')),
+            ('12', _(u'Reuniones')),
+            ('14', _(u'Simposios')),
+            ('16', _(u'Videoconferencias')),
+            ('32', _(u'Cátedras')),
             ('other', _(u'Other')),
+            # ('99', title=u'Otras actividades'),
+        ])
+
+
+class ScopeTypeVocabulary:
+    implements(IVocabulary)
+
+    def getDisplayList(self, instance):
+        return DisplayList([
+
+            ('01', _(u'Institutional')),
+            ('02', _(u'Regional')),
+            ('03', _(u'National')),
+            ('04', _(u'International')),
+            ('05', _(u'Local')),
         ])
 
 
