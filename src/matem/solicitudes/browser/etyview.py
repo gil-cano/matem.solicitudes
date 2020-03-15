@@ -29,12 +29,8 @@ class EtyView(BrowserView):
     def staff_on_leave_or_commission_days(self):
 
         researchers = []
-
-        ftoday = DateTime()
-        today = DateTime('/'.join([str(ftoday.year()), str(ftoday.month()), str(ftoday.day())]))
-        start_date = today
-        # end_date = today + 9.9999
-        end_date = today + 1
+        start_date = DateTime().earliestTime()
+        end_date = start_date + 1
 
         with api.env.adopt_user(username='admin'):
 
@@ -54,6 +50,25 @@ class EtyView(BrowserView):
         sortresearchers = [t[0] for t in aux_sorted]
 
         return sortresearchers
+
+
+    def return_betweenDates(self, days=5):
+        from_date = DateTime().earliestTime() - days
+        to_date = DateTime().latestTime() + days
+        researchers = []
+
+        with api.env.adopt_user(username='admin'):
+            brains = api.content.find(
+                portal_type=['Solicitud','SolicitudInstitucional', 'SolicitudBecario'],
+                review_state='aprobada',
+                fecha_hasta={'query': [from_date, to_date], 'range': 'minmax'},
+                sort_on='fecha_hasta',
+            )
+            for b in brains:
+                obj = b.getObject()
+                researchers.append((obj.nombre_owner, b.fecha_hasta.strftime('%d/%m/%Y'), obj.getPais()))
+        return researchers
+
 
     def staff_on_sabbatical(self):
 

@@ -40,6 +40,29 @@
         </table>
 
       </div>
+
+
+      <div class="fc" tal:define="academics view/return_betweenDates">
+        <h1> Académicos y Becarios que regresaron hace 5 días o regresarán dentro de 5 días</h1>
+        <table class="listing">
+          <thead>
+            <th>Nombre</th>
+            <th>Regreso</th>
+            <th>País</th>
+          </thead>
+          <tbody>
+            <tr tal:repeat="academic academics">
+              <td tal:content="python:academic[0]"/>
+              <td tal:content="python:academic[1]"/>
+              <td tal:content="python:academic[2]"/>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+
+
     </div>
   </body>
 
