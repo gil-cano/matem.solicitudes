@@ -241,6 +241,9 @@ events = {
             'fecha_hasta': '2020-06-26 00:00 ',
             'objeto_viaje': 'Asistir al VIII Iberoamerican Congress on Geometry'},
     },
+    2021: {
+
+    }
 }
 
 
