@@ -21,7 +21,7 @@ class ApplicationstoCVForm(form.Form):
         """Create cv items form applications"""
         logging.info('Dumpping applications')
         folder = api.content.get(
-            path='/servicios/servicios-internos/solicitudes/2019')
+            path='/servicios/servicios-internos/solicitudes/2020')
         catalog = api.portal.get_tool('portal_catalog')
         brains = catalog(
             path={'query': '/'.join(folder.getPhysicalPath()), 'depth': 1},
