@@ -36,7 +36,7 @@ class ApplicationstoCVForm(form.Form):
             # prides = []
             # if userid not in prides:
             #     continue
-            if userid in ['mclapp']:
+            if userid in ['mclapp', 'rosell', 'dalatorre']:
                 continue
             if isinstance(application, Solicitud):
                 self.app2cv(application, userid)
@@ -102,6 +102,7 @@ class ApplicationstoCVForm(form.Form):
                 id=id,
                 title=item['eventName'],
                 container=folder,
+                safe_id=True,
                 **fields)
             # {'othereventtype': '',
             # 'eventtype': 'seminary',
@@ -362,6 +363,7 @@ class ApplicationstoCVForm(form.Form):
                 type=content_type,
                 id=id,
                 container=folder,
+                safe_id=True,
                 **fields)
             # ({'objective': 'Trabajar en nuestro proyecto de investigacion acerca de Distributed Fault-tolerant Checkability apoyado por CONACYT-ECOS-NORD',
             # 'hostresearcher': '',
