@@ -242,7 +242,38 @@ events = {
             'objeto_viaje': 'Asistir al VIII Iberoamerican Congress on Geometry'},
     },
     2021: {
-
+        'SMESMM': {
+            'event_title': 'V Reunión Conjunta de la Real Sociedad Matemática Española y la Sociedad Matemática Mexicana',
+            'pais': 'MX',
+            'ciudad_pais': 'Guanajuato',
+            'institucion': 'Centro de Investigación en Matemáticas',
+            'fecha_desde': '2021-06-14 00:00',
+            'fecha_hasta': '2021-06-18 00:00',
+            'objeto_viaje': 'Asistir ala V Reunión Conjunta de la Real Sociedad Matemática Española y la Sociedad Matemática Mexicana'},
+        'CMA': {
+            'event_title': 'Congreso Matemático de las Américas (CMA 2021)',
+            'pais': 'AR',
+            'ciudad_pais': 'Buenos Aires',
+            'institucion': 'Unversidad de Buenos Aires',
+            'fecha_desde': '2021-07-19 00:00',
+            'fecha_hasta': '2021-07-24 00:00',
+            'objeto_viaje': 'Asistir al Congreso Matemático de las Américas (CMA 2021)'},
+        'SMM': {
+            'event_title': 'Congreso Nacional de la Sociedad Matemática Mexicana (SMM 2021)',
+            'pais': 'MX',
+            'ciudad_pais': '',
+            'institucion': '',
+            'fecha_desde': '',
+            'fecha_hasta': '',
+            'objeto_viaje': 'Asistir al Congreso Nacional de la Sociedad Matemática Mexicana (SMM 2021)'},
+        'ICG': {
+            'event_title': 'VIII Iberoamerican Congress on Geometry',
+            'pais': 'MX',
+            'ciudad_pais': 'Morelia',
+            'institucion': 'Centro de Ciencias Matemáticas, UNAM',
+            'fecha_desde': '',
+            'fecha_hasta': '',
+            'objeto_viaje': 'Asistir al VIII Iberoamerican Congress on Geometry'},
     }
 }
 
