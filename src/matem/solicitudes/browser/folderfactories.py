@@ -274,6 +274,9 @@ events = {
             'fecha_desde': '',
             'fecha_hasta': '',
             'objeto_viaje': 'Asistir al VIII Iberoamerican Congress on Geometry'},
+    },
+    2022: {
+
     }
 }
 
